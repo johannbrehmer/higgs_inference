@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=creg-aware
+#SBATCH --job-name=carl-pbp
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
@@ -17,6 +17,6 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/inference
 
-python -u experiments.py combinedregression --aware --training basis -o shallow
-python -u experiments.py combinedregression --aware --training basis
-python -u experiments.py combinedregression --aware --training basis -o deep
+python -u experiments.py carl --point-by-point -o shallow
+python -u experiments.py carl --point-by-point
+python -u experiments.py carl --point-by-point -o deep

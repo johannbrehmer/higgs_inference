@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#SBATCH --job-name=debug
+#SBATCH --job-name=regr-pbp
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
-#SBATCH --time=1-00:00:00
+#SBATCH --time=7-00:00:00
 #SBATCH --gres=gpu:1
 
 # Modules
@@ -15,6 +15,8 @@ module load theano/0.9.0
 module load tensorflow/python2.7/20170707
 module load keras/2.0.2
 
-cd /home/jb6504/learning_higgs_eft/parameterized/inference/cluster
+cd /home/jb6504/higgs_inference/inference
 
-python -u parameterized_inference.py debug carl
+python -u experiments.py regression --point-by-point -o shallow
+python -u experiments.py regression --point-by-point
+python -u experiments.py regression --point-by-point -o deep

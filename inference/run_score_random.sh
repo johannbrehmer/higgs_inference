@@ -15,8 +15,8 @@ module load theano/0.9.0
 module load tensorflow/python2.7/20170707
 module load keras/2.0.2
 
-cd /home/jb6504/learning_higgs_eft/parameterized/inference/cluster
+cd /home/jb6504/higgs_inference/inference
 
-python -u parameterized_inference.py score random shallow
-python -u parameterized_inference.py score random
-python -u parameterized_inference.py score random deep
+python -u experiments.py score --training random -o shallow
+python -u experiments.py score --training random
+python -u experiments.py score --training random -o deep

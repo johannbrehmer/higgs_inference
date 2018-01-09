@@ -15,9 +15,9 @@ module load theano/0.9.0
 module load tensorflow/python2.7/20170707
 module load keras/2.0.2
 
-cd /home/jb6504/learning_higgs_eft/parameterized/inference/cluster
+cd /home/jb6504/higgs_inference/inference
 
-python -u parameterized_inference.py combinedregression shallow
-python -u parameterized_inference.py combinedregression
-python -u parameterized_inference.py combinedregression deep
+python -u experiments.py combinedregression -o shallow
+python -u experiments.py combinedregression
+python -u experiments.py combinedregression -o deep
 

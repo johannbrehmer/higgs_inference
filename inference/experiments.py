@@ -4,6 +4,7 @@ import argparse
 
 from truth import truth_inference
 from parameterized import parameterized_inference
+from point_by_point import point_by_point_inference
 
 # Parse arguments
 parser = argparse.ArgumentParser(description='Inference experiments for Higgs EFT measurements')
@@ -28,7 +29,8 @@ if args.algorithm == 'truth':
     truth_inference(options=args.options)
 
 elif args.point-by-point:
-    raise NotImplementedError
+    point_by_point_inference(algorithm=args.algorithm,
+                             options=args.options)
 
 else:
     parameterized_inference(algorithm=args.algorithm,
