@@ -1,0 +1,2013 @@
+
+\documentclass[a4paper,
+	oneside,
+	captions=nooneline, 
+	fleqn, 
+	parskip=half,
+	%appendixprefix,
+	%headsepline,
+	bibliography=totoc,
+	abstracton,
+        %openright,
+	%cleardoublepage=plain,
+	11pt]{scrartcl}
+
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+
+\usepackage[mathlf,mathtabular,minionint]{MinionPro}
+\usepackage[mathlf,mathtabular,sansmath]{MyriadPro}
+
+\usepackage{color,xcolor}
+\definecolor{dark-grey}{rgb}{0.5,0.5,0.5}
+\definecolor{dark-red}{rgb}{0.8,0.0,0.0}
+\definecolor{dark-blue}{rgb}{0.0,0.0,0.8}
+\definecolor{dark-green}{rgb}{0.,0.65,0.}
+\definecolor{highlight-color}{rgb}{0.8,0.0,0.0}
+
+\usepackage{amsmath,dsfont,mathtools}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{multirow,booktabs,tabularx,float}
+\usepackage[font=normalsize]{subfig}
+\usepackage{slashed,braket}
+\usepackage{feynmp-auto}
+\usepackage[sort&compress]{natbib}
+%\usepackage[pdftex,colorlinks,linkcolor={dark-blue}, citecolor={dark-green}, urlcolor={dark-red},bookmarksopen,linktoc=all]{hyperref}
+\PassOptionsToPackage{hyphens}{url}\usepackage[pdftex,hidelinks,linkcolor={dark-blue}, citecolor={dark-green}, urlcolor={dark-red},bookmarksopen,linktoc=all]{hyperref}
+\usepackage{enumitem} % for user-defined bullets 
+\usepackage{pdfpages} % allows to load cover page
+\usepackage[stretch=15,shrink=15]{microtype} % Default settings: protrusion=true,factor=1000,expansion=true,auto=true,stretch=20,shrink=20
+\usepackage{calc} % arithmetic expressions for lengths
+\usepackage{mparhack} % avoids marginpars appearing on the wrong side, remove for final version
+\usepackage{tabto}
+% \usepackage{tikz}
+
+\input{definitions.tex}
+
+% feynmf stuff
+\DeclareGraphicsRule{*}{mps}{*}{}
+\unitlength = 1pt
+
+% Itemize with smaller bullets
+\setlist[itemize,1]{label=\raisebox{0.1ex}{\scriptsize$\bullet$}}
+
+% less space around items
+\setlist{itemsep=1.5pt plus 1.0pt minus 0.5pt,
+parsep=1.5pt plus 1.0pt minus 0.5pt,
+partopsep=3.0pt plus 1.0pt minus 1.0pt,
+topsep=3.0pt plus 1.5pt minus 2.5pt}
+
+% \emph for bold instead of italic
+\makeatletter
+\DeclareRobustCommand{\em}{%
+  \@nomath\em \if b\expandafter\@car\f@series\@nil
+  \normalfont \else \bfseries \fi}
+\makeatother 
+
+% always center floats, also smaller font for tables
+\makeatletter
+\g@addto@macro\@floatboxreset\centering\small
+\makeatother
+
+% pdf file info
+\makeatletter
+\hypersetup{pdftitle=\@title, pdfauthor=\@author}
+\makeatother
+
+% don't number subsubsections
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% Avoid widows and orphans (default: 150)
+\widowpenalty=500
+\clubpenalty=500
+
+% bugfix, use only from pdftex 1.40.15 on
+\pdfsuppresswarningpagegroup=1
+
+\bibliographystyle{jthesis2}
+\bibpunct{[}{]}{,}{n}{,}{,}
+
+\renewcommand\bibname{References}
+\addto\captionsbritish{\renewcommand{\bibname}{References}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Higgs inference experiments}
+\author{Cyril Becot, Johann Brehmer, Kyle Cranmer, Lukas Heinrich,\\
+Gilles Louppe, and Juan Pavez}
+\date{\today}
+
+
+\begin{document}
+
+\begin{fmffile}{diagrams}
+
+\maketitle
+
+%\begin{abstract}
+%\end{abstract}
+
+\tableofcontents
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Introduction}
+\label{sec:intro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We apply different likelihood-free techniques including
+\toolfont{carl}~\cite{Cranmer:2015bka, Louppe:2016aov} to estimate
+likelihood ratios between dimension-six operator hypotheses in WBF
+Higgs production in the four-lepton mode. Even at parton level and
+leading order, this process has a 15-dimensional phase space, making
+the likelihood intractable. But under some idealized assumptions about
+the detector response, we can access the exact likelihood ratio for
+the problem, allowing us to evaluate the performance of the different
+approaches. This physics problem and the data set is described in more
+detail in Section~\ref{sec:problem}.
+
+A first class of algorithms approaches the inference problem point by
+point in parameter space, learning the likelihood ratio
+$r (\boldx; \boldtheta_0, \boldtheta_1) \equiv p(\boldx |
+\boldtheta_0) / p(\boldx | \boldtheta_1)$
+between a fixed pair of hypotheses. Only in the end the different
+analysed pairs $(\boldtheta_0, \boldtheta_1)$ are compared and
+interpolated. We discuss different strategies for this approach in
+Section~\ref{sec:pointwise}. Also, Appendix~\ref{sec:appendix_2d}
+contains an analysis of a simpler two-dimensional problem in the same
+algorithmic approach.
+
+An alternative and potentially more powerful is to learn the full
+statistical model $r (\boldx; \boldtheta, \boldtheta_1)$ including the
+dependence on the model parameters $\boldx$. This allows us for
+instance to include information from the gradients of the likelihood
+function with respect to the theory parameters, the scores, where they
+are available; and to include physics knowledge about the structure
+the dependence of the likelihood function on $\boldtheta$. We analyse
+these approaches in Section~\ref{sec:parameterized}, before we briefly
+summarize our findings in Section~\ref{sec:conclusions}.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Problem statement}
+\label{sec:problem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{WBF Higgs to four leptons}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+  \fmfframe(0,15)(15,15){ %(L,T) (R,B)
+    \begin{fmfgraph*}(150,70)
+      \feynmansetup
+      \fmfleft{i2,i1}
+      \fmfright{o6,o5,o4,o3,o2,o1}
+      \fmflabel{\small $q$}{i1}
+      \fmflabel{\small $q$}{i2}
+      \fmflabel{\small $q$}{o1}
+      \fmflabel{\small $\ell^+$}{o2}
+      \fmflabel{\small $\ell^-$}{o3}
+      \fmflabel{\small $\ell^+$}{o4}
+      \fmflabel{\small $\ell^-$}{o5}
+      \fmflabel{\small $q$}{o6}
+      \fmf{fermion,tension=4}{i1,v3}
+      \fmf{fermion,tension=4}{i2,v4}
+      \fmf{fermion,tension=2.5}{v3,o1}
+      \fmf{fermion,tension=2.5}{v4,o6}
+      \fmf{wiggly,label=\small $W$,, $Z$,label.side=right}{v3,v5}
+      \fmf{wiggly,label=\small $W$,, $Z$,label.side=left}{v4,v5}
+      \fmf{dashes,label=\small $h$,tension=0.5}{v5,v6}
+      \fmf{wiggly,tension=0.3,label=\small $Z$,tension=0.3,label.side=right}{v7,v6}
+      \fmf{wiggly,tension=0.3,label=\small $Z$,tension=0.3,label.side=right}{v6,v8}
+      \fmf{fermion,tension=0.2}{o2,v7,o3}
+      \fmf{fermion,tension=0.2}{o4,v8,o5}
+      \fmfv{decoration.shape=circle,foreground=(0.8,,0.,,0.),decoration.size=5}{v5,v6}
+    \end{fmfgraph*}
+  }
+  \caption{Feynman diagram for WBF Higgs production in the $4 \ell $
+    mode. The red dots show the Higgs-gauge interactions affected by
+    the dimension-six operators of our analysis.}
+  \label{fig:information_wbf_4l_diag}
+\end{figure}
+
+We analyze WBF\,/\,VBF Higgs production with a Higgs decay into four
+leptons:
+%
+\begin{equation}
+  q q \to q q \; h \to q q \; Z Z \to q q \; \ell^+ \ell^- \; \ell^+ \ell^-
+\end{equation}
+%
+with $\ell = e, \mu$, as shown in
+\autoref{fig:information_wbf_4l_diag}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Parameter space}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The dominant signatures of heavy new physics are expected to be
+described by two dimension-six operators. In the
+Hagiwara-Ishihara-Szalapski-Zeppenfeld
+conventions~\cite{Hagiwara:1993ck}, they read
+%
+\begin{equation}
+  \lgr{} = \lgr{SM}
+  + \frac {f_{W}} {\Lambda^2} \; \underbrace{\dfrac{\im g}{2} \, (D^\mu\phi)^\dagger \, \sigma^a \, D^\nu\phi \; W_{\mu\nu}^a}_{\ope{W}} \;
+  {} - \frac {f_{WW}} {\Lambda^2} \;  \underbrace{\frac{g^2}{4} \, (\phisq) \; W^a_{\mu\nu} \, W^{\mu\nu\, a}}_{\ope{WW}}
+\end{equation} 
+%
+with real Wilson coefficients $f_W$ and $f_{WW}$ and unknown new physics
+scale $\Lambda$.
+
+We parameterise these coefficients in a dimensionless form as
+%
+\begin{equation}
+  \boldtheta = \frac {v^2} {\Lambda^2} \twovec{f_W} {f_{WW}} \,,
+\end{equation}
+%
+where $v=246~\gev$ is the SM Higgs vev. The SM therefore corresponds
+to $\boldtheta_{SM} = \boldzero$, and parameters should always be in
+the range $-1 < |\theta_i| < 1$.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Event generation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We generate event samples in exactly the same way as described in
+Refs.~\cite{Brehmer:2016nyr, johann_thesis}, using
+\toolfont{MadGraph~5}~\cite{Alwall:2014hca} and its add-on
+\toolfont{MadMax}~\cite{Cranmer:2006zs, Plehn:2013paa,
+  Kling:2016lay}. This combination allows us to generate weighted
+event samples $\{ \boldx, p (\boldx | \boldtheta ) \}$ including the
+full likelihood $ p (\boldx | \boldtheta )$ for arbitrary
+$\boldtheta$.
+
+For this particularly clean channel, shown in
+\autoref{fig:information_wbf_4l_diag}, the backgrounds are not the
+limiting factor, so we omit them for our toy study: a calculation with
+\toolfont{MadGraph~5} shows that in the relevant phase-space region
+the cross section of the dominant irreducible $ZZ^* \,jj$ background
+is more than one order of magnitude smaller than the SM Higgs signal.
+For this truth-level analysis we include neither a parton shower nor
+detector effects: we assume that the four-momenta of the leptons and
+quarks can be measured precisely, the latter in the form of jets. For
+the leptons, we also assume that the charge and flavour is always
+measured exactly.
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_2d/sample_weights.pdf}
+  \caption{Distribution of event weights for the SM hypothesis, for
+    the main training sample as well as for the final evaluation
+    sample}.
+  \label{fig:sample_weights}
+\end{figure}
+
+We generate a sample of $5.55 \cdot 10^6$ weighted events, which we
+randomly split into a main sample of $5.00 \cdot 10^6$ events for
+training and intermediate testing plus a smaller sample of
+$0.55 \cdot 10^6$ events for the final evaluation.
+
+In \autoref{fig:sample_weights} we show the distribution of the event
+weights in these two samples. The weights are not distributed evenly,
+with individual events in the training sample carrying an individual
+probability to be drawn of up to $10^{-3}$. This is, of course, far
+from ideal ideal, but unfortunately a consequence of using
+$\toolfont{MadMax}$.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Observables}
+\label{sec:features}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We train classifiers and estimate the likelihood ratio $r(\boldx)$
+based on different sets of kinematic features.
+%
+\begin{enumerate}
+\item First, we consider a simple \emph{two-dimensional feature space}
+  consisting of
+  % 
+  \begin{itemize}
+  \item the transverse momentum of the hardest jet, $p_{T,j1}$, as well as
+  \item the azimuthal angle between the two jets, $\Delta \phi_{jj}$.
+  \end{itemize}
+  % 
+  These observables are known to be sensitive to the operators of
+  interest. Broadly speaking, the jet $p_T$ distribution provides a
+  probe of $\ope{W}$, while $\Delta \phi_{jj}$ is more sensitive to
+  $\ope{WW}$~\cite{johann_thesis, Brehmer:2016nyr}.
+%
+\item We extend this to a \emph{medium set}, consisting of
+  %
+  \begin{itemize}
+    \item the energy, transverse momentum, pseudorapidity $\eta$, and azimuthal angle
+  $\phi$ of each of the two jets, ordered by $p_T$;
+  \item the energy, transverse momentum, pseudorapidity $\eta$, and
+    azimuthal angle $\phi$ of the four-lepton system (which reconstructs the Higgs);
+  \item the invariant mass of the dijet system, $m_{jj}$;
+  \item the separation in pseudorapidity between the two jets,
+    $\Delta \eta_{jj}$; and
+  \item the separation in azimuthal angle between the two jets,
+    $\Delta \phi_{jj}$.
+  \end{itemize}
+  %
+  This set of 15 observables completely characterises the production
+  of an on-shell Higgs in weak boson fusion at leading order (which
+  has a five-dimensional phase space). We aim to answer the question
+  whether training \toolfont{carl} on these 15 observables is enough
+  to estimate the true likelihood ratio based on the fully
+  differential kinematics.
+%
+\item In a next step, we use the \emph{full kinematics} of the
+  leading-order process including the Higgs decay. We parameterise the
+  four-momenta of the four leptons and the two jets with their energy,
+  transverse momentum, pseudorapidity $\eta$, and azimuthal angle
+  $\phi$. In this way we include 24 variables, 9 more than the 15
+  dimensions of the phase space at leading
+  order.\footnote{$ (2+6) \cdot 4_{\text{four-momenta}} -
+    4_{\text{$E$, $p$ conservation}} - 8_{\text{on-shell conditions}}
+    - 4_{\text{beam directions}} - 1_{\text{overall $\phi$}} = 15$}
+%
+\item Finally, we add some \emph{derived variables} to this full set
+  and check whether this improves the classifier performance. In
+  addition to the 24 variables of the previous set, we include the
+  following quantities:
+  % 
+  \begin{itemize}
+  \item the invariant mass of the dijet system, $m_{jj}$;
+  \item the separation in pseudorapidity between the two jets,
+    $\Delta \eta_{jj}$;
+  \item the separation in azimuthal angle between the two jets,
+    $\Delta \phi_{jj}$;
+  \item the invariant masses of the two reconstructed $Z$ bosons,
+    $m_{Z1}$ and $m_{Z2}$;
+  \item the energy, transverse momentum, pseudorapidity, and azimuthal
+    angle of the four-lepton system; and finally 
+  \item the energy, transverse momentum, pseudorapidity, and azimuthal
+    angle of the reconstructed $Z$ bosons.
+  \end{itemize}
+  % 
+  All in all, this makes 42 observables. We do not (yet) explicitly
+  take into account the decay angles that characterize the
+  $h \to 4\ell$ decay chain since they carry less information on
+  $\ope{W}$ and $\ope{WW}$ than production-side
+  observables~\cite{johann_thesis, Brehmer:2016nyr}.
+\end{enumerate}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exact likelihood ratio}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+These samples $\{ \boldx, p (\boldx | \boldtheta ) \}$ allow for a
+straightforward calculation of the truth-level likelihood ratio. When
+the full set of kinematic variables is taken into account, it is given
+by
+%
+\begin{equation}
+  r_{\text{full}}(\boldx) = \frac {p(\boldx | \boldtheta_0)} {p(\boldx | \boldtheta_1)} \,.
+\end{equation}
+%
+We compare the medium set of observables, the full kinematics, and the
+full kinematics including derived observables to this exact ratio.
+
+For the reduced two-dimensional feature space discussed in the
+appendix, we first have to integrate (sum) over the unobserved
+directions in phase space:
+%
+\begin{equation}
+  r_{\text{2d}}(\boldv_0) =
+  \dfrac
+  {\sum\limits_{\boldx | \boldv(\boldx) \approx \boldv_0} p(\boldx | \boldtheta_0)}
+  {\sum\limits_{\boldx' | \boldv(\boldx) \approx \boldv_0} p(\boldx' | \boldtheta_1)} \,.
+\end{equation}
+%
+Here $\boldv \in \mathbf{R}^2$ are the two-dimensional observables,
+$\boldx$ denote 15-dimensional phase-space vectors, and
+$\boldv(\boldx) \approx \boldv_0$ means that the two-dimensional
+observables calculated from $\boldx$ are (approximately) equal to
+$\boldv_0$. This is realised by binning the two-dimensional feature
+space and summing over all events $\boldx$ in the same bin. We use 20
+equidistant bins for $\Delta \phi_{jj}$ times 25 bins for
+$p_{T,j1}$. The jet momentum bins have a varying size: 10~\gev up to a
+$p_T$ of 100~\gev, 20~\gev up to 200~\gev, 40~\gev up to 400~\gev,
+80~\gev up to 1200~\gev, and an overflow bin for $p_T > 1200~\gev$. Note
+that for simplicity we will later use $\boldx$ to label the two
+observables of this process. 
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Point-by-point setup}
+\label{sec:pointwise}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+One class of algorithms simplifies the inference problem by estimating
+the likelihood ratio $r(\boldx ; \boldtheta_0, \boldtheta_1)$ for
+different pairs $(\boldtheta_0, \boldtheta_1)$ separately. We analyse
+two approaches: calibrated classification (\toolfont{carl}), and
+regression on the likelihood ratio.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Calibrated classifiers}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Benchmark hypothesis test}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+For two benchmark parameter points
+%
+\begin{equation}
+  \boldtheta_0 = \twovec{-0.2} {-0.2} \,, \quad
+  \boldtheta_1 = \twovec{0.2} {0.2}
+  \label{eq:pointwise_tuning_benchmarks}
+\end{equation}
+%
+we first analyse how well \toolfont{carl} can estimate the likelihood ratio
+%
+\begin{equation}
+  r(\boldx) = \frac {p(\boldx | \boldtheta_0)}  {p(\boldx | \boldtheta_1)}
+  \label{eq:pointwise_tuning_r}
+\end{equation}
+%
+depending on the classifier, its hyperparameters, and a number of
+different settings. 
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/pointwise_tuning_full/p_over_x.pdf}
+  \caption{Distributions of all kinematic observables for $\boldtheta_0$ (blue) and $\boldtheta_1$ (orange).}
+  \label{fig:pointwise_tuning_p_over_x}
+\end{figure}
+
+In \autoref{fig:pointwise_tuning_p_over_x} we show the distributions
+of all 42 considered kinematic variables for these two parameter
+points.
+
+For each of the four feature sets outlined above (2D, medium set, full
+kinematics, full kinematics plus derived variables), we tune the
+parameters in two steps. First, we perform a randomized scan over
+the hyperparameters, maximizing the classification power between event
+samples sampled from $p(\boldx | \boldtheta_0)$ and
+$p(\boldx | \boldtheta_1)$. In a second step we finetune these
+parameters on the mean squared error between the \toolfont{carl}
+estimate $\log \hat{r}(\boldx)$ and the true value $\log r(\boldx)$.
+
+The first classifier we consider is a \emph{random forest}, more
+precisely extremely randomized trees, in the
+\toolfont{sklearn.ensemble.ExtraTreesClassifier} implementation. The
+following parameters are tuned:
+%
+\begin{itemize}
+  \item \toolfont{n\_estimators}, the number of trees in the forest;
+  \item \toolfont{max\_features}, the number of features considered in
+    the search for the best split;
+  \item \toolfont{max\_depth}, the maximum depth of the trees;
+  \item \toolfont{min\_samples\_split}, the minimum fraction of events
+    at a node required for a split; and
+  \item \toolfont{min\_samples\_leaf}, the minimum fraction of events
+    in a leaf.
+\end{itemize}
+
+A \emph{multi-layer perceptron} implemented as a
+\toolfont{sklearn.neural\_network.MLPClassifier} is our second
+classifier. We optimize the following parameters:
+%
+\begin{itemize}
+  \item \toolfont{hidden\_layer\_sizes}, describing the number of hidden
+  layers and the number of neurons in each layer;
+  \item \toolfont{activation}, the activation function; and
+  \item \toolfont{alpha}, an $L^2$ penalty term.
+\end{itemize}
+
+For both classifiers, the kinematic features are first rescaled to a
+normal distribution with a
+\toolfont{sklearn.preprocessing.StandardScaler}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Estimators for the medium feature set}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/r_over_x_2d.pdf}
+  \caption{Truth likelihood ratio $r(\boldx)$ as defined in
+    \autoref{eq:pointwise_tuning_r} for the fully differential
+    kinematics as a function of two particular observables.}
+  \label{fig:pointwise_tuning_full_r_x}
+\end{figure}
+
+We now try to see if we can estimate the fully differential likelihood
+ratio equally well. This is a much more difficult problem:
+\autoref{fig:pointwise_tuning_full_r_x} shows a scatter plot of the
+truth likelihood ratio between the two points defined in
+\autoref{eq:pointwise_tuning_benchmarks} over the jet $p_T$ and
+$\Delta \phi_{jj}$, showing sizable fluctuations between close points
+due to the other directions in phase space. First we train
+$\toolfont{carl}$ on the medium set of 15 observables defined in
+\autoref{sec:features}.
+
+\begin{table}
+\small
+\begin{tabular}{ll r rrrr }
+  \toprule 
+  & Parameter & Range & Random & Bayes 1 & Bayes 2 & Benchmark \\
+  \midrule
+  RF & \toolfont{n\_estimators} & $50 \dots 200$ & $100$ &&& $100$ \\
+  & \toolfont{max\_features} & $1 \dots 24$ & $6$ &&& $6$ \\
+  & \toolfont{max\_depth} & $1 \dots 20, \infty$ & $12$ &&& $12$ \\
+  & \toolfont{min\_samples\_split} & $0 \dots 1$ & $0$ &&& $0$ \\
+  & \toolfont{min\_samples\_leaf} & $0 \dots 0.5$ & $0$ &&& $0$ \\
+  \midrule
+  NN & number of hidden layers & $1\dots 5$ & $2$ & $1$ & $1$ & $2$\\
+  & neurons at each layer & $2\dots 100$ per layer & $(8,8)$ & $(5)$ & $(5)$ & $(8,8)$\\
+  & activation function & $\tanh, \relu, \logistic$ & $\logistic$ & $\logistic$ & $\logistic$ & $\logistic$ \\
+  & $\alpha$ & $0\dots 100$ & $0$ & $10^{-9}$ & $0$ & $0$\\
+  & initial learning rate & $0.0001 \dots 0.01$ & & $0.01$ & $0.0067$ & $0.001$ \\
+  \bottomrule
+\end{tabular}
+\caption{Hyperparameter scan on the classification problem between
+  $\boldtheta_0$ and $\boldtheta_1$ using the medium feature set as input. For
+  each parameter of the random forrest (RF) and the neural network (NN)
+  we show the considered range and the best settings as determined by a randomized
+  search CV, a Bayesian optimization procedure geared towards exploitation, and a Bayesian optimization procedure
+  geared towards exploration. The final column shows our baseline parameters for the next step of the
+  optimization procedure.}
+ \label{tbl:pointwise_tuning_smart_parameters}
+\end{table}
+
+We first tune hyperparameters with a randomized scan on the
+classification problem between unweighted event samples drawn from
+$p(\boldx | \boldtheta_0)$ and $p(\boldx | \boldtheta_1)$. Using
+\toolfont{sklearn.model\_selection.RandomizedSearchCV}, we optimize on
+the ROC AUC. We give the optimal parameters in
+\autoref{tbl:pointwise_tuning_full_parameters}. The optimal random
+forests are now quite a bit deeper than in the 2d case.
+
+\begin{figure}
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/rhat_vs_r_smart_rf.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/rhat_vs_r_smart_mlp.pdf}%
+  \caption{Likelihood ratio estimation with the tuned classifiers
+    (left: random forest, right: neural network) using the medium feature set as
+    input. We show a scatter plot between the true $r(\boldx)$ and the
+    estimate $\hat{r}(\boldx)$.}
+  \label{fig:pointwise_tuning_smart_performance}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/pointwise_tuning_full/rhat_vs_x_smart_rf.pdf}
+  \caption{Correlation of $r(\boldx)$ (blue) and $\toolfont{carl}$
+    estimate $\hat{r}(\boldx)$ (orange) with various kinematic
+    observables. As classifier we use the tuned random forest with the
+    medium feature set as input. To guide the eye we also show fitted
+    second-order polynomials.}
+  \label{fig:pointwise_tuning_smart_rf_rhat_vs_x}
+\end{figure}
+
+In \autoref{fig:pointwise_tuning_smart_performance} we show how well
+\toolfont{carl} can estimate the true likelihood ratio $r(\boldx)$
+with the tuned classifiers given in the right column of
+\autoref{tbl:pointwise_tuning_smart_parameters}. The performance is
+much worse than in the 2d
+case. \autoref{fig:pointwise_tuning_smart_rf_rhat_vs_x} shows a
+scatter plot of the kinematic observables versus the exact ratio
+$r(\boldx)$ and the estimate $\hat{r}(\boldx)$.
+
+Next, we vary all parameters one by one and see how this affects the
+mean squared error of $\log \hat{r}(\boldx)$. The results are shown in
+Figures~\ref{fig:pointwise_tuning_smart_rf_tuning}.
+and \ref{fig:pointwise_tuning_smart_mlp_tuning}.
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/mse_smart_rf_n_estimators.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_smart_rf_max_depths.pdf}\\%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_smart_rf_max_features.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_smart_rf_min_samples_splits.pdf}%
+  \caption{carl performance as a function of the random forest
+    hyperparameters. We show the mean squred error of the estimated
+    log likelihood ratio between two benchmark points using the medium
+    feature set as input. Each data point shows the mean of three
+    calculations, the error bars are $95\%$ confidence intervals.}
+  \label{fig:pointwise_tuning_smart_rf_tuning}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/mse_smart_mlp_hidden_layer_sizes.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_smart_mlp_activation.pdf}\\%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_smart_mlp_alpha.pdf}%
+  \caption{carl performance as a function of the neural network
+  hyperparameters. Mean squred error of the estimated log likelihood
+  ratio between two benchmark points using the medium feature set as
+  input. Each data point shows the mean of three calculations, the
+  error bars are $95\%$ confidence intervals.}
+  \label{fig:pointwise_tuning_smart_mlp_tuning}
+\end{figure}
+
+For the random forest, the results of the hyperparameter scan lead to
+a good performance, and there is no obvious reason to change any of
+the settings in the right column of
+\autoref{tbl:pointwise_tuning_smart_parameters}. For the neural
+network, we define a final setup with a $\relu$ activation function
+instead of the logistic one, with all other settings in the right
+column of \autoref{tbl:pointwise_tuning_smart_parameters} unchanged.
+
+% \begin{figure}
+%   \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/mse_smart_training_sample_size.pdf}%
+%   \caption{carl performance as a function of the training sample
+%   size.  We show the mean squred error of the estimated log
+%   likelihood ratio between two benchmark points using the medium
+%   feature set as input. Each data point shows the mean of three
+%   calculations, the error bars are $95\%$ confidence intervals.}
+%   \label{fig:pointwise_tuning_smart_carl_tuning}
+% \end{figure}
+
+% \autoref{fig:pointwise_tuning_smart_carl_tuning} shows the effect of
+% the size of the training samples.  Again, we choose 200\,000 events
+% per sample as a compromise between computation time and performance. 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Estimators for the full feature set}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Now we use the full kinematics including the Higgs decay patterns,
+parametrized by the 24 energies, transverse momenta, and angles given
+in configuration 2 in
+\autoref{sec:features}.
+
+\begin{table}
+\small
+\begin{tabular}{ll r rrrr }
+  \toprule 
+  & Parameter & Range & Random & Bayes 1 & Bayes 2 & Benchmark \\
+  \midrule
+  RF & \toolfont{n\_estimators} & $50 \dots 200$ & $200$ &&& $200$ \\
+  & \toolfont{max\_features} & $1 \dots 24$ & $20$ &&& $20$ \\
+  & \toolfont{max\_depth} & $1 \dots 20, \infty$ & $12$ &&& $12$ \\
+  & \toolfont{min\_samples\_split} & $0 \dots 1$ & $0.001$ &&& $0.001$ \\
+  & \toolfont{min\_samples\_leaf} & $0 \dots 0.5$ & $0$ &&& $0$ \\
+  \midrule
+  NN & number of hidden layers & $1\dots 5$ & $2$ & $2$ & $2$ & $2$\\
+  & neurons at each layer & $2\dots 100$ per layer & $(4,12)$ & $(50,50)$ & $(50,20)$ & $(4,12)$\\
+  & activation function & $\tanh, \relu, \logistic$ & $\logistic$ & $\logistic$ & $\logistic$ & $\logistic$ \\
+  & $\alpha$ & $0\dots 100$ & $0$ & $0$ & $10^{-9}$ & $0$\\
+  & initial learning rate & $0.0001 \dots 0.01$ & & $0.0013$ & $0.0018$ & $0.001$ \\
+  \bottomrule
+\end{tabular}
+\caption{Hyperparameter scan on the classification problem between
+  $\boldtheta_0$ and $\boldtheta_1$ using the full feature set as input. For
+  each parameter of the random forrest (RF) and the neural network (NN)
+  we show the considered range and the best settings as determined by a randomized
+  search CV, a Bayesian optimization procedure geared towards exploitation, and a Bayesian optimization procedure
+  geared towards exploration. The final column shows our baseline parameters for the next step of the
+  optimization procedure.}
+ \label{tbl:pointwise_tuning_full_parameters}
+\end{table}
+
+We first tune hyperparameters with a randomized scan on the
+classification problem between unweighted event samples drawn from
+$p(\boldx | \boldtheta_0)$ and $p(\boldx | \boldtheta_1)$. Using
+\toolfont{sklearn.model\_selection.RandomizedSearchCV}, we optimize on
+the ROC AUC. We give the optimal parameters in
+\autoref{tbl:pointwise_tuning_full_parameters}. The optimal random
+forests are now quite a bit deeper than in the 2d case. For the neural
+networks we find a surprising preference for small hidden layers, and
+logistic activation functions are now preferred.
+
+\begin{figure}
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/rhat_vs_r_full_rf.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/rhat_vs_r_full_mlp.pdf}%
+  \caption{Likelihood ratio estimation with the tuned classifiers
+    (left: random forest, right: neural network) using the full
+    feature set as input. We show a scatter plot between the true
+    $r(\boldx)$ and the estimate $\hat{r}(\boldx)$}.
+  \label{fig:pointwise_tuning_full_rf_performance}
+\end{figure}
+
+In \autoref{fig:pointwise_tuning_full_rf_performance} we show how well
+\toolfont{carl} can estimate the true likelihood ratio $r(\boldx)$
+with the tuned classifiers given in the right column of
+\autoref{tbl:pointwise_tuning_full_parameters}. The performance is
+much worse than in the 2d case.
+
+Next, we vary all parameters one by one and see how this affects the
+mean squared error of $\log \hat{r}(\boldx)$. The results are shown in
+Figures~\ref{fig:pointwise_tuning_full_rf_tuning} to
+\ref{fig:pointwise_tuning_full_carl_tuning}. For the random forest, we
+again find that the parameters tuned on the classification problem
+already lead to a good performance for the estimation of
+$r(\boldx)$. For the neural network, switching to the $\relu$
+activation function improves the estimation, so we use it in our final
+setup.
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/mse_full_rf_n_estimators.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_full_rf_max_depths.pdf}\\%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_full_rf_max_features.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_full_rf_min_samples_splits.pdf}%
+  \caption{carl performance as a function of the random forest
+    hyperparameters. We show the mean squred error of the estimated
+    log likelihood ratio between two benchmark points using the full
+    feature set as input. Each data point shows the mean of three
+    calculations, the error bars are $95\%$ confidence intervals.}
+  \label{fig:pointwise_tuning_full_rf_tuning}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/mse_full_mlp_hidden_layer_sizes.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_full_mlp_activation.pdf}\\%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_full_mlp_alpha.pdf}%
+  \caption{carl performance as a function of the neural network
+    hyperparameters. We show the mean squred error of the estimated
+    log likelihood ratio between two benchmark points using the full
+    feature set as input. Each data point shows the mean of three
+    calculations, the error bars are $95\%$ confidence intervals.}
+  \label{fig:pointwise_tuning_full_mlp_tuning}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/mse_full_training_sample_size.pdf}%
+  \caption{carl performance as a function of the training sample size.
+    We show the mean squred error of the estimated log likelihood
+    ratio between two benchmark points using the full feature set as
+    input. Each data point shows the mean of three calculations, the
+    error bars are $95\%$ confidence intervals.}
+  \label{fig:pointwise_tuning_full_carl_tuning}
+\end{figure}
+
+\autoref{fig:pointwise_tuning_full_carl_tuning} shows the effect of
+the size of the training samples.  Again, we choose 200\,000 events
+per sample as a compromise between computation time and performance.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Estimators for the full plus derived feature set}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Finally, we analyse whether the estimator is improved if we include an
+additional 18 derived quantities, see \autoref{sec:features}. The
+results of the hyperparameter scan are given in
+\autoref{tbl:pointwise_tuning_full_parameters}.
+
+\begin{table}
+\small
+\begin{tabular}{ll r rrrr }
+  \toprule 
+  & Parameter & Range & Random & Bayes 1 & Bayes 2 & Benchmark \\
+  \midrule
+  RF & \toolfont{n\_estimators} & $50 \dots 200$ & $200$ &&& $200$ \\
+  & \toolfont{max\_features} & $1 \dots 42$ & $42$ &&& $42$ \\
+  & \toolfont{max\_depth} & $1 \dots 20, \infty$ & $10$ &&& $10$ \\
+  & \toolfont{min\_samples\_split} & $0 \dots 1$ & $0.001$ &&& $0.001$ \\
+  & \toolfont{min\_samples\_leaf} & $0 \dots 0.5$ & $0$ &&& $0$ \\
+  \midrule
+  NN & number of hidden layers & $1\dots 5$ & $2$ & $2$ & $2$ & $2$\\
+  & neurons at each layer & $2\dots 100$ per layer & $(4,12)$ & $(5,5)$ & $(100,100)$ & $(4,12)$\\
+  & activation function & $\tanh, \relu, \logistic$ & $\logistic$ & $\logistic$ & $\logistic$ & $\logistic$ \\
+  & $\alpha$ & $0\dots 100$ & $0$ & $10^{-8}$ & $0$ & $0$\\
+  & initial learning rate & $0.0001 \dots 0.01$ & & $0.00022$ & $0.00064$ & $0.001$ \\
+  \bottomrule
+\end{tabular}
+\caption{Hyperparameter scan on the classification problem between
+  $\boldtheta_0$ and $\boldtheta_1$ using the full plus derived
+  feature set as input. For
+  each parameter of the random forrest (RF) and the neural network (NN)
+  we show the considered range and the best settings as determined by a randomized
+  search CV, a Bayesian optimization procedure geared towards exploitation, and a Bayesian optimization procedure
+  geared towards exploration. The final column shows our baseline parameters for the next step of the
+  optimization procedure.}
+ \label{tbl:pointwise_tuning_derived_parameters}
+\end{table}
+
+In \autoref{fig:pointwise_tuning_derived_performance} we show how well
+\toolfont{carl} can estimate the true likelihood ratio $r(\boldx)$
+with the tuned classifiers given in the right column of
+\autoref{tbl:pointwise_tuning_derived_parameters}. The performance is
+slightly better than without the derived variables.
+
+\begin{figure}
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/rhat_vs_r_derived_rf.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/rhat_vs_r_derived_mlp.pdf}%
+  \caption{Likelihood ratio estimation with the tuned classifiers
+    (left: random forest, right: neural network) using the full plus
+    derived feature set as input. We show a scatter plot between the
+    true $r(\boldx)$ and the estimate $\hat{r}(\boldx)$.}.
+  \label{fig:pointwise_tuning_derived_performance}
+\end{figure}
+
+Again, we vary the parameters one by one and check if we can improve
+the performance, see
+Figures~\ref{fig:pointwise_tuning_derived_rf_tuning} to
+\ref{fig:pointwise_tuning_derived_carl_tuning}. The results mirror
+those in the previous section. The only improvement we can find is
+switching to the $\relu$ activation function for the neural network in
+our final setup, all other settings remain as in the right column of
+\autoref{tbl:pointwise_tuning_derived_parameters}.
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/mse_derived_rf_n_estimators.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_derived_rf_max_depths.pdf}\\%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_derived_rf_max_features.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_derived_rf_min_samples_splits.pdf}%
+  \caption{carl performance as a function of the random forest
+    hyperparameters. We show the mean squred error of the estimated
+    log likelihood ratio between two benchmark points using the full
+    plus derived feature set as input. Each data point shows the mean
+    of three calculations, the error bars are $95\%$ confidence
+    intervals.}
+  \label{fig:pointwise_tuning_derived_rf_tuning}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/mse_derived_mlp_hidden_layer_sizes.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_derived_mlp_activation.pdf}\\%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_derived_mlp_alpha.pdf}%
+  \caption{carl performance as a function of the neural network
+    hyperparameters. We show the mean squred error of the estimated
+    log likelihood ratio between two benchmark points using the full
+    plus derived feature set as input. Each data point shows the mean
+    of three calculations, the error bars are $95\%$ confidence
+    intervals.}
+  \label{fig:pointwise_tuning_derived_mlp_tuning}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/mse_derived_training_sample_size.pdf}%
+  \caption{carl performance as a function of the training sample size.
+    We show the mean squred error of the estimated log likelihood
+    ratio between two benchmark points using the full plus derived
+    feature set as input. Each data point shows the mean of three
+    calculations, the error bars are $95\%$ confidence intervals.}
+  \label{fig:pointwise_tuning_derived_carl_tuning}
+\end{figure}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Calibration}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We now stick to a random forest trained on the medium feature set with
+hyperparameters as given in the last column of
+\autoref{tbl:pointwise_tuning_smart_parameters} and have a closer look
+at \toolfont{carl}'s calibration procedure.
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/rhat_vs_r_smart_rf_uncalibrated.pdf}%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/rhat_vs_r_smart_rf.pdf}%
+  \caption{Likelihood ratio estimation with uncalibrated (left) vs
+    calibrated (right) random forests. We show a scatter plot between
+    the true $r(\boldx)$ and the estimate $\hat{r}(\boldx)$.}
+  \label{fig:pointwise_tuning_smart_calibration}
+\end{figure}
+
+First, \autoref{fig:pointwise_tuning_smart_calibration} shows the
+output of an uncalibrated classifier and compares it to the calibrated
+classifier. Clearly, calibration improves the performance. 
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/mse_full_calibration_method.pdf}%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/mse_full_cv_folds.pdf}\\%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/mse_full_calibration_bins.pdf}%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/mse_full_calibration_bins_variable.pdf}%
+  \caption{Performance of \toolfont{carl} as a function of the
+    calibration method and its parameters. Top left: different
+    calibration algorithms. Top right: different cross-validation
+    setups for the histogram validation. Bottom left: different number
+    of bins for the histogram calibration. Bottom right: Same, also
+    showing the results for variable bin widths. We show the mean
+    squred error of the estimated log likelihood ratio between two
+    benchmark points using the medium feature set as input. Each data
+    point shows the mean of three calculations, the error bars are
+    $95\%$ confidence intervals.}
+  \label{fig:pointwise_tuning_smart_calibration_tuning}
+\end{figure}
+
+\autoref{fig:pointwise_tuning_smart_calibration_tuning} shows how the
+performance of \toolfont{carl} depends on the calibration method and
+its settings. The best results come from the simple histogram
+calibration (with equidistant bin sizes) or an isotonic calibration.
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_raw_vs_cal_one_smart_rf.pdf}%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_raw_vs_cal_average_smart_rf.pdf}\\%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/average_s_raw_vs_rhat_smart_rf.pdf}%
+  \caption{Details of the histogram calibration procedure. Top left:
+    correlation between raw $s(\boldx)$ from one random forest and the
+    corresponding calibrated values. Top right: correlation between
+    average raw $s(\boldx)$ from all random forests in the
+    cross-validator and the average calibrated $s(\boldx)$. Bottom:
+    correlation between average raw $s(\boldx)$ from all random
+    forests in the cross-validator and the final output
+    $\hat{r}(\boldx)$.}
+  \label{fig:pointwise_tuning_smart_calibration_histogram1}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/calibration_histos_one_smart_rf.pdf}%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_histos_one_log_smart_rf.pdf}\\%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_histos_average_smart_rf.pdf}%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_histos_average_log_smart_rf.pdf}%
+  \caption{Calibration histograms. Top left: actual calibration
+    histogram for one random forest. Top right: distribution of the
+    raw and calibrated values of $s(\boldx)$ for one random
+    forest. Bottom left: distribution of the average raw and average
+    calibrated values of $s(\boldx)$ for the ensemble of all random
+    forests. Bottom right: same, but with a logarithmic $y$ axis.}
+  \label{fig:pointwise_tuning_smart_calibration_histogram2}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_raw_vs_cal_one_smart_rf_isotonic.pdf}%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_raw_vs_cal_average_smart_rf_isotonic.pdf}\\%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/average_s_raw_vs_rhat_smart_rf_isotonic.pdf}%
+  \caption{Details of the isotonic calibration procedure. Top left:
+    correlation between raw $s(\boldx)$ from one random forest and the
+    corresponding calibrated values. Top right: correlation between
+    average raw $s(\boldx)$ from all random forests in the
+    cross-validator and the average calibrated $s(\boldx)$. Bottom:
+    correlation between average raw $s(\boldx)$ from all random
+    forests in the cross-validator and the final output
+    $\hat{r}(\boldx)$.}
+  \label{fig:pointwise_tuning_smart_calibration_isotonic}
+\end{figure}
+
+In \autoref{fig:pointwise_tuning_smart_calibration_histogram1} and
+\autoref{fig:pointwise_tuning_smart_calibration_histogram2} we
+illuminate the relation between raw and calibrated $s(\boldx)$ for the
+default histogram-based
+calibration with fixed bin widths. \autoref{fig:pointwise_tuning_smart_calibration_isotonic}
+does the same for isotonic calibration. Both calibration procedures
+work as expected.
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_raw_vs_cal_one_smart_rf_var_binwidth.pdf}%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_raw_vs_cal_average_smart_rf_var_binwidth.pdf}\\%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/average_s_raw_vs_rhat_smart_rf_var_binwidth.pdf}%
+  \caption{Details of the histogram calibration procedure with
+    variable bin width, with different binnings for nominator and
+    denominator. Top left: correlation between raw $s(\boldx)$ from
+    one random forest and the corresponding calibrated values. Top
+    right: correlation between average raw $s(\boldx)$ from all random
+    forests in the cross-validator and the average calibrated
+    $s(\boldx)$. Bottom: correlation between average raw $s(\boldx)$
+    from all random forests in the cross-validator and the final
+    output $\hat{r}(\boldx)$.}
+  \label{fig:pointwise_tuning_smart_calibration_histogram_varwidth1}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/calibration_histos_one_smart_rf_var_binwidth.pdf}%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_histos_one_log_smart_rf_var_binwidth.pdf}\\%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_histos_average_smart_rf_var_binwidth.pdf}%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_histos_average_log_smart_rf_var_binwidth.pdf}%
+  \caption{Calibration histograms with variable bin width, with
+    different binnings for nominator and denominator. Top left: actual
+    calibration histogram for one random forest. Top right:
+    distribution of the raw and calibrated values of $s(\boldx)$ for
+    one random forest. Bottom left: distribution of the average raw
+    and average calibrated values of $s(\boldx)$ for the ensemble of
+    all random forests. Bottom right: same, but with a logarithmic $y$
+    axis.}
+  \label{fig:pointwise_tuning_smart_calibration_histogram_varwidth2}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_raw_vs_cal_one_smart_rf_var_binwidth_common.pdf}%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_raw_vs_cal_average_smart_rf_var_binwidth_common.pdf}\\%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/average_s_raw_vs_rhat_smart_rf_var_binwidth_common.pdf}%
+  \caption{Details of the histogram calibration procedure with
+    variable bin width, with common binning for nominator and
+    denominator. Top left: correlation between raw $s(\boldx)$ from
+    one random forest and the corresponding calibrated values. Top
+    right: correlation between average raw $s(\boldx)$ from all random
+    forests in the cross-validator and the average calibrated
+    $s(\boldx)$. Bottom: correlation between average raw $s(\boldx)$
+    from all random forests in the cross-validator and the final
+    output $\hat{r}(\boldx)$.}
+  \label{fig:pointwise_tuning_smart_calibration_histogram_varwidth3}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/calibration_histos_one_smart_rf_var_binwidth_common.pdf}%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_histos_one_log_smart_rf_var_binwidth_common.pdf}\\%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_histos_average_smart_rf_var_binwidth_common.pdf}%
+  \includegraphics[width=0.45\textwidth]{figures/pointwise_tuning_full/s_histos_average_log_smart_rf_var_binwidth_common.pdf}%
+  \caption{Calibration histograms with variable bin width, with common
+    binning for nominator and denominator. Top left: actual
+    calibration histogram for one random forest. Top right:
+    distribution of the raw and calibrated values of $s(\boldx)$ for
+    one random forest. Bottom left: distribution of the average raw
+    and average calibrated values of $s(\boldx)$ for the ensemble of
+    all random forests. Bottom right: same, but with a logarithmic $y$
+    axis.}
+  \label{fig:pointwise_tuning_smart_calibration_histogram_varwidth4}
+\end{figure}
+
+Figures~\ref{fig:pointwise_tuning_smart_calibration_histogram_varwidth1}
+to \ref{fig:pointwise_tuning_smart_calibration_histogram_varwidth4}
+show the same plots for the histogram calibration procedure with
+variable bin width. Different bin boundaries for the nominator and
+denominator histograms lead to problems (see the weird behaviour at
+$s \gtrsim 0.6$). But even with a common binning, the variable-width
+calibration setup performs worse than fixed-width histograms.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Comparison}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We summarize our different attempts to estimate $r(\boldx)$ for the
+high-dimensional $\boldx$ in
+\autoref{fig:pointwise_tuning_full_final}. No setup performs
+significantly better than a random forest trained on the medium set of
+15 production observables.
+
+\begin{figure}
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_tuning_full/mse_final.pdf}%
+  \caption{carl performance for \toolfont{sklearn} default
+    hyperparameters, the best parameters according to the initial
+    hyperparameter scan, and the final parameters as defined in the
+    text, using three different feature sets as inputs. We show
+    the mean squred error of the estimated log likelihood ratio
+    between two benchmark points based on the fully differential
+    feature space. Each data point shows the mean of three
+    calculations, the error bars are $95\%$ confidence intervals.}
+  \label{fig:pointwise_tuning_full_final}
+\end{figure}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Likelihood contours}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+After optimizing our classifier setup on the distinction between two
+distinct hypotheses, and validating the results on another two
+hypotheses, we now turn towards the more relevant problem of
+estimating $\boldtheta$ based on some measurements. We generate
+25\,000 toy events sampled from the probability distribution for the
+SM,
+%
+\begin{equation}
+  \boldtheta_{\text{observed}} = \twovec 0 0 \,.
+\end{equation} 
+%
+For 100 points randomly sampled in $\boldtheta \in [-0.9,0.9]^2$, we
+calculate the true expected likelihood ratio to
+%
+\begin{equation}
+  \boldtheta_{1} = \twovec {-0.23} {0.30}
+\end{equation}
+%
+as well as the corresponding \toolfont{carl} estimate. Finally, we
+interpolate between these points with a Gaussian Process with Mat\'ern
+kernel with $\nu = 0.5$.
+
+Based on the tuning described above, we train $\toolfont{carl}$ on the
+medium set of 15 production-side observables. We use a random forest
+with 100 estimators, a maximal tree depth of 10, which considers 6
+randomly chosen features for each splitting. The training samples
+consist of 200\,000 unweighted samples each, and the $\toolfont{carl}$
+default for the fixed-size binning of the calibration histograms is
+used.
+
+\begin{figure}
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_inference/llr_truth_vs_carl_full.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_inference/llr_gp_carl_full.pdf}%
+  \caption{Inference from truth likelihood ratio and \toolfont{carl}'s
+    estimate for the fully differential case. Left: scatter plot
+    showing the difference between the exact expected likelihood ratio
+    for 100 randomly sampled points and $\boldtheta_1$ and
+    \toolfont{carl}'s estimate. Right: true (white) and approximate
+    (orange) likelihood contours, using a Gaussian Process for
+    interpolation. The white and orange dots show the exact and
+    approximate maximum-likelihood estimators. The green and red dots
+    show $\boldtheta_{\text{observed}}$ and $\boldtheta_1$,
+    respectively. Finally, the small grey dots show the sampled
+    parameter points at which the likelihood ratio was evaluated.}
+  \label{fig:pointwise_inference_full}
+\end{figure}
+
+The results are shown in \autoref{fig:pointwise_inference_full}. There
+are visible differences between exact and approximate likelihood, but
+overall the agreement is still pretty good.
+
+We have also checked that a deep and wide neural network does not lead
+to a better performance in this inference problem.
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Regression}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Next, we check how this performance of calibrated classifiers compares
+to regressor directly trained on the ratio $r(\boldx)$\,---\,which is
+possible on our truth-level sample, but not in a likelihood-free
+setup. Note that in this setup the regressors are not
+calibrated. Since the calibrated classifiers work flawlessly for the
+simple 2D case, we now stick to the fully differential case.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Benchmark hypothesis test}
+\label{sec:pointwise_regression_tuning}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Again, we first tune the settings on the likelihood ratio between the
+two parameter points
+%
+\begin{equation}
+  \boldtheta_0 = \twovec{-0.2} {-0.2} \,, \quad
+  \boldtheta_1 = \twovec{0.2} {0.2}
+  \label{eq:pointwise_regression_tuning_benchmarks}
+\end{equation}
+
+For now, we only use neural networks (brief experiments with random
+forests and Gaussian processes lead to different computational
+problems and errors).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{What to learn}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this regression setup, one has to be careful which quantity should
+be learned by the regressors, or with the definition of the loss
+function. The naive choice of minimizing the squared error of the
+likelihood ratio
+$r(\boldx) = p(\boldx | \boldtheta_0) / p(\boldx | \boldtheta_1)$ does
+not work very well. First, this loss function changes significantly
+under the exchange $\boldtheta_0 \leftrightarrow \boldtheta_1$.
+Second, individual phase-space points with
+$p(\boldx | \boldtheta_1) \ll 1$ will have a very large weight and
+dominate the loss function, potentially decreasing the performance of
+the regressor for the majority of the phase-space points with
+$r \approx 1$. Instead, we find that it is advantageous to optimize on
+the squared error of $\log r(\boldx)$. This quantity is invariant
+under $\boldtheta_0 \leftrightarrow \boldtheta_1$, and the
+squared-error loss function is not dominated by few extreme
+phase-space points.
+
+\begin{figure}
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_regression_tuning_full/rhat_vs_r_smart_mlp.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_regression_tuning_full/rhat_vs_r_smart_mlp_switched.pdf}\\%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_regression_tuning_full/rhat_vs_r_smart_mlp_logr.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_regression_tuning_full/rhat_vs_r_smart_mlp_logr_switched.pdf}\\%
+  \caption{Likelihood ratio estimation with regression, learning
+    $r(\boldx) = p(\boldx | \boldtheta_0) / p(\boldx | \boldtheta_1) $
+    (top left), $r' (\boldx) = 1/r(\boldx)$ (top right),
+    $\log r(\boldx)$ (bottom left), and $\log r'(\boldx)$ (bottom
+    right). In each case we use the medium feature set as input and
+    train a neural network regressor with four hidden layers of 100
+    neurons each. We show a scatter plot between the true $r(\boldx)$
+    and the estimate $\hat{r}(\boldx)$}.
+  \label{fig:pointwise_regression_tuning_what}
+\end{figure}
+
+We demonstrate this
+\autoref{fig:pointwise_regression_tuning_what}. Training $r(\boldx)$
+directly can work for the right phase-space points (top left panel),
+but can dramatically fail for other ratios (top right). Training
+$\log r(\boldx)$ does not depend on the choice of numerator and works
+reliably in all analysed ratios (bottom panels).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Estimators for the medium feature set}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}
+\small
+\begin{tabular}{ll r rrr }
+  \toprule 
+  & Parameter & Range & Bayes 1 & Bayes 2 & Benchmark \\
+  \midrule
+  NN & number of hidden layers & $1\dots 5$ & $3$ & $5$ & $3$\\
+  & neurons in last hidden layer & $5\dots 100$ & $5$ & $20$ & $5$\\
+  & neurons in other hidden layers & $5\dots 100$ & $100$ & $50$ & $100$\\
+  & activation function & $\tanh, \relu, \logistic$ & $\tanh$ & $\relu$ & $\tanh$ \\
+  & $\alpha$ & $0\dots 100$ & $0$ & $0.02$ & $0$\\
+  & initial learning rate & $0.0001 \dots 0.01$ & $0.0002$ & $0.0003$ & $0.0002$ \\
+  \bottomrule
+\end{tabular}
+\caption{Hyperparameter scan on the regression problem of $r(\boldx)$ between
+  $\boldtheta_0$ and $\boldtheta_1$ using the medium feature set as input. For
+  each parameter of the random forrest (RF) and the neural network (NN)
+  we show the considered range, the best settings as determined by 
+  a Bayesian optimization procedure geared towards exploitation, and the best settings
+  determined by a Bayesian optimization procedure
+  geared towards exploration. The final column shows our baseline parameters for the next step of the
+  optimization procedure.}
+ \label{tbl:pointwise_regression_tuning_smart_parameters}
+\end{table}
+
+For the regression setup, we simply tune the hyperparameters with a
+Bayesian optimization procedure on the regression problem to estimate
+the likelihood ratio $r(\boldx)$ between $p(\boldx | \boldtheta_0)$
+and $p(\boldx | \boldtheta_1)$. Using \toolfont{skopt.BayesSearchCV},
+we optimize on the mean squared error. We give the optimal parameters
+in \autoref{tbl:pointwise_regression_tuning_full_parameters}. Unlike
+for the calibrated classifiers, the neural networks are now
+significantly more complex.
+
+\begin{figure}
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_regression_tuning_full/rhat_vs_r_smart_mlp.pdf}%
+  \caption{Likelihood ratio estimation with regression using the
+    medium feature set as input. We show a scatter plot between the
+    true $r(\boldx)$ and the estimate $\hat{r}(\boldx)$}.
+  \label{fig:pointwise_regression_tuning_smart_performance}
+\end{figure}
+
+In \autoref{fig:pointwise_regression_tuning_smart_performance} we show
+how well \toolfont{carl} can estimate the true likelihood ratio
+$r(\boldx)$ with the tuned regressor given in the right column of
+\autoref{tbl:pointwise_regression_tuning_smart_parameters}. We find
+impressive agreement.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Estimators for the full feature set}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Now we use the full kinematics including the Higgs decay patterns,
+parametrized by the 24 energies, transverse momenta, and angles given
+in configuration 3 in
+\autoref{sec:features}.
+
+\begin{table}
+\small
+\begin{tabular}{ll r rrr }
+  \toprule 
+  & Parameter & Range & Bayes 1 & Bayes 2 & Benchmark \\
+  \midrule
+  NN & number of hidden layers & $1\dots 5$ & $5$ & $5$ & $5$\\
+  & neurons in last hidden layer & $5\dots 100$ & $10$ & $10$ & $10$\\
+  & neurons in other hidden layers & $5\dots 100$ & $50$ & $50$ & $50$\\
+  & activation function & $\tanh, \relu, \logistic$ & $\tanh$ & $\tanh$ & $\tanh$ \\
+  & $\alpha$ & $0\dots 100$ & $0$ & $0$ & $0$ \\
+  & initial learning rate & $0.0001 \dots 0.01$ & $0.0002$ & $0.0003$ & $0.0002$ \\
+  \bottomrule
+\end{tabular}
+\caption{Hyperparameter scan on the regression problem of $r(\boldx)$ between
+  $\boldtheta_0$ and $\boldtheta_1$ using the full feature set as input. For
+  each parameter of the random forrest (RF) and the neural network (NN)
+  we show the considered range and the best settings as determined by a randomized
+  search CV, a Bayesian optimization procedure geared towards exploitation, and a Bayesian optimization procedure
+  geared towards exploration. The final column shows our baseline parameters for the next step of the
+  optimization procedure.}
+ \label{tbl:pointwise_regression_tuning_full_parameters}
+\end{table}
+
+We first tune hyperparameters with a randomized scan on the
+classification problem between unweighted event samples drawn from
+$p(\boldx | \boldtheta_0)$ and $p(\boldx | \boldtheta_1)$. Using
+\toolfont{sklearn.model\_selection.RandomizedSearchCV}, we optimize on
+the ROC AUC. We give the optimal parameters in
+\autoref{tbl:pointwise_regression_tuning_full_parameters}. Again, we
+find a preference for around four hidden layers with 100 neurons each.
+
+\begin{figure}
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_regression_tuning_full/rhat_vs_r_full_mlp.pdf}%
+  \caption{Likelihood ratio estimation with the tuned regressor
+    using the full
+    feature set as input. We show a scatter plot between the true
+    $r(\boldx)$ and the estimate $\hat{r}(\boldx)$}.
+  \label{fig:pointwise_regression_tuning_full_rf_performance}
+\end{figure}
+
+In \autoref{fig:pointwise_regression_tuning_full_rf_performance} we show how well
+\toolfont{carl} can estimate the true likelihood ratio $r(\boldx)$
+with the tuned classifiers given in the right column of
+\autoref{tbl:pointwise_regression_tuning_full_parameters}.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Estimators for the full plus derived feature set}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Finally, we analyse whether the estimator is improved if we include an
+additional 18 derived quantities, see \autoref{sec:features}. The
+results of the hyperparameter scan are given in
+\autoref{tbl:pointwise_regression_tuning_full_parameters}.
+
+\begin{table}
+\small
+\begin{tabular}{ll r rrr }
+  \toprule 
+  & Parameter & Range & Bayes 1 & Bayes 2 & Benchmark \\
+  \midrule
+  NN & number of hidden layers & $1\dots 5$ & $3$ & $3$ & $3$\\
+  & neurons in last hidden layer & $5\dots 100$ & $50$ & $100$ & $50$\\
+  & neurons in other hidden layers & $5\dots 100$ & $100$ & $100$ & $100$\\
+  & activation function & $\tanh, \relu, \logistic$ & $\tanh$ & $\logistic$ & $\tanh$ \\
+  & $\alpha$ & $0\dots 100$ & $0$ & $0.00004$ & $0$ \\
+  & initial learning rate & $0.0001 \dots 0.01$ & $0.0003$ & $0.0006$ & $0.0003$ \\
+  \bottomrule
+\end{tabular}
+\caption{Hyperparameter scan on the regression problem of $r(\boldx)$ between
+  $\boldtheta_0$ and $\boldtheta_1$ using the full plus derived feature set as input. For
+  each parameter of the random forrest (RF) and the neural network (NN)
+  we show the considered range and the best settings as determined by a randomized
+  search CV, a Bayesian optimization procedure geared towards exploitation, and a Bayesian optimization procedure
+  geared towards exploration. The final column shows our baseline parameters for the next step of the
+  optimization procedure.}
+ \label{tbl:pointwise_regression_tuning_derived_parameters}
+\end{table}
+
+We first tune hyperparameters with a randomized scan on the
+classification problem between unweighted event samples drawn from
+$p(\boldx | \boldtheta_0)$ and $p(\boldx | \boldtheta_1)$. Using
+\toolfont{sklearn.model\_selection.RandomizedSearchCV}, we optimize on
+the ROC AUC. We give the optimal parameters in
+\autoref{tbl:pointwise_regression_tuning_derived_parameters}. Again, we
+find a preference for around four hidden layers with 100 neurons each.
+
+\begin{figure}
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_regression_tuning_full/rhat_vs_r_derived_mlp.pdf}%
+  \caption{Likelihood ratio estimation with the tuned regressor
+    using the full
+    feature plus derived set as input. We show a scatter plot between the true
+    $r(\boldx)$ and the estimate $\hat{r}(\boldx)$}.
+  \label{fig:pointwise_regression_tuning_derived_rf_performance}
+\end{figure}
+
+In \autoref{fig:pointwise_regression_tuning_derived_rf_performance} we show how well
+\toolfont{carl} can estimate the true likelihood ratio $r(\boldx)$
+with the tuned classifiers given in the right column of
+\autoref{tbl:pointwise_regression_tuning_derived_parameters}.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Comparison}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We summarize our different attempts to estimate $r(\boldx)$ for the
+high-dimensional $\boldx$ with different regressors in
+\autoref{fig:pointwise_regression_tuning_full_final}. The different
+input sets make a negligible difference, so for the sake of
+computation time we from now on stick to the simple medium set.
+
+\begin{figure}
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_regression_tuning_full/mse_final.pdf}%
+  \caption{Performance of \toolfont{carl} with regression for \toolfont{sklearn} default
+    hyperparameters, the best parameters according to the initial
+    hyperparameter scan, and the final parameters as defined in the
+    text, using three different feature sets as inputs. We show
+    the mean squred error of the estimated log likelihood ratio
+    between two benchmark points based on the fully differential
+    feature space. Each data point shows the mean of three
+    calculations, the error bars are $95\%$ confidence intervals.}
+  \label{fig:pointwise_regression_tuning_full_final}
+\end{figure}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Likelihood contours}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+After optimizing our regressor setup on the likelihood ratio between
+two distinct hypotheses, we now turn towards the more relevant problem
+of estimating $\boldtheta$ based on some measurements. We generate
+25\,000 toy events sampled from the probability distribution for the
+SM,
+%
+\begin{equation}
+  \boldtheta_{\text{observed}} = \twovec 0 0 \,.
+\end{equation} 
+%
+For 100 points randomly sampled in $\boldtheta \in [-0.9,0.9]^2$, we
+calculate the true expected likelihood ratio to
+%
+\begin{equation}
+  \boldtheta_{1} = \twovec {-0.23} {0.30}
+\end{equation}
+%
+as well as the corresponding \toolfont{carl} estimate. Finally, we
+interpolate between these points with a Gaussian Process with Mat\'ern
+kernel with $\nu = 0.5$.
+
+We train $\toolfont{carl}$ on the medium feature set. We use a neural
+network regressor with two hidden layers of 100 neurons each and
+another hidden layer with 5 neurons, the $\tanh$ activation function,
+$\alpha=0$, and an initial learning rate of $0.0002$. The training
+samples consist of 200\,000 unweighted samples each.
+
+\begin{figure}
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_inference/llr_truth_vs_regression_full.pdf}%
+  \includegraphics[height=0.45\textwidth]{figures/pointwise_inference/llr_gp_regression_vs_truth_full.pdf}%
+  \caption{Inference from truth likelihood ratio and \toolfont{carl}'s
+    estimate for the fully differential case with regression. Left: scatter plot
+    showing the difference between the exact expected likelihood ratio
+    for 100 randomly sampled points and $\boldtheta_1$ and
+    \toolfont{carl}'s estimate. Right: true (white) and approximate
+    (cyan) likelihood contours, using a Gaussian Process for
+    interpolation. The white and cyan dots show the exact and
+    approximate maximum-likelihood estimators. The green and red dots
+    show $\boldtheta_{\text{observed}}$ and $\boldtheta_1$,
+    respectively. Finally, the small grey dots show the sampled
+    parameter points at which the likelihood ratio was evaluated.}
+  \label{fig:pointwise_regression_inference_full}
+\end{figure}
+
+The results are shown in
+\autoref{fig:pointwise_regression_inference_full}. We see that
+$\toolfont{carl}$ with regression captures the likelihood function
+qualitatively well and slightly better than the calibrated
+classifiers.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Parameterized setup}
+\label{sec:parameterized}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Instead of estimating the likelihood ratio separately for different
+pairs $(\boldtheta_0, \boldtheta_1)$, we can also train one
+parameterized classifier or regressor
+$\hat{r}(\boldx; \boldtheta_0 , \boldtheta_1)$. This allows us to go
+beyond the likelihood-free setting and include the information from
+the score when it is available, or to use physics knowledge about the
+$\boldtheta$ dependence.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Setup}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Samples}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We consider two different training samples. In the \emph{baseline} setup, the
+training sample consists of 1000 pairs $(\boldtheta_0, \boldtheta_1)$.
+%
+\begin{equation}
+  \boldtheta_1 = (0.393, 0.492)
+  \label{eq:parameterized_theta1}
+\end{equation}
+%
+is fixed, while the values of $\boldtheta_0$ are chosen randomly (with
+a flat distribution over $[-1,1]^2]$). For each of these pairs, we
+draw 5\,000 events according to $\boldtheta_0$ and 5\,000 events
+according to $\boldtheta_1$. This amounts to a total of $10^7$ events.
+
+In our alternative ``\emph{random $\boldtheta$}'' training sample draw
+independent values of $\boldtheta_0$ for each event, from a flat prior
+in $[-1,1]^2$. $\boldtheta_1$ is fixed as before. The sample consists
+of 9998227 events, 4998047 of which were drawn according to
+$\boldtheta_1$.
+
+Finally, for some scenarios we analyse a training sample where only
+the 15 basis points of the morphing procedure are used as values of
+$\boldtheta_0$. Again a total of $10^7$ events are used.
+
+In all cases, our evaluation sample consists of $100\,000$ events
+drawn according to the SM. We calculate the exact likelihood ratio for
+these events for a total of 1016 values of $\boldtheta_0$, 1000 of
+which are the same as those used in the first training sample. Again
+we fix $\boldtheta_1$ as in Equation~\eqref{eq:parameterized_theta1}.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Strategies}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We consider five different inference setups. For the
+\emph{likelihood-free setting}, we use the normal \toolfont{carl}
+approach. We first define a ``raw'' version: for the mapping
+$\hat{r} (\hat{s})$ we simply assume a perfectly trained classifier,
+$\hat{s}(\boldx) = p(\boldx|\boldtheta_0) / ( p(\boldx|\boldtheta_0) +
+p(\boldx|\boldtheta_1) )$.
+Second, we use a calibrated version, where we generate a new
+calibration histogram for each of the 1016 values of $\boldtheta_0$
+used in the evaluation. For the calibration we always use the same
+(weighted) events, which is not possible in the most general
+likelihood-free setup (but may be in situations like the EFT described
+here).
+
+For the setup in which the \emph{score is tractable}, we define two
+estimators: one is just trained by regressing on the score data. The
+second uses a combination of \toolfont{carl}'s cross-entropy loss and
+the mean squared error of the score regression problem. A parameter
+$\alpha$ weights these two terms in the loss function, aiming for an
+approximately equal size of the two terms. Again, we consider a raw
+and a calibrated version of this setup.
+
+Finally, we define two regressors for the case in which the
+\emph{likelihood is tractable}: standard regression on $\log r$ as in
+the previous section, and a combination of regression on $\log r$ and
+on the score. The regression models are not calibrated.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Estimator design}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In the \emph{baseline} model, our estimators consist of a fully
+connected neural network. In this way, the network can learn
+(almost) any dependence on $\boldtheta$ it wants.
+
+In addition we consider a ``\emph{physics-aware model}'' that uses the
+knowledge about the compositional structure of the likelihood function
+(as in the morphing setup):
+%
+\begin{equation}
+  \hat{r} (\boldx; \boldtheta) = \sum_i w_i(\boldtheta) \, \hat{r}_i (\boldx)
+\end{equation}
+%
+where we have explicitly left out the dependence on $\boldtheta_1$,
+which we always keep fixed. The sum goes over the 15 basis samples
+used in the morphing setup, and the functions $w_i(\boldtheta)$ are
+analytically known. Following this structure, our network consists of
+15 independent estimators $\hat{r}_i (\boldx)$, weighted with the
+$w_i(\boldtheta)$. Each of these individual networks has two hidden
+layers with 50 components and $\tanh$ activation functions.
+
+We implement both setups in \toolfont{keras} with a
+\toolfont{TensorFlow} backend inside a \toolfont{sklearn} wrapper and
+train for 1 epoch. Longer training does not improve the
+performance. By default we use three hidden layers of 100 units with
+$\tanh$ activation functions for the baseline model, and two hidden
+layers of 50 units with $\tanh$ activations for the physics-aware
+version. We also comment on more shallow and deeper architectures.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Uncertainty diagnostics}
+\label{sec:parameterized_diagnostics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We are experimenting with diagnostic tools that might provide some
+measure of the uncertainty of the estimators $\hat{r}(\boldx)$. There are different ideas:
+%
+\begin{enumerate}
+\item \emph{Ensemble variance}: repeating the full calculation with
+  different random seeds, one can extract an uncertainty measure from
+  the ensemble variance. This would only capture statistical
+  uncertainties, not a systematic bias. Obviously this increases the
+  computational cost.
+  % 
+\item \emph{Denominator variation}: the relative log likelihood
+  contours (compared to the best-fit point) should not depend on the
+  choice of the denominator hypothesis
+  $\boldtheta_1$~\cite{Cranmer:2015bka}. We can therefore use
+  quantities like
+  % 
+  \begin{multline}
+    \Delta \log \hat{r} (\boldx; \boldtheta_0, \boldtheta_1) 
+    = \Bigl| (\log \hat{r} (\boldx; \boldtheta_0, \boldtheta_1) - \max_\boldtheta \log \hat{r} (\boldx; \boldtheta, \boldtheta_1) ) \\
+      - (\log \hat{r}' (\boldx; \boldtheta_0, \boldtheta_1') - \max_\boldtheta \log \hat{r}' (\boldx; \boldtheta_0, \boldtheta_1') ) \Bigr| \,.
+    \label{eq:parameterized_diagnostics3}
+  \end{multline}
+  % 
+  as a measure of systematic uncertainties. Probably such a number
+  only presents a lower bound for the true uncertainty. Again, this
+  increases the computational cost.
+  % 
+\item \emph{Toy experiments}: we perform a series of mock experiments
+  with different numbers of events and calculate the variance in the
+  distribution of $\log \hat{r}{\boldx}$ as a function of the number
+  of events. We fit the variance as a function of the event number
+  with
+  % 
+  \begin{equation}
+    \var [\log \hat{r}(\boldx; \boldtheta_0, \boldtheta_1) ] (n) = a/n + b \,.
+  \end{equation}
+  % 
+  Then $\sqrt{a/n}$ represents the statistical uncertainty from a
+  limited number of events, while
+  % 
+  \begin{equation}
+    \Delta \log \hat{r} (\boldx; \boldtheta_0, \boldtheta_1) = \sqrt{b}
+    \label{eq:parameterized_diagnostics1}
+  \end{equation}
+  % 
+  might provide a measure of a residual systematic uncertainty in the
+  expectation values with large $n$. There is no guarantee that this
+  strategy works.
+  % 
+\item \emph{Identity check}: for $\boldtheta_0 = \boldtheta_1$ the log
+  likelihood ratio should identically vanish. A non-zero value of
+  % 
+  \begin{equation}
+    \Delta \log \hat{r} (\boldx) = \log \hat{r}(\boldx; \boldtheta_0 = \boldtheta_1, \boldtheta_1) 
+    \label{eq:parameterized_diagnostics2}
+  \end{equation}
+  % 
+  might therefore hint at a systematic uncertainty. Again, there is no
+  guarantee that this number says anything about the behaviour at other
+  values of $\boldtheta_0$. Also, any constant bias in
+  $ \log \hat{r} (\boldx) $ would cancel out in the likelihood contours,
+  which consider the difference in the log likelihood with respect to
+  the best-fit point.
+%
+\item \emph{Score expectation value}: we know that
+  $E[\mathbf{t}(\boldx | \boldtheta_0) | \boldtheta_0] = 0$. Perhaps
+  there is a way to translate non-zero expectation values to an
+  uncertainty measure on $\log r(\boldx)$?
+\end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Baseline version}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Our baseline model trains a fully connected network as a function of
+both the features and the parameter points on 1000 fixed values of
+$\boldtheta_0$, which are also used for evaluation.
+
+We show the results of these experiments in
+Figures~\ref{fig:parameterized_baseline_r_histo} to
+\ref{fig:parameterized_baseline_likelihood_ratio}. We find that
+calibration is important, and that the combinatino of
+$\toolfont{carl}$ with score information works well. The tested
+diagnostic tool for uncertainties, unfortunately, does not seem to be
+particularly useful: it wrongly assisngs sizeable errors to the ground
+truth.
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/parameterized_r_histograms_shallow.pdf}%
+  \caption{Likelihood ratio histograms for individual phase-space points
+    $\boldx$, for one particular hypothesis comparison
+    $(\boldtheta_0, \boldtheta_1)$.  We show the baseline version of
+    the different parameterized models.}
+  \label{fig:parameterized_baseline_r_histo}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/parameterized_r_scatter_shallow.pdf}%
+  \caption{Likelihood ratio scatter plot for individual phase-space points
+    $\boldx$, for one particular hypothesis comparison
+    $(\boldtheta_0, \boldtheta_1)$.  We show the baseline version of
+    the different parameterized models.}
+  \label{fig:parameterized_baseline_r_scatter}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/parameterized_score_scatter_shallow.pdf}%
+  \caption{Score scatter plots for individual phase-space points $\boldx$, for one
+    particular hypothesis comparison $(\boldtheta_0, \boldtheta_1)$.
+    We show the baseline version of the different parameterized
+    models.}
+  \label{fig:parameterized_baseline_score_scatter}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/parameterized_theta_dependence_comparison_shallow.pdf}%
+  \caption{Exact and estimated likelihood ratios as a function of
+    $\boldtheta_0$, for four different individual events $\boldx$
+    (columns). We show the baseline version of the different
+    parameterized models (rows).}
+  \label{fig:parameterized_baseline_theta_dependence}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/parameterized_expected_likelihood_scatter_shallow.pdf}%
+  \caption{Scatter plot of the expected likelihood ratios for
+    different values of $\boldtheta_0$, taking the expectation value
+    over $\boldx$. We show the baseline version of the different
+    parameterized models.}
+  \label{fig:parameterized_baseline_likelihood_ratio}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/parameterized_likelihood_contours_shallow.pdf}%
+  \caption{Contours of the expected likelihood ratio at
+    $-2 \Delta \log r = 1$ (solid), $4$ (dashed), $9$ (dotted). We
+    show the baseline version of the different parameterized
+    models. The shaded error bands show an estimate of the
+    uncertainties following
+    Equation~\eqref{eq:parameterized_diagnostics1}.}
+  \label{fig:parameterized_baseline_likelihood_ratio}
+\end{figure}
+
+The plots shown are based on fully connected neural networks with
+three hidden layers of 100 units. We are currently experimenting with
+more shallow or deeper networks.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\clearpage
+\subsection{Training sample with fully random $\boldtheta$}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We now switch to a training sample in which the values of
+$\boldtheta_0$ are drawn randomly for each event. The results are
+shown in Figures~\ref{fig:parameterized_random_r_histo} to
+\ref{fig:parameterized_random_likelihood_ratio}.
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/parameterized_r_histograms_random.pdf}%
+  \caption{Likelihood ratio histograms for individual phase-space points
+    $\boldx$, for one particular hypothesis comparison
+    $(\boldtheta_0, \boldtheta_1)$.  We show the random $\boldtheta$ version of
+    the different parameterized models.}
+  \label{fig:parameterized_random_r_histo}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/parameterized_r_scatter_random.pdf}%
+  \caption{Likelihood ratio scatter plot for individual phase-space points
+    $\boldx$, for one particular hypothesis comparison
+    $(\boldtheta_0, \boldtheta_1)$.  We show the random $\boldtheta$ version of
+    the different parameterized models.}
+  \label{fig:parameterized_random_r_scatter}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/parameterized_score_scatter_random.pdf}%
+  \caption{Score scatter plots for individual phase-space points $\boldx$, for one
+    particular hypothesis comparison $(\boldtheta_0, \boldtheta_1)$.
+    We show the random $\boldtheta$ version of the different parameterized
+    models.}
+  \label{fig:parameterized_random_score_scatter}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/parameterized_theta_dependence_comparison_random.pdf}%
+  \caption{Exact and estimated likelihood ratios as a function of
+    $\boldtheta_0$, for four different individual events $\boldx$
+    (columns). We show the random $\boldtheta$ version of the different
+    parameterized models (rows).}
+  \label{fig:parameterized_random_theta_dependence}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/parameterized_expected_likelihood_scatter_random.pdf}%
+  \caption{Scatter plot of the expected likelihood ratios for
+    different values of $\boldtheta_0$, taking the expectation value
+    over $\boldx$. We show the random $\boldtheta$ version of the different
+    parameterized models.}
+  \label{fig:parameterized_random_likelihood_ratio}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/parameterized_likelihood_contours_random.pdf}%
+  \caption{Contours of the expected likelihood ratio at
+    $-2 \Delta \log r = 1$ (solid), $4$ (dashed), $9$ (dotted). We
+    show the random $\boldtheta$ version of the different parameterized
+    models. The shaded error bands show an estimate of the
+    uncertainties following
+    Equation~\eqref{eq:parameterized_diagnostics1}.}
+  \label{fig:parameterized_random_likelihood_ratio}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\clearpage
+\subsection{Physics-aware estimators}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Finally, we analyse our physics-aware design that uses the analytic
+form of the morphing weights $w_i (\boldtheta)$. These factors
+crucially depend on the basis points in the morphing procedure, as we
+show in Figures~\ref{fig:parameterized_morphing_weights1} and
+\ref{fig:parameterized_morphing_weights2}. Here we stick to the choice
+shown in Figure~\ref{fig:parameterized_morphing_weights2}, which
+reduces the weights and the cancellations between them compared to
+other basis choices. For now we only analyse the training sample
+consisting only of these basis values of $\boldtheta_0$.
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/morphing_original.pdf}%
+  \caption{Morphing weights $w_i(\boldtheta)$ for basis points chosen
+    only in one quadrant of the parameter space of interest.}
+  \label{fig:parameterized_morphing_weights1}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/parameterized/morphing_optimized2.pdf}%
+  \caption{Morphing weights $w_i(\boldtheta)$ for basis points
+    distributed over the full relevant parameter space.}
+  \label{fig:parameterized_morphing_weights2}
+\end{figure}
+
+There are still issues with the results\dots
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Comparison}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Tables~\ref{tbl:parameterized_comparison1} and
+\ref{tbl:parameterized_comparison2} compare the performance of all
+different setups tested. Generally, we observe that regression works
+best, followed by carl augmented with score information, followed by
+pure carl. For the carl approaches, calibration is crucial. Shallow
+networks with two hidden layers mostly outperform deeper ones.
+
+Comparing the baseline training sample and the random $\boldtheta$
+training sample, the two are roughly comparable except in the
+approaches that take into account the score, where the random
+$\boldtheta$ samples perform clearly worse. It is not clear what's
+going wrong there.
+
+
+\begin{table}
+  \scriptsize
+  \begin{tabular}{llrrrr}
+    \toprule
+   Algorithm & Setup & $\MSE_\boldx \left[ \log r(\boldx; \boldtheta_1, \boldtheta_0) \right]$ & $\MSE_\boldtheta \left[ E[\log r(\boldx; \boldtheta, \boldtheta_0)] \right]$ & $\MSE_\boldtheta \left[ \Delta E[\log r(\boldx; \boldtheta, \boldtheta_0)] \right]$\\
+   \midrule
+   carl (raw) & Baseline (2) & $\mathbf{0.11}$ & $\mathbf{1.27}$ & $1.16$\\
+    & Baseline (3) & $0.17$ & $11.43$ & $1.60$\\
+    & Baseline (5) & $0.24$ & $8.80$ & $1.73$\\
+    & Random $\boldtheta$ (2) & $0.13$ & $3.12$ & $\mathbf{0.39}$\\
+    & Random $\boldtheta$ (3) & $0.17$ & $4.96$ & $2.20$\\
+    & Random $\boldtheta$ (5) & $0.29$ & $32.02$ & $1.23$\\
+    & Physics-aware (1) &  &  & \\
+    & Physics-aware (2) &  &  & \\
+    & Physics-aware (3) &  &  & \\
+   \midrule
+   carl (calibrated) & Baseline (2) & $\mathbf{0.10}$ & $0.29$ & $0.31$\\
+    & Baseline (3) & $0.14$ & $0.44$ & $0.54$\\
+    & Baseline (5) & $0.23$ & $0.71$ & $1.14$\\
+    & Random $\boldtheta$ (2) & $0.11$ & $\mathbf{0.24}$ & $\mathbf{0.26}$\\
+    & Random $\boldtheta$ (3) & $0.12$ & $0.30$ & $0.30$\\
+    & Random $\boldtheta$ (5) &  &  & \\
+    & Physics-aware (1) &  &  & \\
+    & Physics-aware (2) &  &  & \\
+    & Physics-aware (3) &  &  & \\
+   \midrule
+   score (raw) & Baseline (2) & $\mathbf{0.09}$ & $\mathbf{0.46}$ & $\mathbf{0.06}$\\
+    & Baseline (3) & $0.09$ & $1.40$ & $0.13$\\
+    & Baseline (5) & $0.27$ & $66.82$ & $0.17$\\
+    & Random $\boldtheta$ (2) & $0.29$ & $4.22$ & $4.06$\\
+    & Random $\boldtheta$ (3) & $0.32$ & $24.13$ & $3.70$\\
+    & Random $\boldtheta$ (5) & $0.46$ & $40.74$ & $4.15$\\
+    & Physics-aware (1) &  &  & \\
+    & Physics-aware (2) &  &  & \\
+    & Physics-aware (3) &  &  & \\
+   \midrule
+   score (calibrated) & Baseline (2) & $\mathbf{0.08}$ & $\mathbf{0.35}$ & $\mathbf{0.61}$\\
+    & Baseline (3) & $0.11$ & $0.88$ & $1.33$\\
+    & Baseline (5) &  &  & \\
+    & Random $\boldtheta$ (2) & $0.19$ & $2.20$ & $2.69$\\
+    & Random $\boldtheta$ (3) & $0.20$ & $2.05$ & $2.58$\\
+    & Random $\boldtheta$ (5) &  &  & \\
+    & Physics-aware (1) &  &  & \\
+    & Physics-aware (2) &  &  & \\
+    & Physics-aware (3) &  &  & \\
+    \bottomrule
+  \end{tabular}
+  \caption{Comparison of parameterized inference strategies, part 2. The numbers
+    in brackets denote the number of hidden layers.  We show
+    three metrics: the mean squared error of $\log r$ for a fixed pair of hypotheses
+    over different phase-space points; the mean squared error of the expectation 
+    value of $\log r$ for different pairs of hypotheses; and the same, but subtracting
+    the expectation value for the best-fit point. In the last two cases the expectation value
+    sums over $\boldx$ following the SM distribution.}
+  \label{tbl:parameterized_comparison1}
+\end{table}
+
+\begin{table}
+  \scriptsize
+  \begin{tabular}{llrrrr}
+    \toprule
+   Algorithm & Setup & $\MSE_\boldx \left[ \log r(\boldx; \boldtheta_1, \boldtheta_0) \right]$ & $\MSE_\boldtheta \left[ E[\log r(\boldx; \boldtheta, \boldtheta_0)] \right]$ & $\MSE_\boldtheta \left[ \Delta E[\log r(\boldx; \boldtheta, \boldtheta_0)] \right]$\\
+   \midrule
+   carl + score (raw) & Baseline (2) & $\mathbf{0.03}$ & $\mathbf{1.62}$ & $\mathbf{0.23}$\\
+    & Baseline (3) & $0.06$ & $6.66$ & $0.63$\\
+    & Baseline (5) & $0.38$ & $92.43$ & $0.92$\\
+    & Random $\boldtheta$ (2) & $0.19$ & $2.51$ & $2.99$\\
+    & Random $\boldtheta$ (3) & $0.20$ & $2.29$ & $3.89$\\
+    & Random $\boldtheta$ (5) & $0.23$ & $6.87$ & $2.76$\\
+    & Physics-aware (1) &  &  & \\
+    & Physics-aware (2) &  &  & \\
+    & Physics-aware (3) &  &  & \\
+   \midrule
+   carl + score (calibrated) & Baseline (2) & $\mathbf{0.04}$ & $\mathbf{0.22}$ & $\mathbf{0.21}$\\
+    & Baseline (3) & $0.05$ & $0.30$ & $0.31$\\
+    & Baseline (5) &  &  & \\
+    & Random $\boldtheta$ (2) & $0.13$ & $0.86$ & $1.11$\\
+    & Random $\boldtheta$ (3) & $0.13$ & $0.82$ & $1.10$\\
+    & Random $\boldtheta$ (5) &  &  & \\
+    & Physics-aware (1) &  &  & \\
+    & Physics-aware (2) &  &  & \\
+    & Physics-aware (3) &  &  & \\
+   \midrule
+   regression (raw) & Baseline (2) & $\mathbf{0.02}$ & $0.30$ & $0.16$\\
+    & Baseline (3) & $0.02$ & $0.30$ & $0.23$\\
+    & Baseline (5) & $0.03$ & $1.00$ & $0.52$\\
+    & Random $\boldtheta$ (2) & $0.02$ & $0.36$ & $\mathbf{0.09}$\\
+    & Random $\boldtheta$ (3) & $0.02$ & $\mathbf{0.14}$ & $0.13$\\
+    & Random $\boldtheta$ (5) & $0.04$ & $0.39$ & $0.23$\\
+    & Physics-aware (1) &  &  & \\
+    & Physics-aware (2) &  &  & \\
+    & Physics-aware (3) &  &  & \\
+   \midrule
+   regression + score (raw) & Baseline (2) & $\mathbf{0.02}$ & $0.11$ & $0.12$\\
+    & Baseline (3) & $0.02$ & $0.12$ & $0.18$\\
+    & Baseline (5) & $0.09$ & $5.59$ & $0.30$\\
+    & Random $\boldtheta$ (2) & $0.02$ & $\mathbf{0.04}$ & $0.09$\\
+    & Random $\boldtheta$ (3) & $0.03$ & $0.68$ & $0.07$\\
+    & Random $\boldtheta$ (5) & $0.07$ & $0.76$ & $\mathbf{0.06}$\\
+    & Physics-aware (1) &  &  & \\
+    & Physics-aware (2) &  &  & \\
+    & Physics-aware (3) &  &  & \\
+    \bottomrule
+  \end{tabular}
+  \caption{Comparison of parameterized inference strategies, part 2. The numbers
+    in brackets denote the number of hidden layers.  We show
+    three metrics: the mean squared error of $\log r$ for a fixed pair of hypotheses
+    over different phase-space points; the mean squared error of the expectation 
+    value of $\log r$ for different pairs of hypotheses; and the same, but subtracting
+    the expectation value for the best-fit point. In the last two cases the expectation value
+    sums over $\boldx$ following the SM distribution.}
+  \label{tbl:parameterized_comparison2}
+\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Conclusions}
+\label{sec:conclusions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{appendix.tex}
+
+\clearpage
+\bibliography{references}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{fmffile}
+
+\end{document}
