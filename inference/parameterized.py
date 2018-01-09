@@ -3,7 +3,6 @@
 ################################################################################
 
 import numpy as np
-import logging
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.gaussian_process import GaussianProcessRegressor
@@ -15,11 +14,11 @@ from keras.callbacks import EarlyStopping
 from carl.ratios import ClassifierScoreRatio
 from carl.learning import CalibratedClassifierScoreCV
 
-from keras_models import make_classifier_carl, make_classifier_carl_morphingaware
-from keras_models import make_classifier_score, make_classifier_score_morphingaware
-from keras_models import make_classifier_combined, make_classifier_combined_morphingaware
-from keras_models import make_regressor, make_regressor_morphingaware
-from keras_models import make_combined_regressor, make_combined_regressor_morphingaware
+from models_parameterized import make_classifier_carl, make_classifier_carl_morphingaware
+from models_parameterized import make_classifier_score, make_classifier_score_morphingaware
+from models_parameterized import make_classifier_combined, make_classifier_combined_morphingaware
+from models_parameterized import make_regressor, make_regressor_morphingaware
+from models_parameterized import make_combined_regressor, make_combined_regressor_morphingaware
 
 
 
@@ -33,15 +32,13 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
                             options=''): # all other options in a string
 
     """
+    Trains and evaluates one of the parameterized inference methods.
 
     :param algorithm: Type of the algorithm used. Currently supported: 'carl', 'score', 'combined', 'regression', and
     'combinedregression'.
-    :type algorithm: string
-    :param morphing_aware:
-    :type morphing_aware: bool
-    :param training_sample:
-    :param options:
-    :return:
+    :param morphing_aware: bool that decides whether a morphing-aware or morphing-agnostic architecture is used.
+    :param training_sample: Training sample. Can be 'baseline', 'basis', or 'random'.
+    :param options: Further options in a list of strings or string.
     """
     
     assert algorithm in ['carl', 'score', 'combined', 'regression', 'combinedregression']
