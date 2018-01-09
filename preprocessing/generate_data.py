@@ -214,13 +214,16 @@ if do_train:
             np.array(weights_train[theta_score][indices_den]),
         ))
 
+        # filter out bad events
+        filter = (scores[:,0]**2 + scores[:,1]**2 < 2500.) & (np.log(r)**2 < 10000.)
+
         # print thetas0.shape, thetas1.shape, X.shape, y.shape, scores.shape, r.shape, p_score.shape
 
-        return thetas0, thetas1, X, y, scores, r, p0, p1, p_score
+        return thetas0[filter], thetas1[filter], X[filter], y[filter], scores[filter], r[filter], p0[filter], p1[filter], p_score[filter]
 
     for i, t in enumerate(thetas_train):
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1, this_p_score = generate_data_train(t, theta1)
-        print(t, thetas[t])
+        print(t, thetas[t], len(this_r))
 
         if i > 0:
             th0 = np.vstack((th0, np.array(this_th0, dtype=np.float16)))
@@ -229,7 +232,8 @@ if do_train:
             y = np.hstack((y, np.array(this_y, dtype=np.float16)))
             scores = np.vstack((scores, np.array(this_scores, dtype=np.float16)))
             r = np.hstack((r, np.array(this_r, dtype=np.float16)))
-            p_score = np.hstack((r, np.array(this_p_score, dtype=np.float16)))
+            p0 = np.hstack((r, np.array(this_p0, dtype=np.float16)))
+            p1 = np.hstack((r, np.array(this_p1, dtype=np.float16)))
         else:
             th0 = np.array(this_th0, dtype=np.float16)
             th1 = np.array(this_th1, dtype=np.float16)
@@ -237,7 +241,8 @@ if do_train:
             y = np.array(this_y, dtype=np.float16)
             scores = np.array(this_scores, dtype=np.float16)
             r = np.array(this_r, dtype=np.float16)
-            p_score = np.array(this_p_score, dtype=np.float16)
+            p0 = np.array(this_p0, dtype=np.float16)
+            p1 = np.array(this_p1, dtype=np.float16)
 
     np.save(data_dir + '/unweighted_events/theta0_train' + filename_addition + '.npy', th0)
     np.save(data_dir + '/unweighted_events/theta1_train' + filename_addition + '.npy', th1)
@@ -245,7 +250,8 @@ if do_train:
     np.save(data_dir + '/unweighted_events/y_train' + filename_addition + '.npy', y)
     np.save(data_dir + '/unweighted_events/scores_train' + filename_addition + '.npy', scores)
     np.save(data_dir + '/unweighted_events/r_train' + filename_addition + '.npy', r)
-    np.save(data_dir + '/unweighted_events/p_score_train' + filename_addition + '.npy', p_score)
+    np.save(data_dir + '/unweighted_events/p0_train' + filename_addition + '.npy', p0)
+    np.save(data_dir + '/unweighted_events/p1_train' + filename_addition + '.npy', p1)
 
     print('...done!')
 
@@ -306,12 +312,15 @@ if do_basis:
 
         # print thetas0.shape, thetas1.shape, X.shape, y.shape, scores.shape, r.shape, p_score.shape
 
-        return thetas0, thetas1, X, y, scores, r, p0, p1, p_score
+        # filter out bad events
+        filter = (scores[:,0]**2 + scores[:,1]**2 < 2500.) & (np.log(r)**2 < 10000.)
+
+        return thetas0[filter], thetas1[filter], X[filter], y[filter], scores[filter], r[filter], p0[filter], p1[filter], p_score[filter]
 
     for i, t in enumerate(thetas_basis):
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1,\
             this_p_score = generate_data_train_basis(t, theta1)
-        print(t, thetas[t])
+        print(t, thetas[t], len(this_r))
 
         if i > 0:
             th0 = np.vstack((th0, np.array(this_th0, dtype=np.float16)))
@@ -320,7 +329,8 @@ if do_basis:
             y = np.hstack((y, np.array(this_y, dtype=np.float16)))
             scores = np.vstack((scores, np.array(this_scores, dtype=np.float16)))
             r = np.hstack((r, np.array(this_r, dtype=np.float16)))
-            p_score = np.hstack((r, np.array(this_p_score, dtype=np.float16)))
+            p0 = np.hstack((r, np.array(this_p0, dtype=np.float16)))
+            p1 = np.hstack((r, np.array(this_p1, dtype=np.float16)))
         else:
             th0 = np.array(this_th0, dtype=np.float16)
             th1 = np.array(this_th1, dtype=np.float16)
@@ -328,7 +338,8 @@ if do_basis:
             y = np.array(this_y, dtype=np.float16)
             scores = np.array(this_scores, dtype=np.float16)
             r = np.array(this_r, dtype=np.float16)
-            p_score = np.array(this_p_score, dtype=np.float16)
+            p0 = np.array(this_p0, dtype=np.float16)
+            p1 = np.array(this_p1, dtype=np.float16)
 
     np.save(data_dir + '/unweighted_events/theta0_train_basis' + filename_addition + '.npy', th0)
     np.save(data_dir + '/unweighted_events/theta1_train_basis' + filename_addition + '.npy', th1)
@@ -336,7 +347,8 @@ if do_basis:
     np.save(data_dir + '/unweighted_events/y_train_basis' + filename_addition + '.npy', y)
     np.save(data_dir + '/unweighted_events/scores_train_basis' + filename_addition + '.npy', scores)
     np.save(data_dir + '/unweighted_events/r_train_basis' + filename_addition + '.npy', r)
-    np.save(data_dir + '/unweighted_events/p_score_train_basis' + filename_addition + '.npy', p_score)
+    np.save(data_dir + '/unweighted_events/p0_train_basis' + filename_addition + '.npy', p0)
+    np.save(data_dir + '/unweighted_events/p1_train_basis' + filename_addition + '.npy', p1)
 
     print('...done!')
 
@@ -396,6 +408,9 @@ if do_point_by_point:
         ))
 
         # print thetas0.shape, thetas1.shape, X.shape, y.shape, scores.shape, r.shape, p_score.shape
+
+        # filter out bad events
+        filter = (scores[:,0]**2 + scores[:,1]**2 < 2500.) & (np.log(r)**2 < 10000.)
 
         return thetas0, thetas1, X, y, scores, r, p0, p1, p_score
 
@@ -475,7 +490,11 @@ if do_random:
         thetas1[:] = thetas[theta1]
 
         print(randomtheta0, '-', n_dice, 'throws,', len(accepted_num), 'num', len(accepted_den), 'den')
-        return thetas0, thetas1, X, y, scores, r
+
+        # filter out bad events
+        filter = (scores[:,0]**2 + scores[:,1]**2 < 2500.) & (np.log(r)**2 < 10000.)
+
+        return thetas0[filter], thetas1[filter], X[filter], y[filter], scores[filter], r[filter]
 
 
     for t in range(n_randomthetas):
@@ -526,7 +545,11 @@ if do_calibration:
         for t in range(n_thetas):
             r[t, :] = np.array(weights_train[t][indices] / weights_train[theta_observed][indices])
 
-        return X, r
+
+        # filter out bad events
+        filter = (np.log(r)**2 < 10000.)
+
+        return X[filter], r[:,filter]
 
 
     X, weights = generate_data_calibration(theta_observed)
@@ -562,19 +585,22 @@ if do_test:
             subset_scores = [weighted_data_test.columns.get_loc(x) for x in labels_scores]
             scores[t] = np.array(weighted_data_test.iloc[indices, subset_scores])
 
-        p_score = np.array(weights_test[theta_score][indices])
+        p_score = np.array(weights_test[theta1][indices])
 
         print(X.shape, scores.shape, r.shape, p_score.shape)
 
-        return X, scores, r, p_score
+        # filter out bad events
+        filter = (scores[:,0]**2 + scores[:,1]**2 < 2500.) & (np.log(r)**2 < 10000.)
+
+        return X[filter], scores[filter], r[:,filter], p1[filter]
 
 
-    X, scores, r, p_score = generate_data_test(theta_observed, theta1)
+    X, scores, r, p1 = generate_data_test(theta_observed, theta1)
 
     np.save(data_dir + '/unweighted_events/X_test' + filename_addition + '.npy', X)
     np.save(data_dir + '/unweighted_events/scores_test' + filename_addition + '.npy', scores)
     np.save(data_dir + '/unweighted_events/r_test' + filename_addition + '.npy', r)
-    np.save(data_dir + '/unweighted_events/p_score_test' + filename_addition + '.npy', p_score)
+    np.save(data_dir + '/unweighted_events/p1_test' + filename_addition + '.npy', p1)
 
     print('...done!')
 
