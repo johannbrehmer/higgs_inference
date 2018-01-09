@@ -26,6 +26,7 @@ do_test = ('test' in args)
 do_roam = ('roam' in args)
 
 denom1_mode = ('denom1' in args)
+debug_mode = ('debug' in args)
 
 print('')
 print('Tasks:')
@@ -42,10 +43,14 @@ if denom1_mode:
     print('  Denominator: theta', 1)
 else:
     print('  Denominator: theta', 0)
+print('  Debug mode:             ', debug_mode)
 
 filename_addition = ''
 if denom1_mode:
     filename_addition = '_denom1'
+
+if debug_mode:
+    filename_addition += '_debug'
 
 data_dir = '../data'
 
@@ -97,7 +102,10 @@ subset_features = list(range(42)) #list(range(15))
 # Data
 ################################################################################
 
-weighted_data = pd.read_csv('/scratch/jb6504/eft-data/wbf_4l_supernew.dat', sep='\t', dtype=np.float32)
+if debug_mode:
+    weighted_data = pd.read_csv('/scratch/jb6504/eft-data/wbf_4l_supernew_excerpt.dat', sep='\t', dtype=np.float32)
+else:
+    weighted_data = pd.read_csv('/scratch/jb6504/eft-data/wbf_4l_supernew.dat', sep='\t', dtype=np.float32)
 
 # # Check probabilities
 # print('')
