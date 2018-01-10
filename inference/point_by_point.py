@@ -11,8 +11,8 @@ from sklearn.gaussian_process.kernels import ConstantKernel as C, Matern
 from keras.wrappers.scikit_learn import KerasRegressor
 from keras.callbacks import EarlyStopping
 
-from carl.ratios import ClassifierRatio
-from carl.learning import CalibratedClassifierCV
+from carl.ratios import ClassifierScoreRatio
+from carl.learning import CalibratedClassifierScoreCV
 
 from models_point_by_point import make_classifier, make_regressor
 
@@ -214,16 +214,19 @@ def point_by_point_inference(algorithm='carl',
 
             # Calibration
             nc = X_calibration_transformed.shape[0]
+            X_calibration_both = np.zeros((2 * nc, X_calibration_transformed.shape[1]))
+            X_calibration_both[:nc] = X_calibration_transformed
+            X_calibration_both[nc:] = X_calibration_transformed
             y_calibration = np.zeros(2 * nc)
             y_calibration[nc:] = 1.
             w_calibration = np.zeros(2 * nc)
             w_calibration[:nc] = weights_calibration[t]
             w_calibration[nc:] = weights_calibration[theta1]
 
-            ratio_calibrated = ClassifierRatio(
-                CalibratedClassifierCV(clf, cv='prefit', bins=50, independent_binning=False)
+            ratio_calibrated = ClassifierScoreRatio(
+                CalibratedClassifierScoreCV(clf, cv='prefit', bins=50, independent_binning=False)
             )
-            ratio_calibrated.fit(X_calibration_transformed, y_calibration, sample_weight=w_calibration)
+            ratio_calibrated.fit(X_calibration_both, y_calibration, sample_weight=w_calibration)
 
             # Evaluation of calibrated classifier
             this_r = ratio_calibrated.predict(X_test_transformed)

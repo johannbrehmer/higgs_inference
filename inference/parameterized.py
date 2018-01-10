@@ -409,9 +409,9 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
             thetas0_array[:, :] = thetas[t]
             X_thetas_calibration = np.hstack((X_calibration_transformed, thetas0_array))
             X_thetas_calibration = np.vstack((X_thetas_calibration, X_thetas_calibration))
-            y_calibration = np.zeros(2*nc)
+            y_calibration = np.zeros(2 * nc)
             y_calibration[nc:] = 1.
-            w_calibration = np.zeros(2*nc)
+            w_calibration = np.zeros(2 * nc)
             w_calibration[:nc] = weights_calibration[t]
             w_calibration[nc:] = weights_calibration[theta1]
     
