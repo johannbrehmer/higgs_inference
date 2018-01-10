@@ -6,8 +6,9 @@
 ################################################################################
 
 from keras.models import Model
-from keras.layers import Input, Dense, Dropout
+from keras.layers import Input, Dense, Dropout, Lambda
 from keras import losses, optimizers
+import keras.backend as K
 
 
 ################################################################################
@@ -99,7 +100,8 @@ def make_regressor(n_hidden_layers=3,
 def make_classifier(n_hidden_layers=3,
                     hidden_layer_size=100,
                     activation='tanh',
-                    dropout_prob=0.0):
+                    dropout_prob=0.0,
+                    learn_log_r=False):
     # Inputs
     input_layer = Input(shape=(n_features,))
 
@@ -111,7 +113,13 @@ def make_classifier(n_hidden_layers=3,
                                       activation=activation,
                                       dropout_prob=dropout_prob)
         hidden_layer = hidden_layer_(hidden_layer)
-    s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
+
+    if learn_log_r:
+        log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
+        s_hat_layer = Lambda(lambda x: 1./(1. + K.exp(x)))(log_r_hat_layer)
+
+    else:
+        s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
 
     # Combine outputs
     model = Model(inputs=[input_layer], outputs=[s_hat_layer])

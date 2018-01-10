@@ -37,15 +37,17 @@ def point_by_point_inference(algorithm='carl',
     assert algorithm in ['carl', 'regression']
 
     denom1_mode = ('denom1' in options)
-
     debug_mode = ('debug' in options)
-
+    learn_logr_mode = ('learnlogr' in options)
     short_mode = ('short' in options)
     long_mode = ('long' in options)
     deep_mode = ('deep' in options)
     shallow_mode = ('shallow' in options)
 
     filename_addition = ''
+
+    if learn_logr_mode:
+        filename_addition += '_learnlogr'
 
     n_hidden_layers = 2
     if shallow_mode:
@@ -196,7 +198,7 @@ def point_by_point_inference(algorithm='carl',
             X_test_transformed = scaler.transform(X_test)
             X_calibration_transformed = scaler.transform(X_calibration)
 
-            clf = KerasRegressor(lambda: make_classifier(n_hidden_layers=n_hidden_layers),
+            clf = KerasRegressor(lambda: make_classifier(n_hidden_layers=n_hidden_layers, learn_log_r=learn_logr_mode),
                                   epochs=n_epochs, validation_split=0.142857,
                                   verbose=2)
 
