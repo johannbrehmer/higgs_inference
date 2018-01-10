@@ -95,9 +95,9 @@ def point_by_point_inference(algorithm='carl',
 
     thetas = np.load(data_dir + '/thetas/thetas_parameterized.npy')
     n_thetas = len(thetas)
-    theta_benchmark1 = 213
+    theta_benchmark1 = 422
     theta_benchmark2 = 9
-    training_thetas = [0, 9, 101, 106, 110, 221, 325, 415, 559, 612, 634, 717, 807, 902, 910]
+    training_thetas = [0, 13, 14, 15, 16, 9, 422, 956, 666, 802, 675, 839, 699, 820, 203, 291, 634, 371, 973, 742, 901, 181, 82, 937, 510, 919, 745, 588, 804, 963, 396, 62, 401, 925, 874, 770, 108, 179, 669, 758, 113, 587, 600, 975, 496, 66, 467, 412, 701, 986, 598, 810, 97, 18, 723, 159, 320, 301, 352, 159, 89, 421, 574, 923, 849, 299, 119, 167, 939, 402, 52, 787, 978, 41, 873, 533, 827, 304, 294, 760, 890, 539, 1000, 291, 740, 276, 679, 167, 125, 429, 149, 430, 720, 123, 908, 256, 777, 809, 269, 851]
 
     X_calibration = np.load(data_dir + '/unweighted_events/X_calibration' + input_filename_addition + '.npy')
     weights_calibration = np.load(

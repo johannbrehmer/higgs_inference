@@ -131,7 +131,7 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
     thetas = np.load(data_dir + '/thetas/thetas_parameterized.npy')
     
     n_thetas = len(thetas)
-    theta_trained = 213
+    theta_trained = 422
     theta_nottrained = 9
     
     if random_theta_mode:
