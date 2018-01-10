@@ -612,7 +612,7 @@ if do_test:
         print(X.shape, scores.shape, r.shape, p_score.shape)
 
         # filter out bad events
-        filter = (scores[:,0]**2 + scores[:,1]**2 < 2500.) & (np.log(r)**2 < 10000.)
+        filter = np.all((scores[:,:,0]**2 + scores[:,:,1]**2 < 2500.) & (np.log(r)**2 < 10000.), axis=0)
 
         return X[filter], scores[filter], r[:,filter], p1[filter]
 

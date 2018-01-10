@@ -12,12 +12,12 @@ parser = argparse.ArgumentParser(description='Inference experiments for Higgs EF
 parser.add_argument('algorithm', help='Algorithm type. Options are "truth", "carl", "score", '
                                       + '"combined" (carl + score), "regression", or "combinedregression" '
                                       + '(regression + score).')
-parser.add_argument("-pbp", "--point-by-point", type=bool, nargs='?', default=False, const=True,
+parser.add_argument("-pbp", "--point-by-point", action="store_true",
                     help="Point-by-point rather than parameterized setup.")
-parser.add_argument("-a", "--aware", type=bool, nargs='?', default=False, const=True,
+parser.add_argument("-a", "--aware", action="store_true",
                     help="Physics-aware parameterized setup.")
 parser.add_argument("-t", "--training", default='baseline', help='Training sample: "baseline", "basis", or "random".')
-parser.add_argument("-o", "--options", nargs='+', constant='', help="Further options to be passed on to the algorithm.")
+parser.add_argument("-o", "--options", nargs='+', default='', help="Further options to be passed on to the algorithm.")
 
 args = parser.parse_args()
 
