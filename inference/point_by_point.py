@@ -207,7 +207,7 @@ def point_by_point_inference(algorithm='carl',
             ratio = ClassifierScoreRatio(clf, prefit=True)
 
             # Evaluation
-            this_r = ratio.predict(X_test_transformed)
+            this_r, _ = ratio.predict(X_test_transformed)
 
             llr.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
 
@@ -233,7 +233,7 @@ def point_by_point_inference(algorithm='carl',
             ratio_calibrated.fit(X_calibration_both, y_calibration, sample_weight=w_calibration)
 
             # Evaluation of calibrated classifier
-            this_r = ratio_calibrated.predict(X_test_transformed)
+            this_r, _ = ratio_calibrated.predict(X_test_transformed)
             llr_calibrated.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
 
             if t == theta_benchmark2:
