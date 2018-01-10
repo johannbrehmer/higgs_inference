@@ -22,6 +22,8 @@ do_train = ('train' in args)
 do_basis = ('basis' in args)
 do_random = ('random' in args)
 do_point_by_point = ('point-by-point' in args)
+do_score_regression = True # ('score-regression' in args) # debug
+
 do_calibration = ('calibration' in args)
 do_test = ('test' in args)
 do_roam = ('roam' in args)
@@ -71,11 +73,17 @@ if denom1_mode:
 theta_test = 213
 theta_observed = 0
 theta_score = 0 # for local model
+theta_score_regression = 0
 thetas_train = list(range(17,1017))
 thetas_basis = [0, 101, 106, 902, 910,
                 226, 373, 583, 747, 841,
                 599, 709, 422, 367, 167]
-thetas_point_by_point = [0, 13, 14, 15, 16, 9, 422, 956, 666, 802, 675, 839, 699, 820, 203, 291, 634, 371, 973, 742, 901, 181, 82, 937, 510, 919, 745, 588, 804, 963, 396, 62, 401, 925, 874, 770, 108, 179, 669, 758, 113, 587, 600, 975, 496, 66, 467, 412, 701, 986, 598, 810, 97, 18, 723, 159, 320, 301, 352, 159, 89, 421, 574, 923, 849, 299, 119, 167, 939, 402, 52, 787, 978, 41, 873, 533, 827, 304, 294, 760, 890, 539, 1000, 291, 740, 276, 679, 167, 125, 429, 149, 430, 720, 123, 908, 256, 777, 809, 269, 851]
+thetas_point_by_point = [0, 13, 14, 15, 16, 9, 422, 956, 666, 802, 675, 839, 699, 820, 203, 291, 634, 371, 973, 742,
+                         901, 181, 82, 937, 510, 919, 745, 588, 804, 963, 396, 62, 401, 925, 874, 770, 108, 179, 669,
+                         758, 113, 587, 600, 975, 496, 66, 467, 412, 701, 986, 598, 810, 97, 18, 723, 159, 320, 301,
+                         352, 159, 89, 421, 574, 923, 849, 299, 119, 167, 939, 402, 52, 787, 978, 41, 873, 533, 827,
+                         304, 294, 760, 890, 539, 1000, 291, 740, 276, 679, 167, 125, 429, 149, 430, 720, 123, 908,
+                         256, 777, 809, 269, 851]
 
 thetas_test = list(range(17))
 
@@ -87,6 +95,7 @@ n_randomtheta_num    = 5000000 # in total (expected)
 n_randomtheta_den    = 5000000 # in total (expected)
 n_point_by_point_num =   50000 # per theta
 n_point_by_point_den =   50000 # per theta
+n_score_regression   =10000000 # total
 n_calibrate          =   20000
 n_observed           =   50000
 n_roam               =      20
@@ -649,5 +658,42 @@ if do_roam:
 
     np.save(data_dir + '/unweighted_events/X_roam' + filename_addition + '.npy', X)
     np.save(data_dir + '/unweighted_events/r_roam' + filename_addition + '.npy', r)
+
+    print('...done!')
+
+
+
+
+
+################################################################################
+# Training sample for score regression
+################################################################################
+
+if do_score_regression:
+
+    print('')
+    print('Generating training sample for score regression...')
+
+    def generate_data_score_regression(theta):
+        indices = np.random.choice(list(range(n_events_train)), n_score_regression, p=weights_train[theta])
+
+        X = np.array(weighted_data_train.iloc[indices, subset_features])
+
+        labels_scores = ["score_theta_" + str(theta) + "_0", "score_theta_" + str(theta) + "_1"]
+        subset_scores = [weighted_data_train.columns.get_loc(x) for x in labels_scores]
+        scores = np.array(weighted_data_train.iloc[indices, subset_scores])
+
+        p = np.array(weights_train[theta][indices])
+
+        # filter out bad events
+        filter = (scores[:,0]**2 + scores[:,1]**2 < 2500.)
+
+        return X[filter], scores[filter], p[filter]
+
+    X, scores, p = generate_data_score_regression(theta_score_regression)
+
+    np.save(data_dir + '/unweighted_events/X_train_scoreregression' + filename_addition + '.npy', X)
+    np.save(data_dir + '/unweighted_events/scores_train_scoreregression' + filename_addition + '.npy', scores)
+    np.save(data_dir + '/unweighted_events/p_train_scoreregression' + filename_addition + '.npy', p)
 
     print('...done!')
