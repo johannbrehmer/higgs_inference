@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser(description='Inference experiments for Higgs EF
 parser.add_argument('algorithm', help='Algorithm type. Options are "truth", "carl", "score", '
                                       + '"combined" (carl + score), "regression", or "combinedregression" '
                                       + '(regression + score).')
-parser.add_argument("-pbp", "--point-by-point", action="store_true",
+parser.add_argument("-pbp", "--pointbypoint", action="store_true",
                     help="Point-by-point rather than parameterized setup.")
 parser.add_argument("-a", "--aware", action="store_true",
                     help="Physics-aware parameterized setup.")
@@ -28,12 +28,12 @@ assert args.training in ['baseline', 'basis', 'random']
 if args.algorithm == 'truth':
     truth_inference(options=args.options)
 
-elif args.point-by-point:
+elif args.pointbypoint:
     point_by_point_inference(algorithm=args.algorithm,
                              options=args.options)
 
 else:
     parameterized_inference(algorithm=args.algorithm,
-                            morphing_aware=args.morphing_aware,
+                            morphing_aware=args.aware,
                             training_sample=args.training,
                             options=args.options)

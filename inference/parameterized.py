@@ -2,6 +2,8 @@
 # Imports
 ################################################################################
 
+from __future__ import absolute_import, division, print_function
+
 import numpy as np
 
 from sklearn.preprocessing import StandardScaler
@@ -72,14 +74,14 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
         alpha_carl = 0.2
         filename_addition += '_largealpha'
     
-    n_hidden_layers = 3
+    n_hidden_layers = 2
     n_hidden_layers_aware = 2
     if shallow_mode:
-        n_hidden_layers = 2
+        n_hidden_layers = 1
         n_hidden_layers_aware = 1
         filename_addition += '_shallow'
     elif deep_mode:
-        n_hidden_layers = 5
+        n_hidden_layers = 3
         n_hidden_layers_aware = 3
         filename_addition += '_deep'
     
@@ -431,9 +433,20 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
             if t == theta_nottrained:
                 r_nottrained_calibrated = np.copy(this_r)
                 scores_nottrained_calibrated = np.copy(this_score)
+
+                np.save(results_dir + '/cal0histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
+                np.save(results_dir + '/cal0edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
+                np.save(results_dir + '/cal1histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
+                np.save(results_dir + '/cal1edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
+
             elif t == theta_trained:
                 r_trained_calibrated = np.copy(this_r)
                 scores_trained_calibrated = np.copy(this_score)
+
+                np.save(results_dir + '/cal0histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
+                np.save(results_dir + '/cal0edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
+                np.save(results_dir + '/cal1histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
+                np.save(results_dir + '/cal1edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
     
             # Roaming
             thetas0_array = np.zeros((n_roaming, 2), dtype=X_roam_transformed.dtype)
