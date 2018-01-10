@@ -2,6 +2,8 @@
 # Imports
 ################################################################################
 
+from __future__ import absolute_import, division, print_function
+
 import numpy as np
 
 from sklearn.preprocessing import StandardScaler
@@ -36,6 +38,8 @@ def point_by_point_inference(algorithm='carl',
 
     denom1_mode = ('denom1' in options)
 
+    debug_mode = ('debug' in options)
+
     short_mode = ('short' in options)
     long_mode = ('long' in options)
     deep_mode = ('deep' in options)
@@ -43,12 +47,12 @@ def point_by_point_inference(algorithm='carl',
 
     filename_addition = ''
 
-    n_hidden_layers = 3
+    n_hidden_layers = 2
     if shallow_mode:
-        n_hidden_layers = 2
+        n_hidden_layers = 1
         filename_addition += '_shallow'
     elif deep_mode:
-        n_hidden_layers = 5
+        n_hidden_layers = 3
         filename_addition += '_deep'
 
     n_epochs = 20
@@ -200,7 +204,7 @@ def point_by_point_inference(algorithm='carl',
                      callbacks=([EarlyStopping(verbose=1, patience=3)] if early_stopping else None))
 
             # carl wrapper
-            ratio = ClassifierRatio(clf, prefit=True)
+            ratio = ClassifierScoreRatio(clf, prefit=True)
 
             # Evaluation
             this_r = ratio.predict(X_test_transformed)
@@ -234,9 +238,22 @@ def point_by_point_inference(algorithm='carl',
 
             if t == theta_benchmark2:
                 np.save(results_dir + '/r_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
+
+                # Save calibration histograms
+                np.save(results_dir + '/cal0histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
+                np.save(results_dir + '/cal0edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
+                np.save(results_dir + '/cal1histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
+                np.save(results_dir + '/cal1edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
+                
             elif t == theta_benchmark1:
                 np.save(results_dir + '/r_trained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
 
+                # Save calibration histograms
+                np.save(results_dir + '/cal0histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
+                np.save(results_dir + '/cal0edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
+                np.save(results_dir + '/cal1histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
+                np.save(results_dir + '/cal1edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
+                
         llr = np.asarray(llr)
         llr_calibrated = np.asarray(llr_calibrated)
 

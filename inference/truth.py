@@ -4,6 +4,8 @@
 # Imports
 ################################################################################
 
+from __future__ import absolute_import, division, print_function
+
 import numpy as np
 
 from sklearn.gaussian_process import GaussianProcessRegressor

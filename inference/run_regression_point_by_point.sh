@@ -3,7 +3,7 @@
 #SBATCH --job-name=regr-pbp
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=32GB
+#SBATCH --mem=16GB
 #SBATCH --time=7-00:00:00
 #SBATCH --gres=gpu:1
 
@@ -17,6 +17,6 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/inference
 
-python -u experiments.py regression --point-by-point -o shallow
-python -u experiments.py regression --point-by-point
-python -u experiments.py regression --point-by-point -o deep
+python -u experiments.py regression --pointbypoint -o shallow
+python -u experiments.py regression --pointbypoint
+python -u experiments.py regression --pointbypoint -o deep
