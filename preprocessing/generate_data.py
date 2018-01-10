@@ -614,7 +614,7 @@ if do_test:
         # filter out bad events
         filter = np.all((scores[:,:,0]**2 + scores[:,:,1]**2 < 2500.) & (np.log(r)**2 < 10000.), axis=0)
 
-        return X[filter], scores[filter], r[:,filter], p1[filter]
+        return X[filter], scores[:,filter,:], r[:,filter], p1[filter]
 
 
     X, scores, r, p1 = generate_data_test(theta_observed, theta1)
