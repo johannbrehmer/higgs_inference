@@ -26,6 +26,7 @@ def truth_inference(options=''):
         filename_addition += '_denom1'
 
     data_dir = '../data'
+    unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
     results_dir = '../results/truth'
 
     ################################################################################
@@ -38,10 +39,10 @@ def truth_inference(options=''):
     theta_trained = 422
     theta_nottrained = 9
 
-    scores_test = np.load(data_dir + '/unweighted_events/scores_test' + input_filename_addition + '.npy')
-    r_test = np.load(data_dir + '/unweighted_events/r_test' + input_filename_addition + '.npy')
+    scores_test = np.load(unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
+    r_test = np.load(unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
 
-    r_roam = np.load(data_dir + '/unweighted_events/r_roam' + input_filename_addition + '.npy')
+    r_roam = np.load(unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
 
     n_observed = r_test.shape[1]
     assert n_thetas == r_test.shape[0]

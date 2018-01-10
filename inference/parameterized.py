@@ -107,6 +107,7 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
         theta1 = 422
 
     data_dir = '../data'
+    unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
     results_dir = '../results/parameterized'
     
     print('')
@@ -135,33 +136,33 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
     theta_nottrained = 9
     
     if random_theta_mode:
-        X_train = np.load(data_dir + '/unweighted_events/X_train_random' + input_filename_addition + '.npy')
-        y_train = np.load(data_dir + '/unweighted_events/y_train_random' + input_filename_addition + '.npy')
-        scores_train = np.load(data_dir + '/unweighted_events/scores_train_random' + input_filename_addition + '.npy')
-        r_train = np.load(data_dir + '/unweighted_events/r_train_random' + input_filename_addition + '.npy')
-        theta0_train = np.load(data_dir + '/unweighted_events/theta0_train_random' + input_filename_addition + '.npy')
+        X_train = np.load(unweighted_events_dir + '/X_train_random' + input_filename_addition + '.npy')
+        y_train = np.load(unweighted_events_dir + '/y_train_random' + input_filename_addition + '.npy')
+        scores_train = np.load(unweighted_events_dir + '/scores_train_random' + input_filename_addition + '.npy')
+        r_train = np.load(unweighted_events_dir + '/r_train_random' + input_filename_addition + '.npy')
+        theta0_train = np.load(unweighted_events_dir + '/theta0_train_random' + input_filename_addition + '.npy')
     elif basis_theta_mode:
-        X_train = np.load(data_dir + '/unweighted_events/X_train_basis' + input_filename_addition + '.npy')
-        y_train = np.load(data_dir + '/unweighted_events/y_train_basis' + input_filename_addition + '.npy')
-        scores_train = np.load(data_dir + '/unweighted_events/scores_train_basis' + input_filename_addition + '.npy')
-        r_train = np.load(data_dir + '/unweighted_events/r_train_basis' + input_filename_addition + '.npy')
-        theta0_train = np.load(data_dir + '/unweighted_events/theta0_train_basis' + input_filename_addition + '.npy')
+        X_train = np.load(unweighted_events_dir + '/X_train_basis' + input_filename_addition + '.npy')
+        y_train = np.load(unweighted_events_dir + '/y_train_basis' + input_filename_addition + '.npy')
+        scores_train = np.load(unweighted_events_dir + '/scores_train_basis' + input_filename_addition + '.npy')
+        r_train = np.load(unweighted_events_dir + '/r_train_basis' + input_filename_addition + '.npy')
+        theta0_train = np.load(unweighted_events_dir + '/theta0_train_basis' + input_filename_addition + '.npy')
     else:
-        X_train = np.load(data_dir + '/unweighted_events/X_train' + input_filename_addition + '.npy')
-        y_train = np.load(data_dir + '/unweighted_events/y_train' + input_filename_addition + '.npy')
-        scores_train = np.load(data_dir + '/unweighted_events/scores_train' + input_filename_addition + '.npy')
-        r_train = np.load(data_dir + '/unweighted_events/r_train' + input_filename_addition + '.npy')
-        theta0_train = np.load(data_dir + '/unweighted_events/theta0_train' + input_filename_addition + '.npy')
+        X_train = np.load(unweighted_events_dir + '/X_train' + input_filename_addition + '.npy')
+        y_train = np.load(unweighted_events_dir + '/y_train' + input_filename_addition + '.npy')
+        scores_train = np.load(unweighted_events_dir + '/scores_train' + input_filename_addition + '.npy')
+        r_train = np.load(unweighted_events_dir + '/r_train' + input_filename_addition + '.npy')
+        theta0_train = np.load(unweighted_events_dir + '/theta0_train' + input_filename_addition + '.npy')
     
-    X_calibration = np.load(data_dir + '/unweighted_events/X_calibration' + input_filename_addition + '.npy')
-    weights_calibration = np.load(data_dir + '/unweighted_events/weights_calibration' + input_filename_addition + '.npy')
+    X_calibration = np.load(unweighted_events_dir + '/X_calibration' + input_filename_addition + '.npy')
+    weights_calibration = np.load(unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
     
-    X_test = np.load(data_dir + '/unweighted_events/X_test' + input_filename_addition + '.npy')
-    #scores_test = np.load(data_dir + '/unweighted_events/scores_test' + input_filename_addition + '.npy')
-    r_test = np.load(data_dir + '/unweighted_events/r_test' + input_filename_addition + '.npy')
+    X_test = np.load(unweighted_events_dir + '/X_test' + input_filename_addition + '.npy')
+    #scores_test = np.load(unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
+    r_test = np.load(unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
     
-    X_roam = np.load(data_dir + '/unweighted_events/X_roam' + input_filename_addition + '.npy')
-    #r_roam = np.load(data_dir + '/unweighted_events/r_roam' + input_filename_addition + '.npy')
+    X_roam = np.load(unweighted_events_dir + '/X_roam' + input_filename_addition + '.npy')
+    #r_roam = np.load(unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
     n_roaming = len(X_roam)
     
     n_observed = X_test.shape[0]

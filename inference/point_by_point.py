@@ -77,6 +77,7 @@ def point_by_point_inference(algorithm='carl',
         theta1 = 422
 
     data_dir = '../data'
+    unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
     results_dir = '../results/point_by_point'
 
     print('')
@@ -99,12 +100,12 @@ def point_by_point_inference(algorithm='carl',
     theta_benchmark2 = 9
     training_thetas = [0, 13, 14, 15, 16, 9, 422, 956, 666, 802, 675, 839, 699, 820, 203, 291, 634, 371, 973, 742, 901, 181, 82, 937, 510, 919, 745, 588, 804, 963, 396, 62, 401, 925, 874, 770, 108, 179, 669, 758, 113, 587, 600, 975, 496, 66, 467, 412, 701, 986, 598, 810, 97, 18, 723, 159, 320, 301, 352, 159, 89, 421, 574, 923, 849, 299, 119, 167, 939, 402, 52, 787, 978, 41, 873, 533, 827, 304, 294, 760, 890, 539, 1000, 291, 740, 276, 679, 167, 125, 429, 149, 430, 720, 123, 908, 256, 777, 809, 269, 851]
 
-    X_calibration = np.load(data_dir + '/unweighted_events/X_calibration' + input_filename_addition + '.npy')
+    X_calibration = np.load(unweighted_events_dir + '/X_calibration' + input_filename_addition + '.npy')
     weights_calibration = np.load(
-        data_dir + '/unweighted_events/weights_calibration' + input_filename_addition + '.npy')
+        unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
 
-    X_test = np.load(data_dir + '/unweighted_events/X_test' + input_filename_addition + '.npy')
-    r_test = np.load(data_dir + '/unweighted_events/r_test' + input_filename_addition + '.npy')
+    X_test = np.load(unweighted_events_dir + '/X_test' + input_filename_addition + '.npy')
+    r_test = np.load(unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
 
     n_observed = X_test.shape[0]
     assert n_thetas == r_test.shape[0]
@@ -127,8 +128,8 @@ def point_by_point_inference(algorithm='carl',
             print('Theta', t, thetas[t])
 
             # Load data
-            X_train = np.load(data_dir + '/unweighted_events/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
-            r_train = np.load(data_dir + '/unweighted_events/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            X_train = np.load(unweighted_events_dir + '/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            r_train = np.load(unweighted_events_dir + '/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
 
             # Scale data
             scaler = StandardScaler()
@@ -185,8 +186,8 @@ def point_by_point_inference(algorithm='carl',
             print('Theta', t, thetas[t])
 
             # Load data
-            X_train = np.load(data_dir + '/unweighted_events/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
-            y_train = np.load(data_dir + '/unweighted_events/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            X_train = np.load(unweighted_events_dir + '/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            y_train = np.load(unweighted_events_dir + '/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
 
             # Scale data
             scaler = StandardScaler()

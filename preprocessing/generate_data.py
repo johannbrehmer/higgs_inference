@@ -22,7 +22,7 @@ do_train = ('train' in args)
 do_basis = ('basis' in args)
 do_random = ('random' in args)
 do_point_by_point = ('point-by-point' in args)
-do_score_regression = True # ('score-regression' in args) # debug
+do_score_regression = ('score-regression' in args)
 
 do_calibration = ('calibration' in args)
 do_test = ('test' in args)
@@ -55,8 +55,9 @@ if denom1_mode:
 if debug_mode:
     filename_addition += '_debug'
 
+weighted_events_dir = '/scratch/jb6504/higgs_inference/data/events'
+unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
 data_dir = '../data'
-
 
 
 ################################################################################
@@ -122,10 +123,10 @@ subset_features = list(range(42)) #list(range(15))
 ################################################################################
 
 if debug_mode:
-    weighted_data = pd.read_csv('/scratch/jb6504/eft-data/wbf_4l_supernew_excerpt.dat', sep='\t', dtype=np.float32)
+    weighted_data = pd.read_csv(weighted_events_dir + '/wbf_4l_supernew_excerpt.dat', sep='\t', dtype=np.float32)
     #weighted_data = pd.read_csv('../data/events/wbf_4l_supernew_excerpt.dat', sep='\t', dtype=np.float32)
 else:
-    weighted_data = pd.read_csv('/scratch/jb6504/eft-data/wbf_4l_supernew.dat', sep='\t', dtype=np.float32)
+    weighted_data = pd.read_csv(weighted_events_dir + '/wbf_4l_supernew.dat', sep='\t', dtype=np.float32)
 
 # # Check probabilities
 # print('')
@@ -272,14 +273,14 @@ if do_train:
             p0 = np.array(this_p0, dtype=np.float16)
             p1 = np.array(this_p1, dtype=np.float16)
 
-    np.save(data_dir + '/unweighted_events/theta0_train' + filename_addition + '.npy', th0)
-    np.save(data_dir + '/unweighted_events/theta1_train' + filename_addition + '.npy', th1)
-    np.save(data_dir + '/unweighted_events/X_train' + filename_addition + '.npy', X)
-    np.save(data_dir + '/unweighted_events/y_train' + filename_addition + '.npy', y)
-    np.save(data_dir + '/unweighted_events/scores_train' + filename_addition + '.npy', scores)
-    np.save(data_dir + '/unweighted_events/r_train' + filename_addition + '.npy', r)
-    np.save(data_dir + '/unweighted_events/p0_train' + filename_addition + '.npy', p0)
-    np.save(data_dir + '/unweighted_events/p1_train' + filename_addition + '.npy', p1)
+    np.save(unweighted_events_dir + '/theta0_train' + filename_addition + '.npy', th0)
+    np.save(unweighted_events_dir + '/theta1_train' + filename_addition + '.npy', th1)
+    np.save(unweighted_events_dir + '/X_train' + filename_addition + '.npy', X)
+    np.save(unweighted_events_dir + '/y_train' + filename_addition + '.npy', y)
+    np.save(unweighted_events_dir + '/scores_train' + filename_addition + '.npy', scores)
+    np.save(unweighted_events_dir + '/r_train' + filename_addition + '.npy', r)
+    np.save(unweighted_events_dir + '/p0_train' + filename_addition + '.npy', p0)
+    np.save(unweighted_events_dir + '/p1_train' + filename_addition + '.npy', p1)
 
     print('...done!')
 
@@ -369,14 +370,14 @@ if do_basis:
             p0 = np.array(this_p0, dtype=np.float16)
             p1 = np.array(this_p1, dtype=np.float16)
 
-    np.save(data_dir + '/unweighted_events/theta0_train_basis' + filename_addition + '.npy', th0)
-    np.save(data_dir + '/unweighted_events/theta1_train_basis' + filename_addition + '.npy', th1)
-    np.save(data_dir + '/unweighted_events/X_train_basis' + filename_addition + '.npy', X)
-    np.save(data_dir + '/unweighted_events/y_train_basis' + filename_addition + '.npy', y)
-    np.save(data_dir + '/unweighted_events/scores_train_basis' + filename_addition + '.npy', scores)
-    np.save(data_dir + '/unweighted_events/r_train_basis' + filename_addition + '.npy', r)
-    np.save(data_dir + '/unweighted_events/p0_train_basis' + filename_addition + '.npy', p0)
-    np.save(data_dir + '/unweighted_events/p1_train_basis' + filename_addition + '.npy', p1)
+    np.save(unweighted_events_dir + '/theta0_train_basis' + filename_addition + '.npy', th0)
+    np.save(unweighted_events_dir + '/theta1_train_basis' + filename_addition + '.npy', th1)
+    np.save(unweighted_events_dir + '/X_train_basis' + filename_addition + '.npy', X)
+    np.save(unweighted_events_dir + '/y_train_basis' + filename_addition + '.npy', y)
+    np.save(unweighted_events_dir + '/scores_train_basis' + filename_addition + '.npy', scores)
+    np.save(unweighted_events_dir + '/r_train_basis' + filename_addition + '.npy', r)
+    np.save(unweighted_events_dir + '/p0_train_basis' + filename_addition + '.npy', p0)
+    np.save(unweighted_events_dir + '/p1_train_basis' + filename_addition + '.npy', p1)
 
     print('...done!')
 
@@ -447,11 +448,11 @@ if do_point_by_point:
             this_p_score = generate_data_train_point_by_point(t, theta1)
         print(t, thetas[t], len(this_y))
 
-        np.save(data_dir + '/unweighted_events/X_train_point_by_point_' + str(t) + filename_addition + '.npy', this_X)
-        np.save(data_dir + '/unweighted_events/y_train_point_by_point_' + str(t) + filename_addition + '.npy', this_y)
-        np.save(data_dir + '/unweighted_events/r_train_point_by_point_' + str(t) + filename_addition + '.npy', this_r)
-        np.save(data_dir + '/unweighted_events/p0_train_point_by_point_' + str(t) + filename_addition + '.npy', this_p0)
-        np.save(data_dir + '/unweighted_events/p1_train_point_by_point_' + str(t) + filename_addition + '.npy', this_p1)
+        np.save(unweighted_events_dir + '/X_train_point_by_point_' + str(t) + filename_addition + '.npy', this_X)
+        np.save(unweighted_events_dir + '/y_train_point_by_point_' + str(t) + filename_addition + '.npy', this_y)
+        np.save(unweighted_events_dir + '/r_train_point_by_point_' + str(t) + filename_addition + '.npy', this_r)
+        np.save(unweighted_events_dir + '/p0_train_point_by_point_' + str(t) + filename_addition + '.npy', this_p0)
+        np.save(unweighted_events_dir + '/p1_train_point_by_point_' + str(t) + filename_addition + '.npy', this_p1)
 
     print('...done!')
 
@@ -543,12 +544,12 @@ if do_random:
             scores = np.array(this_scores, dtype=np.float16)
             r = np.array(this_r, dtype=np.float16)
 
-    np.save(data_dir + '/unweighted_events/theta0_train_random' + filename_addition + '.npy', th0)
-    np.save(data_dir + '/unweighted_events/theta1_train_random' + filename_addition + '.npy', th1)
-    np.save(data_dir + '/unweighted_events/X_train_random' + filename_addition + '.npy', X)
-    np.save(data_dir + '/unweighted_events/y_train_random' + filename_addition + '.npy', y)
-    np.save(data_dir + '/unweighted_events/scores_train_random' + filename_addition + '.npy', scores)
-    np.save(data_dir + '/unweighted_events/r_train_random' + filename_addition + '.npy', r)
+    np.save(unweighted_events_dir + '/theta0_train_random' + filename_addition + '.npy', th0)
+    np.save(unweighted_events_dir + '/theta1_train_random' + filename_addition + '.npy', th1)
+    np.save(unweighted_events_dir + '/X_train_random' + filename_addition + '.npy', X)
+    np.save(unweighted_events_dir + '/y_train_random' + filename_addition + '.npy', y)
+    np.save(unweighted_events_dir + '/scores_train_random' + filename_addition + '.npy', scores)
+    np.save(unweighted_events_dir + '/r_train_random' + filename_addition + '.npy', r)
 
     print('...done!')
 
@@ -582,8 +583,8 @@ if do_calibration:
 
     X, weights = generate_data_calibration(theta_observed)
 
-    np.save(data_dir + '/unweighted_events/X_calibration' + filename_addition + '.npy', X)
-    np.save(data_dir + '/unweighted_events/weights_calibration' + filename_addition + '.npy', weights)
+    np.save(unweighted_events_dir + '/X_calibration' + filename_addition + '.npy', X)
+    np.save(unweighted_events_dir + '/weights_calibration' + filename_addition + '.npy', weights)
 
 
 
@@ -625,10 +626,10 @@ if do_test:
 
     X, scores, r, p1 = generate_data_test(theta_observed, theta1)
 
-    np.save(data_dir + '/unweighted_events/X_test' + filename_addition + '.npy', X)
-    np.save(data_dir + '/unweighted_events/scores_test' + filename_addition + '.npy', scores)
-    np.save(data_dir + '/unweighted_events/r_test' + filename_addition + '.npy', r)
-    np.save(data_dir + '/unweighted_events/p1_test' + filename_addition + '.npy', p1)
+    np.save(unweighted_events_dir + '/X_test' + filename_addition + '.npy', X)
+    np.save(unweighted_events_dir + '/scores_test' + filename_addition + '.npy', scores)
+    np.save(unweighted_events_dir + '/r_test' + filename_addition + '.npy', r)
+    np.save(unweighted_events_dir + '/p1_test' + filename_addition + '.npy', p1)
 
     print('...done!')
 
@@ -656,8 +657,8 @@ if do_roam:
 
     X, r = generate_data_roam(theta_observed, theta1)
 
-    np.save(data_dir + '/unweighted_events/X_roam' + filename_addition + '.npy', X)
-    np.save(data_dir + '/unweighted_events/r_roam' + filename_addition + '.npy', r)
+    np.save(unweighted_events_dir + '/X_roam' + filename_addition + '.npy', X)
+    np.save(unweighted_events_dir + '/r_roam' + filename_addition + '.npy', r)
 
     print('...done!')
 
@@ -692,8 +693,8 @@ if do_score_regression:
 
     X, scores, p = generate_data_score_regression(theta_score_regression)
 
-    np.save(data_dir + '/unweighted_events/X_train_scoreregression' + filename_addition + '.npy', X)
-    np.save(data_dir + '/unweighted_events/scores_train_scoreregression' + filename_addition + '.npy', scores)
-    np.save(data_dir + '/unweighted_events/p_train_scoreregression' + filename_addition + '.npy', p)
+    np.save(unweighted_events_dir + '/X_train_scoreregression' + filename_addition + '.npy', X)
+    np.save(unweighted_events_dir + '/scores_train_scoreregression' + filename_addition + '.npy', scores)
+    np.save(unweighted_events_dir + '/p_train_scoreregression' + filename_addition + '.npy', p)
 
     print('...done!')
