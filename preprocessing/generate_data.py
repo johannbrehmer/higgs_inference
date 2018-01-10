@@ -94,6 +94,19 @@ n_calibrate          =   20000
 n_observed           =   50000
 n_roam               =      20
 
+if debug_mode:
+    n_num                =    500 # per value of theta
+    n_den                =    500 # per value of theta
+    n_basis_num          =  33333 # per basis thetas
+    n_basis_den          =  33333 # per basis thetas
+    n_randomtheta_num    = 500000 # in total (expected)
+    n_randomtheta_den    = 500000 # in total (expected)
+    n_point_by_point_num =   5000 # per theta
+    n_point_by_point_den =   5000 # per theta
+    n_calibrate          =   2000
+    n_observed           =   5000
+    n_roam               =      2
+
 subset_features = list(range(42)) #list(range(15))
 
 
@@ -103,7 +116,8 @@ subset_features = list(range(42)) #list(range(15))
 ################################################################################
 
 if debug_mode:
-    weighted_data = pd.read_csv('/scratch/jb6504/eft-data/wbf_4l_supernew_excerpt.dat', sep='\t', dtype=np.float32)
+    #weighted_data = pd.read_csv('/scratch/jb6504/eft-data/wbf_4l_supernew_excerpt.dat', sep='\t', dtype=np.float32)
+    weighted_data = pd.read_csv('../data/events/wbf_4l_supernew_excerpt.dat', sep='\t', dtype=np.float32)
 else:
     weighted_data = pd.read_csv('/scratch/jb6504/eft-data/wbf_4l_supernew.dat', sep='\t', dtype=np.float32)
 
@@ -424,8 +438,8 @@ if do_point_by_point:
 
     for i, t in enumerate(thetas_point_by_point):
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1,\
-            this_p_score = generate_data_train_basis(t, theta1)
-        print(t, thetas[t])
+            this_p_score = generate_data_train_point_by_point(t, theta1)
+        print(t, thetas[t], len(this_y))
 
         np.save(data_dir + '/unweighted_events/X_train_point_by_point_' + str(t) + filename_addition + '.npy', this_X)
         np.save(data_dir + '/unweighted_events/y_train_point_by_point_' + str(t) + filename_addition + '.npy', this_y)
@@ -555,7 +569,7 @@ if do_calibration:
 
 
         # filter out bad events
-        filter = (np.log(r)**2 < 10000.)
+        filter = np.all(np.log(r)**2 < 10000., axis=0)
 
         return X[filter], r[:,filter]
 

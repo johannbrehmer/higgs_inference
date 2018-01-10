@@ -410,13 +410,13 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
             X_thetas_calibration = np.hstack((X_calibration_transformed, thetas0_array))
             X_thetas_calibration = np.vstack((X_thetas_calibration, X_thetas_calibration))
             y_calibration = np.zeros(2*nc)
-            y_calibration[X_thetas_calibration.shape[0]/2:] = 1.
+            y_calibration[nc:] = 1.
             w_calibration = np.zeros(2*nc)
             w_calibration[:nc] = weights_calibration[t]
             w_calibration[nc:] = weights_calibration[theta1]
     
             ratio_calibrated = ClassifierScoreRatio(
-                CalibratedClassifierScoreCV(clf, cv='prefit', bins=100, independent_binning=False, interpolation="linear")
+                CalibratedClassifierScoreCV(clf, cv='prefit', bins=50, independent_binning=False)
             )
             ratio_calibrated.fit(X_thetas_calibration, y_calibration, sample_weight=w_calibration)
     

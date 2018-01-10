@@ -191,12 +191,12 @@ def point_by_point_inference(algorithm='carl',
             X_test_transformed = scaler.transform(X_test)
             X_calibration_transformed = scaler.transform(X_calibration)
 
-            regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
+            clf = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
                                   epochs=n_epochs, validation_split=0.142857,
                                   verbose=2)
 
             # Training
-            regr.fit(X_train_transformed, y_train,
+            clf.fit(X_train_transformed, y_train,
                      callbacks=([EarlyStopping(verbose=1, patience=3)] if early_stopping else None))
 
             # carl wrapper
@@ -215,14 +215,13 @@ def point_by_point_inference(algorithm='carl',
             # Calibration
             nc = X_calibration_transformed.shape[0]
             y_calibration = np.zeros(2 * nc)
-            y_calibration[X_thetas_calibration.shape[0] / 2:] = 1.
+            y_calibration[nc:] = 1.
             w_calibration = np.zeros(2 * nc)
             w_calibration[:nc] = weights_calibration[t]
             w_calibration[nc:] = weights_calibration[theta1]
 
             ratio_calibrated = ClassifierRatio(
-                CalibratedClassifierCV(clf, cv='prefit', bins=100, independent_binning=False,
-                                       interpolation="linear")
+                CalibratedClassifierCV(clf, cv='prefit', bins=50, independent_binning=False)
             )
             ratio_calibrated.fit(X_calibration_transformed, y_calibration, sample_weight=w_calibration)
 
