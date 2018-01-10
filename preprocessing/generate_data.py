@@ -116,8 +116,8 @@ subset_features = list(range(42)) #list(range(15))
 ################################################################################
 
 if debug_mode:
-    #weighted_data = pd.read_csv('/scratch/jb6504/eft-data/wbf_4l_supernew_excerpt.dat', sep='\t', dtype=np.float32)
-    weighted_data = pd.read_csv('../data/events/wbf_4l_supernew_excerpt.dat', sep='\t', dtype=np.float32)
+    weighted_data = pd.read_csv('/scratch/jb6504/eft-data/wbf_4l_supernew_excerpt.dat', sep='\t', dtype=np.float32)
+    #weighted_data = pd.read_csv('../data/events/wbf_4l_supernew_excerpt.dat', sep='\t', dtype=np.float32)
 else:
     weighted_data = pd.read_csv('/scratch/jb6504/eft-data/wbf_4l_supernew.dat', sep='\t', dtype=np.float32)
 
