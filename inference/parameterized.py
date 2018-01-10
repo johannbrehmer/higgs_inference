@@ -49,8 +49,8 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
     random_theta_mode = training_sample == 'random'
     basis_theta_mode = training_sample == 'basis'
 
+    learn_logr_mode = ('learnlogr' in options)
     denom1_mode = ('denom1' in options)
-    
     short_mode = ('short' in options)
     long_mode = ('long' in options)
     large_alpha_mode = ('largealpha' in options)
@@ -66,7 +66,10 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
         filename_addition += '_random'
     elif basis_theta_mode:
         filename_addition += '_basis'
-    
+
+    if learn_logr_mode:
+        filename_addition += '_learnlogr'
+
     alpha_regression = 0.005
     alpha_carl = 0.1
     if large_alpha_mode:
@@ -307,21 +310,25 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
         print('Training:')
         if algorithm=='carl':
             if morphing_aware:
-                clf = KerasRegressor(lambda: make_classifier_carl_morphingaware(n_hidden_layers=n_hidden_layers_aware),
+                clf = KerasRegressor(lambda: make_classifier_carl_morphingaware(n_hidden_layers=n_hidden_layers_aware,
+                                                                                learn_log_r=learn_logr_mode),
                                      epochs=n_epochs, validation_split=0.142857,
                                      verbose=2)
             else:
-                clf = KerasRegressor(lambda: make_classifier_carl(n_hidden_layers=n_hidden_layers),
+                clf = KerasRegressor(lambda: make_classifier_carl(n_hidden_layers=n_hidden_layers,
+                                                                  learn_log_r=learn_logr_mode),
                                      epochs=n_epochs, validation_split=0.142857,
                                      verbose=2)
 
         elif algorithm=='score':
             if morphing_aware:
-                clf = KerasRegressor(lambda: make_classifier_score_morphingaware(n_hidden_layers=n_hidden_layers_aware),
+                clf = KerasRegressor(lambda: make_classifier_score_morphingaware(n_hidden_layers=n_hidden_layers_aware,
+                                                                                 learn_log_r=learn_logr_mode),
                                      epochs=n_epochs, validation_split=0.142857,
                                      verbose=2)
             else:
-                clf = KerasRegressor(lambda: make_classifier_score(n_hidden_layers=n_hidden_layers),
+                clf = KerasRegressor(lambda: make_classifier_score(n_hidden_layers=n_hidden_layers,
+                                                                   learn_log_r=learn_logr_mode),
                                      epochs=n_epochs, validation_split=0.142857,
                                      verbose=2)
 
@@ -329,11 +336,13 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
             if morphing_aware:
                 clf = KerasRegressor(
                     lambda: make_classifier_combined_morphingaware(n_hidden_layers=n_hidden_layers_aware,
+                                                                   learn_log_r=learn_logr_mode,
                                                                    alpha=alpha_carl),
                     epochs=n_epochs, validation_split=0.142857,
                     verbose=2)
             else:
                 clf = KerasRegressor(lambda: make_classifier_combined(n_hidden_layers=n_hidden_layers,
+                                                                      learn_log_r=learn_logr_mode,
                                                                       alpha=alpha_carl),
                                      epochs=n_epochs, validation_split=0.142857,
                                      verbose=2)

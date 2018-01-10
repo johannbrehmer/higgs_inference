@@ -318,7 +318,8 @@ def make_combined_regressor_morphingaware(n_hidden_layers=2,
 def make_classifier_carl(n_hidden_layers=3,
                                   hidden_layer_size=100,
                                   activation='tanh',
-                                  dropout_prob=0.0):
+                                  dropout_prob=0.0,
+                                  learn_log_r=False):
     # Inputs
     input_layer = Input(shape=(n_thetas_features,))
 
@@ -330,11 +331,18 @@ def make_classifier_carl(n_hidden_layers=3,
                                       activation=activation,
                                       dropout_prob=dropout_prob)
         hidden_layer = hidden_layer_(hidden_layer)
-    s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
+
+    if learn_log_r:
+        log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
+        r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
+        s_hat_layer = Lambda(lambda x: 1./(1. + r_hat_layer))(log_r_hat_layer)
+
+    else:
+        s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
+        r_hat_layer = Lambda(lambda x: (1. - x) / x)(s_hat_layer)
+        log_r_hat_layer = Lambda(lambda x: K.log(x))(r_hat_layer)
 
     # Score
-    r_hat_layer = Lambda(lambda x: (1. - x) / x)(s_hat_layer)
-    log_r_hat_layer = Lambda(lambda x: K.log(x))(r_hat_layer)
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0],
                             output_shape=(n_thetas_features,))([log_r_hat_layer, input_layer])
     score_layer = Lambda(lambda x: x[:, -n_params:], output_shape=(n_params,))(gradient_layer)
@@ -355,6 +363,7 @@ def make_classifier_carl_morphingaware(n_hidden_layers=2,
                                        hidden_layer_size=100,
                                        activation='tanh',
                                        dropout_prob=0.0,
+                                       learn_log_r=False,
                                        epsilon=1.e-4):
     # Inputs
     input_layer = Input(shape=(n_thetas_features,))
@@ -375,8 +384,14 @@ def make_classifier_carl_morphingaware(n_hidden_layers=2,
                                           activation=activation,
                                           dropout_prob=dropout_prob)
             hidden_layer = hidden_layer_(hidden_layer)
-        si_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
-        ri_hat_layers.append(Reshape((1,))(Lambda(lambda x: (1. - x) / (x + epsilon))(si_hat_layer)))
+
+        if learn_log_r:
+            log_ri_hat_layer = Dense(1, activation='linear')(hidden_layer)
+            ri_hat_layers.append(Lambda(lambda x: K.exp(x))(log_ri_hat_layer))
+        else:
+            si_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
+            ri_hat_layers.append(Reshape((1,))(Lambda(lambda x: (1. - x) / (x + epsilon))(si_hat_layer)))
+
     ri_hat_layer = Concatenate()(ri_hat_layers)
 
     # Combine, clip, transform to \hat{s}
@@ -411,6 +426,7 @@ def make_classifier_score(n_hidden_layers=3,
                           hidden_layer_size=100,
                           activation='tanh',
                           dropout_prob=0.0,
+                          learn_log_r=False,
                           l2_regularization=0.001):
     # Inputs
     input_layer = Input(shape=(n_thetas_features,))
@@ -423,11 +439,18 @@ def make_classifier_score(n_hidden_layers=3,
                                       activation=activation,
                                       dropout_prob=dropout_prob)
         hidden_layer = hidden_layer_(hidden_layer)
-    s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
+
+    if learn_log_r:
+        log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
+        r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
+        s_hat_layer = Lambda(lambda x: 1./(1. + r_hat_layer))(log_r_hat_layer)
+
+    else:
+        s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
+        r_hat_layer = Lambda(lambda x: (1. - x) / x)(s_hat_layer)
+        log_r_hat_layer = Lambda(lambda x: K.log(x))(r_hat_layer)
 
     # Score
-    r_hat_layer = Lambda(lambda x: (1. - x) / x)(s_hat_layer)
-    log_r_hat_layer = Lambda(lambda x: K.log(x))(r_hat_layer)
     regularizer_layer = ActivityRegularization(l1=0.,l2=l2_regularization)(log_r_hat_layer)
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0],
                             output_shape=(n_thetas_features,))([regularizer_layer, input_layer])
@@ -450,6 +473,7 @@ def make_classifier_score_morphingaware(n_hidden_layers=2,
                                            activation='tanh',
                                            dropout_prob=0.0,
                                            l2_regularization=0.001,
+                                           learn_log_r=False,
                                            epsilon=1.e-4):
     # Inputs
     input_layer = Input(shape=(n_thetas_features,))
@@ -470,8 +494,14 @@ def make_classifier_score_morphingaware(n_hidden_layers=2,
                                           activation=activation,
                                           dropout_prob=dropout_prob)
             hidden_layer = hidden_layer_(hidden_layer)
-        si_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
-        ri_hat_layers.append(Reshape((1,))(Lambda(lambda x: (1. - x) / (x + epsilon))(si_hat_layer)))
+
+        if learn_log_r:
+            log_ri_hat_layer = Dense(1, activation='linear')(hidden_layer)
+            ri_hat_layers.append(Lambda(lambda x: K.exp(x))(log_ri_hat_layer))
+        else:
+            si_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
+            ri_hat_layers.append(Reshape((1,))(Lambda(lambda x: (1. - x) / (x + epsilon))(si_hat_layer)))
+
     ri_hat_layer = Concatenate()(ri_hat_layers)
 
     # Combine, clip, transform to \hat{s}
@@ -507,6 +537,7 @@ def make_classifier_combined(n_hidden_layers=3,
                              hidden_layer_size=100,
                              activation='tanh',
                              dropout_prob=0.0,
+                             learn_log_r=False,
                              alpha=0.1):
     # Inputs
     input_layer = Input(shape=(n_thetas_features,))
@@ -519,11 +550,18 @@ def make_classifier_combined(n_hidden_layers=3,
                                       activation=activation,
                                       dropout_prob=dropout_prob)
         hidden_layer = hidden_layer_(hidden_layer)
-    s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
+
+    if learn_log_r:
+        log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
+        r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
+        s_hat_layer = Lambda(lambda x: 1./(1. + r_hat_layer))(log_r_hat_layer)
+
+    else:
+        s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
+        r_hat_layer = Lambda(lambda x: (1. - x) / x)(s_hat_layer)
+        log_r_hat_layer = Lambda(lambda x: K.log(x))(r_hat_layer)
 
     # Score
-    r_hat_layer = Lambda(lambda x: (1. - x) / x)(s_hat_layer)
-    log_r_hat_layer = Lambda(lambda x: K.log(x))(r_hat_layer)
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0],
                             output_shape=(n_thetas_features,))([log_r_hat_layer, input_layer])
     score_layer = Lambda(lambda x: x[:, -n_params:], output_shape=(n_params,))(gradient_layer)
@@ -545,6 +583,7 @@ def make_classifier_combined_morphingaware(n_hidden_layers=2,
                                            activation='tanh',
                                            dropout_prob=0.0,
                                            alpha=0.1,
+                                           learn_log_r=False,
                                            epsilon=1.e-4):
     # Inputs
     input_layer = Input(shape=(n_thetas_features,))
@@ -565,8 +604,14 @@ def make_classifier_combined_morphingaware(n_hidden_layers=2,
                                           activation=activation,
                                           dropout_prob=dropout_prob)
             hidden_layer = hidden_layer_(hidden_layer)
-        si_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
-        ri_hat_layers.append(Reshape((1,))(Lambda(lambda x: (1. - x) / (x + epsilon))(si_hat_layer)))
+
+        if learn_log_r:
+            log_ri_hat_layer = Dense(1, activation='linear')(hidden_layer)
+            ri_hat_layers.append(Lambda(lambda x: K.exp(x))(log_ri_hat_layer))
+        else:
+            si_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
+            ri_hat_layers.append(Reshape((1,))(Lambda(lambda x: (1. - x) / (x + epsilon))(si_hat_layer)))
+
     ri_hat_layer = Concatenate()(ri_hat_layers)
 
     # Combine, clip, transform to \hat{s}

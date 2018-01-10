@@ -116,7 +116,8 @@ def make_classifier(n_hidden_layers=3,
 
     if learn_log_r:
         log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
-        s_hat_layer = Lambda(lambda x: 1./(1. + K.exp(x)))(log_r_hat_layer)
+        r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
+        s_hat_layer = Lambda(lambda x: 1./(1. + r_hat_layer))(log_r_hat_layer)
 
     else:
         s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
