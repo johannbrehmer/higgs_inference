@@ -15,7 +15,7 @@ cd /home/jb6504/higgs_inference/preprocessing
 #python -u generate_data.py train
 #python -u generate_data.py basis
 #python -u generate_data.py random
-python -u generate_data.py point-by-point
+# python -u generate_data.py point-by-point
 #python -u generate_data.py calibration
 python -u generate_data.py test
-python -u generate_data.py score-regression
+# python -u generate_data.py score-regression

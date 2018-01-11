@@ -614,9 +614,9 @@ if do_test:
             subset_scores = [weighted_data_test.columns.get_loc(x) for x in labels_scores]
             scores[t] = np.array(weighted_data_test.iloc[indices, subset_scores])
 
-        p_score = np.array(weights_test[theta1][indices])
+        p1 = np.array(weights_test[theta1][indices])
 
-        print(X.shape, scores.shape, r.shape, p_score.shape)
+        print(X.shape, scores.shape, r.shape, p1.shape)
 
         # filter out bad events
         filter = np.all((scores[:,:,0]**2 + scores[:,:,1]**2 < 2500.) & (np.log(r)**2 < 10000.), axis=0)
