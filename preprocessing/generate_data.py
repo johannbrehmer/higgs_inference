@@ -402,7 +402,7 @@ if do_point_by_point:
         ))
 
         y = np.zeros(n_point_by_point_num + n_point_by_point_den)
-        y[n_basis_num:] = 1.
+        y[n_point_by_point_num:] = 1.
 
         labels_scores = ["score_theta_" + str(theta0) + "_0", "score_theta_" + str(theta0) + "_1"]
         subset_scores = [weighted_data_train.columns.get_loc(x) for x in labels_scores]
@@ -411,9 +411,9 @@ if do_point_by_point:
             np.array(weighted_data_train.iloc[indices_den, subset_scores])
         ))
 
-        thetas0 = np.zeros((n_basis_num + n_basis_den, 2))
+        thetas0 = np.zeros((n_point_by_point_num + n_point_by_point_den, 2))
         thetas0[:] = thetas[theta0]
-        thetas1 = np.zeros((n_basis_num + n_basis_den, 2))
+        thetas1 = np.zeros((n_point_by_point_num + n_point_by_point_den, 2))
         thetas1[:] = thetas[theta1]
 
         r = np.hstack((
