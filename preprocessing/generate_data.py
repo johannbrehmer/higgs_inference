@@ -564,7 +564,6 @@ if do_calibration:
     print('')
     print('Generating calibration data...')
 
-
     def generate_data_calibration(theta_observed):
         indices = np.random.choice(list(range(n_events_train)), n_calibrate, p=weights_train[theta_observed])
 
@@ -574,24 +573,24 @@ if do_calibration:
         for t in range(n_thetas):
             r[t, :] = np.array(weights_train[t][indices] / weights_train[theta_observed][indices])
 
-
         # filter out bad events
         filter = np.all(np.log(r)**2 < 10000., axis=0)
 
         return X[filter], r[:,filter]
 
+    for i, t in enumerate(thetas_train):
+        this_X, this_weights = generate_data_calibration(t)
+        print(t, thetas[t], this_X.shape[0])
 
-    this_X, this_weights = generate_data_calibration(theta_observed)
+        if i > 0:
+            X = np.vstack((X, np.array(this_X, dtype=np.float16)))
+            weights = np.hstack((y, np.array(this_weights, dtype=np.float16)))
+        else:
+            X = np.array(this_X, dtype=np.float16)
+            weights = np.array(this_weights, dtype=np.float16)
 
-    if t > 0:
-        X = np.vstack((X, np.array(this_X, dtype=np.float16)))
-        weights = np.hstack((y, np.array(this_weights, dtype=np.float16)))
-    else:
-        X = np.array(this_X, dtype=np.float16)
-        weights = np.array(this_weights, dtype=np.float16)
-
-    np.save(unweighted_events_dir + '/X_calibration' + filename_addition + '.npy', X)
-    np.save(unweighted_events_dir + '/weights_calibration' + filename_addition + '.npy', weights)
+        np.save(unweighted_events_dir + '/X_calibration' + filename_addition + '.npy', X)
+        np.save(unweighted_events_dir + '/weights_calibration' + filename_addition + '.npy', weights)
 
 
 
