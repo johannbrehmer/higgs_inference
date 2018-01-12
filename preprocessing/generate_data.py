@@ -97,7 +97,7 @@ n_randomtheta_den    = 5000000 # in total (expected)
 n_point_by_point_num =   50000 # per theta
 n_point_by_point_den =   50000 # per theta
 n_score_regression   =10000000 # total
-n_calibrate          = 1000000 # total
+n_calibrate          =    1000 # per theta
 n_observed           =   50000
 n_roam               =      20
 
@@ -110,7 +110,7 @@ if debug_mode:
     n_randomtheta_den    = 500000 # in total (expected)
     n_point_by_point_num =   5000 # per theta
     n_point_by_point_den =   5000 # per theta
-    n_calibrate          = 100000
+    n_calibrate          =    100 # per theta
     n_observed           =   5000
     n_roam               =      2
 
@@ -573,7 +573,7 @@ if do_calibration:
         r = np.zeros((n_thetas, n_calibrate))
         for t in range(n_thetas):
             r[t, :] = np.array(weights_train[t][indices] / weights_train[theta_observed][indices])
-<
+
 
         # filter out bad events
         filter = np.all(np.log(r)**2 < 10000., axis=0)
@@ -581,7 +581,14 @@ if do_calibration:
         return X[filter], r[:,filter]
 
 
-    X, weights = generate_data_calibration(theta_observed)
+    this_X, this_weights = generate_data_calibration(theta_observed)
+
+    if t > 0:
+        X = np.vstack((X, np.array(this_X, dtype=np.float16)))
+        weights = np.hstack((y, np.array(this_weights, dtype=np.float16)))
+    else:
+        X = np.array(this_X, dtype=np.float16)
+        weights = np.array(this_weights, dtype=np.float16)
 
     np.save(unweighted_events_dir + '/X_calibration' + filename_addition + '.npy', X)
     np.save(unweighted_events_dir + '/weights_calibration' + filename_addition + '.npy', weights)
