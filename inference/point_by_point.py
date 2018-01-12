@@ -231,7 +231,7 @@ def point_by_point_inference(algorithm='carl',
             w_calibration[nc:] = weights_calibration[theta1]
 
             ratio_calibrated = ClassifierScoreRatio(
-                CalibratedClassifierScoreCV(clf, cv='prefit', bins=50, independent_binning=False)
+                CalibratedClassifierScoreCV(clf, cv='prefit', bins=100, independent_binning=False)
             )
             ratio_calibrated.fit(X_calibration_both, y_calibration, sample_weight=w_calibration)
 
