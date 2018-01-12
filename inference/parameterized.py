@@ -428,7 +428,7 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
             w_calibration[nc:] = weights_calibration[theta1]
     
             ratio_calibrated = ClassifierScoreRatio(
-                CalibratedClassifierScoreCV(clf, cv='prefit', bins=100, independent_binning=False)
+                CalibratedClassifierScoreCV(clf, cv='prefit', bins=50, independent_binning=False)
             )
             ratio_calibrated.fit(X_thetas_calibration, y_calibration, sample_weight=w_calibration)
     
