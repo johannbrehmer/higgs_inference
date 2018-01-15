@@ -94,8 +94,8 @@ n_basis_num          =  333333 # per basis thetas
 n_basis_den          =  333333 # per basis thetas
 n_randomtheta_num    = 5000000 # in total (expected)
 n_randomtheta_den    = 5000000 # in total (expected)
-n_point_by_point_num =   50000 # per theta
-n_point_by_point_den =   50000 # per theta
+n_point_by_point_num =  500000 # per theta
+n_point_by_point_den =  500000 # per theta
 n_score_regression   =10000000 # total
 n_calibrate          =    1000 # per theta
 n_observed           =   50000
@@ -454,6 +454,8 @@ if do_point_by_point:
         np.save(unweighted_events_dir + '/p0_train_point_by_point_' + str(t) + filename_addition + '.npy', this_p0)
         np.save(unweighted_events_dir + '/p1_train_point_by_point_' + str(t) + filename_addition + '.npy', this_p1)
 
+        del this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1, this_p_score
+
     print('...done!')
 
 
@@ -584,7 +586,7 @@ if do_calibration:
 
         if i > 0:
             X = np.vstack((X, np.array(this_X, dtype=np.float16)))
-            weights = np.hstack((y, np.array(this_weights, dtype=np.float16)))
+            weights = np.hstack((weights, np.array(this_weights, dtype=np.float16)))
         else:
             X = np.array(this_X, dtype=np.float16)
             weights = np.array(this_weights, dtype=np.float16)
