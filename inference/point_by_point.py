@@ -6,9 +6,8 @@ from __future__ import absolute_import, division, print_function
 
 import numpy as np
 
+from scipy.interpolate import LinearNDInterpolator
 from sklearn.preprocessing import StandardScaler
-from sklearn.gaussian_process import GaussianProcessRegressor
-from sklearn.gaussian_process.kernels import ConstantKernel as C, Matern
 
 from keras.wrappers.scikit_learn import KerasRegressor
 from keras.callbacks import EarlyStopping
@@ -163,10 +162,12 @@ def point_by_point_inference(algorithm='carl',
         print('')
         print('Interpolation')
 
-        gp = GaussianProcessRegressor(normalize_y=True,
-                                      kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
-        gp.fit(thetas[training_thetas], llr)
-        llr_all = gp.predict(thetas)
+        interpolator = LinearNDInterpolator(thetas[training_thetas], llr)
+        llr_all = interpolator(thetas)
+        #gp = GaussianProcessRegressor(normalize_y=True,
+        #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
+        #gp.fit(thetas[training_thetas], llr)
+        #llr_all = gp.predict(thetas)
         np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', llr_all)
 
 
@@ -265,15 +266,19 @@ def point_by_point_inference(algorithm='carl',
         print('')
         print('Interpolation')
 
-        gp = GaussianProcessRegressor(normalize_y=True,
-                                      kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
-        gp.fit(thetas[training_thetas], llr)
-        llr_all = gp.predict(thetas)
+        interpolator = LinearNDInterpolator(thetas[training_thetas], llr)
+        llr_all = interpolator(thetas)
+        #gp = GaussianProcessRegressor(normalize_y=True,
+        #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
+        #gp.fit(thetas[training_thetas], llr)
+        #llr_all = gp.predict(thetas)
 
         np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', llr_all)
 
-        gp = GaussianProcessRegressor(normalize_y=True,
-                                      kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
-        gp.fit(thetas[training_thetas], llr_calibrated)
-        llr_calibrated_all = gp.predict(thetas)
+        interpolator = LinearNDInterpolator(thetas[training_thetas], llr_calibrated)
+        llr_calibrated_all = interpolator(thetas)
+        #gp = GaussianProcessRegressor(normalize_y=True,
+        #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
+        #gp.fit(thetas[training_thetas], llr_calibrated)
+        #llr_calibrated_all = gp.predict(thetas)
         np.save(results_dir + '/llr_' + algorithm + '_calibrated' + filename_addition + '.npy', llr_calibrated_all)
