@@ -135,8 +135,8 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
     thetas = np.load(data_dir + '/thetas/thetas_parameterized.npy')
     
     n_thetas = len(thetas)
-    theta_trained = 422
-    theta_nottrained = 9
+    theta_benchmark_trained = 422
+    theta_benchmark_nottrained = 9
     
     if random_theta_mode:
         X_train = np.load(unweighted_events_dir + '/X_train_random' + input_filename_addition + '.npy')
@@ -249,23 +249,28 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
     
             prediction = regr.predict(X_thetas_test)
             this_r = np.exp(prediction[:, 0])
-            this_score = prediction[:, 1:]
+            this_score = prediction[:, 1:3]
+            if morphing_aware:
+                this_wi  = prediction[:,3:18]
+                this_ri  = prediction[:,18:]
     
             llr.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
-            expected_score = 1. / float(n_observed) * np.sum(this_score, axis=0)
     
-            if t == theta_nottrained:
-                r_nottrained = np.copy(this_r)
-                scores_nottrained = np.copy(this_score)
-            elif t == theta_trained:
-                r_trained = np.copy(this_r)
-                scores_trained = np.copy(this_score)
-    
+            if t == theta_benchmark_nottrained:
+                np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
+                np.save(results_dir + '/scores_nottrained_' + algorithm + filename_addition + '.npy', this_score)
+                if morphing_aware:
+                    np.save(results_dir + '/morphing_ri_nottrained_' + algorithm + filename_addition + '.npy', this_wi)
+                    np.save(results_dir + '/morphing_wi_nottrained_' + algorithm + filename_addition + '.npy', this_ri)
+
+            elif t == theta_benchmark_trained:
+                np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
+                np.save(results_dir + '/scores_trained_' + algorithm + filename_addition + '.npy', this_score)
+                if morphing_aware:
+                    np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_wi)
+                    np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_ri)
+
         llr = np.asarray(llr)
-        np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', r_nottrained)
-        np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', r_trained)
-        np.save(results_dir + '/scores_trained_' + algorithm + filename_addition + '.npy', scores_trained)
-        np.save(results_dir + '/scores_nottrained_' + algorithm + filename_addition + '.npy', scores_nottrained)
         np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', llr)
     
         print('')
@@ -358,20 +363,30 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
             thetas0_array = np.zeros((X_test_transformed.shape[0], 2), dtype=X_test_transformed.dtype)
             thetas0_array[:, :] = thetas[t]
             X_thetas_test = np.hstack((X_test_transformed, thetas0_array))
-            this_r, this_score = ratio.predict(X_thetas_test)
+
+            this_r, this_other = ratio.predict(X_thetas_test)
+            this_score = this_other[:, :2]
+            if morphing_aware:
+                this_wi = this_other[:, 2:17]
+                this_ri = this_other[:, 17:]
+
             llr.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
-            expected_score = 1. / float(n_observed) * np.sum(this_score, axis=0)
-            if t == theta_nottrained:
-                r_nottrained = np.copy(this_r)
-                scores_nottrained = np.copy(this_score)
-            elif t == theta_trained:
-                r_trained = np.copy(this_r)
-                scores_trained = np.copy(this_score)
+
+            if t == theta_benchmark_nottrained:
+                np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
+                np.save(results_dir + '/scores_nottrained_' + algorithm + filename_addition + '.npy', this_score)
+                if morphing_aware:
+                    np.save(results_dir + '/morphing_ri_nottrained_' + algorithm + filename_addition + '.npy', this_wi)
+                    np.save(results_dir + '/morphing_wi_nottrained_' + algorithm + filename_addition + '.npy', this_ri)
+
+            elif t == theta_benchmark_trained:
+                np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
+                np.save(results_dir + '/scores_trained_' + algorithm + filename_addition + '.npy', this_score)
+                if morphing_aware:
+                    np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_wi)
+                    np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_ri)
+
         llr = np.asarray(llr)
-        np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', r_nottrained)
-        np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', r_trained)
-        np.save(results_dir + '/scores_trained_' + algorithm + filename_addition + '.npy', scores_trained)
-        np.save(results_dir + '/scores_nottrained_' + algorithm + filename_addition + '.npy', scores_nottrained)
         np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', llr)
     
         print('')
@@ -394,7 +409,9 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
                     thetas0_array = np.zeros((n, 2), dtype=X_test_transformed.dtype)
                     thetas0_array[:, :] = thetas[t]
                     X_thetas_test = np.hstack((X_test_transformed[indices], thetas0_array))
-                    this_r, this_score = ratio.predict(X_thetas_test)
+
+                    this_r, _ = ratio.predict(X_thetas_test)
+
                     pseudoexperiments[t,i,j] = (- 19.2 / float(n) * np.sum(np.log(this_r)))
         pseudoexperiments_variance = np.zeros((n_thetas, n_pseudoexperiments_series))
         for t in range(n_thetas):
@@ -416,19 +433,19 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
     
         for t, theta in enumerate(thetas):
             # Calibration
-            nc = X_calibration_transformed.shape[0]
-            thetas0_array = np.zeros((nc, 2), dtype=X_calibration_transformed.dtype)
+            n_calibration_each = X_calibration_transformed.shape[0]
+            thetas0_array = np.zeros((n_calibration_each, 2), dtype=X_calibration_transformed.dtype)
             thetas0_array[:, :] = thetas[t]
             X_thetas_calibration = np.hstack((X_calibration_transformed, thetas0_array))
             X_thetas_calibration = np.vstack((X_thetas_calibration, X_thetas_calibration))
-            y_calibration = np.zeros(2 * nc)
-            y_calibration[nc:] = 1.
-            w_calibration = np.zeros(2 * nc)
-            w_calibration[:nc] = weights_calibration[t]
-            w_calibration[nc:] = weights_calibration[theta1]
+            y_calibration = np.zeros(2 * n_calibration_each)
+            y_calibration[n_calibration_each:] = 1.
+            w_calibration = np.zeros(2 * n_calibration_each)
+            w_calibration[:n_calibration_each] = weights_calibration[t]
+            w_calibration[n_calibration_each:] = weights_calibration[theta1]
     
             ratio_calibrated = ClassifierScoreRatio(
-                CalibratedClassifierScoreCV(clf, cv='prefit', bins=50, independent_binning=False)
+                CalibratedClassifierScoreCV(clf, cv='prefit', bins=100, variable_width=True, independent_binning=False)
             )
             ratio_calibrated.fit(X_thetas_calibration, y_calibration, sample_weight=w_calibration)
     
@@ -436,23 +453,25 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
             thetas0_array = np.zeros((X_test_transformed.shape[0], 2), dtype=X_test_transformed.dtype)
             thetas0_array[:, :] = thetas[t]
             X_thetas_test = np.hstack((X_test_transformed, thetas0_array))
-    
-            this_r, this_score = ratio_calibrated.predict(X_thetas_test)
+
+            this_r, this_other = ratio.predict(X_thetas_test)
+            this_score = this_other[:, :2]
+
             llr_calibrated.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
     
-            if t == theta_nottrained:
-                r_nottrained_calibrated = np.copy(this_r)
-                scores_nottrained_calibrated = np.copy(this_score)
-
+            if t == theta_benchmark_nottrained:
+                np.save(results_dir + '/scores_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_score)
+                np.save(results_dir + '/r_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
+                np.save(results_dir + '/calvalues_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
                 np.save(results_dir + '/cal0histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
                 np.save(results_dir + '/cal0edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
                 np.save(results_dir + '/cal1histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
                 np.save(results_dir + '/cal1edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
 
-            elif t == theta_trained:
-                r_trained_calibrated = np.copy(this_r)
-                scores_trained_calibrated = np.copy(this_score)
-
+            elif t == theta_benchmark_trained:
+                np.save(results_dir + '/scores_trained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_score)
+                np.save(results_dir + '/r_trained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
+                np.save(results_dir + '/calvalues_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
                 np.save(results_dir + '/cal0histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
                 np.save(results_dir + '/cal0edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
                 np.save(results_dir + '/cal1histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
@@ -474,10 +493,6 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
                     pseudoexperiments_calibrated[t, i, j] = (- 19.2 / float(n) * np.sum(np.log(this_r)))
     
         llr_calibrated = np.asarray(llr_calibrated)
-        np.save(results_dir + '/r_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy', r_nottrained_calibrated)
-        np.save(results_dir + '/r_trained_' + algorithm + '_calibrated' + filename_addition + '.npy', r_trained_calibrated)
-        np.save(results_dir + '/scores_trained_' + algorithm + '_calibrated' + filename_addition + '.npy', scores_trained_calibrated)
-        np.save(results_dir + '/scores_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy', scores_nottrained_calibrated)
         np.save(results_dir + '/llr_' + algorithm + '_calibrated' + filename_addition + '.npy', llr_calibrated)
     
         print('')

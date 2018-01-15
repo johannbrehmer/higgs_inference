@@ -117,7 +117,7 @@ def loss_function_regression(y_true, y_pred):
     return losses.mean_squared_error(y_true[:, 0], y_pred[:, 0])
 
 def loss_function_score(y_true, y_pred):
-    return losses.mean_squared_error(y_true[:, 1:], y_pred[:, 1:])
+    return losses.mean_squared_error(y_true[:, 1:n_params+1], y_pred[:, 1:n_params+1])
 
 def loss_function_combinedregression(y_true, y_pred, alpha=0.005):
     return loss_function_regression(y_true, y_pred) + alpha * loss_function_score(y_true, y_pred)
@@ -207,7 +207,8 @@ def make_regressor_morphingaware(n_hidden_layers=2,
     score_layer = Lambda(lambda x: x[:, -n_params:], output_shape=(n_params,))(gradient_layer)
 
     # Combine outputs
-    output_layer = Concatenate()([log_r_hat_layer, score_layer])
+    # output_layer = Concatenate()([log_r_hat_layer, score_layer])
+    output_layer = Concatenate()([log_r_hat_layer, score_layer, wi_layer, ri_hat_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
@@ -299,7 +300,8 @@ def make_combined_regressor_morphingaware(n_hidden_layers=2,
     score_layer = Lambda(lambda x: x[:, -n_params:], output_shape=(n_params,))(gradient_layer)
 
     # Combine outputs
-    output_layer = Concatenate()([log_r_hat_layer, score_layer])
+    # output_layer = Concatenate()([log_r_hat_layer, score_layer])
+    output_layer = Concatenate()([log_r_hat_layer, score_layer, wi_layer, ri_hat_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
@@ -406,7 +408,8 @@ def make_classifier_carl_morphingaware(n_hidden_layers=2,
     score_layer = Lambda(lambda x: x[:, -n_params:], output_shape=(n_params,))(gradient_layer)
 
     # Combine outputs
-    output_layer = Concatenate()([s_hat_layer, score_layer])
+    # output_layer = Concatenate()([s_hat_layer, score_layer])
+    output_layer = Concatenate()([s_hat_layer, score_layer, wi_layer, ri_hat_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
@@ -517,7 +520,8 @@ def make_classifier_score_morphingaware(n_hidden_layers=2,
     score_layer = Lambda(lambda x: x[:, -n_params:], output_shape=(n_params,))(gradient_layer)
 
     # Combine outputs
-    output_layer = Concatenate()([s_hat_layer, score_layer])
+    # output_layer = Concatenate()([s_hat_layer, score_layer])
+    output_layer = Concatenate()([s_hat_layer, score_layer, wi_layer, ri_hat_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
@@ -626,7 +630,8 @@ def make_classifier_combined_morphingaware(n_hidden_layers=2,
     score_layer = Lambda(lambda x: x[:, -n_params:], output_shape=(n_params,))(gradient_layer)
 
     # Combine outputs
-    output_layer = Concatenate()([s_hat_layer, score_layer])
+    # output_layer = Concatenate()([s_hat_layer, score_layer])
+    output_layer = Concatenate()([s_hat_layer, score_layer, wi_layer, ri_hat_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model

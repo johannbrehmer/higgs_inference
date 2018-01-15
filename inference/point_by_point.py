@@ -38,7 +38,7 @@ def point_by_point_inference(algorithm='carl',
 
     denom1_mode = ('denom1' in options)
     debug_mode = ('debug' in options)
-    learn_logr_mode = ('learnlogr' in options)
+    learn_logr_mode = (not 'learns' in options)
     short_mode = ('short' in options)
     long_mode = ('long' in options)
     deep_mode = ('deep' in options)
@@ -46,8 +46,8 @@ def point_by_point_inference(algorithm='carl',
 
     filename_addition = ''
 
-    if learn_logr_mode:
-        filename_addition += '_learnlogr'
+    if not learn_logr_mode:
+        filename_addition += '_learns'
 
     n_hidden_layers = 2
     if shallow_mode:
@@ -98,8 +98,8 @@ def point_by_point_inference(algorithm='carl',
 
     thetas = np.load(data_dir + '/thetas/thetas_parameterized.npy')
     n_thetas = len(thetas)
-    theta_benchmark1 = 422
-    theta_benchmark2 = 9
+    theta_benchmark_trained = 422
+    theta_benchmark_nottrained = 9
     training_thetas = [0, 13, 14, 15, 16, 9, 422, 956, 666, 802, 675, 839, 699, 820, 203, 291, 634, 371, 973, 742, 901, 181, 82, 937, 510, 919, 745, 588, 804, 963, 396, 62, 401, 925, 874, 770, 108, 179, 669, 758, 113, 587, 600, 975, 496, 66, 467, 412, 701, 986, 598, 810, 97, 18, 723, 159, 320, 301, 352, 159, 89, 421, 574, 923, 849, 299, 119, 167, 939, 402, 52, 787, 978, 41, 873, 533, 827, 304, 294, 760, 890, 539, 1000, 291, 740, 276, 679, 167, 125, 429, 149, 430, 720, 123, 908, 256, 777, 809, 269, 851]
 
     X_calibration = np.load(unweighted_events_dir + '/X_calibration' + input_filename_addition + '.npy')
@@ -153,9 +153,9 @@ def point_by_point_inference(algorithm='carl',
 
             llr.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
 
-            if t == theta_benchmark2:
+            if t == theta_benchmark_nottrained:
                 np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
-            elif t == theta_benchmark1:
+            elif t == theta_benchmark_trained:
                 np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
 
         llr = np.asarray(llr)
@@ -214,21 +214,21 @@ def point_by_point_inference(algorithm='carl',
 
             llr.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
 
-            if t == theta_benchmark2:
+            if t == theta_benchmark_nottrained:
                 np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
-            elif t == theta_benchmark1:
+            elif t == theta_benchmark_trained:
                 np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
 
             # Calibration
-            nc = X_calibration_transformed.shape[0]
-            X_calibration_both = np.zeros((2 * nc, X_calibration_transformed.shape[1]))
-            X_calibration_both[:nc] = X_calibration_transformed
-            X_calibration_both[nc:] = X_calibration_transformed
-            y_calibration = np.zeros(2 * nc)
-            y_calibration[nc:] = 1.
-            w_calibration = np.zeros(2 * nc)
-            w_calibration[:nc] = weights_calibration[t]
-            w_calibration[nc:] = weights_calibration[theta1]
+            n_calibration_each = X_calibration_transformed.shape[0]
+            X_calibration_both = np.zeros((2 * n_calibration_each, X_calibration_transformed.shape[1]))
+            X_calibration_both[:n_calibration_each] = X_calibration_transformed
+            X_calibration_both[n_calibration_each:] = X_calibration_transformed
+            y_calibration = np.zeros(2 * n_calibration_each)
+            y_calibration[n_calibration_each:] = 1.
+            w_calibration = np.zeros(2 * n_calibration_each)
+            w_calibration[:n_calibration_each] = weights_calibration[t]
+            w_calibration[n_calibration_each:] = weights_calibration[theta1]
 
             ratio_calibrated = ClassifierScoreRatio(
                 CalibratedClassifierScoreCV(clf, cv='prefit', bins=100, independent_binning=False)
@@ -239,19 +239,21 @@ def point_by_point_inference(algorithm='carl',
             this_r, _ = ratio_calibrated.predict(X_test_transformed)
             llr_calibrated.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
 
-            if t == theta_benchmark2:
+            if t == theta_benchmark_nottrained:
                 np.save(results_dir + '/r_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
 
                 # Save calibration histograms
+                np.save(results_dir + '/calvalues_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
                 np.save(results_dir + '/cal0histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
                 np.save(results_dir + '/cal0edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
                 np.save(results_dir + '/cal1histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
                 np.save(results_dir + '/cal1edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
                 
-            elif t == theta_benchmark1:
+            elif t == theta_benchmark_trained:
                 np.save(results_dir + '/r_trained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
 
                 # Save calibration histograms
+                np.save(results_dir + '/calvalues_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
                 np.save(results_dir + '/cal0histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
                 np.save(results_dir + '/cal0edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
                 np.save(results_dir + '/cal1histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)

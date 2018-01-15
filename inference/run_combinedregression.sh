@@ -17,7 +17,7 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/inference
 
-python -u experiments.py combinedregression -o shallow
+# python -u experiments.py combinedregression -o shallow
 python -u experiments.py combinedregression
-python -u experiments.py combinedregression -o deep
+# python -u experiments.py combinedregression -o deep
 

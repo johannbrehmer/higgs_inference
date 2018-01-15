@@ -17,6 +17,6 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/inference
 
-python -u experiments.py carl -o shallow
+# python -u experiments.py carl -o shallow
 python -u experiments.py carl
-python -u experiments.py carl -o deep
+# python -u experiments.py carl -o deep
