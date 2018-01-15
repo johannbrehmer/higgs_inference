@@ -211,7 +211,7 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
     # Regression approaches
     ################################################################################
     
-    if algorithm=='regression':
+    if algorithm in ['regression', 'combinedregression']:
 
         if algorithm=='regression':
             if morphing_aware:
@@ -351,6 +351,9 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
                                                                       alpha=alpha_carl),
                                      epochs=n_epochs, validation_split=0.142857,
                                      verbose=2)
+
+        else:
+            raise ValueError()
 
         clf.fit(X_thetas_train[::], y_score_train[::],
                  callbacks=([EarlyStopping(verbose=1,patience=3)] if early_stopping else None))
