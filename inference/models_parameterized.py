@@ -8,7 +8,7 @@
 import numpy as np
 
 from keras.models import Model
-from keras.layers import Input, Dense, Dropout, Lambda, Concatenate, Multiply, Reshape, ActivityRegularization
+from keras.layers import Input, Dense, Dropout, Lambda, Concatenate, Multiply, Reshape, ActivityRegularization, Activation
 from keras import losses, optimizers
 import keras.backend as K
 
@@ -199,9 +199,10 @@ def make_regressor_morphingaware(n_hidden_layers=2,
     # Combine, clip, transform to \hat{s}
     wi_ri_hat_layer = Multiply()([wi_layer, ri_hat_layer])
     r_hat_layer = Reshape((1,))(Lambda(lambda x: K.sum(x, axis=1))(wi_ri_hat_layer))
+    positive_r_hat_layer = Activation('relu')(r_hat_layer)
 
     # Score
-    log_r_hat_layer = Lambda(lambda x: K.log(x + epsilon))(r_hat_layer)
+    log_r_hat_layer = Lambda(lambda x: K.log(x + epsilon))(positive_r_hat_layer)
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0], output_shape=(n_thetas_features,))(
         [log_r_hat_layer, input_layer])
     score_layer = Lambda(lambda x: x[:, -n_params:], output_shape=(n_params,))(gradient_layer)
@@ -292,9 +293,10 @@ def make_combined_regressor_morphingaware(n_hidden_layers=2,
     # Combine, clip, transform to \hat{s}
     wi_ri_hat_layer = Multiply()([wi_layer, ri_hat_layer])
     r_hat_layer = Reshape((1,))(Lambda(lambda x: K.sum(x, axis=1))(wi_ri_hat_layer))
+    positive_r_hat_layer = Activation('relu')(r_hat_layer)
 
     # Score
-    log_r_hat_layer = Lambda(lambda x: K.log(x + epsilon))(r_hat_layer)
+    log_r_hat_layer = Lambda(lambda x: K.log(x + epsilon))(positive_r_hat_layer)
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0], output_shape=(n_thetas_features,))(
         [log_r_hat_layer, input_layer])
     score_layer = Lambda(lambda x: x[:, -n_params:], output_shape=(n_params,))(gradient_layer)
@@ -399,10 +401,11 @@ def make_classifier_carl_morphingaware(n_hidden_layers=2,
     # Combine, clip, transform to \hat{s}
     wi_ri_hat_layer = Multiply()([wi_layer, ri_hat_layer])
     r_hat_layer = Reshape((1,))(Lambda(lambda x: K.sum(x, axis=1))(wi_ri_hat_layer))
-    s_hat_layer = Lambda(lambda x: 1. / (1. + x))(r_hat_layer)
+    positive_r_hat_layer = Activation('relu')(r_hat_layer)
+    s_hat_layer = Lambda(lambda x: 1. / (1. + x))(positive_r_hat_layer)
 
     # Score
-    log_r_hat_layer = Lambda(lambda x: K.log(x + epsilon))(r_hat_layer)
+    log_r_hat_layer = Lambda(lambda x: K.log(x + epsilon))(positive_r_hat_layer)
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0], output_shape=(n_thetas_features,))(
         [log_r_hat_layer, input_layer])
     score_layer = Lambda(lambda x: x[:, -n_params:], output_shape=(n_params,))(gradient_layer)
@@ -510,10 +513,11 @@ def make_classifier_score_morphingaware(n_hidden_layers=2,
     # Combine, clip, transform to \hat{s}
     wi_ri_hat_layer = Multiply()([wi_layer, ri_hat_layer])
     r_hat_layer = Reshape((1,))(Lambda(lambda x: K.sum(x, axis=1))(wi_ri_hat_layer))
-    s_hat_layer = Lambda(lambda x: 1. / (1. + x))(r_hat_layer)
+    positive_r_hat_layer = Activation('relu')(r_hat_layer)
+    s_hat_layer = Lambda(lambda x: 1. / (1. + x))(positive_r_hat_layer)
 
     # Score
-    log_r_hat_layer = Lambda(lambda x: K.log(x + epsilon))(r_hat_layer)
+    log_r_hat_layer = Lambda(lambda x: K.log(x + epsilon))(positive_r_hat_layer)
     regularizer_layer = ActivityRegularization(l1=0.,l2=l2_regularization)(log_r_hat_layer)
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0], output_shape=(n_thetas_features,))(
         [regularizer_layer, input_layer])
@@ -621,10 +625,11 @@ def make_classifier_combined_morphingaware(n_hidden_layers=2,
     # Combine, clip, transform to \hat{s}
     wi_ri_hat_layer = Multiply()([wi_layer, ri_hat_layer])
     r_hat_layer = Reshape((1,))(Lambda(lambda x: K.sum(x, axis=1))(wi_ri_hat_layer))
-    s_hat_layer = Lambda(lambda x: 1. / (1. + x))(r_hat_layer)
+    positive_r_hat_layer = Activation('relu')(r_hat_layer)
+    s_hat_layer = Lambda(lambda x: 1. / (1. + x))(positive_r_hat_layer)
 
     # Score
-    log_r_hat_layer = Lambda(lambda x: K.log(x + epsilon))(r_hat_layer)
+    log_r_hat_layer = Lambda(lambda x: K.log(x + epsilon))(positive_r_hat_layer)
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0], output_shape=(n_thetas_features,))(
         [log_r_hat_layer, input_layer])
     score_layer = Lambda(lambda x: x[:, -n_params:], output_shape=(n_params,))(gradient_layer)
