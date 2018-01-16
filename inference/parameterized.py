@@ -253,6 +253,7 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
             if morphing_aware:
                 this_wi  = prediction[:,3:18]
                 this_ri  = prediction[:,18:]
+                print('Morphing weights for theta', t, '(', theta, '):', this_wi[0])
     
             llr.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
     
@@ -260,15 +261,15 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
                 np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
                 np.save(results_dir + '/scores_nottrained_' + algorithm + filename_addition + '.npy', this_score)
                 if morphing_aware:
-                    np.save(results_dir + '/morphing_ri_nottrained_' + algorithm + filename_addition + '.npy', this_wi)
-                    np.save(results_dir + '/morphing_wi_nottrained_' + algorithm + filename_addition + '.npy', this_ri)
+                    np.save(results_dir + '/morphing_ri_nottrained_' + algorithm + filename_addition + '.npy', this_ri)
+                    np.save(results_dir + '/morphing_wi_nottrained_' + algorithm + filename_addition + '.npy', this_wi)
 
             elif t == theta_benchmark_trained:
                 np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
                 np.save(results_dir + '/scores_trained_' + algorithm + filename_addition + '.npy', this_score)
                 if morphing_aware:
-                    np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_wi)
-                    np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_ri)
+                    np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_ri)
+                    np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_wi)
 
         llr = np.asarray(llr)
         np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', llr)
@@ -372,6 +373,7 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
             if morphing_aware:
                 this_wi = this_other[:, 2:17]
                 this_ri = this_other[:, 17:]
+                print('Morphing weights for theta', t, '(', theta, '):', this_wi[0])
 
             llr.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
 
@@ -379,15 +381,15 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
                 np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
                 np.save(results_dir + '/scores_nottrained_' + algorithm + filename_addition + '.npy', this_score)
                 if morphing_aware:
-                    np.save(results_dir + '/morphing_ri_nottrained_' + algorithm + filename_addition + '.npy', this_wi)
-                    np.save(results_dir + '/morphing_wi_nottrained_' + algorithm + filename_addition + '.npy', this_ri)
+                    np.save(results_dir + '/morphing_ri_nottrained_' + algorithm + filename_addition + '.npy', this_ri)
+                    np.save(results_dir + '/morphing_wi_nottrained_' + algorithm + filename_addition + '.npy', this_wi)
 
             elif t == theta_benchmark_trained:
                 np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
                 np.save(results_dir + '/scores_trained_' + algorithm + filename_addition + '.npy', this_score)
                 if morphing_aware:
-                    np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_wi)
-                    np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_ri)
+                    np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_ri)
+                    np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_wi)
 
         llr = np.asarray(llr)
         np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', llr)
