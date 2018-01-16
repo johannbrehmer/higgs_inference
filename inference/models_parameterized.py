@@ -63,7 +63,7 @@ def hidden_layers(n,
 # sigma_sample = np.linalg.inv(component_sample).dot(sigma_component)
 # n_samples = 15
 
-# Morphing (optimized)
+# Morphing
 sample_component = np.load('../data/morphing/components_fakebasis2.npy')[:,1:] # Ignore background component
 component_sample = np.linalg.inv(sample_component)
 sigma_sample = np.load('../data/morphing/fakebasis2_xsecs.npy')
@@ -337,7 +337,7 @@ def make_classifier_carl(n_hidden_layers=3,
     if learn_log_r:
         log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
         r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
-        s_hat_layer = Lambda(lambda x: 1./(1. + r_hat_layer))(log_r_hat_layer)
+        s_hat_layer = Lambda(lambda x: 1./(1. + x))(r_hat_layer)
 
     else:
         s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
@@ -446,7 +446,7 @@ def make_classifier_score(n_hidden_layers=3,
     if learn_log_r:
         log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
         r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
-        s_hat_layer = Lambda(lambda x: 1./(1. + r_hat_layer))(log_r_hat_layer)
+        s_hat_layer = Lambda(lambda x: 1./(1. + x))(r_hat_layer)
 
     else:
         s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
@@ -558,7 +558,7 @@ def make_classifier_combined(n_hidden_layers=3,
     if learn_log_r:
         log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
         r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
-        s_hat_layer = Lambda(lambda x: 1./(1. + r_hat_layer))(log_r_hat_layer)
+        s_hat_layer = Lambda(lambda x: 1./(1. + x))(r_hat_layer)
 
     else:
         s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
