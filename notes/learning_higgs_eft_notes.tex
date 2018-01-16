@@ -475,7 +475,7 @@ training sample consists of 1000 pairs $(\boldtheta_0, \boldtheta_1)$.
 %
 \begin{equation}
   \boldtheta_1 = (0.393, 0.492)
-  \label{eq:parameterized_theta1}
+  \label{eq:theta1}
 \end{equation}
 %
 is fixed, while the values of $\boldtheta_0$ are chosen randomly (with
@@ -497,7 +497,7 @@ In all cases, our evaluation sample consists of $100\,000$ events
 drawn according to the SM. We calculate the exact likelihood ratio for
 these events for a total of 1016 values of $\boldtheta_0$, 1000 of
 which are the same as those used in the first training sample. Again
-we fix $\boldtheta_1$ as in Equation~\eqref{eq:parameterized_theta1}.
+we fix $\boldtheta_1$ as in Equation~\eqref{eq:theta1}.
 
 
 
@@ -544,7 +544,7 @@ train for 20 epochs with early stopping.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Uncertainty diagnostics}
-\label{sec:parameterized_diagnostics}
+\label{sec:diagnostics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 We are experimenting with diagnostic tools that might provide some
@@ -567,7 +567,7 @@ measure of the uncertainty of the estimators $\hat{r}(\boldx)$. There are differ
     \Delta \log \hat{r} (\boldx; \boldtheta_0, \boldtheta_1) 
     = \Bigl| (\log \hat{r} (\boldx; \boldtheta_0, \boldtheta_1) - \max_\boldtheta \log \hat{r} (\boldx; \boldtheta, \boldtheta_1) ) \\
       - (\log \hat{r}' (\boldx; \boldtheta_0, \boldtheta_1') - \max_\boldtheta \log \hat{r}' (\boldx; \boldtheta_0, \boldtheta_1') ) \Bigr| \,.
-    \label{eq:parameterized_diagnostics3}
+    \label{eq:diagnostics3}
   \end{multline}
   % 
   as a measure of systematic uncertainties. Probably such a number
@@ -589,7 +589,7 @@ measure of the uncertainty of the estimators $\hat{r}(\boldx)$. There are differ
   % 
   \begin{equation}
     \Delta \log \hat{r} (\boldx; \boldtheta_0, \boldtheta_1) = \sqrt{b}
-    \label{eq:parameterized_diagnostics1}
+    \label{eq:diagnostics1}
   \end{equation}
   % 
   might provide a measure of a residual systematic uncertainty in the
@@ -601,7 +601,7 @@ measure of the uncertainty of the estimators $\hat{r}(\boldx)$. There are differ
   % 
   \begin{equation}
     \Delta \log \hat{r} (\boldx) = \log \hat{r}(\boldx; \boldtheta_0 = \boldtheta_1, \boldtheta_1) 
-    \label{eq:parameterized_diagnostics2}
+    \label{eq:diagnostics2}
   \end{equation}
   % 
   might therefore hint at a systematic uncertainty. Again, there is no
@@ -633,8 +633,8 @@ measure of the uncertainty of the estimators $\hat{r}(\boldx)$. There are differ
 \subsection{Overview}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Tables~\ref{tbl:parameterized_comparison1} to
-\ref{tbl:parameterized_comparison_score} compare the performance of all
+Tables~\ref{tbl:comparison1} to
+\ref{tbl:comparison_score} compare the performance of all
 different setups tested.
 
 \begin{table}
@@ -697,7 +697,7 @@ different setups tested.
     of the point-by-point training). In the latter
     case, the expectation value sums over $\boldx$ following the SM
     distribution.}
-  \label{tbl:parameterized_comparison1}
+  \label{tbl:comparison1}
 \end{table}
 
 
@@ -765,7 +765,7 @@ different setups tested.
     of the point-by-point training). In the latter
     case, the expectation value sums over $\boldx$ following the SM
     distribution.}
-  \label{tbl:parameterized_comparison2}
+  \label{tbl:comparison2}
 \end{table}
 
 
@@ -818,7 +818,7 @@ different setups tested.
     of the point-by-point training). In the latter
     case, the expectation value sums over $\boldx$ following the SM
     distribution.}
-  \label{tbl:parameterized_comparison3}
+  \label{tbl:comparison3}
 \end{table}
 
 
@@ -889,7 +889,7 @@ different setups tested.
     models (it was still part of the point-by-point training).
     The numbers in brackets denote the number of hidden layers in the
     neural networks.}
-  \label{tbl:parameterized_comparison_score}
+  \label{tbl:comparison_score}
 \end{table}
 
 
@@ -898,8 +898,8 @@ different setups tested.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 We show the results of the parameterized baseline experiments in
-Figures~\ref{fig:parameterized_baseline_r_histo} to
-\ref{fig:parameterized_baseline_likelihood_ratio}. We find that
+Figures~\ref{fig:baseline_r_histo} to
+\ref{fig:baseline_likelihood_ratio}. We find that
 calibration is important, and that the combinatino of
 $\toolfont{carl}$ with score information works well. The tested
 diagnostic tool for uncertainties, unfortunately, does not seem to be
@@ -912,7 +912,7 @@ truth.
     $\boldx$, for one particular hypothesis comparison
     $(\boldtheta_0, \boldtheta_1)$.  We show the baseline version of
     the different parameterized models.}
-  \label{fig:parameterized_baseline_r_histo}
+  \label{fig:baseline_r_histo}
 \end{figure}
 
 \begin{figure}
@@ -921,7 +921,7 @@ truth.
     $\boldx$, for one particular hypothesis comparison
     $(\boldtheta_0, \boldtheta_1)$.  We show the baseline version of
     the different parameterized models.}
-  \label{fig:parameterized_baseline_r_scatter}
+  \label{fig:baseline_r_scatter}
 \end{figure}
 
 \begin{figure}
@@ -930,7 +930,7 @@ truth.
     particular hypothesis comparison $(\boldtheta_0, \boldtheta_1)$.
     We show the baseline version of the different parameterized
     models.}
-  \label{fig:parameterized_baseline_score_scatter}
+  \label{fig:baseline_score_scatter}
 \end{figure}
 
 \begin{figure}
@@ -939,7 +939,7 @@ truth.
     $\boldtheta_0$, for four different individual events $\boldx$
     (columns). We show the baseline version of the different
     parameterized models (rows).}
-  \label{fig:parameterized_baseline_theta_dependence}
+  \label{fig:baseline_theta_dependence}
 \end{figure}
 
 \begin{figure}
@@ -948,7 +948,7 @@ truth.
     different values of $\boldtheta_0$, taking the expectation value
     over $\boldx$. We show the baseline version of the different
     parameterized models.}
-  \label{fig:parameterized_baseline_likelihood_ratio}
+  \label{fig:baseline_likelihood_ratio}
 \end{figure}
 
 \begin{figure}
@@ -958,13 +958,13 @@ truth.
     show the baseline version of the different parameterized
     models. The shaded error bands show an estimate of the
     uncertainties following
-    Equation~\eqref{eq:parameterized_diagnostics1}.}
-  \label{fig:parameterized_baseline_likelihood_ratio}
+    Equation~\eqref{eq:diagnostics1}.}
+  \label{fig:baseline_likelihood_ratio}
 \end{figure}
 
 The plots shown are based on fully connected neural networks with
 three hidden layers of 100 units. We are currently experimenting with
-more shallow or deeper networks. 
+more shallow or deeper networks.
 
 
 
@@ -973,19 +973,70 @@ more shallow or deeper networks.
 \subsection{Calibration experiments}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+In Table~\ref{tbl:calibration_strategies} we compare the performance
+of different calibration strategies. The corresponding calibration
+curves are shown in Figure~\ref{fig:calibration_curves}.
+
+\begin{table}
+  \small
+  \begin{tabular}{ll rr}
+    \toprule
+    Calibration strategy & Settings & \multicolumn{2}{c}{$\MSE_\boldx \left[ \log  r(\boldx; \boldtheta_0, \boldtheta_1) \right]$} \\
+    \cmidrule{3-4} 
+                         && PbP regression & PbP carl \\
+    \midrule
+    None &  & $\mathbf{0.0050}$ & $\mathbf{0.401}$ \\
+    \midrule
+    Histogram & 30 equidistant bins & $0.0072$ & $\mathbf{0.064}$ \\
+                         & 50 equidistant bins & $0.0056$ & $0.064$ \\
+                         & 100 equidistant bins & $\mathbf{0.0050}$ & $0.066$ \\
+                         & 200 equidistant bins & $0.0050$ & $0.066$ \\
+                         & 30 variable bins & $0.0185$ & $0.067$ \\
+                         & 50 variable bins & $0.0107$ & $0.065$ \\
+                         & 100 variable bins & $0.0068$ & $0.064$ \\
+                         & 200 variable bins & $0.0054$ & $0.065$ \\
+    \midrule
+    Isotonic &  & $\mathbf{0.0049}$ & $\mathbf{0.063}$ \\
+    \midrule
+    KDE & fixed bandwidth & $\mathbf{0.0255}$ & $0.070$ \\
+                         & adaptive ($\alpha=0.25$) & $0.0288$ & $\mathbf{0.069}$ \\
+                         & adaptive ($\alpha=0.5$) & $0.0322$ & $0.070$ \\
+                         & adaptive ($\alpha=0.75$) & $0.0376$ & $0.072$ \\
+                         & adaptive ($\alpha=1.$) & $0.0454$ & $0.077$ \\
+    \midrule
+    KDE & gradient-adaptive ($\beta=0.2$) & $\mathbf{0.0126}$ & $0.073$ \\
+                         & gradient-adaptive ($\beta=0.5$) & $0.0135$ & $\mathbf{0.067}$ \\
+                         & gradient-adaptive ($\beta=1$) & $0.0192$ & $0.068$ \\
+                         & gradient-adaptive ($\beta=2$) & $0.0388$ & $0.081$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{Comparison of different calibration methods.
+    As test scenario we use two inference strategies, carl and regression, both in a
+    point-by-point setup for one particular benchmark $\boldtheta_0$.}
+  \label{tbl:calibration_strategies}
+\end{table}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/calibration/calibration_curves.pdf}%
+  \caption{Calibration curbes for different calibration strategies.
+    Top: point-by-point regression. Bottom: point-by-point carl.}
+  \label{fig:calibration_curves}
+\end{figure}
+
+
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Physics-aware estimators}
+\subsection{Physics-aware setup}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We now turn towards our physics-aware design that uses the analytic
+The physics-aware setup is based on the analytic
 form of the morphing weights $w_i (\boldtheta)$. These factors
 crucially depend on the basis points in the morphing procedure, as we
-show in Figures~\ref{fig:parameterized_morphing_weights1} and
-\ref{fig:parameterized_morphing_weights2}. Here we stick to the choice
-shown in Figure~\ref{fig:parameterized_morphing_weights2}, which
+show in Figures~\ref{fig:morphing_weights1} and
+\ref{fig:morphing_weights2}. Here we stick to the choice
+shown in Figure~\ref{fig:morphing_weights2}, which
 reduces the weights and the cancellations between them compared to
 other basis choices. For now we only analyse the training sample
 consisting only of these basis values of $\boldtheta_0$.
@@ -994,14 +1045,14 @@ consisting only of these basis values of $\boldtheta_0$.
   \includegraphics[width=\textwidth]{figures/morphing/morphing_original.pdf}%
   \caption{Morphing weights $w_i(\boldtheta)$ for basis points chosen
     only in one quadrant of the parameter space of interest.}
-  \label{fig:parameterized_morphing_weights1}
+  \label{fig:morphing_weights1}
 \end{figure}
 
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/morphing/morphing_optimized2.pdf}%
   \caption{Morphing weights $w_i(\boldtheta)$ for basis points
     distributed over the full relevant parameter space.}
-  \label{fig:parameterized_morphing_weights2}
+  \label{fig:morphing_weights2}
 \end{figure}
 
 \dots
