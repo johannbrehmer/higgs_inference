@@ -16,7 +16,10 @@ sbatch run_score.sh
 sleep 60
 
 sbatch run_carl_aware.sh
+sbatch run_combined_aware.sh
 # sbatch run_regression_aware.sh
+sbatch run_score_aware.sh
+# sbatch run_combinedregression_aware.sh
 
 sleep 60
 
@@ -25,7 +28,3 @@ sbatch run_combined_random.sh
 # sbatch run_regression_random.sh
 sbatch run_score_random.sh
 # sbatch run_combinedregression_random.sh
-
-# sbatch run_combined_aware.sh
-# sbatch run_score_aware.sh
-# sbatch run_combinedregression_aware.sh
