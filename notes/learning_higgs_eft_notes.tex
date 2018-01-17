@@ -461,7 +461,40 @@ Finally, we define two regressors for the case in which the
 \emph{likelihood is tractable}: standard regression on $\log r$, both
 for the point-by-point and the parameterized setup. For the
 parameterized setup, we also use a combination of regression on
-$\log r$ and on the score. The regression models are not calibrated.
+$\log r$ and on the score. The regression models are not calibrated. 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Calibration methods}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We consider and compare different calibration strategies:
+%
+\begin{description}
+  \item[Histogram:] \dots
+  \item[Isotonic:] \dots
+  \item[Sigmoid:] \dots
+  \item[Kernel density estimation (KDE):] \dots
+  \item[Gradient-adaptive KDE:] \dots
+    %
+  \item[Analytic:] The calibration curve is given by the strictly
+    monotonic parametric function
+    \begin{equation}
+      s_{\text{calibrated}} (s_{\text{raw}} ; \alpha)
+      = \frac { (1 - \alpha) s_{\text{raw}} }
+      { (1 - \alpha) s_{\text{raw}} + \alpha (1 - s_{\text{raw}}) }
+      \label{eq:analytic_calibration_function}
+    \end{equation}
+    %
+    with parameter $0 < \alpha < 1$. The value of this parameter is
+    determined by fitting
+    Equation~\eqref{eq:analytic_calibration_function} to the raw and
+    calibrated values of $\hat{s}$ of a different calibration
+    method (for now, we are using histograms).
+    %
+\end{description}
 
 
 
@@ -984,30 +1017,44 @@ curves are shown in Figure~\ref{fig:calibration_curves}.
     Calibration strategy & Settings & \multicolumn{2}{c}{$\MSE_\boldx \left[ \log  r(\boldx; \boldtheta_0, \boldtheta_1) \right]$} \\
     \cmidrule{3-4} 
                          && PbP regression & PbP carl \\
-    \midrule
-    None &  & $\mathbf{0.0050}$ & $\mathbf{0.401}$ \\
-    \midrule
-    Histogram & 30 equidistant bins & $0.0072$ & $\mathbf{0.064}$ \\
-                         & 50 equidistant bins & $0.0056$ & $0.064$ \\
-                         & 100 equidistant bins & $\mathbf{0.0050}$ & $0.066$ \\
-                         & 200 equidistant bins & $0.0050$ & $0.066$ \\
-                         & 30 variable bins & $0.0185$ & $0.067$ \\
-                         & 50 variable bins & $0.0107$ & $0.065$ \\
-                         & 100 variable bins & $0.0068$ & $0.064$ \\
-                         & 200 variable bins & $0.0054$ & $0.065$ \\
-    \midrule
-    Isotonic &  & $\mathbf{0.0049}$ & $\mathbf{0.063}$ \\
-    \midrule
-    KDE & fixed bandwidth & $\mathbf{0.0255}$ & $0.070$ \\
-                         & adaptive ($\alpha=0.25$) & $0.0288$ & $\mathbf{0.069}$ \\
-                         & adaptive ($\alpha=0.5$) & $0.0322$ & $0.070$ \\
-                         & adaptive ($\alpha=0.75$) & $0.0376$ & $0.072$ \\
-                         & adaptive ($\alpha=1.$) & $0.0454$ & $0.077$ \\
-    \midrule
-    KDE & gradient-adaptive ($\beta=0.2$) & $\mathbf{0.0126}$ & $0.073$ \\
-                         & gradient-adaptive ($\beta=0.5$) & $0.0135$ & $\mathbf{0.067}$ \\
-                         & gradient-adaptive ($\beta=1$) & $0.0192$ & $0.068$ \\
-                         & gradient-adaptive ($\beta=2$) & $0.0388$ & $0.081$ \\
+   \midrule
+   No calibration &  & $\mathbf{0.0026}$ & $\mathbf{0.260}$ \\
+   \midrule
+   Histogram & 25 equidistant bins & $0.0065$ & $0.034$ \\
+    & 50 equidistant bins & $0.0038$ & $0.032$ \\
+    & 100 equidistant bins & $0.0030$ & $0.032$ \\
+    & 200 equidistant bins & $0.0028$ & $0.032$ \\
+    & 25 equidistant bins, linear interpolation & $0.0052$ & $0.033$ \\
+    & 50 equidistant bins, linear interpolation & $0.0034$ & $\mathbf{0.032}$ \\
+    & 100 equidistant bins, linear interpolation & $0.0029$ & $0.032$ \\
+    & 200 equidistant bins, linear interpolation & $\mathbf{0.0027}$ & $0.032$ \\
+    & 25 equidistant bins, spline interpolation & $0.0051$ & $0.032$ \\
+    & 50 equidistant bins, spline interpolation & $0.0034$ & $0.034$ \\
+    & 100 equidistant bins, spline interpolation & $0.0029$ & $0.032$ \\
+    & 200 equidistant bins, spline interpolation & $0.0060$ & $0.041$ \\
+    & 25 variable bins & $1.5307$ & $0.945$ \\
+    & 50 variable bins & $1.6809$ & $1.186$ \\
+    & 100 variable bins & $1.7720$ & $1.908$ \\
+    & 200 variable bins & $2.8246$ & $3.601$ \\
+   \midrule
+   Isotonic & no interpolation & $\mathbf{0.0025}$ & $\mathbf{0.032}$ \\
+    & linear interpolation & $0.0025$ & $0.036$ \\
+   \midrule
+   Sigmoid &  & $\mathbf{0.0250}$ & $\mathbf{0.046}$ \\
+   \midrule
+   KDE & fixed bandwidth & $\mathbf{0.0176}$ & $0.043$ \\
+    & adaptive ($\alpha=0.25$) & $0.0185$ & $0.043$ \\
+    & adaptive ($\alpha=0.5$) & $0.0196$ & $\mathbf{0.042}$ \\
+    & adaptive ($\alpha=0.75$) & $0.0206$ & $0.043$ \\
+    & adaptive ($\alpha=1.$) & $0.0304$ & $0.048$ \\
+   \midrule
+   KDE & grad-adaptive ($\beta=0.2$) & $\mathbf{0.0051}$ & $0.037$ \\
+    & grad-adaptive ($\beta=0.5$) & $0.0070$ & $\mathbf{0.033}$ \\
+    & grad-adaptive ($\beta=1$) & $0.0101$ & $0.035$ \\
+    & grad-adaptive ($\beta=2$) & $0.0207$ & $0.046$ \\
+    & grad-adaptive ($\beta_{\text{num}} = 1.66$, $\beta_{\text{den}} = 1.13$) & $0.0109$ & $0.034$ \\
+   \midrule
+   Analytic & Equation~\eqref{eq:analytic_calibration_function} fit to histogram & $\mathbf{0.0026}$ & $\mathbf{0.036}$ \\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different calibration methods.
@@ -1018,8 +1065,10 @@ curves are shown in Figure~\ref{fig:calibration_curves}.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/calibration/calibration_curves.pdf}%
-  \caption{Calibration curbes for different calibration strategies.
-    Top: point-by-point regression. Bottom: point-by-point carl.}
+  \caption{Calibration curbes for different calibration
+    strategies. The analytic calibration function is defined in
+    Equation~\eqref{eq:analytic_calibration_function}.  Top:
+    point-by-point regression. Bottom: point-by-point carl.}
   \label{fig:calibration_curves}
 \end{figure}
 
