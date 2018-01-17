@@ -473,11 +473,9 @@ We consider and compare different calibration strategies:
 \begin{description}
   \item[Histogram:] \dots
   \item[Isotonic:] \dots
-  \item[Sigmoid:] \dots
-  \item[Kernel density estimation (KDE):] \dots
-  \item[Gradient-adaptive KDE:] \dots
+  \item[Parametric:] We also consider two parametric calibration procedures. First, there is sigmoid calibration (Platt's method)\dots
     %
-  \item[Analytic:] The calibration curve is given by the strictly
+    As an alternative we consider the strictly
     monotonic parametric function
     \begin{equation}
       s_{\text{calibrated}} (s_{\text{raw}} ; \alpha)
@@ -486,12 +484,14 @@ We consider and compare different calibration strategies:
       \label{eq:analytic_calibration_function}
     \end{equation}
     %
-    with parameter $0 < \alpha < 1$. The value of this parameter is
+    with parameter $0 < \alpha < 1$ as a calibration curve. The value of this parameter is
     determined by fitting
     Equation~\eqref{eq:analytic_calibration_function} to the raw and
     calibrated values of $\hat{s}$ of a different calibration
     method (for now, we are using histograms).
     %
+  \item[Kernel density estimation (KDE):] \dots
+  \item[Gradient-adaptive KDE:] \dots
 \end{description}
 
 
@@ -1039,7 +1039,8 @@ curves are shown in Figures~\ref{fig:calibration_curves1} and \ref{fig:calibrati
    Isotonic & no interpolation & $\mathbf{0.0025}$ & $\mathbf{0.032}$ \\
     & linear interpolation & $0.0025$ & $0.036$ \\
    \midrule
-   Sigmoid &  & $\mathbf{0.0250}$ & $\mathbf{0.046}$ \\
+   Parametric & sigmoid & $0.0250$ & $0.046$ \\
+   & Equation~\eqref{eq:analytic_calibration_function} & $\mathbf{0.0026}$ & $\mathbf{0.036}$ \\
    \midrule
    KDE & fixed bandwidth & $\mathbf{0.0176}$ & $0.043$ \\
     & adaptive ($\alpha=0.25$) & $0.0185$ & $0.043$ \\
@@ -1052,8 +1053,6 @@ curves are shown in Figures~\ref{fig:calibration_curves1} and \ref{fig:calibrati
     & grad-adaptive ($\beta=1$) & $0.0101$ & $0.035$ \\
     & grad-adaptive ($\beta=2$) & $0.0207$ & $0.046$ \\
     & grad-adaptive ($\beta_{\text{num}} = 1.66$, $\beta_{\text{den}} = 1.13$) & $0.0109$ & $0.034$ \\
-   \midrule
-   Analytic & Equation~\eqref{eq:analytic_calibration_function} fit to histogram & $\mathbf{0.0026}$ & $\mathbf{0.036}$ \\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different calibration methods.
@@ -1065,7 +1064,7 @@ curves are shown in Figures~\ref{fig:calibration_curves1} and \ref{fig:calibrati
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/calibration/calibration_curves.pdf}%
   \caption{Calibration curves $r_{\text{calibrated}}(s_{\text{raw}})$ for different calibration
-    strategies. The analytic calibration function is defined in
+    strategies. The parametric approach is defined in
     Equation~\eqref{eq:analytic_calibration_function}.  Top:
     point-by-point regression. Bottom: point-by-point carl.}
   \label{fig:calibration_curves1}
@@ -1074,7 +1073,7 @@ curves are shown in Figures~\ref{fig:calibration_curves1} and \ref{fig:calibrati
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/calibration/calibration_s_curves.pdf}%
   \caption{Calibration curves $s_{\text{calibrated}}(s_{\text{raw}})$ for different calibration
-    strategies. The analytic calibration function is defined in
+    strategies. The parametric approach is defined in
     Equation~\eqref{eq:analytic_calibration_function}.  Top:
     point-by-point regression. Bottom: point-by-point carl.}
   \label{fig:calibration_curves2}
