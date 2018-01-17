@@ -269,12 +269,10 @@ randomly split into a main sample of $5.00 \cdot 10^6$ events for
 training and intermediate testing plus a smaller sample of
 $0.55 \cdot 10^6$ events for the final evaluation.
 
-In \autoref{fig:sample_weights} we show the distribution of the event
-weights in these two samples. The weights are not distributed evenly,
-with individual events in the training sample carrying an individual
-probability to be drawn of up to $10^{-3}$. This is, of course, far
-from ideal ideal, but unfortunately a consequence of using
-$\toolfont{MadMax}$.
+In these original samples, the weights are not are not always the same,
+with individual events in the training sample carrying an individual probability
+ to be drawn of up to $10^{-3}$. This is, of course, far from ideal ideal, but unfortunately
+a consequence of using $\toolfont{MadMax}$.
 
 
 
@@ -657,6 +655,7 @@ measure of the uncertainty of the estimators $\hat{r}(\boldx)$. There are differ
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \section{Results}
+\label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -932,7 +931,7 @@ different setups tested.
 
 We show the results of the parameterized baseline experiments in
 Figures~\ref{fig:baseline_r_histo} to
-\ref{fig:baseline_likelihood_ratio}. We find that
+\ref{fig:baseline_likelihood_ratio_contours}. We find that
 calibration is important, and that the combinatino of
 $\toolfont{carl}$ with score information works well. The tested
 diagnostic tool for uncertainties, unfortunately, does not seem to be
@@ -981,7 +980,7 @@ truth.
     different values of $\boldtheta_0$, taking the expectation value
     over $\boldx$. We show the baseline version of the different
     parameterized models.}
-  \label{fig:baseline_likelihood_ratio}
+  \label{fig:baseline_likelihood_ratio_scatter}
 \end{figure}
 
 \begin{figure}
@@ -992,7 +991,7 @@ truth.
     models. The shaded error bands show an estimate of the
     uncertainties following
     Equation~\eqref{eq:diagnostics1}.}
-  \label{fig:baseline_likelihood_ratio}
+  \label{fig:baseline_likelihood_ratio_contours}
 \end{figure}
 
 The plots shown are based on fully connected neural networks with
@@ -1008,7 +1007,7 @@ more shallow or deeper networks.
 
 In Table~\ref{tbl:calibration_strategies} we compare the performance
 of different calibration strategies. The corresponding calibration
-curves are shown in Figure~\ref{fig:calibration_curves}.
+curves are shown in Figures~\ref{fig:calibration_curves1} and \ref{fig:calibration_curves2}.
 
 \begin{table}
   \small
@@ -1065,11 +1064,20 @@ curves are shown in Figure~\ref{fig:calibration_curves}.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/calibration/calibration_curves.pdf}%
-  \caption{Calibration curbes for different calibration
+  \caption{Calibration curves $r_{\text{calibrated}}(s_{\text{raw}})$ for different calibration
     strategies. The analytic calibration function is defined in
     Equation~\eqref{eq:analytic_calibration_function}.  Top:
     point-by-point regression. Bottom: point-by-point carl.}
-  \label{fig:calibration_curves}
+  \label{fig:calibration_curves1}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/calibration/calibration_s_curves.pdf}%
+  \caption{Calibration curves $s_{\text{calibrated}}(s_{\text{raw}})$ for different calibration
+    strategies. The analytic calibration function is defined in
+    Equation~\eqref{eq:analytic_calibration_function}.  Top:
+    point-by-point regression. Bottom: point-by-point carl.}
+  \label{fig:calibration_curves2}
 \end{figure}
 
 

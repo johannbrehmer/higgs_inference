@@ -212,14 +212,13 @@ the random forest, we stick to the parameters in the right column of
 \end{figure}
 
 \autoref{fig:pointwise_tuning_2d_carl_tuning} shows the effect of the
-size of the training samples as well as the binning of
-\toolfont{carl}'s calibration histograms.  Regardless of the
-problematic distribution of weights in the input samples (see
-\autoref{fig:sample_weights}), the performance becomes much better
+size of the training samples as well as the binning of \toolfont{carl}'s
+calibration histograms.  Regardless of the problematic distribution of
+weights in the input samples, the performance becomes much better
 with larger training samples. We pick a size of 200\,000 events as a
 balance between computation time and performance. The calibration
-histograms should have at least 20 bins, and variable bin widths do
-not seem to work well at all.
+histograms should have at least 20 bins, and variable bin widths do not
+seem to work well at all.
 
 \begin{figure}
   \includegraphics[height=0.45\textwidth]{figures/appendix/pointwise_tuning_2d/mse_weighted_events.pdf}%
@@ -339,7 +338,7 @@ observables.
 In Figures~\ref{fig:pointwise_validation_2d_rf_performance} to
 \ref{fig:pointwise_validation_2d_overview} we show
 \toolfont{carl}'s estimation based on the final settings tuned in
-\autoref{sec:pointwise_tuning_2d}. How this performance depends on the
+the previous section. How this performance depends on the
 choice of hyperparameters is illustrated in
 \autoref{fig:pointwise_validation_2d_tuning}.
 
@@ -431,7 +430,7 @@ impressively well with the exact one.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \section{Detailed tuning of the point-by-point algorithms}
-\label{sec:pointwise}
+\label{sec:pointwise_tuning}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 One class of algorithms simplifies the inference problem by estimating
@@ -455,14 +454,12 @@ For two benchmark parameter points
 \begin{equation}
   \boldtheta_0 = \twovec{-0.2} {-0.2} \,, \quad
   \boldtheta_1 = \twovec{0.2} {0.2}
-  \label{eq:pointwise_tuning_benchmarks}
 \end{equation}
 %
 we first analyse how well \toolfont{carl} can estimate the likelihood ratio
 %
 \begin{equation}
   r(\boldx) = \frac {p(\boldx | \boldtheta_0)}  {p(\boldx | \boldtheta_1)}
-  \label{eq:pointwise_tuning_r}
 \end{equation}
 %
 depending on the classifier, its hyperparameters, and a number of
@@ -1498,7 +1495,7 @@ classifiers.
     based on $\boldtheta_0$ and $\boldtheta_1$ as defined in
     \autoref{eq:pointwise_tuning_benchmarks}. Left: calibrated
     classifiers (with random forests as described in
-    \autoref{sec:pointwise_tuning_full}). Right: regression (with a
+    \autoref{sec:pointwise_tuning}). Right: regression (with a
     neural network as described in
     \autoref{sec:pointwise_regression_tuning}.}
   \label{fig:pointwise_tuning_roc}
@@ -1506,11 +1503,11 @@ classifiers.
 
 In Figure~\ref{fig:pointwise_tuning_roc} we show some ROC curves
 corresponding to the classification problem of
-\autoref{sec:pointwise_tuning_full}. We compare the TPRs and FPRs of
+\autoref{sec:pointwise_tuning}. We compare the TPRs and FPRs of
 six different scores:
 %
 \begin{itemize}
-  \item the raw output $\hat{s}(\boldx)$ of one random forest, using the medium feature set as input and the tuned settings described in \autoref{sec:pointwise_tuning_full};
+  \item the raw output $\hat{s}(\boldx)$ of one random forest, using the medium feature set as input and the tuned settings described in \autoref{sec:pointwise_tuning};
   \item the same output, calibrated with the histogram method;
   \item the average of the outputs of five such calibrated random forests;
   \item the corresponding $\toolfont{carl}$ estimate $\hat{r}(\boldx)$;
