@@ -23,5 +23,5 @@ python -u experiments.py combined --aware
 
 
 # python -u experiments.py combined --aware --training basis -o shallow
-# python -u experiments.py combined --aware --training basis
+python -u experiments.py combined --aware --training basis
 # python -u experiments.py combined --aware --training basis -o deep

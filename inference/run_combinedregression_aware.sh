@@ -22,5 +22,5 @@ python -u experiments.py combinedregression --aware
 # python -u experiments.py combinedregression --aware -o deep
 
 # python -u experiments.py combinedregression --aware --training basis -o shallow
-# python -u experiments.py combinedregression --aware --training basis
+python -u experiments.py combinedregression --aware --training basis
 # python -u experiments.py combinedregression --aware --training basis -o deep

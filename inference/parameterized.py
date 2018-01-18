@@ -53,7 +53,7 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
     denom1_mode = ('denom1' in options)
     short_mode = ('short' in options)
     long_mode = ('long' in options)
-    large_alpha_mode = ('largealpha' in options)
+    large_alpha_mode = ('smallalpha' in options)
     deep_mode = ('deep' in options)
     shallow_mode = ('shallow' in options)
     debug_mode = ('debug' in options)
@@ -70,12 +70,12 @@ def parameterized_inference(algorithm='carl', #'carl', 'score', 'combined', 'reg
     if learn_logr_mode:
         filename_addition += '_learnlogr'
 
-    alpha_regression = 0.005
-    alpha_carl = 0.1
-    if large_alpha_mode:
-        alpha_regression = 0.008
-        alpha_carl = 0.2
-        filename_addition += '_largealpha'
+    alpha_regression = 0.011
+    alpha_carl = 0.35
+    if small_alpha_mode:
+        alpha_regression = 0.005
+        alpha_carl = 0.1
+        filename_addition += '_smallalpha'
     
     n_hidden_layers = 2
     n_hidden_layers_aware = 2
