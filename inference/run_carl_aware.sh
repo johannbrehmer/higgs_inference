@@ -22,5 +22,5 @@ python -u experiments.py carl --aware
 # python -u experiments.py carl --aware -o deep
 
 # python -u experiments.py carl --aware --training basis -o shallow
-# python -u experiments.py carl --aware --training basis
+python -u experiments.py carl --aware --training basis
 # python -u experiments.py carl --aware --training basis -o deep

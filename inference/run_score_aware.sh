@@ -23,5 +23,5 @@ python -u experiments.py score --aware
 
 
 # python -u experiments.py score --aware --training basis -o shallow
-# python -u experiments.py score --aware --training basis
+python -u experiments.py score --aware --training basis
 # python -u experiments.py score --aware --training basis -o deep
