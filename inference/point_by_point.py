@@ -4,6 +4,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+import logging
 import numpy as np
 
 from scipy.interpolate import LinearNDInterpolator
@@ -33,6 +34,8 @@ def point_by_point_inference(algorithm='carl',
     :param options: Further options in a list of strings or string.
     """
 
+    logging.info('Starting point-by-point inference')
+    
     assert algorithm in ['carl', 'regression']
 
     denom1_mode = ('denom1' in options)
@@ -81,13 +84,11 @@ def point_by_point_inference(algorithm='carl',
     unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
     results_dir = '../results/point_by_point'
 
-    print('')
-    print('Main settings:')
-    print('  Algorithm:                ', algorithm)
-    print('')
-    print('Options:')
-    print('  Number of epochs:         ', n_epochs)
-    print('  Number of hidden layers:  ', n_hidden_layers)
+    logging.info('Main settings:')
+    logging.info('  Algorithm:                %s', algorithm)
+    logging.info('Options:')
+    logging.info('  Number of epochs:         %s', n_epochs)
+    logging.info('  Number of hidden layers:  %s', n_hidden_layers)
 
 
 
@@ -122,11 +123,10 @@ def point_by_point_inference(algorithm='carl',
         llr = []
 
         # Loop over the 15 thetas
-        print('')
 
-        for t in training_thetas:
+        for i, t in enumerate(training_thetas):
 
-            print('Theta', t, thetas[t])
+            logging.info('Starting theta %s/%s: number %s (%s)', i+1, len(training_thetas), t, thetas[t])
 
             # Load data
             X_train = np.load(unweighted_events_dir + '/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
@@ -159,8 +159,7 @@ def point_by_point_inference(algorithm='carl',
 
         llr = np.asarray(llr)
 
-        print('')
-        print('Interpolation')
+        logging.info('Interpolation')
 
         interpolator = LinearNDInterpolator(thetas[training_thetas], llr)
         llr_all = interpolator(thetas)
@@ -182,11 +181,9 @@ def point_by_point_inference(algorithm='carl',
         llr_calibrated = []
 
         # Loop over the 15 thetas
-        print('')
+        for i,t in enumerate(training_thetas):
 
-        for t in training_thetas:
-
-            print('Theta', t, thetas[t])
+            logging.info('Starting theta %s/%s: number %s (%s)', i+1, len(training_thetas), t, thetas[t])
 
             # Load data
             X_train = np.load(unweighted_events_dir + '/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
@@ -264,8 +261,7 @@ def point_by_point_inference(algorithm='carl',
         llr = np.asarray(llr)
         llr_calibrated = np.asarray(llr_calibrated)
 
-        print('')
-        print('Interpolation')
+        logging.info('Starting interpolation')
 
         interpolator = LinearNDInterpolator(thetas[training_thetas], llr)
         llr_all = interpolator(thetas)
