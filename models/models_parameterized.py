@@ -1,6 +1,3 @@
-#! /usr/bin/env python
-
-
 ################################################################################
 # Imports
 ################################################################################
@@ -8,10 +5,10 @@
 import numpy as np
 
 from keras.models import Model
-from keras.layers import Input, Dense, Dropout, Lambda, Concatenate, Multiply, Reshape, ActivityRegularization, Activation
+from keras.layers import Input, Dense, Dropout, Lambda, Concatenate, Multiply, Reshape, ActivityRegularization, \
+    Activation
 from keras import losses, optimizers
 import keras.backend as K
-
 
 ################################################################################
 # Parameters
@@ -20,7 +17,6 @@ import keras.backend as K
 n_params = 2
 n_features = 42
 n_thetas_features = n_features + n_params
-
 
 
 ################################################################################
@@ -34,6 +30,7 @@ def stack_layer(layers):
         return x
 
     return f
+
 
 def hidden_layers(n,
                   hidden_layer_size=100,
@@ -52,7 +49,6 @@ def hidden_layers(n,
     return stack_layer(r)
 
 
-
 ################################################################################
 # Morphing
 ################################################################################
@@ -64,11 +60,12 @@ def hidden_layers(n,
 # n_samples = 15
 
 # Morphing
-sample_component = np.load('../data/morphing/components_fakebasis2.npy')[:,1:] # Ignore background component
+sample_component = np.load('../data/morphing/components_fakebasis2.npy')[:, 1:]  # Ignore background component
 component_sample = np.linalg.inv(sample_component)
 sigma_sample = np.load('../data/morphing/fakebasis2_xsecs.npy')
 sigma_component = component_sample.dot(sigma_sample)
 n_samples = 15
+
 
 def _generate_wtilde_layer(input_layer):
     wtilde_component_layers = [Lambda(lambda t: 1. + 0. * t[:, 0])(input_layer),
@@ -105,7 +102,6 @@ def _generate_wi_layer(wtilde_layer):
     return wi_layer
 
 
-
 ################################################################################
 # Loss functions
 ################################################################################
@@ -113,19 +109,21 @@ def _generate_wi_layer(wtilde_layer):
 def loss_function_carl(y_true, y_pred):
     return losses.binary_crossentropy(y_true[:, 0], y_pred[:, 0])
 
+
 def loss_function_regression(y_true, y_pred):
     return losses.mean_squared_error(y_true[:, 0], y_pred[:, 0])
 
+
 def loss_function_score(y_true, y_pred):
-    return losses.mean_squared_error(y_true[:, 1:n_params+1], y_pred[:, 1:n_params+1])
+    return losses.mean_squared_error(y_true[:, 1:n_params + 1], y_pred[:, 1:n_params + 1])
+
 
 def loss_function_combinedregression(y_true, y_pred, alpha=0.005):
     return loss_function_regression(y_true, y_pred) + alpha * loss_function_score(y_true, y_pred)
 
+
 def loss_function_combined(y_true, y_pred, alpha=0.1):
     return loss_function_carl(y_true, y_pred) + alpha * loss_function_score(y_true, y_pred)
-
-
 
 
 ################################################################################
@@ -136,7 +134,6 @@ def make_regressor(n_hidden_layers=3,
                    hidden_layer_size=100,
                    activation='tanh',
                    dropout_prob=0.0):
-
     # Inputs
     input_layer = Input(shape=(n_thetas_features,))
 
@@ -165,7 +162,6 @@ def make_regressor(n_hidden_layers=3,
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
-
 
 
 def make_regressor_morphingaware(n_hidden_layers=2,
@@ -220,7 +216,6 @@ def make_regressor_morphingaware(n_hidden_layers=2,
     return model
 
 
-
 ################################################################################
 # Regression + score
 ################################################################################
@@ -258,7 +253,6 @@ def make_combined_regressor(n_hidden_layers=3,
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
-
 
 
 def make_combined_regressor_morphingaware(n_hidden_layers=2,
@@ -314,16 +308,15 @@ def make_combined_regressor_morphingaware(n_hidden_layers=2,
     return model
 
 
-
 ################################################################################
 # carl
 ################################################################################
 
 def make_classifier_carl(n_hidden_layers=3,
-                                  hidden_layer_size=100,
-                                  activation='tanh',
-                                  dropout_prob=0.0,
-                                  learn_log_r=False):
+                         hidden_layer_size=100,
+                         activation='tanh',
+                         dropout_prob=0.0,
+                         learn_log_r=False):
     # Inputs
     input_layer = Input(shape=(n_thetas_features,))
 
@@ -339,7 +332,7 @@ def make_classifier_carl(n_hidden_layers=3,
     if learn_log_r:
         log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
         r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
-        s_hat_layer = Lambda(lambda x: 1./(1. + x))(r_hat_layer)
+        s_hat_layer = Lambda(lambda x: 1. / (1. + x))(r_hat_layer)
 
     else:
         s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
@@ -423,7 +416,6 @@ def make_classifier_carl_morphingaware(n_hidden_layers=2,
     return model
 
 
-
 ################################################################################
 # Score only
 ################################################################################
@@ -449,7 +441,7 @@ def make_classifier_score(n_hidden_layers=3,
     if learn_log_r:
         log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
         r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
-        s_hat_layer = Lambda(lambda x: 1./(1. + x))(r_hat_layer)
+        s_hat_layer = Lambda(lambda x: 1. / (1. + x))(r_hat_layer)
 
     else:
         s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
@@ -457,7 +449,7 @@ def make_classifier_score(n_hidden_layers=3,
         log_r_hat_layer = Lambda(lambda x: K.log(x))(r_hat_layer)
 
     # Score
-    regularizer_layer = ActivityRegularization(l1=0.,l2=l2_regularization)(log_r_hat_layer)
+    regularizer_layer = ActivityRegularization(l1=0., l2=l2_regularization)(log_r_hat_layer)
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0],
                             output_shape=(n_thetas_features,))([regularizer_layer, input_layer])
     score_layer = Lambda(lambda x: x[:, -n_params:], output_shape=(n_params,))(gradient_layer)
@@ -475,12 +467,12 @@ def make_classifier_score(n_hidden_layers=3,
 
 
 def make_classifier_score_morphingaware(n_hidden_layers=2,
-                                           hidden_layer_size=100,
-                                           activation='tanh',
-                                           dropout_prob=0.0,
-                                           l2_regularization=0.001,
-                                           learn_log_r=False,
-                                           epsilon=1.e-4):
+                                        hidden_layer_size=100,
+                                        activation='tanh',
+                                        dropout_prob=0.0,
+                                        l2_regularization=0.001,
+                                        learn_log_r=False,
+                                        epsilon=1.e-4):
     # Inputs
     input_layer = Input(shape=(n_thetas_features,))
     x_layer = Lambda(lambda x: x[:, :n_features], output_shape=(n_features,))(input_layer)
@@ -518,7 +510,7 @@ def make_classifier_score_morphingaware(n_hidden_layers=2,
 
     # Score
     log_r_hat_layer = Lambda(lambda x: K.log(x + epsilon))(positive_r_hat_layer)
-    regularizer_layer = ActivityRegularization(l1=0.,l2=l2_regularization)(log_r_hat_layer)
+    regularizer_layer = ActivityRegularization(l1=0., l2=l2_regularization)(log_r_hat_layer)
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0], output_shape=(n_thetas_features,))(
         [regularizer_layer, input_layer])
     score_layer = Lambda(lambda x: x[:, -n_params:], output_shape=(n_params,))(gradient_layer)
@@ -534,7 +526,6 @@ def make_classifier_score_morphingaware(n_hidden_layers=2,
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
-
 
 
 ################################################################################
@@ -562,7 +553,7 @@ def make_classifier_combined(n_hidden_layers=3,
     if learn_log_r:
         log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
         r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
-        s_hat_layer = Lambda(lambda x: 1./(1. + x))(r_hat_layer)
+        s_hat_layer = Lambda(lambda x: 1. / (1. + x))(r_hat_layer)
 
     else:
         s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)

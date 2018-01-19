@@ -16,8 +16,7 @@ from keras.callbacks import EarlyStopping
 from carl.ratios import ClassifierScoreRatio
 from carl.learning import CalibratedClassifierScoreCV
 
-from models_point_by_point import make_classifier, make_regressor
-
+from ..models.models_point_by_point import make_classifier, make_regressor
 
 
 ################################################################################
@@ -26,7 +25,6 @@ from models_point_by_point import make_classifier, make_regressor
 
 def point_by_point_inference(algorithm='carl',
                              options=''):
-
     """
     Trains and evaluates one of the point-by-point inference methods.
 
@@ -35,12 +33,12 @@ def point_by_point_inference(algorithm='carl',
     """
 
     logging.info('Starting point-by-point inference')
-    
+
     assert algorithm in ['carl', 'regression']
 
     denom1_mode = ('denom1' in options)
     debug_mode = ('debug' in options)
-    learn_logr_mode = (not 'learns' in options)
+    learn_logr_mode = ('learns' not in options)
     short_mode = ('short' in options)
     long_mode = ('long' in options)
     deep_mode = ('deep' in options)
@@ -90,8 +88,6 @@ def point_by_point_inference(algorithm='carl',
     logging.info('  Number of epochs:         %s', n_epochs)
     logging.info('  Number of hidden layers:  %s', n_hidden_layers)
 
-
-
     ################################################################################
     # Data
     ################################################################################
@@ -100,7 +96,11 @@ def point_by_point_inference(algorithm='carl',
     n_thetas = len(thetas)
     theta_benchmark_trained = 422
     theta_benchmark_nottrained = 9
-    training_thetas = [0, 13, 14, 15, 16, 9, 422, 956, 666, 802, 675, 839, 699, 820, 203, 291, 634, 371, 973, 742, 901, 181, 82, 937, 510, 919, 745, 588, 804, 963, 396, 62, 401, 925, 874, 770, 108, 179, 669, 758, 113, 587, 600, 975, 496, 66, 467, 412, 701, 986, 598, 810, 97, 18, 723, 159, 320, 301, 352, 159, 89, 421, 574, 923, 849, 299, 119, 167, 939, 402, 52, 787, 978, 41, 873, 533, 827, 304, 294, 760, 890, 539, 1000, 291, 740, 276, 679, 167, 125, 429, 149, 430, 720, 123, 908, 256, 777, 809, 269, 851]
+    training_thetas = [0, 13, 14, 15, 16, 9, 422, 956, 666, 802, 675, 839, 699, 820, 203, 291, 634, 371, 973, 742, 901,
+                       181, 82, 937, 510, 919, 745, 588, 804, 963, 396, 62, 401, 925, 874, 770, 108, 179, 669, 758, 113,
+                       587, 600, 975, 496, 66, 467, 412, 701, 986, 598, 810, 97, 18, 723, 159, 320, 301, 352, 159, 89,
+                       421, 574, 923, 849, 299, 119, 167, 939, 402, 52, 787, 978, 41, 873, 533, 827, 304, 294, 760, 890,
+                       539, 1000, 291, 740, 276, 679, 167, 125, 429, 149, 430, 720, 123, 908, 256, 777, 809, 269, 851]
 
     X_calibration = np.load(unweighted_events_dir + '/X_calibration' + input_filename_addition + '.npy')
     weights_calibration = np.load(
@@ -109,10 +109,9 @@ def point_by_point_inference(algorithm='carl',
     X_test = np.load(unweighted_events_dir + '/X_test' + input_filename_addition + '.npy')
     r_test = np.load(unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
 
-    n_observed = X_test.shape[0]
+    n_expected_events = 36
+    n_events_test = X_test.shape[0]
     assert n_thetas == r_test.shape[0]
-
-
 
     ################################################################################
     # Regression approaches
@@ -120,17 +119,19 @@ def point_by_point_inference(algorithm='carl',
 
     if algorithm == 'regression':
 
-        llr = []
+        expected_llr = []
 
         # Loop over the 15 thetas
 
         for i, t in enumerate(training_thetas):
 
-            logging.info('Starting theta %s/%s: number %s (%s)', i+1, len(training_thetas), t, thetas[t])
+            logging.info('Starting theta %s/%s: number %s (%s)', i + 1, len(training_thetas), t, thetas[t])
 
             # Load data
-            X_train = np.load(unweighted_events_dir + '/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
-            r_train = np.load(unweighted_events_dir + '/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            X_train = np.load(
+                unweighted_events_dir + '/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            r_train = np.load(
+                unweighted_events_dir + '/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
 
             # Scale data
             scaler = StandardScaler()
@@ -150,26 +151,24 @@ def point_by_point_inference(algorithm='carl',
             prediction = regr.predict(X_test_transformed)
             this_r = np.exp(prediction[:])
 
-            llr.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
+            expected_llr.append(- 2. * n_expected_events / n_events_test * np.sum(np.log(this_r)))
 
             if t == theta_benchmark_nottrained:
                 np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
             elif t == theta_benchmark_trained:
                 np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
 
-        llr = np.asarray(llr)
+        expected_llr = np.asarray(expected_llr)
 
         logging.info('Interpolation')
 
-        interpolator = LinearNDInterpolator(thetas[training_thetas], llr)
-        llr_all = interpolator(thetas)
-        #gp = GaussianProcessRegressor(normalize_y=True,
+        interpolator = LinearNDInterpolator(thetas[training_thetas], expected_llr)
+        expected_llr_all = interpolator(thetas)
+        # gp = GaussianProcessRegressor(normalize_y=True,
         #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
-        #gp.fit(thetas[training_thetas], llr)
-        #llr_all = gp.predict(thetas)
-        np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', llr_all)
-
-
+        # gp.fit(thetas[training_thetas], expected_llr)
+        # expected_llr_all = gp.predict(thetas)
+        np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', expected_llr_all)
 
     ################################################################################
     # Carl approaches
@@ -177,17 +176,19 @@ def point_by_point_inference(algorithm='carl',
 
     else:
 
-        llr = []
-        llr_calibrated = []
+        expected_llr = []
+        expected_llr_calibrated = []
 
         # Loop over the 15 thetas
-        for i,t in enumerate(training_thetas):
+        for i, t in enumerate(training_thetas):
 
-            logging.info('Starting theta %s/%s: number %s (%s)', i+1, len(training_thetas), t, thetas[t])
+            logging.info('Starting theta %s/%s: number %s (%s)', i + 1, len(training_thetas), t, thetas[t])
 
             # Load data
-            X_train = np.load(unweighted_events_dir + '/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
-            y_train = np.load(unweighted_events_dir + '/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            X_train = np.load(
+                unweighted_events_dir + '/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            y_train = np.load(
+                unweighted_events_dir + '/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
 
             # Scale data
             scaler = StandardScaler()
@@ -197,12 +198,12 @@ def point_by_point_inference(algorithm='carl',
             X_calibration_transformed = scaler.transform(X_calibration)
 
             clf = KerasRegressor(lambda: make_classifier(n_hidden_layers=n_hidden_layers, learn_log_r=learn_logr_mode),
-                                  epochs=n_epochs, validation_split=0.142857,
-                                  verbose=2)
+                                 epochs=n_epochs, validation_split=0.142857,
+                                 verbose=2)
 
             # Training
             clf.fit(X_train_transformed, y_train,
-                     callbacks=([EarlyStopping(verbose=1, patience=3)] if early_stopping else None))
+                    callbacks=([EarlyStopping(verbose=1, patience=3)] if early_stopping else None))
 
             # carl wrapper
             ratio = ClassifierScoreRatio(clf, prefit=True)
@@ -210,7 +211,7 @@ def point_by_point_inference(algorithm='carl',
             # Evaluation
             this_r, _ = ratio.predict(X_test_transformed)
 
-            llr.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
+            expected_llr.append(- 2. * n_expected_events / n_events_test * np.sum(np.log(this_r)))
 
             if t == theta_benchmark_nottrained:
                 np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
@@ -229,53 +230,56 @@ def point_by_point_inference(algorithm='carl',
             w_calibration[n_calibration_each:] = weights_calibration[theta1]
 
             ratio_calibrated = ClassifierScoreRatio(
-                #CalibratedClassifierScoreCV(clf, cv='prefit', bins=100, independent_binning=False)
+                # CalibratedClassifierScoreCV(clf, cv='prefit', bins=100, independent_binning=False)
                 CalibratedClassifierScoreCV(clf, cv='prefit', method='isotonic')
             )
             ratio_calibrated.fit(X_calibration_both, y_calibration, sample_weight=w_calibration)
 
             # Evaluation of calibrated classifier
             this_r, _ = ratio_calibrated.predict(X_test_transformed)
-            llr_calibrated.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
+            expected_llr_calibrated.append(- 2. * n_expected_events / n_events_test * np.sum(np.log(this_r)))
 
             if t == theta_benchmark_nottrained:
                 np.save(results_dir + '/r_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
 
                 # Save calibration histograms
-                np.save(results_dir + '/calvalues_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
-                #np.save(results_dir + '/cal0histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
-                #np.save(results_dir + '/cal0edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
-                #np.save(results_dir + '/cal1histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
-                #np.save(results_dir + '/cal1edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
-                
+                np.save(results_dir + '/calvalues_nottrained_' + algorithm + filename_addition + '.npy',
+                        ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
+                # np.save(results_dir + '/cal0histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
+                # np.save(results_dir + '/cal0edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
+                # np.save(results_dir + '/cal1histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
+                # np.save(results_dir + '/cal1edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
+
             elif t == theta_benchmark_trained:
                 np.save(results_dir + '/r_trained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
 
                 # Save calibration histograms
-                np.save(results_dir + '/calvalues_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
-                #np.save(results_dir + '/cal0histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
-                #np.save(results_dir + '/cal0edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
-                #np.save(results_dir + '/cal1histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
-                #np.save(results_dir + '/cal1edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
-                
-        llr = np.asarray(llr)
-        llr_calibrated = np.asarray(llr_calibrated)
+                np.save(results_dir + '/calvalues_trained_' + algorithm + filename_addition + '.npy',
+                        ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
+                # np.save(results_dir + '/cal0histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
+                # np.save(results_dir + '/cal0edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
+                # np.save(results_dir + '/cal1histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
+                # np.save(results_dir + '/cal1edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
+
+        expected_llr = np.asarray(expected_llr)
+        expected_llr_calibrated = np.asarray(expected_llr_calibrated)
 
         logging.info('Starting interpolation')
 
-        interpolator = LinearNDInterpolator(thetas[training_thetas], llr)
-        llr_all = interpolator(thetas)
-        #gp = GaussianProcessRegressor(normalize_y=True,
+        interpolator = LinearNDInterpolator(thetas[training_thetas], expected_llr)
+        expected_llr_all = interpolator(thetas)
+        # gp = GaussianProcessRegressor(normalize_y=True,
         #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
-        #gp.fit(thetas[training_thetas], llr)
-        #llr_all = gp.predict(thetas)
+        # gp.fit(thetas[training_thetas], expected_llr)
+        # expected_llr_all = gp.predict(thetas)
 
-        np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', llr_all)
+        np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', expected_llr_all)
 
-        interpolator = LinearNDInterpolator(thetas[training_thetas], llr_calibrated)
-        llr_calibrated_all = interpolator(thetas)
-        #gp = GaussianProcessRegressor(normalize_y=True,
+        interpolator = LinearNDInterpolator(thetas[training_thetas], expected_llr_calibrated)
+        expected_llr_calibrated_all = interpolator(thetas)
+        # gp = GaussianProcessRegressor(normalize_y=True,
         #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
-        #gp.fit(thetas[training_thetas], llr_calibrated)
-        #llr_calibrated_all = gp.predict(thetas)
-        np.save(results_dir + '/llr_' + algorithm + '_calibrated' + filename_addition + '.npy', llr_calibrated_all)
+        # gp.fit(thetas[training_thetas], expected_llr_calibrated)
+        # expected_llr_calibrated_all = gp.predict(thetas)
+        np.save(results_dir + '/expected_llr_' + algorithm + '_calibrated' + filename_addition + '.npy',
+                expected_llr_calibrated_all)

@@ -17,7 +17,7 @@ from keras.callbacks import EarlyStopping
 from carl.ratios import ClassifierScoreRatio
 from carl.learning import CalibratedClassifierScoreCV
 
-from models_score_regression import make_regressor
+from ..models.models_score_regression import make_regressor
 
 
 ################################################################################
@@ -92,25 +92,10 @@ def score_regression_inference(options=''):
     n_thetas = len(thetas)
     theta_benchmark_trained = 422
     theta_benchmark_nottrained = 9
+    theta_score = 0
 
-    if random_theta_mode:
-        X_train = np.load(unweighted_events_dir + '/X_train_random' + input_filename_addition + '.npy')
-        y_train = np.load(unweighted_events_dir + '/y_train_random' + input_filename_addition + '.npy')
-        scores_train = np.load(unweighted_events_dir + '/scores_train_random' + input_filename_addition + '.npy')
-        r_train = np.load(unweighted_events_dir + '/r_train_random' + input_filename_addition + '.npy')
-        theta0_train = np.load(unweighted_events_dir + '/theta0_train_random' + input_filename_addition + '.npy')
-    elif basis_theta_mode:
-        X_train = np.load(unweighted_events_dir + '/X_train_basis' + input_filename_addition + '.npy')
-        y_train = np.load(unweighted_events_dir + '/y_train_basis' + input_filename_addition + '.npy')
-        scores_train = np.load(unweighted_events_dir + '/scores_train_basis' + input_filename_addition + '.npy')
-        r_train = np.load(unweighted_events_dir + '/r_train_basis' + input_filename_addition + '.npy')
-        theta0_train = np.load(unweighted_events_dir + '/theta0_train_basis' + input_filename_addition + '.npy')
-    else:
-        X_train = np.load(unweighted_events_dir + '/X_train' + input_filename_addition + '.npy')
-        y_train = np.load(unweighted_events_dir + '/y_train' + input_filename_addition + '.npy')
-        scores_train = np.load(unweighted_events_dir + '/scores_train' + input_filename_addition + '.npy')
-        r_train = np.load(unweighted_events_dir + '/r_train' + input_filename_addition + '.npy')
-        theta0_train = np.load(unweighted_events_dir + '/theta0_train' + input_filename_addition + '.npy')
+    X_train = np.load(unweighted_events_dir + '/X_train_scoreregression' + input_filename_addition + '.npy')=
+    scores_train = np.load(unweighted_events_dir + '/scores_train_scoreregression' + input_filename_addition + '.npy')
 
     X_calibration = np.load(unweighted_events_dir + '/X_calibration' + input_filename_addition + '.npy')
     weights_calibration = np.load(unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
@@ -119,11 +104,8 @@ def score_regression_inference(options=''):
     # scores_test = np.load(unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
     r_test = np.load(unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
 
-    X_roam = np.load(unweighted_events_dir + '/X_roam' + input_filename_addition + '.npy')
-    # r_roam = np.load(unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
-    n_roaming = len(X_roam)
-
-    n_observed = X_test.shape[0]
+    n_expected_events = 36
+    n_events_test = X_test.shape[0]
     assert n_thetas == r_test.shape[0]
     n_pseudoexperiments_series = 5
     n_pseudoexperiments_events = [10, 30, 100, 300, 1000]
@@ -158,7 +140,7 @@ def score_regression_inference(options=''):
         X_test_transformed = X_test[::100]
         X_calibration_transformed = X_calibration_transformed[::100]
         weights_calibration = weights_calibration[:, ::100]
-        n_observed = len(X_test_transformed)
+        n_events_test = len(X_test_transformed)
         n_pseudoexperiments_repetitions = 10
 
     ################################################################################
@@ -194,7 +176,7 @@ def score_regression_inference(options=''):
                  callbacks=([EarlyStopping(verbose=1, patience=3)] if early_stopping else None))
 
         logging.info('Starting evaluation')
-        llr = []
+        expected_llr = []
         for t, theta in enumerate(thetas):
             thetas0_array = np.zeros((X_test_transformed.shape[0], 2), dtype=X_test_transformed.dtype)
             thetas0_array[:, :] = thetas[t]
@@ -208,7 +190,7 @@ def score_regression_inference(options=''):
                 this_ri = prediction[:, 18:]
                 logging.debug('Morphing weights for theta %s (%s): $s', t, theta, this_wi[0])
 
-            llr.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
+            expected_llr.append(- 2. * n_expected_events / n_events_test * np.sum(np.log(this_r)))
 
             if t == theta_benchmark_nottrained:
                 np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
@@ -224,8 +206,8 @@ def score_regression_inference(options=''):
                     np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_ri)
                     np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_wi)
 
-        llr = np.asarray(llr)
-        np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', llr)
+        expected_llr = np.asarray(expected_llr)
+        np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', expected_llr)
 
         logging.info('Starting roaming')
         r_roam = []
@@ -239,14 +221,14 @@ def score_regression_inference(options=''):
         # pseudoexperiments = np.zeros((n_thetas, n_pseudoexperiments_series, n_pseudoexperiments_repetitions))
         # for i, n in enumerate(n_pseudoexperiments_events):
         #     for j in range(n_pseudoexperiments_repetitions):
-        #         indices = np.random.choice(list(range(n_observed)), n)
+        #         indices = np.random.choice(list(range(n_events_test)), n)
         #         for t, theta in enumerate(thetas):
         #             thetas0_array = np.zeros((n, 2), dtype=X_test_transformed.dtype)
         #             thetas0_array[:, :] = thetas[t]
         #             X_thetas_test = np.hstack((X_test_transformed[indices], thetas0_array))
         #             prediction = regr.predict(X_thetas_test)
         #             this_r = np.exp(prediction[:, 0])
-        #             pseudoexperiments[t, i, j] = (- 19.2 / float(n) * np.sum(np.log(this_r)))
+        #             pseudoexperiments[t, i, j] = (- n_expected_events / float(n) * np.sum(np.log(this_r)))
         #
         # pseudoexperiments_variance = np.zeros((n_thetas, n_pseudoexperiments_series))
         # for t in range(n_thetas):
@@ -311,7 +293,7 @@ def score_regression_inference(options=''):
 
         logging.info('Starting evaluation')
         ratio = ClassifierScoreRatio(clf, prefit=True)
-        llr = []
+        expected_llr = []
         for t, theta in enumerate(thetas):
             thetas0_array = np.zeros((X_test_transformed.shape[0], 2), dtype=X_test_transformed.dtype)
             thetas0_array[:, :] = thetas[t]
@@ -324,7 +306,7 @@ def score_regression_inference(options=''):
                 this_ri = this_other[:, 17:]
                 logging.debug('Morphing weights for theta %s (%s): $s', t, theta, this_wi[0])
 
-            llr.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
+            expected_llr.append(- 2. * n_expected_events / n_events_test * np.sum(np.log(this_r)))
 
             if t == theta_benchmark_nottrained:
                 np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
@@ -340,8 +322,8 @@ def score_regression_inference(options=''):
                     np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_ri)
                     np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_wi)
 
-        llr = np.asarray(llr)
-        np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', llr)
+        expected_llr = np.asarray(expected_llr)
+        np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', expected_llr)
 
         logging.info('Starting roaming')
         r_roam = []
@@ -356,7 +338,7 @@ def score_regression_inference(options=''):
         # pseudoexperiments = np.zeros((n_thetas, n_pseudoexperiments_series, n_pseudoexperiments_repetitions))
         # for i, n in enumerate(n_pseudoexperiments_events):
         #     for j in range(n_pseudoexperiments_repetitions):
-        #         indices = np.random.choice(list(range(n_observed)), n)
+        #         indices = np.random.choice(list(range(n_events_test)), n)
         #         for t, theta in enumerate(thetas):
         #             thetas0_array = np.zeros((n, 2), dtype=X_test_transformed.dtype)
         #             thetas0_array[:, :] = thetas[t]
@@ -364,7 +346,7 @@ def score_regression_inference(options=''):
         #
         #             this_r, _ = ratio.predict(X_thetas_test)
         #
-        #             pseudoexperiments[t,i,j] = (- 19.2 / float(n) * np.sum(np.log(this_r)))
+        #             pseudoexperiments[t,i,j] = (- n_expected_events / float(n) * np.sum(np.log(this_r)))
         # pseudoexperiments_variance = np.zeros((n_thetas, n_pseudoexperiments_series))
         # for t in range(n_thetas):
         #     for i in range(n_pseudoexperiments_series):
@@ -373,12 +355,12 @@ def score_regression_inference(options=''):
         #         pseudoexperiments_variance)
 
         logging.info('Starting calibrated evaluation:')
-        llr_calibrated = []
+        expected_llr_calibrated = []
         r_roam_temp = np.zeros((n_thetas, n_roaming))
         pseudoexperiments_calibrated = np.zeros((n_thetas, n_pseudoexperiments_series, n_pseudoexperiments_repetitions))
         # Pick indices for pseudo-experiments
         indices = [
-            [np.random.choice(list(range(n_observed)), n) for j in range(n_pseudoexperiments_repetitions)]
+            [np.random.choice(list(range(n_events_test)), n) for j in range(n_pseudoexperiments_repetitions)]
             for i, n in enumerate(n_pseudoexperiments_events)
         ]
 
@@ -409,7 +391,7 @@ def score_regression_inference(options=''):
             this_r, this_other = ratio_calibrated.predict(X_thetas_test)
             this_score = this_other[:, :2]
 
-            llr_calibrated.append(- 19.2 / float(n_observed) * np.sum(np.log(this_r)))
+            expected_llr_calibrated.append(- 2. * n_expected_events / n_events_test * np.sum(np.log(this_r)))
 
             if t == theta_benchmark_nottrained:
                 np.save(results_dir + '/scores_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy',
@@ -446,10 +428,10 @@ def score_regression_inference(options=''):
             #     for j in range(n_pseudoexperiments_repetitions):
             #         X_thetas_pseudoexp_test = np.hstack((X_test_transformed[indices[i][j]], thetas0_array))
             #         this_r, _ = ratio.predict(X_thetas_pseudoexp_test)
-            #         pseudoexperiments_calibrated[t, i, j] = (- 19.2 / float(n) * np.sum(np.log(this_r)))
+            #         pseudoexperiments_calibrated[t, i, j] = (- n_expected_events / float(n) * np.sum(np.log(this_r)))
 
-        llr_calibrated = np.asarray(llr_calibrated)
-        np.save(results_dir + '/llr_' + algorithm + '_calibrated' + filename_addition + '.npy', llr_calibrated)
+        expected_llr_calibrated = np.asarray(expected_llr_calibrated)
+        np.save(results_dir + '/llr_' + algorithm + '_calibrated' + filename_addition + '.npy', expected_llr_calibrated)
 
         # logging.info('Evaluating calibrated pseudo-experiments')
         # pseudoexperiments_variance_calibrated = np.zeros((n_thetas, n_pseudoexperiments_series))
