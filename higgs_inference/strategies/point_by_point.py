@@ -16,7 +16,7 @@ from keras.callbacks import EarlyStopping
 from carl.ratios import ClassifierScoreRatio
 from carl.learning import CalibratedClassifierScoreCV
 
-from ..models.models_point_by_point import make_classifier, make_regressor
+from higgs_inference.models.models_point_by_point import make_classifier, make_regressor
 
 
 ################################################################################
@@ -26,13 +26,13 @@ from ..models.models_point_by_point import make_classifier, make_regressor
 def point_by_point_inference(algorithm='carl',
                              options=''):
     """
-    Trains and evaluates one of the point-by-point inference methods.
+    Trains and evaluates one of the point-by-point higgs_inference methods.
 
     :param algorithm: Type of the algorithm used. Currently supported: 'carl' and 'regression'.
     :param options: Further options in a list of strings or string.
     """
 
-    logging.info('Starting point-by-point inference')
+    logging.info('Starting point-by-point higgs_inference')
 
     assert algorithm in ['carl', 'regression']
 

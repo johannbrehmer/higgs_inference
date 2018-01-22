@@ -7,7 +7,7 @@ from keras.layers import Input, Dense, Lambda
 from keras import losses, optimizers
 import keras.backend as K
 
-from ..various.utils import build_hidden_layers
+from higgs_inference.various.utils import build_hidden_layers
 
 ################################################################################
 # Parameters

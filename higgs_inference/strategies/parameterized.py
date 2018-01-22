@@ -17,11 +17,11 @@ from keras.callbacks import EarlyStopping
 from carl.ratios import ClassifierScoreRatio
 from carl.learning import CalibratedClassifierScoreCV
 
-from inference.models.models_parameterized import make_classifier_carl, make_classifier_carl_morphingaware
-from inference.models.models_parameterized import make_classifier_score, make_classifier_score_morphingaware
-from inference.models.models_parameterized import make_classifier_combined, make_classifier_combined_morphingaware
-from inference.models.models_parameterized import make_regressor, make_regressor_morphingaware
-from inference.models.models_parameterized import make_combined_regressor, make_combined_regressor_morphingaware
+from higgs_inference.models.models_parameterized import make_classifier_carl, make_classifier_carl_morphingaware
+from higgs_inference.models.models_parameterized import make_classifier_score, make_classifier_score_morphingaware
+from higgs_inference.models.models_parameterized import make_classifier_combined, make_classifier_combined_morphingaware
+from higgs_inference.models.models_parameterized import make_regressor, make_regressor_morphingaware
+from higgs_inference.models.models_parameterized import make_combined_regressor, make_combined_regressor_morphingaware
 
 
 ################################################################################
@@ -34,7 +34,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                             options=''):  # all other options in a string
 
     """
-    Trains and evaluates one of the parameterized inference methods.
+    Trains and evaluates one of the parameterized higgs_inference methods.
 
     :param algorithm: Type of the algorithm used. Currently supported: 'carl', 'score', 'combined', 'regression', and
     'combinedregression'.
@@ -43,7 +43,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     :param options: Further options in a list of strings or string.
     """
 
-    logging.info('Starting parameterized inference')
+    logging.info('Starting parameterized higgs_inference')
 
     assert algorithm in ['carl', 'score', 'combined', 'regression', 'combinedregression']
     assert training_sample in ['baseline', 'basis', 'random']

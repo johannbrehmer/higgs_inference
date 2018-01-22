@@ -4,11 +4,14 @@ from __future__ import absolute_import, division, print_function
 
 import argparse
 import logging
+from os import sys, path
 
-from .strategies.truth import truth_inference
-from .strategies.parameterized import parameterized_inference
-from .strategies.point_by_point import point_by_point_inference
-from .strategies.score_regression import score_regression_inference
+sys.path.append(path.abspath(path.join(path.dirname(__file__), '..')))
+
+from higgs_inference.strategies.truth import truth_inference
+from higgs_inference.strategies.parameterized import parameterized_inference
+from higgs_inference.strategies.point_by_point import point_by_point_inference
+from higgs_inference.strategies.score_regression import score_regression_inference
 
 # Set up logging
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG, datefmt='%d.%m.%Y %H:%M:%S')
