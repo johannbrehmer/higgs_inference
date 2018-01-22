@@ -671,7 +671,7 @@ different setups tested.
 
 \begin{table}
   \small
-  \begin{tabular}{ll rr rr}
+  \begin{tabular}{ll rr rr rr}
     \toprule
     Algorithm & Setup & \multicolumn{2}{c}{$\MSE_\boldx \left[ \log  r(\boldx; \boldtheta_0, \boldtheta_1) \right]$}
     & \multicolumn{2}{c}{$\MSE_\boldtheta \left[ E[\log r(\boldx;
@@ -680,39 +680,39 @@ different setups tested.
     && $\boldtheta_0 = \boldtheta_{T}$ & $\boldtheta_0 = \boldtheta_{NT}$
       & $\boldtheta_{\text{den}} = \boldtheta_1$ & $\boldtheta_{\text{den}} = \hat{\boldtheta}_{\text{MLE}}$ \\
     \midrule
-   PbP carl (raw) & PbP (1) & $0.206$ & $0.229$ & $50.54$ & $5.98$\\
-    & PbP (2) & $0.177$ & $0.203$ & $48.99$ & $4.75$\\
-    & PbP (3) & $0.201$ & $0.272$ & $49.31$ & $5.97$\\
-    & PbP learning $\log r(\boldx)$ (1) & $0.189$ & $0.193$ & $49.15$ & $\mathbf{4.14}$\\
-    & PbP learning $\log r(\boldx)$ (2) & $0.269$ & $0.196$ & $48.51$ & $4.59$\\
-    & PbP learning $\log r(\boldx)$ (3) & $\mathbf{0.114}$ & $\mathbf{0.157}$ & $\mathbf{47.81}$ & $4.80$\\
+   PbP carl (raw) & PbP (1) &  &  &  &  &  & \\
+    & PbP (2) & $\mathbf{0.149}$ & $\mathbf{0.141}$ & $\mathbf{46.41}$ & $\mathbf{10.16}$ & $\mathbf{1.07}$ & $\mathbf{1.07}$\\
+    & PbP (3) &  &  &  &  &  & \\
    \midrule
-   PbP carl (cal.) & PbP (1) & $0.094$ & $0.121$ & $3.91$ & $\mathbf{3.82}$\\
-    & PbP (2) & $0.139$ & $0.239$ & $3.91$ & $3.87$\\
-    & PbP (3) & $0.099$ & $0.132$ & $3.95$ & $3.90$\\
-    & PbP learning $\log r(\boldx)$ (1) & $0.097$ & $0.194$ & $3.93$ & $3.91$\\
-    & PbP learning $\log r(\boldx)$ (2) & $\mathbf{0.087}$ & $0.155$ & $\mathbf{3.88}$ & $3.85$\\
-    & PbP learning $\log r(\boldx)$ (3) & $0.113$ & $\mathbf{0.100}$ & $3.95$ & $4.36$\\
+   PbP carl (cal.) & PbP (1) &  &  &  &  &  & \\
+    & PbP (2) & $\mathbf{0.029}$ & $\mathbf{0.035}$ & $\mathbf{0.12}$ & $\mathbf{0.12}$ & $\mathbf{0.12}$ & $\mathbf{0.12}$\\
+    & PbP (3) &  &  &  &  &  & \\
    \midrule
-   Param carl (raw) & Baseline (1) & $0.040$ & $0.074$ & $2.78$ & $0.72$\\
-    & Baseline (2) & $0.083$ & $0.116$ & $29.68$ & $5.49$\\
-    & Baseline (3) & $0.037$ & $\mathbf{0.051}$ & $4.80$ & $2.64$\\
-    & Random $\boldtheta$ (1) & $0.047$ & $0.066$ & $1.41$ & $1.53$\\
-    & Random $\boldtheta$ (2) & $\mathbf{0.037}$ & $0.054$ & $0.85$ & $0.70$\\
-    & Random $\boldtheta$ (3) & $0.040$ & $0.055$ & $\mathbf{0.26}$ & $\mathbf{0.20}$\\
-    & Physics-aware (1) &  &  &  & \\
-    & Physics-aware (2) &  &  &  & \\
-    & Physics-aware (3) &  &  &  & \\
+   Param carl (raw) & Baseline (1) &  &  &  &  &  & \\
+    & Baseline (2) & $0.046$ & $\mathbf{0.052}$ & $6.06$ & $0.94$ & $0.82$ & $0.82$\\
+    & Baseline (3) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (1) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (2) & $\mathbf{0.040}$ & $0.053$ & $\mathbf{1.40}$ & $\mathbf{0.67}$ & $\mathbf{0.36}$ & $\mathbf{0.36}$\\
+    & Random $\boldtheta$ (3) &  &  &  &  &  & \\
+    & Physics-aware, baseline (1) &  &  &  &  &  & \\
+    & Physics-aware, baseline (2) & $0.265$ & ($0.449$) & ($81.26$) & ($100.00$) &  & \\
+    & Physics-aware, baseline (3) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (1) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (2) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (3) &  &  &  &  &  & \\
    \midrule
-   Param carl (cal.) & Baseline (1) & $0.033$ & $0.050$ & $0.24$ & $0.41$\\
-    & Baseline (2) & $\mathbf{0.027}$ & $\mathbf{0.038}$ & $0.10$ & $0.09$\\
-    & Baseline (3) & $0.047$ & $0.062$ & $0.58$ & $0.61$\\
-    & Random $\boldtheta$ (1) & $0.034$ & $0.048$ & $0.09$ & $0.30$\\
-    & Random $\boldtheta$ (2) & $0.041$ & $0.055$ & $\mathbf{0.03}$ & $\mathbf{0.04}$\\
-    & Random $\boldtheta$ (3) & $0.046$ & $0.064$ & $0.64$ & $0.50$\\
-    & Physics-aware (1) &  &  &  & \\
-    & Physics-aware (2) &  &  &  & \\
-    & Physics-aware (3) &  &  &  & \\
+   Param carl (cal.) & Baseline (1) &  &  &  &  &  & \\
+    & Baseline (2) & $0.028$ & $\mathbf{0.036}$ & $0.10$ & $0.13$ & $0.08$ & $0.08$\\
+    & Baseline (3) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (1) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (2) & $\mathbf{0.028}$ & $0.039$ & $\mathbf{0.06}$ & $\mathbf{0.08}$ & $\mathbf{0.06}$ & $\mathbf{0.06}$\\
+    & Random $\boldtheta$ (3) &  &  &  &  &  & \\
+    & Physics-aware, baseline (1) &  &  &  &  &  & \\
+    & Physics-aware, baseline (2) &  &  &  &  &  & \\
+    & Physics-aware, baseline (3) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (1) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (2) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (3) &  &  &  &  &  & \\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 1.
@@ -735,7 +735,7 @@ different setups tested.
 
 \begin{table}
   \small
-  \begin{tabular}{ll rr rr}
+  \begin{tabular}{ll rr rr rr}
     \toprule
     Algorithm & Setup & \multicolumn{2}{c}{$\MSE_\boldx \left[ \log  r(\boldx; \boldtheta_0, \boldtheta_1) \right]$}
     & \multicolumn{2}{c}{$\MSE_\boldtheta \left[ E[\log r(\boldx; \boldtheta, \boldtheta_{\text{den}})] \right]$} \\
@@ -743,45 +743,57 @@ different setups tested.
     && $\boldtheta_0 = \boldtheta_{T}$ & $\boldtheta_0 = \boldtheta_{NT}$
       & $\boldtheta_{\text{den}} = \boldtheta_1$ & $\boldtheta_{\text{den}} = \hat{\boldtheta}_{\text{MLE}}$ \\
    \midrule
-   Param score (raw) & Baseline (1) & $\mathbf{0.060}$ & $0.067$ & $0.23$ & $0.25$\\
-    & Baseline (2) & $0.060$ & $\mathbf{0.064}$ & $\mathbf{0.16}$ & $\mathbf{0.06}$\\
-    & Baseline (3) & $0.104$ & $0.110$ & $15.30$ & $0.09$\\
-    & Random $\boldtheta$ (1) & $0.099$ & $0.135$ & $3.51$ & $3.57$\\
-    & Random $\boldtheta$ (2) & $0.082$ & $0.113$ & $3.76$ & $3.19$\\
-    & Random $\boldtheta$ (3) & $0.135$ & $0.177$ & $14.09$ & $3.20$\\
-    & Physics-aware (1) &  &  &  & \\
-    & Physics-aware (2) &  &  &  & \\
-    & Physics-aware (3) &  &  &  & \\
+   Param score (raw) & Baseline (1) &  &  &  &  &  & \\
+    & Baseline (2) & $\mathbf{0.042}$ & $\mathbf{0.044}$ & $\mathbf{0.35}$ & $\mathbf{0.02}$ & $\mathbf{0.01}$ & $\mathbf{0.01}$\\
+    & Baseline (3) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (1) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (2) & $0.099$ & $0.128$ & $2.64$ & $3.29$ & $2.64$ & $2.64$\\
+    & Random $\boldtheta$ (3) &  &  &  &  &  & \\
+    & Physics-aware, baseline (1) &  &  &  &  &  & \\
+    & Physics-aware, baseline (2) & $0.247$ & $0.333$ & ($8.11$) & ($25.43$) &  & \\
+    & Physics-aware, baseline (3) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (1) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (2) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (3) &  &  &  &  &  & \\
    \midrule
-   Param score (cal.) & Baseline (1) & $0.100$ & $0.105$ & $0.96$ & $0.90$\\
-    & Baseline (2) & $\mathbf{0.076}$ & $\mathbf{0.094}$ & $\mathbf{0.43}$ & $\mathbf{0.43}$\\
-    & Baseline (3) &  &  &  & \\
-    & Random $\boldtheta$ (1) & $0.088$ & $0.172$ & $2.01$ & $2.15$\\
-    & Random $\boldtheta$ (2) & $0.115$ & $0.533$ & $2.36$ & $2.36$\\
-    & Random $\boldtheta$ (3) &  &  &  & \\
-    & Physics-aware (1) &  &  &  & \\
-    & Physics-aware (2) &  &  &  & \\
-    & Physics-aware (3) &  &  &  & \\
+   Param score (cal.) & Baseline (1) &  &  &  &  &  & \\
+    & Baseline (2) & $\mathbf{0.029}$ & $\mathbf{0.029}$ & $\mathbf{0.10}$ & $\mathbf{0.09}$ & $\mathbf{0.08}$ & $\mathbf{0.08}$\\
+    & Baseline (3) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (1) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (2) & $0.057$ & $0.075$ & $0.82$ & $0.96$ & $0.82$ & $0.82$\\
+    & Random $\boldtheta$ (3) &  &  &  &  &  & \\
+    & Physics-aware, baseline (1) &  &  &  &  &  & \\
+    & Physics-aware, baseline (2) &  &  &  &  &  & \\
+    & Physics-aware, baseline (3) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (1) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (2) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (3) &  &  &  &  &  & \\
    \midrule
-   Param carl + score (raw) & Baseline (1) & $0.037$ & $0.049$ & $2.11$ & $0.19$\\
-    & Baseline (2) & $\mathbf{0.014}$ & $\mathbf{0.016}$ & $\mathbf{0.66}$ & $0.16$\\
-    & Baseline (3) & $0.041$ & $0.047$ & $10.99$ & $\mathbf{0.15}$\\
-    & Random $\boldtheta$ (1) & $0.050$ & $0.082$ & $1.53$ & $3.62$\\
-    & Random $\boldtheta$ (2) & $0.038$ & $0.063$ & $2.08$ & $3.50$\\
-    & Random $\boldtheta$ (3) & $0.053$ & $0.074$ & $3.01$ & $4.20$\\
-    & Physics-aware (1) &  &  &  & \\
-    & Physics-aware (2) &  &  &  & \\
-    & Physics-aware (3) &  &  &  & \\
+   Param carl + score (raw) & Baseline (1) &  &  &  &  &  & \\
+    & Baseline (2) & $0.063$ & $0.070$ & $25.26$ & $\mathbf{0.32}$ & $\mathbf{0.32}$ & $\mathbf{0.32}$\\
+    & Baseline (3) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (1) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (2) & $\mathbf{0.047}$ & $\mathbf{0.065}$ & $4.77$ & $3.55$ & $1.78$ & $1.78$\\
+    & Random $\boldtheta$ (3) &  &  &  &  &  & \\
+    & Physics-aware, baseline (1) &  &  &  &  &  & \\
+    & Physics-aware, baseline (2) & $0.234$ & $0.291$ & ($\mathbf{4.70}$) & ($14.41$) &  & \\
+    & Physics-aware, baseline (3) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (1) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (2) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (3) &  &  &  &  &  & \\
    \midrule
-   Param carl + score (cal.) & Baseline (1) & $0.028$ & $0.041$ & $0.07$ & $\mathbf{0.07}$\\
-    & Baseline (2) & $\mathbf{0.012}$ & $\mathbf{0.014}$ & $\mathbf{0.04}$ & $0.09$\\
-    & Baseline (3) & $0.028$ & $0.023$ & $0.56$ & $0.46$\\
-    & Random $\boldtheta$ (1) & $0.037$ & $0.058$ & $0.49$ & $0.97$\\
-    & Random $\boldtheta$ (2) & $0.024$ & $0.035$ & $0.32$ & $0.47$\\
-    & Random $\boldtheta$ (3) & $0.034$ & $0.047$ & $0.63$ & $0.98$\\
-    & Physics-aware (1) &  &  &  & \\
-    & Physics-aware (2) &  &  &  & \\
-    & Physics-aware (3) &  &  &  & \\
+   Param carl + score (cal.) & Baseline (1) &  &  &  &  &  & \\
+    & Baseline (2) & $\mathbf{0.011}$ & $\mathbf{0.013}$ & $\mathbf{0.15}$ & $\mathbf{0.11}$ & $\mathbf{0.05}$ & $\mathbf{0.05}$\\
+    & Baseline (3) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (1) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (2) & $0.022$ & $0.030$ & $0.57$ & $0.70$ & $0.46$ & $0.46$\\
+    & Random $\boldtheta$ (3) &  &  &  &  &  & \\
+    & Physics-aware, baseline (1) &  &  &  &  &  & \\
+    & Physics-aware, baseline (2) &  &  &  &  &  & \\
+    & Physics-aware, baseline (3) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (1) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (2) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (3) &  &  &  &  &  & \\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 2.
@@ -803,7 +815,7 @@ different setups tested.
 
 \begin{table}
   \small
-  \begin{tabular}{ll rr rr}
+  \begin{tabular}{ll rr rr rr}
     \toprule
     Algorithm & Setup & \multicolumn{2}{c}{$\MSE_\boldx \left[ \log  r(\boldx; \boldtheta_0, \boldtheta_1) \right]$}
     & \multicolumn{2}{c}{$\MSE_\boldtheta \left[ E[\log r(\boldx; \boldtheta, \boldtheta_{\text{den}})] \right]$} \\
@@ -811,29 +823,35 @@ different setups tested.
     && $\boldtheta_0 = \boldtheta_{T}$ & $\boldtheta_0 = \boldtheta_{NT}$
       & $\boldtheta_{\text{den}} = \boldtheta_1$ & $\boldtheta_{\text{den}} = \hat{\boldtheta}_{\text{MLE}}$ \\
     \midrule
-   PbP regression (raw) & PbP (1) & $0.011$ & $0.015$ & $3.79$ & $3.92$\\
-    & PbP (2) & $0.005$ & $\mathbf{0.005}$ & $3.78$ & $\mathbf{3.83}$\\
-    & PbP (3) & $\mathbf{0.004}$ & $0.006$ & $\mathbf{3.60}$ & $4.02$\\
+   PbP regression (raw) & PbP (1) &  &  &  &  &  & \\
+    & PbP (2) & $\mathbf{0.003}$ & $\mathbf{0.003}$ & ($\mathbf{0.25}$) &  &  & \\
+    & PbP (3) &  &  &  &  &  & \\
    \midrule
-   Param regression (raw) & Baseline (1) & $0.015$ & $0.022$ & $0.12$ & $0.12$\\
-    & Baseline (2) & $\mathbf{0.004}$ & $\mathbf{0.005}$ & $0.16$ & $0.14$\\
-    & Baseline (3) & $0.007$ & $0.007$ & $0.30$ & $0.29$\\
-    & Random $\boldtheta$ (1) & $0.015$ & $0.021$ & $0.40$ & $0.22$\\
-    & Random $\boldtheta$ (2) & $0.005$ & $0.007$ & $0.20$ & $\mathbf{0.02}$\\
-    & Random $\boldtheta$ (3) & $0.007$ & $0.008$ & $\mathbf{0.04}$ & $0.03$\\
-    & Physics-aware (1) &  &  &  & \\
-    & Physics-aware (2) &  &  &  & \\
-    & Physics-aware (3) &  &  &  & \\
+   Param regression (raw) & Baseline (1) &  &  &  &  &  & \\
+    & Baseline (2) & $\mathbf{0.004}$ & $\mathbf{0.005}$ & $0.23$ & $0.21$ & $0.21$ & $0.21$\\
+    & Baseline (3) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (1) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (2) & $0.005$ & $0.006$ & $\mathbf{0.06}$ & $\mathbf{0.06}$ & $\mathbf{0.06}$ & $\mathbf{0.06}$\\
+    & Random $\boldtheta$ (3) &  &  &  &  &  & \\
+    & Physics-aware, baseline (1) &  &  &  &  &  & \\
+    & Physics-aware, baseline (2) & $0.027$ & $0.378$ & $261.91$ & $271.17$ & $216.67$ & $216.67$\\
+    & Physics-aware, baseline (3) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (1) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (2) & $0.015$ & $85.603$ & $9572.27$ & $18995.38$ & $7907.55$ & $7907.55$\\
+    & Physics-aware, morphing basis (3) &  &  &  &  &  & \\
    \midrule
-   Param regr.\ + score (raw) & Baseline (1) &  &  &  & \\
-    & Baseline (2) &  &  &  & \\
-    & Baseline (3) &  &  &  & \\
-    & Random $\boldtheta$ (1) &  &  &  & \\
-    & Random $\boldtheta$ (2) &  &  &  & \\
-    & Random $\boldtheta$ (3) &  &  &  & \\
-    & Physics-aware (1) &  &  &  & \\
-    & Physics-aware (2) &  &  &  & \\
-    & Physics-aware (3) &  &  &  & \\
+   Param regr.\ + score (raw) & Baseline (1) &  &  &  &  &  & \\
+    & Baseline (2) & $0.005$ & $\mathbf{0.006}$ & $0.21$ & $0.26$ & $0.19$ & $0.19$\\
+    & Baseline (3) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (1) &  &  &  &  &  & \\
+    & Random $\boldtheta$ (2) & $\mathbf{0.005}$ & $0.007$ & $\mathbf{0.18}$ & $\mathbf{0.15}$ & $\mathbf{0.11}$ & $\mathbf{0.11}$\\
+    & Random $\boldtheta$ (3) &  &  &  &  &  & \\
+    & Physics-aware, baseline (1) &  &  &  &  &  & \\
+    & Physics-aware, baseline (2) & $0.054$ & $0.335$ & $181.05$ & $277.70$ & $170.70$ & $170.70$\\
+    & Physics-aware, baseline (3) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (1) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (2) &  &  &  &  &  & \\
+    & Physics-aware, morphing basis (3) &  &  &  &  &  & \\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 3.
@@ -862,55 +880,70 @@ different setups tested.
     \cmidrule{3-4} 
     && $\boldtheta_0 = \boldtheta_{T}$ & $\boldtheta_0 = \boldtheta_{NT}$ \\
     \midrule
-   Param carl & Baseline (1) & $\mathbf{0.42}$ & $\mathbf{0.81}$\\
-    & Baseline (2) & $1.12$ & $1.46$\\
-    & Baseline (3) & $4.29$ & $2.85$\\
-    & Random $\boldtheta$ (1) & $0.43$ & $0.85$\\
-    & Random $\boldtheta$ (2) & $1.20$ & $1.45$\\
-    & Random $\boldtheta$ (3) & $3.21$ & $3.31$\\
-    & Physics-aware (1) &  & \\
-    & Physics-aware (2) &  & \\
-    & Physics-aware (3) &  & \\
-   \midrule
-   Param score & Baseline (1) & $0.19$ & $0.48$\\
-    & Baseline (2) & $\mathbf{0.09}$ & $\mathbf{0.22}$\\
-    & Baseline (3) & $0.10$ & $0.23$\\
-    & Random $\boldtheta$ (1) & $0.40$ & $0.77$\\
-    & Random $\boldtheta$ (2) & $0.37$ & $0.72$\\
-    & Random $\boldtheta$ (3) & $0.40$ & $0.75$\\
-    & Physics-aware (1) &  & \\
-    & Physics-aware (2) &  & \\
-    & Physics-aware (3) &  & \\
-   \midrule
-   Param carl + score & Baseline (1) & $0.24$ & $0.55$\\
-    & Baseline (2) & $\mathbf{0.12}$ & $\mathbf{0.27}$\\
-    & Baseline (3) & $0.15$ & $0.34$\\
-    & Random $\boldtheta$ (1) & $0.38$ & $0.77$\\
-    & Random $\boldtheta$ (2) & $0.36$ & $0.71$\\
-    & Random $\boldtheta$ (3) & $0.37$ & $0.71$\\
-    & Physics-aware (1) &  & \\
-    & Physics-aware (2) &  & \\
-    & Physics-aware (3) &  & \\
-   \midrule
-   Param regression & Baseline (1) & $0.27$ & $0.59$\\
-    & Baseline (2) & $\mathbf{0.16}$ & $\mathbf{0.25}$\\
-    & Baseline (3) & $0.30$ & $0.48$\\
-    & Random $\boldtheta$ (1) & $0.28$ & $0.64$\\
-    & Random $\boldtheta$ (2) & $0.23$ & $0.30$\\
-    & Random $\boldtheta$ (3) & $0.46$ & $0.84$\\
-    & Physics-aware (1) &  & \\
-    & Physics-aware (2) &  & \\
-    & Physics-aware (3) &  & \\
-   \midrule
-   Param regr.\ + score & Baseline (1) &  & \\
-    & Baseline (2) &  & \\
+   Param carl & Baseline (1) &  & \\
+    & Baseline (2) & $\mathbf{0.70}$ & $\mathbf{0.99}$\\
     & Baseline (3) &  & \\
     & Random $\boldtheta$ (1) &  & \\
-    & Random $\boldtheta$ (2) &  & \\
+    & Random $\boldtheta$ (2) & $0.86$ & $1.33$\\
     & Random $\boldtheta$ (3) &  & \\
-    & Physics-aware (1) &  & \\
-    & Physics-aware (2) &  & \\
-    & Physics-aware (3) &  & \\
+    & Physics-aware, baseline (1) &  & \\
+    & Physics-aware, baseline (2) & $221.12$ & $1913.99$\\
+    & Physics-aware, baseline (3) &  & \\
+    & Physics-aware, morphing basis (1) &  & \\
+    & Physics-aware, morphing basis (2) &  & \\
+    & Physics-aware, morphing basis (3) &  & \\
+   \midrule
+   Param score & Baseline (1) &  & \\
+    & Baseline (2) & $\mathbf{0.11}$ & $\mathbf{0.25}$\\
+    & Baseline (3) &  & \\
+    & Random $\boldtheta$ (1) &  & \\
+    & Random $\boldtheta$ (2) & $0.38$ & $0.73$\\
+    & Random $\boldtheta$ (3) &  & \\
+    & Physics-aware, baseline (1) &  & \\
+    & Physics-aware, baseline (2) & $1.06$ & $0.94$\\
+    & Physics-aware, baseline (3) &  & \\
+    & Physics-aware, morphing basis (1) &  & \\
+    & Physics-aware, morphing basis (2) &  & \\
+    & Physics-aware, morphing basis (3) &  & \\
+   \midrule
+   Param carl + score & Baseline (1) &  & \\
+    & Baseline (2) & $\mathbf{0.12}$ & $\mathbf{0.34}$\\
+    & Baseline (3) &  & \\
+    & Random $\boldtheta$ (1) &  & \\
+    & Random $\boldtheta$ (2) & $0.36$ & $0.72$\\
+    & Random $\boldtheta$ (3) &  & \\
+    & Physics-aware, baseline (1) &  & \\
+    & Physics-aware, baseline (2) & $0.43$ & $0.94$\\
+    & Physics-aware, baseline (3) &  & \\
+    & Physics-aware, morphing basis (1) &  & \\
+    & Physics-aware, morphing basis (2) &  & \\
+    & Physics-aware, morphing basis (3) &  & \\
+   \midrule
+   Param regression & Baseline (1) &  & \\
+    & Baseline (2) & $\mathbf{0.15}$ & $0.28$\\
+    & Baseline (3) &  & \\
+    & Random $\boldtheta$ (1) &  & \\
+    & Random $\boldtheta$ (2) & $0.15$ & $\mathbf{0.26}$\\
+    & Random $\boldtheta$ (3) &  & \\
+    & Physics-aware, baseline (1) &  & \\
+    & Physics-aware, baseline (2) & $6.85$ & $650.47$\\
+    & Physics-aware, baseline (3) &  & \\
+    & Physics-aware, morphing basis (1) &  & \\
+    & Physics-aware, morphing basis (2) & $782.61$ & $8.87$\\
+    & Physics-aware, morphing basis (3) &  & \\
+   \midrule
+   Param regr.\ + score & Baseline (1) &  & \\
+    & Baseline (2) & $\mathbf{0.13}$ & $\mathbf{0.25}$\\
+    & Baseline (3) &  & \\
+    & Random $\boldtheta$ (1) &  & \\
+    & Random $\boldtheta$ (2) & $0.15$ & $0.32$\\
+    & Random $\boldtheta$ (3) &  & \\
+    & Physics-aware, baseline (1) &  & \\
+    & Physics-aware, baseline (2) & $1.61$ & $179.09$\\
+    & Physics-aware, baseline (3) &  & \\
+    & Physics-aware, morphing basis (1) &  & \\
+    & Physics-aware, morphing basis (2) &  & \\
+    & Physics-aware, morphing basis (3) &  & \\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 4.
@@ -979,6 +1012,16 @@ truth.
   \caption{Scatter plot of the expected likelihood ratios for
     different values of $\boldtheta_0$, taking the expectation value
     over $\boldx$. We show the baseline version of the different
+    parameterized models.}
+  \label{fig:baseline_likelihood_ratio_scatter}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/results/expected_likelihood_errors_over_theta_vanilla.pdf}%
+  \caption{Error in estimating the expected log likelihood ratio over $\boldtheta_0$,
+    taking the expectation value
+    over $\boldx$. For the point-by-point (PbP) versions, the larger dots show the points
+    where the estimators are trained (the smaller dots are interpolated). We show the baseline version of the different
     parameterized models.}
   \label{fig:baseline_likelihood_ratio_scatter}
 \end{figure}

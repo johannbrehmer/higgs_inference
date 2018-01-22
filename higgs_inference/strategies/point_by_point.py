@@ -133,11 +133,16 @@ def point_by_point_inference(algorithm='carl',
             r_train = np.load(
                 unweighted_events_dir + '/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
 
+            assert np.all(np.isfinite(np.log(r_train)))
+
             # Scale data
             scaler = StandardScaler()
             scaler.fit(np.array(X_train, dtype=np.float64))
             X_train_transformed = scaler.transform(X_train)
             X_test_transformed = scaler.transform(X_test)
+
+            assert np.all(np.isfinite(np.log(X_train_transformed)))
+            assert np.all(np.isfinite(np.log(X_test_transformed)))
 
             regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
                                   epochs=n_epochs, validation_split=0.1,
@@ -150,6 +155,9 @@ def point_by_point_inference(algorithm='carl',
             # Evaluation
             prediction = regr.predict(X_test_transformed)
             this_r = np.exp(prediction[:])
+
+            if not np.all(np.isfinite(prediction)):
+                logging.warning('Regression output contains NaNs')
 
             expected_llr.append(- 2. * n_expected_events / n_events_test * np.sum(np.log(this_r)))
 
