@@ -1002,7 +1002,7 @@ more shallow or deeper networks.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Calibration experiments}
+\subsection{Calibration strategies}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In Table~\ref{tbl:calibration_strategies} we compare the performance
@@ -1077,6 +1077,83 @@ curves are shown in Figures~\ref{fig:calibration_curves1} and \ref{fig:calibrati
     Equation~\eqref{eq:analytic_calibration_function}.  Top:
     point-by-point regression. Bottom: point-by-point carl.}
   \label{fig:calibration_curves2}
+\end{figure}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Score density estimation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Instead of learning the classifier output $s(\boldx)$, we can learn the score $\boldt(\boldx)$,
+which is the sufficient statistics in the local model, and perform density estimation in either
+$\boldtheta$ space or in one-dimensional $\Delta \boldtheta \cdot \boldtheta$ space. In
+Table~\ref{tbl:score_density_estimation_strategies} and Figure~\ref{fig:score_density_estimation}
+we compare different strategies.
+
+\begin{table}
+  \small
+  \begin{tabular}{ll r}
+    \toprule
+    Density estimation strategy & Settings & $\MSE_\boldx \left[ \log  r(\boldx; \boldtheta_0, \boldtheta_1) \right]$ \\
+   \midrule
+    $t$ histogram & $10^2$ equidistant bins & $0.229$ \\
+    & $20^2$ equidistant bins & $0.211$ \\
+    & $30^2$ equidistant bins & $0.102$ \\
+    & $40^2$ equidistant bins & $0.108$ \\
+    & $42^2$ optimized bins & $\mathbf{0.010}$ \\
+   \midrule
+   $t$ KDE & fixed bandwidth & $0.174$ \\
+    & adaptive ($\alpha=0.25$) & $0.127$ \\
+    & adaptive ($\alpha=0.5$) & $0.102$ \\
+    & adaptive ($\alpha=0.75$) & $0.089$ \\
+    & adaptive ($\alpha=1$) & $\mathbf{0.086}$ \\
+   \midrule
+   Local model fit &  & $\mathbf{0.057}$ \\
+   \midrule
+   $t \cdot \Delta \theta$ histogram & 25 equidistant bins & $0.124$ \\
+    & 50 equidistant bins & $0.041$ \\
+    & 100 equidistant bins & $0.024$ \\
+    & 200 equidistant bins & $0.012$ \\
+    & 500 equidistant bins & $0.009$ \\
+    & 25 equidistant bins, linear interpolation & $0.164$ \\
+    & 50 equidistant bins, linear interpolation & $0.045$ \\
+    & 100 equidistant bins, linear interpolation & $0.025$ \\
+    & 200 equidistant bins, linear interpolation & $0.010$ \\
+    & 500 equidistant bins, linear interpolation & $0.008$ \\
+    & 25 equidistant bins, spline interpolation & $0.388$ \\
+    & 50 equidistant bins, spline interpolation & $0.066$ \\
+    & 100 equidistant bins, spline interpolation & $0.032$ \\
+    & 200 equidistant bins, spline interpolation & $0.010$ \\
+    & 500 equidistant bins, spline interpolation & $\mathbf{0.008}$ \\
+    & 25 variable bins & $0.029$ \\
+    & 50 variable bins & $0.014$ \\
+    & 100 variable bins & $0.010$ \\
+    & 200 variable bins & $0.009$ \\
+    & 500 variable bins & $0.008$ \\
+    & 146 optimized bins & $0.008$ \\
+   \midrule
+   $t \cdot \Delta \theta$ KDE & fixed bandwidth & $0.124$ \\
+    & adaptive ($\alpha=0.25$) & $0.090$ \\
+    & adaptive ($\alpha=0.5$) & $0.068$ \\
+    & adaptive ($\alpha=0.75$) & $0.053$ \\
+    & adaptive ($\alpha=1$) & $\mathbf{0.046}$ \\
+   \midrule
+   $t \cdot \Delta \theta$ KDE & grad-adaptive ($\beta=0.2$) & $\mathbf{0.035}$ \\
+    & grad-adaptive ($\beta=0.5$) & $0.046$ \\
+    & grad-adaptive ($\beta=1$) & $0.043$ \\
+    & grad-adaptive ($\beta=2$) & $0.046$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{Comparison of different density estimation strategies after estimating the score.}
+  \label{tbl: score_density_estimation_strategies}
+\end{table}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/score_density_estimation/density_estimation_curves.pdf}%
+  \caption{Comparison of different density estimation strategies after estimating the score.}
+  \label{fig: score_density_estimation}
 \end{figure}
 
 
