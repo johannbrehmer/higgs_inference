@@ -140,7 +140,7 @@ def point_by_point_inference(algorithm='carl',
             X_test_transformed = scaler.transform(X_test)
 
             regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
-                                  epochs=n_epochs, validation_split=0.142857,
+                                  epochs=n_epochs, validation_split=0.1,
                                   verbose=2)
 
             # Training
@@ -198,7 +198,7 @@ def point_by_point_inference(algorithm='carl',
             X_calibration_transformed = scaler.transform(X_calibration)
 
             clf = KerasRegressor(lambda: make_classifier(n_hidden_layers=n_hidden_layers, learn_log_r=learn_logr_mode),
-                                 epochs=n_epochs, validation_split=0.142857,
+                                 epochs=n_epochs, validation_split=0.1,
                                  verbose=2)
 
             # Training

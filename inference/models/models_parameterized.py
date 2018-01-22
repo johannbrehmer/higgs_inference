@@ -5,10 +5,13 @@
 import numpy as np
 
 from keras.models import Model
-from keras.layers import Input, Dense, Dropout, Lambda, Concatenate, Multiply, Reshape, ActivityRegularization, \
+from keras.layers import Input, Dense, Lambda, Concatenate, Multiply, Reshape, ActivityRegularization, \
     Activation
 from keras import losses, optimizers
 import keras.backend as K
+
+from ..various.utils import build_hidden_layers
+
 
 ################################################################################
 # Parameters
@@ -17,37 +20,6 @@ import keras.backend as K
 n_params = 2
 n_features = 42
 n_thetas_features = n_features + n_params
-
-
-################################################################################
-# Helper functions
-################################################################################
-
-def stack_layer(layers):
-    def f(x):
-        for k in range(len(layers)):
-            x = layers[k](x)
-        return x
-
-    return f
-
-
-def hidden_layers(n,
-                  hidden_layer_size=100,
-                  activation='tanh',
-                  dropout_prob=0.0):
-    r = []
-    for k in range(n):
-        if dropout_prob > 0.:
-            s = stack_layer([
-                Dropout(dropout_prob),
-                Dense(hidden_layer_size, activation=activation)
-            ])
-        else:
-            s = stack_layer([Dense(hidden_layer_size, activation=activation)])
-        r.append(s)
-    return stack_layer(r)
-
 
 ################################################################################
 # Morphing
@@ -140,10 +112,10 @@ def make_regressor(n_hidden_layers=3,
     # Network
     hidden_layer = Dense(hidden_layer_size, activation=activation)(input_layer)
     if n_hidden_layers > 1:
-        hidden_layer_ = hidden_layers(n_hidden_layers - 1,
-                                      hidden_layer_size=hidden_layer_size,
-                                      activation=activation,
-                                      dropout_prob=dropout_prob)
+        hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                            hidden_layer_size=hidden_layer_size,
+                                            activation=activation,
+                                            dropout_prob=dropout_prob)
         hidden_layer = hidden_layer_(hidden_layer)
     log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
 
@@ -183,10 +155,10 @@ def make_regressor_morphingaware(n_hidden_layers=2,
     for i in range(n_samples):
         hidden_layer = Dense(hidden_layer_size, activation=activation)(x_layer)
         if n_hidden_layers > 1:
-            hidden_layer_ = hidden_layers(n_hidden_layers - 1,
-                                          hidden_layer_size=hidden_layer_size,
-                                          activation=activation,
-                                          dropout_prob=dropout_prob)
+            hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                                hidden_layer_size=hidden_layer_size,
+                                                activation=activation,
+                                                dropout_prob=dropout_prob)
             hidden_layer = hidden_layer_(hidden_layer)
         si_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
         ri_hat_layers.append(Reshape((1,))(Lambda(lambda x: (1. - x) / (x + epsilon))(si_hat_layer)))
@@ -231,10 +203,10 @@ def make_combined_regressor(n_hidden_layers=3,
     # Network
     hidden_layer = Dense(hidden_layer_size, activation=activation)(input_layer)
     if n_hidden_layers > 1:
-        hidden_layer_ = hidden_layers(n_hidden_layers - 1,
-                                      hidden_layer_size=hidden_layer_size,
-                                      activation=activation,
-                                      dropout_prob=dropout_prob)
+        hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                            hidden_layer_size=hidden_layer_size,
+                                            activation=activation,
+                                            dropout_prob=dropout_prob)
         hidden_layer = hidden_layer_(hidden_layer)
     log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
 
@@ -275,10 +247,10 @@ def make_combined_regressor_morphingaware(n_hidden_layers=2,
     for i in range(n_samples):
         hidden_layer = Dense(hidden_layer_size, activation=activation)(x_layer)
         if n_hidden_layers > 1:
-            hidden_layer_ = hidden_layers(n_hidden_layers - 1,
-                                          hidden_layer_size=hidden_layer_size,
-                                          activation=activation,
-                                          dropout_prob=dropout_prob)
+            hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                                hidden_layer_size=hidden_layer_size,
+                                                activation=activation,
+                                                dropout_prob=dropout_prob)
             hidden_layer = hidden_layer_(hidden_layer)
         si_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
         ri_hat_layers.append(Reshape((1,))(Lambda(lambda x: (1. - x) / (x + epsilon))(si_hat_layer)))
@@ -323,10 +295,10 @@ def make_classifier_carl(n_hidden_layers=3,
     # Network
     hidden_layer = Dense(hidden_layer_size, activation=activation)(input_layer)
     if n_hidden_layers > 1:
-        hidden_layer_ = hidden_layers(n_hidden_layers - 1,
-                                      hidden_layer_size=hidden_layer_size,
-                                      activation=activation,
-                                      dropout_prob=dropout_prob)
+        hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                            hidden_layer_size=hidden_layer_size,
+                                            activation=activation,
+                                            dropout_prob=dropout_prob)
         hidden_layer = hidden_layer_(hidden_layer)
 
     if learn_log_r:
@@ -376,10 +348,10 @@ def make_classifier_carl_morphingaware(n_hidden_layers=2,
     for i in range(n_samples):
         hidden_layer = Dense(hidden_layer_size, activation=activation)(x_layer)
         if n_hidden_layers > 1:
-            hidden_layer_ = hidden_layers(n_hidden_layers - 1,
-                                          hidden_layer_size=hidden_layer_size,
-                                          activation=activation,
-                                          dropout_prob=dropout_prob)
+            hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                                hidden_layer_size=hidden_layer_size,
+                                                activation=activation,
+                                                dropout_prob=dropout_prob)
             hidden_layer = hidden_layer_(hidden_layer)
 
         if learn_log_r:
@@ -432,10 +404,10 @@ def make_classifier_score(n_hidden_layers=3,
     # Network
     hidden_layer = Dense(hidden_layer_size, activation=activation)(input_layer)
     if n_hidden_layers > 1:
-        hidden_layer_ = hidden_layers(n_hidden_layers - 1,
-                                      hidden_layer_size=hidden_layer_size,
-                                      activation=activation,
-                                      dropout_prob=dropout_prob)
+        hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                            hidden_layer_size=hidden_layer_size,
+                                            activation=activation,
+                                            dropout_prob=dropout_prob)
         hidden_layer = hidden_layer_(hidden_layer)
 
     if learn_log_r:
@@ -487,10 +459,10 @@ def make_classifier_score_morphingaware(n_hidden_layers=2,
     for i in range(n_samples):
         hidden_layer = Dense(hidden_layer_size, activation=activation)(x_layer)
         if n_hidden_layers > 1:
-            hidden_layer_ = hidden_layers(n_hidden_layers - 1,
-                                          hidden_layer_size=hidden_layer_size,
-                                          activation=activation,
-                                          dropout_prob=dropout_prob)
+            hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                                hidden_layer_size=hidden_layer_size,
+                                                activation=activation,
+                                                dropout_prob=dropout_prob)
             hidden_layer = hidden_layer_(hidden_layer)
 
         if learn_log_r:
@@ -544,10 +516,10 @@ def make_classifier_combined(n_hidden_layers=3,
     # Network
     hidden_layer = Dense(hidden_layer_size, activation=activation)(input_layer)
     if n_hidden_layers > 1:
-        hidden_layer_ = hidden_layers(n_hidden_layers - 1,
-                                      hidden_layer_size=hidden_layer_size,
-                                      activation=activation,
-                                      dropout_prob=dropout_prob)
+        hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                            hidden_layer_size=hidden_layer_size,
+                                            activation=activation,
+                                            dropout_prob=dropout_prob)
         hidden_layer = hidden_layer_(hidden_layer)
 
     if learn_log_r:
@@ -598,10 +570,10 @@ def make_classifier_combined_morphingaware(n_hidden_layers=2,
     for i in range(n_samples):
         hidden_layer = Dense(hidden_layer_size, activation=activation)(x_layer)
         if n_hidden_layers > 1:
-            hidden_layer_ = hidden_layers(n_hidden_layers - 1,
-                                          hidden_layer_size=hidden_layer_size,
-                                          activation=activation,
-                                          dropout_prob=dropout_prob)
+            hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                                hidden_layer_size=hidden_layer_size,
+                                                activation=activation,
+                                                dropout_prob=dropout_prob)
             hidden_layer = hidden_layer_(hidden_layer)
 
         if learn_log_r:

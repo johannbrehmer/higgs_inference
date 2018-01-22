@@ -17,31 +17,68 @@ from keras.callbacks import EarlyStopping
 from carl.ratios import ClassifierScoreRatio
 from carl.learning import CalibratedClassifierScoreCV
 
-from ..models.models_score_regression import make_regressor
+from inference.models.models_parameterized import make_classifier_carl, make_classifier_carl_morphingaware
+from inference.models.models_parameterized import make_classifier_score, make_classifier_score_morphingaware
+from inference.models.models_parameterized import make_classifier_combined, make_classifier_combined_morphingaware
+from inference.models.models_parameterized import make_regressor, make_regressor_morphingaware
+from inference.models.models_parameterized import make_combined_regressor, make_combined_regressor_morphingaware
 
 
 ################################################################################
 # What do
 ################################################################################
 
-def score_regression_inference(options=''):
+def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'regression', 'combinedregression'
+                            morphing_aware=False,
+                            training_sample='baseline',  # 'baseline', 'basis', 'random'
+                            options=''):  # all other options in a string
 
     """
     Trains and evaluates one of the parameterized inference methods.
 
+    :param algorithm: Type of the algorithm used. Currently supported: 'carl', 'score', 'combined', 'regression', and
+    'combinedregression'.
+    :param morphing_aware: bool that decides whether a morphing-aware or morphing-agnostic architecture is used.
+    :param training_sample: Training sample. Can be 'baseline', 'basis', or 'random'.
     :param options: Further options in a list of strings or string.
     """
 
-    logging.info('Starting score regression inference')
+    logging.info('Starting parameterized inference')
 
+    assert algorithm in ['carl', 'score', 'combined', 'regression', 'combinedregression']
+    assert training_sample in ['baseline', 'basis', 'random']
+
+    random_theta_mode = training_sample == 'random'
+    basis_theta_mode = training_sample == 'basis'
+
+    learn_logr_mode = ('learnlogr' in options)
+    denom1_mode = ('denom1' in options)
+    short_mode = ('short' in options)
+    long_mode = ('long' in options)
+    small_alpha_mode = ('smallalpha' in options)
     deep_mode = ('deep' in options)
     shallow_mode = ('shallow' in options)
     debug_mode = ('debug' in options)
-    short_mode = ('short' in options)
-    long_mode = ('long' in options)
-    denom1_mode = ('denom1' in options)
 
     filename_addition = ''
+    if morphing_aware:
+        filename_addition = '_aware'
+
+    if random_theta_mode:
+        filename_addition += '_random'
+    elif basis_theta_mode:
+        filename_addition += '_basis'
+
+    if learn_logr_mode:
+        filename_addition += '_learnlogr'
+
+    alpha_regression = 0.011
+    alpha_carl = 0.35
+    if small_alpha_mode:
+        alpha_regression = 0.005
+        alpha_carl = 0.1
+        filename_addition += '_smallalpha'
+
     n_hidden_layers = 2
     n_hidden_layers_aware = 2
     if shallow_mode:
@@ -78,9 +115,15 @@ def score_regression_inference(options=''):
     unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
     results_dir = '../results/parameterized'
 
+    logging.info('Main settings:')
+    logging.info('  Algorithm:                %s', algorithm)
+    logging.info('  Morphing-aware:           %s', morphing_aware)
+    logging.info('  Training sample:          %s', training_sample)
     logging.info('Options:')
     logging.info('  Number of epochs:         %s', n_epochs)
     logging.info('  Number of hidden layers:  %s', n_hidden_layers)
+    logging.info('  alpha carl:               %s', alpha_carl)
+    logging.info('  alpha regression:         %s', alpha_regression)
     logging.info('  Debug mode:               %s', debug_mode)
 
     ################################################################################
@@ -92,10 +135,25 @@ def score_regression_inference(options=''):
     n_thetas = len(thetas)
     theta_benchmark_trained = 422
     theta_benchmark_nottrained = 9
-    theta_score = 0
 
-    X_train = np.load(unweighted_events_dir + '/X_train_scoreregression' + input_filename_addition + '.npy')
-    scores_train = np.load(unweighted_events_dir + '/scores_train_scoreregression' + input_filename_addition + '.npy')
+    if random_theta_mode:
+        X_train = np.load(unweighted_events_dir + '/X_train_random' + input_filename_addition + '.npy')
+        y_train = np.load(unweighted_events_dir + '/y_train_random' + input_filename_addition + '.npy')
+        scores_train = np.load(unweighted_events_dir + '/scores_train_random' + input_filename_addition + '.npy')
+        r_train = np.load(unweighted_events_dir + '/r_train_random' + input_filename_addition + '.npy')
+        theta0_train = np.load(unweighted_events_dir + '/theta0_train_random' + input_filename_addition + '.npy')
+    elif basis_theta_mode:
+        X_train = np.load(unweighted_events_dir + '/X_train_basis' + input_filename_addition + '.npy')
+        y_train = np.load(unweighted_events_dir + '/y_train_basis' + input_filename_addition + '.npy')
+        scores_train = np.load(unweighted_events_dir + '/scores_train_basis' + input_filename_addition + '.npy')
+        r_train = np.load(unweighted_events_dir + '/r_train_basis' + input_filename_addition + '.npy')
+        theta0_train = np.load(unweighted_events_dir + '/theta0_train_basis' + input_filename_addition + '.npy')
+    else:
+        X_train = np.load(unweighted_events_dir + '/X_train' + input_filename_addition + '.npy')
+        y_train = np.load(unweighted_events_dir + '/y_train' + input_filename_addition + '.npy')
+        scores_train = np.load(unweighted_events_dir + '/scores_train' + input_filename_addition + '.npy')
+        r_train = np.load(unweighted_events_dir + '/r_train' + input_filename_addition + '.npy')
+        theta0_train = np.load(unweighted_events_dir + '/theta0_train' + input_filename_addition + '.npy')
 
     X_calibration = np.load(unweighted_events_dir + '/X_calibration' + input_filename_addition + '.npy')
     weights_calibration = np.load(unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
@@ -104,15 +162,16 @@ def score_regression_inference(options=''):
     # scores_test = np.load(unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
     r_test = np.load(unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
 
+    X_roam = np.load(unweighted_events_dir + '/X_roam' + input_filename_addition + '.npy')
+    # r_roam = np.load(unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
+    n_roaming = len(X_roam)
+
     n_expected_events = 36
     n_events_test = X_test.shape[0]
     assert n_thetas == r_test.shape[0]
-
-
-
-    ################################################ TO HERE ######################################################
-
-
+    n_pseudoexperiments_series = 5
+    n_pseudoexperiments_events = [10, 30, 100, 300, 1000]
+    n_pseudoexperiments_repetitions = 1000
 
     scaler = StandardScaler()
     scaler.fit(np.array(X_train, dtype=np.float64))
@@ -155,23 +214,23 @@ def score_regression_inference(options=''):
         if algorithm == 'regression':
             if morphing_aware:
                 regr = KerasRegressor(lambda: make_regressor_morphingaware(n_hidden_layers=n_hidden_layers_aware),
-                                      epochs=n_epochs, validation_split=0.142857,
+                                      epochs=n_epochs, validation_split=0.1,
                                       verbose=2)
             else:
                 regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
-                                      epochs=n_epochs, validation_split=0.142857,
+                                      epochs=n_epochs, validation_split=0.1,
                                       verbose=2)
         else:
             if morphing_aware:
                 regr = KerasRegressor(
                     lambda: make_combined_regressor_morphingaware(n_hidden_layers=n_hidden_layers_aware,
                                                                   alpha=alpha_regression),
-                    epochs=n_epochs, validation_split=0.142857,
+                    epochs=n_epochs, validation_split=0.1,
                     verbose=2)
             else:
                 regr = KerasRegressor(lambda: make_combined_regressor(n_hidden_layers=n_hidden_layers,
                                                                       alpha=alpha_regression),
-                                      epochs=n_epochs, validation_split=0.142857,
+                                      epochs=n_epochs, validation_split=0.1,
                                       verbose=2)
 
         logging.info('Starting training')
@@ -253,24 +312,24 @@ def score_regression_inference(options=''):
             if morphing_aware:
                 clf = KerasRegressor(lambda: make_classifier_carl_morphingaware(n_hidden_layers=n_hidden_layers_aware,
                                                                                 learn_log_r=learn_logr_mode),
-                                     epochs=n_epochs, validation_split=0.142857,
+                                     epochs=n_epochs, validation_split=0.1,
                                      verbose=2)
             else:
                 clf = KerasRegressor(lambda: make_classifier_carl(n_hidden_layers=n_hidden_layers,
                                                                   learn_log_r=learn_logr_mode),
-                                     epochs=n_epochs, validation_split=0.142857,
+                                     epochs=n_epochs, validation_split=0.1,
                                      verbose=2)
 
         elif algorithm == 'score':
             if morphing_aware:
                 clf = KerasRegressor(lambda: make_classifier_score_morphingaware(n_hidden_layers=n_hidden_layers_aware,
                                                                                  learn_log_r=learn_logr_mode),
-                                     epochs=n_epochs, validation_split=0.142857,
+                                     epochs=n_epochs, validation_split=0.1,
                                      verbose=2)
             else:
                 clf = KerasRegressor(lambda: make_classifier_score(n_hidden_layers=n_hidden_layers,
                                                                    learn_log_r=learn_logr_mode),
-                                     epochs=n_epochs, validation_split=0.142857,
+                                     epochs=n_epochs, validation_split=0.1,
                                      verbose=2)
 
         elif algorithm == 'combined':
@@ -279,13 +338,13 @@ def score_regression_inference(options=''):
                     lambda: make_classifier_combined_morphingaware(n_hidden_layers=n_hidden_layers_aware,
                                                                    learn_log_r=learn_logr_mode,
                                                                    alpha=alpha_carl),
-                    epochs=n_epochs, validation_split=0.142857,
+                    epochs=n_epochs, validation_split=0.1,
                     verbose=2)
             else:
                 clf = KerasRegressor(lambda: make_classifier_combined(n_hidden_layers=n_hidden_layers,
                                                                       learn_log_r=learn_logr_mode,
                                                                       alpha=alpha_carl),
-                                     epochs=n_epochs, validation_split=0.142857,
+                                     epochs=n_epochs, validation_split=0.1,
                                      verbose=2)
 
         else:
@@ -360,12 +419,12 @@ def score_regression_inference(options=''):
         logging.info('Starting calibrated evaluation:')
         expected_llr_calibrated = []
         r_roam_temp = np.zeros((n_thetas, n_roaming))
-        pseudoexperiments_calibrated = np.zeros((n_thetas, n_pseudoexperiments_series, n_pseudoexperiments_repetitions))
+        # pseudoexperiments_calibrated = np.zeros((n_thetas, n_pseudoexperiments_series, n_pseudoexperiments_repetitions))
         # Pick indices for pseudo-experiments
-        indices = [
-            [np.random.choice(list(range(n_events_test)), n) for j in range(n_pseudoexperiments_repetitions)]
-            for i, n in enumerate(n_pseudoexperiments_events)
-        ]
+        # indices = [
+        #     [np.random.choice(list(range(n_events_test)), n) for j in range(n_pseudoexperiments_repetitions)]
+        #     for i, n in enumerate(n_pseudoexperiments_events)
+        # ]
 
         for t, theta in enumerate(thetas):
             # Calibration

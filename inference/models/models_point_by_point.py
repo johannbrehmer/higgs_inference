@@ -3,45 +3,17 @@
 ################################################################################
 
 from keras.models import Model
-from keras.layers import Input, Dense, Dropout, Lambda
+from keras.layers import Input, Dense, Lambda
 from keras import losses, optimizers
 import keras.backend as K
+
+from ..various.utils import build_hidden_layers
 
 ################################################################################
 # Parameters
 ################################################################################
 
 n_features = 42
-
-
-################################################################################
-# Helper functions
-################################################################################
-
-def stack_layer(layers):
-    def f(x):
-        for k in range(len(layers)):
-            x = layers[k](x)
-        return x
-
-    return f
-
-
-def hidden_layers(n,
-                  hidden_layer_size=100,
-                  activation='tanh',
-                  dropout_prob=0.0):
-    r = []
-    for k in range(n):
-        if dropout_prob > 0.:
-            s = stack_layer([
-                Dropout(dropout_prob),
-                Dense(hidden_layer_size, activation=activation)
-            ])
-        else:
-            s = stack_layer([Dense(hidden_layer_size, activation=activation)])
-        r.append(s)
-    return stack_layer(r)
 
 
 ################################################################################
@@ -70,10 +42,10 @@ def make_regressor(n_hidden_layers=3,
     # Network
     hidden_layer = Dense(hidden_layer_size, activation=activation)(input_layer)
     if n_hidden_layers > 1:
-        hidden_layer_ = hidden_layers(n_hidden_layers - 1,
-                                      hidden_layer_size=hidden_layer_size,
-                                      activation=activation,
-                                      dropout_prob=dropout_prob)
+        hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                            hidden_layer_size=hidden_layer_size,
+                                            activation=activation,
+                                            dropout_prob=dropout_prob)
         hidden_layer = hidden_layer_(hidden_layer)
     log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
 
@@ -101,10 +73,10 @@ def make_classifier(n_hidden_layers=3,
     # Network
     hidden_layer = Dense(hidden_layer_size, activation=activation)(input_layer)
     if n_hidden_layers > 1:
-        hidden_layer_ = hidden_layers(n_hidden_layers - 1,
-                                      hidden_layer_size=hidden_layer_size,
-                                      activation=activation,
-                                      dropout_prob=dropout_prob)
+        hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                            hidden_layer_size=hidden_layer_size,
+                                            activation=activation,
+                                            dropout_prob=dropout_prob)
         hidden_layer = hidden_layer_(hidden_layer)
 
     if learn_log_r:
