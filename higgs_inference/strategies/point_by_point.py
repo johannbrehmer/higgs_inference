@@ -141,8 +141,8 @@ def point_by_point_inference(algorithm='carl',
             X_train_transformed = scaler.transform(X_train)
             X_test_transformed = scaler.transform(X_test)
 
-            assert np.all(np.isfinite(np.log(X_train_transformed)))
-            assert np.all(np.isfinite(np.log(X_test_transformed)))
+            assert np.all(np.isfinite(X_train_transformed))
+            assert np.all(np.isfinite(X_test_transformed))
 
             regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
                                   epochs=n_epochs, validation_split=0.1,
