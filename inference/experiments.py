@@ -5,10 +5,10 @@ from __future__ import absolute_import, division, print_function
 import argparse
 import logging
 
-from inference.strategies.truth import truth_inference
-from inference.strategies.parameterized import parameterized_inference
-from inference.strategies.point_by_point import point_by_point_inference
-from inference.strategies.score_regression import score_regression_inference
+from .strategies.truth import truth_inference
+from .strategies.parameterized import parameterized_inference
+from .strategies.point_by_point import point_by_point_inference
+from .strategies.score_regression import score_regression_inference
 
 # Set up logging
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG, datefmt='%d.%m.%Y %H:%M:%S')

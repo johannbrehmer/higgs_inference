@@ -1017,42 +1017,46 @@ curves are shown in Figures~\ref{fig:calibration_curves1} and \ref{fig:calibrati
     \cmidrule{3-4} 
                          && PbP regression & PbP carl \\
    \midrule
-   No calibration &  & $\mathbf{0.0026}$ & $\mathbf{0.260}$ \\
+   No calibration &  & $\mathbf{0.0241}$ & $\mathbf{0.272}$ \\
    \midrule
-   Histogram & 25 equidistant bins & $0.0065$ & $0.034$ \\
-    & 50 equidistant bins & $0.0038$ & $0.032$ \\
-    & 100 equidistant bins & $0.0030$ & $0.032$ \\
-    & 200 equidistant bins & $0.0028$ & $0.032$ \\
-    & 25 equidistant bins, linear interpolation & $0.0052$ & $0.033$ \\
-    & 50 equidistant bins, linear interpolation & $0.0034$ & $\mathbf{0.032}$ \\
-    & 100 equidistant bins, linear interpolation & $0.0029$ & $0.032$ \\
-    & 200 equidistant bins, linear interpolation & $\mathbf{0.0027}$ & $0.032$ \\
-    & 25 equidistant bins, spline interpolation & $0.0051$ & $0.032$ \\
-    & 50 equidistant bins, spline interpolation & $0.0034$ & $0.034$ \\
-    & 100 equidistant bins, spline interpolation & $0.0029$ & $0.032$ \\
-    & 200 equidistant bins, spline interpolation & $0.0060$ & $0.041$ \\
-    & 25 variable bins & $1.5307$ & $0.945$ \\
-    & 50 variable bins & $1.6809$ & $1.186$ \\
-    & 100 variable bins & $1.7720$ & $1.908$ \\
-    & 200 variable bins & $2.8246$ & $3.601$ \\
+   Histogram & 25 equidistant bins & $0.0277$ & $0.040$ \\
+    & 50 equidistant bins & $0.0259$ & $0.038$ \\
+    & 100 equidistant bins & $0.0255$ & $0.038$ \\
+    & 200 equidistant bins & $0.0255$ & $0.038$ \\
+    & 500 equidistant bins & $0.0264$ & $0.039$ \\
+    & 25 equidistant bins, linear interpolation & $0.0278$ & $0.039$ \\
+    & 50 equidistant bins, linear interpolation & $0.0261$ & $0.038$ \\
+    & 100 equidistant bins, linear interpolation & $0.0254$ & $0.038$ \\
+    & 200 equidistant bins, linear interpolation & $0.0254$ & $0.038$ \\
+    & 500 equidistant bins, linear interpolation & $0.0260$ & $0.038$ \\
+    & 25 equidistant bins, spline interpolation & $0.0272$ & $0.038$ \\
+    & 50 equidistant bins, spline interpolation & $0.0258$ & $\mathbf{0.038}$ \\
+    & 100 equidistant bins, spline interpolation & $\mathbf{0.0253}$ & $0.038$ \\
+    & 200 equidistant bins, spline interpolation & $0.0258$ & $0.050$ \\
+    & 500 equidistant bins, spline interpolation & $0.0279$ & $0.051$ \\
+    & 25 variable bins & $0.0362$ & $0.045$ \\
+    & 50 variable bins & $0.0286$ & $0.039$ \\
+    & 100 variable bins & $0.0442$ & $0.054$ \\
+    & 200 variable bins & $0.0437$ & $0.054$ \\
+    & 500 variable bins & $0.0422$ & $0.049$ \\
    \midrule
-   Isotonic & no interpolation & $\mathbf{0.0025}$ & $\mathbf{0.032}$ \\
-    & linear interpolation & $0.0025$ & $0.036$ \\
+   Isotonic & no interpolation & $0.0247$ & $\mathbf{0.037}$ \\
+    & linear interpolation & $\mathbf{0.0245}$ & $0.037$ \\
    \midrule
-   Parametric & sigmoid & $0.0250$ & $0.046$ \\
-   & Equation~\eqref{eq:analytic_calibration_function} & $\mathbf{0.0026}$ & $\mathbf{0.036}$ \\
+   Parametric & sigmoid & $0.0406$ & $0.042$ \\
+    &  Equation~\eqref{eq:analytic_calibration_function} & $\mathbf{0.0238}$ & $\mathbf{0.038}$ \\
    \midrule
-   KDE & fixed bandwidth & $\mathbf{0.0176}$ & $0.043$ \\
-    & adaptive ($\alpha=0.25$) & $0.0185$ & $0.043$ \\
-    & adaptive ($\alpha=0.5$) & $0.0196$ & $\mathbf{0.042}$ \\
-    & adaptive ($\alpha=0.75$) & $0.0206$ & $0.043$ \\
-    & adaptive ($\alpha=1.$) & $0.0304$ & $0.048$ \\
+   KDE & fixed bandwidth & $\mathbf{0.0418}$ & $0.058$ \\
+    & adaptive ($\alpha=0.25$) & $0.0439$ & $0.058$ \\
+    & adaptive ($\alpha=0.5$) & $0.0458$ & $0.056$ \\
+    & adaptive ($\alpha=0.75$) & $0.0474$ & $0.053$ \\
+    & adaptive ($\alpha=1$) & $0.0545$ & $\mathbf{0.052}$ \\
    \midrule
-   KDE & grad-adaptive ($\beta=0.2$) & $\mathbf{0.0051}$ & $0.037$ \\
-    & grad-adaptive ($\beta=0.5$) & $0.0070$ & $\mathbf{0.033}$ \\
-    & grad-adaptive ($\beta=1$) & $0.0101$ & $0.035$ \\
-    & grad-adaptive ($\beta=2$) & $0.0207$ & $0.046$ \\
-    & grad-adaptive ($\beta_{\text{num}} = 1.66$, $\beta_{\text{den}} = 1.13$) & $0.0109$ & $0.034$ \\
+   KDE & grad-adaptive ($\beta=0.2$) & $\mathbf{0.0282}$ & $0.040$ \\
+    & grad-adaptive ($\beta=0.5$) & $0.0304$ & $\mathbf{0.039}$ \\
+    & grad-adaptive ($\beta=1$) & $0.0331$ & $0.042$ \\
+    & grad-adaptive ($\beta=2$) & $0.0439$ & $0.049$ \\
+    & grad-adaptive ($\beta_{\text{num}} = 1.66$, $\beta_{\text{den}} = 1.13$) & $0.0326$ & $0.040$ \\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different calibration methods.
