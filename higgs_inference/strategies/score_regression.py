@@ -162,7 +162,8 @@ def score_regression_inference(options=''):
 
         # Toy experimemts for distribution of test statistics (Neyman construction)
         that_neyman_distribution_experiments = np.zeros((n_neyman_distribution_experiments, n_expected_events, 2))
-        event_probabilities = weights_calibration[t]/np.sum(weights_calibration[t])
+        event_probabilities = np.copy(weights_calibration[t]).astype(np.float64)
+        event_probabilities /= np.sum(event_probabilities)
         for i in range(n_neyman_distribution_experiments):
             indices = np.random.choice(X_calibration_transformed.shape[0], n_expected_events, p=event_probabilities)
             that_neyman_distribution_experiments[i, :, :] = regr.predict(X_calibration_transformed[indices])
