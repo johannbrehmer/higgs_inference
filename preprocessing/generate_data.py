@@ -439,9 +439,9 @@ if do_point_by_point:
         # print thetas0.shape, thetas1.shape, X.shape, y.shape, scores.shape, r.shape, p_score.shape
 
         # filter out bad events
-        filter = (scores[:,0]**2 + scores[:,1]**2 < 2500.) & (np.log(r)**2 < 10000.)
+        filter = (scores[:,0]**2 + scores[:,1]**2 < 2500.) & (np.log(r)**2 < 10000.) & (np.isfinite(np.log(r)))
 
-        return thetas0, thetas1, X, y, scores, r, p0, p1, p_score
+        return thetas0[filter], thetas1[filter], X[filter], y[filter], scores[filter], r[filter], p0[filter], p1[filter], p_score[filter]
 
     for i, t in enumerate(thetas_point_by_point):
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1,\

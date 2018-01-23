@@ -111,7 +111,7 @@ def score_regression_inference(options=''):
     ################################################################################
 
     regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
-                          epochs=20, verbose=1, validation_split=0.1,
+                          epochs=20, verbose=2, validation_split=0.1,
                           callbacks=[EarlyStopping(verbose=1, patience=3)])
 
     logging.info('Starting training of score regression')
@@ -142,7 +142,7 @@ def score_regression_inference(options=''):
         # Weights for density estimation histograms
         tthat_calibration = np.hstack((tthat_calibration, tthat_calibration))
         y_calibration = np.hstack((np.zeros(that_calibration.shape[0]), np.ones(that_calibration.shape[0])))
-        w_calibration = np.hstack((weights_calibration[theta, ::], weights_calibration[theta1, ::]))
+        w_calibration = np.hstack((weights_calibration[t, ::], weights_calibration[theta1, ::]))
 
         # Calibration histograms
         calibrator = HistogramCalibrator(bins=500, independent_binning=False, variable_width=False,

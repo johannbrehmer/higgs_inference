@@ -1,10 +1,8 @@
 #!/bin/bash
 
-sbatch run_truth.sh
+# sbatch run_truth.sh
 
 sbatch run_scoreregression.sh
-
-# sleep 60
 
 # sbatch run_carl_point_by_point.sh
 # sbatch run_regression_point_by_point.sh
