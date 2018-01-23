@@ -111,7 +111,7 @@ def score_regression_inference(options=''):
     ################################################################################
 
     regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
-                          epochs=20, verbose=2, validation_split=0.1,
+                          epochs=n_epochs, verbose=2, validation_split=0.1,
                           callbacks=[EarlyStopping(verbose=1, patience=3)])
 
     logging.info('Starting training of score regression')
