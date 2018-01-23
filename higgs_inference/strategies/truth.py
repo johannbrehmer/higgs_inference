@@ -29,7 +29,8 @@ def truth_inference(options=''):
         theta1 = 422
 
     data_dir = '../data'
-    unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
+    unweighted_events_dir = '../data/unweighted_events'
+    #unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
     results_dir = '../results/truth'
 
     ################################################################################
@@ -60,7 +61,7 @@ def truth_inference(options=''):
     xx, yy = np.meshgrid(xi, yi)
 
     # p values
-    n_neyman_distribution_experiments = 100000
+    n_neyman_distribution_experiments = 1000
     n_neyman_observed_experiments = 101
 
     ################################################################################
@@ -106,22 +107,27 @@ def truth_inference(options=''):
         llr_neyman_distribution_experiments = np.zeros(n_neyman_distribution_experiments)
         event_probabilities = np.copy(weights_calibration[t]).astype(np.float64)
         event_probabilities /= np.sum(event_probabilities)
+        logging.debug('Probabilities to draw events: %s', event_probabilities)
         for i in range(n_neyman_distribution_experiments):
             indices = np.random.choice(weights_calibration.shape[1], n_expected_events, p=event_probabilities)
             llr_neyman_distribution_experiments[i] = -2. * (
                 np.sum(np.log(weights_calibration[t, indices]) - np.log(weights_calibration[theta1, indices])))
         llr_neyman_distribution_experiments = np.sort(llr_neyman_distribution_experiments)
+        logging.debug('LLR distribution: %s', llr_neyman_distribution_experiments)
 
         # Calculate observed test statistics
         llr_neyman_observed_experiments = np.zeros(n_neyman_observed_experiments)
         for i in range(n_neyman_observed_experiments):
             llr_neyman_observed_experiments[i] = -2. * np.sum(np.log(r_test[t, indices_neyman_observed_experiments[i]]))
+        logging.debug('LLR observed: %s', llr_neyman_observed_experiments)
 
         # Calculate p values and store median p value
         p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
                                          llr_neyman_observed_experiments).astype('float')
                     / n_neyman_distribution_experiments)
+        logging.debug('p-values: %s', p_values)
         median_p_values.append(np.median(p_values))
+        logging.debug('Theta %s (%s): median p-value = %s', t, theta, median_p_values[-1])
 
         # For some benchmark thetas, save more information on Neyman construction
         if t == theta_benchmark_nottrained:
@@ -138,7 +144,6 @@ def truth_inference(options=''):
     # Save median p values
     median_p_values = np.asarray(median_p_values)
     np.save(results_dir + '/p_values_truth' + filename_addition + '.npy', median_p_values)
-    logging.debug('Theta %s (%s): median p-value = %s', t, theta, median_p_values[-1])
 
     # logging.info('Starting pseudo-experiments')
     # pseudoexperiments = np.zeros((n_thetas, n_pseudoexperiments_series, n_pseudoexperiments_repetitions))

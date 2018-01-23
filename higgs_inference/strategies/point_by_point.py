@@ -114,7 +114,7 @@ def point_by_point_inference(algorithm='carl',
     assert n_thetas == r_test.shape[0]
 
     # p values
-    n_neyman_distribution_experiments = 100000
+    n_neyman_distribution_experiments = 1000
     n_neyman_observed_experiments = 101
 
     ################################################################################
@@ -183,6 +183,7 @@ def point_by_point_inference(algorithm='carl',
             llr_neyman_distribution_experiments = np.zeros((n_neyman_distribution_experiments, n_expected_events))
             event_probabilities = np.copy(weights_calibration[t]).astype(np.float64)
             event_probabilities /= np.sum(event_probabilities)
+            logging.debug('Probabilities to draw events: %s', event_probabilities)
             for k in range(n_neyman_distribution_experiments):
                 indices = np.random.choice(X_calibration_transformed.shape[0], n_expected_events, p=event_probabilities)
                 llr_neyman_distribution_experiments[k] = -2. * np.sum(regr.predict(X_calibration_transformed[indices]))
@@ -195,10 +196,13 @@ def point_by_point_inference(algorithm='carl',
                     regr.predict(X_test_transformed[indices_neyman_observed_experiments[k]]))
 
             # Calculate p values and store median p value
+            logging.debug('LLR distribution: %s', llr_neyman_distribution_experiments)
+            logging.debug('LLR observed: %s', llr_neyman_observed_experiments)
             p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
                                              llr_neyman_observed_experiments).astype('float')
                         / n_neyman_distribution_experiments)
             median_p_values.append(np.median(p_values))
+            logging.debug('Theta %s (%s): median p-value = %s', t, theta, median_p_values[-1])
 
             # For some benchmark thetas, save more information on Neyman construction
             if t == theta_benchmark_nottrained:
@@ -301,6 +305,8 @@ def point_by_point_inference(algorithm='carl',
                 llr_neyman_observed_experiments[k] = -2. * np.sum(np.log(prediction))
 
             # Calculate p values and store median p value
+            logging.debug('LLR distribution: %s', llr_neyman_distribution_experiments)
+            logging.debug('LLR observed: %s', llr_neyman_observed_experiments)
             p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
                                              llr_neyman_observed_experiments).astype('float')
                         / n_neyman_distribution_experiments)
@@ -381,6 +387,8 @@ def point_by_point_inference(algorithm='carl',
                 llr_neyman_observed_experiments[k] = -2. * np.sum(np.log(prediction))
 
             # Calculate p values and store median p value (calibrated)
+            logging.debug('LLR distribution: %s', llr_neyman_distribution_experiments)
+            logging.debug('LLR observed: %s', llr_neyman_observed_experiments)
             p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
                                              llr_neyman_observed_experiments).astype('float')
                         / n_neyman_distribution_experiments)

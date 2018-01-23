@@ -64,7 +64,8 @@ def score_regression_inference(options=''):
         theta1 = 422
 
     data_dir = '../data'
-    unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
+    unweighted_events_dir = '../data/unweighted_events'
+    #unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
     results_dir = '../results/parameterized'
 
     logging.info('Options:')
@@ -97,7 +98,7 @@ def score_regression_inference(options=''):
     assert n_thetas == r_test.shape[0]
 
     # p values
-    n_neyman_distribution_experiments = 100000
+    n_neyman_distribution_experiments = 1000
     n_neyman_observed_experiments = 101
 
     scaler = StandardScaler()
@@ -164,9 +165,11 @@ def score_regression_inference(options=''):
         that_neyman_distribution_experiments = np.zeros((n_neyman_distribution_experiments, n_expected_events, 2))
         event_probabilities = np.copy(weights_calibration[t]).astype(np.float64)
         event_probabilities /= np.sum(event_probabilities)
+        logging.debug('Probabilities to draw events: %s', event_probabilities)
         for i in range(n_neyman_distribution_experiments):
             indices = np.random.choice(X_calibration_transformed.shape[0], n_expected_events, p=event_probabilities)
             that_neyman_distribution_experiments[i, :, :] = regr.predict(X_calibration_transformed[indices])
+        logging.debug('Scores for distribution: %s', that_neyman_distribution_experiments)
 
         # Calculate distribution of test statistics
         tthat_neyman_distribution_experiments = that_neyman_distribution_experiments.dot(delta_theta)
@@ -175,6 +178,7 @@ def score_regression_inference(options=''):
             this_r = r_from_s(calibrator.predict(tthat_neyman_distribution_experiments[i]))
             llr_neyman_distribution_experiments[i] = -2. * np.sum(np.log(this_r))
         llr_neyman_distribution_experiments = np.sort(llr_neyman_distribution_experiments)
+        logging.debug('LLR distribution: %s', llr_neyman_distribution_experiments)
 
         # Calculate observed test statistics
         tthat_neyman_observed_experiments = that_neyman_observed_experiments.dot(delta_theta)
@@ -182,6 +186,7 @@ def score_regression_inference(options=''):
         for i in range(n_neyman_observed_experiments):
             this_r = r_from_s(calibrator.predict(tthat_neyman_observed_experiments[i]))
             llr_neyman_observed_experiments[i] = -2. * np.sum(np.log(this_r))
+        logging.debug('LLR observed: %s', llr_neyman_observed_experiments)
 
         # Calculate p values and store median p value
         p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
