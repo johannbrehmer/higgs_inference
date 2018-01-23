@@ -188,6 +188,7 @@ def score_regression_inference(options=''):
                                          llr_neyman_observed_experiments).astype('float')
                     / n_neyman_distribution_experiments)
         median_p_values.append(np.median(p_values))
+        logging.debug('Theta %s (%s): median p-value = %s', t, theta, median_p_values[-1])
 
         # For some benchmark thetas, save more information on Neyman construction
         if t == theta_benchmark_nottrained:

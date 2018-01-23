@@ -137,6 +137,7 @@ def truth_inference(options=''):
     # Save median p values
     median_p_values = np.asarray(median_p_values)
     np.save(results_dir + '/p_values_truth' + filename_addition + '.npy', median_p_values)
+    logging.debug('Theta %s (%s): median p-value = %s', t, theta, median_p_values[-1])
 
     # logging.info('Starting pseudo-experiments')
     # pseudoexperiments = np.zeros((n_thetas, n_pseudoexperiments_series, n_pseudoexperiments_repetitions))

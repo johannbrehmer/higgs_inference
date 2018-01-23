@@ -151,6 +151,7 @@ def point_by_point_inference(algorithm='carl',
             scaler.fit(np.array(X_train, dtype=np.float64))
             X_train_transformed = scaler.transform(X_train)
             X_test_transformed = scaler.transform(X_test)
+            X_calibration_transformed = scaler.transform(X_calibration)
 
             assert np.all(np.isfinite(X_train_transformed))
             assert np.all(np.isfinite(X_test_transformed))
@@ -178,9 +179,42 @@ def point_by_point_inference(algorithm='carl',
             elif t == theta_benchmark_trained:
                 np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
 
+            # Toy experimemts for distribution of test statistics (Neyman construction)
+            llr_neyman_distribution_experiments = np.zeros((n_neyman_distribution_experiments, n_expected_events))
+            event_probabilities = np.copy(weights_calibration[t]).astype(np.float64)
+            event_probabilities /= np.sum(event_probabilities)
+            for k in range(n_neyman_distribution_experiments):
+                indices = np.random.choice(X_calibration_transformed.shape[0], n_expected_events, p=event_probabilities)
+                llr_neyman_distribution_experiments[k] = -2. * np.sum(regr.predict(X_calibration_transformed[indices]))
+            llr_neyman_distribution_experiments = np.sort(llr_neyman_distribution_experiments)
 
+            # Calculate observed test statistics
+            llr_neyman_observed_experiments = np.zeros(n_neyman_observed_experiments)
+            for k in range(n_neyman_observed_experiments):
+                llr_neyman_observed_experiments[k] = -2. * np.sum(
+                    regr.predict(X_test_transformed[indices_neyman_observed_experiments[k]]))
+
+            # Calculate p values and store median p value
+            p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
+                                             llr_neyman_observed_experiments).astype('float')
+                        / n_neyman_distribution_experiments)
+            median_p_values.append(np.median(p_values))
+            logging.debug('Theta %s (%s): median p-value = %s', t, thetas[t], median_p_values[-1])
+
+            # For some benchmark thetas, save more information on Neyman construction
+            if t == theta_benchmark_nottrained:
+                np.save(results_dir + '/neyman_llr_distribution_nottrained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_distribution_experiments)
+                np.save(results_dir + '/neyman_llr_observed_nottrained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_observed_experiments)
+            elif t == theta_benchmark_trained:
+                np.save(results_dir + '/neyman_llr_distribution_trained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_distribution_experiments)
+                np.save(results_dir + '/neyman_llr_observed_trained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_observed_experiments)
 
         expected_llr = np.asarray(expected_llr)
+        median_p_values = np.asarray(median_p_values)
 
         logging.info('Interpolation')
 
@@ -192,6 +226,14 @@ def point_by_point_inference(algorithm='carl',
         # expected_llr_all = gp.predict(thetas)
         np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', expected_llr_all)
 
+        interpolator = LinearNDInterpolator(thetas[training_thetas], np.log(median_p_values))
+        median_p_values_all = np.exp(interpolator(thetas))
+        # gp = GaussianProcessRegressor(normalize_y=True,
+        #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
+        # gp.fit(thetas[training_thetas], expected_llr)
+        # expected_llr_all = gp.predict(thetas)
+        np.save(results_dir + '/p_values_' + algorithm + filename_addition + '.npy', median_p_values_all)
+
     ################################################################################
     # Carl approaches
     ################################################################################
@@ -200,6 +242,8 @@ def point_by_point_inference(algorithm='carl',
 
         expected_llr = []
         expected_llr_calibrated = []
+        median_p_values = []
+        median_p_values_calibrated = []
 
         # Loop over the 15 thetas
         for i, t in enumerate(training_thetas):
@@ -239,6 +283,43 @@ def point_by_point_inference(algorithm='carl',
                 np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
             elif t == theta_benchmark_trained:
                 np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
+
+            # Toy experimemts for distribution of test statistics (Neyman construction)
+            llr_neyman_distribution_experiments = np.zeros((n_neyman_distribution_experiments, n_expected_events))
+            event_probabilities = np.copy(weights_calibration[t]).astype(np.float64)
+            event_probabilities /= np.sum(event_probabilities)
+            for k in range(n_neyman_distribution_experiments):
+                indices = np.random.choice(X_calibration_transformed.shape[0], n_expected_events,
+                                           p=event_probabilities)
+                llr_neyman_distribution_experiments[k] = -2. * np.sum(np.log(
+                    ratio.predict(X_calibration_transformed[indices])))
+            llr_neyman_distribution_experiments = np.sort(llr_neyman_distribution_experiments)
+
+            # Calculate observed test statistics
+            llr_neyman_observed_experiments = np.zeros(n_neyman_observed_experiments)
+            for k in range(n_neyman_observed_experiments):
+                llr_neyman_observed_experiments[k] = -2. * np.sum(np.log(
+                    ratio.predict(X_test_transformed[indices_neyman_observed_experiments[k]])))
+
+            # Calculate p values and store median p value
+            p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
+                                             llr_neyman_observed_experiments).astype('float')
+                        / n_neyman_distribution_experiments)
+            median_p_values.append(np.median(p_values))
+            logging.debug('Theta %s (%s): median p-value = %s', t, thetas[t], median_p_values[-1])
+
+            # For some benchmark thetas, save more information on Neyman construction
+            if t == theta_benchmark_nottrained:
+                np.save(
+                    results_dir + '/neyman_llr_distribution_nottrained_' + algorithm + filename_addition + '.npy',
+                    llr_neyman_distribution_experiments)
+                np.save(results_dir + '/neyman_llr_observed_nottrained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_observed_experiments)
+            elif t == theta_benchmark_trained:
+                np.save(results_dir + '/neyman_llr_distribution_trained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_distribution_experiments)
+                np.save(results_dir + '/neyman_llr_observed_trained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_observed_experiments)
 
             # Calibration
             n_calibration_each = X_calibration_transformed.shape[0]
@@ -283,8 +364,52 @@ def point_by_point_inference(algorithm='carl',
                 # np.save(results_dir + '/cal1histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
                 # np.save(results_dir + '/cal1edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
 
+            # Toy experimemts for distribution of test statistics (Neyman construction) (calibrated)
+            llr_neyman_distribution_experiments = np.zeros((n_neyman_distribution_experiments, n_expected_events))
+            event_probabilities = np.copy(weights_calibration[t]).astype(np.float64)
+            event_probabilities /= np.sum(event_probabilities)
+            for k in range(n_neyman_distribution_experiments):
+                indices = np.random.choice(X_calibration_transformed.shape[0], n_expected_events,
+                                           p=event_probabilities)
+                llr_neyman_distribution_experiments[k] = -2. * np.sum(np.log(
+                    ratio_calibrated.predict(X_calibration_transformed[indices])))
+            llr_neyman_distribution_experiments = np.sort(llr_neyman_distribution_experiments)
+
+            # Calculate observed test statistics (calibrated)
+            llr_neyman_observed_experiments = np.zeros(n_neyman_observed_experiments)
+            for k in range(n_neyman_observed_experiments):
+                llr_neyman_observed_experiments[k] = -2. * np.sum(np.log(
+                    ratio.predict(X_test_transformed[indices_neyman_observed_experiments[k]])))
+
+            # Calculate p values and store median p value (calibrated)
+            p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
+                                             llr_neyman_observed_experiments).astype('float')
+                        / n_neyman_distribution_experiments)
+            median_p_values_calibrated.append(np.median(p_values))
+
+            # For some benchmark thetas, save more information on Neyman construction (calibrated)
+            if t == theta_benchmark_nottrained:
+                np.save(
+                    results_dir + '/neyman_llr_distribution_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy',
+                    llr_neyman_distribution_experiments)
+                np.save(
+                    results_dir + '/neyman_llr_observed_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy',
+                    llr_neyman_observed_experiments)
+            elif t == theta_benchmark_trained:
+                np.save(
+                    results_dir + '/neyman_llr_distribution_trained_' + algorithm + '_calibrated' + filename_addition + '.npy',
+                    llr_neyman_distribution_experiments)
+                np.save(
+                    results_dir + '/neyman_llr_observed_trained_' + algorithm + '_calibrated' + filename_addition + '.npy',
+                    llr_neyman_observed_experiments)
+
+            logging.debug('Theta %s (%s): median p-value = %s (with calibration: %s)', t, thetas[t],
+                          median_p_values[-1], median_p_values_calibrated[-1])
+
         expected_llr = np.asarray(expected_llr)
         expected_llr_calibrated = np.asarray(expected_llr_calibrated)
+        median_p_values = np.asarray(median_p_values)
+        median_p_values_calibrated = np.asarray(median_p_values_calibrated)
 
         logging.info('Starting interpolation')
 
@@ -294,7 +419,6 @@ def point_by_point_inference(algorithm='carl',
         #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
         # gp.fit(thetas[training_thetas], expected_llr)
         # expected_llr_all = gp.predict(thetas)
-
         np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', expected_llr_all)
 
         interpolator = LinearNDInterpolator(thetas[training_thetas], expected_llr_calibrated)
@@ -305,3 +429,20 @@ def point_by_point_inference(algorithm='carl',
         # expected_llr_calibrated_all = gp.predict(thetas)
         np.save(results_dir + '/expected_llr_' + algorithm + '_calibrated' + filename_addition + '.npy',
                 expected_llr_calibrated_all)
+
+        interpolator = LinearNDInterpolator(thetas[training_thetas], np.log(median_p_values))
+        median_p_values_all = np.exp(interpolator(thetas))
+        # gp = GaussianProcessRegressor(normalize_y=True,
+        #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
+        # gp.fit(thetas[training_thetas], expected_llr)
+        # expected_llr_all = gp.predict(thetas)
+        np.save(results_dir + '/p_values_' + algorithm + filename_addition + '.npy', median_p_values_all)
+
+        interpolator = LinearNDInterpolator(thetas[training_thetas], np.log(median_p_values_calibrated))
+        median_p_values_calibrated_all = np.exp(interpolator(thetas))
+        # gp = GaussianProcessRegressor(normalize_y=True,
+        #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
+        # gp.fit(thetas[training_thetas], expected_llr)
+        # expected_llr_all = gp.predict(thetas)
+        np.save(results_dir + '/p_values_' + algorithm + '_calibrated' + filename_addition + '.npy',
+                median_p_values_calibrated_all)
