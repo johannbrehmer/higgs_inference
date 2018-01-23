@@ -96,7 +96,7 @@ def truth_inference(options=''):
     logging.info('Starting toy experiments for Neyman construction')
     indices_neyman_observed_experiments = np.zeros((n_neyman_observed_experiments, n_expected_events), dtype=np.int32)
     for i in range(n_neyman_observed_experiments):
-        indices_neyman_observed_experiments = np.random.choice(r_test.shape[1], n_expected_events)
+        indices_neyman_observed_experiments[i] = np.random.choice(r_test.shape[1], n_expected_events)
 
     median_p_values = []
 

@@ -121,9 +121,16 @@ def point_by_point_inference(algorithm='carl',
     # Regression approaches
     ################################################################################
 
+    # Toy experiments for p values
+    logging.info('Starting toy experiments for Neyman construction')
+    indices_neyman_observed_experiments = np.zeros((n_neyman_observed_experiments, n_expected_events), dtype=np.int32)
+    for i in range(n_neyman_observed_experiments):
+        indices_neyman_observed_experiments = np.random.choice(r_test.shape[1], n_expected_events)
+
     if algorithm == 'regression':
 
         expected_llr = []
+        median_p_values = []
 
         # Loop over the 15 thetas
 
@@ -165,10 +172,13 @@ def point_by_point_inference(algorithm='carl',
 
             expected_llr.append(- 2. * n_expected_events / n_events_test * np.sum(np.log(this_r)))
 
+            # For some benchmark thetas, save r for each phase-space point
             if t == theta_benchmark_nottrained:
                 np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
             elif t == theta_benchmark_trained:
                 np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
+
+
 
         expected_llr = np.asarray(expected_llr)
 
