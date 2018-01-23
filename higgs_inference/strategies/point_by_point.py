@@ -290,15 +290,15 @@ def point_by_point_inference(algorithm='carl',
             for k in range(n_neyman_distribution_experiments):
                 indices = np.random.choice(X_calibration_transformed.shape[0], n_expected_events,
                                            p=event_probabilities)
-                llr_neyman_distribution_experiments[k] = -2. * np.sum(np.log(
-                    ratio.predict(X_calibration_transformed[indices])))
+                prediction, _ = ratio.predict(X_calibration_transformed[indices])
+                llr_neyman_distribution_experiments[k] = -2. * np.sum(np.log(prediction))
             llr_neyman_distribution_experiments = np.sort(llr_neyman_distribution_experiments)
 
             # Calculate observed test statistics
             llr_neyman_observed_experiments = np.zeros(n_neyman_observed_experiments)
             for k in range(n_neyman_observed_experiments):
-                llr_neyman_observed_experiments[k] = -2. * np.sum(np.log(
-                    ratio.predict(X_test_transformed[indices_neyman_observed_experiments[k]])))
+                prediction, _ = ratio.predict(X_test_transformed[indices_neyman_observed_experiments[k]])
+                llr_neyman_observed_experiments[k] = -2. * np.sum(np.log(prediction))
 
             # Calculate p values and store median p value
             p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
@@ -370,15 +370,15 @@ def point_by_point_inference(algorithm='carl',
             for k in range(n_neyman_distribution_experiments):
                 indices = np.random.choice(X_calibration_transformed.shape[0], n_expected_events,
                                            p=event_probabilities)
-                llr_neyman_distribution_experiments[k] = -2. * np.sum(np.log(
-                    ratio_calibrated.predict(X_calibration_transformed[indices])))
+                prediction, _ = ratio_calibrated.predict(X_calibration_transformed[indices])
+                llr_neyman_distribution_experiments[k] = -2. * np.sum(np.log(prediction))
             llr_neyman_distribution_experiments = np.sort(llr_neyman_distribution_experiments)
 
             # Calculate observed test statistics (calibrated)
             llr_neyman_observed_experiments = np.zeros(n_neyman_observed_experiments)
             for k in range(n_neyman_observed_experiments):
-                llr_neyman_observed_experiments[k] = -2. * np.sum(np.log(
-                    ratio.predict(X_test_transformed[indices_neyman_observed_experiments[k]])))
+                prediction, _ = ratio_calibrated.predict(X_test_transformed[indices_neyman_observed_experiments[k]])
+                llr_neyman_observed_experiments[k] = -2. * np.sum(np.log(prediction))
 
             # Calculate p values and store median p value (calibrated)
             p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
