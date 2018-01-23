@@ -97,7 +97,7 @@ def score_regression_inference(options=''):
     assert n_thetas == r_test.shape[0]
 
     # p values
-    n_neyman_distribution_experiments = 1000000
+    n_neyman_distribution_experiments = 100000
     n_neyman_observed_experiments = 101
 
     scaler = StandardScaler()

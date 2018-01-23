@@ -114,7 +114,7 @@ def point_by_point_inference(algorithm='carl',
     assert n_thetas == r_test.shape[0]
 
     # p values
-    n_neyman_distribution_experiments = 1000000
+    n_neyman_distribution_experiments = 100000
     n_neyman_observed_experiments = 101
 
     ################################################################################
@@ -125,7 +125,7 @@ def point_by_point_inference(algorithm='carl',
     logging.info('Starting toy experiments for observed events')
     indices_neyman_observed_experiments = np.zeros((n_neyman_observed_experiments, n_expected_events), dtype=np.int32)
     for i in range(n_neyman_observed_experiments):
-        indices_neyman_observed_experiments = np.random.choice(n_events_test, n_expected_events)
+        indices_neyman_observed_experiments[i] = np.random.choice(n_events_test, n_expected_events)
 
     if algorithm == 'regression':
 

@@ -175,7 +175,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     # n_pseudoexperiments_repetitions = 1000
 
     # p values
-    n_neyman_distribution_experiments = 1000000
+    n_neyman_distribution_experiments = 100000
     n_neyman_observed_experiments = 101
 
     scaler = StandardScaler()
@@ -209,7 +209,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         weights_calibration = weights_calibration[:, ::100]
         n_events_test = len(X_test_transformed)
         # n_pseudoexperiments_repetitions = 10
-        n_neyman_distribution_experiments = 100000
+        n_neyman_distribution_experiments = 10000
         n_neyman_observed_experiments = 11
 
     ################################################################################
@@ -220,7 +220,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     logging.info('Starting toy experiments for observed events')
     indices_neyman_observed_experiments = np.zeros((n_neyman_observed_experiments, n_expected_events), dtype=np.int32)
     for i in range(n_neyman_observed_experiments):
-        indices_neyman_observed_experiments = np.random.choice(n_events_test, n_expected_events)
+        indices_neyman_observed_experiments[i] = np.random.choice(n_events_test, n_expected_events)
 
     if algorithm in ['regression', 'combinedregression']:
 

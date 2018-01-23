@@ -60,7 +60,7 @@ def truth_inference(options=''):
     xx, yy = np.meshgrid(xi, yi)
 
     # p values
-    n_neyman_distribution_experiments = 1000000
+    n_neyman_distribution_experiments = 100000
     n_neyman_observed_experiments = 101
 
     ################################################################################
