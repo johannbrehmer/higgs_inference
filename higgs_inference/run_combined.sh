@@ -15,8 +15,12 @@ module load theano/0.9.0
 module load tensorflow/python2.7/20170707
 module load keras/2.0.2
 
-cd /home/jb6504/higgs_inference/inference
+cd /home/jb6504/higgs_inference/higgs_inference
 
 # python -u experiments.py combined -o shallow
 python -u experiments.py combined
 # python -u experiments.py combined -o deep
+
+# python -u experiments.py combined --training random -o shallow
+python -u experiments.py combined --training random
+# python -u experiments.py combined --training random -o deep

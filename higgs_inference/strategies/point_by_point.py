@@ -122,10 +122,10 @@ def point_by_point_inference(algorithm='carl',
     ################################################################################
 
     # Toy experiments for p values
-    logging.info('Starting toy experiments for Neyman construction')
+    logging.info('Starting toy experiments for observed events')
     indices_neyman_observed_experiments = np.zeros((n_neyman_observed_experiments, n_expected_events), dtype=np.int32)
     for i in range(n_neyman_observed_experiments):
-        indices_neyman_observed_experiments = np.random.choice(r_test.shape[1], n_expected_events)
+        indices_neyman_observed_experiments = np.random.choice(n_events_test, n_expected_events)
 
     if algorithm == 'regression':
 
@@ -199,7 +199,6 @@ def point_by_point_inference(algorithm='carl',
                                              llr_neyman_observed_experiments).astype('float')
                         / n_neyman_distribution_experiments)
             median_p_values.append(np.median(p_values))
-            logging.debug('Theta %s (%s): median p-value = %s', t, thetas[t], median_p_values[-1])
 
             # For some benchmark thetas, save more information on Neyman construction
             if t == theta_benchmark_nottrained:

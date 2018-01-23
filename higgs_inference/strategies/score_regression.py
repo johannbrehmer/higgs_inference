@@ -123,7 +123,7 @@ def score_regression_inference(options=''):
     that_test = regr.predict(X_test_transformed)
 
     # Toy experiments for p values
-    logging.info('Starting toy experiments for Neyman construction')
+    logging.info('Starting toy experiments for observed events')
     that_neyman_observed_experiments = np.zeros((n_neyman_observed_experiments, n_expected_events, 2))
     for i in range(n_neyman_observed_experiments):
         indices = np.random.choice(X_test_transformed.shape[0], n_expected_events)
