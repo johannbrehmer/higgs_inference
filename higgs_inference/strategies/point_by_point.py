@@ -113,6 +113,10 @@ def point_by_point_inference(algorithm='carl',
     n_events_test = X_test.shape[0]
     assert n_thetas == r_test.shape[0]
 
+    # p values
+    n_neyman_distribution_experiments = 1000000
+    n_neyman_observed_experiments = 101
+
     ################################################################################
     # Regression approaches
     ################################################################################

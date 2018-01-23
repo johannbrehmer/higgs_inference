@@ -169,9 +169,14 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     n_expected_events = 36
     n_events_test = X_test.shape[0]
     assert n_thetas == r_test.shape[0]
-    n_pseudoexperiments_series = 5
-    n_pseudoexperiments_events = [10, 30, 100, 300, 1000]
-    n_pseudoexperiments_repetitions = 1000
+
+    # n_pseudoexperiments_series = 5
+    # n_pseudoexperiments_events = [10, 30, 100, 300, 1000]
+    # n_pseudoexperiments_repetitions = 1000
+
+    # p values
+    n_neyman_distribution_experiments = 1000000
+    n_neyman_observed_experiments = 101
 
     scaler = StandardScaler()
     scaler.fit(np.array(X_train, dtype=np.float64))

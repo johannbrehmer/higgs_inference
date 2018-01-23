@@ -183,7 +183,7 @@ def score_regression_inference(options=''):
             this_r = r_from_s(calibrator.predict(tthat_neyman_observed_experiments[i]))
             llr_neyman_observed_experiments[i] = -2. * np.sum(np.log(this_r))
 
-        # Calculate p values
+        # Calculate p values and store median p value
         p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
                                          llr_neyman_observed_experiments).astype('float')
                     / n_neyman_distribution_experiments)
@@ -201,6 +201,7 @@ def score_regression_inference(options=''):
             np.save(results_dir + '/neyman_llr_observed_trained_scoreregression' + filename_addition + '.npy',
                     llr_neyman_observed_experiments)
 
+    # Save expected LLR and median p values
     expected_llr = np.asarray(expected_llr)
     median_p_values = np.asarray(median_p_values)
     np.save(results_dir + '/llr_scoreregression' + filename_addition + '.npy', expected_llr)
