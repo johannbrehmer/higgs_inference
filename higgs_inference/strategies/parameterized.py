@@ -175,7 +175,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     # n_pseudoexperiments_repetitions = 1000
 
     # p values
-    n_neyman_distribution_experiments = 100000
+    n_neyman_distribution_experiments = 1000
     n_neyman_observed_experiments = 101
 
     scaler = StandardScaler()
@@ -209,7 +209,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         weights_calibration = weights_calibration[:, ::100]
         n_events_test = len(X_test_transformed)
         # n_pseudoexperiments_repetitions = 10
-        n_neyman_distribution_experiments = 10000
+        n_neyman_distribution_experiments = 100
         n_neyman_observed_experiments = 11
 
     ################################################################################
@@ -309,6 +309,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 llr_neyman_observed_experiments[k] = -2. * np.sum(prediction[:, 0])
 
             # Calculate p values and store median p value
+            logging.debug('LLR distribution: %s', llr_neyman_distribution_experiments)
+            logging.debug('LLR observed: %s', llr_neyman_observed_experiments)
             p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
                                              llr_neyman_observed_experiments).astype('float')
                         / n_neyman_distribution_experiments)
