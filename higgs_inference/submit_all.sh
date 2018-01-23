@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# sbatch run_truth.sh
+sbatch run_truth.sh
 
 sbatch run_scoreregression.sh
 
-# sbatch run_carl_point_by_point.sh
-# sbatch run_regression_point_by_point.sh
+sbatch run_carl_point_by_point.sh
+sbatch run_regression_point_by_point.sh
 
 # sleep 60
 
