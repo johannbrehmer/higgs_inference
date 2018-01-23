@@ -22,5 +22,5 @@ python -u experiments.py carl
 # python -u experiments.py carl -o deep
 
 # python -u experiments.py carl --training random -o shallow
-python -u experiments.py carl --training random
+# python -u experiments.py carl --training random
 # python -u experiments.py carl --training random -o deep

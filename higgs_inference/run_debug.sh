@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=sreg-debug
+#SBATCH --job-name=debug
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
@@ -17,4 +17,4 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py scoreregression -o shallow short
+python -u experiments.py carl -o debug
