@@ -208,7 +208,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         X_calibration_transformed = X_calibration_transformed[::100]
         weights_calibration = weights_calibration[:, ::100]
         n_events_test = len(X_test_transformed)
-        #n_pseudoexperiments_repetitions = 10
+        # n_pseudoexperiments_repetitions = 10
         n_neyman_distribution_experiments = 100000
         n_neyman_observed_experiments = 11
 
@@ -261,7 +261,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             thetas0_array[:, :] = thetas[t]
             X_thetas_test = np.hstack((X_test_transformed, thetas0_array))
 
-            # Prepare calibration data
+            # Prepare calibration data (for toy experiments)
             n_calibration_each = X_calibration_transformed.shape[0]
             thetas0_array = np.zeros((n_calibration_each, 2), dtype=X_calibration_transformed.dtype)
             thetas0_array[:, :] = thetas[t]
@@ -305,8 +305,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             # Calculate observed test statistics
             llr_neyman_observed_experiments = np.zeros(n_neyman_observed_experiments)
             for k in range(n_neyman_observed_experiments):
-                prediction = regr.predict(X_thetas_test[indices])
-                llr_neyman_observed_experiments[k] = -2. * np.sum(prediction[:,0])
+                prediction = regr.predict(X_thetas_test[indices_neyman_observed_experiments[k]])
+                llr_neyman_observed_experiments[k] = -2. * np.sum(prediction[:, 0])
 
             # Calculate p values and store median p value
             p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
@@ -361,10 +361,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         # np.save(results_dir + '/pseudoexperiments_variance_' + algorithm + filename_addition + '.npy',
         #         pseudoexperiments_variance)
 
-
-
-
-
     ################################################################################
     # Carl approaches
     ################################################################################
@@ -414,19 +410,29 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         else:
             raise ValueError()
 
+        # Fit
         clf.fit(X_thetas_train[::], y_score_train[::],
                 callbacks=([EarlyStopping(verbose=1, patience=3)] if early_stopping else None))
 
-        logging.info('Starting evaluation')
+        # carl ratio object
         ratio = ClassifierScoreRatio(clf, prefit=True)
+
+        logging.info('Starting evaluation and toy experiments for Neyman construction')
         expected_llr = []
+        median_p_values = []
 
         for t, theta in enumerate(thetas):
 
-            # Prepare data
+            # Prepare test data
             thetas0_array = np.zeros((X_test_transformed.shape[0], 2), dtype=X_test_transformed.dtype)
             thetas0_array[:, :] = thetas[t]
             X_thetas_test = np.hstack((X_test_transformed, thetas0_array))
+
+            # Prepare calibration data (for toy experiments)
+            n_calibration_each = X_calibration_transformed.shape[0]
+            thetas0_array = np.zeros((n_calibration_each, 2), dtype=X_calibration_transformed.dtype)
+            thetas0_array[:, :] = thetas[t]
+            X_thetas_calibration = np.hstack((X_calibration_transformed, thetas0_array))
 
             # Evaluation
             this_r, this_other = ratio.predict(X_thetas_test)
@@ -452,8 +458,45 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                     np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_ri)
                     np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_wi)
 
+            # Toy experiments for distribution of test statistics (Neyman construction)
+            llr_neyman_distribution_experiments = np.zeros((n_neyman_distribution_experiments, n_expected_events))
+            event_probabilities = np.copy(weights_calibration[t]).astype(np.float64)
+            event_probabilities /= np.sum(event_probabilities)
+            for k in range(n_neyman_distribution_experiments):
+                indices = np.random.choice(X_calibration_transformed.shape[0], n_expected_events, p=event_probabilities)
+                this_r, _ = ratio.predict(X_thetas_calibration[indices])
+                llr_neyman_distribution_experiments[k] = -2. * np.sum(np.log(this_r))
+            llr_neyman_distribution_experiments = np.sort(llr_neyman_distribution_experiments)
+
+            # Calculate observed test statistics
+            llr_neyman_observed_experiments = np.zeros(n_neyman_observed_experiments)
+            for k in range(n_neyman_observed_experiments):
+                this_r, _ = ratio.predict(X_thetas_test[indices_neyman_observed_experiments[k]])
+                llr_neyman_observed_experiments[k] = -2. * np.sum(np.log(this_r))
+
+            # Calculate p values and store median p value
+            p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
+                                             llr_neyman_observed_experiments).astype('float')
+                        / n_neyman_distribution_experiments)
+            median_p_values.append(np.median(p_values))
+            logging.debug('Theta %s (%s): median p-value = %s', t, theta, median_p_values[-1])
+
+            # For some benchmark thetas, save more information on Neyman construction
+            if t == theta_benchmark_nottrained:
+                np.save(results_dir + '/neyman_llr_distribution_nottrained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_distribution_experiments)
+                np.save(results_dir + '/neyman_llr_observed_nottrained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_observed_experiments)
+            elif t == theta_benchmark_trained:
+                np.save(results_dir + '/neyman_llr_distribution_trained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_distribution_experiments)
+                np.save(results_dir + '/neyman_llr_observed_trained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_observed_experiments)
+
         expected_llr = np.asarray(expected_llr)
+        median_p_values = np.asarray(median_p_values)
         np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', expected_llr)
+        np.save(results_dir + '/p_values_' + algorithm + filename_addition + '.npy', median_p_values)
 
         logging.info('Starting roaming')
         r_roam = []
@@ -484,8 +527,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         # np.save(results_dir + '/pseudoexperiments_variance_' + algorithm + filename_addition + '.npy',
         #         pseudoexperiments_variance)
 
-        logging.info('Starting calibrated evaluation:')
+        logging.info('Starting calibrated evaluation, toy experiments for Neyman construction, and roaming')
         expected_llr_calibrated = []
+        median_p_values_calibrated = []
         r_roam_temp = np.zeros((n_thetas, n_roaming))
         # pseudoexperiments_calibrated = np.zeros((n_thetas, n_pseudoexperiments_series, n_pseudoexperiments_repetitions))
         # Pick indices for pseudo-experiments
@@ -563,8 +607,48 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             #         this_r, _ = ratio.predict(X_thetas_pseudoexp_test)
             #         pseudoexperiments_calibrated[t, i, j] = (- n_expected_events / float(n) * np.sum(np.log(this_r)))
 
+            # Toy experiments for distribution of test statistics (Neyman construction)
+            llr_neyman_distribution_experiments = np.zeros((n_neyman_distribution_experiments, n_expected_events))
+            event_probabilities = np.copy(weights_calibration[t]).astype(np.float64)
+            event_probabilities /= np.sum(event_probabilities)
+            for k in range(n_neyman_distribution_experiments):
+                indices = np.random.choice(n_calibration_each, n_expected_events, p=event_probabilities)
+                this_r, _ = ratio_calibrated.predict(X_thetas_calibration[indices])
+                llr_neyman_distribution_experiments[k] = -2. * np.sum(np.log(this_r))
+            llr_neyman_distribution_experiments = np.sort(llr_neyman_distribution_experiments)
+
+            # Calculate observed test statistics
+            llr_neyman_observed_experiments = np.zeros(n_neyman_observed_experiments)
+            for k in range(n_neyman_observed_experiments):
+                this_r, _ = ratio.predict(X_thetas_test[indices_neyman_observed_experiments[k]])
+                llr_neyman_observed_experiments[k] = -2. * np.sum(np.log(this_r))
+
+            # Calculate p values and store median p value
+            p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
+                                             llr_neyman_observed_experiments).astype('float')
+                        / n_neyman_distribution_experiments)
+            median_p_values_calibrated.append(np.median(p_values))
+            logging.debug('Theta %s (%s), after calibration: median p-value = %s', t, theta, median_p_values[-1])
+
+            # For some benchmark thetas, save more information on Neyman construction
+            if t == theta_benchmark_nottrained:
+                np.save(results_dir + '/neyman_llr_distribution_nottrained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_distribution_experiments)
+                np.save(results_dir + '/neyman_llr_observed_nottrained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_observed_experiments)
+            elif t == theta_benchmark_trained:
+                np.save(results_dir + '/neyman_llr_distribution_trained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_distribution_experiments)
+                np.save(results_dir + '/neyman_llr_observed_trained_' + algorithm + filename_addition + '.npy',
+                        llr_neyman_observed_experiments)
+
+        # Save LLR and median p values
         expected_llr_calibrated = np.asarray(expected_llr_calibrated)
-        np.save(results_dir + '/llr_' + algorithm + '_calibrated' + filename_addition + '.npy', expected_llr_calibrated)
+        median_p_values_calibrated = np.asarray(median_p_values_calibrated)
+        np.save(results_dir + '/llr_' + algorithm + '_calibrated' + filename_addition + '.npy',
+                expected_llr_calibrated)
+        np.save(results_dir + '/p_values_' + algorithm + '_calibrated' + filename_addition + '.npy',
+                median_p_values_calibrated)
 
         # logging.info('Evaluating calibrated pseudo-experiments')
         # pseudoexperiments_variance_calibrated = np.zeros((n_thetas, n_pseudoexperiments_series))
@@ -574,7 +658,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         # np.save(results_dir + '/pseudoexperiments_variance_' + algorithm + '_calibrated' + filename_addition + '.npy',
         #         pseudoexperiments_variance_calibrated)
 
-        logging.info('Evaluating calibrated roaming')
+        logging.info('Interpolating calibrated roaming')
         gp = GaussianProcessRegressor(normalize_y=True,
                                       kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
         gp.fit(thetas[:], np.log(r_roam_temp))
