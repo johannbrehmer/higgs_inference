@@ -3,7 +3,7 @@
 #SBATCH --job-name=data
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=256GB
+#SBATCH --mem=512GB
 #SBATCH --time=8:00:00
 
 # Modules
