@@ -475,6 +475,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 llr_neyman_observed_experiments[k] = -2. * np.sum(np.log(this_r))
 
             # Calculate p values and store median p value
+            logging.debug('LLR distribution: %s', llr_neyman_distribution_experiments)
+            logging.debug('LLR observed: %s', llr_neyman_observed_experiments)
             p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
                                              llr_neyman_observed_experiments).astype('float')
                         / n_neyman_distribution_experiments)
