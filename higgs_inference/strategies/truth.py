@@ -18,6 +18,9 @@ from sklearn.gaussian_process.kernels import ConstantKernel as C, Matern
 ################################################################################
 
 def truth_inference(options=''):
+
+    logging.info('Starting truth calculation')
+
     denom1_mode = ('denom1' in options)
 
     filename_addition = ''

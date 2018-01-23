@@ -8,7 +8,7 @@ def s_from_r(r):
 
 
 def r_from_s(s, epsilon=1.e-3):
-    return (1.-s)/(s + epsilon)
+    return (1. - s + epsilon)/(s + epsilon)
 
 
 def stack_layers(layers):

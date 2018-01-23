@@ -29,7 +29,7 @@ def score_regression_inference(options=''):
     :param options: Further options in a list of strings or string.
     """
 
-    logging.info('Starting score regression higgs_inference')
+    logging.info('Starting score regression inference')
 
     deep_mode = ('deep' in options)
     shallow_mode = ('shallow' in options)
@@ -79,6 +79,7 @@ def score_regression_inference(options=''):
     thetas = np.load(data_dir + '/thetas/thetas_parameterized.npy')
 
     n_thetas = len(thetas)
+    theta_expected = 0
     theta_benchmark_trained = 422
     theta_benchmark_nottrained = 9
     # theta_score = 0
@@ -98,8 +99,8 @@ def score_regression_inference(options=''):
     assert n_thetas == r_test.shape[0]
 
     # p values
-    n_neyman_distribution_experiments = 1000
-    n_neyman_observed_experiments = 101
+    n_neyman_distribution_experiments = 10000
+    n_neyman_observed_experiments = 1001
 
     scaler = StandardScaler()
     scaler.fit(np.array(X_train, dtype=np.float64))
@@ -165,20 +166,41 @@ def score_regression_inference(options=''):
         that_neyman_distribution_experiments = np.zeros((n_neyman_distribution_experiments, n_expected_events, 2))
         event_probabilities = np.copy(weights_calibration[t]).astype(np.float64)
         event_probabilities /= np.sum(event_probabilities)
-        logging.debug('Probabilities to draw events: %s', event_probabilities)
         for i in range(n_neyman_distribution_experiments):
             indices = np.random.choice(X_calibration_transformed.shape[0], n_expected_events, p=event_probabilities)
             that_neyman_distribution_experiments[i, :, :] = regr.predict(X_calibration_transformed[indices])
-        logging.debug('Scores for distribution: %s', that_neyman_distribution_experiments)
+
+        if not np.all(np.isfinite(that_neyman_distribution_experiments)):
+            logging.warning('%s NaNs in score distribution',
+                            np.sum(np.invert(np.isfinite(that_neyman_distribution_experiments))))
 
         # Calculate distribution of test statistics
         tthat_neyman_distribution_experiments = that_neyman_distribution_experiments.dot(delta_theta)
+
+        if not np.all(np.isfinite(tthat_neyman_distribution_experiments)):
+            logging.warning('%s NaNs in theta times scores distribution',
+                            np.sum(np.invert(np.isfinite(tthat_neyman_distribution_experiments))))
+
         llr_neyman_distribution_experiments = np.zeros(n_neyman_distribution_experiments)
         for i in range(n_neyman_distribution_experiments):
-            this_r = r_from_s(calibrator.predict(tthat_neyman_distribution_experiments[i]))
+            this_s = calibrator.predict(tthat_neyman_distribution_experiments[i])
+
+            if not np.all(np.isfinite(this_s)):
+                logging.warning('NaN in calibrator output!')
+
+            this_r = r_from_s(this_s)
+
+            if not np.all(np.isfinite(this_r)):
+                logging.warning('NaN in calibrator output transformed to s!')
+
             llr_neyman_distribution_experiments[i] = -2. * np.sum(np.log(this_r))
+
+        if not np.all(np.isfinite(llr_neyman_distribution_experiments)):
+            logging.warning('%s NaNs in LLR distribution!',
+                            np.sum(np.invert(np.isfinite(llr_neyman_distribution_experiments))))
+
         llr_neyman_distribution_experiments = np.sort(llr_neyman_distribution_experiments)
-        logging.debug('LLR distribution: %s', llr_neyman_distribution_experiments)
+        #logging.debug('LLR distribution: %s', llr_neyman_distribution_experiments)
 
         # Calculate observed test statistics
         tthat_neyman_observed_experiments = that_neyman_observed_experiments.dot(delta_theta)
@@ -186,17 +208,22 @@ def score_regression_inference(options=''):
         for i in range(n_neyman_observed_experiments):
             this_r = r_from_s(calibrator.predict(tthat_neyman_observed_experiments[i]))
             llr_neyman_observed_experiments[i] = -2. * np.sum(np.log(this_r))
-        logging.debug('LLR observed: %s', llr_neyman_observed_experiments)
+        #logging.debug('LLR observed: %s', llr_neyman_observed_experiments)
 
         # Calculate p values and store median p value
         p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
                                          llr_neyman_observed_experiments).astype('float')
-                    / n_neyman_distribution_experiments)
+                    / np.sum(np.isfinite(llr_neyman_distribution_experiments)))
         median_p_values.append(np.median(p_values))
         logging.debug('Theta %s (%s): median p-value = %s', t, theta, median_p_values[-1])
 
         # For some benchmark thetas, save more information on Neyman construction
-        if t == theta_benchmark_nottrained:
+        if t == theta_expected:
+            np.save(results_dir + '/neyman_llr_distribution_expected_scoreregression' + filename_addition + '.npy',
+                    llr_neyman_distribution_experiments)
+            np.save(results_dir + '/neyman_llr_observed_expected_scoreregression' + filename_addition + '.npy',
+                    llr_neyman_observed_experiments)
+        elif t == theta_benchmark_nottrained:
             np.save(results_dir + '/neyman_llr_distribution_nottrained_scoreregression' + filename_addition + '.npy',
                     llr_neyman_distribution_experiments)
             np.save(results_dir + '/neyman_llr_observed_nottrained_scoreregression' + filename_addition + '.npy',

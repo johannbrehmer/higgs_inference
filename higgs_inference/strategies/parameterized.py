@@ -43,7 +43,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     :param options: Further options in a list of strings or string.
     """
 
-    logging.info('Starting parameterized higgs_inference')
+    logging.info('Starting parameterized inference ')
 
     assert algorithm in ['carl', 'score', 'combined', 'regression', 'combinedregression']
     assert training_sample in ['baseline', 'basis', 'random']
