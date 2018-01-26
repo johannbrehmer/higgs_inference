@@ -2,7 +2,7 @@
 
 # sbatch run_truth.sh
 
-sleep 30
+# sleep 30
 
 sbatch run_scoreregression.sh
 
