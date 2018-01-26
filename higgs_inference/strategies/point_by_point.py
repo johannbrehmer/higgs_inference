@@ -174,7 +174,7 @@ def point_by_point_inference(algorithm='carl',
             log_r_neyman_observed = regr.predict(
                 X_neyman_observed_transformed.reshape((-1, X_neyman_observed_transformed.shape[2]))
             )
-            llr_neyman_observed = -2. * np.sum(log_r_neyman_observed.reshape((-1, 36)), axis=1)
+            llr_neyman_observed = -2. * np.sum(log_r_neyman_observed.reshape((-1, n_expected_events)), axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + '.npy',
                     llr_neyman_observed)
 
@@ -186,7 +186,7 @@ def point_by_point_inference(algorithm='carl',
             log_r_neyman_distribution = regr.predict(
                 X_neyman_distribution_transformed.reshape((-1, X_neyman_distribution_transformed.shape[2]))
             )
-            llr_neyman_distribution = -2. * np.sum(log_r_neyman_distribution.reshape((-1, 36)), axis=1)
+            llr_neyman_distribution = -2. * np.sum(log_r_neyman_distribution.reshape((-1, n_expected_events)), axis=1)
             np.save(neyman_dir + '/neyman_llr_distribution_' + algorithm + '_' + str(t) + '.npy',
                     llr_neyman_distribution)
 

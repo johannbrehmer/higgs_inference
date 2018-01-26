@@ -59,10 +59,10 @@ logging.info('  Neyman construction:     %s', args.neyman)
 logging.info('  Roaming:                 %s', args.roam)
 logging.info('Options:')
 if args.alternativedenom:
-    logging.info('  Denominator: standard')
+    logging.info('  Denominator:             alternative')
 else:
-    logging.info('  Denominator: alternative')
-logging.info('  Debug mode:  %s', args.debug)
+    logging.info('  Denominator:             standard')
+logging.info('  Debug mode:              %s', args.debug)
 
 filename_addition = ''
 if args.alternativedenom:
