@@ -8,6 +8,7 @@ from os import sys, path
 
 sys.path.append(path.abspath(path.join(path.dirname(__file__), '..')))
 
+from higgs_inference.various.p_values import calculate_all_CL
 from higgs_inference.strategies.truth import truth_inference
 from higgs_inference.strategies.parameterized import parameterized_inference
 from higgs_inference.strategies.point_by_point import point_by_point_inference
@@ -20,9 +21,10 @@ logging.info('Welcome! How are you today?')
 # Parse arguments
 parser = argparse.ArgumentParser(description='Inference experiments for Higgs EFT measurements')
 
-parser.add_argument('algorithm', help='Algorithm type. Options are "truth", "carl", "score" (in the carl setup), '
+parser.add_argument('algorithm', help='Algorithm type. Options are "p" or "cl" for the calculation of p values '
+                                      + 'through the Neyman construction; "truth", "carl", "score" (in the carl setup), '
                                       + '"combined" (carl + score), "regression", "combinedregression" '
-                                      + '(regression + score), or "scoreregression" (regresses on the score and'
+                                      + '(regression + score), or "scoreregression" (regresses on the score and '
                                       + 'performs density estimation on theta.score.')
 parser.add_argument("-pbp", "--pointbypoint", action="store_true",
                     help="Point-by-point rather than parameterized setup.")
@@ -36,11 +38,15 @@ args = parser.parse_args()
 logging.info('The algorithm of the day is: %s', args.algorithm)
 
 # Sanity checks
-assert args.algorithm in ['truth', 'carl', 'score', 'combined', 'regression', 'combinedregression', 'scoreregression']
+assert args.algorithm in ['p', 'cl', 'pvalues',
+                          'truth', 'carl', 'score', 'combined', 'regression', 'combinedregression', 'scoreregression']
 assert args.training in ['baseline', 'basis', 'random']
 
 # Start calculation
-if args.algorithm == 'truth':
+if args.algorithm in ['p', 'p-values', 'pvalues']:
+    calculate_all_CL()
+
+elif args.algorithm == 'truth':
     truth_inference(options=args.options)
 
 elif args.algorithm == 'scoreregression':

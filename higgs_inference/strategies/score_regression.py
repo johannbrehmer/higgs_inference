@@ -67,7 +67,7 @@ def score_regression_inference(options=''):
     # unweighted_events_dir = '../data/unweighted_events'
     unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
     results_dir = '../results/score_regression'
-    Neyman_dir = results_dir + '/neyman'
+    neyman_dir = results_dir + '/neyman'
 
     logging.info('Options:')
     logging.info('  Number of epochs:         %s', n_epochs)
@@ -94,8 +94,7 @@ def score_regression_inference(options=''):
     X_test = np.load(unweighted_events_dir + '/X_test' + input_filename_addition + '.npy')
     # scores_test = np.load(unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
     r_test = np.load(unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
-
-    X_Neyman_observed = np.load(unweighted_events_dir + '/X_neyman_observed.npy')
+    X_neyman_observed = np.load(unweighted_events_dir + '/X_neyman_observed.npy')
 
     n_expected_events = 36
     n_events_test = X_test.shape[0]
@@ -106,7 +105,7 @@ def score_regression_inference(options=''):
     X_train_transformed = scaler.transform(X_train)
     X_test_transformed = scaler.transform(X_test)
     X_calibration_transformed = scaler.transform(X_calibration)
-    X_Neyman_observed_transformed = scaler.transform(X_Neyman_observed)
+    X_neyman_observed_transformed = scaler.transform(X_neyman_observed)
 
     ################################################################################
     # Score regression
@@ -155,36 +154,36 @@ def score_regression_inference(options=''):
             np.save(results_dir + '/r_trained_scoreregression' + filename_addition + '.npy', r_hat_test)
 
         # Neyman construction: evaluate observed sample (raw)
-        tthat_Neyman_observed = regr.predict(
-            X_Neyman_observed_transformed.reshape((-1, X_Neyman_observed_transformed.shape[2]))
+        tthat_neyman_observed = regr.predict(
+            X_neyman_observed_transformed.reshape((-1, X_neyman_observed_transformed.shape[2]))
         ).dot(delta_theta)
-        llr_Neyman_observed = -2. * np.sum(tthat_Neyman_observed.reshape((-1, 36)), axis=1)
-        np.save(Neyman_dir + '/neyman_llr_observed_scoreregression_' + str(theta) + '.npy',
-                llr_Neyman_observed)
+        llr_neyman_observed = -2. * np.sum(tthat_neyman_observed.reshape((-1, n_expected_events)), axis=1)
+        np.save(neyman_dir + '/neyman_llr_observed_scoreregression_' + str(t) + '.npy',
+                llr_neyman_observed)
 
         # Neyman construction: evaluate observed sample (calibrated)
-        r_Neyman_observed = r_from_s(calibrator.predict(tthat_Neyman_observed))
-        llr_calibrated_Neyman_observed = -2. * np.sum(np.log(r_Neyman_observed).reshape((-1, 36)), axis=1)
-        np.save(Neyman_dir + '/neyman_llr_observed_scoreregression_calibrated_' + str(theta) + '.npy',
-                llr_calibrated_Neyman_observed)
+        r_neyman_observed = r_from_s(calibrator.predict(tthat_neyman_observed))
+        llr_calibrated_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, n_expected_events)), axis=1)
+        np.save(neyman_dir + '/neyman_llr_observed_scoreregression_calibrated_' + str(t) + '.npy',
+                llr_calibrated_neyman_observed)
 
         # Neyman construction: load distribution sample
-        X_Neyman_distribution = np.load(unweighted_events_dir + '/X_neyman_distribution_' + str(t) + '.npy')
-        X_Neyman_distribution_transformed = scaler.transform(X_Neyman_distribution)
+        X_neyman_distribution = np.load(unweighted_events_dir + '/X_neyman_distribution_' + str(t) + '.npy')
+        X_neyman_distribution_transformed = scaler.transform(X_neyman_distribution)
 
         # Neyman construction: evaluate distribution sample (raw)
-        tthat_Neyman_distribution = regr.predict(
-            X_Neyman_distribution_transformed.reshape((-1, X_Neyman_distribution_transformed.shape[2]))
+        tthat_neyman_distribution = regr.predict(
+            X_neyman_distribution_transformed.reshape((-1, X_neyman_distribution_transformed.shape[2]))
         ).dot(delta_theta)
-        llr_Neyman_distribution = -2. * np.sum(tthat_Neyman_distribution.reshape((-1, 36)), axis=1)
-        np.save(Neyman_dir + '/neyman_llr_distribution_scoreregression_' + str(theta) + '.npy',
-                llr_Neyman_distribution)
+        llr_neyman_distribution = -2. * np.sum(tthat_neyman_distribution.reshape((-1, n_expected_events)), axis=1)
+        np.save(neyman_dir + '/neyman_llr_distribution_scoreregression_' + str(t) + '.npy',
+                llr_neyman_distribution)
 
         # Neyman construction: evaluate distribution sample (calibrated)
-        r_Neyman_distribution = r_from_s(calibrator.predict(tthat_Neyman_distribution))
-        llr_calibrated_Neyman_distribution = -2. * np.sum(np.log(r_Neyman_distribution).reshape((-1, 36)), axis=1)
-        np.save(Neyman_dir + '/neyman_llr_distribution_scoreregression_calibrated_' + str(theta) + '.npy',
-                llr_calibrated_Neyman_distribution)
+        r_neyman_distribution = r_from_s(calibrator.predict(tthat_neyman_distribution))
+        llr_calibrated_neyman_distribution = -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, n_expected_events)), axis=1)
+        np.save(neyman_dir + '/neyman_llr_distribution_scoreregression_calibrated_' + str(t) + '.npy',
+                llr_calibrated_neyman_distribution)
 
     # Save expected LLR
     expected_llr = np.asarray(expected_llr)
