@@ -142,7 +142,8 @@ def point_by_point_inference(algorithm='carl',
             scaler.fit(np.array(X_train, dtype=np.float64))
             X_train_transformed = scaler.transform(X_train)
             X_test_transformed = scaler.transform(X_test)
-            X_neyman_observed_transformed = scaler.transform(X_neyman_observed)
+            X_neyman_observed_transformed = scaler.transform(
+                X_neyman_observed.reshape((-1, X_neyman_observed.shape[2])))
 
             assert np.all(np.isfinite(X_train_transformed))
             assert np.all(np.isfinite(X_test_transformed))
@@ -171,21 +172,18 @@ def point_by_point_inference(algorithm='carl',
                 np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
 
             # Neyman construction: evaluate observed sample (raw)
-            log_r_neyman_observed = regr.predict(
-                X_neyman_observed_transformed.reshape((-1, X_neyman_observed_transformed.shape[2]))
-            )
+            log_r_neyman_observed = regr.predict(X_neyman_observed_transformed)
             llr_neyman_observed = -2. * np.sum(log_r_neyman_observed.reshape((-1, n_expected_events)), axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + '.npy',
                     llr_neyman_observed)
 
             # Neyman construction: load distribution sample
             X_neyman_distribution = np.load(unweighted_events_dir + '/X_neyman_distribution_' + str(t) + '.npy')
-            X_neyman_distribution_transformed = scaler.transform(X_neyman_distribution)
+            X_neyman_distribution_transformed = scaler.transform(
+                X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
             # Neyman construction: evaluate distribution sample (raw)
-            log_r_neyman_distribution = regr.predict(
-                X_neyman_distribution_transformed.reshape((-1, X_neyman_distribution_transformed.shape[2]))
-            )
+            log_r_neyman_distribution = regr.predict(X_neyman_distribution_transformed)
             llr_neyman_distribution = -2. * np.sum(log_r_neyman_distribution.reshape((-1, n_expected_events)), axis=1)
             np.save(neyman_dir + '/neyman_llr_distribution_' + algorithm + '_' + str(t) + '.npy',
                     llr_neyman_distribution)
@@ -228,7 +226,8 @@ def point_by_point_inference(algorithm='carl',
             X_train_transformed = scaler.transform(X_train)
             X_test_transformed = scaler.transform(X_test)
             X_calibration_transformed = scaler.transform(X_calibration)
-            X_neyman_observed_transformed = scaler.transform(X_neyman_observed)
+            X_neyman_observed_transformed = scaler.transform(
+                X_neyman_observed.reshape((-1, X_neyman_observed.shape[2])))
 
             clf = KerasRegressor(lambda: make_classifier(n_hidden_layers=n_hidden_layers, learn_log_r=learn_logr_mode),
                                  epochs=n_epochs, validation_split=0.1,
@@ -295,38 +294,33 @@ def point_by_point_inference(algorithm='carl',
                 # np.save(results_dir + '/cal1edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
 
             # Neyman construction: evaluate observed sample (raw)
-            r_neyman_observed, _ = ratio.predict(
-                X_neyman_observed_transformed.reshape((-1, X_neyman_observed_transformed.shape[2]))
-            )
+            r_neyman_observed, _ = ratio.predict(X_neyman_observed_transformed)
             llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, n_expected_events)), axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + '.npy',
                     llr_neyman_observed)
 
             # Neyman construction: evaluate observed sample (calibrated)
-            r_neyman_observed, _ = ratio_calibrated.predict(
-                X_neyman_observed_transformed.reshape((-1, X_neyman_observed_transformed.shape[2]))
-            )
+            r_neyman_observed, _ = ratio_calibrated.predict(X_neyman_observed_transformed)
             llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, n_expected_events)), axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_calibrated_' + str(t) + '.npy',
                     llr_neyman_observed)
 
             # Neyman construction: load distribution sample
             X_neyman_distribution = np.load(unweighted_events_dir + '/X_neyman_distribution_' + str(t) + '.npy')
-            X_neyman_distribution_transformed = scaler.transform(X_neyman_distribution)
+            X_neyman_distribution_transformed = scaler.transform(
+                X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
             # Neyman construction: evaluate distribution sample (raw)
-            r_neyman_distribution, _ = ratio.predict(
-                X_neyman_distribution_transformed.reshape((-1, X_neyman_distribution_transformed.shape[2]))
-            )
-            llr_neyman_distribution = -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, 36)), axis=1)
+            r_neyman_distribution, _ = ratio.predict(X_neyman_distribution_transformed)
+            llr_neyman_distribution = -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, n_expected_events)),
+                                                   axis=1)
             np.save(neyman_dir + '/neyman_llr_distribution_' + algorithm + '_' + str(t) + '.npy',
                     llr_neyman_distribution)
 
             # Neyman construction: evaluate distribution sample (calibrated)
-            r_neyman_distribution, _ = ratio_calibrated.predict(
-                X_neyman_distribution_transformed.reshape((-1, X_neyman_distribution_transformed.shape[2]))
-            )
-            llr_neyman_distribution = -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, 36)), axis=1)
+            r_neyman_distribution, _ = ratio_calibrated.predict(X_neyman_distribution_transformed)
+            llr_neyman_distribution = -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, n_expected_events)),
+                                                   axis=1)
             np.save(neyman_dir + '/neyman_llr_distribution_' + algorithm + '_calibrated_' + str(t) + '.npy',
                     llr_neyman_distribution)
 
