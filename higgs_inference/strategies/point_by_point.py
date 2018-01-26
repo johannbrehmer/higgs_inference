@@ -79,8 +79,8 @@ def point_by_point_inference(algorithm='carl',
         theta1 = 422
 
     data_dir = '../data'
-    unweighted_events_dir = '../data/unweighted_events'
-    #unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
+    #unweighted_events_dir = '../data/unweighted_events'
+    unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
     results_dir = '../results/point_by_point'
 
     logging.info('Main settings:')
@@ -113,10 +113,6 @@ def point_by_point_inference(algorithm='carl',
     n_expected_events = 36
     n_events_test = X_test.shape[0]
     assert n_thetas == r_test.shape[0]
-
-    # p values
-    n_neyman_distribution_experiments = 1000
-    n_neyman_observed_experiments = 101
 
     ################################################################################
     # Regression approaches

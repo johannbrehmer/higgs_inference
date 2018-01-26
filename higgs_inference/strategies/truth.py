@@ -63,10 +63,6 @@ def truth_inference(options=''):
     yi = np.linspace(-1.0, 1.0, n_thetas_roam)
     xx, yy = np.meshgrid(xi, yi)
 
-    # p values
-    n_neyman_distribution_experiments = 1000
-    n_neyman_observed_experiments = 101
-
     ################################################################################
     # Truth
     ################################################################################
@@ -96,57 +92,57 @@ def truth_inference(options=''):
     r_roam_truth = np.exp(gp.predict(np.c_[xx.ravel(), yy.ravel()])).T
     np.save(results_dir + '/r_roam_truth' + filename_addition + '.npy', r_roam_truth)
 
-    # Toy experiments for p values
-    logging.info('Starting toy experiments for observed events')
-    indices_neyman_observed_experiments = np.zeros((n_neyman_observed_experiments, n_expected_events), dtype=np.int32)
-    for i in range(n_neyman_observed_experiments):
-        indices_neyman_observed_experiments[i] = np.random.choice(r_test.shape[1], n_expected_events)
-
-    median_p_values = []
-
-    logging.info('Starting toy experiments for Neyman construction')
-    for t, theta in enumerate(thetas):
-        # Toy experimemts for distribution of test statistics (Neyman construction)
-        llr_neyman_distribution_experiments = np.zeros(n_neyman_distribution_experiments)
-        event_probabilities = np.copy(weights_calibration[t]).astype(np.float64)
-        event_probabilities /= np.sum(event_probabilities)
-        logging.debug('Probabilities to draw events: %s', event_probabilities)
-        for i in range(n_neyman_distribution_experiments):
-            indices = np.random.choice(weights_calibration.shape[1], n_expected_events, p=event_probabilities)
-            llr_neyman_distribution_experiments[i] = -2. * (
-                np.sum(np.log(weights_calibration[t, indices]) - np.log(weights_calibration[theta1, indices])))
-        llr_neyman_distribution_experiments = np.sort(llr_neyman_distribution_experiments)
-        logging.debug('LLR distribution: %s', llr_neyman_distribution_experiments)
-
-        # Calculate observed test statistics
-        llr_neyman_observed_experiments = np.zeros(n_neyman_observed_experiments)
-        for i in range(n_neyman_observed_experiments):
-            llr_neyman_observed_experiments[i] = -2. * np.sum(np.log(r_test[t, indices_neyman_observed_experiments[i]]))
-        logging.debug('LLR observed: %s', llr_neyman_observed_experiments)
-
-        # Calculate p values and store median p value
-        p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
-                                         llr_neyman_observed_experiments).astype('float')
-                    / n_neyman_distribution_experiments)
-        logging.debug('p-values: %s', p_values)
-        median_p_values.append(np.median(p_values))
-        logging.debug('Theta %s (%s): median p-value = %s', t, theta, median_p_values[-1])
-
-        # For some benchmark thetas, save more information on Neyman construction
-        if t == theta_benchmark_nottrained:
-            np.save(results_dir + '/neyman_llr_distribution_nottrained_truth' + filename_addition + '.npy',
-                    llr_neyman_distribution_experiments)
-            np.save(results_dir + '/neyman_llr_observed_nottrained_truth' + filename_addition + '.npy',
-                    llr_neyman_observed_experiments)
-        elif t == theta_benchmark_trained:
-            np.save(results_dir + '/neyman_llr_distribution_trained_truth' + filename_addition + '.npy',
-                    llr_neyman_distribution_experiments)
-            np.save(results_dir + '/neyman_llr_observed_trained_truth' + filename_addition + '.npy',
-                    llr_neyman_observed_experiments)
-
-    # Save median p values
-    median_p_values = np.asarray(median_p_values)
-    np.save(results_dir + '/p_values_truth' + filename_addition + '.npy', median_p_values)
+    # # Toy experiments for p values
+    # logging.info('Starting toy experiments for observed events')
+    # indices_neyman_observed_experiments = np.zeros((n_neyman_observed_experiments, n_expected_events), dtype=np.int32)
+    # for i in range(n_neyman_observed_experiments):
+    #     indices_neyman_observed_experiments[i] = np.random.choice(r_test.shape[1], n_expected_events)
+    #
+    # median_p_values = []
+    #
+    # logging.info('Starting toy experiments for Neyman construction')
+    # for t, theta in enumerate(thetas):
+    #     # Toy experimemts for distribution of test statistics (Neyman construction)
+    #     llr_neyman_distribution_experiments = np.zeros(n_neyman_distribution_experiments)
+    #     event_probabilities = np.copy(weights_calibration[t]).astype(np.float64)
+    #     event_probabilities /= np.sum(event_probabilities)
+    #     logging.debug('Probabilities to draw events: %s', event_probabilities)
+    #     for i in range(n_neyman_distribution_experiments):
+    #         indices = np.random.choice(weights_calibration.shape[1], n_expected_events, p=event_probabilities)
+    #         llr_neyman_distribution_experiments[i] = -2. * (
+    #             np.sum(np.log(weights_calibration[t, indices]) - np.log(weights_calibration[theta1, indices])))
+    #     llr_neyman_distribution_experiments = np.sort(llr_neyman_distribution_experiments)
+    #     logging.debug('LLR distribution: %s', llr_neyman_distribution_experiments)
+    #
+    #     # Calculate observed test statistics
+    #     llr_neyman_observed_experiments = np.zeros(n_neyman_observed_experiments)
+    #     for i in range(n_neyman_observed_experiments):
+    #         llr_neyman_observed_experiments[i] = -2. * np.sum(np.log(r_test[t, indices_neyman_observed_experiments[i]]))
+    #     logging.debug('LLR observed: %s', llr_neyman_observed_experiments)
+    #
+    #     # Calculate p values and store median p value
+    #     p_values = (1. - np.searchsorted(llr_neyman_distribution_experiments,
+    #                                      llr_neyman_observed_experiments).astype('float')
+    #                 / n_neyman_distribution_experiments)
+    #     logging.debug('p-values: %s', p_values)
+    #     median_p_values.append(np.median(p_values))
+    #     logging.debug('Theta %s (%s): median p-value = %s', t, theta, median_p_values[-1])
+    #
+    #     # For some benchmark thetas, save more information on Neyman construction
+    #     if t == theta_benchmark_nottrained:
+    #         np.save(results_dir + '/neyman_llr_distribution_nottrained_truth' + filename_addition + '.npy',
+    #                 llr_neyman_distribution_experiments)
+    #         np.save(results_dir + '/neyman_llr_observed_nottrained_truth' + filename_addition + '.npy',
+    #                 llr_neyman_observed_experiments)
+    #     elif t == theta_benchmark_trained:
+    #         np.save(results_dir + '/neyman_llr_distribution_trained_truth' + filename_addition + '.npy',
+    #                 llr_neyman_distribution_experiments)
+    #         np.save(results_dir + '/neyman_llr_observed_trained_truth' + filename_addition + '.npy',
+    #                 llr_neyman_observed_experiments)
+    #
+    # # Save median p values
+    # median_p_values = np.asarray(median_p_values)
+    # np.save(results_dir + '/p_values_truth' + filename_addition + '.npy', median_p_values)
 
     # logging.info('Starting pseudo-experiments')
     # pseudoexperiments = np.zeros((n_thetas, n_pseudoexperiments_series, n_pseudoexperiments_repetitions))

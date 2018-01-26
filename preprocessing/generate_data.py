@@ -207,12 +207,15 @@ n_events_train = weighted_data_train.shape[0]
 n_events_calibrate = weighted_data_calibrate.shape[0]
 n_events_test = weighted_data_test.shape[0]
 
-logging.info('Number of events (full, train, calibrate, test):')
-logging.info(n_events, n_events_train, n_events_calibrate, n_events_test)
+logging.info('Number of events:')
+logging.info('  All:    %s', n_events)
+logging.info('  Training:    %s', n_events_train)
+logging.info('  Calibration: %s', n_events_calibrate)
+logging.info('  Evaluation:  %s', n_events_test)
 
 del weighted_data
 
-logging.info('Calibrating probabilities...')
+logging.info('Normalizing probabilities')
 
 weights_train = []
 for n in range(n_thetas):
@@ -244,7 +247,7 @@ weights_test = np.asarray(weights_test)
 
 if args.train:
 
-    logging.info('Generating baseline training sample...')
+    logging.info('Generating baseline training sample')
 
 
     def generate_data_train(theta0, theta1):
@@ -303,7 +306,7 @@ if args.train:
     for i, t in enumerate(thetas_train):
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1, this_p_score = generate_data_train(t,
                                                                                                                       theta1)
-        logging.info(t, thetas[t], len(this_r))
+        # logging.info(t, thetas[t], len(this_r))
 
         if i > 0:
             th0 = np.vstack((th0, np.array(this_th0, dtype=np.float16)))
@@ -333,15 +336,13 @@ if args.train:
     np.save(unweighted_events_dir + '/p0_train' + filename_addition + '.npy', p0)
     np.save(unweighted_events_dir + '/p1_train' + filename_addition + '.npy', p1)
 
-    logging.info('...done!')
-
 ################################################################################
 # Basis training
 ################################################################################
 
 if args.basis:
 
-    logging.info('Generating basis-only training sample...')
+    logging.info('Generating morphing basis training sample')
 
 
     def generate_data_train_basis(theta0, theta1):
@@ -399,8 +400,8 @@ if args.basis:
 
     for i, t in enumerate(thetas_basis):
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1, \
-            this_p_score = generate_data_train_basis(t, theta1)
-        logging.info(t, thetas[t], len(this_r))
+        this_p_score = generate_data_train_basis(t, theta1)
+        # logging.info(t, thetas[t], len(this_r))
 
         if i > 0:
             th0 = np.vstack((th0, np.array(this_th0, dtype=np.float16)))
@@ -430,15 +431,13 @@ if args.basis:
     np.save(unweighted_events_dir + '/p0_train_basis' + filename_addition + '.npy', p0)
     np.save(unweighted_events_dir + '/p1_train_basis' + filename_addition + '.npy', p1)
 
-    logging.info('...done!')
-
 ################################################################################
 # Point-by-point training
 ################################################################################
 
 if args.pointbypoint:
 
-    logging.info('Generating point-by-point training samples...')
+    logging.info('Generating point-by-point training samples')
 
 
     def generate_data_train_point_by_point(theta0, theta1):
@@ -496,8 +495,8 @@ if args.pointbypoint:
 
     for i, t in enumerate(thetas_point_by_point):
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1, \
-            this_p_score = generate_data_train_point_by_point(t, theta1)
-        logging.info(t, thetas[t], len(this_y))
+        this_p_score = generate_data_train_point_by_point(t, theta1)
+        # logging.info(t, thetas[t], len(this_y))
 
         np.save(unweighted_events_dir + '/X_train_point_by_point_' + str(t) + filename_addition + '.npy', this_X)
         np.save(unweighted_events_dir + '/y_train_point_by_point_' + str(t) + filename_addition + '.npy', this_y)
@@ -507,15 +506,13 @@ if args.pointbypoint:
 
         del this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1, this_p_score
 
-    logging.info('...done!')
-
 ################################################################################
 # Random training
 ################################################################################
 
 if args.random:
 
-    logging.info('Generating random training sample...')
+    logging.info('Generating random theta training sample')
 
 
     def generate_random_data_train(randomtheta0, theta1):
@@ -566,7 +563,7 @@ if args.random:
         thetas1 = np.zeros((len(X), 2))
         thetas1[:] = thetas[theta1]
 
-        logging.info(randomtheta0, '-', n_dice, 'throws,', len(accepted_num), 'num', len(accepted_den), 'den')
+        # logging.info(randomtheta0, '-', n_dice, 'throws,', len(accepted_num), 'num', len(accepted_den), 'den')
 
         # filter out bad events
         filter = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < 2500.) & (np.log(r) ** 2 < 10000.)
@@ -599,15 +596,13 @@ if args.random:
     np.save(unweighted_events_dir + '/scores_train_random' + filename_addition + '.npy', scores)
     np.save(unweighted_events_dir + '/r_train_random' + filename_addition + '.npy', r)
 
-    logging.info('...done!')
-
 ################################################################################
 # Calibration
 ################################################################################
 
 if args.calibration:
 
-    logging.info('Generating calibration data...')
+    logging.info('Generating calibration sample')
 
 
     def generate_data_calibration(theta_observed):
@@ -627,7 +622,7 @@ if args.calibration:
 
     for i, t in enumerate(thetas_train):
         this_X, this_weights = generate_data_calibration(t)
-        logging.info(t, thetas[t], this_X.shape[0])
+        # logging.info(t, thetas[t], this_X.shape[0])
 
         if i > 0:
             X = np.vstack((X, np.array(this_X, dtype=np.float16)))
@@ -644,7 +639,7 @@ if args.calibration:
 ################################################################################
 
 if args.scoreregression:
-    logging.info('Generating training sample for score regression...')
+    logging.info('Generating training sample for score regression')
 
 
     def generate_data_score_regression(theta):
@@ -670,15 +665,13 @@ if args.scoreregression:
     np.save(unweighted_events_dir + '/scores_train_scoreregression' + filename_addition + '.npy', scores)
     np.save(unweighted_events_dir + '/p_train_scoreregression' + filename_addition + '.npy', p)
 
-    logging.info('...done!')
-
 ################################################################################
 # Likelihood ratio evaluation
 ################################################################################
 
 if args.test:
 
-    logging.info('Generating test sample...')
+    logging.info('Generating likelihood ratio evaluation sample')
 
 
     def generate_data_test(theta_observed, theta1):
@@ -713,15 +706,13 @@ if args.test:
     np.save(unweighted_events_dir + '/r_test' + filename_addition + '.npy', r)
     np.save(unweighted_events_dir + '/p1_test' + filename_addition + '.npy', p1)
 
-    logging.info('...done!')
-
 ################################################################################
 # Neyman construction
 ################################################################################
 
 if args.neyman:
 
-    logging.info('Generating Neyman construction samples...')
+    logging.info('Generating Neyman construction samples')
 
 
     def generate_data_neyman(theta_observed, n_toy_experiments):
@@ -747,15 +738,13 @@ if args.neyman:
                      X.shape[0], X.shape[1], theta)
         np.save(unweighted_events_dir + '/X_neyman_distribution_' + str(t) + filename_addition + '.npy', X)
 
-    logging.info('...done!')
-
 ################################################################################
 # Roam data
 ################################################################################
 
 if args.roam:
 
-    logging.info('Generating roaming sample...')
+    logging.info('Generating roaming sample')
 
 
     def generate_data_roam(theta_observed, theta1):
@@ -775,4 +764,4 @@ if args.roam:
     np.save(unweighted_events_dir + '/X_roam' + filename_addition + '.npy', X)
     np.save(unweighted_events_dir + '/r_roam' + filename_addition + '.npy', r)
 
-    logging.info('...done!')
+logging.info('Done!')

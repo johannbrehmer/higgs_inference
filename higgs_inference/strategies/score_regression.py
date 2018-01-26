@@ -64,8 +64,8 @@ def score_regression_inference(options=''):
         theta1 = 422
 
     data_dir = '../data'
-    unweighted_events_dir = '../data/unweighted_events'
-    #unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
+    #unweighted_events_dir = '../data/unweighted_events'
+    unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
     results_dir = '../results/parameterized'
 
     logging.info('Options:')
@@ -97,10 +97,6 @@ def score_regression_inference(options=''):
     n_expected_events = 36
     n_events_test = X_test.shape[0]
     assert n_thetas == r_test.shape[0]
-
-    # p values
-    n_neyman_distribution_experiments = 10000
-    n_neyman_observed_experiments = 1001
 
     scaler = StandardScaler()
     scaler.fit(np.array(X_train, dtype=np.float64))
