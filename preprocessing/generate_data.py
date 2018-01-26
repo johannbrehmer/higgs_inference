@@ -48,20 +48,6 @@ parser.add_argument("--debug", action="store_true",
 
 args = parser.parse_args()
 
-args.train = ('train' in args)
-args.basis = ('basis' in args)
-args.random = ('random' in args)
-args.pointbypoint = ('point-by-point' in args)
-args.scoreregression = ('score-regression' in args)
-
-args.calibration = ('calibration' in args)
-args.test = ('test' in args)
-args.neyman = ('neyman' in args)
-args.roam = ('roam' in args)
-
-args.alternativedenom = ('denom1' in args)
-args.debug = ('debug' in args)
-
 logging.info('Tasks:')
 logging.info('  Baseline training:       %s', args.train)
 logging.info('  Random training:         %s', args.random)
