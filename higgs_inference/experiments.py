@@ -45,7 +45,8 @@ parser.add_argument("-o", "--options", nargs='+', default='', help="Further opti
 
 args = parser.parse_args()
 
-logging.info('The algorithm of the day is: %s', args.algorithm)
+logging.info('Algorithm: %s' + (' (point by point)' if args.pointbypoint else ''), args.algorithm)
+logging.info('Base directory: %s', settings.base_dir)
 
 # Sanity checks
 assert args.algorithm in ['p', 'cl', 'pvalues',
