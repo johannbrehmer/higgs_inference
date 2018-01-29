@@ -1,3 +1,7 @@
+################################################################################
+# Global settings
+################################################################################
+
 # Directories
 base_dir = '/home/jb6504/higgs_inference'  # Will be overridden at startup
 weighted_events_dir = '/scratch/jb6504/higgs_inference/data/events'
@@ -67,4 +71,3 @@ n_events_calibration = 1000
 n_events_test = 50000
 # Roaming, total
 n_events_roam = 20
-

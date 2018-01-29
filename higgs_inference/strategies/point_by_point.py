@@ -20,10 +20,6 @@ from higgs_inference import settings
 from higgs_inference.models.models_point_by_point import make_classifier, make_regressor
 
 
-################################################################################
-# What do
-################################################################################
-
 def point_by_point_inference(algorithm='carl',
                              options=''):
     """
@@ -34,6 +30,10 @@ def point_by_point_inference(algorithm='carl',
     """
 
     logging.info('Starting point-by-point inference')
+
+    ################################################################################
+    # Settings
+    ################################################################################
 
     assert algorithm in ['carl', 'regression']
 
@@ -108,7 +108,7 @@ def point_by_point_inference(algorithm='carl',
     assert n_thetas == r_test.shape[0]
 
     ################################################################################
-    # Regression approaches
+    # Regression
     ################################################################################
 
     if algorithm == 'regression':
@@ -171,9 +171,9 @@ def point_by_point_inference(algorithm='carl',
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
             for tt in range(n_thetas):
-
                 # Neyman construction: load distribution sample
-                X_neyman_distribution = np.load(settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
+                X_neyman_distribution = np.load(
+                    settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
                 X_neyman_distribution_transformed = scaler.transform(
                     X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
@@ -293,13 +293,15 @@ def point_by_point_inference(algorithm='carl',
 
             # Neyman construction: evaluate observed sample (raw)
             r_neyman_observed, _ = ratio.predict(X_neyman_observed_transformed)
-            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)), axis=1)
+            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
+                                               axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + filename_addition + '.npy',
                     llr_neyman_observed)
 
             # Neyman construction: evaluate observed sample (calibrated)
             r_neyman_observed, _ = ratio_calibrated.predict(X_neyman_observed_transformed)
-            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)), axis=1)
+            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
+                                               axis=1)
             np.save(
                 neyman_dir + '/neyman_llr_observed_' + algorithm + '_calibrated_' + str(t) + filename_addition + '.npy',
                 llr_neyman_observed)
@@ -308,9 +310,9 @@ def point_by_point_inference(algorithm='carl',
             llr_neyman_distributions = []
             llr_neyman_distributions_calibrated = []
             for tt in range(n_thetas):
-
                 # Neyman construction: load distribution sample
-                X_neyman_distribution = np.load(settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
+                X_neyman_distribution = np.load(
+                    settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
                 X_neyman_distribution_transformed = scaler.transform(
                     X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 

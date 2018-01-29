@@ -25,10 +25,6 @@ from higgs_inference.models.models_parameterized import make_regressor, make_reg
 from higgs_inference.models.models_parameterized import make_combined_regressor, make_combined_regressor_morphingaware
 
 
-################################################################################
-# What do
-################################################################################
-
 def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'regression', 'combinedregression'
                             morphing_aware=False,
                             training_sample='baseline',  # 'baseline', 'basis', 'random'
@@ -44,7 +40,11 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     :param options: Further options in a list of strings or string.
     """
 
-    logging.info('Starting parameterized inference ')
+    logging.info('Starting parameterized inference')
+
+    ################################################################################
+    # Settings
+    ################################################################################
 
     assert algorithm in ['carl', 'score', 'combined', 'regression', 'combinedregression']
     assert training_sample in ['baseline', 'basis', 'random']
@@ -135,15 +135,19 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     if random_theta_mode:
         X_train = np.load(settings.unweighted_events_dir + '/X_train_random' + input_filename_addition + '.npy')
         y_train = np.load(settings.unweighted_events_dir + '/y_train_random' + input_filename_addition + '.npy')
-        scores_train = np.load(settings.unweighted_events_dir + '/scores_train_random' + input_filename_addition + '.npy')
+        scores_train = np.load(
+            settings.unweighted_events_dir + '/scores_train_random' + input_filename_addition + '.npy')
         r_train = np.load(settings.unweighted_events_dir + '/r_train_random' + input_filename_addition + '.npy')
-        theta0_train = np.load(settings.unweighted_events_dir + '/theta0_train_random' + input_filename_addition + '.npy')
+        theta0_train = np.load(
+            settings.unweighted_events_dir + '/theta0_train_random' + input_filename_addition + '.npy')
     elif basis_theta_mode:
         X_train = np.load(settings.unweighted_events_dir + '/X_train_basis' + input_filename_addition + '.npy')
         y_train = np.load(settings.unweighted_events_dir + '/y_train_basis' + input_filename_addition + '.npy')
-        scores_train = np.load(settings.unweighted_events_dir + '/scores_train_basis' + input_filename_addition + '.npy')
+        scores_train = np.load(
+            settings.unweighted_events_dir + '/scores_train_basis' + input_filename_addition + '.npy')
         r_train = np.load(settings.unweighted_events_dir + '/r_train_basis' + input_filename_addition + '.npy')
-        theta0_train = np.load(settings.unweighted_events_dir + '/theta0_train_basis' + input_filename_addition + '.npy')
+        theta0_train = np.load(
+            settings.unweighted_events_dir + '/theta0_train_basis' + input_filename_addition + '.npy')
     else:
         X_train = np.load(settings.unweighted_events_dir + '/X_train' + input_filename_addition + '.npy')
         y_train = np.load(settings.unweighted_events_dir + '/y_train' + input_filename_addition + '.npy')
@@ -152,7 +156,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         theta0_train = np.load(settings.unweighted_events_dir + '/theta0_train' + input_filename_addition + '.npy')
 
     X_calibration = np.load(settings.unweighted_events_dir + '/X_calibration' + input_filename_addition + '.npy')
-    weights_calibration = np.load(settings.unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
+    weights_calibration = np.load(
+        settings.unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
 
     X_test = np.load(settings.unweighted_events_dir + '/X_test' + input_filename_addition + '.npy')
     # scores_test = np.load(settings.unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
@@ -200,7 +205,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         n_events_test = len(X_test_transformed)
 
     ################################################################################
-    # Regression approaches
+    # Regression (basic or augmented with score)
     ################################################################################
 
     if algorithm in ['regression', 'combinedregression']:
@@ -281,9 +286,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
             for tt in range(n_thetas):
-
                 # Neyman construction: load distribution sample
-                X_neyman_distribution = np.load(settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
+                X_neyman_distribution = np.load(
+                    settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
                 X_neyman_distribution_transformed = scaler.transform(
                     X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
@@ -314,7 +319,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         np.save(results_dir + '/r_roam_' + algorithm + filename_addition + '.npy', r_roam)
 
     ################################################################################
-    # Carl approaches
+    # Carl (basic or augmented with score)
     ################################################################################
 
     else:
@@ -411,16 +416,17 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # Neyman construction: evaluate observed sample (raw)
             r_neyman_observed, _ = ratio.predict(X_thetas_neyman_observed)
-            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)), axis=1)
+            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
+                                               axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + filename_addition + '.npy',
                     llr_neyman_observed)
 
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
             for tt in range(n_thetas):
-
                 # Neyman construction: load distribution sample
-                X_neyman_distribution = np.load(settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
+                X_neyman_distribution = np.load(
+                    settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
                 X_neyman_distribution_transformed = scaler.transform(
                     X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
@@ -516,7 +522,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # Neyman construction: evaluate observed sample (raw)
             r_neyman_observed, _ = ratio_calibrated.predict(X_thetas_neyman_observed)
-            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)), axis=1)
+            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
+                                               axis=1)
             np.save(
                 neyman_dir + '/neyman_llr_observed_' + algorithm + '_calibrated_' + str(t) + filename_addition + '.npy',
                 llr_neyman_observed)
@@ -524,9 +531,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
             for tt in range(n_thetas):
-
                 # Neyman construction: load distribution sample
-                X_neyman_distribution = np.load(settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
+                X_neyman_distribution = np.load(
+                    settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
                 X_neyman_distribution_transformed = scaler.transform(
                     X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 

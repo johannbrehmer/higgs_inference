@@ -95,7 +95,7 @@ if args.alternativedenom:
 # Data
 ################################################################################
 
-subset_features = list(range(42))  # list(range(15))
+subset_features = list(range(settings.n_features))
 
 if args.debug:
     weighted_data = pd.read_csv(settings.weighted_events_dir + '/wbf_4l_supernew_excerpt.dat', sep='\t',
@@ -210,9 +210,7 @@ if args.train:
 
 
     for i, t in enumerate(settings.thetas_train):
-        this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1 = generate_data_train(t,
-                                                                                                                      theta1)
-        # logging.info(t, thetas[t], len(this_r))
+        this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1 = generate_data_train(t, theta1)
 
         if i > 0:
             th0 = np.vstack((th0, np.array(this_th0, dtype=np.float16)))
@@ -292,8 +290,6 @@ if args.basis:
             np.array(weights_train[theta1][indices_den]),
         ))
 
-        # print thetas0.shape, thetas1.shape, X.shape, y.shape, scores.shape, r.shape, p_score.shape
-
         # filter out bad events
         cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < 2500.) & (np.log(r) ** 2 < 10000.)
 
@@ -303,7 +299,6 @@ if args.basis:
 
     for i, t in enumerate(settings.thetas_morphing_basis):
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1 = generate_data_train_basis(t, theta1)
-        # logging.info(t, thetas[t], len(this_r))
 
         if i > 0:
             th0 = np.vstack((th0, np.array(this_th0, dtype=np.float16)))
@@ -383,8 +378,6 @@ if args.pointbypoint:
             np.array(weights_train[theta1][indices_den]),
         ))
 
-        # print thetas0.shape, thetas1.shape, X.shape, y.shape, scores.shape, r.shape, p_score.shape
-
         # filter out bad events
         cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < 2500.) & (np.log(r) ** 2 < 10000.) & (np.isfinite(np.log(r)))
 
@@ -393,8 +386,8 @@ if args.pointbypoint:
 
 
     for i, t in enumerate(settings.pbp_training_thetas):
-        this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1 = generate_data_train_point_by_point(t, theta1)
-        # logging.info(t, thetas[t], len(this_y))
+        this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1 = generate_data_train_point_by_point(
+            t, theta1)
 
         np.save(settings.unweighted_events_dir + '/X_traisettings.n_events_n_point_by_point_' + str(
             t) + filename_addition + '.npy', this_X)
@@ -467,8 +460,6 @@ if args.random:
         thetas1 = np.zeros((len(X), 2))
         thetas1[:] = thetas[theta1]
 
-        # logging.info(randomtheta0, '-', n_dice, 'throws,', len(accepted_num), 'num', len(accepted_den), 'den')
-
         # filter out bad events
         cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < 2500.) & (np.log(r) ** 2 < 10000.)
 
@@ -527,7 +518,6 @@ if args.calibration:
 
     for i, t in enumerate(settings.thetas_train):
         this_X, this_weights = generate_data_calibration(t)
-        # logging.info(t, thetas[t], this_X.shape[0])
 
         if i > 0:
             X = np.vstack((X, np.array(this_X, dtype=np.float16)))
@@ -597,8 +587,6 @@ if args.test:
             scores[t] = np.array(weighted_data_test.iloc[indices, subset_scores])
 
         p1 = np.array(weights_test[theta1][indices])
-
-        # logging.info(X.shape, scores.shape, r.shape, p1.shape)
 
         # filter out bad events
         cut = np.all((scores[:, :, 0] ** 2 + scores[:, :, 1] ** 2 < 2500.) & (np.log(r) ** 2 < 10000.), axis=0)

@@ -15,7 +15,7 @@ from higgs_inference.models.morphing import generate_wi_layer, generate_wtilde_l
 
 
 ################################################################################
-# Regression
+# Regression models
 ################################################################################
 
 def make_regressor(n_hidden_layers=3,
@@ -105,7 +105,7 @@ def make_regressor_morphingaware(n_hidden_layers=2,
 
 
 ################################################################################
-# Regression + score
+# Regression + score models
 ################################################################################
 
 def make_combined_regressor(n_hidden_layers=3,
@@ -197,7 +197,7 @@ def make_combined_regressor_morphingaware(n_hidden_layers=2,
 
 
 ################################################################################
-# carl
+# carl models
 ################################################################################
 
 def make_classifier_carl(n_hidden_layers=3,
@@ -305,7 +305,7 @@ def make_classifier_carl_morphingaware(n_hidden_layers=2,
 
 
 ################################################################################
-# Score only
+# Score only models
 ################################################################################
 
 def make_classifier_score(n_hidden_layers=3,
@@ -417,7 +417,7 @@ def make_classifier_score_morphingaware(n_hidden_layers=2,
 
 
 ################################################################################
-# carl + score
+# carl + score models
 ################################################################################
 
 def make_classifier_combined(n_hidden_layers=3,

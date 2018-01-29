@@ -19,10 +19,6 @@ from higgs_inference.models.models_score_regression import make_regressor
 from higgs_inference.various.utils import r_from_s
 
 
-################################################################################
-# What do
-################################################################################
-
 def score_regression_inference(options=''):
     """
     Trains and evaluates one of the parameterized higgs_inference methods.
@@ -31,6 +27,10 @@ def score_regression_inference(options=''):
     """
 
     logging.info('Starting score regression inference')
+
+    ################################################################################
+    # Settings
+    ################################################################################
 
     deep_mode = ('deep' in options)
     shallow_mode = ('shallow' in options)

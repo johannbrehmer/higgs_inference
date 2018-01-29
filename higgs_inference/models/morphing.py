@@ -1,3 +1,6 @@
+################################################################################
+# Imports
+################################################################################
 
 import numpy as np
 
@@ -10,8 +13,9 @@ from higgs_inference import settings
 # Morphing
 ################################################################################
 
-# Morphing
-sample_component = np.load(settings.base_dir + '/data/morphing/components_fakebasis2.npy')[:, 1:]  # Ignore background component
+# Load morphing data
+sample_component = np.load(settings.base_dir + '/data/morphing/components_fakebasis2.npy')[:,
+                   1:]  # Ignore background component
 component_sample = np.linalg.inv(sample_component)
 sigma_sample = np.load(settings.base_dir + '/data/morphing/fakebasis2_xsecs.npy')
 sigma_component = component_sample.dot(sigma_sample)

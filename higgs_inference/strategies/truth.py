@@ -58,7 +58,7 @@ def truth_inference(options=''):
     xx, yy = np.meshgrid(xi, yi)
 
     ################################################################################
-    # Truth
+    # Evaluate truth likelihood ratios
     ################################################################################
 
     logging.info('Starting evaluation')

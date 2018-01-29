@@ -1,5 +1,9 @@
 #! /usr/bin/env python
 
+################################################################################
+# Imports
+################################################################################
+
 from __future__ import absolute_import, division, print_function
 
 import argparse
@@ -21,6 +25,10 @@ from higgs_inference.strategies.truth import truth_inference
 from higgs_inference.strategies.parameterized import parameterized_inference
 from higgs_inference.strategies.point_by_point import point_by_point_inference
 from higgs_inference.strategies.score_regression import score_regression_inference
+
+################################################################################
+# Set up logging and parse arguments
+################################################################################
 
 settings.base_dir = base_dir
 
@@ -52,6 +60,10 @@ logging.info('Base directory: %s', settings.base_dir)
 assert args.algorithm in ['p', 'cl', 'pvalues',
                           'truth', 'carl', 'score', 'combined', 'regression', 'combinedregression', 'scoreregression']
 assert args.training in ['baseline', 'basis', 'random']
+
+################################################################################
+# Do something
+################################################################################
 
 # Start calculation
 if args.algorithm in ['p', 'cl', 'pvalues']:
