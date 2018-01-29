@@ -6,13 +6,23 @@ import argparse
 import logging
 from os import sys, path
 
-sys.path.append(path.abspath(path.join(path.dirname(__file__), '..')))
+base_dir = path.abspath(path.join(path.dirname(__file__), '..'))
+
+try:
+    from higgs_inference import settings
+except ImportError:
+    if base_dir in sys.path:
+        raise
+    sys.path.append(base_dir)
+    from higgs_inference import settings
 
 from higgs_inference.various.p_values import calculate_all_CL
 from higgs_inference.strategies.truth import truth_inference
 from higgs_inference.strategies.parameterized import parameterized_inference
 from higgs_inference.strategies.point_by_point import point_by_point_inference
 from higgs_inference.strategies.score_regression import score_regression_inference
+
+settings.base_dir = base_dir
 
 # Set up logging
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG, datefmt='%d.%m.%Y %H:%M:%S')

@@ -14,6 +14,7 @@ from keras.callbacks import EarlyStopping
 
 from carl.learning.calibration import HistogramCalibrator
 
+from higgs_inference import settings
 from higgs_inference.models.models_score_regression import make_regressor
 from higgs_inference.various.utils import r_from_s
 
@@ -38,35 +39,33 @@ def score_regression_inference(options=''):
     denom1_mode = ('denom1' in options)
 
     filename_addition = ''
-    n_hidden_layers = 2
+    n_hidden_layers = settings.n_hidden_layers_default
     if shallow_mode:
-        n_hidden_layers = 1
+        n_hidden_layers = settings.n_hidden_layers_shallow
         filename_addition += '_shallow'
     elif deep_mode:
-        n_hidden_layers = 3
+        n_hidden_layers = settings.n_hidden_layers_deep
         filename_addition += '_deep'
 
-    n_epochs = 20
+    n_epochs = settings.n_epochs_default
     early_stopping = True
     if long_mode:
-        n_epochs = 50
+        n_epochs = settings.n_epochs_long
         filename_addition += '_long'
     elif short_mode:
-        n_epochs = 1
+        n_epochs = settings.n_epochs_short
         early_stopping = False
         filename_addition += '_short'
 
-    theta1 = 708
+    theta1 = settings.theta1_default
     input_filename_addition = ''
     if denom1_mode:
         input_filename_addition = '_denom1'
         filename_addition += '_denom1'
-        theta1 = 422
+        theta1 = settings.theta1_alternative
 
-    data_dir = '../data'
-    # unweighted_events_dir = '../data/unweighted_events'
-    unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
-    results_dir = '../results/score_regression'
+    data_dir = settings.base_dir + '/data'
+    results_dir = settings.base_dir + '/results/score_regression'
     neyman_dir = results_dir + '/neyman'
 
     logging.info('Options:')
@@ -78,25 +77,19 @@ def score_regression_inference(options=''):
     ################################################################################
 
     thetas = np.load(data_dir + '/thetas/thetas_parameterized.npy')
-
     n_thetas = len(thetas)
-    # theta_expected = 0
-    theta_benchmark_trained = 422
-    theta_benchmark_nottrained = 9
-    # theta_score = 0
 
-    X_train = np.load(unweighted_events_dir + '/X_train_scoreregression' + input_filename_addition + '.npy')
-    scores_train = np.load(unweighted_events_dir + '/scores_train_scoreregression' + input_filename_addition + '.npy')
+    X_train = np.load(settings.unweighted_events_dir + '/X_train_scoreregression' + input_filename_addition + '.npy')
+    scores_train = np.load(settings.unweighted_events_dir + '/scores_train_scoreregression' + input_filename_addition + '.npy')
 
-    X_calibration = np.load(unweighted_events_dir + '/X_calibration' + input_filename_addition + '.npy')
-    weights_calibration = np.load(unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
+    X_calibration = np.load(settings.unweighted_events_dir + '/X_calibration' + input_filename_addition + '.npy')
+    weights_calibration = np.load(settings.unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
 
-    X_test = np.load(unweighted_events_dir + '/X_test' + input_filename_addition + '.npy')
-    # scores_test = np.load(unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
-    r_test = np.load(unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
-    X_neyman_observed = np.load(unweighted_events_dir + '/X_neyman_observed.npy')
+    X_test = np.load(settings.unweighted_events_dir + '/X_test' + input_filename_addition + '.npy')
+    # scores_test = np.load(settings.unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
+    r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/X_neyman_observed.npy')
 
-    n_expected_events = 36
     n_events_test = X_test.shape[0]
     assert n_thetas == r_test.shape[0]
 
@@ -145,23 +138,23 @@ def score_regression_inference(options=''):
         # Evaluation
         tthat_test = that_test.dot(delta_theta)
         r_hat_test = r_from_s(calibrator.predict(tthat_test.reshape((-1,))))
-        expected_llr.append(- 2. * n_expected_events / n_events_test * np.sum(np.log(r_hat_test)))
+        expected_llr.append(- 2. * settings.n_expected_events / n_events_test * np.sum(np.log(r_hat_test)))
 
         # For some benchmark thetas, save r for each phase-space point
-        if t == theta_benchmark_nottrained:
+        if t == settings.theta_benchmark_nottrained:
             np.save(results_dir + '/r_nottrained_scoreregression' + filename_addition + '.npy', r_hat_test)
-        elif t == theta_benchmark_trained:
+        elif t == settings.theta_benchmark_trained:
             np.save(results_dir + '/r_trained_scoreregression' + filename_addition + '.npy', r_hat_test)
 
         # Neyman construction: evaluate observed sample (raw)
         tthat_neyman_observed = regr.predict(X_neyman_observed_transformed).dot(delta_theta)
-        llr_neyman_observed = -2. * np.sum(tthat_neyman_observed.reshape((-1, n_expected_events)), axis=1)
+        llr_neyman_observed = -2. * np.sum(tthat_neyman_observed.reshape((-1, settings.n_expected_events)), axis=1)
         np.save(neyman_dir + '/neyman_llr_observed_scoreregression_' + str(t) + filename_addition + '.npy',
                 llr_neyman_observed)
 
         # Neyman construction: evaluate observed sample (calibrated)
         r_neyman_observed = r_from_s(calibrator.predict(tthat_neyman_observed))
-        llr_calibrated_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, n_expected_events)),
+        llr_calibrated_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
                                                       axis=1)
         np.save(neyman_dir + '/neyman_llr_observed_scoreregression_calibrated_' + str(t) + filename_addition + '.npy',
                 llr_calibrated_neyman_observed)
@@ -176,19 +169,19 @@ def score_regression_inference(options=''):
         for tt in range(n_thetas):
 
             # Neyman construction: load distribution sample
-            X_neyman_distribution = np.load(unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
+            X_neyman_distribution = np.load(settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
             X_neyman_distribution_transformed = scaler.transform(
                 X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
             # Neyman construction: evaluate distribution sample (raw)
             tthat_neyman_distribution = regr.predict(X_neyman_distribution_transformed).dot(delta_theta)
             llr_neyman_distributions.append(
-                -2. * np.sum(tthat_neyman_distribution.reshape((-1, n_expected_events)), axis=1))
+                -2. * np.sum(tthat_neyman_distribution.reshape((-1, settings.n_expected_events)), axis=1))
 
             # Neyman construction: evaluate distribution sample (calibrated)
             r_neyman_distribution = r_from_s(calibrator.predict(tthat_neyman_distribution))
             llr_neyman_distributions_calibrated.append(-2. * np.sum(
-                np.log(r_neyman_distribution).reshape((-1, n_expected_events)), axis=1))
+                np.log(r_neyman_distribution).reshape((-1, settings.n_expected_events)), axis=1))
 
         llr_neyman_distributions = np.asarray(llr_neyman_distributions)
         llr_neyman_distributions_calibrated = np.asarray(llr_neyman_distributions_calibrated)

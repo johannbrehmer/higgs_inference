@@ -4,28 +4,12 @@
 
 from keras.models import Model
 from keras.layers import Input, Dense, Lambda
-from keras import losses, optimizers
+from keras import optimizers
 import keras.backend as K
 
+from higgs_inference import settings
 from higgs_inference.various.utils import build_hidden_layers
-
-################################################################################
-# Parameters
-################################################################################
-
-n_features = 42
-
-
-################################################################################
-# Loss functions
-################################################################################
-
-def loss_function_carl(y_true, y_pred):
-    return losses.binary_crossentropy(y_true[:, 0], y_pred[:, 0])
-
-
-def loss_function_regression(y_true, y_pred):
-    return losses.mean_squared_error(y_true[:, 0], y_pred[:, 0])
+from higgs_inference.models.loss_functions import loss_function_carl, loss_function_regression
 
 
 ################################################################################
@@ -37,7 +21,7 @@ def make_regressor(n_hidden_layers=3,
                    activation='tanh',
                    dropout_prob=0.0):
     # Inputs
-    input_layer = Input(shape=(n_features,))
+    input_layer = Input(shape=(settings.n_features,))
 
     # Network
     hidden_layer = Dense(hidden_layer_size, activation=activation)(input_layer)
@@ -68,7 +52,7 @@ def make_classifier(n_hidden_layers=3,
                     dropout_prob=0.0,
                     learn_log_r=False):
     # Inputs
-    input_layer = Input(shape=(n_features,))
+    input_layer = Input(shape=(settings.n_features,))
 
     # Network
     hidden_layer = Dense(hidden_layer_size, activation=activation)(input_layer)

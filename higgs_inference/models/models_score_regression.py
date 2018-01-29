@@ -4,25 +4,10 @@
 
 from keras.models import Model
 from keras.layers import Input, Dense
-from keras import losses, optimizers
+from keras import optimizers
 
 from higgs_inference.various.utils import build_hidden_layers
-
-################################################################################
-# Parameters
-################################################################################
-
-n_params = 2
-n_features = 42
-n_thetas_features = n_features + n_params
-
-
-################################################################################
-# Loss functions
-################################################################################
-
-def loss_function_score_regression(y_true, y_pred):
-    return losses.mean_squared_error(y_true[:, :], y_pred[:, :])
+from higgs_inference.models.loss_functions import loss_function_score_regression
 
 
 ################################################################################

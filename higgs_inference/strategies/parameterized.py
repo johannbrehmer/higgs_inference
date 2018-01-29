@@ -17,6 +17,7 @@ from keras.callbacks import EarlyStopping
 from carl.ratios import ClassifierScoreRatio
 from carl.learning import CalibratedClassifierScoreCV
 
+from higgs_inference import settings
 from higgs_inference.models.models_parameterized import make_classifier_carl, make_classifier_carl_morphingaware
 from higgs_inference.models.models_parameterized import make_classifier_score, make_classifier_score_morphingaware
 from higgs_inference.models.models_parameterized import make_classifier_combined, make_classifier_combined_morphingaware
@@ -79,41 +80,37 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         alpha_carl = 0.1
         filename_addition += '_smallalpha'
 
-    n_hidden_layers = 2
-    n_hidden_layers_aware = 2
+    n_hidden_layers = settings.n_hidden_layers_default
     if shallow_mode:
-        n_hidden_layers = 1
-        n_hidden_layers_aware = 1
+        n_hidden_layers = settings.n_hidden_layers_shallow
         filename_addition += '_shallow'
     elif deep_mode:
-        n_hidden_layers = 3
-        n_hidden_layers_aware = 3
+        n_hidden_layers = settings.n_hidden_layers_deep
         filename_addition += '_deep'
 
-    n_epochs = 20
+    n_epochs = settings.n_epochs_default
     early_stopping = True
     if debug_mode:
-        n_epochs = 1
+        n_epochs = settings.n_epochs_short
         early_stopping = False
         filename_addition += '_debug'
     elif long_mode:
-        n_epochs = 50
+        n_epochs = settings.n_epochs_long
         filename_addition += '_long'
     elif short_mode:
-        n_epochs = 1
+        n_epochs = settings.n_epochs_short
         early_stopping = False
         filename_addition += '_short'
 
-    theta1 = 708
+    theta1 = settings.theta1_default
     input_filename_addition = ''
     if denom1_mode:
         input_filename_addition = '_denom1'
         filename_addition += '_denom1'
-        theta1 = 422
+        theta1 = settings.theta1_alternative
 
-    data_dir = '../data'
-    unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
-    results_dir = '../results/parameterized'
+    data_dir = settings.base_dir + '/data'
+    results_dir = settings.base_dir + '/results/parameterized'
     neyman_dir = results_dir + '/neyman'
 
     logging.info('Main settings:')
@@ -134,42 +131,39 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     thetas = np.load(data_dir + '/thetas/thetas_parameterized.npy')
 
     n_thetas = len(thetas)
-    theta_benchmark_trained = 422
-    theta_benchmark_nottrained = 9
 
     if random_theta_mode:
-        X_train = np.load(unweighted_events_dir + '/X_train_random' + input_filename_addition + '.npy')
-        y_train = np.load(unweighted_events_dir + '/y_train_random' + input_filename_addition + '.npy')
-        scores_train = np.load(unweighted_events_dir + '/scores_train_random' + input_filename_addition + '.npy')
-        r_train = np.load(unweighted_events_dir + '/r_train_random' + input_filename_addition + '.npy')
-        theta0_train = np.load(unweighted_events_dir + '/theta0_train_random' + input_filename_addition + '.npy')
+        X_train = np.load(settings.unweighted_events_dir + '/X_train_random' + input_filename_addition + '.npy')
+        y_train = np.load(settings.unweighted_events_dir + '/y_train_random' + input_filename_addition + '.npy')
+        scores_train = np.load(settings.unweighted_events_dir + '/scores_train_random' + input_filename_addition + '.npy')
+        r_train = np.load(settings.unweighted_events_dir + '/r_train_random' + input_filename_addition + '.npy')
+        theta0_train = np.load(settings.unweighted_events_dir + '/theta0_train_random' + input_filename_addition + '.npy')
     elif basis_theta_mode:
-        X_train = np.load(unweighted_events_dir + '/X_train_basis' + input_filename_addition + '.npy')
-        y_train = np.load(unweighted_events_dir + '/y_train_basis' + input_filename_addition + '.npy')
-        scores_train = np.load(unweighted_events_dir + '/scores_train_basis' + input_filename_addition + '.npy')
-        r_train = np.load(unweighted_events_dir + '/r_train_basis' + input_filename_addition + '.npy')
-        theta0_train = np.load(unweighted_events_dir + '/theta0_train_basis' + input_filename_addition + '.npy')
+        X_train = np.load(settings.unweighted_events_dir + '/X_train_basis' + input_filename_addition + '.npy')
+        y_train = np.load(settings.unweighted_events_dir + '/y_train_basis' + input_filename_addition + '.npy')
+        scores_train = np.load(settings.unweighted_events_dir + '/scores_train_basis' + input_filename_addition + '.npy')
+        r_train = np.load(settings.unweighted_events_dir + '/r_train_basis' + input_filename_addition + '.npy')
+        theta0_train = np.load(settings.unweighted_events_dir + '/theta0_train_basis' + input_filename_addition + '.npy')
     else:
-        X_train = np.load(unweighted_events_dir + '/X_train' + input_filename_addition + '.npy')
-        y_train = np.load(unweighted_events_dir + '/y_train' + input_filename_addition + '.npy')
-        scores_train = np.load(unweighted_events_dir + '/scores_train' + input_filename_addition + '.npy')
-        r_train = np.load(unweighted_events_dir + '/r_train' + input_filename_addition + '.npy')
-        theta0_train = np.load(unweighted_events_dir + '/theta0_train' + input_filename_addition + '.npy')
+        X_train = np.load(settings.unweighted_events_dir + '/X_train' + input_filename_addition + '.npy')
+        y_train = np.load(settings.unweighted_events_dir + '/y_train' + input_filename_addition + '.npy')
+        scores_train = np.load(settings.unweighted_events_dir + '/scores_train' + input_filename_addition + '.npy')
+        r_train = np.load(settings.unweighted_events_dir + '/r_train' + input_filename_addition + '.npy')
+        theta0_train = np.load(settings.unweighted_events_dir + '/theta0_train' + input_filename_addition + '.npy')
 
-    X_calibration = np.load(unweighted_events_dir + '/X_calibration' + input_filename_addition + '.npy')
-    weights_calibration = np.load(unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
+    X_calibration = np.load(settings.unweighted_events_dir + '/X_calibration' + input_filename_addition + '.npy')
+    weights_calibration = np.load(settings.unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
 
-    X_test = np.load(unweighted_events_dir + '/X_test' + input_filename_addition + '.npy')
-    # scores_test = np.load(unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
-    r_test = np.load(unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
+    X_test = np.load(settings.unweighted_events_dir + '/X_test' + input_filename_addition + '.npy')
+    # scores_test = np.load(settings.unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
+    r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
 
-    X_roam = np.load(unweighted_events_dir + '/X_roam' + input_filename_addition + '.npy')
-    # r_roam = np.load(unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
+    X_roam = np.load(settings.unweighted_events_dir + '/X_roam' + input_filename_addition + '.npy')
+    # r_roam = np.load(settings.unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
     n_roaming = len(X_roam)
 
-    X_neyman_observed = np.load(unweighted_events_dir + '/X_neyman_observed.npy')
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/X_neyman_observed.npy')
 
-    n_expected_events = 36
     n_events_test = X_test.shape[0]
     assert n_thetas == r_test.shape[0]
 
@@ -186,14 +180,13 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     X_thetas_train = np.hstack((X_train_transformed, theta0_train))
     y_score_train = np.hstack((y_train.reshape(-1, 1), scores_train))
 
-    n_thetas_roam = 101
-    xi = np.linspace(-1.0, 1.0, n_thetas_roam)
-    yi = np.linspace(-1.0, 1.0, n_thetas_roam)
+    xi = np.linspace(-1.0, 1.0, settings.n_thetas_roam)
+    yi = np.linspace(-1.0, 1.0, settings.n_thetas_roam)
     xx, yy = np.meshgrid(xi, yi)
     thetas_roam = np.asarray((xx.flatten(), yy.flatten())).T
     X_thetas_roam = []
     for i in range(n_roaming):
-        X_thetas_roam.append(np.zeros((n_thetas_roam ** 2, X_roam_transformed.shape[1] + 2)))
+        X_thetas_roam.append(np.zeros((settings.n_thetas_roam ** 2, X_roam_transformed.shape[1] + 2)))
         X_thetas_roam[-1][:, :-2] = X_roam_transformed[i, :]
         X_thetas_roam[-1][:, -2:] = thetas_roam
 
@@ -214,7 +207,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
         if algorithm == 'regression':
             if morphing_aware:
-                regr = KerasRegressor(lambda: make_regressor_morphingaware(n_hidden_layers=n_hidden_layers_aware),
+                regr = KerasRegressor(lambda: make_regressor_morphingaware(n_hidden_layers=n_hidden_layers),
                                       epochs=n_epochs, validation_split=0.1,
                                       verbose=2)
             else:
@@ -224,7 +217,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         else:
             if morphing_aware:
                 regr = KerasRegressor(
-                    lambda: make_combined_regressor_morphingaware(n_hidden_layers=n_hidden_layers_aware,
+                    lambda: make_combined_regressor_morphingaware(n_hidden_layers=n_hidden_layers,
                                                                   alpha=alpha_regression),
                     epochs=n_epochs, validation_split=0.1,
                     verbose=2)
@@ -257,16 +250,16 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 this_ri = prediction[:, 18:]
                 logging.debug('Morphing weights for theta %s (%s): $s', t, theta, this_wi[0])
 
-            expected_llr.append(- 2. * n_expected_events / n_events_test * np.sum(np.log(this_r)))
+            expected_llr.append(- 2. * settings.n_expected_events / n_events_test * np.sum(np.log(this_r)))
 
             # For benchmark thetas, save r for different phase-space points
-            if t == theta_benchmark_nottrained:
+            if t == settings.theta_benchmark_nottrained:
                 np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
                 np.save(results_dir + '/scores_nottrained_' + algorithm + filename_addition + '.npy', this_score)
                 if morphing_aware:
                     np.save(results_dir + '/morphing_ri_nottrained_' + algorithm + filename_addition + '.npy', this_ri)
                     np.save(results_dir + '/morphing_wi_nottrained_' + algorithm + filename_addition + '.npy', this_wi)
-            elif t == theta_benchmark_trained:
+            elif t == settings.theta_benchmark_trained:
                 np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
                 np.save(results_dir + '/scores_trained_' + algorithm + filename_addition + '.npy', this_score)
                 if morphing_aware:
@@ -290,7 +283,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             for tt in range(n_thetas):
 
                 # Neyman construction: load distribution sample
-                X_neyman_distribution = np.load(unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
+                X_neyman_distribution = np.load(settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
                 X_neyman_distribution_transformed = scaler.transform(
                     X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
@@ -329,7 +322,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         logging.info('Starting training')
         if algorithm == 'carl':
             if morphing_aware:
-                clf = KerasRegressor(lambda: make_classifier_carl_morphingaware(n_hidden_layers=n_hidden_layers_aware,
+                clf = KerasRegressor(lambda: make_classifier_carl_morphingaware(n_hidden_layers=n_hidden_layers,
                                                                                 learn_log_r=learn_logr_mode),
                                      epochs=n_epochs, validation_split=0.1,
                                      verbose=2)
@@ -341,7 +334,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
         elif algorithm == 'score':
             if morphing_aware:
-                clf = KerasRegressor(lambda: make_classifier_score_morphingaware(n_hidden_layers=n_hidden_layers_aware,
+                clf = KerasRegressor(lambda: make_classifier_score_morphingaware(n_hidden_layers=n_hidden_layers,
                                                                                  learn_log_r=learn_logr_mode),
                                      epochs=n_epochs, validation_split=0.1,
                                      verbose=2)
@@ -354,7 +347,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         elif algorithm == 'combined':
             if morphing_aware:
                 clf = KerasRegressor(
-                    lambda: make_classifier_combined_morphingaware(n_hidden_layers=n_hidden_layers_aware,
+                    lambda: make_classifier_combined_morphingaware(n_hidden_layers=n_hidden_layers,
                                                                    learn_log_r=learn_logr_mode,
                                                                    alpha=alpha_carl),
                     epochs=n_epochs, validation_split=0.1,
@@ -394,16 +387,16 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 this_ri = this_other[:, 17:]
                 logging.debug('Morphing weights for theta %s (%s): $s', t, theta, this_wi[0])
 
-            expected_llr.append(- 2. * n_expected_events / n_events_test * np.sum(np.log(this_r)))
+            expected_llr.append(- 2. * settings.n_expected_events / n_events_test * np.sum(np.log(this_r)))
 
             # For benchmark thetas, save more info
-            if t == theta_benchmark_nottrained:
+            if t == settings.theta_benchmark_nottrained:
                 np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', this_r)
                 np.save(results_dir + '/scores_nottrained_' + algorithm + filename_addition + '.npy', this_score)
                 if morphing_aware:
                     np.save(results_dir + '/morphing_ri_nottrained_' + algorithm + filename_addition + '.npy', this_ri)
                     np.save(results_dir + '/morphing_wi_nottrained_' + algorithm + filename_addition + '.npy', this_wi)
-            elif t == theta_benchmark_trained:
+            elif t == settings.theta_benchmark_trained:
                 np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
                 np.save(results_dir + '/scores_trained_' + algorithm + filename_addition + '.npy', this_score)
                 if morphing_aware:
@@ -418,7 +411,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # Neyman construction: evaluate observed sample (raw)
             r_neyman_observed, _ = ratio.predict(X_thetas_neyman_observed)
-            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, n_expected_events)), axis=1)
+            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)), axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + filename_addition + '.npy',
                     llr_neyman_observed)
 
@@ -427,7 +420,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             for tt in range(n_thetas):
 
                 # Neyman construction: load distribution sample
-                X_neyman_distribution = np.load(unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
+                X_neyman_distribution = np.load(settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
                 X_neyman_distribution_transformed = scaler.transform(
                     X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
@@ -440,7 +433,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 # Neyman construction: evaluate distribution sample (raw)
                 r_neyman_distribution, _ = ratio.predict(X_thetas_neyman_distribution)
                 llr_neyman_distributions.append(
-                    -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, n_expected_events)), axis=1))
+                    -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, settings.n_expected_events)), axis=1))
 
             llr_neyman_distributions = np.asarray(llr_neyman_distributions)
             np.save(neyman_dir + '/neyman_llr_distribution_' + algorithm + '_' + str(t) + filename_addition + '.npy',
@@ -490,10 +483,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             this_r, this_other = ratio_calibrated.predict(X_thetas_test)
             this_score = this_other[:, :2]
 
-            expected_llr_calibrated.append(- 2. * n_expected_events / n_events_test * np.sum(np.log(this_r)))
+            expected_llr_calibrated.append(- 2. * settings.n_expected_events / n_events_test * np.sum(np.log(this_r)))
 
             # For benchmark theta, save more data
-            if t == theta_benchmark_nottrained:
+            if t == settings.theta_benchmark_nottrained:
                 np.save(results_dir + '/scores_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy',
                         this_score)
                 np.save(results_dir + '/r_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
@@ -504,7 +497,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 # np.save(results_dir + '/cal1histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
                 # np.save(results_dir + '/cal1edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
 
-            elif t == theta_benchmark_trained:
+            elif t == settings.theta_benchmark_trained:
                 np.save(results_dir + '/scores_trained_' + algorithm + '_calibrated' + filename_addition + '.npy',
                         this_score)
                 np.save(results_dir + '/r_trained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
@@ -523,7 +516,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # Neyman construction: evaluate observed sample (raw)
             r_neyman_observed, _ = ratio_calibrated.predict(X_thetas_neyman_observed)
-            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, n_expected_events)), axis=1)
+            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)), axis=1)
             np.save(
                 neyman_dir + '/neyman_llr_observed_' + algorithm + '_calibrated_' + str(t) + filename_addition + '.npy',
                 llr_neyman_observed)
@@ -533,7 +526,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             for tt in range(n_thetas):
 
                 # Neyman construction: load distribution sample
-                X_neyman_distribution = np.load(unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
+                X_neyman_distribution = np.load(settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
                 X_neyman_distribution_transformed = scaler.transform(
                     X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
@@ -546,7 +539,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 # Neyman construction: evaluate distribution sample (calibrated)
                 r_neyman_distribution, _ = ratio_calibrated.predict(X_thetas_neyman_distribution)
                 llr_neyman_distributions.append(
-                    -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, n_expected_events)), axis=1))
+                    -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, settings.n_expected_events)), axis=1))
 
             llr_neyman_distributions = np.asarray(llr_neyman_distributions)
             np.save(neyman_dir + '/neyman_llr_distribution_' + algorithm + '_calibrated_' + str(
