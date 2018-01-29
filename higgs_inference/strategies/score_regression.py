@@ -166,24 +166,36 @@ def score_regression_inference(options=''):
         np.save(neyman_dir + '/neyman_llr_observed_scoreregression_calibrated_' + str(t) + filename_addition + '.npy',
                 llr_calibrated_neyman_observed)
 
-        # Neyman construction: load distribution sample
-        X_neyman_distribution = np.load(unweighted_events_dir + '/X_neyman_distribution_' + str(t) + '.npy')
-        X_neyman_distribution_transformed = scaler.transform(
-            X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
+        # Debug output
+        logging.debug('Theta %s (%s) median tthat values: calibration %s, test %s, Neyman observed %s', t, theta,
+                      np.median(tthat_calibration), np.median(tthat_test), np.median(tthat_neyman_observed))
 
-        # Neyman construction: evaluate distribution sample (raw)
-        tthat_neyman_distribution = regr.predict(X_neyman_distribution_transformed).dot(delta_theta)
-        llr_neyman_distribution = -2. * np.sum(tthat_neyman_distribution.reshape((-1, n_expected_events)), axis=1)
+        # Neyman construction: loop over distribution samples generated from different thetas
+        llr_neyman_distributions = []
+        llr_neyman_distributions_calibrated = []
+        for tt in range(n_thetas):
+
+            # Neyman construction: load distribution sample
+            X_neyman_distribution = np.load(unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
+            X_neyman_distribution_transformed = scaler.transform(
+                X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
+
+            # Neyman construction: evaluate distribution sample (raw)
+            tthat_neyman_distribution = regr.predict(X_neyman_distribution_transformed).dot(delta_theta)
+            llr_neyman_distributions.append(
+                -2. * np.sum(tthat_neyman_distribution.reshape((-1, n_expected_events)), axis=1))
+
+            # Neyman construction: evaluate distribution sample (calibrated)
+            r_neyman_distribution = r_from_s(calibrator.predict(tthat_neyman_distribution))
+            llr_neyman_distributions_calibrated.append(-2. * np.sum(
+                np.log(r_neyman_distribution).reshape((-1, n_expected_events)), axis=1))
+
+        llr_neyman_distributions = np.asarray(llr_neyman_distributions)
+        llr_neyman_distributions_calibrated = np.asarray(llr_neyman_distributions_calibrated)
         np.save(neyman_dir + '/neyman_llr_distribution_scoreregression_' + str(t) + filename_addition + '.npy',
-                llr_neyman_distribution)
-
-        # Neyman construction: evaluate distribution sample (calibrated)
-        r_neyman_distribution = r_from_s(calibrator.predict(tthat_neyman_distribution))
-        llr_calibrated_neyman_distribution = -2. * np.sum(
-            np.log(r_neyman_distribution).reshape((-1, n_expected_events)), axis=1)
-        np.save(
-            neyman_dir + '/neyman_llr_distribution_scoreregression_calibrated_' + str(t) + filename_addition + '.npy',
-            llr_calibrated_neyman_distribution)
+                llr_neyman_distributions)
+        np.save(neyman_dir + '/neyman_llr_distribution_scoreregression_calibrated_' + str(t) + filename_addition + '.npy',
+                llr_neyman_distributions_calibrated)
 
     # Save expected LLR
     expected_llr = np.asarray(expected_llr)
