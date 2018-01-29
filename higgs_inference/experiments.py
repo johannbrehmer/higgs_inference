@@ -43,7 +43,7 @@ assert args.algorithm in ['p', 'cl', 'pvalues',
 assert args.training in ['baseline', 'basis', 'random']
 
 # Start calculation
-if args.algorithm in ['p', 'p-values', 'pvalues']:
+if args.algorithm in ['p', 'cl', 'pvalues']:
     calculate_all_CL()
 
 elif args.algorithm == 'truth':
