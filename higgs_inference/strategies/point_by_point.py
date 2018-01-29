@@ -140,12 +140,12 @@ def point_by_point_inference(algorithm='carl',
             assert np.all(np.isfinite(X_test_transformed))
 
             regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
-                                  epochs=n_epochs, validation_split=0.1,
+                                  epochs=n_epochs, validation_split=settings.validation_split,
                                   verbose=2)
 
             # Training
             regr.fit(X_train_transformed, np.log(r_train),
-                     callbacks=([EarlyStopping(verbose=1, patience=3)] if early_stopping else None))
+                     callbacks=([EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
 
             # Evaluation
             prediction = regr.predict(X_test_transformed)
@@ -228,12 +228,12 @@ def point_by_point_inference(algorithm='carl',
                 X_neyman_observed.reshape((-1, X_neyman_observed.shape[2])))
 
             clf = KerasRegressor(lambda: make_classifier(n_hidden_layers=n_hidden_layers, learn_log_r=learn_logr_mode),
-                                 epochs=n_epochs, validation_split=0.1,
+                                 epochs=n_epochs, validation_split=settings.validation_split,
                                  verbose=2)
 
             # Training
             clf.fit(X_train_transformed, y_train,
-                    callbacks=([EarlyStopping(verbose=1, patience=3)] if early_stopping else None))
+                    callbacks=([EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
 
             # carl wrapper
             ratio = ClassifierScoreRatio(clf, prefit=True)

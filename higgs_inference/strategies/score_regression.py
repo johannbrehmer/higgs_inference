@@ -106,12 +106,12 @@ def score_regression_inference(options=''):
     ################################################################################
 
     regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
-                          epochs=n_epochs, verbose=2, validation_split=0.1,
-                          callbacks=[EarlyStopping(verbose=1, patience=3)])
+                          epochs=n_epochs, verbose=2, validation_split=settings.validation_split,
+                          callbacks=[EarlyStopping(verbose=1, patience=settings.early_stopping_patience)])
 
     logging.info('Starting training of score regression')
     regr.fit(X_train_transformed, scores_train,
-             callbacks=([EarlyStopping(verbose=1, patience=3)] if early_stopping else None))
+             callbacks=([EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
 
     logging.info('Starting evaluation')
     that_calibration = regr.predict(X_calibration_transformed)
