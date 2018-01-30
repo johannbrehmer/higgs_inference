@@ -57,8 +57,8 @@ pbp_training_thetas = [0, 13, 14, 15, 16, 9, 422, 956, 666, 802, 675, 839, 699, 
 n_expected_events = 36
 
 # Number of toy experiments
-n_neyman_distribution_experiments = 1000
-n_neyman_observed_experiments = 251
+n_neyman_distribution_experiments = 500
+n_neyman_observed_experiments = 51
 
 ################################################################################
 # Network architecture and training
