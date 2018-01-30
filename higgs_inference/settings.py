@@ -5,6 +5,7 @@
 base_dir = '/home/jb6504/higgs_inference'  # Will be overridden at startup
 weighted_events_dir = '/scratch/jb6504/higgs_inference/data/events'
 unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
+neyman_dir = '/scratch/jb6504/higgs_inference/results/neyman'
 
 ################################################################################
 # Parameters and features

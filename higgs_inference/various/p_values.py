@@ -7,6 +7,8 @@ from __future__ import absolute_import, division, print_function
 import logging
 import numpy as np
 
+from higgs_inference import settings
+
 
 def calculate_median_p_value(llr_distribution, llr_observed):
     """ Calculates the median p-value given a set of observed LLR values and a distribution of LLR values given the
@@ -26,7 +28,7 @@ def subtract_mle(filename, folder, theta_sm=0):
     logging.info('Subtracting MLE for ' + folder + ' ' + filename)
 
     # Settings
-    neyman_dir = '../results/' + folder + '/neyman'
+    neyman_dir = settings.neyman_dir + folder + '/neyman'
     n_thetas = 1017
     n_neyman_distribution_experiments = 1000
     n_neyman_observed_experiments = 101
