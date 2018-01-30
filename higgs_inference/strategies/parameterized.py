@@ -111,7 +111,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     data_dir = settings.base_dir + '/data'
     results_dir = settings.base_dir + '/results/parameterized'
-    neyman_dir = results_dir + '/neyman'
+    neyman_dir = settings.neyman_dir + '/parameterized'
 
     logging.info('Main settings:')
     logging.info('  Algorithm:                %s', algorithm)

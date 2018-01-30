@@ -3,6 +3,8 @@
 ################################################################################
 
 base_dir = '/home/jb6504/higgs_inference'  # Will be overridden at startup
+
+# Large directories, on scratch on cluster
 weighted_events_dir = '/scratch/jb6504/higgs_inference/data/events'
 unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
 neyman_dir = '/scratch/jb6504/higgs_inference/results/neyman'
@@ -20,16 +22,22 @@ n_morphing_samples = 15
 # Benchmark theta points
 ################################################################################
 
-#  (all are indices of the thetas defined in data/thetas/thetas_parameterized.npy)
+n_thetas = 1017
+n_thetas_roam = 101
+n_randomthetas = 100
+
+# The following are indices of the thetas defined in data/thetas/thetas_parameterized.npy
 
 theta_observed = 0
 theta_score_regression = 0
+
 theta1_default = 708
 theta1_alternative = 422
+
 theta_benchmark_trained = 422
 theta_benchmark_nottrained = 9
 
-thetas_train = list(range(17, 1017))
+thetas_train = list(range(17, n_thetas))
 thetas_test = list(range(17))
 thetas_morphing_basis = [0, 101, 106, 902, 910,
                          226, 373, 583, 747, 841,
@@ -40,8 +48,6 @@ pbp_training_thetas = [0, 13, 14, 15, 16, 9, 422, 956, 666, 802, 675, 839, 699, 
                        421, 574, 923, 849, 299, 119, 167, 939, 402, 52, 787, 978, 41, 873, 533, 827, 304, 294, 760, 890,
                        539, 1000, 291, 740, 276, 679, 167, 125, 429, 149, 430, 720, 123, 908, 256, 777, 809, 269, 851]
 
-n_thetas_roam = 101
-n_randomthetas = 100
 
 ################################################################################
 # Evaluation

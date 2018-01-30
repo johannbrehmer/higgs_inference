@@ -66,7 +66,7 @@ def score_regression_inference(options=''):
 
     data_dir = settings.base_dir + '/data'
     results_dir = settings.base_dir + '/results/score_regression'
-    neyman_dir = results_dir + '/neyman'
+    neyman_dir = settings.neyman_dir + '/score_regression'
 
     logging.info('Options:')
     logging.info('  Number of epochs:         %s', n_epochs)

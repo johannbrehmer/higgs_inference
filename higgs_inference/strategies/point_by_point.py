@@ -81,7 +81,7 @@ def point_by_point_inference(algorithm='carl',
 
     data_dir = settings.base_dir + '/data'
     results_dir = settings.base_dir + '/results/point_by_point'
-    neyman_dir = results_dir + '/neyman'
+    neyman_dir = settings.neyman_dir + '/point_by_point'
 
     logging.info('Main settings:')
     logging.info('  Algorithm:               %s', algorithm)
