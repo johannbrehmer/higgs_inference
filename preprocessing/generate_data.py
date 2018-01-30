@@ -617,6 +617,8 @@ if args.neyman:
 
         X = np.asarray(weighted_data_test.iloc[indices, subset_features])
 
+        # TODO: Truth likelihood ratios, truth scores
+
         return X.reshape((n_toy_experiments, settings.n_expected_events, -1))
 
 

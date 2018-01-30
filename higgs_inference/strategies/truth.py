@@ -85,3 +85,5 @@ def truth_inference(options=''):
     gp.fit(thetas[:], np.log(r_roam))
     r_roam_truth = np.exp(gp.predict(np.c_[xx.ravel(), yy.ravel()])).T
     np.save(results_dir + '/r_roam_truth' + filename_addition + '.npy', r_roam_truth)
+
+    # TODO: Neyman construction
