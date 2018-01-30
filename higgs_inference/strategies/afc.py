@@ -9,26 +9,10 @@ import numpy as np
 
 from scipy.interpolate import LinearNDInterpolator
 from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KernelDensity
 
 from higgs_inference import settings
 from higgs_inference.various.utils import format_number
-
-
-def count_acceptances(hypothesis_statistics,
-                      observed_statistics,
-                      epsilon):
-
-    """ Counts how often the observed_statistics are in epsilon-balls with radius epsilon around the
-    hypothesis_statistics. """
-
-    counter = 0
-
-    for hypo in hypothesis_statistics:
-        for obs in observed_statistics:
-            if np.sum((hypo - obs)**2) <= epsilon**2:
-                counter += 1
-
-    return counter
 
 
 def afc_inference(statistics='x',
@@ -137,6 +121,12 @@ def afc_inference(statistics='x',
             summary_statistics_test = X_test_transformed[indices_X]
         else:
             raise NotImplementedError
+
+
+
+        # TODO: from here
+
+
 
         # Calculate acceptance rate for nominator and denominator theta
         accepted_num = count_acceptances(summary_statistics_hypothesis[y_hypothesis == 0], summary_statistics_test)
