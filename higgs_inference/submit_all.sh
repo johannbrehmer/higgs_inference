@@ -1,9 +1,6 @@
 #!/bin/bash
 
-# sbatch run_truth.sh
-
-# sleep 30
-
+sbatch run_truth.sh
 sbatch run_scoreregression.sh
 
 sleep 30
@@ -19,7 +16,7 @@ sbatch run_regression.sh
 sbatch run_score.sh
 sbatch run_combinedregression.sh
 
-# sleep 60
+# sleep 30
 
 # sbatch run_carl_aware.sh
 # sbatch run_combined_aware.sh
