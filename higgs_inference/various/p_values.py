@@ -146,6 +146,8 @@ def calculate_all_CL():
 
     logging.info('Starting p-value calculation')
 
+    calculate_CL('truth', 'truth')
+
     calculate_CL('carl', 'point_by_point')
     calculate_CL('carl_calibrated', 'point_by_point')
     calculate_CL('regression', 'point_by_point')

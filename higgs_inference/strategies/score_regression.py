@@ -161,10 +161,6 @@ def score_regression_inference(options=''):
         np.save(neyman_dir + '/neyman_llr_observed_scoreregression_calibrated_' + str(t) + filename_addition + '.npy',
                 llr_calibrated_neyman_observed)
 
-        # Debug output
-        logging.debug('Theta %s (%s) median tthat values: calibration %s, test %s, Neyman observed %s', t, theta,
-                      np.median(tthat_calibration), np.median(tthat_test), np.median(tthat_neyman_observed))
-
         # Neyman construction: loop over distribution samples generated from different thetas
         llr_neyman_distributions = []
         llr_neyman_distributions_calibrated = []
@@ -180,10 +176,25 @@ def score_regression_inference(options=''):
             llr_neyman_distributions.append(
                 -2. * np.sum(tthat_neyman_distribution.reshape((-1, settings.n_expected_events)), axis=1))
 
+            # Debug output
+            if tt==0:
+                logging.debug(
+                    'Theta %s (%s) median tthat values: calibration %s, test %s, Neyman observed %s, Neyman hypothesis %s',
+                    t, theta,
+                    np.median(tthat_calibration), np.median(tthat_test), np.median(tthat_neyman_observed),
+                    np.median(tthat_neyman_distribution))
+
             # Neyman construction: evaluate distribution sample (calibrated)
             r_neyman_distribution = r_from_s(calibrator.predict(tthat_neyman_distribution))
             llr_neyman_distributions_calibrated.append(-2. * np.sum(
                 np.log(r_neyman_distribution).reshape((-1, settings.n_expected_events)), axis=1))
+
+            # Debug output
+            if tt==0:
+                logging.debug(
+                    'Theta %s (%s) median calibrated LLR values: Neyman observed %s, Neyman hypothesis %s',
+                    t, theta,
+                    np.median(llr_calibrated_neyman_observed), np.median(llr_neyman_distributions_calibrated[-1]))
 
         llr_neyman_distributions = np.asarray(llr_neyman_distributions)
         llr_neyman_distributions_calibrated = np.asarray(llr_neyman_distributions_calibrated)
