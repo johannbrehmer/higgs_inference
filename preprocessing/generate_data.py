@@ -97,11 +97,7 @@ if args.alternativedenom:
 
 subset_features = list(range(settings.n_features))
 
-if args.debug:
-    weighted_data = pd.read_csv(settings.weighted_events_dir + '/wbf_4l_supernew_excerpt.dat', sep='\t',
-                                dtype=np.float32)
-else:
-    weighted_data = pd.read_csv(settings.weighted_events_dir + '/wbf_4l_supernew.dat', sep='\t', dtype=np.float32)
+weighted_data = pd.read_csv(settings.weighted_events_dir + '/wbf_4l_supernew.dat', sep='\t', dtype=np.float32)
 
 logging.info('Splitting...')
 
