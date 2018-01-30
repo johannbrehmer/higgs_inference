@@ -58,7 +58,7 @@ n_expected_events = 36
 
 # Number of toy experiments
 n_neyman_distribution_experiments = 1000
-n_neyman_observed_experiments = 101
+n_neyman_observed_experiments = 251
 
 ################################################################################
 # Network architecture and training
