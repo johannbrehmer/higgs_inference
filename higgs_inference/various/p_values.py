@@ -15,9 +15,11 @@ def calculate_median_p_value(llr_distribution, llr_observed):
     hypothesis to test """
 
     distribution = np.sort(llr_distribution.flatten())
+
     p_values_left = 1. - np.searchsorted(distribution, llr_observed, side='left').astype('float') / len(distribution)
     p_values_right = 1. - np.searchsorted(distribution, llr_observed, side='right').astype('float') / len(distribution)
     p_values = 0.5 * (p_values_left + p_values_right)
+
     return np.median(p_values)
 
 
@@ -28,8 +30,7 @@ def subtract_mle(filename, folder, theta_sm=0):
     logging.info('Subtracting MLE for ' + folder + ' ' + filename)
 
     # Settings
-    #neyman_dir = settings.neyman_dir + '/' + folder #  Long-term solution
-    neyman_dir = settings.base_dir + '/results/' + folder + '/neyman' #  Old, needed for cluster compatibility for now
+    neyman_dir = settings.neyman_dir + '/' + folder
     result_dir = settings.base_dir + '/results/' + folder
     
     n_thetas = settings.n_thetas
@@ -42,16 +43,22 @@ def subtract_mle(filename, folder, theta_sm=0):
 
     for t in range(n_thetas):
         try:
-            llr_distributions.append(
-                np.load(neyman_dir + '/neyman_llr_distribution_' + filename + '_' + str(t) + '.npy'))
-        except IOError:
-            llr_distributions.append(np.asarray([np.nan] * n_neyman_distribution_experiments))
+            entry = np.load(neyman_dir + '/neyman_llr_distribution_' + filename + '_' + str(t) + '.npy')
+            assert entry.shape == (settings.n_thetas, settings.n_neyman_distribution_experiments)
+            llr_distributions.append(entry)
+
+        except (IOError, AssertionError):
+            placeholder = np.empty((settings.n_thetas, settings.n_neyman_distribution_experiments))
+            placeholder[:,:] = np.nan
+            llr_distributions.append(placeholder)
 
         try:
             llr_observeds.append(
                 np.load(neyman_dir + '/neyman_llr_observed_' + filename + '_' + str(t) + '.npy'))
         except IOError:
-            llr_observeds.append(np.asarray([np.nan] * n_neyman_observed_experiments))
+            placeholder = np.empty(settings.n_neyman_observed_experiments)
+            placeholder[:] = np.nan
+            llr_observeds.append(placeholder)
 
     llr_distributions = np.asarray(llr_distributions)  # Shape: (n_thetas_eval, n_thetas_assumed_true, n_experiments)
     llr_observeds = np.asarray(llr_observeds)  # Shape: (n_thetas_eval, n_experiments)
