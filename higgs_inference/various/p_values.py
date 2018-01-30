@@ -31,7 +31,6 @@ def subtract_mle(filename, folder, theta_sm=0):
     #neyman_dir = settings.neyman_dir + '/' + folder #  Long-term solution
     neyman_dir = settings.base_dir + '/results/' + folder + '/neyman' #  Old, needed for cluster compatibility for now
     result_dir = settings.base_dir + '/results/' + folder
-    
     n_thetas = settings.n_thetas
     n_neyman_distribution_experiments = settings.n_neyman_distribution_experiments
     n_neyman_observed_experiments = settings.n_neyman_observed_experiments
