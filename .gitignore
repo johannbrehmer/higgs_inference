@@ -8,10 +8,10 @@ core.*
 
 !/.gitignore
 
-/data/events
-/data/unweighted_events
+/data/events/
+/data/unweighted_events/
 
-/prototypes/flow/models_theano
+/prototypes/flow/models_theano/
 
 /notes/*.aux
 /notes/*.bbl
@@ -26,9 +26,6 @@ core.*
 /notes/*.lot
 /notes/*.fls
 
-/higgs_inference/old_logs
+/higgs_inference/old_logs/
 
-/results/truth/neyman
-/results/parameterized/neyman
-/results/point_by_point/neyman
-/results/score_regression/neyman
+/results/neyman/
