@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=truth
+#SBATCH --output=slurm_truth.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB

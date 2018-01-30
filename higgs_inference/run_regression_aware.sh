@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=regr-aware
+#SBATCH --output=slurm_regression_aware.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB

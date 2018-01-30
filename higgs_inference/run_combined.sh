@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=comb
+#SBATCH --output=slurm_combined.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB

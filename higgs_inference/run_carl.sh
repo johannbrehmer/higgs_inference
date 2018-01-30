@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=carl
+#SBATCH --output=slurm_carl.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB

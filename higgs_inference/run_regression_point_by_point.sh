@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=regr-pbp
+#SBATCH --output=slurm_regression_pbp.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=16GB

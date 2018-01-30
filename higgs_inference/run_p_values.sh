@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=p-values
+#SBATCH --output=slurm_p_values.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
