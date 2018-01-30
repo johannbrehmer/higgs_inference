@@ -86,14 +86,14 @@ def truth_inference(options=''):
     logging.info('Starting evaluation of Neyman experiments')
     for t in range(n_thetas):
         llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed[t]), axis=1)
-        np.save(neyman_dir + '/neyman_observed_truth_' + str(theta) + filename_addition + '.npy', llr_neyman_observed)
+        np.save(neyman_dir + '/neyman_observed_truth_' + str(t) + filename_addition + '.npy', llr_neyman_observed)
 
         llr_neyman_distributions = []
         for tt in range(n_thetas):
             r_neyman_distribution = np.load(
-                settings.unweighted_events_dir + '/r_neyman_distribution_' + str(t) + '.npy')
+                settings.unweighted_events_dir + '/r_neyman_distribution_' + str(tt) + '.npy')
             llr_neyman_distributions.append(-2. * np.sum(np.log(r_neyman_distribution[t]), axis=1))
 
         llr_neyman_distributions = np.asarray(llr_neyman_distributions)
-        np.save(neyman_dir + '/neyman_llr_distribution__truth_' + str(theta) + filename_addition + '.npy',
+        np.save(neyman_dir + '/neyman_llr_distribution__truth_' + str(t) + filename_addition + '.npy',
                 llr_neyman_distributions)
