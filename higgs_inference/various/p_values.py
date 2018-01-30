@@ -65,7 +65,7 @@ def subtract_mle(filename, folder, theta_sm=0):
     # Find MLE
     theta_mle_distribution = np.nanargmin(llr_distributions, axis=0)  # Shape: (n_thetas_assumed_true, n_experiments)
     theta_mle_observed = np.nanargmin(llr_observeds, axis=0)  # Shape: (n_experiments,)
-    logging.debug('MLE thetas: %s, %s', theta_mle_distribution, theta_mle_observed)
+    # logging.debug('MLE thetas: %s, %s', theta_mle_distribution, theta_mle_observed)
 
     # Subtract MLE
     llr_compared_to_mle_distributions = np.zeros( (llr_distributions.shape[1], llr_distributions.shape[2]) )
@@ -82,35 +82,39 @@ def subtract_mle(filename, folder, theta_sm=0):
                                                           - llr_observeds[theta_mle_observed[exp], exp])
 
     # Subtract true
-    llr_compared_to_true_distributions = np.zeros_like(llr_distributions)
-    for t_eval in range(llr_distributions.shape[0]):
-        for t_true in range(llr_distributions.shape[1]):
-            for exp in range(llr_distributions.shape[2]):
-                llr_compared_to_true_distributions[t_eval, t_true, exp] = (llr_distributions[t_eval, t_true, exp]
-                                                                           - llr_distributions[t_true, t_true, exp])
+    # llr_compared_to_true_distributions = np.zeros_like(llr_distributions)
+    # for t_eval in range(llr_distributions.shape[0]):
+    #     for t_true in range(llr_distributions.shape[1]):
+    #         for exp in range(llr_distributions.shape[2]):
+    #             llr_compared_to_true_distributions[t_eval, t_true, exp] = (llr_distributions[t_eval, t_true, exp]
+    #                                                                        - llr_distributions[t_true, t_true, exp])
 
-    llr_compared_to_true_observeds = np.zeros_like(llr_observeds)
-    for t_eval in range(llr_observeds.shape[0]):
-        for exp in range(llr_observeds.shape[1]):
-            llr_compared_to_true_observeds[t_eval, exp] = (llr_observeds[t_eval, exp]
-                                                           - llr_observeds[theta_sm, exp])
+    # llr_compared_to_true_observeds = np.zeros_like(llr_observeds)
+    # for t_eval in range(llr_observeds.shape[0]):
+    #     for exp in range(llr_observeds.shape[1]):
+    #         llr_compared_to_true_observeds[t_eval, exp] = (llr_observeds[t_eval, exp]
+    #                                                        - llr_observeds[theta_sm, exp])
 
     # Save results
     np.save(result_dir + '/neyman_llr_vs_mle_distributions_' + filename + '.npy',
             llr_compared_to_mle_distributions)
     np.save(result_dir + '/neyman_llr_vs_mle_observeds_' + filename + '.npy',
             llr_compared_to_mle_observeds)
-    np.save(result_dir + '/neyman_llr_vs_true_distributions_' + filename + '.npy',
-            llr_compared_to_true_distributions)
-    np.save(result_dir + '/neyman_llr_vs_true_observeds_' + filename + '.npy',
-            llr_compared_to_true_observeds)
+    # np.save(result_dir + '/neyman_llr_vs_true_distributions_' + filename + '.npy',
+    #         llr_compared_to_true_distributions)
+    # np.save(result_dir + '/neyman_llr_vs_true_observeds_' + filename + '.npy',
+    #         llr_compared_to_true_observeds)
 
 
 def calculate_CL(filename, folder):
     """ Steers the calculation of all p-values for a given filename and folder. """
 
     # Preprocessing
-    subtract_mle(filename, folder)
+    try:
+        subtract_mle(filename, folder)
+    except ValueError:
+        logging.warning('Error in MLE subtraction, skipping set')
+        return
 
     logging.info('Calculating p-values for ' + folder + ' ' + filename)
 
@@ -121,20 +125,20 @@ def calculate_CL(filename, folder):
     # Load LLR
     llr_compared_to_mle_distributions = np.load(result_dir + '/neyman_llr_vs_mle_distributions_' + filename + '.npy')
     llr_compared_to_mle_observeds = np.load(result_dir + '/neyman_llr_vs_mle_observeds_' + filename + '.npy')
-    llr_compared_to_true_distributions = np.load(result_dir + '/neyman_llr_vs_true_distributions_' + filename + '.npy')
-    llr_compared_to_true_observeds = np.load(result_dir + '/neyman_llr_vs_true_observeds_' + filename + '.npy')
+    #llr_compared_to_true_distributions = np.load(result_dir + '/neyman_llr_vs_true_distributions_' + filename + '.npy')
+    #llr_compared_to_true_observeds = np.load(result_dir + '/neyman_llr_vs_true_observeds_' + filename + '.npy')
 
     # Calculate expected p values
     p_values_mle = np.zeros(n_thetas)
-    p_values_true = np.zeros(n_thetas)
+    #p_values_true = np.zeros(n_thetas)
     for t in range(n_thetas):
         p_values_mle[t] = calculate_median_p_value(llr_compared_to_mle_distributions[t, :],
                                                    llr_compared_to_mle_observeds[t, :])
-        p_values_true[t] = calculate_median_p_value(llr_compared_to_true_distributions[t, :],
-                                                    llr_compared_to_true_observeds[t, :])
+        #p_values_true[t] = calculate_median_p_value(llr_compared_to_true_distributions[t, :],
+        #                                            llr_compared_to_true_observeds[t, :])
 
     np.save(result_dir + '/p_values_' + filename + '.npy', p_values_mle)
-    np.save(result_dir + '/p_values_ratio_vs_true_' + filename + '.npy', p_values_true)
+    #np.save(result_dir + '/p_values_ratio_vs_true_' + filename + '.npy', p_values_true)
 
 
 def calculate_all_CL():
