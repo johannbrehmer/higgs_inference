@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /home/jb6504/higgs_inference/higgs_inference
+
 sbatch run_truth.sh
 sbatch run_scoreregression.sh
 sbatch run_afc.sh
