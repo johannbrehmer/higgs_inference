@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/jb6504/higgs_inference/higgs_inference
+cd /home/jb6504/higgs_inference/cluster_scripts
 
 sbatch run_truth.sh
 sbatch run_scoreregression.sh

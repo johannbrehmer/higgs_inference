@@ -1,6 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=data
+#SBATCH --job-name=preprocessing
+#SBATCH --output=slurm_preprocessing.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=256GB
