@@ -67,8 +67,8 @@ def afc_inference(statistics='x',
         input_filename_addition = '_denom1'
         filename_addition += '_denom1'
 
-    results_dir = settings.base_dir + '/results/point_by_point'
-    neyman_dir = settings.neyman_dir + '/point_by_point'
+    results_dir = settings.base_dir + '/results/afc'
+    neyman_dir = settings.neyman_dir + '/afc'
 
     logging.info('Settings:')
     if statistics == 'x':
