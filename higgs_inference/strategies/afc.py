@@ -20,7 +20,6 @@ def afc_inference(statistics='x',
                   epsilon=None,
                   kernel='gaussian',
                   options=''):
-
     """
     Approximates the likelihood through Approximate Frequentist Inference, a frequentist twist on ABC
     and effectively the same as kernel density estimation in the summary statistics space.
@@ -29,7 +28,7 @@ def afc_inference(statistics='x',
                        Currently the only option is 'x', which bases the acceptance decision on an epsilon ball in
                        (re-scaled) feature space.
     :param indices_X: If statistics is 'x', this defines which of the features are used in the distance calculation. If
-                      None, a default selection of 15 variables is used.
+                      None, a default selection of five variables is used.
     :param epsilon: This float > 0 defines the size of the epsilon-ball, i.e. the bandwidth of the KDE. A smaller value
                     makes the inference more precise, but requires more data, especially when using high-dimensional
                     statistics. If no value is given, the algorithm uses 0.05^(1/n_dim), where n_dim is the number of
@@ -50,7 +49,7 @@ def afc_inference(statistics='x',
     # TODO: Implement AFC with estimated score or classifier output as summary statistics
 
     if indices_X is None:
-        indices_X = []
+        indices_X = [1, 38, 39, 40, 41]  # pT(j1), m(Z2), m(jj), delta_eta(jj), delta_phi(jj)
 
     statistics_dimensionality = len(indices_X)
 
@@ -62,20 +61,17 @@ def afc_inference(statistics='x',
         filename_addition = filename_addition + '_epsilon_' + format_number(epsilon, 2)
 
     denom1_mode = ('denom1' in options)
-    theta1 = settings.theta1_default
     input_filename_addition = ''
     if denom1_mode:
         input_filename_addition = '_denom1'
         filename_addition += '_denom1'
-        theta1 = settings.theta1_alternative
 
-    data_dir = settings.base_dir + '/data'
     results_dir = settings.base_dir + '/results/point_by_point'
     neyman_dir = settings.neyman_dir + '/point_by_point'
 
     logging.info('Settings:')
     if statistics == 'x':
-        logging.info('  Statistics:              x %s', x_indices)
+        logging.info('  Statistics:              x %s', indices_X)
     else:
         logging.info('  Statistics:              %s', statistics)
     logging.info('  Epsilon (bandwidth):     %s', epsilon)
@@ -148,32 +144,23 @@ def afc_inference(statistics='x',
             # Neyman construction: prepare observed data and construct summary statistics
             X_neyman_observed_transformed = scaler.transform(
                 X_neyman_observed.reshape((-1, X_neyman_observed.shape[2])))
+
             if statistics == 'x':
                 summary_statistics_neyman_observed = X_neyman_observed_transformed[indices_X]
             else:
                 raise NotImplementedError
 
-            # Neyman construction: evaluate observed sample (raw)
+            # Neyman construction: evaluate observed sample
             log_p_hat_num_neyman_observed = kde_num.score_samples(summary_statistics_neyman_observed)
             log_p_hat_den_neyman_observed = kde_den.score_samples(summary_statistics_neyman_observed)
             log_r_hat_neyman_observed = log_p_hat_num_neyman_observed - log_p_hat_den_neyman_observed
-            llr_neyman_observed = -2. * np.sum(log_r_hat_neyman_observed.reshape((-1, settings.n_expected_events)),
-                                               axis=1)
+            log_r_hat_neyman_observed = log_r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
+            llr_neyman_observed = -2. * np.sum(log_r_hat_neyman_observed, axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_afc' + '_' + str(t) + filename_addition + '.npy',
                     llr_neyman_observed)
 
-            # Neyman construction: evaluate observed sample (calibrated)
-            r_neyman_observed, _ = ratio_calibrated.predict(X_neyman_observed_transformed)
-            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
-                                               axis=1)
-            np.save(
-                neyman_dir + '/neyman_llr_observed_' + algorithm + '_calibrated_' + str(
-                    t) + filename_addition + '.npy',
-                llr_neyman_observed)
-
         # Neyman construction: loop over distribution samples generated from different thetas
         llr_neyman_distributions = []
-        llr_neyman_distributions_calibrated = []
         for tt in range(settings.n_thetas):
 
             # Only evaluate certain combinations of thetas to save computation time
@@ -183,29 +170,29 @@ def afc_inference(statistics='x',
                 llr_neyman_distributions.append(placeholder)
                 continue
 
-            # Neyman construction: load distribution sample
+            # Neyman construction: load distribution sample and construct summary statistics
             X_neyman_distribution = np.load(
                 settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
             X_neyman_distribution_transformed = scaler.transform(
                 X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
-            # Neyman construction: evaluate distribution sample (raw)
-            r_neyman_distribution, _ = ratio.predict(X_neyman_distribution_transformed)
-            llr_neyman_distributions.append(
-                -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, settings.n_expected_events)), axis=1))
+            if statistics == 'x':
+                summary_statistics_neyman_distribution = X_neyman_distribution_transformed[indices_X]
+            else:
+                raise NotImplementedError
 
-            # Neyman construction: evaluate distribution sample (calibrated)
-            r_neyman_distribution, _ = ratio_calibrated.predict(X_neyman_distribution_transformed)
-            llr_neyman_distributions_calibrated.append(
-                -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, settings.n_expected_events)), axis=1))
+            # Neyman construction: evaluate observed sample
+            log_p_hat_num_neyman_distribution = kde_num.score_samples(summary_statistics_neyman_distribution)
+            log_p_hat_den_neyman_distribution = kde_den.score_samples(summary_statistics_neyman_distribution)
+            log_r_hat_neyman_distribution = log_p_hat_num_neyman_distribution - log_p_hat_den_neyman_distribution
+            log_r_hat_neyman_distribution = log_r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
+            llr_neyman_distribution = -2. * np.sum(log_r_hat_neyman_distribution, axis=1)
+            np.save(neyman_dir + '/neyman_llr_distribution_afc' + '_' + str(t) + filename_addition + '.npy',
+                    llr_neyman_distribution)
 
         llr_neyman_distributions = np.asarray(llr_neyman_distributions)
-        llr_neyman_distributions_calibrated = np.asarray(llr_neyman_distributions_calibrated)
-        np.save(neyman_dir + '/neyman_llr_distribution_' + algorithm + '_' + str(t) + filename_addition + '.npy',
+        np.save(neyman_dir + '/neyman_llr_distribution_afc' + '_' + str(t) + filename_addition + '.npy',
                 llr_neyman_distributions)
-        np.save(neyman_dir + '/neyman_llr_distribution_' + algorithm + '_calibrated_' + str(t)
-                + filename_addition + '.npy',
-                llr_neyman_distributions_calibrated)
 
     expected_llr = np.asarray(expected_llr)
 
