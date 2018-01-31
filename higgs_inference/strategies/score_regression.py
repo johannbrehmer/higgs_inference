@@ -16,7 +16,7 @@ from carl.learning.calibration import HistogramCalibrator
 
 from higgs_inference import settings
 from higgs_inference.models.models_score_regression import make_regressor
-from higgs_inference.various.utils import r_from_s
+from higgs_inference.various.utils import r_from_s, decide_toy_evaluation
 
 
 def score_regression_inference(options=''):
@@ -108,7 +108,7 @@ def score_regression_inference(options=''):
     logging.info('Starting training of score regression')
     regr.fit(X_train_transformed, scores_train,
              callbacks=(
-             [EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
+                 [EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
 
     logging.info('Starting evaluation')
     that_calibration = regr.predict(X_calibration_transformed)
@@ -144,24 +144,35 @@ def score_regression_inference(options=''):
         elif t == settings.theta_benchmark_trained:
             np.save(results_dir + '/r_trained_scoreregression' + filename_addition + '.npy', r_hat_test)
 
-        # Neyman construction: evaluate observed sample (raw)
-        tthat_neyman_observed = regr.predict(X_neyman_observed_transformed).dot(delta_theta)
-        llr_neyman_observed = -2. * np.sum(tthat_neyman_observed.reshape((-1, settings.n_expected_events)), axis=1)
-        np.save(neyman_dir + '/neyman_llr_observed_scoreregression_' + str(t) + filename_addition + '.npy',
-                llr_neyman_observed)
+        # Only evaluate certain combinations of thetas to save computation time
+        if decide_toy_evaluation(settings.theta_observed, t):
+            # Neyman construction: evaluate observed sample (raw)
+            tthat_neyman_observed = regr.predict(X_neyman_observed_transformed).dot(delta_theta)
+            llr_neyman_observed = -2. * np.sum(tthat_neyman_observed.reshape((-1, settings.n_expected_events)), axis=1)
+            np.save(neyman_dir + '/neyman_llr_observed_scoreregression_' + str(t) + filename_addition + '.npy',
+                    llr_neyman_observed)
 
-        # Neyman construction: evaluate observed sample (calibrated)
-        r_neyman_observed = r_from_s(calibrator.predict(tthat_neyman_observed))
-        llr_calibrated_neyman_observed = -2. * np.sum(
-            np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
-            axis=1)
-        np.save(neyman_dir + '/neyman_llr_observed_scoreregression_calibrated_' + str(t) + filename_addition + '.npy',
+            # Neyman construction: evaluate observed sample (calibrated)
+            r_neyman_observed = r_from_s(calibrator.predict(tthat_neyman_observed))
+            llr_calibrated_neyman_observed = -2. * np.sum(
+                np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
+                axis=1)
+            np.save(
+                neyman_dir + '/neyman_llr_observed_scoreregression_calibrated_' + str(t) + filename_addition + '.npy',
                 llr_calibrated_neyman_observed)
 
         # Neyman construction: loop over distribution samples generated from different thetas
         llr_neyman_distributions = []
         llr_neyman_distributions_calibrated = []
         for tt in range(settings.n_thetas):
+
+            # Only evaluate certain combinations of thetas to save computation time
+            if not decide_toy_evaluation(tt, t):
+                placeholder = np.empty(settings.n_neyman_distribution_experiments)
+                placeholder[:] = np.nan
+                llr_neyman_distributions.append(placeholder)
+                continue
+
             # Neyman construction: load distribution sample
             X_neyman_distribution = np.load(
                 settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')

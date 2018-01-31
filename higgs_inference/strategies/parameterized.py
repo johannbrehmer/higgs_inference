@@ -18,6 +18,7 @@ from carl.ratios import ClassifierScoreRatio
 from carl.learning import CalibratedClassifierScoreCV
 
 from higgs_inference import settings
+from higgs_inference.various.utils import decide_toy_evaluation
 from higgs_inference.models.models_parameterized import make_classifier_carl, make_classifier_carl_morphingaware
 from higgs_inference.models.models_parameterized import make_classifier_score, make_classifier_score_morphingaware
 from higgs_inference.models.models_parameterized import make_classifier_combined, make_classifier_combined_morphingaware
@@ -227,8 +228,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
         logging.info('Starting training')
         regr.fit(X_thetas_train, log_r_score_train,
-                 callbacks=(
-                 [EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
+                 callbacks=([EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
 
         logging.info('Starting evaluation')
         expected_llr = []
@@ -265,21 +265,32 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                     np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_ri)
                     np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_wi)
 
-            # Prepare observed data for Neyman construction
-            thetas0_array = np.zeros((X_neyman_observed_transformed.shape[0], 2),
-                                     dtype=X_neyman_observed_transformed.dtype)
-            thetas0_array[:, :] = settings.thetas[t]
-            X_thetas_neyman_observed = np.hstack((X_neyman_observed_transformed, thetas0_array))
+            # Only evaluate certain combinations of thetas to save computation time
+            if decide_toy_evaluation(settings.theta_observed, t):
 
-            # Neyman construction: evaluate observed sample (raw)
-            log_r_neyman_observed = regr.predict(X_thetas_neyman_observed)[:, 0]
-            llr_neyman_observed = -2. * np.sum(log_r_neyman_observed.reshape((-1, 36)), axis=1)
-            np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + filename_addition + '.npy',
-                    llr_neyman_observed)
+                # Prepare observed data for Neyman construction
+                thetas0_array = np.zeros((X_neyman_observed_transformed.shape[0], 2),
+                                         dtype=X_neyman_observed_transformed.dtype)
+                thetas0_array[:, :] = settings.thetas[t]
+                X_thetas_neyman_observed = np.hstack((X_neyman_observed_transformed, thetas0_array))
+
+                # Neyman construction: evaluate observed sample (raw)
+                log_r_neyman_observed = regr.predict(X_thetas_neyman_observed)[:, 0]
+                llr_neyman_observed = -2. * np.sum(log_r_neyman_observed.reshape((-1, 36)), axis=1)
+                np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + filename_addition + '.npy',
+                        llr_neyman_observed)
 
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
             for tt in range(settings.n_thetas):
+
+                # Only evaluate certain combinations of thetas to save computation time
+                if not decide_toy_evaluation(tt, t):
+                    placeholder = np.empty(settings.n_neyman_distribution_experiments)
+                    placeholder[:] = np.nan
+                    llr_neyman_distributions.append(placeholder)
+                    continue
+
                 # Neyman construction: load distribution sample
                 X_neyman_distribution = np.load(
                     settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
@@ -403,22 +414,33 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                     np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_ri)
                     np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_wi)
 
-            # Prepare observed data for Neyman construction
-            thetas0_array = np.zeros((X_neyman_observed_transformed.shape[0], 2),
-                                     dtype=X_neyman_observed_transformed.dtype)
-            thetas0_array[:, :] = theta
-            X_thetas_neyman_observed = np.hstack((X_neyman_observed_transformed, thetas0_array))
+            # Only evaluate certain combinations of thetas to save computation time
+            if decide_toy_evaluation(settings.theta_observed, t):
 
-            # Neyman construction: evaluate observed sample (raw)
-            r_neyman_observed, _ = ratio.predict(X_thetas_neyman_observed)
-            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
-                                               axis=1)
-            np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + filename_addition + '.npy',
-                    llr_neyman_observed)
+                # Prepare observed data for Neyman construction
+                thetas0_array = np.zeros((X_neyman_observed_transformed.shape[0], 2),
+                                         dtype=X_neyman_observed_transformed.dtype)
+                thetas0_array[:, :] = theta
+                X_thetas_neyman_observed = np.hstack((X_neyman_observed_transformed, thetas0_array))
+
+                # Neyman construction: evaluate observed sample (raw)
+                r_neyman_observed, _ = ratio.predict(X_thetas_neyman_observed)
+                llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
+                                                   axis=1)
+                np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + filename_addition + '.npy',
+                        llr_neyman_observed)
 
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
             for tt in range(settings.n_thetas):
+
+                # Only evaluate certain combinations of thetas to save computation time
+                if not decide_toy_evaluation(tt, t):
+                    placeholder = np.empty(settings.n_neyman_distribution_experiments)
+                    placeholder[:] = np.nan
+                    llr_neyman_distributions.append(placeholder)
+                    continue
+
                 # Neyman construction: load distribution sample
                 X_neyman_distribution = np.load(
                     settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
@@ -512,7 +534,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             # Prepare observed data for Neyman construction
             thetas0_array = np.zeros((X_neyman_observed_transformed.shape[0], 2),
                                      dtype=X_neyman_observed_transformed.dtype)
-            thetas0_array[:, :] = thetas[t]
+            thetas0_array[:, :] = settings.thetas[t]
             X_thetas_neyman_observed = np.hstack((X_neyman_observed_transformed, thetas0_array))
 
             # Neyman construction: evaluate observed sample (raw)

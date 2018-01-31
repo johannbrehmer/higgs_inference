@@ -33,31 +33,38 @@ def subtract_mle(filename, folder, theta_sm=0):
     neyman_dir = settings.neyman_dir + '/' + folder
     result_dir = settings.base_dir + '/results/' + folder
     n_thetas = settings.n_thetas
-    n_neyman_distribution_experiments = settings.n_neyman_distribution_experiments
-    n_neyman_observed_experiments = settings.n_neyman_observed_experiments
 
     # Load log likelihood ratios
     llr_distributions = []
     llr_observeds = []
+
+    files_found = 0
+    files_not_found = 0
 
     for t in range(n_thetas):
         try:
             entry = np.load(neyman_dir + '/neyman_llr_distribution_' + filename + '_' + str(t) + '.npy')
             assert entry.shape == (settings.n_thetas, settings.n_neyman_distribution_experiments)
             llr_distributions.append(entry)
+            files_found += 1
 
         except (IOError, AssertionError):
             placeholder = np.empty((settings.n_thetas, settings.n_neyman_distribution_experiments))
             placeholder[:,:] = np.nan
             llr_distributions.append(placeholder)
+            files_not_found += 1
 
         try:
             llr_observeds.append(
                 np.load(neyman_dir + '/neyman_llr_observed_' + filename + '_' + str(t) + '.npy'))
+            files_found += 1
         except IOError:
             placeholder = np.empty(settings.n_neyman_observed_experiments)
             placeholder[:] = np.nan
             llr_observeds.append(placeholder)
+            files_not_found += 1
+
+    logging.debug("Found %s files, didn't find %s files", files_found, files_not_found)
 
     llr_distributions = np.asarray(llr_distributions)  # Shape: (n_thetas_eval, n_thetas_assumed_true, n_experiments)
     llr_observeds = np.asarray(llr_observeds)  # Shape: (n_thetas_eval, n_experiments)

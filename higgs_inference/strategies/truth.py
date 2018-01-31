@@ -13,6 +13,7 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import ConstantKernel as C, Matern
 
 from higgs_inference import settings
+from higgs_inference.various.utils import decide_toy_evaluation
 
 
 ################################################################################
@@ -81,11 +82,25 @@ def truth_inference(options=''):
 
     logging.info('Starting evaluation of Neyman experiments')
     for t in range(settings.n_thetas):
-        llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed[t]), axis=1)
-        np.save(neyman_dir + '/neyman_observed_truth_' + str(t) + filename_addition + '.npy', llr_neyman_observed)
 
+        # Only evaluate certain combinations of thetas to save computation time
+        if decide_toy_evaluation(settings.theta_observed, t):
+
+            # Observed
+            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed[t]), axis=1)
+            np.save(neyman_dir + '/neyman_observed_truth_' + str(t) + filename_addition + '.npy', llr_neyman_observed)
+
+        # Hypothesis distributions
         llr_neyman_distributions = []
         for tt in range(settings.n_thetas):
+
+            # Only evaluate certain combinations of thetas to save computation time
+            if not decide_toy_evaluation(tt, t):
+                placeholder = np.empty(settings.n_neyman_distribution_experiments)
+                placeholder[:] = np.nan
+                llr_neyman_distributions.append(placeholder)
+                continue
+
             r_neyman_distribution = np.load(
                 settings.unweighted_events_dir + '/r_neyman_distribution_' + str(tt) + '.npy')
             llr_neyman_distributions.append(-2. * np.sum(np.log(r_neyman_distribution[t]), axis=1))

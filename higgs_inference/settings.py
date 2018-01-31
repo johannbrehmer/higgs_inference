@@ -34,7 +34,7 @@ n_thetas = len(thetas)
 n_thetas_roam = 101
 n_randomthetas = 100
 
-# The following are indices of the thetas defined in data/thetas/thetas_parameterized.npy
+# The following are indices of the thetas array defined above
 
 theta_observed = 0
 theta_score_regression = 0
