@@ -22,12 +22,15 @@ except ImportError:
 
 from higgs_inference.various.p_values import calculate_all_CL
 from higgs_inference.strategies.truth import truth_inference
+from higgs_inference.strategies.afc import afc_inference
 
 try:
     from higgs_inference.strategies.parameterized import parameterized_inference
     from higgs_inference.strategies.point_by_point import point_by_point_inference
     from higgs_inference.strategies.score_regression import score_regression_inference
+
     loaded_ml_strategies = True
+
 except ImportError:
     loaded_ml_strategies = False
 
@@ -45,10 +48,11 @@ logging.info('Hi! How are you today?')
 parser = argparse.ArgumentParser(description='Inference experiments for Higgs EFT measurements')
 
 parser.add_argument('algorithm', help='Algorithm type. Options are "p" or "cl" for the calculation of p values '
-                                      + 'through the Neyman construction; "truth", "carl", "score" (in the carl setup), '
+                                      + 'through the Neyman construction; "truth", "afc", "carl", '
+                                      + '"score" (in the carl setup), '
                                       + '"combined" (carl + score), "regression", "combinedregression" '
                                       + '(regression + score), or "scoreregression" (regresses on the score and '
-                                      + 'performs density estimation on theta.score.')
+                                      + 'performs density estimation on theta times score.')
 parser.add_argument("-pbp", "--pointbypoint", action="store_true",
                     help="Point-by-point rather than parameterized setup.")
 parser.add_argument("-a", "--aware", action="store_true",
@@ -69,7 +73,9 @@ logging.info('  ML-based strategies available: %s', loaded_ml_strategies)
 
 # Sanity checks
 assert args.algorithm in ['p', 'cl', 'pvalues',
-                          'truth', 'carl', 'score', 'combined', 'regression', 'combinedregression', 'scoreregression']
+                          'truth', 'afc',
+                          'carl', 'score', 'combined', 'regression', 'combinedregression',
+                          'scoreregression']
 assert args.training in ['baseline', 'basis', 'random']
 
 ################################################################################
@@ -82,6 +88,9 @@ if args.algorithm in ['p', 'cl', 'pvalues']:
 
 elif args.algorithm == 'truth':
     truth_inference(options=args.options)
+
+elif args.algorithm == 'afc':
+    afc_inference(options=args.options)
 
 elif args.algorithm == 'scoreregression':
     assert loaded_ml_strategies
