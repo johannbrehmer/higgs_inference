@@ -82,7 +82,7 @@ def local_model_truth_inference(options=''):
             # Neyman construction: evaluate observed sample (raw)
             tt_neyman_observed = scores_neyman_observed.dot(delta_theta)
             llr_raw_neyman_observed = -2. * np.sum(tt_neyman_observed, axis=1)
-            np.save(neyman_dir + '/neyman_llr_observed_scoreregression_' + str(t) + filename_addition + '.npy',
+            np.save(neyman_dir + '/neyman_llr_observed_localmodel_' + str(t) + filename_addition + '.npy',
                     llr_raw_neyman_observed)
 
         # Neyman construction: loop over distribution samples generated from different thetas
