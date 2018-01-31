@@ -64,12 +64,12 @@ def local_model_truth_inference(options=''):
         # Evaluation
         tt_test = scores_test.dot(delta_theta)
 
-        logging.debug('Theta = %s, t.theta: shape %s, content\n%s', theta, tt_test.shape, tt_test)
+        expected_score = float(settings.n_expected_events) / float(n_events_test) * np.sum(scores_test, axis=0)
 
         expected_llr.append(
             - 2. * float(settings.n_expected_events) / float(n_events_test) * np.sum(tt_test))
 
-        logging.debug('Theta = %s, expected t.theta = %s', theta, expected_llr[-1])
+        logging.debug('Theta = %s, expected score = %s, expected t.theta = %s', theta, expected_score, expected_llr[-1])
 
         # For some benchmark thetas, save r for each phase-space point
         if t == settings.theta_benchmark_nottrained:
