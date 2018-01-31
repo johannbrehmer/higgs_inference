@@ -33,7 +33,7 @@ def afc_inference(statistics='x',
                       None, a default selection of five variables is used.
     :param epsilon: This float > 0 defines the size of the epsilon-ball, i.e. the bandwidth of the KDE. A smaller value
                     makes the inference more precise, but requires more data, especially when using high-dimensional
-                    statistics. If no value is given, the algorithm uses 0.05^(1/n_dim), where n_dim is the number of
+                    statistics. If no value is given, the algorithm uses 0.1^(1/n_dim), where n_dim is the number of
                     dimensions of the statistics space, for instance the length of indices_X.
     :param kernel: The kernel. 'tophat' is equivalent to classic rejection ABC. Another option is 'gaussian'.
     :param options: Further options in a list of strings or string.
@@ -49,14 +49,15 @@ def afc_inference(statistics='x',
         raise NotImplementedError
 
     if indices_X is None:
-        indices_X = [1, 38, 39, 40, 41]  # pT(j1), m(Z2), m(jj), delta_eta(jj), delta_phi(jj)
+        # indices_X = [1, 38, 39, 40, 41]  # pT(j1), m(Z2), m(jj), delta_eta(jj), delta_phi(jj)
+        indices_X = [1, 41]  # pT(j1), delta_phi(jj)
 
     statistics_dimensionality = len(indices_X)
 
     filename_addition = '_' + statistics
 
     if epsilon is None:
-        epsilon = 0.05 ** (1. / statistics_dimensionality)
+        epsilon = 0.1 ** (1. / statistics_dimensionality)
     else:
         filename_addition = filename_addition + '_epsilon_' + format_number(epsilon, 2)
 
@@ -133,7 +134,15 @@ def afc_inference(statistics='x',
         # Evaluation
         log_p_hat_num_test = kde_num.score_samples(summary_statistics_test)
         log_p_hat_den_test = kde_den.score_samples(summary_statistics_test)
+
+        # Sanitize output
+        log_p_hat_num_test[np.invert(np.isfinite(log_p_hat_num_test))] = -1000.
+        log_p_hat_den_test[np.invert(np.isfinite(log_p_hat_den_test))] = -1000.
+
         log_r_hat_test = log_p_hat_num_test - log_p_hat_den_test
+
+        logging.debug('log p (num): shape %s, %s nans, content \n %s',
+                      log_p_hat_num_test.shape, np.sum(np.isnan(log_p_hat_num_test)), log_r_hat_test)
 
         expected_llr.append(- 2. * settings.n_expected_events / n_events_test * np.sum(log_r_hat_test))
 
@@ -161,6 +170,11 @@ def afc_inference(statistics='x',
             # Neyman construction: evaluate observed sample
             log_p_hat_num_neyman_observed = kde_num.score_samples(summary_statistics_neyman_observed)
             log_p_hat_den_neyman_observed = kde_den.score_samples(summary_statistics_neyman_observed)
+
+            # Sanitize output
+            log_p_hat_num_neyman_observed[np.invert(np.isfinite(log_p_hat_num_neyman_observed))] = -1000.
+            log_p_hat_den_neyman_observed[np.invert(np.isfinite(log_p_hat_den_neyman_observed))] = -1000.
+
             log_r_hat_neyman_observed = log_p_hat_num_neyman_observed - log_p_hat_den_neyman_observed
             log_r_hat_neyman_observed = log_r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
             llr_neyman_observed = -2. * np.sum(log_r_hat_neyman_observed, axis=1)
@@ -194,8 +208,14 @@ def afc_inference(statistics='x',
             # Neyman construction: evaluate observed sample
             log_p_hat_num_neyman_distribution = kde_num.score_samples(summary_statistics_neyman_distribution)
             log_p_hat_den_neyman_distribution = kde_den.score_samples(summary_statistics_neyman_distribution)
+
+            # Sanitize output
+            log_p_hat_num_neyman_distribution[np.invert(np.isfinite(log_p_hat_num_neyman_distribution))] = -1000.
+            log_p_hat_den_neyman_distribution[np.invert(np.isfinite(log_p_hat_den_neyman_distribution))] = -1000.
+
             log_r_hat_neyman_distribution = log_p_hat_num_neyman_distribution - log_p_hat_den_neyman_distribution
             log_r_hat_neyman_distribution = log_r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
+
             llr_neyman_distribution = -2. * np.sum(log_r_hat_neyman_distribution, axis=1)
             np.save(neyman_dir + '/neyman_llr_distribution_afc' + '_' + str(t) + filename_addition + '.npy',
                     llr_neyman_distribution)
