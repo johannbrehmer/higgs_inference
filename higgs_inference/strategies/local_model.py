@@ -47,7 +47,7 @@ def local_model_truth_inference(options=''):
     logging.debug('Scores Neyman observed: shape %s, content\n%s',
                   scores_neyman_observed.shape, scores_neyman_observed)
 
-    n_events_test = scores_test.shape[1]
+    n_events_test = scores_test.shape[0]
 
     ################################################################################
     # Evaluate truth likelihood ratios
