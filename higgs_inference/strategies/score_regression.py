@@ -236,3 +236,5 @@ def score_regression_inference(options=''):
 
     np.save(results_dir + '/llr_scoreregression' + filename_addition + '.npy', expected_llr)
     np.save(results_dir + '/llr_scoreregression_calibrated' + filename_addition + '.npy', expected_llr_calibrated)
+
+    # TODO: save raw data in addition to calibrated

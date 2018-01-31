@@ -114,13 +114,19 @@ def afc_inference(statistics='x',
         else:
             raise NotImplementedError
 
+        logging.debug('Setting up KDE')
+
         # Set up KDEs for numerator and denominator
         kde_num = KernelDensity(bandwidth=epsilon, kernel=kernel)
         kde_den = KernelDensity(bandwidth=epsilon, kernel=kernel)
 
+        logging.debug('Fitting KDE')
+
         # Fit KDEs for numerator and denominator
         kde_num.fit(summary_statistics_train[y_train == 0])
         kde_den.fit(summary_statistics_train[y_train == 1])
+
+        logging.debug('Evaluation')
 
         # Evaluation
         log_p_hat_num_test = kde_num.score_samples(summary_statistics_test)
@@ -134,6 +140,8 @@ def afc_inference(statistics='x',
             np.save(results_dir + '/r_nottrained_afc' + filename_addition + '.npy', np.exp(log_r_hat_test))
         elif t == settings.theta_benchmark_trained:
             np.save(results_dir + '/r_trained_afc' + filename_addition + '.npy', np.exp(log_r_hat_test))
+
+        logging.debug('Neyman observed')
 
         # Neyman construction
         # Only evaluate certain combinations of thetas to save computation time
@@ -156,6 +164,8 @@ def afc_inference(statistics='x',
             llr_neyman_observed = -2. * np.sum(log_r_hat_neyman_observed, axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_afc' + '_' + str(t) + filename_addition + '.npy',
                     llr_neyman_observed)
+
+        logging.debug('Neyman distribution')
 
         # Neyman construction: loop over distribution samples generated from different thetas
         llr_neyman_distributions = []

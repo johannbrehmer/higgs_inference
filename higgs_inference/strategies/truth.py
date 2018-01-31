@@ -104,5 +104,5 @@ def truth_inference(options=''):
             llr_neyman_distributions.append(-2. * np.sum(np.log(r_neyman_distribution[t]), axis=1))
 
         llr_neyman_distributions = np.asarray(llr_neyman_distributions)
-        np.save(neyman_dir + '/neyman_llr_distribution__truth_' + str(t) + filename_addition + '.npy',
+        np.save(neyman_dir + '/neyman_llr_distribution_truth_' + str(t) + filename_addition + '.npy',
                 llr_neyman_distributions)
