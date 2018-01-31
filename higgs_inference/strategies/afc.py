@@ -18,7 +18,9 @@ from higgs_inference.various.utils import format_number, decide_toy_evaluation
 def afc_inference(statistics='x',
                   indices_X=None,
                   epsilon=None,
-                  kernel='gaussian',
+                  kernel='tophat',
+                  kde_relative_tolerance=1.e-3,
+                  kde_absolute_tolerance=1.e-6,
                   options=''):
     """
     Approximates the likelihood through Approximate Frequentist Inference, a frequentist twist on ABC
@@ -117,8 +119,8 @@ def afc_inference(statistics='x',
         logging.debug('Setting up KDE')
 
         # Set up KDEs for numerator and denominator
-        kde_num = KernelDensity(bandwidth=epsilon, kernel=kernel)
-        kde_den = KernelDensity(bandwidth=epsilon, kernel=kernel)
+        kde_num = KernelDensity(bandwidth=epsilon, kernel=kernel, rtol=kde_relative_tolerance, atol=kde_absolute_tolerance)
+        kde_den = KernelDensity(bandwidth=epsilon, kernel=kernel, rtol=kde_relative_tolerance, atol=kde_absolute_tolerance)
 
         logging.debug('Fitting KDE')
 
