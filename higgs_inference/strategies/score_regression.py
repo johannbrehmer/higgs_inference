@@ -204,7 +204,7 @@ def score_regression_inference(options=''):
             s_hat_neyman_distribution = calibrator.predict(tthat_neyman_distribution.reshape((-1,)))
             r_hat_neyman_distribution = r_from_s(s_hat_neyman_distribution)
             r_hat_neyman_distribution = r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
-            llr_neyman_distributions_calibrated.append(-2. * np.sum(np.log(r_hat_neyman_distribution)), axis=1)
+            llr_neyman_distributions_calibrated.append(-2. * np.sum(np.log(r_hat_neyman_distribution), axis=1))
 
             # Debug output to track NaNs
             if tt == 0:

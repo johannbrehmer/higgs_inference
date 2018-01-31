@@ -304,6 +304,7 @@ def point_by_point_inference(algorithm='carl',
                 # np.save(results_dir + '/cal1histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
                 # np.save(results_dir + '/cal1edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
 
+            # Neyman construction
             # Only evaluate certain combinations of thetas to save computation time
             if decide_toy_evaluation(settings.theta_observed, t):
                 # Neyman construction: evaluate observed sample (raw)

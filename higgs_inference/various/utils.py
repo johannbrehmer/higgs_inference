@@ -16,11 +16,11 @@ from higgs_inference import settings
 ################################################################################
 
 def s_from_r(r):
-    return 1. / (1. + r)
+    return np.clip(1. / (1. + r), 0., 1.)
 
 
 def r_from_s(s, epsilon=1.e-3):
-    return (1. - s + epsilon) / (s + epsilon)
+    return np.clip((1. - s + epsilon) / (s + epsilon), epsilon, None)
 
 
 ################################################################################
