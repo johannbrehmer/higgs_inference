@@ -64,7 +64,7 @@ def local_model_truth_inference(options=''):
         # Evaluation
         tt_test = scores_test.dot(delta_theta)
 
-        logging.debug('Theta = %s, t.theta: shape %s, content\n%s', tt_test.shape, tt_test)
+        logging.debug('Theta = %s, t.theta: shape %s, content\n%s', theta, tt_test.shape, tt_test)
 
         expected_llr.append(
             - 2. * float(settings.n_expected_events) / float(n_events_test) * np.sum(tt_test))
