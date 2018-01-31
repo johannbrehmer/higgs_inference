@@ -22,7 +22,7 @@ except ImportError:
 
 from higgs_inference.various.p_values import calculate_all_CL
 from higgs_inference.strategies.truth import truth_inference
-from higgs_inference.strategies.truth_local import local_model_truth_inference
+from higgs_inference.strategies.local_model import local_model_truth_inference
 from higgs_inference.strategies.afc import afc_inference
 
 try:
@@ -49,7 +49,7 @@ logging.info('Hi! How are you today?')
 parser = argparse.ArgumentParser(description='Inference experiments for Higgs EFT measurements')
 
 parser.add_argument('algorithm', help='Algorithm type. Options are "p" or "cl" for the calculation of p values '
-                                      + 'through the Neyman construction; "truth", "truthlocal", '
+                                      + 'through the Neyman construction; "truth", "localmodel", '
                                       + '"afc", "carl", "score" (in the carl setup), '
                                       + '"combined" (carl + score), "regression", "combinedregression" '
                                       + '(regression + score), or "scoreregression" (regresses on the score and '
@@ -74,7 +74,7 @@ logging.info('  ML-based strategies available: %s', loaded_ml_strategies)
 
 # Sanity checks
 assert args.algorithm in ['p', 'cl', 'pvalues',
-                          'truth', 'truthlocal', 'afc',
+                          'truth', 'localmodel', 'afc',
                           'carl', 'score', 'combined', 'regression', 'combinedregression',
                           'scoreregression']
 assert args.training in ['baseline', 'basis', 'random']
@@ -90,7 +90,7 @@ if args.algorithm in ['p', 'cl', 'pvalues']:
 elif args.algorithm == 'truth':
     truth_inference(options=args.options)
 
-elif args.algorithm == 'truthlocal':
+elif args.algorithm == 'localmodel':
     local_model_truth_inference(options=args.options)
 
 elif args.algorithm == 'afc':

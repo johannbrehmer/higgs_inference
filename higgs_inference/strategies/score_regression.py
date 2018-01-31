@@ -151,6 +151,7 @@ def score_regression_inference(options=''):
             np.save(results_dir + '/r_trained_scoreregression' + filename_addition + '.npy', np.exp(tthat_test))
             np.save(results_dir + '/r_trained_scoreregression_calibrated' + filename_addition + '.npy', r_hat_test)
 
+        # Neyman construction
         # Only evaluate certain combinations of thetas to save computation time
         if decide_toy_evaluation(settings.theta_observed, t):
             # Neyman construction: evaluate observed sample (raw)
@@ -168,14 +169,6 @@ def score_regression_inference(options=''):
             np.save(
                 neyman_dir + '/neyman_llr_observed_scoreregression_calibrated_' + str(t) + filename_addition + '.npy',
                 llr_calibrated_neyman_observed)
-
-            # Debug output to track NaNs
-            nans_raw = np.sum(np.isnan(tthat_neyman_observed))
-            nans_s = np.sum(np.isnan(s_hat_neyman_observed))
-            nans_r = np.sum(np.isnan(r_hat_neyman_observed))
-            nans_logr = np.sum(np.isnan(np.log(r_hat_neyman_observed)))
-            logging.debug('Theta %s (%s) observed NaNs: %s raw tthat, %s calibrated s, %s r, %s log r',
-                          t, theta, nans_raw, nans_s, nans_r, nans_logr)
 
         # Neyman construction: loop over distribution samples generated from different thetas
         llr_neyman_distributions = []

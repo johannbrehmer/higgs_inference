@@ -14,12 +14,14 @@ from higgs_inference import settings
 from higgs_inference.various.utils import decide_toy_evaluation
 
 
-################################################################################
-# What do
-################################################################################
-
 def truth_inference(options=''):
+    """ Extracts the true likelihood ratios for the evaluation samples. """
+
     logging.info('Starting truth calculation')
+
+    ################################################################################
+    # Settings
+    ################################################################################
 
     denom1_mode = ('denom1' in options)
 
@@ -56,9 +58,9 @@ def truth_inference(options=''):
     expected_llr_truth = []
 
     for t, theta in enumerate(settings.thetas):
-        ratios = np.array(np.log(r_test[t, :]))
+        log_r = np.log(r_test[t, :])
         expected_llr_truth.append(
-            - 2. * float(settings.n_expected_events) / float(n_events_test) * np.sum(ratios[np.isfinite(ratios)]))
+            - 2. * float(settings.n_expected_events) / float(n_events_test) * np.sum(log_r))
 
     r_nottrained_truth = np.copy(r_test[settings.theta_benchmark_nottrained, :])
     r_trained_truth = np.copy(r_test[settings.theta_benchmark_trained, :])
