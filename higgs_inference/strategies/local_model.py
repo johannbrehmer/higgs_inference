@@ -66,6 +66,8 @@ def local_model_truth_inference(options=''):
         expected_llr.append(
             - 2. * float(settings.n_expected_events) / float(n_events_test) * np.sum(tt_test))
 
+        logging.debug('Theta = %s, expected t.theta = %s', theta, expected_llr[-1])
+
         # For some benchmark thetas, save r for each phase-space point
         if t == settings.theta_benchmark_nottrained:
             np.save(results_dir + '/r_nottrained_localmodel' + filename_addition + '.npy', np.exp(tt_test))
