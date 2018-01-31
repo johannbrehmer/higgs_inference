@@ -81,6 +81,9 @@ def local_model_truth_inference(options=''):
     logging.info('Starting evaluation of Neyman experiments')
     for t, theta in enumerate(settings.thetas):
 
+        # Contract estimated scores with delta theta
+        delta_theta = theta - settings.thetas[theta1]
+
         # Only evaluate certain combinations of thetas to save computation time
         if decide_toy_evaluation(settings.theta_observed, t):
             # Neyman construction: evaluate observed sample (raw)
