@@ -148,18 +148,26 @@ def score_regression_inference(options=''):
         if decide_toy_evaluation(settings.theta_observed, t):
             # Neyman construction: evaluate observed sample (raw)
             tthat_neyman_observed = regr.predict(X_neyman_observed_transformed).dot(delta_theta)
-            llr_neyman_observed = -2. * np.sum(tthat_neyman_observed.reshape((-1, settings.n_expected_events)), axis=1)
+            llr_raw_neyman_observed = -2. * np.sum(tthat_neyman_observed.reshape((-1, settings.n_expected_events)), axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_scoreregression_' + str(t) + filename_addition + '.npy',
-                    llr_neyman_observed)
+                    llr_raw_neyman_observed)
 
             # Neyman construction: evaluate observed sample (calibrated)
-            r_neyman_observed = r_from_s(calibrator.predict(tthat_neyman_observed))
-            llr_calibrated_neyman_observed = -2. * np.sum(
-                np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
-                axis=1)
+            s_hat_neyman_observed = calibrator.predict(tthat_neyman_observed.reshape((-1,)))
+            r_hat_neyman_observed = r_from_s(s_hat_neyman_observed)
+            r_hat_neyman_observed = r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
+            llr_calibrated_neyman_observed = -2. * np.sum(np.log(r_hat_neyman_observed), axis=1)
             np.save(
                 neyman_dir + '/neyman_llr_observed_scoreregression_calibrated_' + str(t) + filename_addition + '.npy',
                 llr_calibrated_neyman_observed)
+
+            # Debug output to track NaNs
+            nans_raw = np.sum(np.isnan(tthat_neyman_observed))
+            nans_s = np.sum(np.isnan(s_hat_neyman_observed))
+            nans_r = np.sum(np.isnan(r_hat_neyman_observed))
+            nans_logr = np.sum(np.isnan(np.log(r_hat_neyman_observed)))
+            logging.debug('Theta %s (%s) observed NaNs: %s raw tthat, %s calibrated s, %s r, %s log r',
+                          t, theta, nans_raw, nans_s, nans_r, nans_logr)
 
         # Neyman construction: loop over distribution samples generated from different thetas
         llr_neyman_distributions = []
@@ -193,9 +201,19 @@ def score_regression_inference(options=''):
                     np.median(tthat_neyman_distribution))
 
             # Neyman construction: evaluate distribution sample (calibrated)
-            r_neyman_distribution = r_from_s(calibrator.predict(tthat_neyman_distribution))
-            llr_neyman_distributions_calibrated.append(-2. * np.sum(
-                np.log(r_neyman_distribution).reshape((-1, settings.n_expected_events)), axis=1))
+            s_hat_neyman_distribution = calibrator.predict(tthat_neyman_distribution.reshape((-1,)))
+            r_hat_neyman_distribution = r_from_s(s_hat_neyman_distribution)
+            r_hat_neyman_distribution = r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
+            llr_neyman_distributions_calibrated.append(-2. * np.sum(np.log(r_hat_neyman_distribution)), axis=1)
+
+            # Debug output to track NaNs
+            if tt == 0:
+                nans_raw = np.sum(np.isnan(tthat_neyman_distribution))
+                nans_s = np.sum(np.isnan(s_hat_neyman_distribution))
+                nans_r = np.sum(np.isnan(r_hat_neyman_distribution))
+                nans_logr = np.sum(np.isnan(np.log(r_hat_neyman_distribution)))
+                logging.debug('Theta %s (%s) observed NaNs: %s raw tthat, %s calibrated s, %s r, %s log r',
+                              t, theta, nans_raw, nans_s, nans_r, nans_logr)
 
             # Debug output
             if tt == 0:
