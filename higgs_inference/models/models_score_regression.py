@@ -6,7 +6,7 @@ from keras.models import Model
 from keras.layers import Input, Dense
 from keras import optimizers
 
-from higgs_inference.various.utils import build_hidden_layers
+from higgs_inference.models.ml_utils import build_hidden_layers
 from higgs_inference.models.loss_functions import loss_function_score_regression
 
 

@@ -38,9 +38,13 @@ def local_model_truth_inference(options=''):
     ################################################################################
 
     scores_test = np.load(settings.unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
-    r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
-    r_roam = np.load(settings.unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
-    r_neyman_observed = np.load(settings.unweighted_events_dir + '/r_neyman_observed.npy')
+    scores_neyman_observed = np.load(settings.unweighted_events_dir + '/r_neyman_observed.npy')
+
+
+
+    # TODO: implement local truth model
+
+
 
     n_events_test = r_test.shape[1]
     assert settings.n_thetas == r_test.shape[0]

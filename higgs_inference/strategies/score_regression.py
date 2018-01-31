@@ -232,4 +232,7 @@ def score_regression_inference(options=''):
 
     # Save expected LLR
     expected_llr = np.asarray(expected_llr)
+    expected_llr_calibrated = np.asarray(expected_llr_calibrated)
+
     np.save(results_dir + '/llr_scoreregression' + filename_addition + '.npy', expected_llr)
+    np.save(results_dir + '/llr_scoreregression_calibrated' + filename_addition + '.npy', expected_llr_calibrated)

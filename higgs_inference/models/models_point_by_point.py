@@ -8,7 +8,7 @@ from keras import optimizers
 import keras.backend as K
 
 from higgs_inference import settings
-from higgs_inference.various.utils import build_hidden_layers
+from higgs_inference.models.ml_utils import build_hidden_layers
 from higgs_inference.models.loss_functions import loss_function_carl, loss_function_regression
 
 

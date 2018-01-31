@@ -6,8 +6,6 @@ from __future__ import absolute_import, division, print_function
 
 import numpy as np
 
-from keras.layers import Dense, Dropout
-
 from higgs_inference import settings
 
 
@@ -21,36 +19,6 @@ def s_from_r(r):
 
 def r_from_s(s, epsilon=1.e-3):
     return np.clip((1. - s + epsilon) / (s + epsilon), epsilon, None)
-
-
-################################################################################
-# Helper functions to build fully connected hidden layers
-################################################################################
-
-def stack_layers(layers):
-    def f(x):
-        for k in range(len(layers)):
-            x = layers[k](x)
-        return x
-
-    return f
-
-
-def build_hidden_layers(n,
-                        hidden_layer_size=100,
-                        activation='tanh',
-                        dropout_prob=0.0):
-    r = []
-    for k in range(n):
-        if dropout_prob > 0.:
-            s = stack_layers([
-                Dropout(dropout_prob),
-                Dense(hidden_layer_size, activation=activation)
-            ])
-        else:
-            s = stack_layers([Dense(hidden_layer_size, activation=activation)])
-        r.append(s)
-    return stack_layers(r)
 
 
 ################################################################################
@@ -82,13 +50,11 @@ def format_number(number,
     return temp
 
 
-
 ################################################################################
 # Decide if two a given Neyman toy experiment should be evaluated at a given theta
 ################################################################################
 
 def decide_toy_evaluation(theta_hypothesis, theta_evaluation, distance_threshold=0.4):
-
     if theta_evaluation == theta_hypothesis:
         return True
 
