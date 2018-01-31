@@ -46,8 +46,6 @@ def afc_inference(statistics='x',
     if statistics is not 'x':
         raise NotImplementedError
 
-    # TODO: Implement AFC with estimated score or classifier output as summary statistics
-
     if indices_X is None:
         indices_X = [1, 38, 39, 40, 41]  # pT(j1), m(Z2), m(jj), delta_eta(jj), delta_phi(jj)
 
@@ -111,8 +109,8 @@ def afc_inference(statistics='x',
 
         # Construct summary statistics
         if statistics == 'x':
-            summary_statistics_train = X_train_transformed[indices_X]
-            summary_statistics_test = X_test_transformed[indices_X]
+            summary_statistics_train = X_train_transformed[:, indices_X]
+            summary_statistics_test = X_test_transformed[:, indices_X]
         else:
             raise NotImplementedError
 
@@ -146,7 +144,7 @@ def afc_inference(statistics='x',
                 X_neyman_observed.reshape((-1, X_neyman_observed.shape[2])))
 
             if statistics == 'x':
-                summary_statistics_neyman_observed = X_neyman_observed_transformed[indices_X]
+                summary_statistics_neyman_observed = X_neyman_observed_transformed[:, indices_X]
             else:
                 raise NotImplementedError
 
@@ -177,7 +175,7 @@ def afc_inference(statistics='x',
                 X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
             if statistics == 'x':
-                summary_statistics_neyman_distribution = X_neyman_distribution_transformed[indices_X]
+                summary_statistics_neyman_distribution = X_neyman_distribution_transformed[:, indices_X]
             else:
                 raise NotImplementedError
 
