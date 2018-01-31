@@ -44,7 +44,7 @@ def local_model_truth_inference(options=''):
     scores_neyman_observed = np.load(settings.unweighted_events_dir + '/scores_neyman_observed.npy')
 
     logging.debug('Scores test: shape %s, content\n%s', scores_test.shape, scores_test)
-    logging.debug('Scores Neymanb observed: shape %s, content\n%s',
+    logging.debug('Scores Neyman observed: shape %s, content\n%s',
                   scores_neyman_observed.shape, scores_neyman_observed)
 
     n_events_test = scores_test.shape[1]
@@ -63,6 +63,9 @@ def local_model_truth_inference(options=''):
 
         # Evaluation
         tt_test = scores_test.dot(delta_theta)
+
+        logging.debug('Theta = %s, t.theta: shape %s, content\n%s', tt_test.shape, tt_test)
+
         expected_llr.append(
             - 2. * float(settings.n_expected_events) / float(n_events_test) * np.sum(tt_test))
 
