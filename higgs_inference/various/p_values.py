@@ -88,6 +88,18 @@ def subtract_mle(filename, folder, theta_sm=0):
             llr_compared_to_mle_observeds[t_eval, exp] = (llr_observeds[t_eval, exp]
                                                           - llr_observeds[theta_mle_observed[exp], exp])
 
+    # Debug output
+    logging.debug('LLR observed details (one fixed experiment):')
+    for t in range(settings.n_thetas):
+        logging.debug('  t = %s, mle = %s, q(gen=sm, eval=t) = %s, q(gen=sm, eval=mle) = %s',
+                      t, theta_mle_observed[t, 0], llr_observeds[t, 0],
+                      llr_observeds[theta_mle_observed[t, 0], 0])
+    logging.debug('LLR distribution details (one fixed experiment):')
+    for t in range(settings.n_thetas):
+        logging.debug('  t = %s, mle = %s, q(gen=t, eval=t) = %s, q(gen=t, eval=mle) = %s',
+                      t, theta_mle_distribution[t, 0], llr_distributions[t, t, 0],
+                      llr_distributions[theta_mle_distribution[t, 0], t, 0])
+
     # Subtract true
     # llr_compared_to_true_distributions = np.zeros_like(llr_distributions)
     # for t_eval in range(llr_distributions.shape[0]):

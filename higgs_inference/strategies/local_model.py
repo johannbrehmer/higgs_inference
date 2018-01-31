@@ -43,6 +43,10 @@ def local_model_truth_inference(options=''):
         settings.theta_score_regression]
     scores_neyman_observed = np.load(settings.unweighted_events_dir + '/scores_neyman_observed.npy')
 
+    logging.debug('Scores test: shape %s, content\n%s', scores_test.shape, scores_test)
+    logging.debug('Scores Neymanb observed: shape %s, content\n%s',
+                  scores_neyman_observed.shape, scores_neyman_observed)
+
     n_events_test = scores_test.shape[1]
 
     ################################################################################

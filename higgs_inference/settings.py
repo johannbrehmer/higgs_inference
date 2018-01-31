@@ -28,7 +28,11 @@ n_morphing_samples = 15
 # Benchmark theta points
 ################################################################################
 
-thetas = np.load(base_dir + '/data/thetas/thetas_parameterized.npy')
+try:
+    thetas = np.load(base_dir + '/data/thetas/thetas_parameterized.npy')
+except:
+    base_dir = '../'
+    thetas = np.load(base_dir + '/data/thetas/thetas_parameterized.npy')
 
 n_thetas = len(thetas)
 n_thetas_roam = 101
