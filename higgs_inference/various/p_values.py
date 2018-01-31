@@ -92,7 +92,7 @@ def subtract_mle(filename, folder, theta_sm=0):
     logging.debug('LLR observed details (one fixed experiment):')
     for t in range(settings.n_thetas):
         logging.debug('  t = %s, mle = %s, q(gen=sm, eval=t) = %s, q(gen=sm, eval=mle) = %s',
-                      t, theta_mle_observed[t, 0], llr_observeds[t, 0],
+                      t, theta_mle_observed[0], llr_observeds[t, 0],
                       llr_observeds[theta_mle_observed[0], 0])
     logging.debug('LLR distribution details (one fixed experiment):')
     for t in range(settings.n_thetas):
