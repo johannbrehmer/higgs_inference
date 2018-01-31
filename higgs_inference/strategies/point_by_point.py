@@ -79,7 +79,6 @@ def point_by_point_inference(algorithm='carl',
         filename_addition += '_denom1'
         theta1 = settings.theta1_alternative
 
-    data_dir = settings.base_dir + '/data'
     results_dir = settings.base_dir + '/results/point_by_point'
     neyman_dir = settings.neyman_dir + '/point_by_point'
 
@@ -93,9 +92,6 @@ def point_by_point_inference(algorithm='carl',
     # Data
     ################################################################################
 
-    thetas = np.load(data_dir + '/thetas/thetas_parameterized.npy')
-    n_thetas = len(thetas)
-
     X_calibration = np.load(settings.unweighted_events_dir + '/X_calibration' + input_filename_addition + '.npy')
     weights_calibration = np.load(
         settings.unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
@@ -105,7 +101,7 @@ def point_by_point_inference(algorithm='carl',
     X_neyman_observed = np.load(settings.unweighted_events_dir + '/X_neyman_observed.npy')
 
     n_events_test = X_test.shape[0]
-    assert n_thetas == r_test.shape[0]
+    assert settings.n_thetas == r_test.shape[0]
 
     ################################################################################
     # Regression
@@ -118,7 +114,8 @@ def point_by_point_inference(algorithm='carl',
         # Loop over the training thetas
         for i, t in enumerate(settings.pbp_training_thetas):
 
-            logging.info('Starting theta %s/%s: number %s (%s)', i + 1, len(settings.pbp_training_thetas), t, thetas[t])
+            logging.info('Starting theta %s/%s: number %s (%s)', i + 1, len(settings.pbp_training_thetas), t,
+                         settings.thetas[t])
 
             # Load data
             X_train = np.load(
@@ -145,7 +142,8 @@ def point_by_point_inference(algorithm='carl',
 
             # Training
             regr.fit(X_train_transformed, np.log(r_train),
-                     callbacks=([EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
+                     callbacks=(
+                     [EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
 
             # Evaluation
             prediction = regr.predict(X_test_transformed)
@@ -170,7 +168,7 @@ def point_by_point_inference(algorithm='carl',
 
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
-            for tt in range(n_thetas):
+            for tt in range(settings.n_thetas):
                 # Neyman construction: load distribution sample
                 X_neyman_distribution = np.load(
                     settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
@@ -190,8 +188,8 @@ def point_by_point_inference(algorithm='carl',
 
         logging.info('Interpolation')
 
-        interpolator = LinearNDInterpolator(thetas[settings.pbp_training_thetas], expected_llr)
-        expected_llr_all = interpolator(thetas)
+        interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], expected_llr)
+        expected_llr_all = interpolator(settings.thetas)
         # gp = GaussianProcessRegressor(normalize_y=True,
         #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
         # gp.fit(thetas[settings.pbp_training_thetas], expected_llr)
@@ -210,7 +208,8 @@ def point_by_point_inference(algorithm='carl',
         # Loop over the 15 thetas
         for i, t in enumerate(settings.pbp_training_thetas):
 
-            logging.info('Starting theta %s/%s: number %s (%s)', i + 1, len(settings.pbp_training_thetas), t, thetas[t])
+            logging.info('Starting theta %s/%s: number %s (%s)', i + 1, len(settings.pbp_training_thetas), t,
+                         settings.thetas[t])
 
             # Load data
             X_train = np.load(
@@ -233,7 +232,8 @@ def point_by_point_inference(algorithm='carl',
 
             # Training
             clf.fit(X_train_transformed, y_train,
-                    callbacks=([EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
+                    callbacks=(
+                    [EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
 
             # carl wrapper
             ratio = ClassifierScoreRatio(clf, prefit=True)
@@ -309,7 +309,7 @@ def point_by_point_inference(algorithm='carl',
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
             llr_neyman_distributions_calibrated = []
-            for tt in range(n_thetas):
+            for tt in range(settings.n_thetas):
                 # Neyman construction: load distribution sample
                 X_neyman_distribution = np.load(
                     settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
@@ -339,16 +339,16 @@ def point_by_point_inference(algorithm='carl',
 
         logging.info('Starting interpolation')
 
-        interpolator = LinearNDInterpolator(thetas[settings.pbp_training_thetas], expected_llr)
-        expected_llr_all = interpolator(thetas)
+        interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], expected_llr)
+        expected_llr_all = interpolator(settings.thetas)
         # gp = GaussianProcessRegressor(normalize_y=True,
         #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
         # gp.fit(thetas[settings.pbp_training_thetas], expected_llr)
         # expected_llr_all = gp.predict(thetas)
         np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', expected_llr_all)
 
-        interpolator = LinearNDInterpolator(thetas[settings.pbp_training_thetas], expected_llr_calibrated)
-        expected_llr_calibrated_all = interpolator(thetas)
+        interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], expected_llr_calibrated)
+        expected_llr_calibrated_all = interpolator(settings.thetas)
         # gp = GaussianProcessRegressor(normalize_y=True,
         #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
         # gp.fit(thetas[settings.pbp_training_thetas], expected_llr_calibrated)

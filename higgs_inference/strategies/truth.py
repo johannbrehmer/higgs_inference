@@ -30,7 +30,6 @@ def truth_inference(options=''):
         input_filename_addition = '_denom1'
         filename_addition += '_denom1'
 
-    data_dir = settings.base_dir + '/data'
     neyman_dir = settings.neyman_dir + '/truth'
     results_dir = settings.base_dir + '/results/truth'
 
@@ -38,16 +37,13 @@ def truth_inference(options=''):
     # Data
     ################################################################################
 
-    thetas = np.load(data_dir + '/thetas/thetas_parameterized.npy')
-    n_thetas = len(thetas)
-
     scores_test = np.load(settings.unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
     r_roam = np.load(settings.unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
     r_neyman_observed = np.load(settings.unweighted_events_dir + '/r_neyman_observed.npy')
 
     n_events_test = r_test.shape[1]
-    assert n_thetas == r_test.shape[0]
+    assert settings.n_thetas == r_test.shape[0]
 
     xi = np.linspace(-1.0, 1.0, settings.n_thetas_roam)
     yi = np.linspace(-1.0, 1.0, settings.n_thetas_roam)
@@ -60,7 +56,7 @@ def truth_inference(options=''):
     logging.info('Starting evaluation')
     expected_llr_truth = []
 
-    for t, theta in enumerate(thetas):
+    for t, theta in enumerate(settings.thetas):
         ratios = np.array(np.log(r_test[t, :]))
         expected_llr_truth.append(
             - 2. * float(settings.n_expected_events) / float(n_events_test) * np.sum(ratios[np.isfinite(ratios)]))
@@ -79,17 +75,17 @@ def truth_inference(options=''):
     logging.info('Starting roaming')
     gp = GaussianProcessRegressor(normalize_y=True,
                                   kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
-    gp.fit(thetas[:], np.log(r_roam))
+    gp.fit(settings.thetas[:], np.log(r_roam))
     r_roam_truth = np.exp(gp.predict(np.c_[xx.ravel(), yy.ravel()])).T
     np.save(results_dir + '/r_roam_truth' + filename_addition + '.npy', r_roam_truth)
 
     logging.info('Starting evaluation of Neyman experiments')
-    for t in range(n_thetas):
+    for t in range(settings.n_thetas):
         llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed[t]), axis=1)
         np.save(neyman_dir + '/neyman_observed_truth_' + str(t) + filename_addition + '.npy', llr_neyman_observed)
 
         llr_neyman_distributions = []
-        for tt in range(n_thetas):
+        for tt in range(settings.n_thetas):
             r_neyman_distribution = np.load(
                 settings.unweighted_events_dir + '/r_neyman_distribution_' + str(tt) + '.npy')
             llr_neyman_distributions.append(-2. * np.sum(np.log(r_neyman_distribution[t]), axis=1))

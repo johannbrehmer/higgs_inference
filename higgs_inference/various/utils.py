@@ -4,7 +4,11 @@
 
 from __future__ import absolute_import, division, print_function
 
+import numpy as np
+
 from keras.layers import Dense, Dropout
+
+from higgs_inference import settings
 
 
 ################################################################################
@@ -76,3 +80,21 @@ def format_number(number,
     elif emphasize:
         temp = r'\emph{' + temp + r'}'
     return temp
+
+
+
+################################################################################
+# Decide if two a given Neyman toy experiment should be evaluated at a given theta
+################################################################################
+
+def decide_toy_evaluation(theta_hypothesis, theta_evaluation, distance_threshold=0.4):
+
+    if theta_evaluation == theta_hypothesis:
+        return True
+
+    if theta_evaluation in settings.pbp_training_thetas:
+        return True
+
+    delta_theta = np.linalg.norm(settings.thetas[theta_hypothesis] - settings.thetas[theta_evaluation])
+
+    return (delta_theta <= distance_threshold)

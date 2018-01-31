@@ -64,7 +64,6 @@ def score_regression_inference(options=''):
         filename_addition += '_denom1'
         theta1 = settings.theta1_alternative
 
-    data_dir = settings.base_dir + '/data'
     results_dir = settings.base_dir + '/results/score_regression'
     neyman_dir = settings.neyman_dir + '/score_regression'
 
@@ -75,9 +74,6 @@ def score_regression_inference(options=''):
     ################################################################################
     # Data
     ################################################################################
-
-    thetas = np.load(data_dir + '/thetas/thetas_parameterized.npy')
-    n_thetas = len(thetas)
 
     X_train = np.load(settings.unweighted_events_dir + '/X_train_scoreregression' + input_filename_addition + '.npy')
     scores_train = np.load(
@@ -92,7 +88,7 @@ def score_regression_inference(options=''):
     X_neyman_observed = np.load(settings.unweighted_events_dir + '/X_neyman_observed.npy')
 
     n_events_test = X_test.shape[0]
-    assert n_thetas == r_test.shape[0]
+    assert settings.n_thetas == r_test.shape[0]
 
     scaler = StandardScaler()
     scaler.fit(np.array(X_train, dtype=np.float64))
@@ -111,7 +107,8 @@ def score_regression_inference(options=''):
 
     logging.info('Starting training of score regression')
     regr.fit(X_train_transformed, scores_train,
-             callbacks=([EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
+             callbacks=(
+             [EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
 
     logging.info('Starting evaluation')
     that_calibration = regr.predict(X_calibration_transformed)
@@ -120,10 +117,10 @@ def score_regression_inference(options=''):
     logging.info('Starting density estimation')
     expected_llr = []
 
-    for t, theta in enumerate(thetas):
+    for t, theta in enumerate(settings.thetas):
 
         # Contract estimated scores with delta theta
-        delta_theta = theta - thetas[theta1]
+        delta_theta = theta - settings.thetas[theta1]
         tthat_calibration = that_calibration.dot(delta_theta)
 
         # Weights for density estimation histograms
@@ -164,7 +161,7 @@ def score_regression_inference(options=''):
         # Neyman construction: loop over distribution samples generated from different thetas
         llr_neyman_distributions = []
         llr_neyman_distributions_calibrated = []
-        for tt in range(n_thetas):
+        for tt in range(settings.n_thetas):
             # Neyman construction: load distribution sample
             X_neyman_distribution = np.load(
                 settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
@@ -177,7 +174,7 @@ def score_regression_inference(options=''):
                 -2. * np.sum(tthat_neyman_distribution.reshape((-1, settings.n_expected_events)), axis=1))
 
             # Debug output
-            if tt==0:
+            if tt == 0:
                 logging.debug(
                     'Theta %s (%s) median tthat values: calibration %s, test %s, Neyman observed %s, Neyman hypothesis %s',
                     t, theta,
@@ -190,7 +187,7 @@ def score_regression_inference(options=''):
                 np.log(r_neyman_distribution).reshape((-1, settings.n_expected_events)), axis=1))
 
             # Debug output
-            if tt==0:
+            if tt == 0:
                 logging.debug(
                     'Theta %s (%s) median calibrated LLR values: Neyman observed %s, Neyman hypothesis %s',
                     t, theta,

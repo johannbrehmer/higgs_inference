@@ -109,7 +109,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         filename_addition += '_denom1'
         theta1 = settings.theta1_alternative
 
-    data_dir = settings.base_dir + '/data'
     results_dir = settings.base_dir + '/results/parameterized'
     neyman_dir = settings.neyman_dir + '/parameterized'
 
@@ -127,10 +126,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     ################################################################################
     # Data
     ################################################################################
-
-    thetas = np.load(data_dir + '/thetas/thetas_parameterized.npy')
-
-    n_thetas = len(thetas)
 
     if random_theta_mode:
         X_train = np.load(settings.unweighted_events_dir + '/X_train_random' + input_filename_addition + '.npy')
@@ -168,7 +163,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     X_neyman_observed = np.load(settings.unweighted_events_dir + '/X_neyman_observed.npy')
 
     n_events_test = X_test.shape[0]
-    assert n_thetas == r_test.shape[0]
+    assert settings.n_thetas == r_test.shape[0]
 
     scaler = StandardScaler()
     scaler.fit(np.array(X_train, dtype=np.float64))
@@ -232,16 +227,17 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
         logging.info('Starting training')
         regr.fit(X_thetas_train, log_r_score_train,
-                 callbacks=([EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
+                 callbacks=(
+                 [EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
 
         logging.info('Starting evaluation')
         expected_llr = []
 
-        for t, theta in enumerate(thetas):
+        for t, theta in enumerate(settings.thetas):
 
             # Prepare test data
             thetas0_array = np.zeros((X_test_transformed.shape[0], 2), dtype=X_test_transformed.dtype)
-            thetas0_array[:, :] = thetas[t]
+            thetas0_array[:, :] = settings.thetas[t]
             X_thetas_test = np.hstack((X_test_transformed, thetas0_array))
 
             # Evaluation
@@ -272,7 +268,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             # Prepare observed data for Neyman construction
             thetas0_array = np.zeros((X_neyman_observed_transformed.shape[0], 2),
                                      dtype=X_neyman_observed_transformed.dtype)
-            thetas0_array[:, :] = thetas[t]
+            thetas0_array[:, :] = settings.thetas[t]
             X_thetas_neyman_observed = np.hstack((X_neyman_observed_transformed, thetas0_array))
 
             # Neyman construction: evaluate observed sample (raw)
@@ -283,7 +279,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
-            for tt in range(n_thetas):
+            for tt in range(settings.n_thetas):
                 # Neyman construction: load distribution sample
                 X_neyman_distribution = np.load(
                     settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
@@ -293,7 +289,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 # Prepare distribution data for Neyman construction
                 thetas0_array = np.zeros((X_neyman_distribution_transformed.shape[0], 2),
                                          dtype=X_neyman_distribution_transformed.dtype)
-                thetas0_array[:, :] = thetas[t]
+                thetas0_array[:, :] = settings.thetas[t]
                 X_thetas_neyman_distribution = np.hstack((X_neyman_distribution_transformed, thetas0_array))
 
                 # Neyman construction: evaluate distribution sample (raw)
@@ -367,7 +363,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
         # Fit
         clf.fit(X_thetas_train[::], y_score_train[::],
-                callbacks=([EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
+                callbacks=(
+                [EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
 
         # carl ratio object
         ratio = ClassifierScoreRatio(clf, prefit=True)
@@ -375,11 +372,11 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         logging.info('Starting evaluation')
         expected_llr = []
 
-        for t, theta in enumerate(thetas):
+        for t, theta in enumerate(settings.thetas):
 
             # Prepare test data
             thetas0_array = np.zeros((X_test_transformed.shape[0], 2), dtype=X_test_transformed.dtype)
-            thetas0_array[:, :] = thetas[t]
+            thetas0_array[:, :] = theta
             X_thetas_test = np.hstack((X_test_transformed, thetas0_array))
 
             # Evaluation
@@ -409,7 +406,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             # Prepare observed data for Neyman construction
             thetas0_array = np.zeros((X_neyman_observed_transformed.shape[0], 2),
                                      dtype=X_neyman_observed_transformed.dtype)
-            thetas0_array[:, :] = thetas[t]
+            thetas0_array[:, :] = theta
             X_thetas_neyman_observed = np.hstack((X_neyman_observed_transformed, thetas0_array))
 
             # Neyman construction: evaluate observed sample (raw)
@@ -421,7 +418,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
-            for tt in range(n_thetas):
+            for tt in range(settings.n_thetas):
                 # Neyman construction: load distribution sample
                 X_neyman_distribution = np.load(
                     settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
@@ -431,7 +428,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 # Prepare distribution data for Neyman construction
                 thetas0_array = np.zeros((X_neyman_distribution_transformed.shape[0], 2),
                                          dtype=X_neyman_distribution_transformed.dtype)
-                thetas0_array[:, :] = thetas[t]
+                thetas0_array[:, :] = settings.thetas[t]
                 X_thetas_neyman_distribution = np.hstack((X_neyman_distribution_transformed, thetas0_array))
 
                 # Neyman construction: evaluate distribution sample (raw)
@@ -456,14 +453,14 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
         logging.info('Starting calibrated evaluation and roaming')
         expected_llr_calibrated = []
-        r_roam_temp = np.zeros((n_thetas, n_roaming))
+        r_roam_temp = np.zeros((settings.n_thetas, n_roaming))
 
-        for t, theta in enumerate(thetas):
+        for t, theta in enumerate(settings.thetas):
 
             # Prepare data for calibration
             n_calibration_each = X_calibration_transformed.shape[0]
             thetas0_array = np.zeros((n_calibration_each, 2), dtype=X_calibration_transformed.dtype)
-            thetas0_array[:, :] = thetas[t]
+            thetas0_array[:, :] = settings.thetas[t]
             X_thetas_calibration = np.hstack((X_calibration_transformed, thetas0_array))
             X_thetas_calibration = np.vstack((X_thetas_calibration, X_thetas_calibration))
             y_calibration = np.zeros(2 * n_calibration_each)
@@ -481,7 +478,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # Prepare data
             thetas0_array = np.zeros((X_test_transformed.shape[0], 2), dtype=X_test_transformed.dtype)
-            thetas0_array[:, :] = thetas[t]
+            thetas0_array[:, :] = settings.thetas[t]
             X_thetas_test = np.hstack((X_test_transformed, thetas0_array))
 
             this_r, this_other = ratio_calibrated.predict(X_thetas_test)
@@ -528,7 +525,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
-            for tt in range(n_thetas):
+            for tt in range(settings.n_thetas):
                 # Neyman construction: load distribution sample
                 X_neyman_distribution = np.load(
                     settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
@@ -538,7 +535,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 # Prepare distribution data for Neyman construction
                 thetas0_array = np.zeros((X_neyman_distribution_transformed.shape[0], 2),
                                          dtype=X_neyman_distribution_transformed.dtype)
-                thetas0_array[:, :] = thetas[t]
+                thetas0_array[:, :] = settings.thetas[t]
                 X_thetas_neyman_distribution = np.hstack((X_neyman_distribution_transformed, thetas0_array))
 
                 # Neyman construction: evaluate distribution sample (calibrated)
@@ -553,7 +550,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # Roaming
             thetas0_array = np.zeros((n_roaming, 2), dtype=X_roam_transformed.dtype)
-            thetas0_array[:, :] = thetas[t]
+            thetas0_array[:, :] = settings.thetas[t]
             X_thetas_roaming_temp = np.hstack((X_roam_transformed, thetas0_array))
             r_roam_temp[t, :], _ = ratio_calibrated.predict(X_thetas_roaming_temp)
 
@@ -565,6 +562,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         logging.info('Interpolating calibrated roaming')
         gp = GaussianProcessRegressor(normalize_y=True,
                                       kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
-        gp.fit(thetas[:], np.log(r_roam_temp))
+        gp.fit(settings.thetas[:], np.log(r_roam_temp))
         r_roam_calibrated = np.exp(gp.predict(np.c_[xx.ravel(), yy.ravel()])).T
         np.save(results_dir + '/r_roam_' + algorithm + '_calibrated' + filename_addition + '.npy', r_roam_calibrated)
