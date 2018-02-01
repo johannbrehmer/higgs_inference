@@ -18,9 +18,9 @@ from higgs_inference.various.utils import format_number, decide_toy_evaluation
 def afc_inference(statistics='x',
                   indices_X=None,
                   epsilon=None,
-                  kernel='tophat',
-                  kde_relative_tolerance=1.e-3,
-                  kde_absolute_tolerance=1.e-6,
+                  kernel='gaussian',
+                  kde_relative_tolerance=1.e-2,
+                  kde_absolute_tolerance=1.e-4,
                   options=''):
     """
     Approximates the likelihood through Approximate Frequentist Inference, a frequentist twist on ABC
@@ -54,7 +54,7 @@ def afc_inference(statistics='x',
 
     statistics_dimensionality = len(indices_X)
 
-    filename_addition = '_' + statistics
+    filename_addition = ''
 
     if epsilon is None:
         epsilon = 0.1 ** (1. / statistics_dimensionality)
@@ -141,8 +141,12 @@ def afc_inference(statistics='x',
 
         log_r_hat_test = log_p_hat_num_test - log_p_hat_den_test
 
-        logging.debug('log p (num): shape %s, %s nans, content \n %s',
-                      log_p_hat_num_test.shape, np.sum(np.isnan(log_p_hat_num_test)), log_r_hat_test)
+        logging.debug('Test log p (num): shape %s, %s nans, content \n %s',
+                      log_p_hat_num_test.shape, np.sum(np.isnan(log_p_hat_num_test)), log_p_hat_num_test)
+        logging.debug('Test log p (den): shape %s, %s nans, content \n %s',
+                      log_p_hat_den_test.shape, np.sum(np.isnan(log_p_hat_den_test)), log_p_hat_den_test)
+        logging.debug('Test log r: shape %s, %s nans, content \n %s',
+                      log_r_hat_test.shape, np.sum(np.isnan(log_r_hat_test)), log_r_hat_test)
 
         expected_llr.append(- 2. * settings.n_expected_events / n_events_test * np.sum(log_r_hat_test))
 
@@ -177,6 +181,14 @@ def afc_inference(statistics='x',
 
             log_r_hat_neyman_observed = log_p_hat_num_neyman_observed - log_p_hat_den_neyman_observed
             log_r_hat_neyman_observed = log_r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
+
+            logging.debug('Neyman observed log p (num): shape %s, %s nans, content \n %s',
+                          log_p_hat_num_neyman_observed.shape, np.sum(np.isnan(log_p_hat_num_neyman_observed)), log_p_hat_num_neyman_observed)
+            logging.debug('Neyman observed log p (den): shape %s, %s nans, content \n %s',
+                          log_p_hat_den_neyman_observed.shape, np.sum(np.isnan(log_p_hat_den_neyman_observed)), log_p_hat_den_neyman_observed)
+            logging.debug('Neyman observed log r: shape %s, %s nans, content \n %s',
+                          log_r_hat_neyman_observed.shape, np.sum(np.isnan(log_r_hat_neyman_observed)), log_r_hat_neyman_observed)
+
             llr_neyman_observed = -2. * np.sum(log_r_hat_neyman_observed, axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_afc' + '_' + str(t) + filename_addition + '.npy',
                     llr_neyman_observed)
@@ -215,6 +227,13 @@ def afc_inference(statistics='x',
 
             log_r_hat_neyman_distribution = log_p_hat_num_neyman_distribution - log_p_hat_den_neyman_distribution
             log_r_hat_neyman_distribution = log_r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
+
+            logging.debug('Neyman distribution %s log p (num): shape %s, %s nans, content \n %s',
+                          tt, log_p_hat_num_neyman_distribution.shape, np.sum(np.isnan(log_p_hat_num_neyman_distribution)), log_p_hat_num_neyman_distribution)
+            logging.debug('Neyman distribution %s log p (den): shape %s, %s nans, content \n %s',
+                          tt, log_p_hat_den_neyman_distribution.shape, np.sum(np.isnan(log_p_hat_den_neyman_distribution)), log_p_hat_den_neyman_distribution)
+            logging.debug('Neyman distribution %s log r: shape %s, %s nans, content \n %s',
+                          tt, log_r_hat_neyman_distribution.shape, np.sum(np.isnan(log_r_hat_neyman_distribution)), log_r_hat_neyman_distribution)
 
             llr_neyman_distribution = -2. * np.sum(log_r_hat_neyman_distribution, axis=1)
             np.save(neyman_dir + '/neyman_llr_distribution_afc' + '_' + str(t) + filename_addition + '.npy',
