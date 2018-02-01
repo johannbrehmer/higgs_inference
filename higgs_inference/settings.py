@@ -24,6 +24,8 @@ n_features = 42
 n_thetas_features = n_params + n_features
 n_morphing_samples = 15
 
+epsilon = 1.e-3 # for various numerical accuracy issues
+
 ################################################################################
 # Benchmark theta points
 ################################################################################

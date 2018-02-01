@@ -124,8 +124,12 @@ def score_regression_inference(options=''):
 
         # Delta_theta
         delta_theta = theta - settings.thetas[theta1]
-        rotation_matrix = (np.array([[delta_theta[0], - delta_theta[1]], [delta_theta[1], delta_theta[0]]])
-                           / np.linalg.norm(delta_theta))
+        delta_theta_norm = np.linalg.norm(delta_theta)
+        if delta_theta_norm > settings.epsilon:
+            rotation_matrix = (np.array([[delta_theta[0], - delta_theta[1]], [delta_theta[1], delta_theta[0]]])
+                               / np.linalg.norm(delta_theta))
+        else:
+            rotation_matrix = np.identity(2)
 
         # Prepare calibration data
         tthat_calibration = that_calibration.dot(delta_theta)
