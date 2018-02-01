@@ -88,7 +88,7 @@ def truth_inference(options=''):
 
             # Observed
             llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed[t]), axis=1)
-            np.save(neyman_dir + '/neyman_observed_truth_' + str(t) + filename_addition + '.npy', llr_neyman_observed)
+            np.save(neyman_dir + '/neyman_llr_observed_truth_' + str(t) + filename_addition + '.npy', llr_neyman_observed)
 
         # Hypothesis distributions
         llr_neyman_distributions = []

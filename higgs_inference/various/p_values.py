@@ -49,19 +49,26 @@ def subtract_mle(filename, folder, theta_sm=0):
             files_found += 1
 
         except (IOError, AssertionError):
+            logging.debug("Didn't find file %s", neyman_dir + '/neyman_llr_distribution_' + filename + '_' + str(t) + '.npy')
+
             placeholder = np.empty((settings.n_thetas, settings.n_neyman_distribution_experiments))
             placeholder[:,:] = np.nan
             llr_distributions.append(placeholder)
+
             files_not_found += 1
 
         try:
             llr_observeds.append(
                 np.load(neyman_dir + '/neyman_llr_observed_' + filename + '_' + str(t) + '.npy'))
             files_found += 1
+
         except IOError:
+            logging.debug("Didn't find file %s", neyman_dir + '/neyman_llr_observed_' + filename + '_' + str(t) + '.npy')
+
             placeholder = np.empty(settings.n_neyman_observed_experiments)
             placeholder[:] = np.nan
             llr_observeds.append(placeholder)
+
             files_not_found += 1
 
     logging.debug("Found %s files, didn't find %s files", files_found, files_not_found)
@@ -165,8 +172,8 @@ def calculate_all_CL():
 
     logging.info('Starting p-value calculation')
 
-    # calculate_CL('truth', 'truth')
-    calculate_CL('localmodel', 'truth')
+    calculate_CL('truth', 'truth')
+    # calculate_CL('localmodel', 'truth')
     
     # calculate_CL('afc', 'afc')
     
