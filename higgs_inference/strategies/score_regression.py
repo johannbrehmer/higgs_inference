@@ -115,32 +115,45 @@ def score_regression_inference(options=''):
     that_test = regr.predict(X_test_transformed)
 
     logging.info('Starting density estimation')
-    expected_llr = []
-    expected_llr_calibrated = []
+    # expected_llr = []
+    expected_llr_scoretheta = []
 
     for t, theta in enumerate(settings.thetas):
 
-        # Contract estimated scores with delta theta
+        # Delta_theta
         delta_theta = theta - settings.thetas[theta1]
+        rotation_matrix = (np.array([[delta_theta[0], - delta_theta[1]],[delta_theta[1], delta_theta[0]]])
+                           / np.linalg.norm(delta_theta))
+
+        # Prepare calibration data
         tthat_calibration = that_calibration.dot(delta_theta)
+        that_rotated_calibration = that_calibration.dot(rotation_matrix)
 
         # Weights for density estimation histograms
-        tthat_calibration = np.hstack((tthat_calibration, tthat_calibration))
+        _that_calibration = np.vstack((that_calibration, that_calibration))
+        _tthat_calibration = np.hstack((tthat_calibration, tthat_calibration))
+        _that_rotated_calibration = np.vstack((that_rotated_calibration, that_rotated_calibration))
         y_calibration = np.hstack((np.zeros(that_calibration.shape[0]), np.ones(that_calibration.shape[0])))
         w_calibration = np.hstack((weights_calibration[t, ::], weights_calibration[theta1, ::]))
 
-        # Calibration histograms
+        # 1d density estimation with score * theta
         calibrator = HistogramCalibrator(bins=500, independent_binning=False, variable_width=False,
                                          interpolation='quadratic')
-        calibrator.fit(tthat_calibration, y_calibration, sample_weight=w_calibration)
+        calibrator.fit(_tthat_calibration, y_calibration, sample_weight=w_calibration)
+
+        # 2d density estimation with score
+        calibrator = HistogramCalibrator(bins=500, independent_binning=False, variable_width=False,
+                                         interpolation='quadratic')
+        calibrator.fit(_tthat_calibration, y_calibration, sample_weight=w_calibration)
 
         # Evaluation (raw = local model)
         tthat_test = that_test.dot(delta_theta)
-        expected_llr.append(-2. * settings.n_expected_events / n_events_test * np.sum(tthat_test))
+        that_rotated_test = that_test.dot(rotation_matrix)
+        # expected_llr.append(-2. * settings.n_expected_events / n_events_test * np.sum(tthat_test))
 
         # Evaluation (calibrated = after density estimation)
         r_hat_test = r_from_s(calibrator.predict(tthat_test.reshape((-1,))))
-        expected_llr_calibrated.append(- 2. * settings.n_expected_events / n_events_test * np.sum(np.log(r_hat_test)))
+        expected_llr_scoretheta.append(- 2. * settings.n_expected_events / n_events_test * np.sum(np.log(r_hat_test)))
 
         # For some benchmark thetas, save r for each phase-space point
         if t == settings.theta_benchmark_nottrained:
@@ -208,8 +221,8 @@ def score_regression_inference(options=''):
             llr_neyman_distributions_calibrated)
 
     # Save expected LLR
-    expected_llr = np.asarray(expected_llr)
-    expected_llr_calibrated = np.asarray(expected_llr_calibrated)
+    # expected_llr = np.asarray(expected_llr)
+    expected_llr_scoretheta = np.asarray(expected_llr_scoretheta)
 
-    np.save(results_dir + '/llr_scoreregression' + filename_addition + '.npy', expected_llr)
-    np.save(results_dir + '/llr_scoreregression_calibrated' + filename_addition + '.npy', expected_llr_calibrated)
+    # np.save(results_dir + '/llr_scoreregression' + filename_addition + '.npy', expected_llr)
+    np.save(results_dir + '/llr_scoreregression_calibrated' + filename_addition + '.npy', expected_llr_scoretheta)
