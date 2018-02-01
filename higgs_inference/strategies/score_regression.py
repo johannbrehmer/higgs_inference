@@ -12,7 +12,7 @@ from sklearn.preprocessing import StandardScaler
 from keras.wrappers.scikit_learn import KerasRegressor
 from keras.callbacks import EarlyStopping
 
-from carl.learning.calibration import HistogramCalibrator
+from carl.learning.calibration import HistogramCalibrator, NDHistogramCalibrator
 
 from higgs_inference import settings
 from higgs_inference.models.models_score_regression import make_regressor
@@ -117,12 +117,14 @@ def score_regression_inference(options=''):
     logging.info('Starting density estimation')
     # expected_llr = []
     expected_llr_scoretheta = []
+    expected_llr_score = []
+    expected_llr_rotatedscore = []
 
     for t, theta in enumerate(settings.thetas):
 
         # Delta_theta
         delta_theta = theta - settings.thetas[theta1]
-        rotation_matrix = (np.array([[delta_theta[0], - delta_theta[1]],[delta_theta[1], delta_theta[0]]])
+        rotation_matrix = (np.array([[delta_theta[0], - delta_theta[1]], [delta_theta[1], delta_theta[0]]])
                            / np.linalg.norm(delta_theta))
 
         # Prepare calibration data
@@ -137,55 +139,122 @@ def score_regression_inference(options=''):
         w_calibration = np.hstack((weights_calibration[t, ::], weights_calibration[theta1, ::]))
 
         # 1d density estimation with score * theta
-        calibrator = HistogramCalibrator(bins=500, independent_binning=False, variable_width=False,
-                                         interpolation='quadratic')
-        calibrator.fit(_tthat_calibration, y_calibration, sample_weight=w_calibration)
+        calibrator_scoretheta = HistogramCalibrator(bins=500, independent_binning=False, variable_width=False,
+                                                    interpolation='quadratic')
+        calibrator_scoretheta.fit(_tthat_calibration, y_calibration, sample_weight=w_calibration)
 
-        # 2d density estimation with score
-        calibrator = HistogramCalibrator(bins=500, independent_binning=False, variable_width=False,
-                                         interpolation='quadratic')
-        calibrator.fit(_tthat_calibration, y_calibration, sample_weight=w_calibration)
+        # 2d density estimation with score (fixed binning)
+        _bins = np.concatenate(([-100000., -20., -15., -10., -8., -6.],
+                                np.linspace(-5., -2.5, 6),
+                                np.linspace(-2., -1.2, 5),
+                                np.linspace(-1., 1., 21),
+                                np.linspace(1.2, 2.0, 5),
+                                np.linspace(2.5, 5., 6),
+                                [6., 8., 10., 15., 20., 100000.]))
+        _bins = (_bins, _bins)
+        _range = (np.array((-100000., 100000.)), np.array((-100000., 100000.)))
+        calibrator_score = NDHistogramCalibrator(bins=_bins, range=_range)
+        calibrator_score.fit(_that_calibration,
+                             y_calibration,
+                             sample_weight=w_calibration)
 
-        # Evaluation (raw = local model)
+        # 2d density estimation with score (dynamicically rotated)
+        _bins_main = np.concatenate(([-100000., -20., -15., -10., -8., -6.],
+                                     np.linspace(-5., -2.5, 6),
+                                     np.linspace(-2., -1.2, 5),
+                                     np.linspace(-1., 1., 21),
+                                     np.linspace(1.2, 2.0, 5),
+                                     np.linspace(2.5, 5., 6),
+                                     [6., 8., 10., 15., 20., 100000.]))
+        _bins_other = np.array(
+            [-100000., -20., -10., -5., -3., -2., -1., -0.5, 0., 0.5, 1., 2., 3., 5., 10., 20., 100000.])
+        _bins = (_bins_main, _bins_other)
+        _range = (np.array((-100000., 100000.)), np.array((-100000., 100000.)))
+        calibrator_rotatedscore = NDHistogramCalibrator(bins=_bins, range=_range)
+        calibrator_rotatedscore.fit(_that_rotated_calibration,
+                                    y_calibration,
+                                    sample_weight=w_calibration)
+
+        # Evaluation
         tthat_test = that_test.dot(delta_theta)
         that_rotated_test = that_test.dot(rotation_matrix)
         # expected_llr.append(-2. * settings.n_expected_events / n_events_test * np.sum(tthat_test))
 
-        # Evaluation (calibrated = after density estimation)
-        r_hat_test = r_from_s(calibrator.predict(tthat_test.reshape((-1,))))
-        expected_llr_scoretheta.append(- 2. * settings.n_expected_events / n_events_test * np.sum(np.log(r_hat_test)))
+        # Calibration
+        r_hat_scoretheta_test = r_from_s(calibrator_scoretheta.predict(tthat_test.reshape((-1,))))
+        r_hat_score_test = r_from_s(calibrator_score.predict(that_test.reshape((-1,))))
+        r_hat_rotatedscore_test = r_from_s(calibrator_rotatedscore.predict(that_rotated_test.reshape((-1,))))
+
+        expected_llr_scoretheta.append(- 2. * settings.n_expected_events / n_events_test
+                                       * np.sum(np.log(r_hat_scoretheta_test)))
+        expected_llr_score.append(- 2. * settings.n_expected_events / n_events_test
+                                  * np.sum(np.log(r_hat_score_test)))
+        expected_llr_rotatedscore.append(- 2. * settings.n_expected_events / n_events_test
+                                         * np.sum(np.log(r_hat_rotatedscore_test)))
 
         # For some benchmark thetas, save r for each phase-space point
         if t == settings.theta_benchmark_nottrained:
-            np.save(results_dir + '/r_nottrained_scoreregression' + filename_addition + '.npy', np.exp(tthat_test))
-            np.save(results_dir + '/r_nottrained_scoreregression_calibrated' + filename_addition + '.npy', r_hat_test)
+            np.save(results_dir + '/r_nottrained_scoreregression_scoretheta' + filename_addition + '.npy',
+                    r_hat_scoretheta_test)
+            np.save(results_dir + '/r_nottrained_scoreregression_score' + filename_addition + '.npy',
+                    r_hat_score_test)
+            np.save(results_dir + '/r_nottrained_scoreregression_rotatedscore' + filename_addition + '.npy',
+                    r_hat_rotatedscore_test)
 
         elif t == settings.theta_benchmark_trained:
-            np.save(results_dir + '/r_trained_scoreregression' + filename_addition + '.npy', np.exp(tthat_test))
-            np.save(results_dir + '/r_trained_scoreregression_calibrated' + filename_addition + '.npy', r_hat_test)
+            np.save(results_dir + '/r_trained_scoreregression_scoretheta' + filename_addition + '.npy',
+                    r_hat_scoretheta_test)
+            np.save(results_dir + '/r_trained_scoreregression_score' + filename_addition + '.npy',
+                    r_hat_score_test)
+            np.save(results_dir + '/r_trained_scoreregression_rotatedscore' + filename_addition + '.npy',
+                    r_hat_rotatedscore_test)
 
         # Neyman construction
         # Only evaluate certain combinations of thetas to save computation time
         if decide_toy_evaluation(settings.theta_observed, t):
             # Neyman construction: evaluate observed sample (raw)
-            tthat_neyman_observed = regr.predict(X_neyman_observed_transformed).dot(delta_theta)
+            that_neyman_observed = regr.predict(X_neyman_observed_transformed)
+            tthat_neyman_observed = that_neyman_observed.dot(delta_theta)
+            that_rotated_neyman_observed = that_neyman_observed.dot(rotation_matrix)
+
             llr_raw_neyman_observed = -2. * np.sum(tthat_neyman_observed.reshape((-1, settings.n_expected_events)),
                                                    axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_scoreregression_' + str(t) + filename_addition + '.npy',
                     llr_raw_neyman_observed)
 
-            # Neyman construction: evaluate observed sample (calibrated)
-            s_hat_neyman_observed = calibrator.predict(tthat_neyman_observed.reshape((-1,)))
+            # Neyman construction: evaluate observed sample (calibrated) -- score * theta calibration
+            s_hat_neyman_observed = calibrator_scoretheta.predict(tthat_neyman_observed.reshape((-1,)))
             r_hat_neyman_observed = r_from_s(s_hat_neyman_observed)
             r_hat_neyman_observed = r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
             llr_calibrated_neyman_observed = -2. * np.sum(np.log(r_hat_neyman_observed), axis=1)
             np.save(
-                neyman_dir + '/neyman_llr_observed_scoreregression_calibrated_' + str(t) + filename_addition + '.npy',
+                neyman_dir + '/neyman_llr_observed_scoreregression_scoretheta_' + str(t) + filename_addition + '.npy',
+                llr_calibrated_neyman_observed)
+
+            # Neyman construction: evaluate observed sample (calibrated) -- score calibration
+            s_hat_neyman_observed = calibrator_score.predict(that_neyman_observed.reshape((-1,)))
+            r_hat_neyman_observed = r_from_s(s_hat_neyman_observed)
+            r_hat_neyman_observed = r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
+            llr_calibrated_neyman_observed = -2. * np.sum(np.log(r_hat_neyman_observed), axis=1)
+            np.save(
+                neyman_dir + '/neyman_llr_observed_scoreregression_score_' + str(t) + filename_addition + '.npy',
+                llr_calibrated_neyman_observed)
+
+            # Neyman construction: evaluate observed sample (calibrated) -- rotated score claibration
+            s_hat_neyman_observed = calibrator_rotatedscore.predict(that_rotated_neyman_observed.reshape((-1,)))
+            r_hat_neyman_observed = r_from_s(s_hat_neyman_observed)
+            r_hat_neyman_observed = r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
+            llr_calibrated_neyman_observed = -2. * np.sum(np.log(r_hat_neyman_observed), axis=1)
+            np.save(
+                neyman_dir + '/neyman_llr_observed_scoreregression_rotatedscore_' + str(t) + filename_addition + '.npy',
                 llr_calibrated_neyman_observed)
 
         # Neyman construction: loop over distribution samples generated from different thetas
         llr_neyman_distributions = []
-        llr_neyman_distributions_calibrated = []
+        llr_neyman_distributions_scoretheta = []
+        llr_neyman_distributions_score = []
+        llr_neyman_distributions_rotatedscore = []
+
         for tt in range(settings.n_thetas):
 
             # Only evaluate certain combinations of thetas to save computation time
@@ -202,27 +271,55 @@ def score_regression_inference(options=''):
                 X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
             # Neyman construction: evaluate distribution sample (raw)
-            tthat_neyman_distribution = regr.predict(X_neyman_distribution_transformed).dot(delta_theta)
+            that_neyman_distribution = regr.predict(X_neyman_distribution_transformed)
+            tthat_neyman_distribution = that_neyman_distribution.dot(delta_theta)
+            that_rotated_neyman_distribution = that_neyman_distribution.dot(rotation_matrix)
+
             llr_neyman_distributions.append(
                 -2. * np.sum(tthat_neyman_distribution.reshape((-1, settings.n_expected_events)), axis=1))
 
-            # Neyman construction: evaluate distribution sample (calibrated)
-            s_hat_neyman_distribution = calibrator.predict(tthat_neyman_distribution.reshape((-1,)))
+            # Neyman construction: evaluate distribution sample (score * theta calibration)
+            s_hat_neyman_distribution = calibrator_scoretheta.predict(tthat_neyman_distribution.reshape((-1,)))
             r_hat_neyman_distribution = r_from_s(s_hat_neyman_distribution)
             r_hat_neyman_distribution = r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
-            llr_neyman_distributions_calibrated.append(-2. * np.sum(np.log(r_hat_neyman_distribution), axis=1))
+            llr_neyman_distributions_scoretheta.append(-2. * np.sum(np.log(r_hat_neyman_distribution), axis=1))
+
+            # Neyman construction: evaluate distribution sample (score calibration)
+            s_hat_neyman_distribution = calibrator_score.predict(that_neyman_distribution.reshape((-1,)))
+            r_hat_neyman_distribution = r_from_s(s_hat_neyman_distribution)
+            r_hat_neyman_distribution = r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
+            llr_neyman_distributions_score.append(-2. * np.sum(np.log(r_hat_neyman_distribution), axis=1))
+
+            # Neyman construction: evaluate distribution sample (rotated score calibration)
+            s_hat_neyman_distribution = calibrator_rotatedscore.predict(that_rotated_neyman_distribution.reshape((-1,)))
+            r_hat_neyman_distribution = r_from_s(s_hat_neyman_distribution)
+            r_hat_neyman_distribution = r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
+            llr_neyman_distributions_rotatedscore.append(-2. * np.sum(np.log(r_hat_neyman_distribution), axis=1))
 
         llr_neyman_distributions = np.asarray(llr_neyman_distributions)
-        llr_neyman_distributions_calibrated = np.asarray(llr_neyman_distributions_calibrated)
+        llr_neyman_distributions_scoretheta = np.asarray(llr_neyman_distributions_scoretheta)
+        llr_neyman_distributions_score = np.asarray(llr_neyman_distributions_score)
+        llr_neyman_distributions_rotatedscore = np.asarray(llr_neyman_distributions_rotatedscore)
+
         np.save(neyman_dir + '/neyman_llr_distribution_scoreregression_' + str(t) + filename_addition + '.npy',
                 llr_neyman_distributions)
         np.save(
-            neyman_dir + '/neyman_llr_distribution_scoreregression_calibrated_' + str(t) + filename_addition + '.npy',
-            llr_neyman_distributions_calibrated)
+            neyman_dir + '/neyman_llr_distribution_scoreregression_scoretheta_' + str(t) + filename_addition + '.npy',
+            llr_neyman_distributions_scoretheta)
+        np.save(
+            neyman_dir + '/neyman_llr_distribution_scoreregression_score_' + str(t) + filename_addition + '.npy',
+            llr_neyman_distributions_score)
+        np.save(
+            neyman_dir + '/neyman_llr_distribution_scoreregression_rotatedscore_' + str(t) + filename_addition + '.npy',
+            llr_neyman_distributions_rotatedscore)
 
     # Save expected LLR
     # expected_llr = np.asarray(expected_llr)
     expected_llr_scoretheta = np.asarray(expected_llr_scoretheta)
+    expected_llr_score = np.asarray(expected_llr_score)
+    expected_llr_rotatedscore = np.asarray(expected_llr_rotatedscore)
 
     # np.save(results_dir + '/llr_scoreregression' + filename_addition + '.npy', expected_llr)
-    np.save(results_dir + '/llr_scoreregression_calibrated' + filename_addition + '.npy', expected_llr_scoretheta)
+    np.save(results_dir + '/llr_scoreregression_scoretheta' + filename_addition + '.npy', expected_llr_scoretheta)
+    np.save(results_dir + '/llr_scoreregression_score' + filename_addition + '.npy', expected_llr_score)
+    np.save(results_dir + '/llr_scoreregression_rotatedscore' + filename_addition + '.npy', expected_llr_rotatedscore)
