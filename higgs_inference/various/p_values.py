@@ -172,7 +172,7 @@ def calculate_all_CL():
 
     logging.info('Starting p-value calculation')
 
-    calculate_CL('truth', 'truth')
+    # calculate_CL('truth', 'truth')
     # calculate_CL('localmodel', 'truth')
     
     # calculate_CL('afc', 'afc')
@@ -187,8 +187,8 @@ def calculate_all_CL():
     # calculate_CL('score_calibrated', 'parameterized')
     # calculate_CL('combined', 'parameterized')
     # calculate_CL('combined_calibrated', 'parameterized')
-    # calculate_CL('regression', 'parameterized')
-    # calculate_CL('combinedregression', 'parameterized')
+    calculate_CL('regression', 'parameterized')
+    calculate_CL('combinedregression', 'parameterized')
 
     # calculate_CL('scoreregression', 'score_regression')
     # calculate_CL('scoreregression_calibrated', 'score_regression')
