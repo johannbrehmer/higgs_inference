@@ -439,6 +439,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                     placeholder = np.empty(settings.n_neyman_distribution_experiments)
                     placeholder[:] = np.nan
                     llr_neyman_distributions.append(placeholder)
+
+                    logging.debug('%s, not calculated -> shape %s', tt, llr_neyman_distributions[-1].shape)
                     continue
 
                 # Neyman construction: load distribution sample
@@ -457,6 +459,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 r_neyman_distribution, _ = ratio.predict(X_thetas_neyman_distribution)
                 llr_neyman_distributions.append(
                     -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, settings.n_expected_events)), axis=1))
+
+                logging.debug('%s, calculated -> shape %s', tt, llr_neyman_distributions[-1].shape)
 
             llr_neyman_distributions = np.asarray(llr_neyman_distributions)
             np.save(neyman_dir + '/neyman_llr_distribution_' + algorithm + '_' + str(t) + filename_addition + '.npy',
