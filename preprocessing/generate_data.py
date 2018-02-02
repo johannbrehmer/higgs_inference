@@ -54,6 +54,8 @@ parser.add_argument("-x", "--roam", action="store_true",
                     help="Generate roaming evaluation sample")
 parser.add_argument("--alternativedenom", action="store_true",
                     help="Use alternative denominator theta")
+parser.add_argument("--dry", action="store_true",
+                    help="Don't save results")
 
 args = parser.parse_args()
 
@@ -67,6 +69,7 @@ logging.info('  Likelihood ratio eval:   %s', args.test)
 logging.info('  Neyman construction:     %s', args.neyman)
 logging.info('  Roaming:                 %s', args.roam)
 logging.info('Options:')
+logging.info('  Dry run:                 %s', args.dry)
 if args.alternativedenom:
     logging.info('  Denominator:             alternative')
 else:
@@ -587,15 +590,27 @@ if args.test:
         # filter out bad events
         cut = np.all((scores[:, :, 0] ** 2 + scores[:, :, 1] ** 2 < 2500.) & (np.log(r) ** 2 < 10000.), axis=0)
 
+        # Some immediate truth-level testing
+        expected_score = np.sum(scores[0,:,:]) / scores.shape[1]
+        logging.info('Expected score without sanitization: %s', expected_score)
+        expected_score = np.sum(scores[0,cut,:]) / np.sum(cut)
+        logging.info('Expected score with sanitization:    %s', expected_score)
+
+        mle = np.nanargmax(np.sum(np.log(r), axis=1))
+        logging.info('MLE theta without sanitization: %s (%s)', mle, thetas[mle])
+        mle = np.nanargmax(np.sum(np.log(r[:,cut]), axis=1))
+        logging.info('MLE theta without sanitization: %s (%s)', mle, thetas[mle])
+
         return X[cut], scores[:, cut, :], r[:, cut], p1[cut]
 
 
     X, scores, r, p1 = generate_data_test(settings.theta_observed, theta1)
 
-    np.save(settings.unweighted_events_dir + '/X_test' + filename_addition + '.npy', X)
-    np.save(settings.unweighted_events_dir + '/scores_test' + filename_addition + '.npy', scores)
-    np.save(settings.unweighted_events_dir + '/r_test' + filename_addition + '.npy', r)
-    np.save(settings.unweighted_events_dir + '/p1_test' + filename_addition + '.npy', p1)
+    if not args.dry:
+        np.save(settings.unweighted_events_dir + '/X_test' + filename_addition + '.npy', X)
+        np.save(settings.unweighted_events_dir + '/scores_test' + filename_addition + '.npy', scores)
+        np.save(settings.unweighted_events_dir + '/r_test' + filename_addition + '.npy', r)
+        np.save(settings.unweighted_events_dir + '/p1_test' + filename_addition + '.npy', p1)
 
 ################################################################################
 # Neyman construction

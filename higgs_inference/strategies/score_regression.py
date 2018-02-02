@@ -143,8 +143,19 @@ def score_regression_inference(options=''):
         w_calibration = np.hstack((weights_calibration[t, ::], weights_calibration[theta1, ::]))
 
         # 1d density estimation with score * theta
-        calibrator_scoretheta = HistogramCalibrator(bins=500, independent_binning=False, variable_width=False,
-                                                    interpolation='quadratic')
+        _bins = [np.concatenate(([-100000.,-100.,-70.,-50.,-40.,-30.,-25.,-22.],
+                                      np.linspace(-20.,-11.,10),
+                                      np.linspace(-10.,-5.5,10),
+                                      np.linspace(-5.,-2.2,15),
+                                      np.linspace(-2.,-1.1,10),
+                                      np.linspace(-1.,1.,41),
+                                      np.linspace(1.1,2.,10),
+                                      np.linspace(2.2,5.,15),
+                                      np.linspace(5.5,10.,10),
+                                      np.linspace(11.,20.,10),
+                                      [22.,25.,30.,40.,50.,70.,100.,100000.]))]
+
+        calibrator_scoretheta = HistogramCalibrator(bins=_bins, independent_binning=False, variable_width=False)
         calibrator_scoretheta.fit(_tthat_calibration, y_calibration, sample_weight=w_calibration)
 
         # 2d density estimation with score (fixed binning)
