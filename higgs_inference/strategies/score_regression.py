@@ -115,7 +115,7 @@ def score_regression_inference(options=''):
     that_test = regr.predict(X_test_transformed)
 
     logging.info('Starting density estimation')
-    # expected_llr = []
+    expected_llr = []
     expected_llr_scoretheta = []
     expected_llr_score = []
     expected_llr_rotatedscore = []
@@ -193,7 +193,7 @@ def score_regression_inference(options=''):
         # Evaluation
         tthat_test = that_test.dot(delta_theta)
         that_rotated_test = that_test.dot(rotation_matrix)
-        # expected_llr.append(-2. * settings.n_expected_events / n_events_test * np.sum(tthat_test))
+        expected_llr.append(-2. * settings.n_expected_events / n_events_test * np.sum(tthat_test))
 
         # Calibration
         r_hat_scoretheta_test = r_from_s(calibrator_scoretheta.predict(tthat_test.reshape((-1,))))
@@ -209,6 +209,8 @@ def score_regression_inference(options=''):
 
         # For some benchmark thetas, save r for each phase-space point
         if t == settings.theta_benchmark_nottrained:
+            np.save(results_dir + '/r_nottrained_scoreregression' + filename_addition + '.npy',
+                    tthat_test)
             np.save(results_dir + '/r_nottrained_scoreregression_scoretheta' + filename_addition + '.npy',
                     r_hat_scoretheta_test)
             np.save(results_dir + '/r_nottrained_scoreregression_score' + filename_addition + '.npy',
@@ -217,6 +219,8 @@ def score_regression_inference(options=''):
                     r_hat_rotatedscore_test)
 
         elif t == settings.theta_benchmark_trained:
+            np.save(results_dir + '/r_trained_scoreregression' + filename_addition + '.npy',
+                    tthat_test)
             np.save(results_dir + '/r_trained_scoreregression_scoretheta' + filename_addition + '.npy',
                     r_hat_scoretheta_test)
             np.save(results_dir + '/r_trained_scoreregression_score' + filename_addition + '.npy',
@@ -329,12 +333,12 @@ def score_regression_inference(options=''):
             llr_neyman_distributions_rotatedscore)
 
     # Save expected LLR
-    # expected_llr = np.asarray(expected_llr)
+    expected_llr = np.asarray(expected_llr)
     expected_llr_scoretheta = np.asarray(expected_llr_scoretheta)
     expected_llr_score = np.asarray(expected_llr_score)
     expected_llr_rotatedscore = np.asarray(expected_llr_rotatedscore)
 
-    # np.save(results_dir + '/llr_scoreregression' + filename_addition + '.npy', expected_llr)
+    np.save(results_dir + '/llr_scoreregression' + filename_addition + '.npy', expected_llr)
     np.save(results_dir + '/llr_scoreregression_scoretheta' + filename_addition + '.npy', expected_llr_scoretheta)
     np.save(results_dir + '/llr_scoreregression_score' + filename_addition + '.npy', expected_llr_score)
     np.save(results_dir + '/llr_scoreregression_rotatedscore' + filename_addition + '.npy', expected_llr_rotatedscore)
