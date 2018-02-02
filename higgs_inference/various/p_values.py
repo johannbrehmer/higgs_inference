@@ -20,7 +20,12 @@ def calculate_median_p_value(llr_distribution, llr_observed):
     p_values_right = 1. - np.searchsorted(distribution, llr_observed, side='right').astype('float') / len(distribution)
     p_values = 0.5 * (p_values_left + p_values_right)
 
-    return np.median(p_values)
+    # Some things Kyle suggested
+    q_cut = (distribution[474] + distribution[475]) / 2
+    q_cut_uncertainty = (distribution[475] - distribution[474]) / 2
+    q_median = np.median(llr_observed)
+
+    return np.median(p_values), q_cut, q_cut_uncertainty, q_median
 
 
 def subtract_mle(filename, folder, theta_sm=0):
@@ -169,14 +174,23 @@ def calculate_CL(filename, folder):
     # Calculate expected p values
     p_values_mle = np.zeros(n_thetas)
     #p_values_true = np.zeros(n_thetas)
+
+    q_cut_values_mle = np.zeros(n_thetas)
+    q_median_values_mle = np.zeros(n_thetas)
+    q_cut_uncertainties_mle = np.zeros(n_thetas)
+
     for t in range(n_thetas):
-        p_values_mle[t] = calculate_median_p_value(llr_compared_to_mle_distributions[t, :],
-                                                   llr_compared_to_mle_observeds[t, :])
+        p_values_mle[t], q_cut_values_mle[t], q_cut_uncertainties_mle[t], q_median_values_mle[t] = calculate_median_p_value(llr_compared_to_mle_distributions[t, :],
+                                                    llr_compared_to_mle_observeds[t, :])
         #p_values_true[t] = calculate_median_p_value(llr_compared_to_true_distributions[t, :],
         #                                            llr_compared_to_true_observeds[t, :])
 
     np.save(result_dir + '/p_values_' + filename + '.npy', p_values_mle)
     #np.save(result_dir + '/p_values_ratio_vs_true_' + filename + '.npy', p_values_true)
+
+    np.save(result_dir + '/neyman_qcut_' + filename + '.npy', q_cut_values_mle)
+    np.save(result_dir + '/neyman_qcut_uncertainties_' + filename + '.npy', q_cut_uncertainties_mle)
+    np.save(result_dir + '/neyman_qmedian_' + filename + '.npy', q_median_values_mle)
 
 
 def calculate_all_CL():
@@ -184,7 +198,7 @@ def calculate_all_CL():
 
     logging.info('Starting p-value calculation')
 
-    # calculate_CL('truth', 'truth')
+    calculate_CL('truth', 'truth')
     # calculate_CL('localmodel', 'truth')
     
     # calculate_CL('afc', 'afc')
@@ -199,8 +213,8 @@ def calculate_all_CL():
     # calculate_CL('score_calibrated', 'parameterized')
     # calculate_CL('combined', 'parameterized')
     # calculate_CL('combined_calibrated', 'parameterized')
-    calculate_CL('regression', 'parameterized')
-    calculate_CL('combinedregression', 'parameterized')
+    # calculate_CL('regression', 'parameterized')
+    # calculate_CL('combinedregression', 'parameterized')
 
     # calculate_CL('scoreregression', 'score_regression')
     # calculate_CL('scoreregression_calibrated', 'score_regression')  # old name convention, deprecated
