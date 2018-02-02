@@ -40,6 +40,7 @@ def subtract_mle(filename, folder, theta_sm=0):
 
     files_found = 0
     files_not_found = 0
+    files_wrong_shape = 0
 
     for t in range(n_thetas):
         try:
@@ -48,22 +49,33 @@ def subtract_mle(filename, folder, theta_sm=0):
             llr_distributions.append(entry)
             files_found += 1
 
-        except (IOError, AssertionError):
-            logging.debug("Didn't find file %s", neyman_dir + '/neyman_llr_distribution_' + filename + '_' + str(t) + '.npy')
+        except IOError as err:
+            logging.debug("Error loading file: %s", err)
+            #logging.debug("Didn't find file %s", neyman_dir + '/neyman_llr_distribution_' + filename + '_' + str(t) + '.npy')
 
             placeholder = np.empty((settings.n_thetas, settings.n_neyman_distribution_experiments))
             placeholder[:,:] = np.nan
             llr_distributions.append(placeholder)
 
             files_not_found += 1
+        
+        except AssertionError as err:
+            logging.warning("File %s has wrong shape %s", neyman_dir + '/neyman_llr_distribution_' + filename + '_' + str(t) + '.npy', entry.shape)
+
+            placeholder = np.empty((settings.n_thetas, settings.n_neyman_distribution_experiments))
+            placeholder[:,:] = np.nan
+            llr_distributions.append(placeholder)
+
+            files_wrong_shape += 1
 
         try:
             llr_observeds.append(
                 np.load(neyman_dir + '/neyman_llr_observed_' + filename + '_' + str(t) + '.npy'))
             files_found += 1
 
-        except IOError:
-            logging.debug("Didn't find file %s", neyman_dir + '/neyman_llr_observed_' + filename + '_' + str(t) + '.npy')
+        except IOError as err:
+            logging.debug("Error loading file: %s", err)
+            # logging.debug("Didn't find file %s", neyman_dir + '/neyman_llr_observed_' + filename + '_' + str(t) + '.npy')
 
             placeholder = np.empty(settings.n_neyman_observed_experiments)
             placeholder[:] = np.nan
@@ -71,7 +83,7 @@ def subtract_mle(filename, folder, theta_sm=0):
 
             files_not_found += 1
 
-    logging.debug("Found %s files, didn't find %s files", files_found, files_not_found)
+    logging.debug("Found %s files, didn't find %s files, found %s files with wrong shape", files_found, files_not_found, files_wrong_shape)
 
     llr_distributions = np.asarray(llr_distributions)  # Shape: (n_thetas_eval, n_thetas_assumed_true, n_experiments)
     llr_observeds = np.asarray(llr_observeds)  # Shape: (n_thetas_eval, n_experiments)
@@ -191,4 +203,8 @@ def calculate_all_CL():
     calculate_CL('combinedregression', 'parameterized')
 
     # calculate_CL('scoreregression', 'score_regression')
-    # calculate_CL('scoreregression_calibrated', 'score_regression')
+    # calculate_CL('scoreregression_calibrated', 'score_regression')  # old name convention, deprecated
+    # calculate_CL('scoreregression_scoretheta', 'score_regression')
+    # calculate_CL('scoreregression_score', 'score_regression')
+    # calculate_CL('scoreregression_rotatedscore', 'score_regression')
+    
