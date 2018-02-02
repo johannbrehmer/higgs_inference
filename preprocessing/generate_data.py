@@ -588,12 +588,13 @@ if args.test:
         p1 = np.array(weights_test[theta1][indices])
 
         # filter out bad events
-        cut = np.all((scores[:, :, 0] ** 2 + scores[:, :, 1] ** 2 < 2500.) & (np.log(r) ** 2 < 10000.), axis=0)
+        cut = (scores[theta_observed, :, 0] ** 2 + scores[theta_observed, :, 1] ** 2 < 2500.) & (np.log(r[theta_observed, :]) ** 2 < 10000.)
 
         # Some immediate truth-level testing
-        expected_score = np.sum(scores[0,:,:]) / scores.shape[1]
+        logging.info('Cut efficiency: %s / %s events survive', np.sum(cut), cut.shape[0])
+        expected_score = np.sum(scores[0,:,:], axis=1) / scores.shape[1]
         logging.info('Expected score without sanitization: %s', expected_score)
-        expected_score = np.sum(scores[0,cut,:]) / np.sum(cut)
+        expected_score = np.sum(scores[0,cut,:], axis=1) / np.sum(cut)
         logging.info('Expected score with sanitization:    %s', expected_score)
 
         mle = np.nanargmax(np.sum(np.log(r), axis=1))
