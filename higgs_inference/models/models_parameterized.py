@@ -4,7 +4,7 @@
 
 from keras.models import Model
 from keras.layers import Input, Dense, Lambda, Concatenate, Multiply, Reshape, ActivityRegularization, \
-    Activation
+    Activation, Add
 from keras import optimizers
 import keras.backend as K
 
@@ -61,6 +61,7 @@ def make_regressor_morphingaware(n_hidden_layers=2,
                                  hidden_layer_size=100,
                                  activation='tanh',
                                  dropout_prob=0.0,
+                                 factor_out_sm=True,
                                  epsilon=1.e-4):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
@@ -71,7 +72,19 @@ def make_regressor_morphingaware(n_hidden_layers=2,
     wtilde_layer = generate_wtilde_layer(theta_layer)
     wi_layer = generate_wi_layer(wtilde_layer)
 
-    # Ratio estimators for each component
+    # Log ratio estimator for SM
+    if factor_out_sm:
+        hidden_layer = Dense(hidden_layer_size, activation=activation)(input_layer)
+        if n_hidden_layers > 1:
+            hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                                hidden_layer_size=hidden_layer_size,
+                                                activation=activation,
+                                                dropout_prob=dropout_prob)
+            hidden_layer = hidden_layer_(hidden_layer)
+        log_r0_hat_layer = Dense(1, activation='linear')(hidden_layer)
+        r0_hat_layer = Lambda(lambda x: K.exp(x))(log_r0_hat_layer)
+
+    # Log ratio estimators for each component
     ri_hat_layers = []
     for i in range(settings.n_morphing_samples):
         hidden_layer = Dense(hidden_layer_size, activation=activation)(x_layer)
@@ -81,8 +94,16 @@ def make_regressor_morphingaware(n_hidden_layers=2,
                                                 activation=activation,
                                                 dropout_prob=dropout_prob)
             hidden_layer = hidden_layer_(hidden_layer)
-        si_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
-        ri_hat_layers.append(Reshape((1,))(Lambda(lambda x: (1. - x) / (x + epsilon))(si_hat_layer)))
+
+        if factor_out_sm:
+            delta_ri_hat_layer = Dense(1, activation='linear')(hidden_layer)
+            ri_hat_layer = Add()(delta_ri_hat_layer, r0_hat_layer)
+
+        else:
+            log_ri_hat_layer = Dense(1, activation='linear')(hidden_layer)
+            ri_hat_layer = Lambda(lambda x: K.exp(x))(log_ri_hat_layer)
+
+        ri_hat_layers.append(Reshape((1,))(ri_hat_layer))
     ri_hat_layer = Concatenate()(ri_hat_layers)
 
     # Combine, clip, transform to \hat{s}
@@ -100,7 +121,6 @@ def make_regressor_morphingaware(n_hidden_layers=2,
     score_layer = Lambda(lambda x: x[:, -settings.n_params:], output_shape=(settings.n_params,))(gradient_layer)
 
     # Combine outputs
-    # output_layer = Concatenate()([log_r_hat_layer, score_layer])
     output_layer = Concatenate()([s_hat_layer, log_r_hat_layer, score_layer, wi_layer, ri_hat_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 

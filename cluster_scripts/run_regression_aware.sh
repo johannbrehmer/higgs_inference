@@ -23,5 +23,5 @@ python -u experiments.py regression --aware
 # python -u experiments.py regression --aware -o deep
 
 # python -u experiments.py regression --aware --training basis -o shallow
-# python -u experiments.py regression --aware --training basis
+python -u experiments.py regression --aware --training basis
 # python -u experiments.py regression --aware --training basis -o deep
