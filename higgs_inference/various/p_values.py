@@ -16,6 +16,13 @@ def calculate_median_p_value(llr_distribution, llr_observed):
 
     distribution = np.sort(llr_distribution.flatten())
 
+    # Check for NaNs
+    nans_distribution = np.sum(np.isnan(distribution))
+    nans_observed = np.sum(np.isnan(llr_observed))
+    if nans_distribution + nans_observed > 0:
+        logging.warning('Found %s NaNs in null hypothesis and %s NaNs in alternate hypothesis', nans_distribution,
+                        nans_observed)
+
     p_values_left = 1. - np.searchsorted(distribution, llr_observed, side='left').astype('float') / len(distribution)
     p_values_right = 1. - np.searchsorted(distribution, llr_observed, side='right').astype('float') / len(distribution)
     p_values = 0.5 * (p_values_left + p_values_right)

@@ -5,6 +5,9 @@
 from __future__ import absolute_import, division, print_function
 
 import numpy as np
+from scipy.interpolate import LinearNDInterpolator, CloughTocher2DInterpolator
+from sklearn.gaussian_process import GaussianProcessRegressor
+from sklearn.gaussian_process.kernels import ConstantKernel as C, Matern
 
 from higgs_inference import settings
 
@@ -64,3 +67,54 @@ def decide_toy_evaluation(theta_hypothesis, theta_evaluation, distance_threshold
     delta_theta = np.linalg.norm(settings.thetas[theta_hypothesis] - settings.thetas[theta_evaluation])
 
     return (delta_theta <= distance_threshold)
+
+
+
+################################################################################
+# Interpolation
+################################################################################
+
+def interpolate(thetas, z_thetas,
+                xx, yy,
+                method='linear',
+                z_uncertainties_thetas=None,
+                subtract_min=False):
+
+    if method=='cubic':
+
+        interpolator = CloughTocher2DInterpolator(thetas[:], z_thetas)
+
+        zz = interpolator(np.dstack((xx.flatten(), yy.flatten())))
+        zi = zz.reshape(xx.shape)
+
+    elif method=='gp':
+
+        if z_uncertainties_thetas is not None:
+            gp = GaussianProcessRegressor(normalize_y=True,
+                                          kernel=C(1.0) * Matern(1.0,nu=0.5),
+                                          n_restarts_optimizer=10, alpha=z_uncertainties_thetas)
+        else:
+            gp = GaussianProcessRegressor(normalize_y=True,
+                                          kernel=C(1.0) * Matern(1.0,nu=0.5),
+                                          # kernel=C(1.0, (1.e-9, 1.e9)) + C(1.0, (1.e-9, 1.e9)) * Matern(1.0, nu=0.5),
+                                          n_restarts_optimizer=10, alpha=1.e-6)
+
+        gp.fit(thetas[:], z_thetas[:])
+
+        zz, _ = gp.predict(np.c_[xx.ravel(), yy.ravel()], return_std=True)
+        zi = zz.reshape(xx.shape)
+
+    elif method=='linear':
+        interpolator = LinearNDInterpolator(thetas[:], z_thetas)
+        zz = interpolator(np.dstack((xx.flatten(), yy.flatten())))
+        zi = zz.reshape(xx.shape)
+
+    else:
+        raise ValueError
+
+    mle = np.unravel_index(zi.argmin(), zi.shape)
+
+    if subtract_min:
+        zi -= zi[mle]
+
+    return zi, mle
