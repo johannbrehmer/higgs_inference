@@ -97,7 +97,7 @@ def make_regressor_morphingaware(n_hidden_layers=2,
 
         if factor_out_sm:
             delta_ri_hat_layer = Dense(1, activation='linear')(hidden_layer)
-            ri_hat_layer = Add()(delta_ri_hat_layer, r0_hat_layer)
+            ri_hat_layer = Add()([delta_ri_hat_layer, r0_hat_layer])
 
         else:
             log_ri_hat_layer = Dense(1, activation='linear')(hidden_layer)
