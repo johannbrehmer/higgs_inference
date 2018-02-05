@@ -38,3 +38,5 @@ Free memory: 22.21GiB
 2018-02-05 15:57:43.791733: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
 2018-02-05 15:57:43.791740: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
 2018-02-05 15:57:43.791749: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:04:00.0)
+1370s - loss: 1.5255 - loss_function_carl: 0.8548 - loss_function_carl_kl: 5.7458 - loss_function_score: 1.7714 - val_loss: 0.0284 - val_loss_function_carl: 0.9800 - val_loss_function_carl_kl: 3.3484 - val_loss_function_score: 2.1878
+Epoch 2/20

@@ -1,0 +1,59 @@
+Using TensorFlow backend.
+05.02.2018 16:23:42 INFO    Hi! How are you today?
+05.02.2018 16:23:42 INFO    Startup options:
+05.02.2018 16:23:42 INFO      Algorithm:                     regression
+05.02.2018 16:23:42 INFO      Point by point:                False
+05.02.2018 16:23:42 INFO      Morphing-aware mode:           True
+05.02.2018 16:23:42 INFO      Training sample:               baseline
+05.02.2018 16:23:42 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+05.02.2018 16:23:42 INFO      Neyman construction toys:      False
+05.02.2018 16:23:42 INFO      Other options:                 
+05.02.2018 16:23:42 INFO      Base directory:                /home/jb6504/higgs_inference
+05.02.2018 16:23:42 INFO      ML-based strategies available: True
+05.02.2018 16:23:42 INFO    Starting parameterized inference
+05.02.2018 16:23:42 INFO    Main settings:
+05.02.2018 16:23:42 INFO      Algorithm:                regression
+05.02.2018 16:23:42 INFO      Morphing-aware:           True
+05.02.2018 16:23:42 INFO      Training sample:          baseline
+05.02.2018 16:23:42 INFO    Options:
+05.02.2018 16:23:42 INFO      Number of epochs:         20
+05.02.2018 16:23:42 INFO      Number of hidden layers:  2
+05.02.2018 16:23:42 INFO      alpha carl:               0.35
+05.02.2018 16:23:42 INFO      alpha regression:         0.011
+05.02.2018 16:23:42 INFO      Debug mode:               False
+05.02.2018 16:24:10 INFO    Starting training
+Traceback (most recent call last):
+  File "experiments.py", line 126, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 234, in parameterized_inference
+    patience=settings.early_stopping_patience)] if early_stopping else None))
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 138, in fit
+    self.model = self.build_fn(**self.filter_sk_params(self.build_fn))
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 211, in <lambda>
+    regr = KerasRegressor(lambda: make_regressor_morphingaware(n_hidden_layers=n_hidden_layers),
+  File "/home/jb6504/higgs_inference/higgs_inference/models/models_parameterized.py", line 100, in make_regressor_morphingaware
+    ri_hat_layer = Add()(delta_ri_hat_layer, r0_hat_layer)
+TypeError: __call__() takes exactly 2 arguments (3 given)
+Using TensorFlow backend.
+05.02.2018 16:24:12 INFO    Hi! How are you today?
+05.02.2018 16:24:12 INFO    Startup options:
+05.02.2018 16:24:12 INFO      Algorithm:                     regression
+05.02.2018 16:24:12 INFO      Point by point:                False
+05.02.2018 16:24:12 INFO      Morphing-aware mode:           True
+05.02.2018 16:24:12 INFO      Training sample:               basis
+05.02.2018 16:24:12 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+05.02.2018 16:24:12 INFO      Neyman construction toys:      False
+05.02.2018 16:24:12 INFO      Other options:                 
+05.02.2018 16:24:12 INFO      Base directory:                /home/jb6504/higgs_inference
+05.02.2018 16:24:12 INFO      ML-based strategies available: True
+05.02.2018 16:24:12 INFO    Starting parameterized inference
+05.02.2018 16:24:12 INFO    Main settings:
+05.02.2018 16:24:12 INFO      Algorithm:                regression
+05.02.2018 16:24:12 INFO      Morphing-aware:           True
+05.02.2018 16:24:12 INFO      Training sample:          basis
+05.02.2018 16:24:12 INFO    Options:
+05.02.2018 16:24:12 INFO      Number of epochs:         20
+05.02.2018 16:24:12 INFO      Number of hidden layers:  2
+05.02.2018 16:24:12 INFO      alpha carl:               0.35
+05.02.2018 16:24:12 INFO      alpha regression:         0.011
+05.02.2018 16:24:12 INFO      Debug mode:               False
