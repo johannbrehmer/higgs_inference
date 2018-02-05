@@ -1,120 +1,40 @@
 Using TensorFlow backend.
-02.02.2018 15:45:17 INFO    Hi! How are you today?
-02.02.2018 15:45:17 INFO    Startup options:
-02.02.2018 15:45:17 INFO      Algorithm:                     combinedregression
-02.02.2018 15:45:17 INFO      Point by point:                False
-02.02.2018 15:45:17 INFO      Morphing-aware mode:           False
-02.02.2018 15:45:17 INFO      Training sample:               baseline
-02.02.2018 15:45:17 INFO      Other options:                 
-02.02.2018 15:45:17 INFO      Base directory:                /home/jb6504/higgs_inference
-02.02.2018 15:45:17 INFO      ML-based strategies available: True
-02.02.2018 15:45:17 INFO    Starting parameterized inference
-02.02.2018 15:45:17 INFO    Main settings:
-02.02.2018 15:45:17 INFO      Algorithm:                combinedregression
-02.02.2018 15:45:17 INFO      Morphing-aware:           False
-02.02.2018 15:45:17 INFO      Training sample:          baseline
-02.02.2018 15:45:17 INFO    Options:
-02.02.2018 15:45:17 INFO      Number of epochs:         20
-02.02.2018 15:45:17 INFO      Number of hidden layers:  2
-02.02.2018 15:45:17 INFO      alpha carl:               0.35
-02.02.2018 15:45:17 INFO      alpha regression:         0.011
-02.02.2018 15:45:17 INFO      Debug mode:               False
-02.02.2018 15:45:47 INFO    Starting training
+05.02.2018 15:57:17 INFO    Hi! How are you today?
+05.02.2018 15:57:17 INFO    Startup options:
+05.02.2018 15:57:17 INFO      Algorithm:                     combinedregression
+05.02.2018 15:57:17 INFO      Point by point:                False
+05.02.2018 15:57:17 INFO      Morphing-aware mode:           False
+05.02.2018 15:57:17 INFO      Training sample:               baseline
+05.02.2018 15:57:17 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+05.02.2018 15:57:17 INFO      Neyman construction toys:      False
+05.02.2018 15:57:17 INFO      Other options:                 
+05.02.2018 15:57:17 INFO      Base directory:                /home/jb6504/higgs_inference
+05.02.2018 15:57:17 INFO      ML-based strategies available: True
+05.02.2018 15:57:17 INFO    Starting parameterized inference
+05.02.2018 15:57:17 INFO    Main settings:
+05.02.2018 15:57:17 INFO      Algorithm:                combinedregression
+05.02.2018 15:57:17 INFO      Morphing-aware:           False
+05.02.2018 15:57:17 INFO      Training sample:          baseline
+05.02.2018 15:57:17 INFO    Options:
+05.02.2018 15:57:17 INFO      Number of epochs:         20
+05.02.2018 15:57:17 INFO      Number of hidden layers:  2
+05.02.2018 15:57:17 INFO      alpha carl:               0.35
+05.02.2018 15:57:17 INFO      alpha regression:         0.011
+05.02.2018 15:57:17 INFO      Debug mode:               False
+05.02.2018 15:57:42 INFO    Starting training
 Train on 8995410 samples, validate on 999490 samples
 Epoch 1/20
-2018-02-02 15:45:48.513883: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-02 15:45:48.514290: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-02 15:45:48.514299: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-02 15:45:48.514303: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-02 15:45:48.514308: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-02 15:45:48.812023: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
-name: Tesla K80
-major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+2018-02-05 15:57:43.153728: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-05 15:57:43.154168: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-05 15:57:43.154177: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-05 15:57:43.154181: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-05 15:57:43.154184: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-05 15:57:43.668989: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
 pciBusID 0000:84:00.0
-Total memory: 11.17GiB
-Free memory: 11.10GiB
-2018-02-02 15:45:48.812060: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-02-02 15:45:48.812067: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-02-02 15:45:48.812076: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:84:00.0)
-1658s - loss: 0.0429 - loss_function_regression: 0.0305 - loss_function_score: 1.1246 - val_loss: 0.0261 - val_loss_function_regression: 0.0232 - val_loss_function_score: 0.2643
-Epoch 2/20
-1660s - loss: 0.0269 - loss_function_regression: 0.0169 - loss_function_score: 0.9077 - val_loss: 0.0201 - val_loss_function_regression: 0.0174 - val_loss_function_score: 0.2428
-Epoch 3/20
-1661s - loss: 0.0254 - loss_function_regression: 0.0158 - loss_function_score: 0.8761 - val_loss: 0.0189 - val_loss_function_regression: 0.0162 - val_loss_function_score: 0.2465
-Epoch 4/20
-1660s - loss: 0.0247 - loss_function_regression: 0.0152 - loss_function_score: 0.8634 - val_loss: 0.0203 - val_loss_function_regression: 0.0176 - val_loss_function_score: 0.2512
-Epoch 5/20
-1662s - loss: 0.0244 - loss_function_regression: 0.0150 - loss_function_score: 0.8571 - val_loss: 0.0168 - val_loss_function_regression: 0.0140 - val_loss_function_score: 0.2489
-Epoch 6/20
-1661s - loss: 0.0243 - loss_function_regression: 0.0149 - loss_function_score: 0.8514 - val_loss: 0.0197 - val_loss_function_regression: 0.0168 - val_loss_function_score: 0.2687
-Epoch 7/20
-1661s - loss: 0.0242 - loss_function_regression: 0.0148 - loss_function_score: 0.8503 - val_loss: 0.0198 - val_loss_function_regression: 0.0167 - val_loss_function_score: 0.2758
-Epoch 8/20
-1662s - loss: 0.0241 - loss_function_regression: 0.0147 - loss_function_score: 0.8529 - val_loss: 0.0208 - val_loss_function_regression: 0.0180 - val_loss_function_score: 0.2512
-Epoch 9/20
-1662s - loss: 0.0242 - loss_function_regression: 0.0148 - loss_function_score: 0.8581 - val_loss: 0.0201 - val_loss_function_regression: 0.0171 - val_loss_function_score: 0.2791
-Epoch 00008: early stopping
-02.02.2018 19:54:59 INFO    Starting evaluation
-Traceback (most recent call last):
-  File "experiments.py", line 113, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 310, in parameterized_inference
-    llr_neyman_distributions = np.asarray(llr_neyman_distributions)[:, 0]
-IndexError: too many indices for array
-Using TensorFlow backend.
-02.02.2018 20:04:03 INFO    Hi! How are you today?
-02.02.2018 20:04:03 INFO    Startup options:
-02.02.2018 20:04:03 INFO      Algorithm:                     combinedregression
-02.02.2018 20:04:03 INFO      Point by point:                False
-02.02.2018 20:04:03 INFO      Morphing-aware mode:           False
-02.02.2018 20:04:03 INFO      Training sample:               random
-02.02.2018 20:04:03 INFO      Other options:                 
-02.02.2018 20:04:03 INFO      Base directory:                /home/jb6504/higgs_inference
-02.02.2018 20:04:03 INFO      ML-based strategies available: True
-02.02.2018 20:04:03 INFO    Starting parameterized inference
-02.02.2018 20:04:03 INFO    Main settings:
-02.02.2018 20:04:03 INFO      Algorithm:                combinedregression
-02.02.2018 20:04:03 INFO      Morphing-aware:           False
-02.02.2018 20:04:03 INFO      Training sample:          random
-02.02.2018 20:04:03 INFO    Options:
-02.02.2018 20:04:03 INFO      Number of epochs:         20
-02.02.2018 20:04:03 INFO      Number of hidden layers:  2
-02.02.2018 20:04:03 INFO      alpha carl:               0.35
-02.02.2018 20:04:03 INFO      alpha regression:         0.011
-02.02.2018 20:04:03 INFO      Debug mode:               False
-02.02.2018 20:04:31 INFO    Starting training
-Train on 8996627 samples, validate on 999626 samples
-Epoch 1/20
-2018-02-02 20:04:32.708494: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-02 20:04:32.708957: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-02 20:04:32.708968: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-02 20:04:32.708972: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-02 20:04:32.708976: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-02 20:04:33.011048: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
-name: Tesla K80
-major: 3 minor: 7 memoryClockRate (GHz) 0.8235
-pciBusID 0000:84:00.0
-Total memory: 11.17GiB
-Free memory: 11.10GiB
-2018-02-02 20:04:33.011086: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-02-02 20:04:33.011092: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-02-02 20:04:33.011102: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:84:00.0)
-1640s - loss: 0.0466 - loss_function_regression: 0.0371 - loss_function_score: 0.8673 - val_loss: 0.0343 - val_loss_function_regression: 0.0249 - val_loss_function_score: 0.8578
-Epoch 2/20
-1640s - loss: 0.0338 - loss_function_regression: 0.0234 - loss_function_score: 0.9502 - val_loss: 0.0334 - val_loss_function_regression: 0.0235 - val_loss_function_score: 0.8991
-Epoch 3/20
-1642s - loss: 0.0331 - loss_function_regression: 0.0224 - loss_function_score: 0.9742 - val_loss: 0.0335 - val_loss_function_regression: 0.0230 - val_loss_function_score: 0.9578
-Epoch 4/20
-1643s - loss: 0.0331 - loss_function_regression: 0.0223 - loss_function_score: 0.9839 - val_loss: 0.0336 - val_loss_function_regression: 0.0230 - val_loss_function_score: 0.9573
-Epoch 5/20
-1643s - loss: 0.0331 - loss_function_regression: 0.0222 - loss_function_score: 0.9930 - val_loss: 0.0335 - val_loss_function_regression: 0.0223 - val_loss_function_score: 1.0157
-Epoch 6/20
-1644s - loss: 0.0331 - loss_function_regression: 0.0222 - loss_function_score: 0.9991 - val_loss: 0.0344 - val_loss_function_regression: 0.0236 - val_loss_function_score: 0.9791
-Epoch 00005: early stopping
-02.02.2018 22:48:46 INFO    Starting evaluation
-Traceback (most recent call last):
-  File "experiments.py", line 113, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 310, in parameterized_inference
-    llr_neyman_distributions = np.asarray(llr_neyman_distributions)[:, 0]
-IndexError: too many indices for array
+Total memory: 22.38GiB
+Free memory: 22.21GiB
+2018-02-05 15:57:43.669050: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-05 15:57:43.669056: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-05 15:57:43.669066: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:84:00.0)

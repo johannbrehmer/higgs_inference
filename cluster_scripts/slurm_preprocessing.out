@@ -1,31 +1,31 @@
-03.02.2018 23:18:31 Welcome! How are you today?
-03.02.2018 23:18:31 Tasks:
-03.02.2018 23:18:31   Baseline training:       False
-03.02.2018 23:18:31   Random training:         False
-03.02.2018 23:18:31   Morphing training:       False
-03.02.2018 23:18:31   Point-by-point training: False
-03.02.2018 23:18:31   Calibration:             False
-03.02.2018 23:18:31   Likelihood ratio eval:   True
-03.02.2018 23:18:31   Neyman construction:     False
-03.02.2018 23:18:31   Roaming:                 False
-03.02.2018 23:18:31 Options:
-03.02.2018 23:18:31   Dry run:                 True
-03.02.2018 23:18:31   Denominator:             standard
-03.02.2018 23:32:53 Splitting...
-03.02.2018 23:33:30 Number of events:
-03.02.2018 23:33:30   All:    821636
-03.02.2018 23:33:30   Training:    575145
-03.02.2018 23:33:30   Calibration: 82164
-03.02.2018 23:33:30   Evaluation:  164327
-03.02.2018 23:33:30 Normalizing probabilities
-03.02.2018 23:35:53 Generating likelihood ratio evaluation sample
-04.02.2018 00:04:45 Cut efficiency: 50000 / 50000 events survive
-04.02.2018 00:04:45 Expected score without sanitization: [-0.00693771 -0.00075024]
-04.02.2018 00:04:45 Expected score with sanitization:    [-0.00693771 -0.00075024]
-generate_data.py:600: RuntimeWarning: divide by zero encountered in log
+05.02.2018 15:06:30 Welcome! How are you today?
+05.02.2018 15:06:30 Tasks:
+05.02.2018 15:06:30   Baseline training:       False
+05.02.2018 15:06:30   Random training:         False
+05.02.2018 15:06:30   Morphing training:       False
+05.02.2018 15:06:30   Point-by-point training: False
+05.02.2018 15:06:30   Calibration:             False
+05.02.2018 15:06:30   Likelihood ratio eval:   True
+05.02.2018 15:06:30   Neyman construction:     False
+05.02.2018 15:06:30   Roaming:                 False
+05.02.2018 15:06:30 Options:
+05.02.2018 15:06:30   Dry run:                 False
+05.02.2018 15:06:30   Denominator:             standard
+05.02.2018 15:15:39 Splitting...
+05.02.2018 15:16:01 Number of events:
+05.02.2018 15:16:01   All:    821636
+05.02.2018 15:16:01   Training:    575145
+05.02.2018 15:16:01   Calibration: 82164
+05.02.2018 15:16:01   Evaluation:  164327
+05.02.2018 15:16:01 Normalizing probabilities
+05.02.2018 15:17:50 Generating likelihood ratio evaluation sample
+generate_data.py:593: RuntimeWarning: divide by zero encountered in log
+  & np.all(np.isfinite(np.log(r[:, :])) & np.isfinite(scores[:, :, 0]) & np.isfinite(scores[:, :, 1]),
+05.02.2018 15:38:18 Cut efficiency: 49980 / 50000 events survive
+05.02.2018 15:38:18 Expected score without sanitization: [-0.00237202  0.00525759]
+05.02.2018 15:38:18 Expected score with sanitization:    [-0.00294219  0.00378138]
+generate_data.py:603: RuntimeWarning: divide by zero encountered in log
   mle = np.nanargmax(np.sum(np.log(r), axis=1))
-04.02.2018 00:04:46 MLE theta without sanitization: 0 ([ 0.  0.])
-generate_data.py:602: RuntimeWarning: divide by zero encountered in log
-  mle = np.nanargmax(np.sum(np.log(r[:,cut]), axis=1))
-04.02.2018 00:04:48 MLE theta without sanitization: 0 ([ 0.  0.])
-04.02.2018 00:04:52 Done!
+05.02.2018 15:38:19 MLE theta without sanitization: 0 ([ 0.  0.])
+05.02.2018 15:38:20 MLE theta without sanitization: 0 ([ 0.  0.])
+05.02.2018 15:38:28 Done!

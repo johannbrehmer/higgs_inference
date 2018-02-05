@@ -1,0 +1,35 @@
+Using TensorFlow backend.
+05.02.2018 15:57:48 INFO    Hi! How are you today?
+05.02.2018 15:57:48 INFO    Startup options:
+05.02.2018 15:57:48 INFO      Algorithm:                     carl
+05.02.2018 15:57:48 INFO      Point by point:                True
+05.02.2018 15:57:48 INFO      Morphing-aware mode:           False
+05.02.2018 15:57:48 INFO      Training sample:               baseline
+05.02.2018 15:57:48 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+05.02.2018 15:57:48 INFO      Neyman construction toys:      False
+05.02.2018 15:57:48 INFO      Other options:                 
+05.02.2018 15:57:48 INFO      Base directory:                /home/jb6504/higgs_inference
+05.02.2018 15:57:48 INFO      ML-based strategies available: True
+05.02.2018 15:57:48 INFO    Starting point-by-point inference
+05.02.2018 15:57:48 INFO    Main settings:
+05.02.2018 15:57:48 INFO      Algorithm:               carl
+05.02.2018 15:57:48 INFO    Options:
+05.02.2018 15:57:48 INFO      Number of epochs:        20
+05.02.2018 15:57:48 INFO      Number of hidden layers: 2
+05.02.2018 15:57:49 INFO    Starting theta 1/100: number 0 ([ 0.  0.])
+Train on 898197 samples, validate on 99800 samples
+Epoch 1/20
+2018-02-05 15:57:51.559151: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-05 15:57:51.560833: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-05 15:57:51.560883: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-05 15:57:51.946844: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:0f:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-05 15:57:51.946893: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-05 15:57:51.946904: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-05 15:57:51.946918: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:0f:00.0)
+215s - loss: 0.6736 - loss_function_carl: 0.6736 - loss_function_carl_kl: 11.3761 - val_loss: 0.7457 - val_loss_function_carl: 0.7457 - val_loss_function_carl_kl: 23.8622
+Epoch 2/20

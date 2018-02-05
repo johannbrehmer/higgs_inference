@@ -1,0 +1,17 @@
+05.02.2018 15:57:04 INFO    Hi! How are you today?
+05.02.2018 15:57:04 INFO    Startup options:
+05.02.2018 15:57:04 INFO      Algorithm:                     truth
+05.02.2018 15:57:04 INFO      Point by point:                False
+05.02.2018 15:57:04 INFO      Morphing-aware mode:           False
+05.02.2018 15:57:04 INFO      Training sample:               baseline
+05.02.2018 15:57:04 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+05.02.2018 15:57:04 INFO      Neyman construction toys:      True
+05.02.2018 15:57:04 INFO      Other options:                 
+05.02.2018 15:57:04 INFO      Base directory:                /home/jb6504/higgs_inference
+05.02.2018 15:57:04 INFO      ML-based strategies available: False
+05.02.2018 15:57:04 INFO    Starting truth calculation
+05.02.2018 15:57:09 INFO    Starting evaluation
+05.02.2018 15:57:11 INFO    Starting roaming
+/share/apps/scikit-learn/0.18.1/intel/lib/python2.7/site-packages/sklearn/gaussian_process/kernels.py:1362: RuntimeWarning: invalid value encountered in divide
+  / np.sqrt(D.sum(2))[:, :, np.newaxis]
+05.02.2018 15:59:56 INFO    Starting evaluation of Neyman experiments

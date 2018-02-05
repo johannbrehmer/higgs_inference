@@ -1,0 +1,97 @@
+Using TensorFlow backend.
+05.02.2018 15:57:48 INFO    Hi! How are you today?
+05.02.2018 15:57:48 INFO    Startup options:
+05.02.2018 15:57:48 INFO      Algorithm:                     regression
+05.02.2018 15:57:48 INFO      Point by point:                True
+05.02.2018 15:57:48 INFO      Morphing-aware mode:           False
+05.02.2018 15:57:48 INFO      Training sample:               baseline
+05.02.2018 15:57:48 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+05.02.2018 15:57:48 INFO      Neyman construction toys:      False
+05.02.2018 15:57:48 INFO      Other options:                 
+05.02.2018 15:57:48 INFO      Base directory:                /home/jb6504/higgs_inference
+05.02.2018 15:57:48 INFO      ML-based strategies available: True
+05.02.2018 15:57:48 INFO    Starting point-by-point inference
+05.02.2018 15:57:48 INFO    Main settings:
+05.02.2018 15:57:48 INFO      Algorithm:               regression
+05.02.2018 15:57:48 INFO    Options:
+05.02.2018 15:57:48 INFO      Number of epochs:        20
+05.02.2018 15:57:48 INFO      Number of hidden layers: 2
+05.02.2018 15:57:49 INFO    Starting theta 1/100: number 0 ([ 0.  0.])
+Train on 898197 samples, validate on 99800 samples
+Epoch 1/20
+2018-02-05 15:57:51.285237: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-05 15:57:51.285563: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-05 15:57:51.285577: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-05 15:57:51.640768: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:10:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-05 15:57:51.640828: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-05 15:57:51.640838: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-05 15:57:51.640856: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:10:00.0)
+2018-02-05 15:57:52.230055: W tensorflow/core/framework/op_kernel.cc:1192] Invalid argument: slice index 1 of dimension 1 out of bounds.
+2018-02-05 15:57:52.375628: W tensorflow/core/framework/op_kernel.cc:1192] Invalid argument: slice index 1 of dimension 1 out of bounds.
+	 [[Node: strided_slice = StridedSlice[Index=DT_INT32, T=DT_FLOAT, begin_mask=1, ellipsis_mask=0, end_mask=1, new_axis_mask=0, shrink_axis_mask=2, _device="/job:localhost/replica:0/task:0/gpu:0"](_arg_concatenate_1_target_0_1/_23, strided_slice/stack, strided_slice/stack_1, strided_slice/stack_2)]]
+2018-02-05 15:57:52.375804: W tensorflow/core/framework/op_kernel.cc:1192] Invalid argument: slice index 1 of dimension 1 out of bounds.
+	 [[Node: strided_slice = StridedSlice[Index=DT_INT32, T=DT_FLOAT, begin_mask=1, ellipsis_mask=0, end_mask=1, new_axis_mask=0, shrink_axis_mask=2, _device="/job:localhost/replica:0/task:0/gpu:0"](_arg_concatenate_1_target_0_1/_23, strided_slice/stack, strided_slice/stack_1, strided_slice/stack_2)]]
+Traceback (most recent call last):
+  File "experiments.py", line 118, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/point_by_point.py", line 152, in point_by_point_inference
+    patience=settings.early_stopping_patience)] if early_stopping else None))
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 149, in fit
+    history = self.model.fit(x, y, **fit_args)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1485, in fit
+    initial_epoch=initial_epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1140, in _fit_loop
+    outs = f(ins_batch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 2073, in __call__
+    feed_dict=feed_dict)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 895, in run
+    run_metadata_ptr)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1124, in _run
+    feed_dict_tensor, options, run_metadata)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1321, in _do_run
+    options, run_metadata)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1340, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors_impl.InvalidArgumentError: slice index 1 of dimension 1 out of bounds.
+	 [[Node: strided_slice = StridedSlice[Index=DT_INT32, T=DT_FLOAT, begin_mask=1, ellipsis_mask=0, end_mask=1, new_axis_mask=0, shrink_axis_mask=2, _device="/job:localhost/replica:0/task:0/gpu:0"](_arg_concatenate_1_target_0_1/_23, strided_slice/stack, strided_slice/stack_1, strided_slice/stack_2)]]
+	 [[Node: mul_1/_57 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/cpu:0", send_device="/job:localhost/replica:0/task:0/gpu:0", send_device_incarnation=1, tensor_name="edge_839_mul_1", tensor_type=DT_FLOAT, _device="/job:localhost/replica:0/task:0/cpu:0"]()]]
+
+Caused by op u'strided_slice', defined at:
+  File "experiments.py", line 118, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/point_by_point.py", line 152, in point_by_point_inference
+    patience=settings.early_stopping_patience)] if early_stopping else None))
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 138, in fit
+    self.model = self.build_fn(**self.filter_sk_params(self.build_fn))
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/point_by_point.py", line 144, in <lambda>
+    regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
+  File "/home/jb6504/higgs_inference/higgs_inference/models/models_point_by_point.py", line 48, in make_regressor
+    optimizer=optimizers.Adam(clipnorm=1.))
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 899, in compile
+    sample_weight, mask)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 430, in weighted
+    score_array = fn(y_true, y_pred)
+  File "/home/jb6504/higgs_inference/higgs_inference/models/loss_functions.py", line 23, in loss_function_ratio_regression
+    return losses.mean_squared_error(y_true[:, 1], y_pred[:, 1])
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/ops/array_ops.py", line 501, in _SliceHelper
+    name=name)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/ops/array_ops.py", line 669, in strided_slice
+    shrink_axis_mask=shrink_axis_mask)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/ops/gen_array_ops.py", line 3637, in strided_slice
+    shrink_axis_mask=shrink_axis_mask, name=name)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/framework/op_def_library.py", line 767, in apply_op
+    op_def=op_def)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/framework/ops.py", line 2583, in create_op
+    original_op=self._default_original_op, op_def=op_def)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/framework/ops.py", line 1204, in __init__
+    self._traceback = self._graph._extract_stack()  # pylint: disable=protected-access
+
+InvalidArgumentError (see above for traceback): slice index 1 of dimension 1 out of bounds.
+	 [[Node: strided_slice = StridedSlice[Index=DT_INT32, T=DT_FLOAT, begin_mask=1, ellipsis_mask=0, end_mask=1, new_axis_mask=0, shrink_axis_mask=2, _device="/job:localhost/replica:0/task:0/gpu:0"](_arg_concatenate_1_target_0_1/_23, strided_slice/stack, strided_slice/stack_1, strided_slice/stack_2)]]
+	 [[Node: mul_1/_57 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/cpu:0", send_device="/job:localhost/replica:0/task:0/gpu:0", send_device_incarnation=1, tensor_name="edge_839_mul_1", tensor_type=DT_FLOAT, _device="/job:localhost/replica:0/task:0/cpu:0"]()]]
+
