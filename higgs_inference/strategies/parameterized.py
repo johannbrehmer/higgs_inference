@@ -236,11 +236,11 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         # Save metrics
         def _save_metrics(key, filename):
             try:
-                metrics = np.asarray([history.history(key), history.history('val_' + key)])
+                metrics = np.asarray([history.history[key], history.history['val_' + key]])
                 np.save(results_dir + '/traininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
                         metrics)
             except KeyError:
-                logging.warning('Key %s not found', key)
+                logging.warning('Key %s not found. Available keys: %s', key, list(history.history.keys()))
 
         _save_metrics('loss_function_carl', 'ce')
         _save_metrics('loss_function_carl_kl', 'kl')
@@ -400,11 +400,11 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         # Save metrics
         def _save_metrics(key, filename):
             try:
-                metrics = np.asarray([history.history(key), history.history('val_' + key)])
+                metrics = np.asarray([history.history[key], history.history['val_' + key]])
                 np.save(results_dir + '/traininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
                         metrics)
             except KeyError:
-                logging.warning('Key %s not found', key)
+                logging.warning('Key %s not found. Available keys: %s', key, list(history.history.keys()))
 
         _save_metrics('loss_function_carl_kl', 'kl')
         _save_metrics('loss_function_ratio_regression', 'logr')
