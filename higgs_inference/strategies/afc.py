@@ -161,40 +161,36 @@ def afc_inference(statistics='x',
         if do_neyman:
             logging.debug('Neyman observed')
 
-            # Neyman construction
-            # Only evaluate certain combinations of thetas to save computation time
-            if decide_toy_evaluation(settings.theta_observed, t):
+            # Neyman construction: prepare observed data and construct summary statistics
+            X_neyman_observed_transformed = scaler.transform(
+                X_neyman_observed.reshape((-1, X_neyman_observed.shape[2])))
 
-                # Neyman construction: prepare observed data and construct summary statistics
-                X_neyman_observed_transformed = scaler.transform(
-                    X_neyman_observed.reshape((-1, X_neyman_observed.shape[2])))
+            if statistics == 'x':
+                summary_statistics_neyman_observed = X_neyman_observed_transformed[:, indices_X]
+            else:
+                raise NotImplementedError
 
-                if statistics == 'x':
-                    summary_statistics_neyman_observed = X_neyman_observed_transformed[:, indices_X]
-                else:
-                    raise NotImplementedError
+            # Neyman construction: evaluate observed sample
+            log_p_hat_num_neyman_observed = kde_num.score_samples(summary_statistics_neyman_observed)
+            log_p_hat_den_neyman_observed = kde_den.score_samples(summary_statistics_neyman_observed)
 
-                # Neyman construction: evaluate observed sample
-                log_p_hat_num_neyman_observed = kde_num.score_samples(summary_statistics_neyman_observed)
-                log_p_hat_den_neyman_observed = kde_den.score_samples(summary_statistics_neyman_observed)
+            # Sanitize output
+            log_p_hat_num_neyman_observed[np.invert(np.isfinite(log_p_hat_num_neyman_observed))] = -1000.
+            log_p_hat_den_neyman_observed[np.invert(np.isfinite(log_p_hat_den_neyman_observed))] = -1000.
 
-                # Sanitize output
-                log_p_hat_num_neyman_observed[np.invert(np.isfinite(log_p_hat_num_neyman_observed))] = -1000.
-                log_p_hat_den_neyman_observed[np.invert(np.isfinite(log_p_hat_den_neyman_observed))] = -1000.
+            log_r_hat_neyman_observed = log_p_hat_num_neyman_observed - log_p_hat_den_neyman_observed
+            log_r_hat_neyman_observed = log_r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
 
-                log_r_hat_neyman_observed = log_p_hat_num_neyman_observed - log_p_hat_den_neyman_observed
-                log_r_hat_neyman_observed = log_r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
+            logging.debug('Neyman observed log p (num): shape %s, %s nans, content \n %s',
+                          log_p_hat_num_neyman_observed.shape, np.sum(np.isnan(log_p_hat_num_neyman_observed)), log_p_hat_num_neyman_observed)
+            logging.debug('Neyman observed log p (den): shape %s, %s nans, content \n %s',
+                          log_p_hat_den_neyman_observed.shape, np.sum(np.isnan(log_p_hat_den_neyman_observed)), log_p_hat_den_neyman_observed)
+            logging.debug('Neyman observed log r: shape %s, %s nans, content \n %s',
+                          log_r_hat_neyman_observed.shape, np.sum(np.isnan(log_r_hat_neyman_observed)), log_r_hat_neyman_observed)
 
-                logging.debug('Neyman observed log p (num): shape %s, %s nans, content \n %s',
-                              log_p_hat_num_neyman_observed.shape, np.sum(np.isnan(log_p_hat_num_neyman_observed)), log_p_hat_num_neyman_observed)
-                logging.debug('Neyman observed log p (den): shape %s, %s nans, content \n %s',
-                              log_p_hat_den_neyman_observed.shape, np.sum(np.isnan(log_p_hat_den_neyman_observed)), log_p_hat_den_neyman_observed)
-                logging.debug('Neyman observed log r: shape %s, %s nans, content \n %s',
-                              log_r_hat_neyman_observed.shape, np.sum(np.isnan(log_r_hat_neyman_observed)), log_r_hat_neyman_observed)
-
-                llr_neyman_observed = -2. * np.sum(log_r_hat_neyman_observed, axis=1)
-                np.save(neyman_dir + '/neyman_llr_observed_afc' + '_' + str(t) + filename_addition + '.npy',
-                        llr_neyman_observed)
+            llr_neyman_observed = -2. * np.sum(log_r_hat_neyman_observed, axis=1)
+            np.save(neyman_dir + '/neyman_llr_observed_afc' + '_' + str(t) + filename_addition + '.npy',
+                    llr_neyman_observed)
 
             logging.debug('Neyman distribution')
 

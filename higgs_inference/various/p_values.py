@@ -100,18 +100,32 @@ def subtract_mle(filename, folder, theta_sm=0):
     llr_distributions = np.asarray(llr_distributions)  # Shape: (n_thetas_eval, n_thetas_assumed_true, n_experiments)
     llr_observeds = np.asarray(llr_observeds)  # Shape: (n_thetas_eval, n_experiments)
 
+    # Check that some results exist
+    insufficient_data_distributions = np.any(np.all(np.invert(np.isfinite(llr_distributions)), axis=0))
+    insufficient_data_observed = np.any(np.all(np.invert(np.isfinite(llr_observeds)), axis=0))
+    if insufficient_data_distributions:
+        logging.warning("Insufficient data to find MLEs for null")
+        logging.debug("NaNs distributions:\n%s", np.all(np.invert(np.isfinite(llr_distributions)), axis=0))
+        logging.debug("NaNs observed:\n%s", np.all(np.invert(np.isfinite(llr_observeds)), axis=0))
+    if insufficient_data_observed:
+        logging.warning("Insufficient data to find MLEs for alternate")
+        logging.debug("NaNs distributions:\n%s", np.all(np.invert(np.isfinite(llr_distributions)), axis=0))
+        logging.debug("NaNs observed:\n%s", np.all(np.invert(np.isfinite(llr_observeds)), axis=0))
+    if insufficient_data_observed or insufficient_data_distributions:
+        raise ValueError
+
     # Find MLE
     theta_mle_distribution = np.nanargmin(llr_distributions, axis=0)  # Shape: (n_thetas_assumed_true, n_experiments)
     theta_mle_observed = np.nanargmin(llr_observeds, axis=0)  # Shape: (n_experiments,)
-    # logging.debug('MLE thetas: %s, %s', theta_mle_distribution, theta_mle_observed)
+    logging.debug('MLEs distribution:\n%s', theta_mle_distribution)
+    logging.debug('MLEs observed:\n%s', theta_mle_observed)
 
     # Subtract MLE
     llr_compared_to_mle_distributions = np.zeros( (llr_distributions.shape[1], llr_distributions.shape[2]) )
     for t_true in range(llr_distributions.shape[1]):
         for exp in range(llr_distributions.shape[2]):
             llr_compared_to_mle_distributions[t_true, exp] = (llr_distributions[t_true, t_true, exp]
-                                                                      - llr_distributions[theta_mle_distribution[
-                                                                                              t_true, exp], t_true, exp])
+                                              - llr_distributions[theta_mle_distribution[t_true, exp], t_true, exp])
 
     llr_compared_to_mle_observeds = np.zeros_like(llr_observeds)
     for t_eval in range(llr_observeds.shape[0]):

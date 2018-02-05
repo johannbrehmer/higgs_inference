@@ -89,13 +89,11 @@ def local_model_truth_inference(options=''):
         # Contract estimated scores with delta theta
         delta_theta = theta - settings.thetas[theta1]
 
-        # Only evaluate certain combinations of thetas to save computation time
-        if decide_toy_evaluation(settings.theta_observed, t):
-            # Neyman construction: evaluate observed sample (raw)
-            tt_neyman_observed = scores_neyman_observed.dot(delta_theta)
-            llr_raw_neyman_observed = -2. * np.sum(tt_neyman_observed, axis=1)
-            np.save(neyman_dir + '/neyman_llr_observed_localmodel_' + str(t) + filename_addition + '.npy',
-                    llr_raw_neyman_observed)
+        # Neyman construction: evaluate observed sample (raw)
+        tt_neyman_observed = scores_neyman_observed.dot(delta_theta)
+        llr_raw_neyman_observed = -2. * np.sum(tt_neyman_observed, axis=1)
+        np.save(neyman_dir + '/neyman_llr_observed_localmodel_' + str(t) + filename_addition + '.npy',
+                llr_raw_neyman_observed)
 
         # Neyman construction: loop over distribution samples generated from different thetas
         llr_neyman_distributions = []

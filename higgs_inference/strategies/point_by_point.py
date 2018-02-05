@@ -162,14 +162,12 @@ def point_by_point_inference(algorithm='carl',
             elif t == settings.theta_benchmark_trained:
                 np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', this_r)
 
-            # Only evaluate certain combinations of thetas to save computation time
-            if decide_toy_evaluation(settings.theta_observed, t):
-                # Neyman construction: evaluate observed sample (raw)
-                log_r_neyman_observed = regr.predict(X_neyman_observed_transformed)
-                llr_neyman_observed = -2. * np.sum(log_r_neyman_observed.reshape((-1, settings.n_expected_events)),
-                                                   axis=1)
-                np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + filename_addition + '.npy',
-                        llr_neyman_observed)
+            # Neyman construction: evaluate observed sample (raw)
+            log_r_neyman_observed = regr.predict(X_neyman_observed_transformed)
+            llr_neyman_observed = -2. * np.sum(log_r_neyman_observed.reshape((-1, settings.n_expected_events)),
+                                               axis=1)
+            np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + filename_addition + '.npy',
+                    llr_neyman_observed)
 
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
@@ -304,24 +302,21 @@ def point_by_point_inference(algorithm='carl',
                 # np.save(results_dir + '/cal1histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
                 # np.save(results_dir + '/cal1edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
 
-            # Neyman construction
-            # Only evaluate certain combinations of thetas to save computation time
-            if decide_toy_evaluation(settings.theta_observed, t):
-                # Neyman construction: evaluate observed sample (raw)
-                r_neyman_observed, _ = ratio.predict(X_neyman_observed_transformed)
-                llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
-                                                   axis=1)
-                np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + filename_addition + '.npy',
-                        llr_neyman_observed)
-
-                # Neyman construction: evaluate observed sample (calibrated)
-                r_neyman_observed, _ = ratio_calibrated.predict(X_neyman_observed_transformed)
-                llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
-                                                   axis=1)
-                np.save(
-                    neyman_dir + '/neyman_llr_observed_' + algorithm + '_calibrated_' + str(
-                        t) + filename_addition + '.npy',
+            # Neyman construction: evaluate observed sample (raw)
+            r_neyman_observed, _ = ratio.predict(X_neyman_observed_transformed)
+            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
+                                               axis=1)
+            np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + filename_addition + '.npy',
                     llr_neyman_observed)
+
+            # Neyman construction: evaluate observed sample (calibrated)
+            r_neyman_observed, _ = ratio_calibrated.predict(X_neyman_observed_transformed)
+            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
+                                               axis=1)
+            np.save(
+                neyman_dir + '/neyman_llr_observed_' + algorithm + '_calibrated_' + str(
+                    t) + filename_addition + '.npy',
+                llr_neyman_observed)
 
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
