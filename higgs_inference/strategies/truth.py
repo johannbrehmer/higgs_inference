@@ -14,7 +14,8 @@ from higgs_inference import settings
 from higgs_inference.various.utils import decide_toy_evaluation
 
 
-def truth_inference(options=''):
+def truth_inference(do_neyman=False,
+                    options=''):
     """ Extracts the true likelihood ratios for the evaluation samples. """
 
     logging.info('Starting truth calculation')
@@ -80,28 +81,29 @@ def truth_inference(options=''):
     r_roam_truth = np.exp(gp.predict(np.c_[xx.ravel(), yy.ravel()])).T
     np.save(results_dir + '/r_roam_truth' + filename_addition + '.npy', r_roam_truth)
 
-    logging.info('Starting evaluation of Neyman experiments')
-    for t in range(settings.n_thetas):
+    if do_neyman:
+        logging.info('Starting evaluation of Neyman experiments')
+        for t in range(settings.n_thetas):
 
-        # Observed
-        llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed[t]), axis=1)
-        np.save(neyman_dir + '/neyman_llr_observed_truth_' + str(t) + filename_addition + '.npy', llr_neyman_observed)
+            # Observed
+            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed[t]), axis=1)
+            np.save(neyman_dir + '/neyman_llr_observed_truth_' + str(t) + filename_addition + '.npy', llr_neyman_observed)
 
-        # Hypothesis distributions
-        llr_neyman_distributions = []
-        for tt in range(settings.n_thetas):
+            # Hypothesis distributions
+            llr_neyman_distributions = []
+            for tt in range(settings.n_thetas):
 
-            # Only evaluate certain combinations of thetas to save computation time
-            if not decide_toy_evaluation(tt, t):
-                placeholder = np.empty(settings.n_neyman_distribution_experiments)
-                placeholder[:] = np.nan
-                llr_neyman_distributions.append(placeholder)
-                continue
+                # Only evaluate certain combinations of thetas to save computation time
+                if not decide_toy_evaluation(tt, t):
+                    placeholder = np.empty(settings.n_neyman_distribution_experiments)
+                    placeholder[:] = np.nan
+                    llr_neyman_distributions.append(placeholder)
+                    continue
 
-            r_neyman_distribution = np.load(
-                settings.unweighted_events_dir + '/r_neyman_distribution_' + str(tt) + '.npy')
-            llr_neyman_distributions.append(-2. * np.sum(np.log(r_neyman_distribution[t]), axis=1))
+                r_neyman_distribution = np.load(
+                    settings.unweighted_events_dir + '/r_neyman_distribution_' + str(tt) + '.npy')
+                llr_neyman_distributions.append(-2. * np.sum(np.log(r_neyman_distribution[t]), axis=1))
 
-        llr_neyman_distributions = np.asarray(llr_neyman_distributions)
-        np.save(neyman_dir + '/neyman_llr_distribution_truth_' + str(t) + filename_addition + '.npy',
-                llr_neyman_distributions)
+            llr_neyman_distributions = np.asarray(llr_neyman_distributions)
+            np.save(neyman_dir + '/neyman_llr_distribution_truth_' + str(t) + filename_addition + '.npy',
+                    llr_neyman_distributions)

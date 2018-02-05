@@ -37,6 +37,9 @@ def afc_inference(statistics='x',
                     statistics. If no value is given, the algorithm uses 0.1^(1/n_dim), where n_dim is the number of
                     dimensions of the statistics space, for instance the length of indices_X.
     :param kernel: The kernel. 'tophat' is equivalent to classic rejection ABC. Another option is 'gaussian'.
+    :param do_neyman:
+    :param kde_absolute_tolerance:
+    :param kde_relative_tolerance:
     :param options: Further options in a list of strings or string.
     """
 
@@ -50,15 +53,15 @@ def afc_inference(statistics='x',
         raise NotImplementedError
 
     if indices_X is None:
-        # indices_X = [1, 38, 39, 40, 41]  # pT(j1), m(Z2), m(jj), delta_eta(jj), delta_phi(jj)
-        indices_X = [1, 41]  # pT(j1), delta_phi(jj)
+        indices_X = [1, 38, 39, 40, 41]  # pT(j1), m(Z2), m(jj), delta_eta(jj), delta_phi(jj)
+        # indices_X = [1, 41]  # pT(j1), delta_phi(jj)
 
     statistics_dimensionality = len(indices_X)
 
-    filename_addition = ''
+    filename_addition = '_' + str(statistics_dimensionality) + 'd'
 
     if epsilon is None:
-        epsilon = 0.1 ** (1. / statistics_dimensionality)
+        epsilon = 0.05 ** (1. / statistics_dimensionality)
     else:
         filename_addition = filename_addition + '_epsilon_' + format_number(epsilon, 2)
 
@@ -121,8 +124,10 @@ def afc_inference(statistics='x',
         logging.debug('Setting up KDE')
 
         # Set up KDEs for numerator and denominator
-        kde_num = KernelDensity(bandwidth=epsilon, kernel=kernel, rtol=kde_relative_tolerance, atol=kde_absolute_tolerance)
-        kde_den = KernelDensity(bandwidth=epsilon, kernel=kernel, rtol=kde_relative_tolerance, atol=kde_absolute_tolerance)
+        kde_num = KernelDensity(bandwidth=epsilon, kernel=kernel, rtol=kde_relative_tolerance,
+                                atol=kde_absolute_tolerance)
+        kde_den = KernelDensity(bandwidth=epsilon, kernel=kernel, rtol=kde_relative_tolerance,
+                                atol=kde_absolute_tolerance)
 
         logging.debug('Fitting KDE')
 
@@ -157,7 +162,6 @@ def afc_inference(statistics='x',
         elif t == settings.theta_benchmark_trained:
             np.save(results_dir + '/r_trained_afc' + filename_addition + '.npy', np.exp(log_r_hat_test))
 
-
         if do_neyman:
             logging.debug('Neyman observed')
 
@@ -182,11 +186,14 @@ def afc_inference(statistics='x',
             log_r_hat_neyman_observed = log_r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
 
             logging.debug('Neyman observed log p (num): shape %s, %s nans, content \n %s',
-                          log_p_hat_num_neyman_observed.shape, np.sum(np.isnan(log_p_hat_num_neyman_observed)), log_p_hat_num_neyman_observed)
+                          log_p_hat_num_neyman_observed.shape, np.sum(np.isnan(log_p_hat_num_neyman_observed)),
+                          log_p_hat_num_neyman_observed)
             logging.debug('Neyman observed log p (den): shape %s, %s nans, content \n %s',
-                          log_p_hat_den_neyman_observed.shape, np.sum(np.isnan(log_p_hat_den_neyman_observed)), log_p_hat_den_neyman_observed)
+                          log_p_hat_den_neyman_observed.shape, np.sum(np.isnan(log_p_hat_den_neyman_observed)),
+                          log_p_hat_den_neyman_observed)
             logging.debug('Neyman observed log r: shape %s, %s nans, content \n %s',
-                          log_r_hat_neyman_observed.shape, np.sum(np.isnan(log_r_hat_neyman_observed)), log_r_hat_neyman_observed)
+                          log_r_hat_neyman_observed.shape, np.sum(np.isnan(log_r_hat_neyman_observed)),
+                          log_r_hat_neyman_observed)
 
             llr_neyman_observed = -2. * np.sum(log_r_hat_neyman_observed, axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_afc' + '_' + str(t) + filename_addition + '.npy',
@@ -228,11 +235,14 @@ def afc_inference(statistics='x',
                 log_r_hat_neyman_distribution = log_r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
 
                 logging.debug('Neyman distribution %s log p (num): shape %s, %s nans, content \n %s',
-                              tt, log_p_hat_num_neyman_distribution.shape, np.sum(np.isnan(log_p_hat_num_neyman_distribution)), log_p_hat_num_neyman_distribution)
+                              tt, log_p_hat_num_neyman_distribution.shape,
+                              np.sum(np.isnan(log_p_hat_num_neyman_distribution)), log_p_hat_num_neyman_distribution)
                 logging.debug('Neyman distribution %s log p (den): shape %s, %s nans, content \n %s',
-                              tt, log_p_hat_den_neyman_distribution.shape, np.sum(np.isnan(log_p_hat_den_neyman_distribution)), log_p_hat_den_neyman_distribution)
+                              tt, log_p_hat_den_neyman_distribution.shape,
+                              np.sum(np.isnan(log_p_hat_den_neyman_distribution)), log_p_hat_den_neyman_distribution)
                 logging.debug('Neyman distribution %s log r: shape %s, %s nans, content \n %s',
-                              tt, log_r_hat_neyman_distribution.shape, np.sum(np.isnan(log_r_hat_neyman_distribution)), log_r_hat_neyman_distribution)
+                              tt, log_r_hat_neyman_distribution.shape, np.sum(np.isnan(log_r_hat_neyman_distribution)),
+                              log_r_hat_neyman_distribution)
 
                 llr_neyman_distribution = -2. * np.sum(log_r_hat_neyman_distribution, axis=1)
                 np.save(neyman_dir + '/neyman_llr_distribution_afc' + '_' + str(t) + filename_addition + '.npy',

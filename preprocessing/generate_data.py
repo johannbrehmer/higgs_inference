@@ -588,7 +588,9 @@ if args.test:
         p1 = np.array(weights_test[theta1][indices])
 
         # filter out bad events
-        cut = (scores[theta_observed, :, 0] ** 2 + scores[theta_observed, :, 1] ** 2 < 2500.) & np.isfinite(np.log(r[theta_observed, :])) & (np.log(r[theta_observed, :]) ** 2 < 10000.)
+        cut = ((scores[theta_observed, :, 0] ** 2 + scores[theta_observed, :, 1] ** 2 < 2500.)
+               & (np.log(r[theta_observed, :]) ** 2 < 10000.)
+               & np.all(np.isfinite(np.log(r[:, :])) & np.isfinite(scores[:, :]), axis=0))
 
         # Some immediate truth-level testing
         logging.info('Cut efficiency: %s / %s events survive', np.sum(cut), cut.shape[0])

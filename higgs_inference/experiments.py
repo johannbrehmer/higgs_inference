@@ -59,6 +59,10 @@ parser.add_argument("-pbp", "--pointbypoint", action="store_true",
 parser.add_argument("-a", "--aware", action="store_true",
                     help="Physics-aware parameterized setup.")
 parser.add_argument("-t", "--training", default='baseline', help='Training sample: "baseline", "basis", or "random".')
+parser.add_argument("-x", "--xindices", type=int, nargs='+', default=[1, 38, 39, 40, 41],
+                    help='X components to be used in AFC.')
+parser.add_argument("-n", "--neyman", action='store_true',
+                    help='Calculate toy experiments for the Neyman construction.')
 parser.add_argument("-o", "--options", nargs='+', default='', help="Further options to be passed on to the algorithm.")
 
 args = parser.parse_args()
@@ -68,6 +72,8 @@ logging.info('  Algorithm:                     %s', args.algorithm)
 logging.info('  Point by point:                %s', args.pointbypoint)
 logging.info('  Morphing-aware mode:           %s', args.aware)
 logging.info('  Training sample:               %s', args.training)
+logging.info('  AFC X indices:                 %s', args.xindices)
+logging.info('  Neyman construction toys:      %s', args.neyman)
 logging.info('  Other options:                 %s', args.options)
 logging.info('  Base directory:                %s', settings.base_dir)
 logging.info('  ML-based strategies available: %s', loaded_ml_strategies)
@@ -88,21 +94,27 @@ if args.algorithm in ['p', 'cl', 'pvalues']:
     calculate_all_CL()
 
 elif args.algorithm == 'truth':
-    truth_inference(options=args.options)
+    truth_inference(do_neyman=args.neyman,
+                    options=args.options)
 
 elif args.algorithm == 'localmodel':
-    local_model_truth_inference(options=args.options)
+    local_model_truth_inference(do_neyman=args.neyman,
+                                options=args.options)
 
 elif args.algorithm == 'afc':
-    afc_inference(options=args.options)
+    afc_inference(indices_X=args.xindices,
+                  do_neyman=args.neyman,
+                  options=args.options)
 
 elif args.algorithm == 'scoreregression':
     assert loaded_ml_strategies
-    score_regression_inference(options=args.options)
+    score_regression_inference(do_neyman=args.neyman,
+                               options=args.options)
 
 elif args.pointbypoint:
     assert loaded_ml_strategies
     point_by_point_inference(algorithm=args.algorithm,
+                             do_neyman=args.neyman,
                              options=args.options)
 
 else:
@@ -110,6 +122,7 @@ else:
     parameterized_inference(algorithm=args.algorithm,
                             morphing_aware=args.aware,
                             training_sample=args.training,
+                            do_neyman=args.neyman,
                             options=args.options)
 
 logging.info("That's it -- have a great day!")
