@@ -389,5 +389,5 @@ def point_by_point_inference(algorithm='carl',
         #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
         # gp.fit(thetas[settings.pbp_training_thetas], expected_llr_calibrated)
         # expected_llr_calibrated_all = gp.predict(thetas)
-        np.save(results_dir + '/expected_llr_' + algorithm + '_calibrated' + filename_addition + '.npy',
+        np.save(results_dir + '/llr_' + algorithm + '_calibrated' + filename_addition + '.npy',
                 expected_llr_calibrated_all)
