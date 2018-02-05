@@ -55,7 +55,7 @@ def subtract_mle(filename, folder, theta_sm=0):
             files_found += 1
 
         except IOError as err:
-            logging.debug("Error loading file: %s", err)
+            #logging.debug("Error loading file: %s", err)
             #logging.debug("Didn't find file %s", neyman_dir + '/neyman_llr_distribution_' + filename + '_' + str(t) + '.npy')
 
             placeholder = np.empty((settings.n_thetas, settings.n_neyman_distribution_experiments))
@@ -79,7 +79,7 @@ def subtract_mle(filename, folder, theta_sm=0):
             files_found += 1
 
         except IOError as err:
-            logging.debug("Error loading file: %s", err)
+            #("Error loading file: %s", err)
             # logging.debug("Didn't find file %s", neyman_dir + '/neyman_llr_observed_' + filename + '_' + str(t) + '.npy')
 
             placeholder = np.empty(settings.n_neyman_observed_experiments)
@@ -113,16 +113,16 @@ def subtract_mle(filename, folder, theta_sm=0):
                                                           - llr_observeds[theta_mle_observed[exp], exp])
 
     # Debug output
-    logging.debug('LLR observed details (one fixed experiment):')
-    for t in range(settings.n_thetas):
-        logging.debug('  t = %s, mle = %s, q(gen=sm, eval=t) = %s, q(gen=sm, eval=mle) = %s',
-                      t, theta_mle_observed[0], llr_observeds[t, 0],
-                      llr_observeds[theta_mle_observed[0], 0])
-    logging.debug('LLR distribution details (one fixed experiment):')
-    for t in range(settings.n_thetas):
-        logging.debug('  t = %s, mle = %s, q(gen=t, eval=t) = %s, q(gen=t, eval=mle) = %s',
-                      t, theta_mle_distribution[t, 0], llr_distributions[t, t, 0],
-                      llr_distributions[theta_mle_distribution[t, 0], t, 0])
+    #logging.debug('LLR observed details (one fixed experiment):')
+    #for t in range(settings.n_thetas):
+    #    logging.debug('  t = %s, mle = %s, q(gen=sm, eval=t) = %s, q(gen=sm, eval=mle) = %s',
+    #                  t, theta_mle_observed[0], llr_observeds[t, 0],
+    #                  llr_observeds[theta_mle_observed[0], 0])
+    #logging.debug('LLR distribution details (one fixed experiment):')
+    #for t in range(settings.n_thetas):
+    #    logging.debug('  t = %s, mle = %s, q(gen=t, eval=t) = %s, q(gen=t, eval=mle) = %s',
+    #                  t, theta_mle_distribution[t, 0], llr_distributions[t, t, 0],
+    #                  llr_distributions[theta_mle_distribution[t, 0], t, 0])
 
     # Subtract true
     # llr_compared_to_true_distributions = np.zeros_like(llr_distributions)
@@ -199,26 +199,24 @@ def calculate_all_CL():
     logging.info('Starting p-value calculation')
 
     calculate_CL('truth', 'truth')
-    # calculate_CL('localmodel', 'truth')
+    calculate_CL('localmodel', 'truth')
     
     # calculate_CL('afc', 'afc')
     
-    # calculate_CL('carl', 'point_by_point')
-    # calculate_CL('carl_calibrated', 'point_by_point')
-    # calculate_CL('regression', 'point_by_point')
+    calculate_CL('carl', 'point_by_point')
+    calculate_CL('carl_calibrated', 'point_by_point')
+    calculate_CL('regression', 'point_by_point')
 
-    # calculate_CL('carl', 'parameterized')
-    # calculate_CL('carl_calibrated', 'parameterized')
-    # calculate_CL('score', 'parameterized')
-    # calculate_CL('score_calibrated', 'parameterized')
-    # calculate_CL('combined', 'parameterized')
-    # calculate_CL('combined_calibrated', 'parameterized')
-    # calculate_CL('regression', 'parameterized')
-    # calculate_CL('combinedregression', 'parameterized')
+    calculate_CL('carl', 'parameterized')
+    calculate_CL('carl_calibrated', 'parameterized')
+    calculate_CL('combined', 'parameterized')
+    calculate_CL('combined_calibrated', 'parameterized')
+    calculate_CL('regression', 'parameterized')
+    calculate_CL('combinedregression', 'parameterized')
 
-    # calculate_CL('scoreregression', 'score_regression')
+    calculate_CL('scoreregression', 'score_regression')
     # calculate_CL('scoreregression_calibrated', 'score_regression')  # old name convention, deprecated
-    # calculate_CL('scoreregression_scoretheta', 'score_regression')
-    # calculate_CL('scoreregression_score', 'score_regression')
-    # calculate_CL('scoreregression_rotatedscore', 'score_regression')
+    calculate_CL('scoreregression_scoretheta', 'score_regression')
+    calculate_CL('scoreregression_score', 'score_regression')
+    calculate_CL('scoreregression_rotatedscore', 'score_regression')
     

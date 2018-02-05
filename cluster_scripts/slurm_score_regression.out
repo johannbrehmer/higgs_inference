@@ -1,0 +1,64 @@
+Using TensorFlow backend.
+02.02.2018 17:22:02 INFO    Hi! How are you today?
+02.02.2018 17:22:02 INFO    Startup options:
+02.02.2018 17:22:02 INFO      Algorithm:                     scoreregression
+02.02.2018 17:22:02 INFO      Point by point:                False
+02.02.2018 17:22:02 INFO      Morphing-aware mode:           False
+02.02.2018 17:22:02 INFO      Training sample:               baseline
+02.02.2018 17:22:02 INFO      Other options:                 
+02.02.2018 17:22:02 INFO      Base directory:                /home/jb6504/higgs_inference
+02.02.2018 17:22:02 INFO      ML-based strategies available: True
+02.02.2018 17:22:02 INFO    Starting score regression inference
+02.02.2018 17:22:02 INFO    Options:
+02.02.2018 17:22:02 INFO      Number of epochs:         20
+02.02.2018 17:22:02 INFO      Number of hidden layers:  2
+02.02.2018 17:22:19 INFO    Starting training of score regression
+Train on 8999788 samples, validate on 999977 samples
+Epoch 1/20
+2018-02-02 17:22:19.950568: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-02 17:22:19.950968: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-02 17:22:19.950977: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-02 17:22:19.950982: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-02 17:22:19.950987: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-02 17:22:20.260273: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:85:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-02 17:22:20.260309: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-02 17:22:20.260316: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-02 17:22:20.260325: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:85:00.0)
+1045s - loss: 0.0324 - val_loss: 0.0244
+Epoch 2/20
+1046s - loss: 0.0206 - val_loss: 0.0217
+Epoch 3/20
+1047s - loss: 0.0175 - val_loss: 0.0188
+Epoch 4/20
+1047s - loss: 0.0165 - val_loss: 0.0192
+Epoch 5/20
+1048s - loss: 0.0156 - val_loss: 0.0184
+Epoch 6/20
+1047s - loss: 0.0147 - val_loss: 0.0167
+Epoch 7/20
+1048s - loss: 0.0143 - val_loss: 0.0162
+Epoch 8/20
+1041s - loss: 0.0142 - val_loss: 0.0140
+Epoch 9/20
+1040s - loss: 0.0140 - val_loss: 0.0170
+Epoch 10/20
+1041s - loss: 0.0135 - val_loss: 0.0122
+Epoch 11/20
+1039s - loss: 0.0132 - val_loss: 0.0137
+Epoch 12/20
+1039s - loss: 0.0130 - val_loss: 0.0140
+Epoch 13/20
+1039s - loss: 0.0128 - val_loss: 0.0128
+Epoch 14/20
+1039s - loss: 0.0129 - val_loss: 0.0155
+Epoch 00013: early stopping
+02.02.2018 21:25:51 INFO    Starting evaluation
+02.02.2018 21:25:57 INFO    Starting density estimation
+03.02.2018 22:26:10 INFO    That's it -- have a great day!
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded job memory limit at some point.

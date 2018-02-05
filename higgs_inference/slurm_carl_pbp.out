@@ -1,0 +1,1960 @@
+Using TensorFlow backend.
+31.01.2018 09:39:01 INFO    Hi! How are you today?
+31.01.2018 09:39:01 INFO    Startup options:
+31.01.2018 09:39:01 INFO      Algorithm:                     carl
+31.01.2018 09:39:01 INFO      Point by point:                True
+31.01.2018 09:39:01 INFO      Morphing-aware mode:           False
+31.01.2018 09:39:01 INFO      Training sample:               baseline
+31.01.2018 09:39:01 INFO      Other options:                 
+31.01.2018 09:39:01 INFO      Base directory:                /home/jb6504/higgs_inference
+31.01.2018 09:39:01 INFO      ML-based strategies available: True
+31.01.2018 09:39:01 INFO    Starting point-by-point inference
+31.01.2018 09:39:01 INFO    Main settings:
+31.01.2018 09:39:01 INFO      Algorithm:               carl
+31.01.2018 09:39:01 INFO    Options:
+31.01.2018 09:39:01 INFO      Number of epochs:        20
+31.01.2018 09:39:01 INFO      Number of hidden layers: 2
+31.01.2018 09:39:02 INFO    Starting theta 1/100: number 0 ([ 0.  0.])
+Train on 898197 samples, validate on 99800 samples
+Epoch 1/20
+2018-01-31 09:39:04.549002: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-01-31 09:39:04.549398: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-01-31 09:39:04.549410: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-01-31 09:39:04.934303: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:0f:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-01-31 09:39:04.934350: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-01-31 09:39:04.934359: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-01-31 09:39:04.934371: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:0f:00.0)
+183s - loss: 0.6731 - val_loss: 0.8359
+Epoch 2/20
+182s - loss: 0.6715 - val_loss: 0.7857
+Epoch 3/20
+182s - loss: 0.6713 - val_loss: 0.7718
+Epoch 4/20
+182s - loss: 0.6713 - val_loss: 0.8035
+Epoch 5/20
+182s - loss: 0.6713 - val_loss: 0.7818
+Epoch 6/20
+182s - loss: 0.6713 - val_loss: 0.7786
+Epoch 7/20
+191s - loss: 0.6712 - val_loss: 0.7931
+Epoch 00006: early stopping
+31.01.2018 10:15:50 INFO    Starting theta 2/100: number 13 ([-1. -1.])
+Train on 899500 samples, validate on 99945 samples
+Epoch 1/20
+194s - loss: 0.6256 - val_loss: 0.7664
+Epoch 2/20
+183s - loss: 0.6188 - val_loss: 0.7008
+Epoch 3/20
+187s - loss: 0.6177 - val_loss: 0.7582
+Epoch 4/20
+183s - loss: 0.6173 - val_loss: 0.6971
+Epoch 5/20
+183s - loss: 0.6169 - val_loss: 0.7558
+Epoch 6/20
+183s - loss: 0.6165 - val_loss: 0.7194
+Epoch 7/20
+182s - loss: 0.6162 - val_loss: 0.7499
+Epoch 8/20
+183s - loss: 0.6160 - val_loss: 0.7636
+Epoch 00007: early stopping
+31.01.2018 10:55:14 INFO    Starting theta 3/100: number 14 ([-1.  1.])
+Train on 899914 samples, validate on 99991 samples
+Epoch 1/20
+183s - loss: 0.6145 - val_loss: 0.7100
+Epoch 2/20
+183s - loss: 0.6074 - val_loss: 0.7601
+Epoch 3/20
+185s - loss: 0.6061 - val_loss: 0.6905
+Epoch 4/20
+188s - loss: 0.6053 - val_loss: 0.7167
+Epoch 5/20
+189s - loss: 0.6049 - val_loss: 0.7625
+Epoch 6/20
+189s - loss: 0.6045 - val_loss: 0.7566
+Epoch 7/20
+190s - loss: 0.6043 - val_loss: 0.6743
+Epoch 8/20
+190s - loss: 0.6039 - val_loss: 0.7134
+Epoch 9/20
+189s - loss: 0.6039 - val_loss: 0.7318
+Epoch 10/20
+189s - loss: 0.6036 - val_loss: 0.6944
+Epoch 11/20
+189s - loss: 0.6034 - val_loss: 0.6389
+Epoch 12/20
+190s - loss: 0.6031 - val_loss: 0.7410
+Epoch 13/20
+189s - loss: 0.6030 - val_loss: 0.7382
+Epoch 14/20
+189s - loss: 0.6028 - val_loss: 0.6431
+Epoch 15/20
+190s - loss: 0.6026 - val_loss: 0.6112
+Epoch 16/20
+190s - loss: 0.6024 - val_loss: 0.7229
+Epoch 17/20
+189s - loss: 0.6022 - val_loss: 0.7381
+Epoch 18/20
+189s - loss: 0.6021 - val_loss: 0.7448
+Epoch 19/20
+189s - loss: 0.6020 - val_loss: 0.7235
+Epoch 00018: early stopping
+31.01.2018 12:10:20 INFO    Starting theta 4/100: number 15 ([ 1. -1.])
+Train on 899976 samples, validate on 99998 samples
+Epoch 1/20
+190s - loss: 0.6022 - val_loss: 0.6811
+Epoch 2/20
+189s - loss: 0.5985 - val_loss: 0.6944
+Epoch 3/20
+190s - loss: 0.5977 - val_loss: 0.6667
+Epoch 4/20
+190s - loss: 0.5973 - val_loss: 0.6936
+Epoch 5/20
+190s - loss: 0.5969 - val_loss: 0.6844
+Epoch 6/20
+190s - loss: 0.5967 - val_loss: 0.7871
+Epoch 7/20
+189s - loss: 0.5963 - val_loss: 0.6736
+Epoch 00006: early stopping
+31.01.2018 12:47:55 INFO    Starting theta 5/100: number 16 ([ 1.  1.])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+191s - loss: 0.6687 - val_loss: 0.8326
+Epoch 2/20
+191s - loss: 0.6677 - val_loss: 0.8002
+Epoch 3/20
+190s - loss: 0.6676 - val_loss: 0.7799
+Epoch 4/20
+190s - loss: 0.6676 - val_loss: 0.8203
+Epoch 5/20
+190s - loss: 0.6677 - val_loss: 0.7724
+Epoch 6/20
+190s - loss: 0.6677 - val_loss: 0.8469
+Epoch 7/20
+190s - loss: 0.6676 - val_loss: 0.7957
+Epoch 8/20
+190s - loss: 0.6677 - val_loss: 0.8108
+Epoch 9/20
+190s - loss: 0.6676 - val_loss: 0.8356
+Epoch 00008: early stopping
+31.01.2018 13:32:04 INFO    Starting theta 6/100: number 9 ([-0.5 -0.5])
+Train on 898658 samples, validate on 99851 samples
+Epoch 1/20
+190s - loss: 0.6548 - val_loss: 0.7719
+Epoch 2/20
+192s - loss: 0.6514 - val_loss: 0.8294
+Epoch 3/20
+191s - loss: 0.6504 - val_loss: 0.7865
+Epoch 4/20
+191s - loss: 0.6503 - val_loss: 0.7849
+Epoch 5/20
+188s - loss: 0.6500 - val_loss: 0.8414
+Epoch 00004: early stopping
+31.01.2018 14:03:37 INFO    Starting theta 7/100: number 422 ([-0.19238158 -0.59962178])
+Train on 899409 samples, validate on 99935 samples
+Epoch 1/20
+187s - loss: 0.6574 - val_loss: 0.8174
+Epoch 2/20
+192s - loss: 0.6535 - val_loss: 0.7658
+Epoch 3/20
+192s - loss: 0.6529 - val_loss: 0.7953
+Epoch 4/20
+191s - loss: 0.6526 - val_loss: 0.7953
+Epoch 5/20
+193s - loss: 0.6524 - val_loss: 0.8170
+Epoch 6/20
+190s - loss: 0.6522 - val_loss: 0.7418
+Epoch 7/20
+186s - loss: 0.6521 - val_loss: 0.7969
+Epoch 8/20
+186s - loss: 0.6519 - val_loss: 0.8248
+Epoch 9/20
+184s - loss: 0.6516 - val_loss: 0.8748
+Epoch 10/20
+185s - loss: 0.6515 - val_loss: 0.7543
+Epoch 00009: early stopping
+31.01.2018 14:50:29 INFO    Starting theta 8/100: number 956 ([ 0.89009995 -0.46538046])
+Train on 899965 samples, validate on 99997 samples
+Epoch 1/20
+184s - loss: 0.6381 - val_loss: 0.7022
+Epoch 2/20
+185s - loss: 0.6350 - val_loss: 0.7136
+Epoch 3/20
+185s - loss: 0.6347 - val_loss: 0.7606
+Epoch 4/20
+185s - loss: 0.6344 - val_loss: 0.7811
+Epoch 5/20
+186s - loss: 0.6342 - val_loss: 0.7362
+Epoch 00004: early stopping
+31.01.2018 15:21:28 INFO    Starting theta 9/100: number 666 ([ 0.30761222  0.31321016])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+186s - loss: 0.6878 - val_loss: 0.8050
+Epoch 2/20
+193s - loss: 0.6872 - val_loss: 0.8012
+Epoch 3/20
+192s - loss: 0.6872 - val_loss: 0.8452
+Epoch 4/20
+192s - loss: 0.6873 - val_loss: 0.8416
+Epoch 5/20
+192s - loss: 0.6875 - val_loss: 0.8015
+Epoch 6/20
+192s - loss: 0.6877 - val_loss: 0.7815
+Epoch 7/20
+191s - loss: 0.6879 - val_loss: 0.8263
+Epoch 8/20
+191s - loss: 0.6880 - val_loss: 0.8165
+Epoch 9/20
+191s - loss: 0.6880 - val_loss: 0.8301
+Epoch 10/20
+191s - loss: 0.6880 - val_loss: 0.8006
+Epoch 00009: early stopping
+31.01.2018 16:09:27 INFO    Starting theta 10/100: number 802 ([ 0.57114539 -0.53482071])
+Train on 899914 samples, validate on 99991 samples
+Epoch 1/20
+195s - loss: 0.6513 - val_loss: 0.7129
+Epoch 2/20
+191s - loss: 0.6479 - val_loss: 0.7611
+Epoch 3/20
+191s - loss: 0.6476 - val_loss: 0.7832
+Epoch 4/20
+191s - loss: 0.6473 - val_loss: 0.7301
+Epoch 5/20
+191s - loss: 0.6472 - val_loss: 0.7787
+Epoch 00004: early stopping
+31.01.2018 16:41:25 INFO    Starting theta 11/100: number 675 ([ 0.32337198 -0.34480615])
+Train on 899933 samples, validate on 99993 samples
+Epoch 1/20
+191s - loss: 0.6672 - val_loss: 0.8050
+Epoch 2/20
+191s - loss: 0.6644 - val_loss: 0.8124
+Epoch 3/20
+191s - loss: 0.6640 - val_loss: 0.8129
+Epoch 4/20
+191s - loss: 0.6639 - val_loss: 0.6911
+Epoch 5/20
+192s - loss: 0.6638 - val_loss: 0.7967
+Epoch 6/20
+191s - loss: 0.6637 - val_loss: 0.8238
+Epoch 7/20
+191s - loss: 0.6637 - val_loss: 0.7389
+Epoch 8/20
+191s - loss: 0.6636 - val_loss: 0.7918
+Epoch 00007: early stopping
+31.01.2018 17:23:19 INFO    Starting theta 12/100: number 839 ([ 0.64589677  0.55027312])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+192s - loss: 0.6853 - val_loss: 0.7784
+Epoch 2/20
+192s - loss: 0.6846 - val_loss: 0.8361
+Epoch 3/20
+192s - loss: 0.6847 - val_loss: 0.8147
+Epoch 4/20
+192s - loss: 0.6848 - val_loss: 0.7779
+Epoch 5/20
+192s - loss: 0.6849 - val_loss: 0.7983
+Epoch 6/20
+191s - loss: 0.6850 - val_loss: 0.8054
+Epoch 7/20
+191s - loss: 0.6852 - val_loss: 0.8093
+Epoch 8/20
+191s - loss: 0.6851 - val_loss: 0.8274
+Epoch 00007: early stopping
+31.01.2018 18:05:20 INFO    Starting theta 13/100: number 699 ([ 0.36795424  0.28437234])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+192s - loss: 0.6881 - val_loss: 0.8428
+Epoch 2/20
+191s - loss: 0.6874 - val_loss: 0.8127
+Epoch 3/20
+191s - loss: 0.6874 - val_loss: 0.7866
+Epoch 4/20
+191s - loss: 0.6875 - val_loss: 0.7802
+Epoch 5/20
+191s - loss: 0.6877 - val_loss: 0.8341
+Epoch 6/20
+191s - loss: 0.6879 - val_loss: 0.7982
+Epoch 7/20
+191s - loss: 0.6880 - val_loss: 0.7814
+Epoch 8/20
+191s - loss: 0.6880 - val_loss: 0.7754
+Epoch 9/20
+191s - loss: 0.6880 - val_loss: 0.8015
+Epoch 10/20
+194s - loss: 0.6880 - val_loss: 0.7989
+Epoch 11/20
+193s - loss: 0.6881 - val_loss: 0.8021
+Epoch 12/20
+193s - loss: 0.6880 - val_loss: 0.8770
+Epoch 00011: early stopping
+31.01.2018 19:00:24 INFO    Starting theta 14/100: number 820 ([ 0.60259509 -0.25412776])
+Train on 899909 samples, validate on 99990 samples
+Epoch 1/20
+197s - loss: 0.6643 - val_loss: 0.7483
+Epoch 2/20
+195s - loss: 0.6617 - val_loss: 0.7565
+Epoch 3/20
+193s - loss: 0.6614 - val_loss: 0.7829
+Epoch 4/20
+192s - loss: 0.6612 - val_loss: 0.7796
+Epoch 5/20
+192s - loss: 0.6612 - val_loss: 0.7815
+Epoch 00004: early stopping
+31.01.2018 19:33:18 INFO    Starting theta 15/100: number 203 ([-0.61645122 -0.16986252])
+Train on 898658 samples, validate on 99851 samples
+Epoch 1/20
+192s - loss: 0.6548 - val_loss: 0.7532
+Epoch 2/20
+195s - loss: 0.6513 - val_loss: 0.7867
+Epoch 3/20
+193s - loss: 0.6506 - val_loss: 0.8107
+Epoch 4/20
+196s - loss: 0.6503 - val_loss: 0.8020
+Epoch 5/20
+197s - loss: 0.6501 - val_loss: 0.7873
+Epoch 00004: early stopping
+31.01.2018 20:06:42 INFO    Starting theta 16/100: number 291 ([-0.44794652 -0.29910012])
+Train on 896874 samples, validate on 99653 samples
+Epoch 1/20
+197s - loss: 0.6570 - val_loss: 0.7780
+Epoch 2/20
+196s - loss: 0.6539 - val_loss: 0.6863
+Epoch 3/20
+191s - loss: 0.6534 - val_loss: 0.7624
+Epoch 4/20
+195s - loss: 0.6531 - val_loss: 0.7532
+Epoch 5/20
+195s - loss: 0.6529 - val_loss: 0.7622
+Epoch 6/20
+194s - loss: 0.6526 - val_loss: 0.7775
+Epoch 00005: early stopping
+31.01.2018 20:43:09 INFO    Starting theta 17/100: number 634 ([ 0.24693496 -0.77942393])
+Train on 899945 samples, validate on 99994 samples
+Epoch 1/20
+192s - loss: 0.6494 - val_loss: 0.7086
+Epoch 2/20
+192s - loss: 0.6452 - val_loss: 0.6925
+Epoch 3/20
+192s - loss: 0.6447 - val_loss: 0.8122
+Epoch 4/20
+192s - loss: 0.6444 - val_loss: 0.7265
+Epoch 5/20
+192s - loss: 0.6442 - val_loss: 0.7404
+Epoch 6/20
+192s - loss: 0.6439 - val_loss: 0.7381
+Epoch 00005: early stopping
+31.01.2018 21:19:27 INFO    Starting theta 18/100: number 371 ([-0.2996083   0.60243551])
+Train on 899691 samples, validate on 99966 samples
+Epoch 1/20
+193s - loss: 0.6698 - val_loss: 0.8170
+Epoch 2/20
+192s - loss: 0.6655 - val_loss: 0.8063
+Epoch 3/20
+193s - loss: 0.6646 - val_loss: 0.7773
+Epoch 4/20
+192s - loss: 0.6643 - val_loss: 0.7575
+Epoch 5/20
+192s - loss: 0.6641 - val_loss: 0.8013
+Epoch 6/20
+192s - loss: 0.6640 - val_loss: 0.7284
+Epoch 7/20
+192s - loss: 0.6637 - val_loss: 0.7866
+Epoch 8/20
+193s - loss: 0.6637 - val_loss: 0.7642
+Epoch 9/20
+193s - loss: 0.6633 - val_loss: 0.7521
+Epoch 10/20
+193s - loss: 0.6633 - val_loss: 0.7285
+Epoch 00009: early stopping
+31.01.2018 22:08:49 INFO    Starting theta 19/100: number 973 ([ 0.93200575 -0.74254176])
+Train on 899946 samples, validate on 99995 samples
+Epoch 1/20
+195s - loss: 0.6207 - val_loss: 0.6962
+Epoch 2/20
+193s - loss: 0.6172 - val_loss: 0.7024
+Epoch 3/20
+193s - loss: 0.6166 - val_loss: 0.7279
+Epoch 4/20
+193s - loss: 0.6162 - val_loss: 0.6917
+Epoch 5/20
+193s - loss: 0.6161 - val_loss: 0.7027
+Epoch 6/20
+193s - loss: 0.6158 - val_loss: 0.7212
+Epoch 7/20
+201s - loss: 0.6156 - val_loss: 0.6910
+Epoch 8/20
+200s - loss: 0.6153 - val_loss: 0.7919
+Epoch 9/20
+200s - loss: 0.6151 - val_loss: 0.6936
+Epoch 10/20
+200s - loss: 0.6148 - val_loss: 0.7248
+Epoch 11/20
+200s - loss: 0.6147 - val_loss: 0.6946
+Epoch 00010: early stopping
+31.01.2018 23:02:41 INFO    Starting theta 20/100: number 742 ([ 0.45658682 -0.71556256])
+Train on 899913 samples, validate on 99991 samples
+Epoch 1/20
+199s - loss: 0.6451 - val_loss: 0.7835
+Epoch 2/20
+200s - loss: 0.6416 - val_loss: 0.7960
+Epoch 3/20
+199s - loss: 0.6411 - val_loss: 0.7505
+Epoch 4/20
+199s - loss: 0.6408 - val_loss: 0.7441
+Epoch 5/20
+199s - loss: 0.6406 - val_loss: 0.7566
+Epoch 6/20
+199s - loss: 0.6405 - val_loss: 0.7844
+Epoch 7/20
+194s - loss: 0.6404 - val_loss: 0.7577
+Epoch 8/20
+194s - loss: 0.6402 - val_loss: 0.8526
+Epoch 00007: early stopping
+31.01.2018 23:46:48 INFO    Starting theta 21/100: number 901 ([ 0.76761916  0.18918917])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+193s - loss: 0.6761 - val_loss: 0.7927
+Epoch 2/20
+193s - loss: 0.6744 - val_loss: 0.7483
+Epoch 3/20
+195s - loss: 0.6741 - val_loss: 0.7799
+Epoch 4/20
+193s - loss: 0.6741 - val_loss: 0.8387
+Epoch 5/20
+195s - loss: 0.6741 - val_loss: 0.8074
+Epoch 6/20
+193s - loss: 0.6741 - val_loss: 0.8254
+Epoch 00005: early stopping
+01.02.2018 00:23:47 INFO    Starting theta 22/100: number 181 ([-0.67220747  0.99327244])
+Train on 899864 samples, validate on 99985 samples
+Epoch 1/20
+194s - loss: 0.6384 - val_loss: 0.7648
+Epoch 2/20
+194s - loss: 0.6316 - val_loss: 0.6660
+Epoch 3/20
+194s - loss: 0.6304 - val_loss: 0.7157
+Epoch 4/20
+193s - loss: 0.6299 - val_loss: 0.7574
+Epoch 5/20
+193s - loss: 0.6295 - val_loss: 0.7060
+Epoch 6/20
+193s - loss: 0.6292 - val_loss: 0.7353
+Epoch 00005: early stopping
+01.02.2018 01:00:54 INFO    Starting theta 23/100: number 82 ([-0.86582211  0.18873229])
+Train on 899713 samples, validate on 99969 samples
+Epoch 1/20
+194s - loss: 0.6489 - val_loss: 0.8244
+Epoch 2/20
+194s - loss: 0.6437 - val_loss: 0.7418
+Epoch 3/20
+194s - loss: 0.6424 - val_loss: 0.7522
+Epoch 4/20
+193s - loss: 0.6417 - val_loss: 0.7653
+Epoch 5/20
+194s - loss: 0.6412 - val_loss: 0.7972
+Epoch 6/20
+194s - loss: 0.6409 - val_loss: 0.7729
+Epoch 00005: early stopping
+01.02.2018 01:38:08 INFO    Starting theta 24/100: number 937 ([ 0.84175328  0.06646314])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+194s - loss: 0.6678 - val_loss: 0.7739
+Epoch 2/20
+195s - loss: 0.6658 - val_loss: 0.7608
+Epoch 3/20
+195s - loss: 0.6654 - val_loss: 0.7751
+Epoch 4/20
+194s - loss: 0.6654 - val_loss: 0.7695
+Epoch 5/20
+194s - loss: 0.6652 - val_loss: 0.7574
+Epoch 6/20
+194s - loss: 0.6653 - val_loss: 0.7942
+Epoch 7/20
+194s - loss: 0.6651 - val_loss: 0.8328
+Epoch 8/20
+194s - loss: 0.6650 - val_loss: 0.7908
+Epoch 9/20
+194s - loss: 0.6650 - val_loss: 0.8070
+Epoch 00008: early stopping
+01.02.2018 02:25:15 INFO    Starting theta 25/100: number 510 ([-0.02257083 -0.17754257])
+Train on 898319 samples, validate on 99814 samples
+Epoch 1/20
+194s - loss: 0.6676 - val_loss: 0.8852
+Epoch 2/20
+194s - loss: 0.6654 - val_loss: 0.8412
+Epoch 3/20
+194s - loss: 0.6651 - val_loss: 0.7901
+Epoch 4/20
+194s - loss: 0.6650 - val_loss: 0.8072
+Epoch 5/20
+194s - loss: 0.6649 - val_loss: 0.8190
+Epoch 6/20
+194s - loss: 0.6649 - val_loss: 0.7709
+Epoch 7/20
+194s - loss: 0.6649 - val_loss: 0.8291
+Epoch 8/20
+194s - loss: 0.6647 - val_loss: 0.7393
+Epoch 9/20
+194s - loss: 0.6646 - val_loss: 0.7678
+Epoch 10/20
+194s - loss: 0.6645 - val_loss: 0.7979
+Epoch 11/20
+194s - loss: 0.6643 - val_loss: 0.7217
+Epoch 12/20
+194s - loss: 0.6645 - val_loss: 0.8290
+Epoch 13/20
+194s - loss: 0.6642 - val_loss: 0.8477
+Epoch 14/20
+194s - loss: 0.6641 - val_loss: 0.6742
+Epoch 15/20
+194s - loss: 0.6640 - val_loss: 0.7683
+Epoch 16/20
+194s - loss: 0.6640 - val_loss: 0.8176
+Epoch 17/20
+194s - loss: 0.6639 - val_loss: 0.8116
+Epoch 18/20
+194s - loss: 0.6638 - val_loss: 0.7898
+Epoch 00017: early stopping
+01.02.2018 03:41:08 INFO    Starting theta 26/100: number 919 ([ 0.80563564 -0.3828255 ])
+Train on 899963 samples, validate on 99996 samples
+Epoch 1/20
+189s - loss: 0.6481 - val_loss: 0.7601
+Epoch 2/20
+188s - loss: 0.6452 - val_loss: 0.7171
+Epoch 3/20
+188s - loss: 0.6448 - val_loss: 0.7582
+Epoch 4/20
+188s - loss: 0.6446 - val_loss: 0.7159
+Epoch 5/20
+188s - loss: 0.6444 - val_loss: 0.7198
+Epoch 6/20
+188s - loss: 0.6443 - val_loss: 0.7470
+Epoch 7/20
+188s - loss: 0.6440 - val_loss: 0.7829
+Epoch 8/20
+188s - loss: 0.6440 - val_loss: 0.7476
+Epoch 00007: early stopping
+01.02.2018 04:24:02 INFO    Starting theta 27/100: number 745 ([ 0.45758533  0.23764021])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+188s - loss: 0.6869 - val_loss: 0.7674
+Epoch 2/20
+188s - loss: 0.6861 - val_loss: 0.8509
+Epoch 3/20
+188s - loss: 0.6861 - val_loss: 0.8045
+Epoch 4/20
+188s - loss: 0.6861 - val_loss: 0.8738
+Epoch 5/20
+188s - loss: 0.6863 - val_loss: 0.8427
+Epoch 00004: early stopping
+01.02.2018 04:57:34 INFO    Starting theta 28/100: number 588 ([ 0.14532057 -0.99903057])
+Train on 899808 samples, validate on 99979 samples
+Epoch 1/20
+189s - loss: 0.6411 - val_loss: 0.7176
+Epoch 2/20
+188s - loss: 0.6358 - val_loss: 0.7541
+Epoch 3/20
+188s - loss: 0.6349 - val_loss: 0.7184
+Epoch 4/20
+189s - loss: 0.6346 - val_loss: 0.7756
+Epoch 5/20
+188s - loss: 0.6344 - val_loss: 0.7897
+Epoch 00004: early stopping
+01.02.2018 05:31:15 INFO    Starting theta 29/100: number 804 ([ 0.57747224  0.07115072])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+189s - loss: 0.6798 - val_loss: 0.7687
+Epoch 2/20
+189s - loss: 0.6779 - val_loss: 0.7292
+Epoch 3/20
+188s - loss: 0.6776 - val_loss: 0.8188
+Epoch 4/20
+189s - loss: 0.6777 - val_loss: 0.7033
+Epoch 5/20
+189s - loss: 0.6777 - val_loss: 0.7894
+Epoch 6/20
+189s - loss: 0.6775 - val_loss: 0.8607
+Epoch 7/20
+189s - loss: 0.6775 - val_loss: 0.7984
+Epoch 8/20
+189s - loss: 0.6774 - val_loss: 0.8238
+Epoch 00007: early stopping
+01.02.2018 06:14:35 INFO    Starting theta 30/100: number 963 ([ 0.90819175 -0.62237577])
+Train on 899936 samples, validate on 99993 samples
+Epoch 1/20
+189s - loss: 0.6284 - val_loss: 0.7647
+Epoch 2/20
+189s - loss: 0.6249 - val_loss: 0.7322
+Epoch 3/20
+189s - loss: 0.6244 - val_loss: 0.7071
+Epoch 4/20
+189s - loss: 0.6241 - val_loss: 0.7313
+Epoch 5/20
+189s - loss: 0.6239 - val_loss: 0.6791
+Epoch 6/20
+189s - loss: 0.6238 - val_loss: 0.6789
+Epoch 7/20
+189s - loss: 0.6234 - val_loss: 0.7206
+Epoch 8/20
+189s - loss: 0.6232 - val_loss: 0.7046
+Epoch 9/20
+189s - loss: 0.6231 - val_loss: 0.7379
+Epoch 10/20
+189s - loss: 0.6229 - val_loss: 0.7196
+Epoch 00009: early stopping
+01.02.2018 07:04:22 INFO    Starting theta 31/100: number 396 ([-0.24354882  0.89907487])
+Train on 899785 samples, validate on 99977 samples
+Epoch 1/20
+189s - loss: 0.6618 - val_loss: 0.8061
+Epoch 2/20
+189s - loss: 0.6572 - val_loss: 0.7255
+Epoch 3/20
+188s - loss: 0.6564 - val_loss: 0.7698
+Epoch 4/20
+189s - loss: 0.6562 - val_loss: 0.7810
+Epoch 5/20
+189s - loss: 0.6559 - val_loss: 0.8070
+Epoch 6/20
+189s - loss: 0.6556 - val_loss: 0.6943
+Epoch 7/20
+189s - loss: 0.6554 - val_loss: 0.7360
+Epoch 8/20
+189s - loss: 0.6552 - val_loss: 0.7895
+Epoch 9/20
+192s - loss: 0.6551 - val_loss: 0.7592
+Epoch 10/20
+188s - loss: 0.6549 - val_loss: 0.7176
+Epoch 00009: early stopping
+01.02.2018 07:54:16 INFO    Starting theta 32/100: number 62 ([-0.91016569  0.09832916])
+Train on 899641 samples, validate on 99961 samples
+Epoch 1/20
+189s - loss: 0.6447 - val_loss: 0.8052
+Epoch 2/20
+189s - loss: 0.6393 - val_loss: 0.7546
+Epoch 3/20
+189s - loss: 0.6381 - val_loss: 0.7450
+Epoch 4/20
+189s - loss: 0.6376 - val_loss: 0.7678
+Epoch 5/20
+189s - loss: 0.6369 - val_loss: 0.7272
+Epoch 6/20
+189s - loss: 0.6368 - val_loss: 0.7811
+Epoch 7/20
+188s - loss: 0.6365 - val_loss: 0.7815
+Epoch 8/20
+189s - loss: 0.6363 - val_loss: 0.7885
+Epoch 9/20
+189s - loss: 0.6361 - val_loss: 0.7464
+Epoch 00008: early stopping
+01.02.2018 08:41:05 INFO    Starting theta 33/100: number 401 ([-0.23817276  0.51270026])
+Train on 899593 samples, validate on 99955 samples
+Epoch 1/20
+190s - loss: 0.6729 - val_loss: 0.8206
+Epoch 2/20
+189s - loss: 0.6690 - val_loss: 0.7642
+Epoch 3/20
+189s - loss: 0.6685 - val_loss: 0.7631
+Epoch 4/20
+189s - loss: 0.6682 - val_loss: 0.7973
+Epoch 5/20
+189s - loss: 0.6682 - val_loss: 0.7407
+Epoch 6/20
+189s - loss: 0.6682 - val_loss: 0.7532
+Epoch 7/20
+189s - loss: 0.6679 - val_loss: 0.7474
+Epoch 8/20
+189s - loss: 0.6678 - val_loss: 0.8061
+Epoch 9/20
+190s - loss: 0.6676 - val_loss: 0.8509
+Epoch 00008: early stopping
+01.02.2018 09:28:17 INFO    Starting theta 34/100: number 925 ([ 0.81840142 -0.15652572])
+Train on 899954 samples, validate on 99995 samples
+Epoch 1/20
+196s - loss: 0.6586 - val_loss: 0.7745
+Epoch 2/20
+193s - loss: 0.6558 - val_loss: 0.7385
+Epoch 3/20
+189s - loss: 0.6554 - val_loss: 0.7570
+Epoch 4/20
+189s - loss: 0.6553 - val_loss: 0.7819
+Epoch 5/20
+189s - loss: 0.6552 - val_loss: 0.7271
+Epoch 6/20
+189s - loss: 0.6550 - val_loss: 0.7716
+Epoch 7/20
+189s - loss: 0.6549 - val_loss: 0.7190
+Epoch 8/20
+193s - loss: 0.6548 - val_loss: 0.7610
+Epoch 9/20
+189s - loss: 0.6546 - val_loss: 0.8060
+Epoch 10/20
+192s - loss: 0.6545 - val_loss: 0.7590
+Epoch 11/20
+195s - loss: 0.6544 - val_loss: 0.7226
+Epoch 00010: early stopping
+01.02.2018 10:22:20 INFO    Starting theta 35/100: number 874 ([ 0.70345114 -0.82047772])
+Train on 899951 samples, validate on 99995 samples
+Epoch 1/20
+190s - loss: 0.6287 - val_loss: 0.7113
+Epoch 2/20
+189s - loss: 0.6252 - val_loss: 0.7132
+Epoch 3/20
+190s - loss: 0.6245 - val_loss: 0.7597
+Epoch 4/20
+198s - loss: 0.6242 - val_loss: 0.7286
+Epoch 5/20
+198s - loss: 0.6241 - val_loss: 0.7230
+Epoch 00004: early stopping
+01.02.2018 10:57:53 INFO    Starting theta 36/100: number 770 ([ 0.51044067 -0.52312918])
+Train on 899931 samples, validate on 99993 samples
+Epoch 1/20
+200s - loss: 0.6541 - val_loss: 0.7520
+Epoch 2/20
+200s - loss: 0.6507 - val_loss: 0.7292
+Epoch 3/20
+200s - loss: 0.6505 - val_loss: 0.7482
+Epoch 4/20
+200s - loss: 0.6503 - val_loss: 0.7043
+Epoch 5/20
+200s - loss: 0.6503 - val_loss: 0.7731
+Epoch 6/20
+200s - loss: 0.6499 - val_loss: 0.7154
+Epoch 7/20
+200s - loss: 0.6500 - val_loss: 0.7656
+Epoch 8/20
+201s - loss: 0.6497 - val_loss: 0.8347
+Epoch 00007: early stopping
+01.02.2018 11:44:12 INFO    Starting theta 37/100: number 108 ([-0.81715907  0.17467073])
+Train on 899679 samples, validate on 99965 samples
+Epoch 1/20
+201s - loss: 0.6518 - val_loss: 0.7832
+Epoch 2/20
+198s - loss: 0.6464 - val_loss: 0.7421
+Epoch 3/20
+190s - loss: 0.6452 - val_loss: 0.7717
+Epoch 4/20
+190s - loss: 0.6447 - val_loss: 0.7856
+Epoch 5/20
+191s - loss: 0.6444 - val_loss: 0.7485
+Epoch 6/20
+196s - loss: 0.6441 - val_loss: 0.7596
+Epoch 00005: early stopping
+01.02.2018 12:22:51 INFO    Starting theta 38/100: number 179 ([-0.67350217  0.25822043])
+Train on 899707 samples, validate on 99968 samples
+Epoch 1/20
+191s - loss: 0.6606 - val_loss: 0.7821
+Epoch 2/20
+191s - loss: 0.6555 - val_loss: 0.7622
+Epoch 3/20
+190s - loss: 0.6544 - val_loss: 0.7819
+Epoch 4/20
+190s - loss: 0.6541 - val_loss: 0.7177
+Epoch 5/20
+190s - loss: 0.6537 - val_loss: 0.8214
+Epoch 6/20
+190s - loss: 0.6534 - val_loss: 0.8294
+Epoch 7/20
+195s - loss: 0.6534 - val_loss: 0.8282
+Epoch 8/20
+197s - loss: 0.6530 - val_loss: 0.7181
+Epoch 00007: early stopping
+01.02.2018 13:08:16 INFO    Starting theta 39/100: number 669 ([ 0.31134279 -0.91513634])
+Train on 899947 samples, validate on 99995 samples
+Epoch 1/20
+197s - loss: 0.6410 - val_loss: 0.7694
+Epoch 2/20
+195s - loss: 0.6363 - val_loss: 0.7668
+Epoch 3/20
+196s - loss: 0.6356 - val_loss: 0.7376
+Epoch 4/20
+206s - loss: 0.6354 - val_loss: 0.6847
+Epoch 5/20
+206s - loss: 0.6351 - val_loss: 0.7801
+Epoch 6/20
+206s - loss: 0.6348 - val_loss: 0.7247
+Epoch 7/20
+206s - loss: 0.6346 - val_loss: 0.7516
+Epoch 8/20
+209s - loss: 0.6345 - val_loss: 0.7011
+Epoch 00007: early stopping
+01.02.2018 13:55:47 INFO    Starting theta 40/100: number 758 ([ 0.48555393  0.60272842])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+208s - loss: 0.6875 - val_loss: 0.8126
+Epoch 2/20
+207s - loss: 0.6867 - val_loss: 0.8168
+Epoch 3/20
+207s - loss: 0.6868 - val_loss: 0.8226
+Epoch 4/20
+207s - loss: 0.6869 - val_loss: 0.7563
+Epoch 5/20
+208s - loss: 0.6871 - val_loss: 0.8298
+Epoch 6/20
+211s - loss: 0.6872 - val_loss: 0.8124
+Epoch 7/20
+211s - loss: 0.6874 - val_loss: 0.8223
+Epoch 8/20
+209s - loss: 0.6875 - val_loss: 0.8156
+Epoch 00007: early stopping
+01.02.2018 14:44:12 INFO    Starting theta 41/100: number 113 ([-0.81090693 -0.35089443])
+Train on 898508 samples, validate on 99835 samples
+Epoch 1/20
+207s - loss: 0.6456 - val_loss: 0.8068
+Epoch 2/20
+206s - loss: 0.6410 - val_loss: 0.7423
+Epoch 3/20
+207s - loss: 0.6401 - val_loss: 0.7313
+Epoch 4/20
+207s - loss: 0.6396 - val_loss: 0.8015
+Epoch 5/20
+207s - loss: 0.6392 - val_loss: 0.7585
+Epoch 6/20
+207s - loss: 0.6389 - val_loss: 0.8172
+Epoch 7/20
+207s - loss: 0.6388 - val_loss: 0.7776
+Epoch 00006: early stopping
+01.02.2018 15:29:04 INFO    Starting theta 42/100: number 587 ([ 0.14343539 -0.40035765])
+Train on 899819 samples, validate on 99980 samples
+Epoch 1/20
+206s - loss: 0.6660 - val_loss: 0.8231
+Epoch 2/20
+205s - loss: 0.6630 - val_loss: 0.7856
+Epoch 3/20
+204s - loss: 0.6627 - val_loss: 0.7871
+Epoch 4/20
+205s - loss: 0.6626 - val_loss: 0.7850
+Epoch 5/20
+205s - loss: 0.6626 - val_loss: 0.7743
+Epoch 6/20
+205s - loss: 0.6625 - val_loss: 0.7357
+Epoch 7/20
+205s - loss: 0.6624 - val_loss: 0.7380
+Epoch 8/20
+205s - loss: 0.6622 - val_loss: 0.8143
+Epoch 9/20
+205s - loss: 0.6620 - val_loss: 0.8084
+Epoch 10/20
+204s - loss: 0.6620 - val_loss: 0.7888
+Epoch 00009: early stopping
+01.02.2018 16:24:03 INFO    Starting theta 43/100: number 600 ([ 0.16780437 -0.66065983])
+Train on 899891 samples, validate on 99988 samples
+Epoch 1/20
+205s - loss: 0.6567 - val_loss: 0.7385
+Epoch 2/20
+205s - loss: 0.6525 - val_loss: 0.8090
+Epoch 3/20
+205s - loss: 0.6521 - val_loss: 0.7673
+Epoch 4/20
+204s - loss: 0.6519 - val_loss: 0.7098
+Epoch 5/20
+205s - loss: 0.6518 - val_loss: 0.8110
+Epoch 6/20
+205s - loss: 0.6515 - val_loss: 0.8331
+Epoch 7/20
+205s - loss: 0.6514 - val_loss: 0.7516
+Epoch 8/20
+205s - loss: 0.6512 - val_loss: 0.7690
+Epoch 00007: early stopping
+01.02.2018 17:12:21 INFO    Starting theta 44/100: number 975 ([ 0.93334999 -0.05006023])
+Train on 899785 samples, validate on 99977 samples
+Epoch 1/20
+206s - loss: 0.6569 - val_loss: 0.7518
+Epoch 2/20
+205s - loss: 0.6545 - val_loss: 0.7783
+Epoch 3/20
+205s - loss: 0.6542 - val_loss: 0.7978
+Epoch 4/20
+206s - loss: 0.6541 - val_loss: 0.7201
+Epoch 5/20
+205s - loss: 0.6538 - val_loss: 0.7557
+Epoch 6/20
+203s - loss: 0.6537 - val_loss: 0.7431
+Epoch 7/20
+203s - loss: 0.6535 - val_loss: 0.7815
+Epoch 8/20
+203s - loss: 0.6534 - val_loss: 0.7616
+Epoch 00007: early stopping
+01.02.2018 18:00:40 INFO    Starting theta 45/100: number 496 ([-0.05130633 -0.92036265])
+Train on 899810 samples, validate on 99979 samples
+Epoch 1/20
+208s - loss: 0.6480 - val_loss: 0.7070
+Epoch 2/20
+208s - loss: 0.6428 - val_loss: 0.8214
+Epoch 3/20
+208s - loss: 0.6421 - val_loss: 0.7457
+Epoch 4/20
+208s - loss: 0.6418 - val_loss: 0.7241
+Epoch 5/20
+208s - loss: 0.6414 - val_loss: 0.7495
+Epoch 00004: early stopping
+01.02.2018 18:39:16 INFO    Starting theta 46/100: number 66 ([-0.89913448 -0.075021  ])
+Train on 899395 samples, validate on 99933 samples
+Epoch 1/20
+209s - loss: 0.6439 - val_loss: 0.8010
+Epoch 2/20
+208s - loss: 0.6391 - val_loss: 0.7338
+Epoch 3/20
+208s - loss: 0.6377 - val_loss: 0.7737
+Epoch 4/20
+207s - loss: 0.6370 - val_loss: 0.7521
+Epoch 5/20
+208s - loss: 0.6367 - val_loss: 0.6862
+Epoch 6/20
+208s - loss: 0.6363 - val_loss: 0.8131
+Epoch 7/20
+208s - loss: 0.6360 - val_loss: 0.7505
+Epoch 8/20
+208s - loss: 0.6359 - val_loss: 0.7672
+Epoch 9/20
+208s - loss: 0.6355 - val_loss: 0.7877
+Epoch 00008: early stopping
+01.02.2018 19:31:51 INFO    Starting theta 47/100: number 467 ([-0.09097912  0.32569428])
+Train on 898786 samples, validate on 99866 samples
+Epoch 1/20
+209s - loss: 0.6768 - val_loss: 0.8017
+Epoch 2/20
+208s - loss: 0.6749 - val_loss: 0.8095
+Epoch 3/20
+208s - loss: 0.6745 - val_loss: 0.8382
+Epoch 4/20
+207s - loss: 0.6745 - val_loss: 0.8448
+Epoch 5/20
+209s - loss: 0.6743 - val_loss: 0.8630
+Epoch 00004: early stopping
+01.02.2018 20:10:41 INFO    Starting theta 48/100: number 412 ([-0.21229369  0.15277015])
+Train on 898939 samples, validate on 99883 samples
+Epoch 1/20
+210s - loss: 0.6695 - val_loss: 0.7745
+Epoch 2/20
+209s - loss: 0.6673 - val_loss: 0.8054
+Epoch 3/20
+210s - loss: 0.6672 - val_loss: 0.8133
+Epoch 4/20
+206s - loss: 0.6671 - val_loss: 0.7545
+Epoch 5/20
+208s - loss: 0.6669 - val_loss: 0.8747
+Epoch 6/20
+209s - loss: 0.6670 - val_loss: 0.7614
+Epoch 7/20
+209s - loss: 0.6669 - val_loss: 0.7603
+Epoch 8/20
+209s - loss: 0.6667 - val_loss: 0.7715
+Epoch 00007: early stopping
+01.02.2018 21:00:11 INFO    Starting theta 49/100: number 701 ([ 0.37293732  0.80702849])
+Train on 899995 samples, validate on 100000 samples
+Epoch 1/20
+210s - loss: 0.6836 - val_loss: 0.7598
+Epoch 2/20
+210s - loss: 0.6821 - val_loss: 0.8105
+Epoch 3/20
+209s - loss: 0.6821 - val_loss: 0.8228
+Epoch 4/20
+207s - loss: 0.6821 - val_loss: 0.8564
+Epoch 5/20
+207s - loss: 0.6822 - val_loss: 0.8128
+Epoch 00004: early stopping
+01.02.2018 21:39:20 INFO    Starting theta 50/100: number 986 ([ 0.95088094  0.05214484])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+208s - loss: 0.6610 - val_loss: 0.7743
+Epoch 2/20
+208s - loss: 0.6588 - val_loss: 0.7664
+Epoch 3/20
+207s - loss: 0.6585 - val_loss: 0.8079
+Epoch 4/20
+207s - loss: 0.6584 - val_loss: 0.7695
+Epoch 5/20
+208s - loss: 0.6582 - val_loss: 0.8117
+Epoch 6/20
+209s - loss: 0.6581 - val_loss: 0.7573
+Epoch 7/20
+210s - loss: 0.6581 - val_loss: 0.7639
+Epoch 8/20
+211s - loss: 0.6580 - val_loss: 0.7318
+Epoch 9/20
+210s - loss: 0.6577 - val_loss: 0.7318
+Epoch 10/20
+209s - loss: 0.6577 - val_loss: 0.7780
+Epoch 11/20
+210s - loss: 0.6575 - val_loss: 0.7679
+Epoch 12/20
+213s - loss: 0.6575 - val_loss: 0.8087
+Epoch 13/20
+211s - loss: 0.6575 - val_loss: 0.7580
+Epoch 00012: early stopping
+01.02.2018 22:46:41 INFO    Starting theta 51/100: number 598 ([ 0.16578311 -0.09655258])
+Train on 899656 samples, validate on 99962 samples
+Epoch 1/20
+214s - loss: 0.6763 - val_loss: 0.8368
+Epoch 2/20
+213s - loss: 0.6742 - val_loss: 0.7933
+Epoch 3/20
+213s - loss: 0.6740 - val_loss: 0.7912
+Epoch 4/20
+213s - loss: 0.6740 - val_loss: 0.7745
+Epoch 5/20
+213s - loss: 0.6740 - val_loss: 0.8043
+Epoch 6/20
+213s - loss: 0.6740 - val_loss: 0.7553
+Epoch 7/20
+213s - loss: 0.6739 - val_loss: 0.7656
+Epoch 8/20
+213s - loss: 0.6740 - val_loss: 0.7704
+Epoch 9/20
+213s - loss: 0.6736 - val_loss: 0.8416
+Epoch 10/20
+213s - loss: 0.6736 - val_loss: 0.7998
+Epoch 00009: early stopping
+01.02.2018 23:44:16 INFO    Starting theta 52/100: number 810 ([ 0.58481973 -0.20571565])
+Train on 899933 samples, validate on 99993 samples
+Epoch 1/20
+215s - loss: 0.6667 - val_loss: 0.7536
+Epoch 2/20
+214s - loss: 0.6642 - val_loss: 0.7928
+Epoch 3/20
+213s - loss: 0.6639 - val_loss: 0.7833
+Epoch 4/20
+214s - loss: 0.6638 - val_loss: 0.7534
+Epoch 5/20
+214s - loss: 0.6637 - val_loss: 0.8056
+Epoch 6/20
+214s - loss: 0.6635 - val_loss: 0.7872
+Epoch 7/20
+214s - loss: 0.6636 - val_loss: 0.7685
+Epoch 8/20
+214s - loss: 0.6634 - val_loss: 0.7712
+Epoch 00007: early stopping
+02.02.2018 00:35:00 INFO    Starting theta 53/100: number 97 ([-0.83949827 -0.85622854])
+Train on 899436 samples, validate on 99938 samples
+Epoch 1/20
+215s - loss: 0.6398 - val_loss: 0.7314
+Epoch 2/20
+214s - loss: 0.6337 - val_loss: 0.7195
+Epoch 3/20
+214s - loss: 0.6325 - val_loss: 0.7752
+Epoch 4/20
+214s - loss: 0.6321 - val_loss: 0.7440
+Epoch 5/20
+214s - loss: 0.6316 - val_loss: 0.7355
+Epoch 6/20
+215s - loss: 0.6315 - val_loss: 0.7475
+Epoch 00005: early stopping
+02.02.2018 01:18:45 INFO    Starting theta 54/100: number 18 ([-0.99849038  0.13674514])
+Train on 899650 samples, validate on 99962 samples
+Epoch 1/20
+215s - loss: 0.6378 - val_loss: 0.6742
+Epoch 2/20
+214s - loss: 0.6319 - val_loss: 0.7036
+Epoch 3/20
+214s - loss: 0.6305 - val_loss: 0.7123
+Epoch 4/20
+215s - loss: 0.6301 - val_loss: 0.7220
+Epoch 5/20
+215s - loss: 0.6298 - val_loss: 0.7300
+Epoch 00004: early stopping
+02.02.2018 01:59:05 INFO    Starting theta 55/100: number 723 ([ 0.42313754  0.04817991])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+216s - loss: 0.6827 - val_loss: 0.8055
+Epoch 2/20
+215s - loss: 0.6811 - val_loss: 0.8286
+Epoch 3/20
+215s - loss: 0.6808 - val_loss: 0.7449
+Epoch 4/20
+215s - loss: 0.6809 - val_loss: 0.8457
+Epoch 5/20
+215s - loss: 0.6809 - val_loss: 0.8236
+Epoch 6/20
+215s - loss: 0.6809 - val_loss: 0.8019
+Epoch 7/20
+214s - loss: 0.6809 - val_loss: 0.7926
+Epoch 00006: early stopping
+02.02.2018 02:46:38 INFO    Starting theta 56/100: number 159 ([-0.72275143  0.26484372])
+Train on 899721 samples, validate on 99969 samples
+Epoch 1/20
+204s - loss: 0.6575 - val_loss: 0.7768
+Epoch 2/20
+195s - loss: 0.6524 - val_loss: 0.7378
+Epoch 3/20
+193s - loss: 0.6512 - val_loss: 0.8239
+Epoch 4/20
+194s - loss: 0.6507 - val_loss: 0.7936
+Epoch 5/20
+194s - loss: 0.6504 - val_loss: 0.7098
+Epoch 6/20
+194s - loss: 0.6503 - val_loss: 0.8227
+Epoch 7/20
+194s - loss: 0.6499 - val_loss: 0.8809
+Epoch 8/20
+194s - loss: 0.6497 - val_loss: 0.7571
+Epoch 9/20
+194s - loss: 0.6496 - val_loss: 0.7529
+Epoch 00008: early stopping
+02.02.2018 03:37:26 INFO    Starting theta 57/100: number 320 ([-0.39025216  0.89762413])
+Train on 899811 samples, validate on 99980 samples
+Epoch 1/20
+195s - loss: 0.6563 - val_loss: 0.7811
+Epoch 2/20
+194s - loss: 0.6512 - val_loss: 0.7082
+Epoch 3/20
+194s - loss: 0.6503 - val_loss: 0.7337
+Epoch 4/20
+194s - loss: 0.6499 - val_loss: 0.7914
+Epoch 5/20
+194s - loss: 0.6496 - val_loss: 0.8013
+Epoch 6/20
+194s - loss: 0.6494 - val_loss: 0.7771
+Epoch 00005: early stopping
+02.02.2018 04:18:29 INFO    Starting theta 58/100: number 301 ([-0.42496479 -0.29929615])
+Train on 896882 samples, validate on 99654 samples
+Epoch 1/20
+194s - loss: 0.6576 - val_loss: 0.7823
+Epoch 2/20
+193s - loss: 0.6547 - val_loss: 0.7634
+Epoch 3/20
+193s - loss: 0.6544 - val_loss: 0.7846
+Epoch 4/20
+193s - loss: 0.6541 - val_loss: 0.7791
+Epoch 5/20
+194s - loss: 0.6539 - val_loss: 0.7368
+Epoch 6/20
+193s - loss: 0.6537 - val_loss: 0.8261
+Epoch 7/20
+193s - loss: 0.6534 - val_loss: 0.8323
+Epoch 8/20
+193s - loss: 0.6532 - val_loss: 0.8042
+Epoch 9/20
+193s - loss: 0.6531 - val_loss: 0.7298
+Epoch 10/20
+193s - loss: 0.6529 - val_loss: 0.8132
+Epoch 11/20
+193s - loss: 0.6528 - val_loss: 0.8585
+Epoch 12/20
+193s - loss: 0.6527 - val_loss: 0.7974
+Epoch 13/20
+193s - loss: 0.6525 - val_loss: 0.7797
+Epoch 00012: early stopping
+02.02.2018 05:22:08 INFO    Starting theta 59/100: number 352 ([-0.33117606 -0.06437794])
+Train on 897537 samples, validate on 99727 samples
+Epoch 1/20
+195s - loss: 0.6620 - val_loss: 0.8383
+Epoch 2/20
+193s - loss: 0.6594 - val_loss: 0.8024
+Epoch 3/20
+193s - loss: 0.6591 - val_loss: 0.7749
+Epoch 4/20
+193s - loss: 0.6590 - val_loss: 0.8072
+Epoch 5/20
+193s - loss: 0.6589 - val_loss: 0.8300
+Epoch 6/20
+193s - loss: 0.6587 - val_loss: 0.8273
+Epoch 7/20
+193s - loss: 0.6586 - val_loss: 0.8421
+Epoch 00006: early stopping
+02.02.2018 06:06:32 INFO    Starting theta 60/100: number 159 ([-0.72275143  0.26484372])
+Train on 899721 samples, validate on 99969 samples
+Epoch 1/20
+195s - loss: 0.6578 - val_loss: 0.8222
+Epoch 2/20
+194s - loss: 0.6522 - val_loss: 0.7796
+Epoch 3/20
+194s - loss: 0.6512 - val_loss: 0.7714
+Epoch 4/20
+194s - loss: 0.6507 - val_loss: 0.8382
+Epoch 5/20
+194s - loss: 0.6505 - val_loss: 0.7233
+Epoch 6/20
+194s - loss: 0.6500 - val_loss: 0.7893
+Epoch 7/20
+194s - loss: 0.6500 - val_loss: 0.7683
+Epoch 8/20
+194s - loss: 0.6496 - val_loss: 0.7841
+Epoch 9/20
+194s - loss: 0.6496 - val_loss: 0.7045
+Epoch 10/20
+194s - loss: 0.6493 - val_loss: 0.7917
+Epoch 11/20
+194s - loss: 0.6493 - val_loss: 0.8749
+Epoch 12/20
+194s - loss: 0.6490 - val_loss: 0.7802
+Epoch 13/20
+194s - loss: 0.6489 - val_loss: 0.7917
+Epoch 00012: early stopping
+02.02.2018 07:10:39 INFO    Starting theta 61/100: number 89 ([-0.852803    0.39758022])
+Train on 899783 samples, validate on 99976 samples
+Epoch 1/20
+195s - loss: 0.6484 - val_loss: 0.7160
+Epoch 2/20
+195s - loss: 0.6424 - val_loss: 0.7373
+Epoch 3/20
+195s - loss: 0.6413 - val_loss: 0.8023
+Epoch 4/20
+195s - loss: 0.6407 - val_loss: 0.8202
+Epoch 5/20
+195s - loss: 0.6403 - val_loss: 0.7725
+Epoch 00004: early stopping
+02.02.2018 07:48:59 INFO    Starting theta 62/100: number 421 ([-0.19372397 -0.5487683 ])
+Train on 899257 samples, validate on 99918 samples
+Epoch 1/20
+196s - loss: 0.6582 - val_loss: 0.8264
+Epoch 2/20
+195s - loss: 0.6547 - val_loss: 0.8423
+Epoch 3/20
+195s - loss: 0.6542 - val_loss: 0.8176
+Epoch 4/20
+195s - loss: 0.6540 - val_loss: 0.8045
+Epoch 5/20
+195s - loss: 0.6538 - val_loss: 0.7787
+Epoch 6/20
+195s - loss: 0.6535 - val_loss: 0.8291
+Epoch 7/20
+195s - loss: 0.6533 - val_loss: 0.7890
+Epoch 8/20
+195s - loss: 0.6532 - val_loss: 0.8334
+Epoch 9/20
+195s - loss: 0.6529 - val_loss: 0.7145
+Epoch 10/20
+195s - loss: 0.6528 - val_loss: 0.7356
+Epoch 11/20
+195s - loss: 0.6527 - val_loss: 0.7922
+Epoch 12/20
+195s - loss: 0.6526 - val_loss: 0.8054
+Epoch 13/20
+195s - loss: 0.6525 - val_loss: 0.8198
+Epoch 00012: early stopping
+02.02.2018 08:53:33 INFO    Starting theta 63/100: number 574 ([ 0.12059293  0.25501418])
+Train on 899991 samples, validate on 99999 samples
+Epoch 1/20
+196s - loss: 0.6835 - val_loss: 0.7985
+Epoch 2/20
+196s - loss: 0.6824 - val_loss: 0.8340
+Epoch 3/20
+196s - loss: 0.6823 - val_loss: 0.8234
+Epoch 4/20
+195s - loss: 0.6823 - val_loss: 0.7934
+Epoch 5/20
+195s - loss: 0.6825 - val_loss: 0.7990
+Epoch 6/20
+195s - loss: 0.6826 - val_loss: 0.7960
+Epoch 7/20
+195s - loss: 0.6827 - val_loss: 0.8127
+Epoch 8/20
+195s - loss: 0.6828 - val_loss: 0.8426
+Epoch 00007: early stopping
+02.02.2018 09:41:58 INFO    Starting theta 64/100: number 923 ([ 0.81364542  0.67663973])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+196s - loss: 0.6799 - val_loss: 0.8053
+Epoch 2/20
+195s - loss: 0.6790 - val_loss: 0.8032
+Epoch 3/20
+195s - loss: 0.6790 - val_loss: 0.7797
+Epoch 4/20
+195s - loss: 0.6790 - val_loss: 0.7931
+Epoch 5/20
+196s - loss: 0.6792 - val_loss: 0.7485
+Epoch 6/20
+200s - loss: 0.6792 - val_loss: 0.8304
+Epoch 7/20
+202s - loss: 0.6792 - val_loss: 0.7902
+Epoch 8/20
+202s - loss: 0.6792 - val_loss: 0.8041
+Epoch 9/20
+206s - loss: 0.6793 - val_loss: 0.8697
+Epoch 00008: early stopping
+02.02.2018 10:35:17 INFO    Starting theta 65/100: number 849 ([ 0.6583114   0.73535462])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+210s - loss: 0.6834 - val_loss: 0.7583
+Epoch 2/20
+209s - loss: 0.6824 - val_loss: 0.7741
+Epoch 3/20
+209s - loss: 0.6825 - val_loss: 0.8066
+Epoch 4/20
+210s - loss: 0.6825 - val_loss: 0.7972
+Epoch 5/20
+209s - loss: 0.6827 - val_loss: 0.8304
+Epoch 00004: early stopping
+02.02.2018 11:16:12 INFO    Starting theta 66/100: number 299 ([-0.43548471  0.24506174])
+Train on 899624 samples, validate on 99959 samples
+Epoch 1/20
+208s - loss: 0.6679 - val_loss: 0.8014
+Epoch 2/20
+212s - loss: 0.6641 - val_loss: 0.7474
+Epoch 3/20
+212s - loss: 0.6635 - val_loss: 0.8169
+Epoch 4/20
+212s - loss: 0.6631 - val_loss: 0.8771
+Epoch 5/20
+212s - loss: 0.6629 - val_loss: 0.8342
+Epoch 6/20
+213s - loss: 0.6626 - val_loss: 0.8074
+Epoch 00005: early stopping
+02.02.2018 12:01:27 INFO    Starting theta 67/100: number 119 ([-0.80217018 -0.19137665])
+Train on 899035 samples, validate on 99893 samples
+Epoch 1/20
+212s - loss: 0.6481 - val_loss: 0.7813
+Epoch 2/20
+213s - loss: 0.6437 - val_loss: 0.7869
+Epoch 3/20
+212s - loss: 0.6426 - val_loss: 0.7712
+Epoch 4/20
+212s - loss: 0.6421 - val_loss: 0.7660
+Epoch 5/20
+212s - loss: 0.6416 - val_loss: 0.8389
+Epoch 6/20
+212s - loss: 0.6414 - val_loss: 0.8175
+Epoch 7/20
+213s - loss: 0.6410 - val_loss: 0.7639
+Epoch 8/20
+215s - loss: 0.6408 - val_loss: 0.8108
+Epoch 9/20
+215s - loss: 0.6408 - val_loss: 0.7606
+Epoch 10/20
+214s - loss: 0.6405 - val_loss: 0.7239
+Epoch 11/20
+215s - loss: 0.6403 - val_loss: 0.7456
+Epoch 12/20
+213s - loss: 0.6401 - val_loss: 0.8378
+Epoch 13/20
+214s - loss: 0.6400 - val_loss: 0.7679
+Epoch 14/20
+212s - loss: 0.6398 - val_loss: 0.8077
+Epoch 00013: early stopping
+02.02.2018 13:15:51 INFO    Starting theta 68/100: number 167 ([-0.70631846 -0.18913046])
+Train on 898876 samples, validate on 99876 samples
+Epoch 1/20
+214s - loss: 0.6519 - val_loss: 0.7759
+Epoch 2/20
+211s - loss: 0.6479 - val_loss: 0.7481
+Epoch 3/20
+212s - loss: 0.6473 - val_loss: 0.7884
+Epoch 4/20
+212s - loss: 0.6469 - val_loss: 0.7841
+Epoch 5/20
+213s - loss: 0.6465 - val_loss: 0.7895
+Epoch 6/20
+212s - loss: 0.6463 - val_loss: 0.7852
+Epoch 00005: early stopping
+02.02.2018 14:01:49 INFO    Starting theta 69/100: number 939 ([ 0.84561864 -0.65874341])
+Train on 899938 samples, validate on 99994 samples
+Epoch 1/20
+212s - loss: 0.6303 - val_loss: 0.7785
+Epoch 2/20
+211s - loss: 0.6270 - val_loss: 0.7630
+Epoch 3/20
+211s - loss: 0.6266 - val_loss: 0.7203
+Epoch 4/20
+211s - loss: 0.6263 - val_loss: 0.7411
+Epoch 5/20
+211s - loss: 0.6261 - val_loss: 0.7304
+Epoch 6/20
+211s - loss: 0.6258 - val_loss: 0.7118
+Epoch 7/20
+211s - loss: 0.6257 - val_loss: 0.6965
+Epoch 8/20
+211s - loss: 0.6256 - val_loss: 0.7847
+Epoch 9/20
+211s - loss: 0.6252 - val_loss: 0.7562
+Epoch 10/20
+211s - loss: 0.6251 - val_loss: 0.8072
+Epoch 11/20
+211s - loss: 0.6249 - val_loss: 0.7356
+Epoch 00010: early stopping
+02.02.2018 15:05:12 INFO    Starting theta 70/100: number 402 ([-0.23381329 -0.74778958])
+Train on 899529 samples, validate on 99948 samples
+Epoch 1/20
+210s - loss: 0.6546 - val_loss: 0.8473
+Epoch 2/20
+211s - loss: 0.6499 - val_loss: 0.7210
+Epoch 3/20
+211s - loss: 0.6490 - val_loss: 0.8412
+Epoch 4/20
+211s - loss: 0.6487 - val_loss: 0.7276
+Epoch 5/20
+211s - loss: 0.6485 - val_loss: 0.6677
+Epoch 6/20
+211s - loss: 0.6482 - val_loss: 0.6957
+Epoch 7/20
+211s - loss: 0.6481 - val_loss: 0.8462
+Epoch 8/20
+211s - loss: 0.6479 - val_loss: 0.7681
+Epoch 9/20
+211s - loss: 0.6478 - val_loss: 0.8452
+Epoch 00008: early stopping
+02.02.2018 16:01:46 INFO    Starting theta 71/100: number 52 ([-0.92568077  0.24722516])
+Train on 899717 samples, validate on 99969 samples
+Epoch 1/20
+211s - loss: 0.6448 - val_loss: 0.8466
+Epoch 2/20
+210s - loss: 0.6387 - val_loss: 0.7467
+Epoch 3/20
+211s - loss: 0.6373 - val_loss: 0.7856
+Epoch 4/20
+211s - loss: 0.6368 - val_loss: 0.7281
+Epoch 5/20
+210s - loss: 0.6364 - val_loss: 0.7720
+Epoch 6/20
+211s - loss: 0.6362 - val_loss: 0.7982
+Epoch 7/20
+211s - loss: 0.6361 - val_loss: 0.7012
+Epoch 8/20
+211s - loss: 0.6357 - val_loss: 0.7431
+Epoch 9/20
+211s - loss: 0.6356 - val_loss: 0.8021
+Epoch 10/20
+211s - loss: 0.6353 - val_loss: 0.7304
+Epoch 11/20
+211s - loss: 0.6352 - val_loss: 0.7461
+Epoch 00010: early stopping
+02.02.2018 17:05:09 INFO    Starting theta 72/100: number 787 ([ 0.54418497  0.30320758])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+212s - loss: 0.6864 - val_loss: 0.8008
+Epoch 2/20
+211s - loss: 0.6855 - val_loss: 0.8252
+Epoch 3/20
+211s - loss: 0.6856 - val_loss: 0.8084
+Epoch 4/20
+211s - loss: 0.6856 - val_loss: 0.7773
+Epoch 5/20
+211s - loss: 0.6858 - val_loss: 0.8247
+Epoch 6/20
+211s - loss: 0.6859 - val_loss: 0.8322
+Epoch 7/20
+211s - loss: 0.6859 - val_loss: 0.8326
+Epoch 8/20
+212s - loss: 0.6859 - val_loss: 0.7821
+Epoch 00007: early stopping
+02.02.2018 17:58:22 INFO    Starting theta 73/100: number 978 ([ 0.9400757   0.37123973])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+214s - loss: 0.6720 - val_loss: 0.7868
+Epoch 2/20
+212s - loss: 0.6705 - val_loss: 0.7561
+Epoch 3/20
+211s - loss: 0.6703 - val_loss: 0.8215
+Epoch 4/20
+211s - loss: 0.6702 - val_loss: 0.7960
+Epoch 5/20
+211s - loss: 0.6703 - val_loss: 0.7820
+Epoch 6/20
+211s - loss: 0.6702 - val_loss: 0.7736
+Epoch 00005: early stopping
+02.02.2018 18:44:27 INFO    Starting theta 74/100: number 41 ([-0.9466884  -0.84207419])
+Train on 899246 samples, validate on 99917 samples
+Epoch 1/20
+213s - loss: 0.6325 - val_loss: 0.7598
+Epoch 2/20
+211s - loss: 0.6264 - val_loss: 0.6850
+Epoch 3/20
+211s - loss: 0.6252 - val_loss: 0.7774
+Epoch 4/20
+211s - loss: 0.6247 - val_loss: 0.7510
+Epoch 5/20
+211s - loss: 0.6244 - val_loss: 0.7049
+Epoch 6/20
+211s - loss: 0.6241 - val_loss: 0.6507
+Epoch 7/20
+210s - loss: 0.6238 - val_loss: 0.7619
+Epoch 8/20
+210s - loss: 0.6236 - val_loss: 0.7215
+Epoch 9/20
+210s - loss: 0.6234 - val_loss: 0.7958
+Epoch 10/20
+211s - loss: 0.6232 - val_loss: 0.7292
+Epoch 00009: early stopping
+02.02.2018 19:44:52 INFO    Starting theta 75/100: number 873 ([ 0.70219015 -0.19960724])
+Train on 899958 samples, validate on 99996 samples
+Epoch 1/20
+212s - loss: 0.6625 - val_loss: 0.7629
+Epoch 2/20
+210s - loss: 0.6598 - val_loss: 0.7800
+Epoch 3/20
+210s - loss: 0.6593 - val_loss: 0.7856
+Epoch 4/20
+210s - loss: 0.6592 - val_loss: 0.7320
+Epoch 5/20
+210s - loss: 0.6591 - val_loss: 0.6845
+Epoch 6/20
+210s - loss: 0.6590 - val_loss: 0.8510
+Epoch 7/20
+210s - loss: 0.6588 - val_loss: 0.8131
+Epoch 8/20
+210s - loss: 0.6587 - val_loss: 0.7836
+Epoch 9/20
+209s - loss: 0.6587 - val_loss: 0.7582
+Epoch 00008: early stopping
+02.02.2018 20:41:09 INFO    Starting theta 76/100: number 533 ([ 0.0176752  0.4110256])
+Train on 899740 samples, validate on 99972 samples
+Epoch 1/20
+199s - loss: 0.6807 - val_loss: 0.8424
+Epoch 2/20
+198s - loss: 0.6792 - val_loss: 0.8355
+Epoch 3/20
+198s - loss: 0.6790 - val_loss: 0.7953
+Epoch 4/20
+197s - loss: 0.6789 - val_loss: 0.7785
+Epoch 5/20
+198s - loss: 0.6789 - val_loss: 0.8564
+Epoch 6/20
+197s - loss: 0.6789 - val_loss: 0.8357
+Epoch 7/20
+198s - loss: 0.6789 - val_loss: 0.8234
+Epoch 8/20
+198s - loss: 0.6787 - val_loss: 0.7514
+Epoch 9/20
+197s - loss: 0.6786 - val_loss: 0.7944
+Epoch 10/20
+197s - loss: 0.6786 - val_loss: 0.8211
+Epoch 11/20
+197s - loss: 0.6785 - val_loss: 0.7982
+Epoch 12/20
+198s - loss: 0.6784 - val_loss: 0.8084
+Epoch 00011: early stopping
+02.02.2018 21:44:51 INFO    Starting theta 77/100: number 827 ([ 0.62406481 -0.33833102])
+Train on 899959 samples, validate on 99996 samples
+Epoch 1/20
+199s - loss: 0.6594 - val_loss: 0.7713
+Epoch 2/20
+198s - loss: 0.6563 - val_loss: 0.7791
+Epoch 3/20
+198s - loss: 0.6560 - val_loss: 0.7824
+Epoch 4/20
+199s - loss: 0.6558 - val_loss: 0.8200
+Epoch 5/20
+198s - loss: 0.6558 - val_loss: 0.7879
+Epoch 00004: early stopping
+02.02.2018 22:25:58 INFO    Starting theta 78/100: number 304 ([-0.42112069 -0.83328775])
+Train on 899575 samples, validate on 99953 samples
+Epoch 1/20
+201s - loss: 0.6529 - val_loss: 0.7801
+Epoch 2/20
+198s - loss: 0.6480 - val_loss: 0.7991
+Epoch 3/20
+202s - loss: 0.6469 - val_loss: 0.8274
+Epoch 4/20
+204s - loss: 0.6465 - val_loss: 0.7920
+Epoch 5/20
+204s - loss: 0.6462 - val_loss: 0.7930
+Epoch 00004: early stopping
+02.02.2018 23:07:24 INFO    Starting theta 79/100: number 294 ([-0.44383773  0.33528586])
+Train on 899618 samples, validate on 99958 samples
+Epoch 1/20
+208s - loss: 0.6678 - val_loss: 0.8001
+Epoch 2/20
+206s - loss: 0.6639 - val_loss: 0.7406
+Epoch 3/20
+206s - loss: 0.6631 - val_loss: 0.7616
+Epoch 4/20
+217s - loss: 0.6629 - val_loss: 0.8081
+Epoch 5/20
+216s - loss: 0.6626 - val_loss: 0.8064
+Epoch 6/20
+217s - loss: 0.6623 - val_loss: 0.7863
+Epoch 00005: early stopping
+02.02.2018 23:54:16 INFO    Starting theta 80/100: number 760 ([ 0.49108963 -0.17051546])
+Train on 899942 samples, validate on 99994 samples
+Epoch 1/20
+219s - loss: 0.6726 - val_loss: 0.8842
+Epoch 2/20
+207s - loss: 0.6698 - val_loss: 0.7654
+Epoch 3/20
+207s - loss: 0.6695 - val_loss: 0.7676
+Epoch 4/20
+207s - loss: 0.6693 - val_loss: 0.7866
+Epoch 5/20
+207s - loss: 0.6694 - val_loss: 0.8470
+Epoch 6/20
+207s - loss: 0.6693 - val_loss: 0.7739
+Epoch 00005: early stopping
+03.02.2018 00:39:50 INFO    Starting theta 81/100: number 890 ([ 0.74368597  0.764742  ])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+200s - loss: 0.6810 - val_loss: 0.7869
+Epoch 2/20
+198s - loss: 0.6801 - val_loss: 0.7900
+Epoch 3/20
+198s - loss: 0.6801 - val_loss: 0.8123
+Epoch 4/20
+198s - loss: 0.6802 - val_loss: 0.7765
+Epoch 5/20
+198s - loss: 0.6804 - val_loss: 0.8320
+Epoch 6/20
+198s - loss: 0.6804 - val_loss: 0.8136
+Epoch 7/20
+198s - loss: 0.6805 - val_loss: 0.8117
+Epoch 8/20
+198s - loss: 0.6804 - val_loss: 0.8169
+Epoch 00007: early stopping
+03.02.2018 01:31:03 INFO    Starting theta 82/100: number 539 ([ 0.02611736  0.48536552])
+Train on 899740 samples, validate on 99972 samples
+Epoch 1/20
+200s - loss: 0.6812 - val_loss: 0.7793
+Epoch 2/20
+199s - loss: 0.6794 - val_loss: 0.8100
+Epoch 3/20
+199s - loss: 0.6790 - val_loss: 0.7859
+Epoch 4/20
+199s - loss: 0.6789 - val_loss: 0.8273
+Epoch 5/20
+199s - loss: 0.6789 - val_loss: 0.8177
+Epoch 00004: early stopping
+03.02.2018 02:12:39 INFO    Starting theta 83/100: number 1000 ([ 0.97310957 -0.81263698])
+Train on 899964 samples, validate on 99996 samples
+Epoch 1/20
+202s - loss: 0.6146 - val_loss: 0.6925
+Epoch 2/20
+200s - loss: 0.6110 - val_loss: 0.6617
+Epoch 3/20
+201s - loss: 0.6103 - val_loss: 0.6701
+Epoch 4/20
+200s - loss: 0.6099 - val_loss: 0.7411
+Epoch 5/20
+200s - loss: 0.6095 - val_loss: 0.7111
+Epoch 6/20
+199s - loss: 0.6092 - val_loss: 0.6884
+Epoch 00005: early stopping
+03.02.2018 02:57:48 INFO    Starting theta 84/100: number 291 ([-0.44794652 -0.29910012])
+Train on 896874 samples, validate on 99653 samples
+Epoch 1/20
+200s - loss: 0.6571 - val_loss: 0.7813
+Epoch 2/20
+199s - loss: 0.6540 - val_loss: 0.7580
+Epoch 3/20
+199s - loss: 0.6534 - val_loss: 0.7740
+Epoch 4/20
+200s - loss: 0.6531 - val_loss: 0.7707
+Epoch 5/20
+201s - loss: 0.6529 - val_loss: 0.7472
+Epoch 6/20
+201s - loss: 0.6528 - val_loss: 0.7640
+Epoch 7/20
+201s - loss: 0.6526 - val_loss: 0.7835
+Epoch 8/20
+199s - loss: 0.6525 - val_loss: 0.8083
+Epoch 9/20
+199s - loss: 0.6523 - val_loss: 0.7314
+Epoch 10/20
+199s - loss: 0.6521 - val_loss: 0.8239
+Epoch 11/20
+199s - loss: 0.6521 - val_loss: 0.8089
+Epoch 12/20
+199s - loss: 0.6519 - val_loss: 0.7749
+Epoch 13/20
+199s - loss: 0.6518 - val_loss: 0.8773
+Epoch 00012: early stopping
+03.02.2018 04:06:19 INFO    Starting theta 85/100: number 740 ([ 0.45098284 -0.09648431])
+Train on 899901 samples, validate on 99989 samples
+Epoch 1/20
+201s - loss: 0.6762 - val_loss: 0.8037
+Epoch 2/20
+200s - loss: 0.6741 - val_loss: 0.7761
+Epoch 3/20
+200s - loss: 0.6737 - val_loss: 0.8047
+Epoch 4/20
+200s - loss: 0.6736 - val_loss: 0.7719
+Epoch 5/20
+200s - loss: 0.6735 - val_loss: 0.8601
+Epoch 6/20
+200s - loss: 0.6735 - val_loss: 0.8043
+Epoch 7/20
+200s - loss: 0.6735 - val_loss: 0.7799
+Epoch 8/20
+200s - loss: 0.6734 - val_loss: 0.7795
+Epoch 00007: early stopping
+03.02.2018 04:58:22 INFO    Starting theta 86/100: number 276 ([-0.4640355  -0.39998652])
+Train on 898016 samples, validate on 99780 samples
+Epoch 1/20
+201s - loss: 0.6560 - val_loss: 0.8573
+Epoch 2/20
+200s - loss: 0.6528 - val_loss: 0.7197
+Epoch 3/20
+201s - loss: 0.6521 - val_loss: 0.7310
+Epoch 4/20
+201s - loss: 0.6518 - val_loss: 0.8197
+Epoch 5/20
+201s - loss: 0.6516 - val_loss: 0.7569
+Epoch 6/20
+200s - loss: 0.6515 - val_loss: 0.9042
+Epoch 00005: early stopping
+03.02.2018 05:44:00 INFO    Starting theta 87/100: number 679 ([ 0.33068993 -0.75125927])
+Train on 899947 samples, validate on 99995 samples
+Epoch 1/20
+201s - loss: 0.6486 - val_loss: 0.7296
+Epoch 2/20
+200s - loss: 0.6444 - val_loss: 0.7914
+Epoch 3/20
+200s - loss: 0.6439 - val_loss: 0.7318
+Epoch 4/20
+200s - loss: 0.6437 - val_loss: 0.7867
+Epoch 5/20
+200s - loss: 0.6434 - val_loss: 0.7032
+Epoch 6/20
+200s - loss: 0.6433 - val_loss: 0.7384
+Epoch 7/20
+200s - loss: 0.6430 - val_loss: 0.7413
+Epoch 8/20
+200s - loss: 0.6429 - val_loss: 0.7592
+Epoch 9/20
+200s - loss: 0.6426 - val_loss: 0.7079
+Epoch 00008: early stopping
+03.02.2018 06:39:37 INFO    Starting theta 88/100: number 167 ([-0.70631846 -0.18913046])
+Train on 898876 samples, validate on 99876 samples
+Epoch 1/20
+202s - loss: 0.6521 - val_loss: 0.7555
+Epoch 2/20
+200s - loss: 0.6482 - val_loss: 0.8292
+Epoch 3/20
+200s - loss: 0.6475 - val_loss: 0.7549
+Epoch 4/20
+200s - loss: 0.6471 - val_loss: 0.8050
+Epoch 5/20
+200s - loss: 0.6468 - val_loss: 0.7818
+Epoch 6/20
+201s - loss: 0.6465 - val_loss: 0.7176
+Epoch 7/20
+202s - loss: 0.6463 - val_loss: 0.7128
+Epoch 8/20
+202s - loss: 0.6460 - val_loss: 0.7697
+Epoch 9/20
+202s - loss: 0.6459 - val_loss: 0.7123
+Epoch 10/20
+201s - loss: 0.6457 - val_loss: 0.7764
+Epoch 11/20
+200s - loss: 0.6454 - val_loss: 0.7550
+Epoch 12/20
+200s - loss: 0.6453 - val_loss: 0.7500
+Epoch 13/20
+200s - loss: 0.6452 - val_loss: 0.7579
+Epoch 00012: early stopping
+03.02.2018 07:48:57 INFO    Starting theta 89/100: number 125 ([-0.7910712  -0.98769884])
+Train on 899556 samples, validate on 99951 samples
+Epoch 1/20
+203s - loss: 0.6405 - val_loss: 0.7733
+Epoch 2/20
+201s - loss: 0.6343 - val_loss: 0.8259
+Epoch 3/20
+200s - loss: 0.6329 - val_loss: 0.7421
+Epoch 4/20
+201s - loss: 0.6321 - val_loss: 0.7508
+Epoch 5/20
+201s - loss: 0.6319 - val_loss: 0.7624
+Epoch 6/20
+201s - loss: 0.6315 - val_loss: 0.7744
+Epoch 7/20
+201s - loss: 0.6314 - val_loss: 0.7610
+Epoch 00006: early stopping
+03.02.2018 08:38:23 INFO    Starting theta 90/100: number 429 ([-0.17418656 -0.37102219])
+Train on 898664 samples, validate on 99852 samples
+Epoch 1/20
+202s - loss: 0.6605 - val_loss: 0.8062
+Epoch 2/20
+201s - loss: 0.6574 - val_loss: 0.7094
+Epoch 3/20
+201s - loss: 0.6568 - val_loss: 0.7713
+Epoch 4/20
+201s - loss: 0.6567 - val_loss: 0.7479
+Epoch 5/20
+201s - loss: 0.6567 - val_loss: 0.8031
+Epoch 6/20
+201s - loss: 0.6565 - val_loss: 0.7041
+Epoch 7/20
+201s - loss: 0.6563 - val_loss: 0.8230
+Epoch 8/20
+201s - loss: 0.6561 - val_loss: 0.7850
+Epoch 9/20
+201s - loss: 0.6560 - val_loss: 0.8105
+Epoch 10/20
+200s - loss: 0.6558 - val_loss: 0.7401
+Epoch 00009: early stopping
+03.02.2018 09:37:47 INFO    Starting theta 91/100: number 149 ([-0.73726809 -0.38348788])
+Train on 897831 samples, validate on 99759 samples
+Epoch 1/20
+203s - loss: 0.6493 - val_loss: 0.7364
+Epoch 2/20
+202s - loss: 0.6452 - val_loss: 0.7295
+Epoch 3/20
+201s - loss: 0.6443 - val_loss: 0.7471
+Epoch 4/20
+200s - loss: 0.6440 - val_loss: 0.7902
+Epoch 5/20
+200s - loss: 0.6436 - val_loss: 0.7804
+Epoch 6/20
+200s - loss: 0.6432 - val_loss: 0.7743
+Epoch 00005: early stopping
+03.02.2018 10:24:10 INFO    Starting theta 92/100: number 430 ([-0.16930044  0.22814164])
+Train on 899103 samples, validate on 99901 samples
+Epoch 1/20
+202s - loss: 0.6723 - val_loss: 0.8226
+Epoch 2/20
+201s - loss: 0.6709 - val_loss: 0.8137
+Epoch 3/20
+201s - loss: 0.6705 - val_loss: 0.7740
+Epoch 4/20
+200s - loss: 0.6703 - val_loss: 0.8530
+Epoch 5/20
+200s - loss: 0.6701 - val_loss: 0.8049
+Epoch 6/20
+201s - loss: 0.6700 - val_loss: 0.8276
+Epoch 7/20
+201s - loss: 0.6698 - val_loss: 0.7856
+Epoch 00006: early stopping
+03.02.2018 11:13:42 INFO    Starting theta 93/100: number 720 ([ 0.41602256 -0.1168588 ])
+Train on 899878 samples, validate on 99987 samples
+Epoch 1/20
+202s - loss: 0.6762 - val_loss: 0.8302
+Epoch 2/20
+201s - loss: 0.6740 - val_loss: 0.7422
+Epoch 3/20
+201s - loss: 0.6737 - val_loss: 0.8212
+Epoch 4/20
+201s - loss: 0.6736 - val_loss: 0.7650
+Epoch 5/20
+201s - loss: 0.6736 - val_loss: 0.7761
+Epoch 6/20
+201s - loss: 0.6736 - val_loss: 0.7971
+Epoch 00005: early stopping
+03.02.2018 12:00:06 INFO    Starting theta 94/100: number 123 ([-0.79179407  0.72243203])
+Train on 899870 samples, validate on 99986 samples
+Epoch 1/20
+223s - loss: 0.6431 - val_loss: 0.7387
+Epoch 2/20
+223s - loss: 0.6367 - val_loss: 0.7192
+Epoch 3/20
+223s - loss: 0.6355 - val_loss: 0.7602
+Epoch 4/20
+224s - loss: 0.6349 - val_loss: 0.8317
+Epoch 5/20
+224s - loss: 0.6346 - val_loss: 0.7449
+Epoch 6/20
+223s - loss: 0.6343 - val_loss: 0.7022
+Epoch 7/20
+224s - loss: 0.6341 - val_loss: 0.7853
+Epoch 8/20
+228s - loss: 0.6337 - val_loss: 0.7542
+Epoch 9/20
+224s - loss: 0.6336 - val_loss: 0.8154
+Epoch 10/20
+223s - loss: 0.6333 - val_loss: 0.7741
+Epoch 00009: early stopping
+03.02.2018 13:04:47 INFO    Starting theta 95/100: number 908 ([ 0.77844761  0.32603028])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+225s - loss: 0.6790 - val_loss: 0.8223
+Epoch 2/20
+201s - loss: 0.6779 - val_loss: 0.7890
+Epoch 3/20
+201s - loss: 0.6777 - val_loss: 0.7495
+Epoch 4/20
+201s - loss: 0.6778 - val_loss: 0.8010
+Epoch 5/20
+201s - loss: 0.6779 - val_loss: 0.8096
+Epoch 6/20
+203s - loss: 0.6779 - val_loss: 0.7878
+Epoch 7/20
+208s - loss: 0.6779 - val_loss: 0.7516
+Epoch 00006: early stopping
+03.02.2018 13:56:05 INFO    Starting theta 96/100: number 256 ([-0.50703066 -0.72121867])
+Train on 899475 samples, validate on 99942 samples
+Epoch 1/20
+210s - loss: 0.6539 - val_loss: 0.7672
+Epoch 2/20
+208s - loss: 0.6492 - val_loss: 0.7711
+Epoch 3/20
+208s - loss: 0.6483 - val_loss: 0.7693
+Epoch 4/20
+208s - loss: 0.6477 - val_loss: 0.7463
+Epoch 5/20
+208s - loss: 0.6475 - val_loss: 0.8129
+Epoch 6/20
+208s - loss: 0.6472 - val_loss: 0.8056
+Epoch 7/20
+208s - loss: 0.6471 - val_loss: 0.7971
+Epoch 8/20
+208s - loss: 0.6469 - val_loss: 0.7686
+Epoch 00007: early stopping
+03.02.2018 14:51:41 INFO    Starting theta 97/100: number 777 ([ 0.52377237  0.01987936])
+Train on 899863 samples, validate on 99985 samples
+Epoch 1/20
+210s - loss: 0.6796 - val_loss: 0.8103
+Epoch 2/20
+208s - loss: 0.6776 - val_loss: 0.7739
+Epoch 3/20
+208s - loss: 0.6772 - val_loss: 0.8071
+Epoch 4/20
+208s - loss: 0.6772 - val_loss: 0.8439
+Epoch 5/20
+208s - loss: 0.6772 - val_loss: 0.7475
+Epoch 6/20
+208s - loss: 0.6772 - val_loss: 0.7597
+Epoch 7/20
+209s - loss: 0.6772 - val_loss: 0.7648
+Epoch 8/20
+208s - loss: 0.6771 - val_loss: 0.8563
+Epoch 9/20
+209s - loss: 0.6770 - val_loss: 0.7865
+Epoch 00008: early stopping
+03.02.2018 15:50:36 INFO    Starting theta 98/100: number 809 ([ 0.58338739 -0.68531326])
+Train on 899964 samples, validate on 99996 samples
+Epoch 1/20
+210s - loss: 0.6420 - val_loss: 0.7398
+Epoch 2/20
+209s - loss: 0.6386 - val_loss: 0.7824
+Epoch 3/20
+212s - loss: 0.6382 - val_loss: 0.7586
+Epoch 4/20
+213s - loss: 0.6379 - val_loss: 0.7215
+Epoch 5/20
+213s - loss: 0.6376 - val_loss: 0.7786
+Epoch 6/20
+213s - loss: 0.6376 - val_loss: 0.7079
+Epoch 7/20
+214s - loss: 0.6372 - val_loss: 0.6555
+Epoch 8/20
+213s - loss: 0.6371 - val_loss: 0.7714
+Epoch 9/20
+213s - loss: 0.6370 - val_loss: 0.8303
+Epoch 10/20
+213s - loss: 0.6369 - val_loss: 0.7639
+Epoch 11/20
+212s - loss: 0.6367 - val_loss: 0.7098
+Epoch 00010: early stopping
+03.02.2018 16:57:54 INFO    Starting theta 99/100: number 269 ([-0.48969042 -0.23040933])
+Train on 897498 samples, validate on 99722 samples
+Epoch 1/20
+219s - loss: 0.6570 - val_loss: 0.8142
+Epoch 2/20
+218s - loss: 0.6540 - val_loss: 0.7574
+Epoch 3/20
+218s - loss: 0.6535 - val_loss: 0.7986
+Epoch 4/20
+218s - loss: 0.6531 - val_loss: 0.8628
+Epoch 5/20
+218s - loss: 0.6529 - val_loss: 0.7669
+Epoch 6/20
+218s - loss: 0.6526 - val_loss: 0.7799
+Epoch 00005: early stopping
+03.02.2018 17:48:13 INFO    Starting theta 100/100: number 851 ([ 0.66684741 -0.33464755])
+Train on 899969 samples, validate on 99997 samples
+Epoch 1/20
+221s - loss: 0.6571 - val_loss: 0.7737
+Epoch 2/20
+219s - loss: 0.6543 - val_loss: 0.7844
+Epoch 3/20
+219s - loss: 0.6540 - val_loss: 0.7718
+Epoch 4/20
+219s - loss: 0.6539 - val_loss: 0.8018
+Epoch 5/20
+219s - loss: 0.6538 - val_loss: 0.8505
+Epoch 6/20
+219s - loss: 0.6537 - val_loss: 0.8298
+Epoch 7/20
+219s - loss: 0.6536 - val_loss: 0.8549
+Epoch 00006: early stopping
+03.02.2018 18:42:29 INFO    Starting interpolation
+03.02.2018 18:42:29 INFO    That's it -- have a great day!
