@@ -11,7 +11,7 @@ import keras.backend as K
 from higgs_inference import settings
 from higgs_inference.models.ml_utils import build_hidden_layers
 from higgs_inference.models.loss_functions import loss_function_carl, loss_function_combined, \
-    loss_function_combinedregression, loss_function_regression, loss_function_score
+    loss_function_combinedregression, loss_function_ratio_regression, loss_function_score, loss_function_carl_kl
 from higgs_inference.models.morphing import generate_wi_layer, generate_wtilde_layer
 
 
@@ -36,18 +36,22 @@ def make_regressor(n_hidden_layers=3,
         hidden_layer = hidden_layer_(hidden_layer)
     log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
 
+    # Translate to s
+    r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
+    s_hat_layer = Lambda(lambda x: 1. / (1. + x))(r_hat_layer)
+
     # Score
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0],
                             output_shape=(settings.n_thetas_features,))([log_r_hat_layer, input_layer])
     score_layer = Lambda(lambda x: x[:, -settings.n_params:], output_shape=(settings.n_params,))(gradient_layer)
 
     # Combine outputs
-    output_layer = Concatenate()([log_r_hat_layer, score_layer])
+    output_layer = Concatenate()([s_hat_layer, score_layer, log_r_hat_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
-    model.compile(loss=loss_function_regression,
-                  metrics=[loss_function_score],
+    model.compile(loss=loss_function_ratio_regression,
+                  metrics=[loss_function_carl, loss_function_carl_kl, loss_function_score],
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
@@ -86,6 +90,9 @@ def make_regressor_morphingaware(n_hidden_layers=2,
     r_hat_layer = Reshape((1,))(Lambda(lambda x: K.sum(x, axis=1))(wi_ri_hat_layer))
     positive_r_hat_layer = Activation('relu')(r_hat_layer)
 
+    # Translate to s
+    s_hat_layer = Lambda(lambda x: 1. / (1. + x))(positive_r_hat_layer)
+
     # Score
     log_r_hat_layer = Lambda(lambda x: K.log(x + epsilon))(positive_r_hat_layer)
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0], output_shape=(settings.n_thetas_features,))(
@@ -94,12 +101,12 @@ def make_regressor_morphingaware(n_hidden_layers=2,
 
     # Combine outputs
     # output_layer = Concatenate()([log_r_hat_layer, score_layer])
-    output_layer = Concatenate()([log_r_hat_layer, score_layer, wi_layer, ri_hat_layer])
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer, score_layer, wi_layer, ri_hat_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
-    model.compile(loss=loss_function_regression,
-                  metrics=[loss_function_score],
+    model.compile(loss=loss_function_ratio_regression,
+                  metrics=[loss_function_carl, loss_function_carl_kl, loss_function_score],
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
@@ -127,18 +134,23 @@ def make_combined_regressor(n_hidden_layers=3,
         hidden_layer = hidden_layer_(hidden_layer)
     log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
 
+    # Translate to s
+    r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
+    s_hat_layer = Lambda(lambda x: 1. / (1. + x))(r_hat_layer)
+
     # Score
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0],
                             output_shape=(settings.n_thetas_features,))([log_r_hat_layer, input_layer])
     score_layer = Lambda(lambda x: x[:, -settings.n_params:], output_shape=(settings.n_params,))(gradient_layer)
 
     # Combine outputs
-    output_layer = Concatenate()([log_r_hat_layer, score_layer])
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer, score_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
     model.compile(loss=lambda x, y: loss_function_combinedregression(x, y, alpha=alpha),
-                  metrics=[loss_function_regression, loss_function_score],
+                  metrics=[loss_function_carl, loss_function_carl_kl, loss_function_ratio_regression,
+                           loss_function_score],
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
@@ -178,6 +190,9 @@ def make_combined_regressor_morphingaware(n_hidden_layers=2,
     r_hat_layer = Reshape((1,))(Lambda(lambda x: K.sum(x, axis=1))(wi_ri_hat_layer))
     positive_r_hat_layer = Activation('relu')(r_hat_layer)
 
+    # Translate to s
+    s_hat_layer = Lambda(lambda x: 1. / (1. + x))(positive_r_hat_layer)
+
     # Score
     log_r_hat_layer = Lambda(lambda x: K.log(x + epsilon))(positive_r_hat_layer)
     gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0], output_shape=(settings.n_thetas_features,))(
@@ -186,12 +201,13 @@ def make_combined_regressor_morphingaware(n_hidden_layers=2,
 
     # Combine outputs
     # output_layer = Concatenate()([log_r_hat_layer, score_layer])
-    output_layer = Concatenate()([log_r_hat_layer, score_layer, wi_layer, ri_hat_layer])
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer, score_layer, wi_layer, ri_hat_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
     model.compile(loss=lambda x, y: loss_function_combinedregression(x, y, alpha=alpha),
-                  metrics=[loss_function_regression, loss_function_score],
+                  metrics=[loss_function_carl, loss_function_carl_kl, loss_function_ratio_regression,
+                           loss_function_score],
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
@@ -234,12 +250,12 @@ def make_classifier_carl(n_hidden_layers=3,
     score_layer = Lambda(lambda x: x[:, -settings.n_params:], output_shape=(settings.n_params,))(gradient_layer)
 
     # Combine outputs
-    output_layer = Concatenate()([s_hat_layer, score_layer])
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer, score_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
     model.compile(loss=loss_function_carl,
-                  metrics=[loss_function_score],
+                  metrics=[loss_function_ratio_regression, loss_function_carl_kl, loss_function_score],
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
@@ -294,12 +310,12 @@ def make_classifier_carl_morphingaware(n_hidden_layers=2,
 
     # Combine outputs
     # output_layer = Concatenate()([s_hat_layer, score_layer])
-    output_layer = Concatenate()([s_hat_layer, score_layer, wi_layer, ri_hat_layer])
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer, score_layer, wi_layer, ri_hat_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
     model.compile(loss=loss_function_carl,
-                  metrics=[loss_function_score],
+                  metrics=[loss_function_ratio_regression, loss_function_carl_kl, loss_function_score],
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
@@ -344,12 +360,12 @@ def make_classifier_score(n_hidden_layers=3,
     score_layer = Lambda(lambda x: x[:, -settings.n_params:], output_shape=(settings.n_params,))(gradient_layer)
 
     # Combine outputs
-    output_layer = Concatenate()([s_hat_layer, score_layer])
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer, score_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
     model.compile(loss=loss_function_score,
-                  metrics=[loss_function_carl],
+                  metrics=[loss_function_ratio_regression, loss_function_carl, loss_function_carl_kl],
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
@@ -406,12 +422,12 @@ def make_classifier_score_morphingaware(n_hidden_layers=2,
 
     # Combine outputs
     # output_layer = Concatenate()([s_hat_layer, score_layer])
-    output_layer = Concatenate()([s_hat_layer, score_layer, wi_layer, ri_hat_layer])
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer, score_layer, wi_layer, ri_hat_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
     model.compile(loss=loss_function_score,
-                  metrics=[loss_function_carl],
+                  metrics=[loss_function_ratio_regression, loss_function_carl, loss_function_carl_kl],
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
@@ -455,12 +471,13 @@ def make_classifier_combined(n_hidden_layers=3,
     score_layer = Lambda(lambda x: x[:, -settings.n_params:], output_shape=(settings.n_params,))(gradient_layer)
 
     # Combine outputs
-    output_layer = Concatenate()([s_hat_layer, score_layer])
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer, score_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
     model.compile(loss=lambda x, y: loss_function_combined(x, y, alpha=alpha),
-                  metrics=[loss_function_carl, loss_function_score],
+                  metrics=[loss_function_ratio_regression, loss_function_carl, loss_function_carl_kl,
+                           loss_function_score],
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
@@ -516,12 +533,13 @@ def make_classifier_combined_morphingaware(n_hidden_layers=2,
 
     # Combine outputs
     # output_layer = Concatenate()([s_hat_layer, score_layer])
-    output_layer = Concatenate()([s_hat_layer, score_layer, wi_layer, ri_hat_layer])
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer, score_layer, wi_layer, ri_hat_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
     model.compile(loss=lambda x, y: loss_function_combined(x, y, alpha=alpha),
-                  metrics=[loss_function_carl, loss_function_score],
+                  metrics=[loss_function_ratio_regression, loss_function_carl, loss_function_carl_kl,
+                           loss_function_score],
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model

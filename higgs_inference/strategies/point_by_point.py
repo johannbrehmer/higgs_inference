@@ -153,7 +153,7 @@ def point_by_point_inference(algorithm='carl',
 
             # Evaluation
             prediction = regr.predict(X_test_transformed)
-            this_r = np.exp(prediction[:])
+            this_r = np.exp(prediction[:, 1])
 
             if not np.all(np.isfinite(prediction)):
                 logging.warning('Regression output contains NaNs')
@@ -168,7 +168,7 @@ def point_by_point_inference(algorithm='carl',
 
             if do_neyman:
                 # Neyman construction: evaluate observed sample (raw)
-                log_r_neyman_observed = regr.predict(X_neyman_observed_transformed)
+                log_r_neyman_observed = regr.predict(X_neyman_observed_transformed)[:, 1]
                 llr_neyman_observed = -2. * np.sum(log_r_neyman_observed.reshape((-1, settings.n_expected_events)),
                                                    axis=1)
                 np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + filename_addition + '.npy',
@@ -192,7 +192,7 @@ def point_by_point_inference(algorithm='carl',
                         X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
                     # Neyman construction: evaluate distribution sample (raw)
-                    log_r_neyman_distribution = regr.predict(X_neyman_distribution_transformed)
+                    log_r_neyman_distribution = regr.predict(X_neyman_distribution_transformed)[:, 1]
                     llr_neyman_distributions.append(
                         -2. * np.sum(log_r_neyman_distribution.reshape((-1, settings.n_expected_events)), axis=1))
 

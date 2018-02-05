@@ -3,13 +3,14 @@
 ################################################################################
 
 from keras.models import Model
-from keras.layers import Input, Dense, Lambda
+from keras.layers import Input, Dense, Lambda, Concatenate
 from keras import optimizers
 import keras.backend as K
 
 from higgs_inference import settings
 from higgs_inference.models.ml_utils import build_hidden_layers
-from higgs_inference.models.loss_functions import loss_function_carl, loss_function_regression
+from higgs_inference.models.loss_functions import loss_function_carl, loss_function_carl_kl, \
+    loss_function_ratio_regression
 
 
 ################################################################################
@@ -33,10 +34,17 @@ def make_regressor(n_hidden_layers=3,
         hidden_layer = hidden_layer_(hidden_layer)
     log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
 
-    model = Model(inputs=[input_layer], outputs=[log_r_hat_layer])
+    # Translate to s
+    r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
+    s_hat_layer = Lambda(lambda x: 1. / (1. + x))(r_hat_layer)
+
+    # Combine outputs
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer])
+    model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
-    model.compile(loss=loss_function_regression,
+    model.compile(loss=loss_function_ratio_regression,
+                  metrics=[loss_function_carl, loss_function_carl_kl],
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
@@ -70,12 +78,16 @@ def make_classifier(n_hidden_layers=3,
 
     else:
         s_hat_layer = Dense(1, activation='sigmoid')(hidden_layer)
+        r_hat_layer = Lambda(lambda x: (1. - x) / x)(s_hat_layer)
+        log_r_hat_layer = Lambda(lambda x: K.log(x))(r_hat_layer)
 
     # Combine outputs
-    model = Model(inputs=[input_layer], outputs=[s_hat_layer])
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer])
+    model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model
     model.compile(loss=loss_function_carl,
+                  metrics=[loss_function_carl, loss_function_carl_kl],
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
