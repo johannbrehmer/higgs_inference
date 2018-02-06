@@ -12,7 +12,7 @@ import logging
 import itertools
 import numpy as np
 
-from scipy.stats import norm#, crystalball
+from scipy.stats import norm  # , crystalball
 
 base_dir = path.abspath(path.join(path.dirname(__file__), '..'))
 try:
@@ -32,7 +32,8 @@ settings.base_dir = base_dir
 def get_statistics(values):
     output = ('shape ' + str(values.shape)
               + ', ' + str(np.sum(np.invert(np.isfinite(values)))) + ' NaNs, mean '
-              + str(np.mean(values)) + ', content ' + str(values))
+              + str(np.mean(values)) + ', range ' + str(np.nanmin(values)) + ' - ' + str(np.nanmax(values))
+              + ', content ' + str(values).replace('\n', ''))
     return output
 
 
@@ -44,9 +45,11 @@ def sanitize_angles(values):
     values[np.invert(np.isfinite(values))] = 0.
     return np.clip(values, -10., 10.)
 
+
 def sanitize_energies(values):
     values[np.invert(np.isfinite(values))] = 8000.
     return np.clip(values, 0., 8000.)
+
 
 def sanitize_sigmas(values):
     values[np.invert(np.isfinite(values))] = 100.
@@ -58,7 +61,6 @@ def sanitize_sigmas(values):
 ################################################################################
 
 def smear_angles(values, absolute=0., relative=0.):
-
     values = sanitize_angles(values)
 
     sigmas = absolute + relative * values
@@ -67,14 +69,14 @@ def smear_angles(values, absolute=0., relative=0.):
     smeared_values = norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
     smeared_values = sanitize_angles(smeared_values)
 
-    logging.debug('Standard smearing with absolute uncertainty %s and relative uncertainty %s', absolute, relative)
-    logging.debug('  Before: %s', get_statistics(values))
-    logging.debug('  After:  %s', get_statistics(smeared_values))
+    # logging.debug('Standard smearing with absolute uncertainty %s and relative uncertainty %s', absolute, relative)
+    # logging.debug('  Before: %s', get_statistics(values))
+    # logging.debug('  After:  %s', get_statistics(smeared_values))
 
     return smeared_values
 
 
-def smear_jet_energies(values, resolution_factor=0.5): #, beta=1.5, m=2.5):
+def smear_jet_energies(values, resolution_factor=0.5):  # , beta=1.5, m=2.5):
 
     values = sanitize_energies(values)
 
@@ -85,15 +87,14 @@ def smear_jet_energies(values, resolution_factor=0.5): #, beta=1.5, m=2.5):
     smeared_values = norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
     smeared_values = sanitize_energies(smeared_values)
 
-    logging.debug('Jet energy smearing with resolution %s', resolution_factor)
-    logging.debug('  Before: %s', get_statistics(values))
-    logging.debug('  After:  %s', get_statistics(smeared_values))
+    # logging.debug('Jet energy smearing with resolution %s', resolution_factor)
+    # logging.debug('  Before: %s', get_statistics(values))
+    # logging.debug('  After:  %s', get_statistics(smeared_values))
 
     return smeared_values
 
 
 def smear_lepton_pt(values, resolution_factor=3.e-4):
-
     values = sanitize_energies(values)
 
     sigmas = resolution_factor * values ** 2.
@@ -102,9 +103,9 @@ def smear_lepton_pt(values, resolution_factor=3.e-4):
     smeared_values = norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
     smeared_values = sanitize_energies(smeared_values)
 
-    logging.debug('Lepton pT smearing with resolution %s', resolution_factor)
-    logging.debug('  Before: %s', get_statistics(values))
-    logging.debug('  After:  %s', get_statistics(smeared_values))
+    # logging.debug('Lepton pT smearing with resolution %s', resolution_factor)
+    # logging.debug('  Before: %s', get_statistics(values))
+    # logging.debug('  After:  %s', get_statistics(smeared_values))
 
     return smeared_values
 
@@ -122,21 +123,21 @@ def e_pt_eta_phi(canonical_momentum):
     phi = np.arctan2(py, px)
 
     output = np.hstack((e.reshape((-1, 1)),
-                      pt.reshape((-1, 1)),
-                      eta.reshape((-1, 1)),
-                      phi.reshape((-1, 1))))
+                        pt.reshape((-1, 1)),
+                        eta.reshape((-1, 1)),
+                        phi.reshape((-1, 1))))
 
-    logging.debug('Conversion from E,px,py,pz to E,pT,eta,phi:')
-    logging.debug('  Input: %s', get_statistics(canonical_momentum))
-    logging.debug('  E:     %s', get_statistics(e))
-    logging.debug('  px:    %s', get_statistics(px))
-    logging.debug('  py:    %s', get_statistics(py))
-    logging.debug('  pz:    %s', get_statistics(pz))
-    logging.debug('  pt:    %s', get_statistics(pt))
-    logging.debug('  pabs:  %s', get_statistics(pabs))
-    logging.debug('  eta:   %s', get_statistics(eta))
-    logging.debug('  phi :  %s', get_statistics(phi))
-    logging.debug('  Output:%s', get_statistics(output))
+    # logging.debug('Conversion from E,px,py,pz to E,pT,eta,phi:')
+    # logging.debug('  Input: %s', get_statistics(canonical_momentum))
+    # logging.debug('  E:     %s', get_statistics(e))
+    # logging.debug('  px:    %s', get_statistics(px))
+    # logging.debug('  py:    %s', get_statistics(py))
+    # logging.debug('  pz:    %s', get_statistics(pz))
+    # logging.debug('  pt:    %s', get_statistics(pt))
+    # logging.debug('  pabs:  %s', get_statistics(pabs))
+    # logging.debug('  eta:   %s', get_statistics(eta))
+    # logging.debug('  phi :  %s', get_statistics(phi))
+    # logging.debug('  Output:%s', get_statistics(output))
 
     return output
 
@@ -149,20 +150,20 @@ def e_px_py_pz(momentum):
     pz = pt * np.sinh(eta)
 
     output = np.hstack((e.reshape((-1, 1)),
-                      px.reshape((-1, 1)),
-                      py.reshape((-1, 1)),
-                      pz.reshape((-1, 1))))
+                        px.reshape((-1, 1)),
+                        py.reshape((-1, 1)),
+                        pz.reshape((-1, 1))))
 
-    logging.debug('Conversion from E,pT,eta,phi to E,px,py,pz:')
-    logging.debug('  Input: %s', get_statistics(momentum))
-    logging.debug('  E:     %s', get_statistics(e))
-    logging.debug('  pt:    %s', get_statistics(pt))
-    logging.debug('  eta:   %s', get_statistics(eta))
-    logging.debug('  phi :  %s', get_statistics(phi))
-    logging.debug('  px:    %s', get_statistics(px))
-    logging.debug('  py:    %s', get_statistics(py))
-    logging.debug('  pz:    %s', get_statistics(pz))
-    logging.debug('  Output:%s', get_statistics(output))
+    # logging.debug('Conversion from E,pT,eta,phi to E,px,py,pz:')
+    # logging.debug('  Input: %s', get_statistics(momentum))
+    # logging.debug('  E:     %s', get_statistics(e))
+    # logging.debug('  pt:    %s', get_statistics(pt))
+    # logging.debug('  eta:   %s', get_statistics(eta))
+    # logging.debug('  phi :  %s', get_statistics(phi))
+    # logging.debug('  px:    %s', get_statistics(px))
+    # logging.debug('  py:    %s', get_statistics(py))
+    # logging.debug('  pz:    %s', get_statistics(pz))
+    # logging.debug('  Output:%s', get_statistics(output))
 
     return output
 
@@ -209,6 +210,12 @@ def calculate_e_massless(momentum):
 def apply_smearing(filename, dry_run=False):
     logging.info('Applying smearing to sample %s', filename)
 
+    # For debugging
+    def print_statistics(label, index):
+        logging.debug(label)
+        logging.debug('  Before: %s', get_statistics(X_true[:, index]))
+        logging.debug('  After:  %s', get_statistics(X_smeared[:, index]))
+
     # Load stuff
     try:
         X_true = np.load(settings.unweighted_events_dir + '/X_' + filename + '.npy').astype(np.float64)
@@ -239,52 +246,94 @@ def apply_smearing(filename, dry_run=False):
     indices = [0, 4]
     for i in indices:
         X_smeared[:, i] = smear_jet_energies(X_true[:, i], resolution_factor=settings.smearing_jet_energies)
+    print_statistics('E(j1)', 0)
+    print_statistics('E(j2)', 4)
 
     # Jet eta and phi
     indices = [2, 3, 6, 7]
     for i in indices:
         X_smeared[:, i] = smear_angles(X_true[:, i], absolute=settings.smearing_eta_phi)
+    print_statistics('eta(j1)', 2)
+    print_statistics('eta(j2)', 6)
+    print_statistics('phi(j1)', 3)
+    print_statistics('phi(j2)', 7)
 
     # Derive jet pT, assuming zero jet mass (switch to smearing pT independently?)
     X_smeared[:, 1] = calculate_pt_massless(X_smeared[:, 0:4])
     X_smeared[:, 5] = calculate_pt_massless(X_smeared[:, 4:8])
+    print_statistics('pT(j1)', 1)
+    print_statistics('pT(j2)', 5)
 
     # Lepton momenta
     indices = [9, 13, 17, 21]
     for i in indices:
         X_smeared[:, i] = smear_lepton_pt(X_true[:, i], resolution_factor=settings.smearing_lepton_pt)
+    print_statistics('pT(l1)', 9)
+    print_statistics('pT(l2)', 13)
+    print_statistics('pT(l3)', 17)
+    print_statistics('pT(l4)', 21)
 
     # Lepton eta and phi
     indices = [10, 11, 14, 15, 18, 19, 22, 23]
     X_smeared[:, indices] = X_true[:, indices]
+    print_statistics('eta(l1)', 10)
+    print_statistics('eta(l2)', 14)
+    print_statistics('eta(l3)', 18)
+    print_statistics('eta(l4)', 22)
+    print_statistics('phi(l1)', 11)
+    print_statistics('phi(l2)', 15)
+    print_statistics('phi(l3)', 19)
+    print_statistics('phi(l4)', 23)
 
     # Derive lepton energies, assuming zero lepton masses
     X_smeared[:, 8] = calculate_e_massless(X_smeared[:, 8:12])
     X_smeared[:, 12] = calculate_e_massless(X_smeared[:, 12:16])
     X_smeared[:, 16] = calculate_e_massless(X_smeared[:, 16:20])
     X_smeared[:, 20] = calculate_e_massless(X_smeared[:, 20:24])
+    print_statistics('E(l1)', 8)
+    print_statistics('E(l2)', 12)
+    print_statistics('E(l3)', 16)
+    print_statistics('E(l4)', 20)
 
     # Reconstruct Higgs momentum
     X_smeared[:, 24:28] = sum_momenta([X_smeared[:, 8:12],
                                        X_smeared[:, 12:16],
                                        X_smeared[:, 16:20],
                                        X_smeared[:, 20:24]])
+    print_statistics('E(H)', 24)
+    print_statistics('pT(H)', 25)
+    print_statistics('eta(H)', 26)
+    print_statistics('phi(H)', 27)
 
     # Higgs mass
     X_smeared[:, 28] = calculate_m(X_smeared[:, 24:28])
+    print_statistics('m(H)', 28)
 
     # Find pairings for Zs and reconstruct
+    logging.debug('Looking for Z reconstructions')
     epsilon = 0.1
     found_pairing = np.full((X_true.shape[0],), False, dtype=bool)
     found_multiple_pairings = np.full((X_true.shape[0],), False, dtype=bool)
+
     for z1l1, z1l2, z2l1, z2l2 in itertools.permutations([0, 1, 2, 3]):
+        logging.debug('Pairing: %s', (z1l1, z1l2, z2l1, z2l2))
+
         candidate1 = sum_momenta([X_true[:, 8 + z1l1 * 4:12 + z1l1 * 4],
                                   X_true[:, 8 + z1l2 * 4:12 + z1l2 * 4]])
         candidate2 = sum_momenta([X_true[:, 8 + z2l1 * 4:12 + z2l1 * 4],
                                   X_true[:, 8 + z2l2 * 4:12 + z2l2 * 4]])
 
-        match = (np.all(candidate1 - X_true[:, 29:33] < epsilon, axis=1)
-                 & np.all(candidate2 - X_true[:, 34:38] < epsilon, axis=1))
+        logging.debug('Indices Z1l1: %s -- %s', 8 + z1l1 * 4, 12 + z1l1 * 4)
+        logging.debug('Indices Z1l2: %s -- %s', 8 + z1l2 * 4, 12 + z1l2 * 4)
+        logging.debug('Indices Z2l1: %s -- %s', 8 + z2l1 * 4, 12 + z2l1 * 4)
+        logging.debug('Indices Z2l2: %s -- %s', 8 + z2l2 * 4, 12 + z2l2 * 4)
+        logging.debug('Candidate 1: %s', get_statistics(candidate1))
+        logging.debug('Candidate 2: %s', get_statistics(candidate2))
+
+        match = (np.all((candidate1 - X_true[:, 29:33]) ** 2 < epsilon ** 2, axis=1)
+                 & np.all((candidate2 - X_true[:, 34:38]) ** 2 < epsilon ** 2, axis=1))
+
+        logging.debug('Match: %s, %s', np.sum(match), match)
 
         found_pairing = np.logical_or(found_pairing, match)
         found_multiple_pairings = np.logical_and(found_pairing, match)
@@ -298,15 +347,29 @@ def apply_smearing(filename, dry_run=False):
     if np.any(found_multiple_pairings):
         logging.error('Found multiple lepton pairings to reconstruct Z for %s events', np.sum(found_multiple_pairings))
 
+    print_statistics('E(Z1)', 29)
+    print_statistics('pT(Z1)', 30)
+    print_statistics('eta(Z1)', 31)
+    print_statistics('phi(Z1)', 32)
+    print_statistics('E(Z2)', 34)
+    print_statistics('pT(Z2)', 35)
+    print_statistics('eta(Z2)', 36)
+    print_statistics('phi(Z2)', 37)
+
     # Z masses
     X_smeared[:, 33] = calculate_m(X_smeared[:, 29:33])
     X_smeared[:, 38] = calculate_m(X_smeared[:, 34:38])
+    print_statistics('m(Z1)', 33)
+    print_statistics('m(Z2)', 38)
 
     # Dijet observables
     X_smeared[:, 39] = calculate_m(sum_momenta([X_smeared[:, 0:4],
                                                 X_smeared[:, 4:8]]))
     X_smeared[:, 40] = X_smeared[:, 2] - X_smeared[:, 6]
     X_smeared[:, 41] = X_smeared[:, 3] - X_smeared[:, 7]
+    print_statistics('m(jj)', 39)
+    print_statistics('delta eta(jj)', 40)
+    print_statistics('delta phi(jj)', 41)
 
     # Check for values that have not been replaces
     unchanged = (X_smeared < init_number + settings.epsilon) & (X_smeared > init_number - settings.epsilon)
@@ -327,7 +390,7 @@ def apply_smearing(filename, dry_run=False):
 ################################################################################
 
 # Set up logging
-logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG, datefmt='%d.%m.%Y %H:%M:%S')
+logging.basicConfig(format='%(asctime)s %(levelname)s    %(message)s', level=logging.DEBUG, datefmt='%d.%m.%Y %H:%M:%S')
 logging.info('Welcome! How are you today?')
 
 # Parse arguments

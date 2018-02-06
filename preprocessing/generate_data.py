@@ -28,7 +28,7 @@ settings.base_dir = base_dir
 ################################################################################
 
 # Set up logging
-logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG, datefmt='%d.%m.%Y %H:%M:%S')
+logging.basicConfig(format='%(asctime)s %(levelname)s    %(message)s', level=logging.DEBUG, datefmt='%d.%m.%Y %H:%M:%S')
 logging.info('Welcome! How are you today?')
 
 # Parse arguments
