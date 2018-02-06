@@ -59,14 +59,23 @@ def get_statistics(values):
 # Sanitization functions
 ################################################################################
 
-def sanitize_angles(values):
+def sanitize_eta(values):
     values[np.invert(np.isfinite(values))] = 0.
-    return np.clip(values, -10., 10.)
+    return np.clip(values, -12., 12.)
+
+
+def sanitize_phi(values):
+    values[np.invert(np.isfinite(values))] = 0.
+    while np.sum(values < - np.pi) > 0:
+        values[values < -np.pi] += 2. * np.pi
+    while np.sum(values > np.pi) > 0:
+        values[values > np.pi] -= 2. * np.pi
+    return values
 
 
 def sanitize_energies(values):
-    values[np.invert(np.isfinite(values))] = 8000.
-    return np.clip(values, 0., 8000.)
+    values[np.invert(np.isfinite(values))] = 13000.
+    return np.clip(values, 0., 13000.)
 
 
 def sanitize_sigmas(values):
@@ -78,16 +87,32 @@ def sanitize_sigmas(values):
 # Smearing functions
 ################################################################################
 
-def smear_angles(values, absolute=0., relative=0.):
-    values = sanitize_angles(values)
+def smear_eta(values, absolute=0., relative=0.):
+    values = sanitize_eta(values)
 
     sigmas = absolute + relative * values
     sigmas = sanitize_sigmas(sigmas)
 
     smeared_values = norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
-    smeared_values = sanitize_angles(smeared_values)
+    smeared_values = sanitize_eta(smeared_values)
 
-    # logging.debug('Standard smearing with absolute uncertainty %s and relative uncertainty %s', absolute, relative)
+    # logging.debug('Eta smearing with absolute uncertainty %s and relative uncertainty %s', absolute, relative)
+    # logging.debug('  Before: %s', get_statistics(values))
+    # logging.debug('  After:  %s', get_statistics(smeared_values))
+
+    return smeared_values
+
+
+def smear_phi(values, absolute=0., relative=0.):
+    values = sanitize_phi(values)
+
+    sigmas = absolute + relative * values
+    sigmas = sanitize_sigmas(sigmas)
+
+    smeared_values = norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
+    smeared_values = sanitize_phi(smeared_values)
+
+    # logging.debug('Eta smearing with absolute uncertainty %s and relative uncertainty %s', absolute, relative)
     # logging.debug('  Before: %s', get_statistics(values))
     # logging.debug('  After:  %s', get_statistics(smeared_values))
 
@@ -135,11 +160,11 @@ def smear_lepton_pt(values, resolution_factor=3.e-4):
 def e_pt_eta_phi(canonical_momentum):
     e, px, py, pz = canonical_momentum.T
 
-    pt = (px ** 2 + py ** 2) ** 0.5
+    pt = sanitize_energies((px ** 2 + py ** 2) ** 0.5)
     pabs = (px ** 2 + py ** 2 + pz ** 2) ** 0.5
     pabs = np.clip(pabs, 1.e-9, 8000.)
-    eta = np.arctanh(pz / pabs)
-    phi = np.arctan2(py, px)
+    eta = sanitize_eta(np.arctanh(pz / pabs))
+    phi = sanitize_phi(np.arctan2(py, px))
 
     output = np.hstack((e.reshape((-1, 1)),
                         pt.reshape((-1, 1)),
@@ -197,7 +222,9 @@ def sum_momenta(momenta):
 def calculate_m(momentum):
     e, pt, eta, phi = momentum.T
 
-    pabs = pt * np.cosh(eta)
+    e = sanitize_energies(e)
+    eta = sanitize_eta(eta)
+    pabs = sanitize_energies(pt * np.cosh(eta))
     m_squared = e ** 2 - pabs ** 2
     m_squared = np.clip(m_squared, 0., None)
 
@@ -207,8 +234,9 @@ def calculate_m(momentum):
 def calculate_pt_massless(momentum):
     e, _, eta, phi = momentum.T
 
-    pt_massless = e / np.cosh(eta)
-    pt_massless = np.clip(pt_massless, 0., None)
+    e = sanitize_energies(e)
+    eta = sanitize_eta(eta)
+    pt_massless = sanitize_energies(e / np.cosh(eta))
 
     return pt_massless
 
@@ -216,8 +244,9 @@ def calculate_pt_massless(momentum):
 def calculate_e_massless(momentum):
     _, pt, eta, phi = momentum.T
 
-    e_massless = pt * np.cosh(eta)
-    e_massless = np.clip(e_massless, 0., None)
+    pt = sanitize_energies(pt)
+    eta = sanitize_eta(eta)
+    e_massless = sanitize_energies(pt * np.cosh(eta))
 
     return e_massless
 
@@ -268,12 +297,17 @@ def apply_smearing(filename, dry_run=False):
     print_statistics('E(j1)', 0)
     print_statistics('E(j2)', 4)
 
-    # Jet eta and phi
-    indices = [2, 3, 6, 7]
+    # Jet eta
+    indices = [2, 6]
     for i in indices:
-        X_smeared[:, i] = smear_angles(X_true[:, i], absolute=settings.smearing_eta_phi)
+        X_smeared[:, i] = smear_eta(X_true[:, i], absolute=settings.smearing_eta_phi)
     print_statistics('eta(j1)', 2)
     print_statistics('eta(j2)', 6)
+
+    # Jet phi
+    indices = [3, 7]
+    for i in indices:
+        X_smeared[:, i] = smear_phi(X_true[:, i], absolute=settings.smearing_eta_phi)
     print_statistics('phi(j1)', 3)
     print_statistics('phi(j2)', 7)
 
@@ -292,13 +326,17 @@ def apply_smearing(filename, dry_run=False):
     print_statistics('pT(l3)', 17)
     print_statistics('pT(l4)', 21)
 
-    # Lepton eta and phi
-    indices = [10, 11, 14, 15, 18, 19, 22, 23]
+    # Lepton eta
+    indices = [10, 14, 18, 22]
     X_smeared[:, indices] = X_true[:, indices]
     print_statistics('eta(l1)', 10)
     print_statistics('eta(l2)', 14)
     print_statistics('eta(l3)', 18)
     print_statistics('eta(l4)', 22)
+
+    # Lepton phi
+    indices = [11, 15, 19, 23]
+    X_smeared[:, indices] = X_true[:, indices]
     print_statistics('phi(l1)', 11)
     print_statistics('phi(l2)', 15)
     print_statistics('phi(l3)', 19)
@@ -330,12 +368,12 @@ def apply_smearing(filename, dry_run=False):
 
     # Find pairings for Zs and reconstruct
     logging.debug('Looking for Z reconstructions')
-    epsilon_e = 50.
-    epsilon_pt = 20.
-    epsilon_eta = 0.15
-    epsilon_phi = 0.15
-    found_pairing = np.full((X_true.shape[0],), False, dtype=bool)
-    found_multiple_pairings = np.full((X_true.shape[0],), False, dtype=bool)
+
+    best_distance = 1.e9 * np.ones((X_true.shape[0],))
+    e_factor = 1. / 100.
+    pt_factor = 1. / 100.
+    phi_factor = 1. / 3.
+    eta_factor = 1. / 2.
 
     for z1l1, z1l2, z2l1, z2l2 in itertools.permutations([0, 1, 2, 3]):
 
@@ -355,31 +393,27 @@ def apply_smearing(filename, dry_run=False):
         # logging.debug('Candidate 2: %s', get_statistics(candidate2))
 
         # See if they match
-        match = (
-            ((candidate1[:, 0] - X_true[:, 29]) ** 2 < epsilon_e ** 2)
-            & ((candidate1[:, 1] - X_true[:, 30]) ** 2 < epsilon_pt ** 2)
-            & ((candidate1[:, 2] - X_true[:, 31]) ** 2 < epsilon_eta ** 2)
-            & ((candidate1[:, 3] - X_true[:, 32]) ** 2 < epsilon_phi ** 2)
-            & ((candidate2[:, 0] - X_true[:, 34]) ** 2 < epsilon_e ** 2)
-            & ((candidate2[:, 1] - X_true[:, 35]) ** 2 < epsilon_pt ** 2)
-            & ((candidate2[:, 2] - X_true[:, 36]) ** 2 < epsilon_eta ** 2)
-            & ((candidate2[:, 3] - X_true[:, 37]) ** 2 < epsilon_phi ** 2)
+        distance = (
+                e_factor * (candidate1[:, 0] - X_true[:, 29]) ** 2
+                + pt_factor * (candidate1[:, 1] - X_true[:, 30]) ** 2
+                + eta_factor * (candidate1[:, 2] - X_true[:, 31]) ** 2
+                + phi_factor * (candidate1[:, 3] - X_true[:, 32]) ** 2
+                + e_factor * (candidate2[:, 0] - X_true[:, 34]) ** 2
+                + pt_factor * (candidate2[:, 1] - X_true[:, 35]) ** 2
+                + eta_factor * (candidate2[:, 2] - X_true[:, 36]) ** 2
+                + phi_factor * (candidate2[:, 3] - X_true[:, 37]) ** 2
         )
+        match = distance < best_distance
+        best_distance[match] = distance[match]
 
-        logging.debug('  Pairing %s  ->  %s / %s events match', (z1l1, z1l2, z2l1, z2l2), np.sum(match), X_true.shape[0])
-
-        found_multiple_pairings = np.logical_or(found_multiple_pairings, np.logical_and(found_pairing, match))
-        found_pairing = np.logical_or(found_pairing, match)
-
-        # Save
+        # For these combinations, reconstruct smearing
         X_smeared[match, 29:33] = candidate1[match, :]
         X_smeared[match, 34:38] = candidate2[match, :]
 
-    # Check we found pairings for each event
-    if not np.all(found_pairing):
-        logging.error('Could not find lepton pairing to reconstruct Z for %s events', np.sum(np.invert(found_pairing)))
-    if np.any(found_multiple_pairings):
-        logging.error('Found multiple lepton pairings to reconstruct Z for %s events', np.sum(found_multiple_pairings))
+        logging.debug('  Pairing %s  ->  %s / %s events improve', (z1l1, z1l2, z2l1, z2l2), np.sum(match),
+                      X_true.shape[0])
+
+    logging.debug('Reconstruction distance measure: %s', get_statistics(distance))
 
     print_statistics('E(Z1)', 29)
     print_statistics('pT(Z1)', 30)
@@ -397,10 +431,10 @@ def apply_smearing(filename, dry_run=False):
     print_statistics('m(Z2)', 38)
 
     # Dijet observables
-    X_smeared[:, 39] = calculate_m(sum_momenta([X_smeared[:, 0:4],
-                                                X_smeared[:, 4:8]]))
-    X_smeared[:, 40] = X_smeared[:, 2] - X_smeared[:, 6]
-    X_smeared[:, 41] = X_smeared[:, 3] - X_smeared[:, 7]
+    X_smeared[:, 39] = sanitize_energies(calculate_m(sum_momenta([X_smeared[:, 0:4],
+                                                                  X_smeared[:, 4:8]])))
+    X_smeared[:, 40] = sanitize_eta(X_smeared[:, 2] - X_smeared[:, 6])
+    X_smeared[:, 41] = sanitize_phi(X_smeared[:, 3] - X_smeared[:, 7])
     print_statistics('m(jj)', 39)
     print_statistics('delta eta(jj)', 40)
     print_statistics('delta phi(jj)', 41)
