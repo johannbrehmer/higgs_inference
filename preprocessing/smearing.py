@@ -525,7 +525,7 @@ if args.calibration:
     apply_smearing('calibration', args.dry)
 
 if args.test:
-    apply_smearing('train_test', args.dry)
+    apply_smearing('test', args.dry)
 
 if args.neyman:
     apply_smearing('neyman_observed', args.dry)

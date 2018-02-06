@@ -16,15 +16,26 @@ unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
 neyman_dir = '/scratch/jb6504/higgs_inference/results/neyman'
 
 ################################################################################
-# Parameters and features
+# Features and parameters
 ################################################################################
 
+feature_labels = ['jet1_E', 'jet1_pt', 'jet1_eta', 'jet1_phi',
+                  'jet2_E', 'jet2_pt', 'jet2_eta', 'jet2_phi',
+                  'lepton1_E', 'lepton1_pt', 'lepton1_eta', 'lepton1_phi',
+                  'lepton2_E', 'lepton2_pt', 'lepton2_eta', 'lepton2_phi',
+                  'lepton3_E', 'lepton3_pt', 'lepton3_eta', 'lepton3_phi',
+                  'lepton4_E', 'lepton4_pt', 'lepton4_eta', 'lepton4_phi',
+                  'higgs_E', 'higgs_pt', 'higgs_eta', 'higgs_phi', 'higgs_m',
+                  'Z1_E', 'Z1_pt', 'Z1_eta', 'Z1_phi', 'Z1_m',
+                  'Z2_E', 'Z2_pt', 'Z2_eta', 'Z2_phi', 'Z2_m',
+                  'm_jj', 'deltaeta_jj', 'deltaphi_jj']
+
 n_params = 2
-n_features = 42
+n_features = len(feature_labels)
 n_thetas_features = n_params + n_features
 n_morphing_samples = 15
 
-epsilon = 1.e-3 # for various numerical accuracy issues
+epsilon = 1.e-3  # for various numerical accuracy issues
 
 ################################################################################
 # Benchmark theta points
@@ -62,7 +73,6 @@ pbp_training_thetas = [0, 13, 14, 15, 16, 9, 422, 956, 666, 802, 675, 839, 699, 
                        421, 574, 923, 849, 299, 119, 167, 939, 402, 52, 787, 978, 41, 873, 533, 827, 304, 294, 760, 890,
                        539, 1000, 291, 740, 276, 679, 167, 125, 429, 149, 430, 720, 123, 908, 256, 777, 809, 269, 851]
 
-
 ################################################################################
 # Evaluation
 ################################################################################
@@ -96,7 +106,6 @@ n_epochs_long = 50
 early_stopping_patience = 3
 validation_split = 0.1
 
-
 ################################################################################
 # Size of unweighted event samples
 ################################################################################
@@ -129,11 +138,10 @@ n_events_test = 50000
 # Roaming, total
 n_events_roam = 20
 
-
 ################################################################################
 # Smearing (approximate shower + detector simulation)
 ################################################################################
 
 smearing_eta_phi = 0.1
-smearing_jet_energies = 0.5 # times sqrt(E)
-smearing_lepton_pt = 3.e-4 # times pT^2
+smearing_jet_energies = 0.5  # times sqrt(E)
+smearing_lepton_pt = 3.e-4  # times pT^2
