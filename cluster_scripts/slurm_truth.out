@@ -16,3 +16,5 @@
 /share/apps/scikit-learn/0.18.1/intel/lib/python2.7/site-packages/sklearn/gaussian_process/kernels.py:1362: RuntimeWarning: invalid value encountered in divide
   / np.sqrt(D.sum(2))[:, :, np.newaxis]
 06.02.2018 15:37:10 INFO    Starting evaluation of Neyman experiments
+/home/jb6504/higgs_inference/higgs_inference/strategies/truth.py:105: RuntimeWarning: divide by zero encountered in log
+  llr_neyman_distributions.append(-2. * np.sum(np.log(r_neyman_distribution[t]), axis=1))

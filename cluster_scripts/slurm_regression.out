@@ -116,3 +116,7 @@ Free memory: 11.10GiB
 2018-02-06 15:43:35.299880: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
 2018-02-06 15:43:35.299886: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
 2018-02-06 15:43:35.299895: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:04:00.0)
+1420s - loss: 0.0385 - loss_function_carl: 2.5437 - loss_function_carl_kl: 0.5405 - loss_function_score: 15.5612 - val_loss: 0.0342 - val_loss_function_carl: 1.6621 - val_loss_function_carl_kl: 0.9077 - val_loss_function_score: 6.7093
+Epoch 2/20
+1419s - loss: 0.0268 - loss_function_carl: 1.5139 - loss_function_carl_kl: 1.3340 - loss_function_score: 5.5664 - val_loss: 0.0293 - val_loss_function_carl: 1.0323 - val_loss_function_carl_kl: 3.4341 - val_loss_function_score: 2.5850
+Epoch 3/20
