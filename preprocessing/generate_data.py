@@ -79,9 +79,7 @@ filename_addition = ''
 if args.alternativedenom:
     filename_addition = '_denom1'
 
-settings.weighted_events_dir = '/scratch/jb6504/higgs_inference/data/events'
-settings.unweighted_events_dir = '/scratch/jb6504/higgs_inference/data/unweighted_events'
-data_dir = '../data'
+data_dir = settings.base_dir + '/data'
 
 ################################################################################
 # Settings
@@ -388,15 +386,15 @@ if args.pointbypoint:
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1 = generate_data_train_point_by_point(
             t, theta1)
 
-        np.save(settings.unweighted_events_dir + '/X_traisettings.n_events_n_point_by_point_' + str(
+        np.save(settings.unweighted_events_dir + '/X_train_point_by_point_' + str(
             t) + filename_addition + '.npy', this_X)
-        np.save(settings.unweighted_events_dir + '/y_traisettings.n_events_n_point_by_point_' + str(
+        np.save(settings.unweighted_events_dir + '/y_train_point_by_point_' + str(
             t) + filename_addition + '.npy', this_y)
-        np.save(settings.unweighted_events_dir + '/r_traisettings.n_events_n_point_by_point_' + str(
+        np.save(settings.unweighted_events_dir + '/r_train_point_by_point_' + str(
             t) + filename_addition + '.npy', this_r)
-        np.save(settings.unweighted_events_dir + '/p0_traisettings.n_events_n_point_by_point_' + str(
+        np.save(settings.unweighted_events_dir + '/p0_train_point_by_point_' + str(
             t) + filename_addition + '.npy', this_p0)
-        np.save(settings.unweighted_events_dir + '/p1_traisettings.n_events_n_point_by_point_' + str(
+        np.save(settings.unweighted_events_dir + '/p1_train_point_by_point_' + str(
             t) + filename_addition + '.npy', this_p1)
 
         del this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1

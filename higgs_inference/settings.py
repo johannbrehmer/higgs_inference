@@ -128,3 +128,11 @@ n_events_test = 50000
 
 # Roaming, total
 n_events_roam = 20
+
+
+################################################################################
+# Smearing (approximate shower + detector simulation)
+################################################################################
+
+smearing_eta_phi = 0.1
+smearing_jet_energy
