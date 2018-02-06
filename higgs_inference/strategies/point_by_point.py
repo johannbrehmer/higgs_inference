@@ -127,8 +127,10 @@ def point_by_point_inference(algorithm='carl',
                 settings.unweighted_events_dir + '/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
             r_train = np.load(
                 settings.unweighted_events_dir + '/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
-
-            assert np.all(np.isfinite(np.log(r_train)))
+            y_train = np.load(
+                settings.unweighted_events_dir + '/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            y_logr_train = np.hstack((y_train.reshape(-1, 1), np.log(r_train).reshape((-1, 1))))
+            assert np.all(np.isfinite(y_logr_train))
 
             # Scale data
             scaler = StandardScaler()
@@ -146,7 +148,7 @@ def point_by_point_inference(algorithm='carl',
                                   verbose=2)
 
             # Training
-            regr.fit(X_train_transformed, np.log(r_train),
+            regr.fit(X_train_transformed, y_logr_train,
                      callbacks=(
                          [EarlyStopping(verbose=1,
                                         patience=settings.early_stopping_patience)] if early_stopping else None))
@@ -231,8 +233,12 @@ def point_by_point_inference(algorithm='carl',
             # Load data
             X_train = np.load(
                 settings.unweighted_events_dir + '/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            r_train = np.load(
+                settings.unweighted_events_dir + '/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
             y_train = np.load(
                 settings.unweighted_events_dir + '/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            y_logr_train = np.hstack((y_train.reshape(-1, 1), np.log(r_train).reshape((-1, 1))))
+            assert np.all(np.isfinite(y_logr_train))
 
             # Scale data
             scaler = StandardScaler()
@@ -248,7 +254,7 @@ def point_by_point_inference(algorithm='carl',
                                  verbose=2)
 
             # Training
-            clf.fit(X_train_transformed, y_train,
+            clf.fit(X_train_transformed, y_logr_train,
                     callbacks=(
                         [EarlyStopping(verbose=1,
                                        patience=settings.early_stopping_patience)] if early_stopping else None))

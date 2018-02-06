@@ -180,8 +180,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         X_neyman_observed.reshape((-1, X_neyman_observed.shape[2])))
 
     X_thetas_train = np.hstack((X_train_transformed, theta0_train))
-    y_score_logr_train = np.hstack((y_train.reshape(-1, 1), scores_train, np.log(r_train).reshape(-1, 1)))
-
+    y_logr_score_train = np.hstack((y_train.reshape(-1, 1), np.log(r_train).reshape((-1, 1)), scores_train))
     xi = np.linspace(-1.0, 1.0, settings.n_thetas_roam)
     yi = np.linspace(-1.0, 1.0, settings.n_thetas_roam)
     xx, yy = np.meshgrid(xi, yi)
@@ -194,7 +193,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     if debug_mode:
         X_thetas_train = X_thetas_train[::100]
-        y_score_logr_train = y_score_logr_train[::100]
+        y_logr_score_train = y_logr_score_train[::100]
         X_test_transformed = X_test[::100]
         X_calibration_transformed = X_calibration_transformed[::100]
         weights_calibration = weights_calibration[:, ::100]
@@ -229,7 +228,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                                       verbose=2)
 
         logging.info('Starting training')
-        history = regr.fit(X_thetas_train, y_score_logr_train,
+        history = regr.fit(X_thetas_train, y_logr_score_train,
                            callbacks=([EarlyStopping(verbose=1,
                                                      patience=settings.early_stopping_patience)] if early_stopping else None))
 
@@ -392,7 +391,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             raise ValueError()
 
         # Fit
-        history = clf.fit(X_thetas_train[::], y_score_logr_train[::],
+        history = clf.fit(X_thetas_train[::], y_logr_score_train[::],
                           callbacks=(
                               [EarlyStopping(verbose=1,
                                              patience=settings.early_stopping_patience)] if early_stopping else None))

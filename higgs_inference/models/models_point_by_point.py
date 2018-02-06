@@ -87,7 +87,7 @@ def make_classifier(n_hidden_layers=3,
 
     # Compile model
     model.compile(loss=loss_function_carl,
-                  metrics=[loss_function_carl, loss_function_carl_kl],
+                  metrics=[loss_function_ratio_regression, loss_function_carl_kl],
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model

@@ -121,7 +121,7 @@ def afc_inference(statistics='x',
         else:
             raise NotImplementedError
 
-        logging.debug('Setting up KDE')
+        # logging.debug('Setting up KDE')
 
         # Set up KDEs for numerator and denominator
         kde_num = KernelDensity(bandwidth=epsilon, kernel=kernel, rtol=kde_relative_tolerance,
@@ -129,13 +129,13 @@ def afc_inference(statistics='x',
         kde_den = KernelDensity(bandwidth=epsilon, kernel=kernel, rtol=kde_relative_tolerance,
                                 atol=kde_absolute_tolerance)
 
-        logging.debug('Fitting KDE')
+        # logging.debug('Fitting KDE')
 
         # Fit KDEs for numerator and denominator
         kde_num.fit(summary_statistics_train[y_train == 0])
         kde_den.fit(summary_statistics_train[y_train == 1])
 
-        logging.debug('Evaluation')
+        # logging.debug('Evaluation')
 
         # Evaluation
         log_p_hat_num_test = kde_num.score_samples(summary_statistics_test)
@@ -147,12 +147,12 @@ def afc_inference(statistics='x',
 
         log_r_hat_test = log_p_hat_num_test - log_p_hat_den_test
 
-        logging.debug('Test log p (num): shape %s, %s nans, content \n %s',
-                      log_p_hat_num_test.shape, np.sum(np.isnan(log_p_hat_num_test)), log_p_hat_num_test)
-        logging.debug('Test log p (den): shape %s, %s nans, content \n %s',
-                      log_p_hat_den_test.shape, np.sum(np.isnan(log_p_hat_den_test)), log_p_hat_den_test)
-        logging.debug('Test log r: shape %s, %s nans, content \n %s',
-                      log_r_hat_test.shape, np.sum(np.isnan(log_r_hat_test)), log_r_hat_test)
+        # logging.debug('Test log p (num): shape %s, %s nans, content \n %s',
+        #               log_p_hat_num_test.shape, np.sum(np.isnan(log_p_hat_num_test)), log_p_hat_num_test)
+        # logging.debug('Test log p (den): shape %s, %s nans, content \n %s',
+        #               log_p_hat_den_test.shape, np.sum(np.isnan(log_p_hat_den_test)), log_p_hat_den_test)
+        # logging.debug('Test log r: shape %s, %s nans, content \n %s',
+        #               log_r_hat_test.shape, np.sum(np.isnan(log_r_hat_test)), log_r_hat_test)
 
         expected_llr.append(- 2. * settings.n_expected_events / n_events_test * np.sum(log_r_hat_test))
 
@@ -163,7 +163,7 @@ def afc_inference(statistics='x',
             np.save(results_dir + '/r_trained_afc' + filename_addition + '.npy', np.exp(log_r_hat_test))
 
         if do_neyman:
-            logging.debug('Neyman observed')
+            # logging.debug('Neyman observed')
 
             # Neyman construction: prepare observed data and construct summary statistics
             X_neyman_observed_transformed = scaler.transform(
@@ -185,21 +185,21 @@ def afc_inference(statistics='x',
             log_r_hat_neyman_observed = log_p_hat_num_neyman_observed - log_p_hat_den_neyman_observed
             log_r_hat_neyman_observed = log_r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
 
-            logging.debug('Neyman observed log p (num): shape %s, %s nans, content \n %s',
-                          log_p_hat_num_neyman_observed.shape, np.sum(np.isnan(log_p_hat_num_neyman_observed)),
-                          log_p_hat_num_neyman_observed)
-            logging.debug('Neyman observed log p (den): shape %s, %s nans, content \n %s',
-                          log_p_hat_den_neyman_observed.shape, np.sum(np.isnan(log_p_hat_den_neyman_observed)),
-                          log_p_hat_den_neyman_observed)
-            logging.debug('Neyman observed log r: shape %s, %s nans, content \n %s',
-                          log_r_hat_neyman_observed.shape, np.sum(np.isnan(log_r_hat_neyman_observed)),
-                          log_r_hat_neyman_observed)
+            # logging.debug('Neyman observed log p (num): shape %s, %s nans, content \n %s',
+            #               log_p_hat_num_neyman_observed.shape, np.sum(np.isnan(log_p_hat_num_neyman_observed)),
+            #               log_p_hat_num_neyman_observed)
+            # logging.debug('Neyman observed log p (den): shape %s, %s nans, content \n %s',
+            #               log_p_hat_den_neyman_observed.shape, np.sum(np.isnan(log_p_hat_den_neyman_observed)),
+            #               log_p_hat_den_neyman_observed)
+            # logging.debug('Neyman observed log r: shape %s, %s nans, content \n %s',
+            #               log_r_hat_neyman_observed.shape, np.sum(np.isnan(log_r_hat_neyman_observed)),
+            #               log_r_hat_neyman_observed)
 
             llr_neyman_observed = -2. * np.sum(log_r_hat_neyman_observed, axis=1)
             np.save(neyman_dir + '/neyman_llr_observed_afc' + '_' + str(t) + filename_addition + '.npy',
                     llr_neyman_observed)
 
-            logging.debug('Neyman distribution')
+            # logging.debug('Neyman distribution')
 
             # Neyman construction: loop over distribution samples generated from different thetas
             llr_neyman_distributions = []
@@ -234,15 +234,15 @@ def afc_inference(statistics='x',
                 log_r_hat_neyman_distribution = log_p_hat_num_neyman_distribution - log_p_hat_den_neyman_distribution
                 log_r_hat_neyman_distribution = log_r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
 
-                logging.debug('Neyman distribution %s log p (num): shape %s, %s nans, content \n %s',
-                              tt, log_p_hat_num_neyman_distribution.shape,
-                              np.sum(np.isnan(log_p_hat_num_neyman_distribution)), log_p_hat_num_neyman_distribution)
-                logging.debug('Neyman distribution %s log p (den): shape %s, %s nans, content \n %s',
-                              tt, log_p_hat_den_neyman_distribution.shape,
-                              np.sum(np.isnan(log_p_hat_den_neyman_distribution)), log_p_hat_den_neyman_distribution)
-                logging.debug('Neyman distribution %s log r: shape %s, %s nans, content \n %s',
-                              tt, log_r_hat_neyman_distribution.shape, np.sum(np.isnan(log_r_hat_neyman_distribution)),
-                              log_r_hat_neyman_distribution)
+                # logging.debug('Neyman distribution %s log p (num): shape %s, %s nans, content \n %s',
+                #               tt, log_p_hat_num_neyman_distribution.shape,
+                #               np.sum(np.isnan(log_p_hat_num_neyman_distribution)), log_p_hat_num_neyman_distribution)
+                # logging.debug('Neyman distribution %s log p (den): shape %s, %s nans, content \n %s',
+                #               tt, log_p_hat_den_neyman_distribution.shape,
+                #               np.sum(np.isnan(log_p_hat_den_neyman_distribution)), log_p_hat_den_neyman_distribution)
+                # logging.debug('Neyman distribution %s log r: shape %s, %s nans, content \n %s',
+                #               tt, log_r_hat_neyman_distribution.shape, np.sum(np.isnan(log_r_hat_neyman_distribution)),
+                #               log_r_hat_neyman_distribution)
 
                 llr_neyman_distribution = -2. * np.sum(log_r_hat_neyman_distribution, axis=1)
                 np.save(neyman_dir + '/neyman_llr_distribution_afc' + '_' + str(t) + filename_addition + '.npy',
