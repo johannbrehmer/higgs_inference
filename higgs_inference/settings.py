@@ -43,7 +43,7 @@ epsilon = 1.e-3  # for various numerical accuracy issues
 
 try:
     thetas = np.load(base_dir + '/data/thetas/thetas_parameterized.npy')
-except:
+except IOError:
     base_dir = '../'
     thetas = np.load(base_dir + '/data/thetas/thetas_parameterized.npy')
 
@@ -142,6 +142,6 @@ n_events_roam = 20
 # Smearing (approximate shower + detector simulation)
 ################################################################################
 
-smearing_eta_phi = 0.1
-smearing_jet_energies = 0.5  # times sqrt(E)
-smearing_lepton_pt = 3.e-4  # times pT^2
+smearing_eta_phi = 0.1 # Original: 0.1
+smearing_jet_energies = 0.5  # times sqrt(E). Original: 0.5
+smearing_lepton_pt = 3.e-4  # times pT^2. Original: 3.e-4
