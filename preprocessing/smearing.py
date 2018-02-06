@@ -43,7 +43,7 @@ def get_statistics(values):
         for vmin, vmax in zip(np.nanmin(values, axis=0), np.nanmax(values, axis=0)):
             if len(val_range) > 2:
                 val_range += '  '
-            val_range + str(vmin) + '...' + str(vmax)
+            val_range += str(vmin) + '...' + str(vmax)
         val_range += ' ]'
         content = '\n        ' + content.replace('\n', '\n        ')
 
@@ -330,8 +330,10 @@ def apply_smearing(filename, dry_run=False):
 
     # Find pairings for Zs and reconstruct
     logging.debug('Looking for Z reconstructions')
-    epsilon_e_pt = 10.
-    epsilon_eta_phi = 0.1
+    epsilon_e = 50.
+    epsilon_pt = 20.
+    epsilon_eta = 0.15
+    epsilon_phi = 0.15
     found_pairing = np.full((X_true.shape[0],), False, dtype=bool)
     found_multiple_pairings = np.full((X_true.shape[0],), False, dtype=bool)
 
@@ -341,39 +343,33 @@ def apply_smearing(filename, dry_run=False):
         if not (z1l1 > z1l2 and z2l1 > z2l2):
             continue
 
-        logging.debug('Pairing: %s', (z1l1, z1l2, z2l1, z2l2))
-
         # Construct candidates
         candidate1 = sum_momenta([X_true[:, 8 + z1l1 * 4:12 + z1l1 * 4],
                                   X_true[:, 8 + z1l2 * 4:12 + z1l2 * 4]])
         candidate2 = sum_momenta([X_true[:, 8 + z2l1 * 4:12 + z2l1 * 4],
                                   X_true[:, 8 + z2l2 * 4:12 + z2l2 * 4]])
 
-        # logging.debug('Indices Z1l1: %s -- %s', 8 + z1l1 * 4, 12 + z1l1 * 4)
-        # logging.debug('Indices Z1l2: %s -- %s', 8 + z1l2 * 4, 12 + z1l2 * 4)
-        # logging.debug('Indices Z2l1: %s -- %s', 8 + z2l1 * 4, 12 + z2l1 * 4)
-        # logging.debug('Indices Z2l2: %s -- %s', 8 + z2l2 * 4, 12 + z2l2 * 4)
-        logging.debug('True combination 1: %s', get_statistics(X_true[:,29:33]))
-        logging.debug('Candidate 1: %s', get_statistics(candidate1))
-        logging.debug('True combination 2: %s', get_statistics(X_true[:,34:38]))
-        logging.debug('Candidate 2: %s', get_statistics(candidate2))
+        # logging.debug('True combination 1: %s', get_statistics(X_true[:,29:33]))
+        # logging.debug('Candidate 1: %s', get_statistics(candidate1))
+        # logging.debug('True combination 2: %s', get_statistics(X_true[:,34:38]))
+        # logging.debug('Candidate 2: %s', get_statistics(candidate2))
 
         # See if they match
         match = (
-            ((candidate1[:, 0] - X_true[:, 29]) ** 2 < epsilon_e_pt ** 2)
-            & ((candidate1[:, 1] - X_true[:, 30]) ** 2 < epsilon_e_pt ** 2)
-            & ((candidate1[:, 2] - X_true[:, 31]) ** 2 < epsilon_eta_phi ** 2)
-            & ((candidate1[:, 3] - X_true[:, 32]) ** 2 < epsilon_eta_phi ** 2)
-            & ((candidate2[:, 0] - X_true[:, 34]) ** 2 < epsilon_e_pt ** 2)
-            & ((candidate2[:, 1] - X_true[:, 35]) ** 2 < epsilon_e_pt ** 2)
-            & ((candidate2[:, 2] - X_true[:, 36]) ** 2 < epsilon_eta_phi ** 2)
-            & ((candidate2[:, 3] - X_true[:, 37]) ** 2 < epsilon_eta_phi ** 2)
+            ((candidate1[:, 0] - X_true[:, 29]) ** 2 < epsilon_e ** 2)
+            & ((candidate1[:, 1] - X_true[:, 30]) ** 2 < epsilon_pt ** 2)
+            & ((candidate1[:, 2] - X_true[:, 31]) ** 2 < epsilon_eta ** 2)
+            & ((candidate1[:, 3] - X_true[:, 32]) ** 2 < epsilon_phi ** 2)
+            & ((candidate2[:, 0] - X_true[:, 34]) ** 2 < epsilon_e ** 2)
+            & ((candidate2[:, 1] - X_true[:, 35]) ** 2 < epsilon_pt ** 2)
+            & ((candidate2[:, 2] - X_true[:, 36]) ** 2 < epsilon_eta ** 2)
+            & ((candidate2[:, 3] - X_true[:, 37]) ** 2 < epsilon_phi ** 2)
         )
 
-        logging.debug('Match: %s / %s    -    %s', np.sum(match), X_true.shape[0], match)
+        logging.debug('  Pairing %s  ->  %s / %s events match', (z1l1, z1l2, z2l1, z2l2), np.sum(match), X_true.shape[0])
 
-        found_pairing = np.logical_or(found_pairing, match)
         found_multiple_pairings = np.logical_or(found_multiple_pairings, np.logical_and(found_pairing, match))
+        found_pairing = np.logical_or(found_pairing, match)
 
         # Save
         X_smeared[match, 29:33] = candidate1[match, :]
