@@ -30,10 +30,17 @@ settings.base_dir = base_dir
 ################################################################################
 
 def get_statistics(values):
+    content = str(values)
+    if values.ndim <= 1:
+        content = content.replace('\n', '')
+    else:
+        content = '\n        ' + content.replace('\n', '\n        ')
+
     output = ('shape ' + str(values.shape)
-              + ', ' + str(np.sum(np.invert(np.isfinite(values)))) + ' NaNs, mean '
-              + str(np.mean(values)) + ', range ' + str(np.nanmin(values)) + ' - ' + str(np.nanmax(values))
-              + ', content ' + str(values).replace('\n', ''))
+              + ', ' + str(np.sum(np.invert(np.isfinite(values))))
+              + ' NaNs, mean ' + str(np.mean(values))
+              + ', range ' + str(np.nanmin(values)) + ' - ' + str(np.nanmax(values))
+              + ', content ' + content)
     return output
 
 
@@ -119,7 +126,8 @@ def e_pt_eta_phi(canonical_momentum):
 
     pt = (px ** 2 + py ** 2) ** 0.5
     pabs = (px ** 2 + py ** 2 + pz ** 2) ** 0.5
-    eta = np.arctanh(pz / (pabs + settings.epsilon))
+    pabs = np.clip(pabs, 1.e-9, 8000.)
+    eta = np.arctanh(pz / (pabs))
     phi = np.arctan2(py, px)
 
     output = np.hstack((e.reshape((-1, 1)),
@@ -224,7 +232,7 @@ def apply_smearing(filename, dry_run=False):
         return
 
     if X_true.shape[1] != 42:
-        logging.error('File %s has wrong shape %s',
+        lo<gging.error('File %s has wrong shape %s',
                       settings.unweighted_events_dir + '/X_' + filename + '.npy', X_true.shape)
         return
 
@@ -311,33 +319,50 @@ def apply_smearing(filename, dry_run=False):
 
     # Find pairings for Zs and reconstruct
     logging.debug('Looking for Z reconstructions')
-    epsilon = 0.1
+    epsilon_e_pt = 10.
+    epsilon_eta_phi = 0.1
     found_pairing = np.full((X_true.shape[0],), False, dtype=bool)
     found_multiple_pairings = np.full((X_true.shape[0],), False, dtype=bool)
 
     for z1l1, z1l2, z2l1, z2l2 in itertools.permutations([0, 1, 2, 3]):
+
+        # Avoid overcounting equivalent combinations
+        if not (z1l1 > z1l2 and z2l1 > z2l2):
+            continue
+
         logging.debug('Pairing: %s', (z1l1, z1l2, z2l1, z2l2))
 
+        # Construct candidates
         candidate1 = sum_momenta([X_true[:, 8 + z1l1 * 4:12 + z1l1 * 4],
                                   X_true[:, 8 + z1l2 * 4:12 + z1l2 * 4]])
         candidate2 = sum_momenta([X_true[:, 8 + z2l1 * 4:12 + z2l1 * 4],
                                   X_true[:, 8 + z2l2 * 4:12 + z2l2 * 4]])
 
-        logging.debug('Indices Z1l1: %s -- %s', 8 + z1l1 * 4, 12 + z1l1 * 4)
-        logging.debug('Indices Z1l2: %s -- %s', 8 + z1l2 * 4, 12 + z1l2 * 4)
-        logging.debug('Indices Z2l1: %s -- %s', 8 + z2l1 * 4, 12 + z2l1 * 4)
-        logging.debug('Indices Z2l2: %s -- %s', 8 + z2l2 * 4, 12 + z2l2 * 4)
+        # logging.debug('Indices Z1l1: %s -- %s', 8 + z1l1 * 4, 12 + z1l1 * 4)
+        # logging.debug('Indices Z1l2: %s -- %s', 8 + z1l2 * 4, 12 + z1l2 * 4)
+        # logging.debug('Indices Z2l1: %s -- %s', 8 + z2l1 * 4, 12 + z2l1 * 4)
+        # logging.debug('Indices Z2l2: %s -- %s', 8 + z2l2 * 4, 12 + z2l2 * 4)
         logging.debug('Candidate 1: %s', get_statistics(candidate1))
         logging.debug('Candidate 2: %s', get_statistics(candidate2))
 
-        match = (np.all((candidate1 - X_true[:, 29:33]) ** 2 < epsilon ** 2, axis=1)
-                 & np.all((candidate2 - X_true[:, 34:38]) ** 2 < epsilon ** 2, axis=1))
+        # See if they match
+        match = (np.all(
+            ((candidate1[:,0] - X_true[:, 29])** 2 < epsilon_e_pt**2)
+            & ((candidate1[:,1] - X_true[:, 30])** 2 < epsilon_e_pt**2)
+            & ((candidate1[:,2] - X_true[:, 31])** 2 < epsilon_eta_phi**2)
+            & ((candidate1[:,3] - X_true[:, 32])** 2 < epsilon_eta_phi**2)
+            & ((candidate2[:,0] - X_true[:, 34])** 2 < epsilon_e_pt**2)
+            & ((candidate2[:,1] - X_true[:, 35])** 2 < epsilon_e_pt**2)
+            & ((candidate2[:,2] - X_true[:, 36])** 2 < epsilon_eta_phi**2)
+            & ((candidate2[:,3] - X_true[:, 37])** 2 < epsilon_eta_phi**2)
+        ))
 
-        logging.debug('Match: %s, %s', np.sum(match), match)
+        logging.debug('Match: %s/%s\n%s', np.sum(match), match.shape[0], match)
 
         found_pairing = np.logical_or(found_pairing, match)
-        found_multiple_pairings = np.logical_and(found_pairing, match)
+        found_multiple_pairings = np.logical_or(found_multiple_pairings, np.logical_and(found_pairing, match))
 
+        # Save
         X_smeared[match, 29:33] = candidate1[match, :]
         X_smeared[match, 34:38] = candidate2[match, :]
 

@@ -14,4 +14,4 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/preprocessing
 
-python -u smearing.py --train --dry
+python -u smearing.py --train
