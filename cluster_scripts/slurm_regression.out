@@ -38,3 +38,15 @@ Free memory: 11.10GiB
 2018-02-06 08:32:01.106672: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
 2018-02-06 08:32:01.106678: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
 2018-02-06 08:32:01.106687: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:04:00.0)
+1440s - loss: 0.0341 - loss_function_carl: 1.3708 - loss_function_carl_kl: 2.8940 - loss_function_score: 6.8708 - val_loss: 0.0287 - val_loss_function_carl: 0.7560 - val_loss_function_carl_kl: 9.9872 - val_loss_function_score: 1.6377
+Epoch 2/20
+1444s - loss: 0.0226 - loss_function_carl: 0.8127 - loss_function_carl_kl: 7.2582 - loss_function_score: 3.5903 - val_loss: 0.0285 - val_loss_function_carl: 1.0371 - val_loss_function_carl_kl: 3.0098 - val_loss_function_score: 3.2111
+Epoch 3/20
+1446s - loss: 0.0220 - loss_function_carl: 0.8186 - loss_function_carl_kl: 9.9836 - loss_function_score: 3.7006 - val_loss: 0.0319 - val_loss_function_carl: 0.7220 - val_loss_function_carl_kl: 10.7160 - val_loss_function_score: 1.6898
+Epoch 4/20
+1444s - loss: 0.0217 - loss_function_carl: 0.7408 - loss_function_carl_kl: 11.2234 - loss_function_score: 3.3599 - val_loss: 0.0299 - val_loss_function_carl: 0.7488 - val_loss_function_carl_kl: 8.3179 - val_loss_function_score: 2.0235
+Epoch 5/20
+1445s - loss: 0.0215 - loss_function_carl: 0.8114 - loss_function_carl_kl: 19.3852 - loss_function_score: 3.6690 - val_loss: 0.0252 - val_loss_function_carl: 0.7533 - val_loss_function_carl_kl: 15.8126 - val_loss_function_score: 1.8620
+Epoch 6/20
+1443s - loss: 0.0214 - loss_function_carl: 0.8479 - loss_function_carl_kl: 6.4063 - loss_function_score: 3.9482 - val_loss: 0.0259 - val_loss_function_carl: 0.8317 - val_loss_function_carl_kl: 5.5331 - val_loss_function_score: 2.2050
+Epoch 7/20

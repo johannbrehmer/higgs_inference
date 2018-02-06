@@ -38,3 +38,15 @@ Free memory: 11.10GiB
 2018-02-06 08:32:01.966796: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
 2018-02-06 08:32:01.966803: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
 2018-02-06 08:32:01.966812: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:05:00.0)
+1675s - loss: 0.6685 - loss_function_ratio_regression: 0.1531 - loss_function_carl_kl: 10.7287 - loss_function_score: 2.2241 - val_loss: 0.6622 - val_loss_function_ratio_regression: 0.1232 - val_loss_function_carl_kl: 12.0259 - val_loss_function_score: 0.5126
+Epoch 2/20
+1675s - loss: 0.6659 - loss_function_ratio_regression: 0.1115 - loss_function_carl_kl: 10.6970 - loss_function_score: 2.2181 - val_loss: 0.6635 - val_loss_function_ratio_regression: 0.1354 - val_loss_function_carl_kl: 12.0934 - val_loss_function_score: 0.6117
+Epoch 3/20
+1672s - loss: 0.6655 - loss_function_ratio_regression: 0.1054 - loss_function_carl_kl: 10.6926 - loss_function_score: 2.3209 - val_loss: 0.6573 - val_loss_function_ratio_regression: 0.0819 - val_loss_function_carl_kl: 10.6214 - val_loss_function_score: 0.6791
+Epoch 4/20
+1673s - loss: 0.6653 - loss_function_ratio_regression: 0.1029 - loss_function_carl_kl: 10.6910 - loss_function_score: 2.4035 - val_loss: 0.6612 - val_loss_function_ratio_regression: 0.1177 - val_loss_function_carl_kl: 9.1461 - val_loss_function_score: 0.7354
+Epoch 5/20
+1672s - loss: 0.6653 - loss_function_ratio_regression: 0.1014 - loss_function_carl_kl: 10.6910 - loss_function_score: 2.5481 - val_loss: 0.6665 - val_loss_function_ratio_regression: 0.1634 - val_loss_function_carl_kl: 12.4553 - val_loss_function_score: 0.8441
+Epoch 6/20
+1673s - loss: 0.6651 - loss_function_ratio_regression: 0.1008 - loss_function_carl_kl: 10.6889 - loss_function_score: 2.6611 - val_loss: 0.6597 - val_loss_function_ratio_regression: 0.1031 - val_loss_function_carl_kl: 11.7233 - val_loss_function_score: 0.9017
+Epoch 7/20

@@ -38,3 +38,13 @@ Free memory: 11.10GiB
 2018-02-06 08:32:01.584548: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
 2018-02-06 08:32:01.584555: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
 2018-02-06 08:32:01.584564: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:04:00.0)
+1843s - loss: 1.0841 - loss_function_ratio_regression: 0.0777 - loss_function_carl: 0.6649 - loss_function_carl_kl: 10.6871 - loss_function_score: 1.1979 - val_loss: 0.7239 - val_loss_function_ratio_regression: 0.0837 - val_loss_function_carl: 0.6601 - val_loss_function_carl_kl: 12.1199 - val_loss_function_score: 0.1823
+Epoch 2/20
+1841s - loss: 1.0126 - loss_function_ratio_regression: 0.0584 - loss_function_carl: 0.6636 - loss_function_carl_kl: 10.6695 - loss_function_score: 0.9970 - val_loss: 0.7163 - val_loss_function_ratio_regression: 0.0408 - val_loss_function_carl: 0.6548 - val_loss_function_carl_kl: 11.2717 - val_loss_function_score: 0.1759
+Epoch 3/20
+1846s - loss: 1.0005 - loss_function_ratio_regression: 0.0564 - loss_function_carl: 0.6636 - loss_function_carl_kl: 10.6668 - loss_function_score: 0.9627 - val_loss: 0.7174 - val_loss_function_ratio_regression: 0.0547 - val_loss_function_carl: 0.6565 - val_loss_function_carl_kl: 11.4535 - val_loss_function_score: 0.1740
+Epoch 4/20
+1847s - loss: 0.9963 - loss_function_ratio_regression: 0.0565 - loss_function_carl: 0.6636 - loss_function_carl_kl: 10.6675 - loss_function_score: 0.9506 - val_loss: 0.7151 - val_loss_function_ratio_regression: 0.0312 - val_loss_function_carl: 0.6537 - val_loss_function_carl_kl: 10.2412 - val_loss_function_score: 0.1754
+Epoch 5/20
+1845s - loss: 0.9929 - loss_function_ratio_regression: 0.0564 - loss_function_carl: 0.6635 - loss_function_carl_kl: 10.6696 - loss_function_score: 0.9410 - val_loss: 0.7155 - val_loss_function_ratio_regression: 0.0433 - val_loss_function_carl: 0.6553 - val_loss_function_carl_kl: 11.3741 - val_loss_function_score: 0.1722
+Epoch 6/20

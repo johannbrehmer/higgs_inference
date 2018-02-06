@@ -12,7 +12,7 @@ import logging
 import itertools
 import numpy as np
 
-from scipy.stats import norm, crystalball
+from scipy.stats import norm#, crystalball
 
 base_dir = path.abspath(path.join(path.dirname(__file__), '..'))
 try:
@@ -34,9 +34,10 @@ def smear(values, absolute=0., relative=0.):
     return norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
 
 
-def smear_jet_energies(values, resolution_factor=0.5, beta=1.5, m=2.5):
+def smear_jet_energies(values, resolution_factor=0.5): #, beta=1.5, m=2.5):
     sigmas = resolution_factor * values ** 0.5
-    return crystalball(beta, m, loc=values, scale=sigmas).rvs(size=values.shape[0])
+    return norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
+    # return crystalball(beta, m, loc=values, scale=sigmas).rvs(size=values.shape[0])
 
 
 def smear_lepton_pt(values, resolution_factor=3.e-4):

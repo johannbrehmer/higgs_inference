@@ -31,3 +31,109 @@ Free memory: 11.10GiB
 2018-02-06 08:31:43.641832: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
 2018-02-06 08:31:43.641842: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
 2018-02-06 08:31:43.641861: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:07:00.0)
+221s - loss: 0.6734 - loss_function_ratio_regression: 0.1198 - loss_function_carl_kl: 11.3621 - val_loss: 0.8069 - val_loss_function_ratio_regression: 0.1511 - val_loss_function_carl_kl: 25.8198
+Epoch 2/20
+219s - loss: 0.6716 - loss_function_ratio_regression: 0.0978 - loss_function_carl_kl: 11.3393 - val_loss: 0.7640 - val_loss_function_ratio_regression: 0.1252 - val_loss_function_carl_kl: 24.4473
+Epoch 3/20
+219s - loss: 0.6714 - loss_function_ratio_regression: 0.0942 - loss_function_carl_kl: 11.3385 - val_loss: 0.7802 - val_loss_function_ratio_regression: 0.0911 - val_loss_function_carl_kl: 24.9659
+Epoch 4/20
+219s - loss: 0.6714 - loss_function_ratio_regression: 0.0913 - loss_function_carl_kl: 11.3400 - val_loss: 0.8336 - val_loss_function_ratio_regression: 0.1371 - val_loss_function_carl_kl: 26.6733
+Epoch 5/20
+220s - loss: 0.6713 - loss_function_ratio_regression: 0.0908 - loss_function_carl_kl: 11.3482 - val_loss: 0.7740 - val_loss_function_ratio_regression: 0.0834 - val_loss_function_carl_kl: 24.7662
+Epoch 6/20
+220s - loss: 0.6713 - loss_function_ratio_regression: 0.0914 - loss_function_carl_kl: 11.3428 - val_loss: 0.8696 - val_loss_function_ratio_regression: 0.1830 - val_loss_function_carl_kl: 27.8260
+Epoch 00005: early stopping
+06.02.2018 08:53:56 INFO    Starting theta 2/100: number 13 ([-1. -1.])
+Train on 899500 samples, validate on 99945 samples
+Epoch 1/20
+219s - loss: 0.6257 - loss_function_ratio_regression: 0.3207 - loss_function_carl_kl: 10.5084 - val_loss: 0.7215 - val_loss_function_ratio_regression: 0.3623 - val_loss_function_carl_kl: 23.0884
+Epoch 2/20
+220s - loss: 0.6189 - loss_function_ratio_regression: 0.2098 - loss_function_carl_kl: 10.4211 - val_loss: 0.7213 - val_loss_function_ratio_regression: 0.3121 - val_loss_function_carl_kl: 23.0810
+Epoch 3/20
+220s - loss: 0.6175 - loss_function_ratio_regression: 0.1844 - loss_function_carl_kl: 10.4100 - val_loss: 0.7304 - val_loss_function_ratio_regression: 0.2658 - val_loss_function_carl_kl: 23.3723
+Epoch 4/20
+218s - loss: 0.6171 - loss_function_ratio_regression: 0.1790 - loss_function_carl_kl: 10.4133 - val_loss: 0.7113 - val_loss_function_ratio_regression: 0.2483 - val_loss_function_carl_kl: 22.7620
+Epoch 5/20
+217s - loss: 0.6168 - loss_function_ratio_regression: 0.1737 - loss_function_carl_kl: 10.4103 - val_loss: 0.7120 - val_loss_function_ratio_regression: 0.2340 - val_loss_function_carl_kl: 22.7818
+Epoch 6/20
+219s - loss: 0.6164 - loss_function_ratio_regression: 0.1698 - loss_function_carl_kl: 10.4086 - val_loss: 0.6913 - val_loss_function_ratio_regression: 0.2580 - val_loss_function_carl_kl: 22.1194
+Epoch 7/20
+223s - loss: 0.6161 - loss_function_ratio_regression: 0.1662 - loss_function_carl_kl: 10.4084 - val_loss: 0.7670 - val_loss_function_ratio_regression: 0.3053 - val_loss_function_carl_kl: 24.5439
+Epoch 8/20
+224s - loss: 0.6158 - loss_function_ratio_regression: 0.1642 - loss_function_carl_kl: 10.4065 - val_loss: 0.7036 - val_loss_function_ratio_regression: 0.2485 - val_loss_function_carl_kl: 22.5133
+Epoch 9/20
+223s - loss: 0.6156 - loss_function_ratio_regression: 0.1655 - loss_function_carl_kl: 10.3951 - val_loss: 0.7218 - val_loss_function_ratio_regression: 0.2766 - val_loss_function_carl_kl: 23.0967
+Epoch 10/20
+225s - loss: 0.6155 - loss_function_ratio_regression: 0.1643 - loss_function_carl_kl: 10.3966 - val_loss: 0.7102 - val_loss_function_ratio_regression: 0.2308 - val_loss_function_carl_kl: 22.7245
+Epoch 00009: early stopping
+06.02.2018 09:31:06 INFO    Starting theta 3/100: number 14 ([-1.  1.])
+Train on 899914 samples, validate on 99991 samples
+Epoch 1/20
+225s - loss: 0.6144 - loss_function_ratio_regression: 0.3292 - loss_function_carl_kl: 10.1874 - val_loss: 0.7170 - val_loss_function_ratio_regression: 0.2828 - val_loss_function_carl_kl: 22.9426
+Epoch 2/20
+225s - loss: 0.6071 - loss_function_ratio_regression: 0.2166 - loss_function_carl_kl: 10.0843 - val_loss: 0.7577 - val_loss_function_ratio_regression: 0.3031 - val_loss_function_carl_kl: 24.2457
+Epoch 3/20
+226s - loss: 0.6059 - loss_function_ratio_regression: 0.1968 - loss_function_carl_kl: 10.0672 - val_loss: 0.6941 - val_loss_function_ratio_regression: 0.2223 - val_loss_function_carl_kl: 22.2103
+Epoch 4/20
+225s - loss: 0.6054 - loss_function_ratio_regression: 0.1901 - loss_function_carl_kl: 10.0530 - val_loss: 0.5927 - val_loss_function_ratio_regression: 0.1722 - val_loss_function_carl_kl: 18.9643
+Epoch 5/20
+225s - loss: 0.6048 - loss_function_ratio_regression: 0.1849 - loss_function_carl_kl: 10.0542 - val_loss: 0.7073 - val_loss_function_ratio_regression: 0.2341 - val_loss_function_carl_kl: 22.6321
+Epoch 6/20
+219s - loss: 0.6045 - loss_function_ratio_regression: 0.1801 - loss_function_carl_kl: 10.0441 - val_loss: 0.7139 - val_loss_function_ratio_regression: 0.2221 - val_loss_function_carl_kl: 22.8421
+Epoch 7/20
+217s - loss: 0.6041 - loss_function_ratio_regression: 0.1791 - loss_function_carl_kl: 10.0439 - val_loss: 0.6434 - val_loss_function_ratio_regression: 0.1413 - val_loss_function_carl_kl: 20.5888
+Epoch 8/20
+219s - loss: 0.6039 - loss_function_ratio_regression: 0.1757 - loss_function_carl_kl: 10.0356 - val_loss: 0.7483 - val_loss_function_ratio_regression: 0.2648 - val_loss_function_carl_kl: 23.9444
+Epoch 00007: early stopping
+06.02.2018 10:01:07 INFO    Starting theta 4/100: number 15 ([ 1. -1.])
+Train on 899976 samples, validate on 99998 samples
+Epoch 1/20
+225s - loss: 0.6023 - loss_function_ratio_regression: 0.2312 - loss_function_carl_kl: 9.9229 - val_loss: 0.7488 - val_loss_function_ratio_regression: 0.3010 - val_loss_function_carl_kl: 23.9597
+Epoch 2/20
+225s - loss: 0.5984 - loss_function_ratio_regression: 0.1702 - loss_function_carl_kl: 9.8766 - val_loss: 0.7464 - val_loss_function_ratio_regression: 0.2429 - val_loss_function_carl_kl: 23.8828
+Epoch 3/20
+224s - loss: 0.5976 - loss_function_ratio_regression: 0.1585 - loss_function_carl_kl: 9.8679 - val_loss: 0.6462 - val_loss_function_ratio_regression: 0.1556 - val_loss_function_carl_kl: 20.6769
+Epoch 4/20
+225s - loss: 0.5970 - loss_function_ratio_regression: 0.1551 - loss_function_carl_kl: 9.8621 - val_loss: 0.6424 - val_loss_function_ratio_regression: 0.1702 - val_loss_function_carl_kl: 20.5579
+Epoch 5/20
+226s - loss: 0.5970 - loss_function_ratio_regression: 0.1541 - loss_function_carl_kl: 9.8599 - val_loss: 0.6569 - val_loss_function_ratio_regression: 0.1407 - val_loss_function_carl_kl: 21.0191
+Epoch 6/20
+226s - loss: 0.5966 - loss_function_ratio_regression: 0.1539 - loss_function_carl_kl: 9.8607 - val_loss: 0.6527 - val_loss_function_ratio_regression: 0.1576 - val_loss_function_carl_kl: 20.8859
+Epoch 7/20
+226s - loss: 0.5965 - loss_function_ratio_regression: 0.1520 - loss_function_carl_kl: 9.8572 - val_loss: 0.6855 - val_loss_function_ratio_regression: 0.1652 - val_loss_function_carl_kl: 21.9364
+Epoch 8/20
+225s - loss: 0.5962 - loss_function_ratio_regression: 0.1513 - loss_function_carl_kl: 9.8497 - val_loss: 0.7199 - val_loss_function_ratio_regression: 0.2369 - val_loss_function_carl_kl: 23.0348
+Epoch 00007: early stopping
+06.02.2018 10:31:30 INFO    Starting theta 5/100: number 16 ([ 1.  1.])
+Train on 900000 samples, validate on 100000 samples
+Epoch 1/20
+226s - loss: 0.6687 - loss_function_ratio_regression: 0.0779 - loss_function_carl_kl: 11.1486 - val_loss: 0.7773 - val_loss_function_ratio_regression: 0.0654 - val_loss_function_carl_kl: 24.8733
+Epoch 2/20
+218s - loss: 0.6676 - loss_function_ratio_regression: 0.0721 - loss_function_carl_kl: 11.1569 - val_loss: 0.8108 - val_loss_function_ratio_regression: 0.1062 - val_loss_function_carl_kl: 25.9461
+Epoch 3/20
+218s - loss: 0.6677 - loss_function_ratio_regression: 0.0729 - loss_function_carl_kl: 11.1603 - val_loss: 0.7782 - val_loss_function_ratio_regression: 0.0604 - val_loss_function_carl_kl: 24.9031
+Epoch 4/20
+218s - loss: 0.6677 - loss_function_ratio_regression: 0.0737 - loss_function_carl_kl: 11.1638 - val_loss: 0.7582 - val_loss_function_ratio_regression: 0.0461 - val_loss_function_carl_kl: 24.2639
+Epoch 5/20
+219s - loss: 0.6678 - loss_function_ratio_regression: 0.0757 - loss_function_carl_kl: 11.1643 - val_loss: 0.8052 - val_loss_function_ratio_regression: 0.1005 - val_loss_function_carl_kl: 25.7655
+Epoch 6/20
+218s - loss: 0.6677 - loss_function_ratio_regression: 0.0763 - loss_function_carl_kl: 11.1665 - val_loss: 0.7603 - val_loss_function_ratio_regression: 0.0465 - val_loss_function_carl_kl: 24.3283
+Epoch 7/20
+217s - loss: 0.6676 - loss_function_ratio_regression: 0.0762 - loss_function_carl_kl: 11.1636 - val_loss: 0.7667 - val_loss_function_ratio_regression: 0.0622 - val_loss_function_carl_kl: 24.5356
+Epoch 8/20
+219s - loss: 0.6677 - loss_function_ratio_regression: 0.0759 - loss_function_carl_kl: 11.1656 - val_loss: 0.7930 - val_loss_function_ratio_regression: 0.0783 - val_loss_function_carl_kl: 25.3769
+Epoch 00007: early stopping
+06.02.2018 11:01:04 INFO    Starting theta 6/100: number 9 ([-0.5 -0.5])
+Train on 898658 samples, validate on 99851 samples
+Epoch 1/20
+224s - loss: 0.6550 - loss_function_ratio_regression: 0.2345 - loss_function_carl_kl: 11.0637 - val_loss: 0.7644 - val_loss_function_ratio_regression: 0.2834 - val_loss_function_carl_kl: 24.4599
+Epoch 2/20
+225s - loss: 0.6514 - loss_function_ratio_regression: 0.1704 - loss_function_carl_kl: 11.0350 - val_loss: 0.7716 - val_loss_function_ratio_regression: 0.2487 - val_loss_function_carl_kl: 24.6887
+Epoch 3/20
+225s - loss: 0.6505 - loss_function_ratio_regression: 0.1563 - loss_function_carl_kl: 11.0295 - val_loss: 0.8333 - val_loss_function_ratio_regression: 0.2938 - val_loss_function_carl_kl: 26.6644
+Epoch 4/20
+222s - loss: 0.6503 - loss_function_ratio_regression: 0.1515 - loss_function_carl_kl: 11.0320 - val_loss: 0.8087 - val_loss_function_ratio_regression: 0.2606 - val_loss_function_carl_kl: 25.8770
+Epoch 5/20
+223s - loss: 0.6501 - loss_function_ratio_regression: 0.1465 - loss_function_carl_kl: 11.0440 - val_loss: 0.7783 - val_loss_function_ratio_regression: 0.2068 - val_loss_function_carl_kl: 24.9036
+Epoch 00004: early stopping
+06.02.2018 11:20:02 INFO    Starting theta 7/100: number 422 ([-0.19238158 -0.59962178])

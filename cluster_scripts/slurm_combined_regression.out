@@ -38,3 +38,16 @@ Free memory: 11.10GiB
 2018-02-06 08:31:55.350252: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
 2018-02-06 08:31:55.350258: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
 2018-02-06 08:31:55.350265: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:85:00.0)
+1596s - loss: 0.0432 - loss_function_carl: 0.6605 - loss_function_carl_kl: 10.6111 - loss_function_ratio_regression: 0.0310 - loss_function_score: 1.1067 - val_loss: 0.0199 - val_loss_function_carl: 0.6524 - val_loss_function_carl_kl: 10.4086 - val_loss_function_ratio_regression: 0.0174 - val_loss_function_score: 0.2265
+Epoch 2/20
+1593s - loss: 0.0270 - loss_function_carl: 0.6597 - loss_function_carl_kl: 10.6056 - loss_function_ratio_regression: 0.0172 - loss_function_score: 0.8923 - val_loss: 0.0177 - val_loss_function_carl: 0.6524 - val_loss_function_carl_kl: 10.5631 - val_loss_function_ratio_regression: 0.0151 - val_loss_function_score: 0.2392
+Epoch 3/20
+1594s - loss: 0.0256 - loss_function_carl: 0.6596 - loss_function_carl_kl: 10.6051 - loss_function_ratio_regression: 0.0161 - loss_function_score: 0.8656 - val_loss: 0.0192 - val_loss_function_carl: 0.6525 - val_loss_function_carl_kl: 10.1907 - val_loss_function_ratio_regression: 0.0163 - val_loss_function_score: 0.2635
+Epoch 4/20
+1596s - loss: 0.0250 - loss_function_carl: 0.6596 - loss_function_carl_kl: 10.6047 - loss_function_ratio_regression: 0.0156 - loss_function_score: 0.8577 - val_loss: 0.0197 - val_loss_function_carl: 0.6527 - val_loss_function_carl_kl: 10.5621 - val_loss_function_ratio_regression: 0.0169 - val_loss_function_score: 0.2493
+Epoch 5/20
+1595s - loss: 0.0246 - loss_function_carl: 0.6596 - loss_function_carl_kl: 10.6048 - loss_function_ratio_regression: 0.0153 - loss_function_score: 0.8446 - val_loss: 0.0221 - val_loss_function_carl: 0.6528 - val_loss_function_carl_kl: 10.3887 - val_loss_function_ratio_regression: 0.0192 - val_loss_function_score: 0.2614
+Epoch 6/20
+1594s - loss: 0.0244 - loss_function_carl: 0.6596 - loss_function_carl_kl: 10.6048 - loss_function_ratio_regression: 0.0151 - loss_function_score: 0.8448 - val_loss: 0.0198 - val_loss_function_carl: 0.6525 - val_loss_function_carl_kl: 10.4763 - val_loss_function_ratio_regression: 0.0169 - val_loss_function_score: 0.2665
+Epoch 00005: early stopping
+06.02.2018 11:11:25 INFO    Starting evaluation
