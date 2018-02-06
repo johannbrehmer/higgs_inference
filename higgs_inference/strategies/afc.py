@@ -19,6 +19,7 @@ def afc_inference(statistics='x',
                   indices_X=None,
                   epsilon=None,
                   kernel='gaussian',
+                  use_smearing=False,
                   kde_relative_tolerance=1.e-2,
                   kde_absolute_tolerance=1.e-4,
                   do_neyman=False,
@@ -27,6 +28,7 @@ def afc_inference(statistics='x',
     Approximates the likelihood through Approximate Frequentist Inference, a frequentist twist on ABC
     and effectively the same as kernel density estimation in the summary statistics space.
 
+    :param use_smearing:
     :param statistics: Defines which summary statistics is used to decide upon acceptance or rejection of events.
                        Currently the only option is 'x', which bases the acceptance decision on an epsilon ball in
                        (re-scaled) feature space.
@@ -65,6 +67,11 @@ def afc_inference(statistics='x',
     else:
         filename_addition = filename_addition + '_epsilon_' + format_number(epsilon, 2)
 
+    input_X_prefix = ''
+    if use_smearing:
+        input_X_prefix = 'smeared_'
+        filename_addition += '_smeared'
+
     denom1_mode = ('denom1' in options)
     input_filename_addition = ''
     if denom1_mode:
@@ -86,8 +93,8 @@ def afc_inference(statistics='x',
     # Data
     ################################################################################
 
-    X_test = np.load(settings.unweighted_events_dir + '/X_test' + input_filename_addition + '.npy')
-    X_neyman_observed = np.load(settings.unweighted_events_dir + '/X_neyman_observed.npy')
+    X_test = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
     n_events_test = X_test.shape[0]
 
     ################################################################################
@@ -104,7 +111,7 @@ def afc_inference(statistics='x',
 
         # Load data
         X_train = np.load(
-            settings.unweighted_events_dir + '/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
         y_train = np.load(
             settings.unweighted_events_dir + '/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
 
@@ -214,7 +221,7 @@ def afc_inference(statistics='x',
 
                 # Neyman construction: load distribution sample and construct summary statistics
                 X_neyman_distribution = np.load(
-                    settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
+                    settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_distribution_' + str(tt) + '.npy')
                 X_neyman_distribution_transformed = scaler.transform(
                     X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 

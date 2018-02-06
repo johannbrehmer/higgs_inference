@@ -58,6 +58,7 @@ parser.add_argument("-pbp", "--pointbypoint", action="store_true",
                     help="Point-by-point rather than parameterized setup.")
 parser.add_argument("-a", "--aware", action="store_true",
                     help="Physics-aware parameterized setup.")
+parser.add_argument("-s", "--smearing", action='store_true', help='Train and evaluate on smeared observables.')
 parser.add_argument("-t", "--training", default='baseline', help='Training sample: "baseline", "basis", or "random".')
 parser.add_argument("-x", "--xindices", type=int, nargs='+', default=[1, 38, 39, 40, 41],
                     help='X components to be used in AFC.')
@@ -71,6 +72,7 @@ logging.info('Startup options:')
 logging.info('  Algorithm:                     %s', args.algorithm)
 logging.info('  Point by point:                %s', args.pointbypoint)
 logging.info('  Morphing-aware mode:           %s', args.aware)
+logging.info('  Smeared data:                  %s', args.smearing)
 logging.info('  Training sample:               %s', args.training)
 logging.info('  AFC X indices:                 %s', args.xindices)
 logging.info('  Neyman construction toys:      %s', args.neyman)
@@ -103,17 +105,20 @@ elif args.algorithm == 'localmodel':
 
 elif args.algorithm == 'afc':
     afc_inference(indices_X=args.xindices,
+                  use_smearing=args.smearing,
                   do_neyman=args.neyman,
                   options=args.options)
 
 elif args.algorithm == 'scoreregression':
     assert loaded_ml_strategies
-    score_regression_inference(do_neyman=args.neyman,
+    score_regression_inference(use_smearing=args.smearing,
+                               do_neyman=args.neyman,
                                options=args.options)
 
 elif args.pointbypoint:
     assert loaded_ml_strategies
     point_by_point_inference(algorithm=args.algorithm,
+                             use_smearing=args.smearing,
                              do_neyman=args.neyman,
                              options=args.options)
 
@@ -121,6 +126,7 @@ else:
     assert loaded_ml_strategies
     parameterized_inference(algorithm=args.algorithm,
                             morphing_aware=args.aware,
+                            use_smearing=args.smearing,
                             training_sample=args.training,
                             do_neyman=args.neyman,
                             options=args.options)

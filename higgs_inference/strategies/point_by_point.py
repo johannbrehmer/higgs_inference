@@ -22,12 +22,14 @@ from higgs_inference.models.models_point_by_point import make_classifier, make_r
 
 
 def point_by_point_inference(algorithm='carl',
+                             use_smearing=False,
                              do_neyman=False,
                              do_neyman_calibrated=False,
                              options=''):
     """
     Trains and evaluates one of the point-by-point higgs_inference methods.
 
+    :param use_smearing:
     :param do_neyman_calibrated:
     :param do_neyman:
     :param algorithm: Type of the algorithm used. Currently supported: 'carl' and 'regression'.
@@ -77,6 +79,11 @@ def point_by_point_inference(algorithm='carl',
         early_stopping = False
         filename_addition += '_short'
 
+    input_X_prefix = ''
+    if use_smearing:
+        input_X_prefix = 'smeared_'
+        filename_addition += '_smeared'
+
     theta1 = settings.theta1_default
     input_filename_addition = ''
     if denom1_mode:
@@ -97,13 +104,13 @@ def point_by_point_inference(algorithm='carl',
     # Data
     ################################################################################
 
-    X_calibration = np.load(settings.unweighted_events_dir + '/X_calibration' + input_filename_addition + '.npy')
+    X_calibration = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_calibration' + input_filename_addition + '.npy')
     weights_calibration = np.load(
         settings.unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
 
-    X_test = np.load(settings.unweighted_events_dir + '/X_test' + input_filename_addition + '.npy')
+    X_test = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
-    X_neyman_observed = np.load(settings.unweighted_events_dir + '/X_neyman_observed.npy')
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
 
     n_events_test = X_test.shape[0]
     assert settings.n_thetas == r_test.shape[0]
@@ -124,7 +131,7 @@ def point_by_point_inference(algorithm='carl',
 
             # Load data
             X_train = np.load(
-                settings.unweighted_events_dir + '/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
             r_train = np.load(
                 settings.unweighted_events_dir + '/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
             y_train = np.load(
@@ -189,7 +196,7 @@ def point_by_point_inference(algorithm='carl',
 
                     # Neyman construction: load distribution sample
                     X_neyman_distribution = np.load(
-                        settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
+                        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_distribution_' + str(tt) + '.npy')
                     X_neyman_distribution_transformed = scaler.transform(
                         X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
@@ -232,7 +239,7 @@ def point_by_point_inference(algorithm='carl',
 
             # Load data
             X_train = np.load(
-                settings.unweighted_events_dir + '/X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
             r_train = np.load(
                 settings.unweighted_events_dir + '/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
             y_train = np.load(
@@ -349,7 +356,7 @@ def point_by_point_inference(algorithm='carl',
 
                     # Neyman construction: load distribution sample
                     X_neyman_distribution = np.load(
-                        settings.unweighted_events_dir + '/X_neyman_distribution_' + str(tt) + '.npy')
+                        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_distribution_' + str(tt) + '.npy')
                     X_neyman_distribution_transformed = scaler.transform(
                         X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
