@@ -31,7 +31,7 @@ settings.base_dir = base_dir
 
 def get_statistics(values):
     output = ('shape ' + str(values.shape)
-              + ', ' + np.sum(np.invert(np.isfinite(values))) + ' NaNs, mean'
+              + ', ' + str(np.sum(np.invert(np.isfinite(values)))) + ' NaNs, mean '
               + str(np.mean(values)) + ', content ' + str(values))
     return output
 
@@ -154,7 +154,7 @@ def e_px_py_pz(momentum):
                       pz.reshape((-1, 1))))
 
     logging.debug('Conversion from E,pT,eta,phi to E,px,py,pz:')
-    logging.debug('  Input: %s', get_statistics(canonical_momentum))
+    logging.debug('  Input: %s', get_statistics(momentum))
     logging.debug('  E:     %s', get_statistics(e))
     logging.debug('  pt:    %s', get_statistics(pt))
     logging.debug('  eta:   %s', get_statistics(eta))
@@ -211,7 +211,7 @@ def apply_smearing(filename, dry_run=False):
 
     # Load stuff
     try:
-        X_true = np.load(settings.unweighted_events_dir + '/X_' + filename + '.npy')
+        X_true = np.load(settings.unweighted_events_dir + '/X_' + filename + '.npy').astype(np.float64)
     except IOError:
         logging.error('File %s not found', settings.unweighted_events_dir + '/X_' + filename + '.npy')
         return
@@ -243,7 +243,7 @@ def apply_smearing(filename, dry_run=False):
     # Jet eta and phi
     indices = [2, 3, 6, 7]
     for i in indices:
-        X_smeared[:, i] = smear(X_true[:, i], absolute=settings.smearing_eta_phi)
+        X_smeared[:, i] = smear_angles(X_true[:, i], absolute=settings.smearing_eta_phi)
 
     # Derive jet pT, assuming zero jet mass (switch to smearing pT independently?)
     X_smeared[:, 1] = calculate_pt_massless(X_smeared[:, 0:4])
