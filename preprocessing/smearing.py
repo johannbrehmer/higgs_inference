@@ -127,7 +127,7 @@ def e_pt_eta_phi(canonical_momentum):
     pt = (px ** 2 + py ** 2) ** 0.5
     pabs = (px ** 2 + py ** 2 + pz ** 2) ** 0.5
     pabs = np.clip(pabs, 1.e-9, 8000.)
-    eta = np.arctanh(pz / (pabs))
+    eta = np.arctanh(pz / pabs)
     phi = np.arctan2(py, px)
 
     output = np.hstack((e.reshape((-1, 1)),
@@ -232,7 +232,7 @@ def apply_smearing(filename, dry_run=False):
         return
 
     if X_true.shape[1] != 42:
-        lo<gging.error('File %s has wrong shape %s',
+        logging.error('File %s has wrong shape %s',
                       settings.unweighted_events_dir + '/X_' + filename + '.npy', X_true.shape)
         return
 
@@ -347,14 +347,14 @@ def apply_smearing(filename, dry_run=False):
 
         # See if they match
         match = (np.all(
-            ((candidate1[:,0] - X_true[:, 29])** 2 < epsilon_e_pt**2)
-            & ((candidate1[:,1] - X_true[:, 30])** 2 < epsilon_e_pt**2)
-            & ((candidate1[:,2] - X_true[:, 31])** 2 < epsilon_eta_phi**2)
-            & ((candidate1[:,3] - X_true[:, 32])** 2 < epsilon_eta_phi**2)
-            & ((candidate2[:,0] - X_true[:, 34])** 2 < epsilon_e_pt**2)
-            & ((candidate2[:,1] - X_true[:, 35])** 2 < epsilon_e_pt**2)
-            & ((candidate2[:,2] - X_true[:, 36])** 2 < epsilon_eta_phi**2)
-            & ((candidate2[:,3] - X_true[:, 37])** 2 < epsilon_eta_phi**2)
+            ((candidate1[:, 0] - X_true[:, 29]) ** 2 < epsilon_e_pt ** 2)
+            & ((candidate1[:, 1] - X_true[:, 30]) ** 2 < epsilon_e_pt ** 2)
+            & ((candidate1[:, 2] - X_true[:, 31]) ** 2 < epsilon_eta_phi ** 2)
+            & ((candidate1[:, 3] - X_true[:, 32]) ** 2 < epsilon_eta_phi ** 2)
+            & ((candidate2[:, 0] - X_true[:, 34]) ** 2 < epsilon_e_pt ** 2)
+            & ((candidate2[:, 1] - X_true[:, 35]) ** 2 < epsilon_e_pt ** 2)
+            & ((candidate2[:, 2] - X_true[:, 36]) ** 2 < epsilon_eta_phi ** 2)
+            & ((candidate2[:, 3] - X_true[:, 37]) ** 2 < epsilon_eta_phi ** 2)
         ))
 
         logging.debug('Match: %s/%s\n%s', np.sum(match), match.shape[0], match)
