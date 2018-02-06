@@ -31,15 +31,26 @@ settings.base_dir = base_dir
 
 def get_statistics(values):
     content = str(values)
+
     if values.ndim <= 1:
+        mean = str(np.mean(values))
+        val_range = str(np.nanmin(values)) + '...' + str(np.nanmax(values))
         content = content.replace('\n', '')
+
     else:
+        mean = str(np.mean(values, axis=0))
+        val_range = '[ '
+        for vmin, vmax in zip(np.nanmin(values, axis=0), np.nanmax(values, axis=0)):
+            if len(val_range) > 2:
+                val_range += '  '
+            val_range + str(vmin) + '...' + str(vmax)
+        val_range += ' ]'
         content = '\n        ' + content.replace('\n', '\n        ')
 
     output = ('shape ' + str(values.shape)
               + ', ' + str(np.sum(np.invert(np.isfinite(values))))
-              + ' NaNs, mean ' + str(np.mean(values))
-              + ', range ' + str(np.nanmin(values)) + ' - ' + str(np.nanmax(values))
+              + ' NaNs, mean ' + mean
+              + ', range ' + val_range
               + ', content ' + content)
     return output
 
@@ -342,7 +353,9 @@ def apply_smearing(filename, dry_run=False):
         # logging.debug('Indices Z1l2: %s -- %s', 8 + z1l2 * 4, 12 + z1l2 * 4)
         # logging.debug('Indices Z2l1: %s -- %s', 8 + z2l1 * 4, 12 + z2l1 * 4)
         # logging.debug('Indices Z2l2: %s -- %s', 8 + z2l2 * 4, 12 + z2l2 * 4)
+        logging.debug('True combination 1: %s', get_statistics(X_true[29:33]))
         logging.debug('Candidate 1: %s', get_statistics(candidate1))
+        logging.debug('True combination 2: %s', get_statistics(X_true[34:38]))
         logging.debug('Candidate 2: %s', get_statistics(candidate2))
 
         # See if they match
