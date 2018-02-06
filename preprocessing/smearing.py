@@ -26,53 +26,85 @@ settings.base_dir = base_dir
 
 
 ################################################################################
+# Debug output
+################################################################################
+
+def get_statistics(values):
+    output = ('shape ' + str(values.shape)
+              + ', ' + np.sum(np.invert(np.isfinite(values))) + ' NaNs, mean'
+              + str(np.mean(values)) + ', content ' + str(values))
+    return output
+
+
+################################################################################
+# Sanitization functions
+################################################################################
+
+def sanitize_angles(values):
+    values[np.invert(np.isfinite(values))] = 0.
+    return np.clip(values, -10., 10.)
+
+def sanitize_energies(values):
+    values[np.invert(np.isfinite(values))] = 8000.
+    return np.clip(values, 0., 8000.)
+
+def sanitize_sigmas(values):
+    values[np.invert(np.isfinite(values))] = 100.
+    return np.clip(values, 0., 100.)
+
+
+################################################################################
 # Smearing functions
 ################################################################################
 
-def smear(values, absolute=0., relative=0.):
+def smear_angles(values, absolute=0., relative=0.):
+
+    values = sanitize_angles(values)
+
     sigmas = absolute + relative * values
-    sigmas[np.isnan(sigmas)] = 10.
-    sigmas = np.clip(sigmas, 0., 10.)
+    sigmas = sanitize_sigmas(sigmas)
 
     smeared_values = norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
+    smeared_values = sanitize_angles(smeared_values)
 
     logging.debug('Standard smearing with absolute uncertainty %s and relative uncertainty %s', absolute, relative)
-    logging.debug('  Before: %s', values)
-    logging.debug('  After:  %s', smeared_values)
+    logging.debug('  Before: %s', get_statistics(values))
+    logging.debug('  After:  %s', get_statistics(smeared_values))
 
     return smeared_values
 
 
 def smear_jet_energies(values, resolution_factor=0.5): #, beta=1.5, m=2.5):
 
+    values = sanitize_energies(values)
+
     sigmas = resolution_factor * values ** 0.5
-    sigmas[np.isnan(sigmas)] = 100.
-    sigmas = np.clip(sigmas, 0., 100.)
+    sigmas = sanitize_sigmas(sigmas)
 
     # smeared_values = crystalball(beta, m, loc=values, scale=sigmas).rvs(size=values.shape[0])
     smeared_values = norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
-    smeared_values = np.clip(smeared_values, 0., 8000.)
-    smeared_values[np.isnan(smeared_values)] = 8000.
+    smeared_values = sanitize_energies(smeared_values)
 
     logging.debug('Jet energy smearing with resolution %s', resolution_factor)
-    logging.debug('  Before: %s', values)
-    logging.debug('  After:  %s', smeared_values)
+    logging.debug('  Before: %s', get_statistics(values))
+    logging.debug('  After:  %s', get_statistics(smeared_values))
 
     return smeared_values
 
 
 def smear_lepton_pt(values, resolution_factor=3.e-4):
+
+    values = sanitize_energies(values)
+
     sigmas = resolution_factor * values ** 2.
-    sigmas[np.isnan(sigmas)] = 100.
-    sigmas = np.clip(sigmas, 0., 100.)
+    sigmas = sanitize_sigmas(sigmas)
 
     smeared_values = norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
-    smeared_values = np.clip(smeared_values, 0., 8000.)
-    smeared_values[np.isnan(smeared_values)] = 8000.
+    smeared_values = sanitize_energies(smeared_values)
 
     logging.debug('Lepton pT smearing with resolution %s', resolution_factor)
-    logging.debug('  Before: %s', values)
-    logging.debug('  After:  %s', smeared_values)
+    logging.debug('  Before: %s', get_statistics(values))
+    logging.debug('  After:  %s', get_statistics(smeared_values))
 
     return smeared_values
 
@@ -89,10 +121,24 @@ def e_pt_eta_phi(canonical_momentum):
     eta = np.arctanh(pz / (pabs + settings.epsilon))
     phi = np.arctan2(py, px)
 
-    return np.hstack((e.reshape((-1, 1)),
+    output = np.hstack((e.reshape((-1, 1)),
                       pt.reshape((-1, 1)),
                       eta.reshape((-1, 1)),
                       phi.reshape((-1, 1))))
+
+    logging.debug('Conversion from E,px,py,pz to E,pT,eta,phi:')
+    logging.debug('  Input: %s', get_statistics(canonical_momentum))
+    logging.debug('  E:     %s', get_statistics(e))
+    logging.debug('  px:    %s', get_statistics(px))
+    logging.debug('  py:    %s', get_statistics(py))
+    logging.debug('  pz:    %s', get_statistics(pz))
+    logging.debug('  pt:    %s', get_statistics(pt))
+    logging.debug('  pabs:  %s', get_statistics(pabs))
+    logging.debug('  eta:   %s', get_statistics(eta))
+    logging.debug('  phi :  %s', get_statistics(phi))
+    logging.debug('  Output:%s', get_statistics(output))
+
+    return output
 
 
 def e_px_py_pz(momentum):
@@ -102,10 +148,23 @@ def e_px_py_pz(momentum):
     py = pt * np.sin(phi)
     pz = pt * np.sinh(eta)
 
-    return np.hstack((e.reshape((-1, 1)),
+    output = np.hstack((e.reshape((-1, 1)),
                       px.reshape((-1, 1)),
                       py.reshape((-1, 1)),
                       pz.reshape((-1, 1))))
+
+    logging.debug('Conversion from E,pT,eta,phi to E,px,py,pz:')
+    logging.debug('  Input: %s', get_statistics(canonical_momentum))
+    logging.debug('  E:     %s', get_statistics(e))
+    logging.debug('  pt:    %s', get_statistics(pt))
+    logging.debug('  eta:   %s', get_statistics(eta))
+    logging.debug('  phi :  %s', get_statistics(phi))
+    logging.debug('  px:    %s', get_statistics(px))
+    logging.debug('  py:    %s', get_statistics(py))
+    logging.debug('  pz:    %s', get_statistics(pz))
+    logging.debug('  Output:%s', get_statistics(output))
+
+    return output
 
 
 def sum_momenta(momenta):
