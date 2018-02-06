@@ -407,8 +407,10 @@ def apply_smearing(filename, dry_run=False):
         best_distance[match] = distance[match]
 
         # For these combinations, reconstruct smearing
-        X_smeared[match, 29:33] = candidate1[match, :]
-        X_smeared[match, 34:38] = candidate2[match, :]
+        X_smeared[match, 29:33] = sum_momenta([X_smeared[match, 8 + z1l1 * 4:12 + z1l1 * 4],
+                                               X_smeared[match, 8 + z1l2 * 4:12 + z1l2 * 4]])
+        X_smeared[match, 34:38] = sum_momenta([X_smeared[match, 8 + z2l1 * 4:12 + z2l1 * 4],
+                                               X_smeared[match, 8 + z2l2 * 4:12 + z2l2 * 4]])
 
         logging.debug('  Pairing %s  ->  %s / %s events improve', (z1l1, z1l2, z2l1, z2l2), np.sum(match),
                       X_true.shape[0])
@@ -433,8 +435,8 @@ def apply_smearing(filename, dry_run=False):
     # Dijet observables
     X_smeared[:, 39] = sanitize_energies(calculate_m(sum_momenta([X_smeared[:, 0:4],
                                                                   X_smeared[:, 4:8]])))
-    X_smeared[:, 40] = sanitize_eta(X_smeared[:, 2] - X_smeared[:, 6])
-    X_smeared[:, 41] = sanitize_phi(X_smeared[:, 3] - X_smeared[:, 7])
+    X_smeared[:, 40] = np.absolute(sanitize_eta(X_smeared[:, 2] - X_smeared[:, 6]))
+    X_smeared[:, 41] = np.absolute(sanitize_phi(X_smeared[:, 3] - X_smeared[:, 7]))
     print_statistics('m(jj)', 39)
     print_statistics('delta eta(jj)', 40)
     print_statistics('delta phi(jj)', 41)
