@@ -1,40 +1,40 @@
 Using TensorFlow backend.
-05.02.2018 15:57:17 INFO    Hi! How are you today?
-05.02.2018 15:57:17 INFO    Startup options:
-05.02.2018 15:57:17 INFO      Algorithm:                     combinedregression
-05.02.2018 15:57:17 INFO      Point by point:                False
-05.02.2018 15:57:17 INFO      Morphing-aware mode:           False
-05.02.2018 15:57:17 INFO      Training sample:               baseline
-05.02.2018 15:57:17 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-05.02.2018 15:57:17 INFO      Neyman construction toys:      False
-05.02.2018 15:57:17 INFO      Other options:                 
-05.02.2018 15:57:17 INFO      Base directory:                /home/jb6504/higgs_inference
-05.02.2018 15:57:17 INFO      ML-based strategies available: True
-05.02.2018 15:57:17 INFO    Starting parameterized inference
-05.02.2018 15:57:17 INFO    Main settings:
-05.02.2018 15:57:17 INFO      Algorithm:                combinedregression
-05.02.2018 15:57:17 INFO      Morphing-aware:           False
-05.02.2018 15:57:17 INFO      Training sample:          baseline
-05.02.2018 15:57:17 INFO    Options:
-05.02.2018 15:57:17 INFO      Number of epochs:         20
-05.02.2018 15:57:17 INFO      Number of hidden layers:  2
-05.02.2018 15:57:17 INFO      alpha carl:               0.35
-05.02.2018 15:57:17 INFO      alpha regression:         0.011
-05.02.2018 15:57:17 INFO      Debug mode:               False
-05.02.2018 15:57:42 INFO    Starting training
+06.02.2018 08:31:30 INFO    Hi! How are you today?
+06.02.2018 08:31:30 INFO    Startup options:
+06.02.2018 08:31:30 INFO      Algorithm:                     combinedregression
+06.02.2018 08:31:30 INFO      Point by point:                False
+06.02.2018 08:31:30 INFO      Morphing-aware mode:           False
+06.02.2018 08:31:30 INFO      Training sample:               baseline
+06.02.2018 08:31:30 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+06.02.2018 08:31:30 INFO      Neyman construction toys:      False
+06.02.2018 08:31:30 INFO      Other options:                 
+06.02.2018 08:31:30 INFO      Base directory:                /home/jb6504/higgs_inference
+06.02.2018 08:31:30 INFO      ML-based strategies available: True
+06.02.2018 08:31:30 INFO    Starting parameterized inference
+06.02.2018 08:31:30 INFO    Main settings:
+06.02.2018 08:31:30 INFO      Algorithm:                combinedregression
+06.02.2018 08:31:30 INFO      Morphing-aware:           False
+06.02.2018 08:31:30 INFO      Training sample:          baseline
+06.02.2018 08:31:30 INFO    Options:
+06.02.2018 08:31:30 INFO      Number of epochs:         20
+06.02.2018 08:31:30 INFO      Number of hidden layers:  2
+06.02.2018 08:31:30 INFO      alpha carl:               0.35
+06.02.2018 08:31:30 INFO      alpha regression:         0.011
+06.02.2018 08:31:30 INFO      Debug mode:               False
+06.02.2018 08:31:54 INFO    Starting training
 Train on 8995410 samples, validate on 999490 samples
 Epoch 1/20
-2018-02-05 15:57:43.153728: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-05 15:57:43.154168: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-05 15:57:43.154177: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-05 15:57:43.154181: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-05 15:57:43.154184: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-05 15:57:43.668989: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
-name: Tesla P40
-major: 6 minor: 1 memoryClockRate (GHz) 1.531
-pciBusID 0000:84:00.0
-Total memory: 22.38GiB
-Free memory: 22.21GiB
-2018-02-05 15:57:43.669050: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-02-05 15:57:43.669056: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-02-05 15:57:43.669066: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:84:00.0)
+2018-02-06 08:31:55.050912: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 08:31:55.052503: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 08:31:55.052512: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 08:31:55.052516: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 08:31:55.052519: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 08:31:55.350218: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:85:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-06 08:31:55.350252: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-06 08:31:55.350258: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-06 08:31:55.350265: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:85:00.0)

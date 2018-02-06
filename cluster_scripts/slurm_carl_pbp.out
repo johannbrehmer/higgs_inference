@@ -1,43 +1,33 @@
 Using TensorFlow backend.
-05.02.2018 16:05:47 INFO    Hi! How are you today?
-05.02.2018 16:05:47 INFO    Startup options:
-05.02.2018 16:05:47 INFO      Algorithm:                     carl
-05.02.2018 16:05:47 INFO      Point by point:                True
-05.02.2018 16:05:47 INFO      Morphing-aware mode:           False
-05.02.2018 16:05:47 INFO      Training sample:               baseline
-05.02.2018 16:05:47 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-05.02.2018 16:05:47 INFO      Neyman construction toys:      False
-05.02.2018 16:05:47 INFO      Other options:                 
-05.02.2018 16:05:47 INFO      Base directory:                /home/jb6504/higgs_inference
-05.02.2018 16:05:47 INFO      ML-based strategies available: True
-05.02.2018 16:05:47 INFO    Starting point-by-point inference
-05.02.2018 16:05:47 INFO    Main settings:
-05.02.2018 16:05:47 INFO      Algorithm:               carl
-05.02.2018 16:05:47 INFO    Options:
-05.02.2018 16:05:47 INFO      Number of epochs:        20
-05.02.2018 16:05:47 INFO      Number of hidden layers: 2
-05.02.2018 16:05:47 INFO    Starting theta 1/100: number 0 ([ 0.  0.])
+06.02.2018 08:31:39 INFO    Hi! How are you today?
+06.02.2018 08:31:39 INFO    Startup options:
+06.02.2018 08:31:39 INFO      Algorithm:                     carl
+06.02.2018 08:31:39 INFO      Point by point:                True
+06.02.2018 08:31:39 INFO      Morphing-aware mode:           False
+06.02.2018 08:31:39 INFO      Training sample:               baseline
+06.02.2018 08:31:39 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+06.02.2018 08:31:39 INFO      Neyman construction toys:      False
+06.02.2018 08:31:39 INFO      Other options:                 
+06.02.2018 08:31:39 INFO      Base directory:                /home/jb6504/higgs_inference
+06.02.2018 08:31:39 INFO      ML-based strategies available: True
+06.02.2018 08:31:39 INFO    Starting point-by-point inference
+06.02.2018 08:31:39 INFO    Main settings:
+06.02.2018 08:31:39 INFO      Algorithm:               carl
+06.02.2018 08:31:39 INFO    Options:
+06.02.2018 08:31:39 INFO      Number of epochs:        20
+06.02.2018 08:31:39 INFO      Number of hidden layers: 2
+06.02.2018 08:31:40 INFO    Starting theta 1/100: number 0 ([ 0.  0.])
 Train on 898197 samples, validate on 99800 samples
 Epoch 1/20
-2018-02-05 16:05:49.712119: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-05 16:05:49.712371: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-05 16:05:49.712384: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-05 16:05:50.133565: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+2018-02-06 08:31:43.287940: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 08:31:43.289430: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 08:31:43.289443: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 08:31:43.641786: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
 name: Tesla K80
 major: 3 minor: 7 memoryClockRate (GHz) 0.8235
-pciBusID 0000:0f:00.0
+pciBusID 0000:07:00.0
 Total memory: 11.17GiB
 Free memory: 11.10GiB
-2018-02-05 16:05:50.133616: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-02-05 16:05:50.133626: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-02-05 16:05:50.133642: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:0f:00.0)
-216s - loss: 0.6733 - loss_function_carl: 0.6733 - loss_function_carl_kl: 11.3716 - val_loss: 0.8624 - val_loss_function_carl: 0.8624 - val_loss_function_carl_kl: 27.5945
-Epoch 2/20
-214s - loss: 0.6714 - loss_function_carl: 0.6714 - loss_function_carl_kl: 11.3363 - val_loss: 0.7784 - val_loss_function_carl: 0.7784 - val_loss_function_carl_kl: 24.9058
-Epoch 3/20
-215s - loss: 0.6712 - loss_function_carl: 0.6712 - loss_function_carl_kl: 11.3284 - val_loss: 0.8138 - val_loss_function_carl: 0.8138 - val_loss_function_carl_kl: 26.0413
-Epoch 4/20
-215s - loss: 0.6713 - loss_function_carl: 0.6713 - loss_function_carl_kl: 11.3337 - val_loss: 0.8484 - val_loss_function_carl: 0.8484 - val_loss_function_carl_kl: 27.1474
-Epoch 5/20
-215s - loss: 0.6713 - loss_function_carl: 0.6713 - loss_function_carl_kl: 11.3395 - val_loss: 0.7995 - val_loss_function_carl: 0.7995 - val_loss_function_carl_kl: 25.5818
-Epoch 6/20
+2018-02-06 08:31:43.641832: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-06 08:31:43.641842: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-06 08:31:43.641861: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:07:00.0)

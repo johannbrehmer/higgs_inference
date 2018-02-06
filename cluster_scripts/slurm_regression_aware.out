@@ -1,59 +1,40 @@
 Using TensorFlow backend.
-05.02.2018 16:23:42 INFO    Hi! How are you today?
-05.02.2018 16:23:42 INFO    Startup options:
-05.02.2018 16:23:42 INFO      Algorithm:                     regression
-05.02.2018 16:23:42 INFO      Point by point:                False
-05.02.2018 16:23:42 INFO      Morphing-aware mode:           True
-05.02.2018 16:23:42 INFO      Training sample:               baseline
-05.02.2018 16:23:42 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-05.02.2018 16:23:42 INFO      Neyman construction toys:      False
-05.02.2018 16:23:42 INFO      Other options:                 
-05.02.2018 16:23:42 INFO      Base directory:                /home/jb6504/higgs_inference
-05.02.2018 16:23:42 INFO      ML-based strategies available: True
-05.02.2018 16:23:42 INFO    Starting parameterized inference
-05.02.2018 16:23:42 INFO    Main settings:
-05.02.2018 16:23:42 INFO      Algorithm:                regression
-05.02.2018 16:23:42 INFO      Morphing-aware:           True
-05.02.2018 16:23:42 INFO      Training sample:          baseline
-05.02.2018 16:23:42 INFO    Options:
-05.02.2018 16:23:42 INFO      Number of epochs:         20
-05.02.2018 16:23:42 INFO      Number of hidden layers:  2
-05.02.2018 16:23:42 INFO      alpha carl:               0.35
-05.02.2018 16:23:42 INFO      alpha regression:         0.011
-05.02.2018 16:23:42 INFO      Debug mode:               False
-05.02.2018 16:24:10 INFO    Starting training
-Traceback (most recent call last):
-  File "experiments.py", line 126, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 234, in parameterized_inference
-    patience=settings.early_stopping_patience)] if early_stopping else None))
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 138, in fit
-    self.model = self.build_fn(**self.filter_sk_params(self.build_fn))
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 211, in <lambda>
-    regr = KerasRegressor(lambda: make_regressor_morphingaware(n_hidden_layers=n_hidden_layers),
-  File "/home/jb6504/higgs_inference/higgs_inference/models/models_parameterized.py", line 100, in make_regressor_morphingaware
-    ri_hat_layer = Add()(delta_ri_hat_layer, r0_hat_layer)
-TypeError: __call__() takes exactly 2 arguments (3 given)
-Using TensorFlow backend.
-05.02.2018 16:24:12 INFO    Hi! How are you today?
-05.02.2018 16:24:12 INFO    Startup options:
-05.02.2018 16:24:12 INFO      Algorithm:                     regression
-05.02.2018 16:24:12 INFO      Point by point:                False
-05.02.2018 16:24:12 INFO      Morphing-aware mode:           True
-05.02.2018 16:24:12 INFO      Training sample:               basis
-05.02.2018 16:24:12 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-05.02.2018 16:24:12 INFO      Neyman construction toys:      False
-05.02.2018 16:24:12 INFO      Other options:                 
-05.02.2018 16:24:12 INFO      Base directory:                /home/jb6504/higgs_inference
-05.02.2018 16:24:12 INFO      ML-based strategies available: True
-05.02.2018 16:24:12 INFO    Starting parameterized inference
-05.02.2018 16:24:12 INFO    Main settings:
-05.02.2018 16:24:12 INFO      Algorithm:                regression
-05.02.2018 16:24:12 INFO      Morphing-aware:           True
-05.02.2018 16:24:12 INFO      Training sample:          basis
-05.02.2018 16:24:12 INFO    Options:
-05.02.2018 16:24:12 INFO      Number of epochs:         20
-05.02.2018 16:24:12 INFO      Number of hidden layers:  2
-05.02.2018 16:24:12 INFO      alpha carl:               0.35
-05.02.2018 16:24:12 INFO      alpha regression:         0.011
-05.02.2018 16:24:12 INFO      Debug mode:               False
+06.02.2018 08:31:30 INFO    Hi! How are you today?
+06.02.2018 08:31:30 INFO    Startup options:
+06.02.2018 08:31:30 INFO      Algorithm:                     regression
+06.02.2018 08:31:30 INFO      Point by point:                False
+06.02.2018 08:31:30 INFO      Morphing-aware mode:           True
+06.02.2018 08:31:30 INFO      Training sample:               baseline
+06.02.2018 08:31:30 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+06.02.2018 08:31:30 INFO      Neyman construction toys:      False
+06.02.2018 08:31:30 INFO      Other options:                 
+06.02.2018 08:31:30 INFO      Base directory:                /home/jb6504/higgs_inference
+06.02.2018 08:31:30 INFO      ML-based strategies available: True
+06.02.2018 08:31:30 INFO    Starting parameterized inference
+06.02.2018 08:31:30 INFO    Main settings:
+06.02.2018 08:31:30 INFO      Algorithm:                regression
+06.02.2018 08:31:30 INFO      Morphing-aware:           True
+06.02.2018 08:31:30 INFO      Training sample:          baseline
+06.02.2018 08:31:30 INFO    Options:
+06.02.2018 08:31:30 INFO      Number of epochs:         20
+06.02.2018 08:31:30 INFO      Number of hidden layers:  2
+06.02.2018 08:31:30 INFO      alpha carl:               0.35
+06.02.2018 08:31:30 INFO      alpha regression:         0.011
+06.02.2018 08:31:30 INFO      Debug mode:               False
+06.02.2018 08:31:55 INFO    Starting training
+Train on 8995410 samples, validate on 999490 samples
+Epoch 1/20
+2018-02-06 08:32:01.733114: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 08:32:01.735268: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 08:32:01.735278: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 08:32:01.735282: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 08:32:01.735287: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 08:32:02.025405: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:05:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-06 08:32:02.025440: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-06 08:32:02.025446: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-06 08:32:02.025456: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:05:00.0)
