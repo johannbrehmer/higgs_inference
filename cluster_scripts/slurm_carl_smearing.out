@@ -1,32 +1,41 @@
 Using TensorFlow backend.
-06.02.2018 16:32:45 INFO    Hi! How are you today?
-06.02.2018 16:32:45 INFO    Startup options:
-06.02.2018 16:32:45 INFO      Algorithm:                     carl
-06.02.2018 16:32:45 INFO      Point by point:                False
-06.02.2018 16:32:45 INFO      Morphing-aware mode:           False
-06.02.2018 16:32:45 INFO      Smeared data:                  True
-06.02.2018 16:32:45 INFO      Training sample:               baseline
-06.02.2018 16:32:45 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-06.02.2018 16:32:45 INFO      Neyman construction toys:      False
-06.02.2018 16:32:45 INFO      Other options:                 
-06.02.2018 16:32:45 INFO      Base directory:                /home/jb6504/higgs_inference
-06.02.2018 16:32:45 INFO      ML-based strategies available: True
-06.02.2018 16:32:45 INFO    Starting parameterized inference
-06.02.2018 16:32:45 INFO    Main settings:
-06.02.2018 16:32:45 INFO      Algorithm:                carl
-06.02.2018 16:32:45 INFO      Morphing-aware:           False
-06.02.2018 16:32:45 INFO      Training sample:          baseline
-06.02.2018 16:32:45 INFO    Options:
-06.02.2018 16:32:45 INFO      Number of epochs:         20
-06.02.2018 16:32:45 INFO      Number of hidden layers:  2
-06.02.2018 16:32:45 INFO      alpha carl:               0.35
-06.02.2018 16:32:45 INFO      alpha regression:         0.011
-06.02.2018 16:32:45 INFO      Debug mode:               False
-Traceback (most recent call last):
-  File "experiments.py", line 132, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 175, in parameterized_inference
-    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
-  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
-    fid = open(file, "rb")
-IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+06.02.2018 16:39:26 INFO    Hi! How are you today?
+06.02.2018 16:39:26 INFO    Startup options:
+06.02.2018 16:39:26 INFO      Algorithm:                     carl
+06.02.2018 16:39:26 INFO      Point by point:                False
+06.02.2018 16:39:26 INFO      Morphing-aware mode:           False
+06.02.2018 16:39:26 INFO      Smeared data:                  True
+06.02.2018 16:39:26 INFO      Training sample:               baseline
+06.02.2018 16:39:26 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+06.02.2018 16:39:26 INFO      Neyman construction toys:      False
+06.02.2018 16:39:26 INFO      Other options:                 
+06.02.2018 16:39:26 INFO      Base directory:                /home/jb6504/higgs_inference
+06.02.2018 16:39:26 INFO      ML-based strategies available: True
+06.02.2018 16:39:26 INFO    Starting parameterized inference
+06.02.2018 16:39:26 INFO    Main settings:
+06.02.2018 16:39:26 INFO      Algorithm:                carl
+06.02.2018 16:39:26 INFO      Morphing-aware:           False
+06.02.2018 16:39:26 INFO      Training sample:          baseline
+06.02.2018 16:39:26 INFO    Options:
+06.02.2018 16:39:26 INFO      Number of epochs:         20
+06.02.2018 16:39:26 INFO      Number of hidden layers:  2
+06.02.2018 16:39:26 INFO      alpha carl:               0.35
+06.02.2018 16:39:26 INFO      alpha regression:         0.011
+06.02.2018 16:39:26 INFO      Debug mode:               False
+06.02.2018 16:39:43 INFO    Starting training
+Train on 8995410 samples, validate on 999490 samples
+Epoch 1/20
+2018-02-06 16:39:44.281037: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 16:39:44.281463: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 16:39:44.281471: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 16:39:44.281474: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 16:39:44.281478: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 16:39:44.591857: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:85:00.0
+Total memory: 22.38GiB
+Free memory: 22.21GiB
+2018-02-06 16:39:44.591894: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-06 16:39:44.591899: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-06 16:39:44.591908: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:85:00.0)

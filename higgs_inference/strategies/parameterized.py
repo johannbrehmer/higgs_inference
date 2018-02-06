@@ -171,8 +171,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     X_roam = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_roam' + input_filename_addition + '.npy')
     n_roaming = len(X_roam)
-
-    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+    
+    if do_neyman:
+        X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
 
     n_events_test = X_test.shape[0]
     assert settings.n_thetas == r_test.shape[0]
@@ -183,8 +184,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     X_test_transformed = scaler.transform(X_test)
     X_roam_transformed = scaler.transform(X_roam)
     X_calibration_transformed = scaler.transform(X_calibration)
-    X_neyman_observed_transformed = scaler.transform(
-        X_neyman_observed.reshape((-1, X_neyman_observed.shape[2])))
+    if do_neyman:
+        X_neyman_observed_transformed = scaler.transform(
+            X_neyman_observed.reshape((-1, X_neyman_observed.shape[2])))
 
     X_thetas_train = np.hstack((X_train_transformed, theta0_train))
     y_logr_score_train = np.hstack((y_train.reshape(-1, 1), np.log(r_train).reshape((-1, 1)), scores_train))
