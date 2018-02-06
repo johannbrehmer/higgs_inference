@@ -31,18 +31,50 @@ settings.base_dir = base_dir
 
 def smear(values, absolute=0., relative=0.):
     sigmas = absolute + relative * values
-    return norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
+    sigmas[np.isnan(sigmas)] = 10.
+    sigmas = np.clip(sigmas, 0., 10.)
+
+    smeared_values = norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
+
+    logging.debug('Standard smearing with absolute uncertainty %s and relative uncertainty %s', absolute, relative)
+    logging.debug('  Before: %s', values)
+    logging.debug('  After:  %s', smeared_values)
+
+    return smeared_values
 
 
 def smear_jet_energies(values, resolution_factor=0.5): #, beta=1.5, m=2.5):
+
     sigmas = resolution_factor * values ** 0.5
-    return norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
-    # return crystalball(beta, m, loc=values, scale=sigmas).rvs(size=values.shape[0])
+    sigmas[np.isnan(sigmas)] = 100.
+    sigmas = np.clip(sigmas, 0., 100.)
+
+    # smeared_values = crystalball(beta, m, loc=values, scale=sigmas).rvs(size=values.shape[0])
+    smeared_values = norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
+    smeared_values = np.clip(smeared_values, 0., 8000.)
+    smeared_values[np.isnan(smeared_values)] = 8000.
+
+    logging.debug('Jet energy smearing with resolution %s', resolution_factor)
+    logging.debug('  Before: %s', values)
+    logging.debug('  After:  %s', smeared_values)
+
+    return smeared_values
 
 
 def smear_lepton_pt(values, resolution_factor=3.e-4):
     sigmas = resolution_factor * values ** 2.
-    return norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
+    sigmas[np.isnan(sigmas)] = 100.
+    sigmas = np.clip(sigmas, 0., 100.)
+
+    smeared_values = norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
+    smeared_values = np.clip(smeared_values, 0., 8000.)
+    smeared_values[np.isnan(smeared_values)] = 8000.
+
+    logging.debug('Lepton pT smearing with resolution %s', resolution_factor)
+    logging.debug('  Before: %s', values)
+    logging.debug('  After:  %s', smeared_values)
+
+    return smeared_values
 
 
 ################################################################################
@@ -54,7 +86,7 @@ def e_pt_eta_phi(canonical_momentum):
 
     pt = (px ** 2 + py ** 2) ** 0.5
     pabs = (px ** 2 + py ** 2 + pz ** 2) ** 0.5
-    eta = np.arctanh(pz / pabs)
+    eta = np.arctanh(pz / (pabs + settings.epsilon))
     phi = np.arctan2(py, px)
 
     return np.hstack((e.reshape((-1, 1)),
@@ -147,7 +179,7 @@ def apply_smearing(filename, dry_run=False):
     # Jet energies
     indices = [0, 4]
     for i in indices:
-        X_smeared[:, i] = smear_jet_energies(X_true[:, i])
+        X_smeared[:, i] = smear_jet_energies(X_true[:, i], resolution_factor=settings.smearing_jet_energies)
 
     # Jet eta and phi
     indices = [2, 3, 6, 7]
@@ -161,7 +193,7 @@ def apply_smearing(filename, dry_run=False):
     # Lepton momenta
     indices = [9, 13, 17, 21]
     for i in indices:
-        X_smeared[:, i] = smear_lepton_pt(X_true[:, i])
+        X_smeared[:, i] = smear_lepton_pt(X_true[:, i], resolution_factor=settings.smearing_lepton_pt)
 
     # Lepton eta and phi
     indices = [10, 11, 14, 15, 18, 19, 22, 23]

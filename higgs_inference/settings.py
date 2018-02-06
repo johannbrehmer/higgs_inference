@@ -135,3 +135,5 @@ n_events_roam = 20
 ################################################################################
 
 smearing_eta_phi = 0.1
+smearing_jet_energies = 0.5 # times sqrt(E)
+smearing_lepton_pt = 3.e-4 # times pT^2
