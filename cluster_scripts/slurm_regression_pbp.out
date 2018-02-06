@@ -1,97 +1,106 @@
 Using TensorFlow backend.
-05.02.2018 15:57:48 INFO    Hi! How are you today?
-05.02.2018 15:57:48 INFO    Startup options:
-05.02.2018 15:57:48 INFO      Algorithm:                     regression
-05.02.2018 15:57:48 INFO      Point by point:                True
-05.02.2018 15:57:48 INFO      Morphing-aware mode:           False
-05.02.2018 15:57:48 INFO      Training sample:               baseline
-05.02.2018 15:57:48 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-05.02.2018 15:57:48 INFO      Neyman construction toys:      False
-05.02.2018 15:57:48 INFO      Other options:                 
-05.02.2018 15:57:48 INFO      Base directory:                /home/jb6504/higgs_inference
-05.02.2018 15:57:48 INFO      ML-based strategies available: True
-05.02.2018 15:57:48 INFO    Starting point-by-point inference
-05.02.2018 15:57:48 INFO    Main settings:
-05.02.2018 15:57:48 INFO      Algorithm:               regression
-05.02.2018 15:57:48 INFO    Options:
-05.02.2018 15:57:48 INFO      Number of epochs:        20
-05.02.2018 15:57:48 INFO      Number of hidden layers: 2
-05.02.2018 15:57:49 INFO    Starting theta 1/100: number 0 ([ 0.  0.])
+06.02.2018 13:38:09 INFO    Hi! How are you today?
+06.02.2018 13:38:09 INFO    Startup options:
+06.02.2018 13:38:09 INFO      Algorithm:                     regression
+06.02.2018 13:38:09 INFO      Point by point:                True
+06.02.2018 13:38:09 INFO      Morphing-aware mode:           False
+06.02.2018 13:38:09 INFO      Training sample:               baseline
+06.02.2018 13:38:09 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+06.02.2018 13:38:09 INFO      Neyman construction toys:      False
+06.02.2018 13:38:09 INFO      Other options:                 
+06.02.2018 13:38:09 INFO      Base directory:                /home/jb6504/higgs_inference
+06.02.2018 13:38:09 INFO      ML-based strategies available: True
+06.02.2018 13:38:09 INFO    Starting point-by-point inference
+06.02.2018 13:38:09 INFO    Main settings:
+06.02.2018 13:38:09 INFO      Algorithm:               regression
+06.02.2018 13:38:09 INFO    Options:
+06.02.2018 13:38:09 INFO      Number of epochs:        20
+06.02.2018 13:38:09 INFO      Number of hidden layers: 2
+06.02.2018 13:38:13 INFO    Starting theta 1/100: number 0 ([ 0.  0.])
 Train on 898197 samples, validate on 99800 samples
 Epoch 1/20
-2018-02-05 15:57:51.285237: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-05 15:57:51.285563: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-05 15:57:51.285577: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-05 15:57:51.640768: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+2018-02-06 13:38:16.314138: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 13:38:16.314491: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 13:38:16.314505: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-06 13:38:16.705344: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
 name: Tesla K80
 major: 3 minor: 7 memoryClockRate (GHz) 0.8235
-pciBusID 0000:10:00.0
+pciBusID 0000:07:00.0
 Total memory: 11.17GiB
 Free memory: 11.10GiB
-2018-02-05 15:57:51.640828: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-02-05 15:57:51.640838: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-02-05 15:57:51.640856: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:10:00.0)
-2018-02-05 15:57:52.230055: W tensorflow/core/framework/op_kernel.cc:1192] Invalid argument: slice index 1 of dimension 1 out of bounds.
-2018-02-05 15:57:52.375628: W tensorflow/core/framework/op_kernel.cc:1192] Invalid argument: slice index 1 of dimension 1 out of bounds.
-	 [[Node: strided_slice = StridedSlice[Index=DT_INT32, T=DT_FLOAT, begin_mask=1, ellipsis_mask=0, end_mask=1, new_axis_mask=0, shrink_axis_mask=2, _device="/job:localhost/replica:0/task:0/gpu:0"](_arg_concatenate_1_target_0_1/_23, strided_slice/stack, strided_slice/stack_1, strided_slice/stack_2)]]
-2018-02-05 15:57:52.375804: W tensorflow/core/framework/op_kernel.cc:1192] Invalid argument: slice index 1 of dimension 1 out of bounds.
-	 [[Node: strided_slice = StridedSlice[Index=DT_INT32, T=DT_FLOAT, begin_mask=1, ellipsis_mask=0, end_mask=1, new_axis_mask=0, shrink_axis_mask=2, _device="/job:localhost/replica:0/task:0/gpu:0"](_arg_concatenate_1_target_0_1/_23, strided_slice/stack, strided_slice/stack_1, strided_slice/stack_2)]]
-Traceback (most recent call last):
-  File "experiments.py", line 118, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/point_by_point.py", line 152, in point_by_point_inference
-    patience=settings.early_stopping_patience)] if early_stopping else None))
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 149, in fit
-    history = self.model.fit(x, y, **fit_args)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1485, in fit
-    initial_epoch=initial_epoch)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1140, in _fit_loop
-    outs = f(ins_batch)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 2073, in __call__
-    feed_dict=feed_dict)
-  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 895, in run
-    run_metadata_ptr)
-  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1124, in _run
-    feed_dict_tensor, options, run_metadata)
-  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1321, in _do_run
-    options, run_metadata)
-  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1340, in _do_call
-    raise type(e)(node_def, op, message)
-tensorflow.python.framework.errors_impl.InvalidArgumentError: slice index 1 of dimension 1 out of bounds.
-	 [[Node: strided_slice = StridedSlice[Index=DT_INT32, T=DT_FLOAT, begin_mask=1, ellipsis_mask=0, end_mask=1, new_axis_mask=0, shrink_axis_mask=2, _device="/job:localhost/replica:0/task:0/gpu:0"](_arg_concatenate_1_target_0_1/_23, strided_slice/stack, strided_slice/stack_1, strided_slice/stack_2)]]
-	 [[Node: mul_1/_57 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/cpu:0", send_device="/job:localhost/replica:0/task:0/gpu:0", send_device_incarnation=1, tensor_name="edge_839_mul_1", tensor_type=DT_FLOAT, _device="/job:localhost/replica:0/task:0/cpu:0"]()]]
-
-Caused by op u'strided_slice', defined at:
-  File "experiments.py", line 118, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/point_by_point.py", line 152, in point_by_point_inference
-    patience=settings.early_stopping_patience)] if early_stopping else None))
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 138, in fit
-    self.model = self.build_fn(**self.filter_sk_params(self.build_fn))
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/point_by_point.py", line 144, in <lambda>
-    regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
-  File "/home/jb6504/higgs_inference/higgs_inference/models/models_point_by_point.py", line 48, in make_regressor
-    optimizer=optimizers.Adam(clipnorm=1.))
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 899, in compile
-    sample_weight, mask)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 430, in weighted
-    score_array = fn(y_true, y_pred)
-  File "/home/jb6504/higgs_inference/higgs_inference/models/loss_functions.py", line 23, in loss_function_ratio_regression
-    return losses.mean_squared_error(y_true[:, 1], y_pred[:, 1])
-  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/ops/array_ops.py", line 501, in _SliceHelper
-    name=name)
-  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/ops/array_ops.py", line 669, in strided_slice
-    shrink_axis_mask=shrink_axis_mask)
-  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/ops/gen_array_ops.py", line 3637, in strided_slice
-    shrink_axis_mask=shrink_axis_mask, name=name)
-  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/framework/op_def_library.py", line 767, in apply_op
-    op_def=op_def)
-  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/framework/ops.py", line 2583, in create_op
-    original_op=self._default_original_op, op_def=op_def)
-  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/framework/ops.py", line 1204, in __init__
-    self._traceback = self._graph._extract_stack()  # pylint: disable=protected-access
-
-InvalidArgumentError (see above for traceback): slice index 1 of dimension 1 out of bounds.
-	 [[Node: strided_slice = StridedSlice[Index=DT_INT32, T=DT_FLOAT, begin_mask=1, ellipsis_mask=0, end_mask=1, new_axis_mask=0, shrink_axis_mask=2, _device="/job:localhost/replica:0/task:0/gpu:0"](_arg_concatenate_1_target_0_1/_23, strided_slice/stack, strided_slice/stack_1, strided_slice/stack_2)]]
-	 [[Node: mul_1/_57 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/cpu:0", send_device="/job:localhost/replica:0/task:0/gpu:0", send_device_incarnation=1, tensor_name="edge_839_mul_1", tensor_type=DT_FLOAT, _device="/job:localhost/replica:0/task:0/cpu:0"]()]]
-
+2018-02-06 13:38:16.705400: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-06 13:38:16.705411: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-06 13:38:16.705427: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:07:00.0)
+228s - loss: 0.0048 - loss_function_carl: 0.6749 - loss_function_carl_kl: 9.6639 - val_loss: 0.0022 - val_loss_function_carl: 0.6771 - val_loss_function_carl_kl: 21.6651
+Epoch 2/20
+226s - loss: 0.0015 - loss_function_carl: 0.6745 - loss_function_carl_kl: 9.6624 - val_loss: 0.0017 - val_loss_function_carl: 0.6826 - val_loss_function_carl_kl: 21.8412
+Epoch 3/20
+226s - loss: 0.0011 - loss_function_carl: 0.6745 - loss_function_carl_kl: 9.6620 - val_loss: 9.1432e-04 - val_loss_function_carl: 0.6803 - val_loss_function_carl_kl: 21.7681
+Epoch 4/20
+227s - loss: 9.1181e-04 - loss_function_carl: 0.6745 - loss_function_carl_kl: 9.6620 - val_loss: 8.2501e-04 - val_loss_function_carl: 0.6803 - val_loss_function_carl_kl: 21.7679
+Epoch 5/20
+227s - loss: 7.9386e-04 - loss_function_carl: 0.6745 - loss_function_carl_kl: 9.6618 - val_loss: 9.5499e-04 - val_loss_function_carl: 0.6812 - val_loss_function_carl_kl: 21.7963
+Epoch 6/20
+227s - loss: 7.4761e-04 - loss_function_carl: 0.6745 - loss_function_carl_kl: 9.6617 - val_loss: 7.0230e-04 - val_loss_function_carl: 0.6797 - val_loss_function_carl_kl: 21.7476
+Epoch 7/20
+227s - loss: 6.9003e-04 - loss_function_carl: 0.6745 - loss_function_carl_kl: 9.6617 - val_loss: 0.0011 - val_loss_function_carl: 0.6845 - val_loss_function_carl_kl: 21.9015
+Epoch 8/20
+225s - loss: 6.4725e-04 - loss_function_carl: 0.6745 - loss_function_carl_kl: 9.6617 - val_loss: 0.0014 - val_loss_function_carl: 0.6833 - val_loss_function_carl_kl: 21.8629
+Epoch 9/20
+227s - loss: 6.2356e-04 - loss_function_carl: 0.6745 - loss_function_carl_kl: 9.6619 - val_loss: 9.4814e-04 - val_loss_function_carl: 0.6777 - val_loss_function_carl_kl: 21.6836
+Epoch 10/20
+227s - loss: 5.9011e-04 - loss_function_carl: 0.6745 - loss_function_carl_kl: 9.6620 - val_loss: 7.1151e-04 - val_loss_function_carl: 0.6805 - val_loss_function_carl_kl: 21.7734
+Epoch 00009: early stopping
+06.02.2018 14:16:08 INFO    Starting theta 2/100: number 13 ([-1. -1.])
+Train on 899500 samples, validate on 99945 samples
+Epoch 1/20
+228s - loss: 0.0578 - loss_function_carl: 0.6204 - loss_function_carl_kl: 8.8796 - val_loss: 0.0295 - val_loss_function_carl: 0.6259 - val_loss_function_carl_kl: 20.0264
+Epoch 2/20
+227s - loss: 0.0153 - loss_function_carl: 0.6178 - loss_function_carl_kl: 8.8795 - val_loss: 0.0277 - val_loss_function_carl: 0.6352 - val_loss_function_carl_kl: 20.3266
+Epoch 3/20
+226s - loss: 0.0119 - loss_function_carl: 0.6176 - loss_function_carl_kl: 8.8795 - val_loss: 0.0178 - val_loss_function_carl: 0.6256 - val_loss_function_carl_kl: 20.0193
+Epoch 4/20
+227s - loss: 0.0103 - loss_function_carl: 0.6176 - loss_function_carl_kl: 8.8791 - val_loss: 0.0153 - val_loss_function_carl: 0.6283 - val_loss_function_carl_kl: 20.1058
+Epoch 5/20
+227s - loss: 0.0094 - loss_function_carl: 0.6175 - loss_function_carl_kl: 8.8787 - val_loss: 0.0140 - val_loss_function_carl: 0.6322 - val_loss_function_carl_kl: 20.2291
+Epoch 6/20
+227s - loss: 0.0088 - loss_function_carl: 0.6174 - loss_function_carl_kl: 8.8784 - val_loss: 0.0195 - val_loss_function_carl: 0.6248 - val_loss_function_carl_kl: 19.9934
+Epoch 7/20
+224s - loss: 0.0081 - loss_function_carl: 0.6174 - loss_function_carl_kl: 8.8782 - val_loss: 0.0158 - val_loss_function_carl: 0.6157 - val_loss_function_carl_kl: 19.7005
+Epoch 8/20
+223s - loss: 0.0077 - loss_function_carl: 0.6175 - loss_function_carl_kl: 8.8788 - val_loss: 0.0117 - val_loss_function_carl: 0.6263 - val_loss_function_carl_kl: 20.0402
+Epoch 9/20
+224s - loss: 0.0074 - loss_function_carl: 0.6174 - loss_function_carl_kl: 8.8788 - val_loss: 0.0141 - val_loss_function_carl: 0.6275 - val_loss_function_carl_kl: 20.0779
+Epoch 10/20
+224s - loss: 0.0072 - loss_function_carl: 0.6175 - loss_function_carl_kl: 8.8786 - val_loss: 0.0121 - val_loss_function_carl: 0.6289 - val_loss_function_carl_kl: 20.1249
+Epoch 11/20
+224s - loss: 0.0069 - loss_function_carl: 0.6174 - loss_function_carl_kl: 8.8784 - val_loss: 0.0171 - val_loss_function_carl: 0.6222 - val_loss_function_carl_kl: 19.9090
+Epoch 12/20
+224s - loss: 0.0067 - loss_function_carl: 0.6173 - loss_function_carl_kl: 8.8775 - val_loss: 0.0106 - val_loss_function_carl: 0.6274 - val_loss_function_carl_kl: 20.0745
+Epoch 13/20
+224s - loss: 0.0066 - loss_function_carl: 0.6174 - loss_function_carl_kl: 8.8784 - val_loss: 0.0128 - val_loss_function_carl: 0.6199 - val_loss_function_carl_kl: 19.8373
+Epoch 14/20
+223s - loss: 0.0064 - loss_function_carl: 0.6174 - loss_function_carl_kl: 8.8787 - val_loss: 0.0109 - val_loss_function_carl: 0.6299 - val_loss_function_carl_kl: 20.1550
+Epoch 15/20
+224s - loss: 0.0063 - loss_function_carl: 0.6174 - loss_function_carl_kl: 8.8780 - val_loss: 0.0120 - val_loss_function_carl: 0.6327 - val_loss_function_carl_kl: 20.2468
+Epoch 16/20
+224s - loss: 0.0061 - loss_function_carl: 0.6173 - loss_function_carl_kl: 8.8778 - val_loss: 0.0105 - val_loss_function_carl: 0.6263 - val_loss_function_carl_kl: 20.0401
+Epoch 17/20
+224s - loss: 0.0061 - loss_function_carl: 0.6173 - loss_function_carl_kl: 8.8775 - val_loss: 0.0105 - val_loss_function_carl: 0.6221 - val_loss_function_carl_kl: 19.9075
+Epoch 18/20
+224s - loss: 0.0060 - loss_function_carl: 0.6173 - loss_function_carl_kl: 8.8778 - val_loss: 0.0102 - val_loss_function_carl: 0.6175 - val_loss_function_carl_kl: 19.7598
+Epoch 19/20
+223s - loss: 0.0059 - loss_function_carl: 0.6173 - loss_function_carl_kl: 8.8776 - val_loss: 0.0094 - val_loss_function_carl: 0.6209 - val_loss_function_carl_kl: 19.8693
+Epoch 20/20
+224s - loss: 0.0058 - loss_function_carl: 0.6173 - loss_function_carl_kl: 8.8780 - val_loss: 0.0087 - val_loss_function_carl: 0.6269 - val_loss_function_carl_kl: 20.0584
+06.02.2018 15:31:23 INFO    Starting theta 3/100: number 14 ([-1.  1.])
+Train on 899914 samples, validate on 99991 samples
+Epoch 1/20
+224s - loss: 0.0619 - loss_function_carl: 0.6080 - loss_function_carl_kl: 8.5733 - val_loss: 0.0318 - val_loss_function_carl: 0.6029 - val_loss_function_carl_kl: 19.2929
+Epoch 2/20
+224s - loss: 0.0182 - loss_function_carl: 0.6052 - loss_function_carl_kl: 8.5474 - val_loss: 0.0208 - val_loss_function_carl: 0.6088 - val_loss_function_carl_kl: 19.4813
+Epoch 3/20
+224s - loss: 0.0140 - loss_function_carl: 0.6049 - loss_function_carl_kl: 8.5447 - val_loss: 0.0212 - val_loss_function_carl: 0.6027 - val_loss_function_carl_kl: 19.2836
+Epoch 4/20
+223s - loss: 0.0122 - loss_function_carl: 0.6048 - loss_function_carl_kl: 8.5444 - val_loss: 0.0138 - val_loss_function_carl: 0.5902 - val_loss_function_carl_kl: 18.8859
+Epoch 5/20
