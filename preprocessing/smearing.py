@@ -357,7 +357,7 @@ def apply_smearing(filename, dry_run=False):
             & ((candidate2[:, 3] - X_true[:, 37]) ** 2 < epsilon_eta_phi ** 2)
         ))
 
-        logging.debug('Match: %s/%s\n%s', np.sum(match), match.shape[0], match)
+        logging.debug('Match: %s / %s    -    %s', np.sum(match), X_true.shape[0], match)
 
         found_pairing = np.logical_or(found_pairing, match)
         found_multiple_pairings = np.logical_or(found_multiple_pairings, np.logical_and(found_pairing, match))
