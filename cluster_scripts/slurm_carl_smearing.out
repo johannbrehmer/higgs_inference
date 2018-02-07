@@ -39,3 +39,20 @@ Free memory: 22.21GiB
 2018-02-06 16:39:44.591894: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
 2018-02-06 16:39:44.591899: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
 2018-02-06 16:39:44.591908: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:85:00.0)
+1416s - loss: 0.6689 - loss_function_ratio_regression: 0.1580 - loss_function_carl_kl: 10.7338 - loss_function_score: 2.2272 - val_loss: 0.6594 - val_loss_function_ratio_regression: 0.1021 - val_loss_function_carl_kl: 9.8373 - val_loss_function_score: 0.5097
+Epoch 2/20
+1414s - loss: 0.6665 - loss_function_ratio_regression: 0.1205 - loss_function_carl_kl: 10.7047 - loss_function_score: 2.2479 - val_loss: 0.6581 - val_loss_function_ratio_regression: 0.0872 - val_loss_function_carl_kl: 11.1744 - val_loss_function_score: 0.5871
+Epoch 3/20
+1413s - loss: 0.6661 - loss_function_ratio_regression: 0.1143 - loss_function_carl_kl: 10.6989 - loss_function_score: 2.3332 - val_loss: 0.6610 - val_loss_function_ratio_regression: 0.1154 - val_loss_function_carl_kl: 9.1709 - val_loss_function_score: 0.6729
+Epoch 4/20
+1413s - loss: 0.6659 - loss_function_ratio_regression: 0.1123 - loss_function_carl_kl: 10.6962 - loss_function_score: 2.4689 - val_loss: 0.6606 - val_loss_function_ratio_regression: 0.1190 - val_loss_function_carl_kl: 11.1371 - val_loss_function_score: 0.7481
+Epoch 5/20
+1414s - loss: 0.6659 - loss_function_ratio_regression: 0.1116 - loss_function_carl_kl: 10.6973 - loss_function_score: 2.6180 - val_loss: 0.6593 - val_loss_function_ratio_regression: 0.0979 - val_loss_function_carl_kl: 9.3813 - val_loss_function_score: 0.8064
+Epoch 6/20
+1413s - loss: 0.6658 - loss_function_ratio_regression: 0.1112 - loss_function_carl_kl: 10.6960 - loss_function_score: 2.7160 - val_loss: 0.6605 - val_loss_function_ratio_regression: 0.1110 - val_loss_function_carl_kl: 11.7097 - val_loss_function_score: 0.8628
+Epoch 00005: early stopping
+06.02.2018 19:01:09 INFO    Starting evaluation
+06.02.2018 19:17:13 INFO    Starting roaming
+06.02.2018 19:17:16 INFO    Starting calibrated evaluation and roaming
+06.02.2018 21:44:43 INFO    Interpolating calibrated roaming
+06.02.2018 21:46:31 INFO    That's it -- have a great day!
