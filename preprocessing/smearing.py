@@ -119,7 +119,7 @@ def smear_phi(values, absolute=0., relative=0.):
     return smeared_values
 
 
-def smear_jet_energies(values, resolution_factor=0.5):  # , beta=1.5, m=2.5):
+def smear_jet_energies_simple(values, resolution_factor=0.5):  # , beta=1.5, m=2.5):
 
     values = sanitize_energies(values)
 
@@ -128,6 +128,41 @@ def smear_jet_energies(values, resolution_factor=0.5):  # , beta=1.5, m=2.5):
 
     # smeared_values = crystalball(beta, m, loc=values, scale=sigmas).rvs(size=values.shape[0])
     smeared_values = norm(loc=values, scale=sigmas).rvs(size=values.shape[0])
+    smeared_values = sanitize_energies(smeared_values)
+
+    # logging.debug('Jet energy smearing with resolution %s', resolution_factor)
+    # logging.debug('  Before: %s', get_statistics(values))
+    # logging.debug('  After:  %s', get_statistics(smeared_values))
+
+    return smeared_values
+
+
+def smear_jet_energies(values,
+                       relative_weight=0.2,
+                       gaussian1_bias_parameters=(1.559, 0.293, 0.0100),
+                       gaussian1_sigma_parameters=(0.952, 0.522, 0.0191),
+                       gaussian2_bias_parameters=(11.64, -2.39, 0.316),
+                       gaussian2_sigma_parameters=(3.32, -0.0856, 0.138)):
+    values = sanitize_energies(values)
+
+    bias1 = (gaussian1_bias_parameters[0]
+             + gaussian1_bias_parameters[1] * values ** 0.5
+             + gaussian1_bias_parameters[2] * values)
+    sigma1 = (gaussian1_sigma_parameters[0]
+              + gaussian1_sigma_parameters[1] * values ** 0.5
+              + gaussian1_sigma_parameters[2] * values)
+    sigma1 = sanitize_sigmas(sigma1)
+
+    bias2 = (gaussian2_bias_parameters[0]
+             + gaussian2_bias_parameters[1] * values ** 0.5
+             + gaussian2_bias_parameters[2] * values)
+    sigma2 = (gaussian2_sigma_parameters[0]
+              + gaussian2_sigma_parameters[1] * values ** 0.5
+              + gaussian2_sigma_parameters[2] * values)
+    sigma2 = sanitize_sigmas(sigma2)
+
+    smeared_values = norm(loc=values + bias1, scale=sigma1).rvs(size=values.shape[0])
+    smeared_values = smeared_values + relative_weight * norm(loc=bias2, scale=sigma2).rvs(size=values.shape[0])
     smeared_values = sanitize_energies(smeared_values)
 
     # logging.debug('Jet energy smearing with resolution %s', resolution_factor)
@@ -293,7 +328,7 @@ def apply_smearing(filename, dry_run=False):
     # Jet energies
     indices = [0, 4]
     for i in indices:
-        X_smeared[:, i] = smear_jet_energies(X_true[:, i], resolution_factor=settings.smearing_jet_energies)
+        X_smeared[:, i] = smear_jet_energies(X_true[:, i])
     print_statistics('E(j1)', 0)
     print_statistics('E(j2)', 4)
 

@@ -103,8 +103,8 @@ alpha_carl_small = 0.1
 n_epochs_short = 1
 n_epochs_default = 20
 n_epochs_long = 50
-early_stopping_patience = 3
-validation_split = 0.1
+early_stopping_patience = 5
+validation_split = 0.2
 
 ################################################################################
 # Size of unweighted event samples
