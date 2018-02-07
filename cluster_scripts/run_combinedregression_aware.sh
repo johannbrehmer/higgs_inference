@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=creg-aware
-#SBATCH --output=slurm_combined_regression_aware.out
+#SBATCH --output=slurm_combinedregression_aware.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB

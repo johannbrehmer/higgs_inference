@@ -46,7 +46,7 @@ def make_regressor(n_hidden_layers=3,
     score_layer = Lambda(lambda x: x[:, -settings.n_params:], output_shape=(settings.n_params,))(gradient_layer)
 
     # Combine outputs
-    output_layer = Concatenate()([s_hat_layer, score_layer, log_r_hat_layer])
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer, score_layer])
     model = Model(inputs=[input_layer], outputs=[output_layer])
 
     # Compile model

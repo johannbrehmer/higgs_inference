@@ -104,11 +104,13 @@ def point_by_point_inference(algorithm='carl',
     # Data
     ################################################################################
 
-    X_calibration = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_calibration' + input_filename_addition + '.npy')
+    X_calibration = np.load(
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_calibration' + input_filename_addition + '.npy')
     weights_calibration = np.load(
         settings.unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
 
-    X_test = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
+    X_test = np.load(
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
     X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
 
@@ -131,7 +133,8 @@ def point_by_point_inference(algorithm='carl',
 
             # Load data
             X_train = np.load(
-                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_point_by_point_' + str(
+                    t) + input_filename_addition + '.npy')
             r_train = np.load(
                 settings.unweighted_events_dir + '/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
             y_train = np.load(
@@ -155,10 +158,27 @@ def point_by_point_inference(algorithm='carl',
                                   verbose=2)
 
             # Training
-            regr.fit(X_train_transformed, y_logr_train,
-                     callbacks=(
-                         [EarlyStopping(verbose=1,
-                                        patience=settings.early_stopping_patience)] if early_stopping else None))
+            history = regr.fit(X_train_transformed, y_logr_train,
+                               callbacks=([EarlyStopping(verbose=1, patience=settings.early_stopping_patience)]
+                               if early_stopping else None))
+
+            # Save metrics
+            def _save_metrics(key, filename):
+                try:
+                    metrics = np.asarray([history.history[key], history.history['val_' + key]])
+                    np.save(results_dir + '/traininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
+                            metrics)
+                except KeyError:
+                    logging.warning('Key %s not found. Available keys: %s', key, list(history.history.keys()))
+
+            if t == settings.theta_benchmark_nottrained:
+                _save_metrics('loss_function_carl', 'ce_nottrained')
+                _save_metrics('loss_function_carl_kl', 'kl_nottrained')
+                _save_metrics('loss', 'logr_nottrained')
+            elif t == settings.theta_benchmark_trained:
+                _save_metrics('loss_function_carl', 'ce_trained')
+                _save_metrics('loss_function_carl_kl', 'kl_trained')
+                _save_metrics('loss', 'logr_trained')
 
             # Evaluation
             prediction = regr.predict(X_test_transformed)
@@ -196,7 +216,8 @@ def point_by_point_inference(algorithm='carl',
 
                     # Neyman construction: load distribution sample
                     X_neyman_distribution = np.load(
-                        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_distribution_' + str(tt) + '.npy')
+                        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_distribution_' + str(
+                            tt) + '.npy')
                     X_neyman_distribution_transformed = scaler.transform(
                         X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
@@ -239,7 +260,8 @@ def point_by_point_inference(algorithm='carl',
 
             # Load data
             X_train = np.load(
-                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_point_by_point_' + str(
+                    t) + input_filename_addition + '.npy')
             r_train = np.load(
                 settings.unweighted_events_dir + '/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
             y_train = np.load(
@@ -261,10 +283,27 @@ def point_by_point_inference(algorithm='carl',
                                  verbose=2)
 
             # Training
-            clf.fit(X_train_transformed, y_logr_train,
-                    callbacks=(
-                        [EarlyStopping(verbose=1,
-                                       patience=settings.early_stopping_patience)] if early_stopping else None))
+            history = clf.fit(X_train_transformed, y_logr_train,
+                              callbacks=([EarlyStopping(verbose=1, patience=settings.early_stopping_patience)]
+                              if early_stopping else None))
+
+            # Save metrics
+            def _save_metrics(key, filename):
+                try:
+                    metrics = np.asarray([history.history[key], history.history['val_' + key]])
+                    np.save(results_dir + '/traininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
+                            metrics)
+                except KeyError:
+                    logging.warning('Key %s not found. Available keys: %s', key, list(history.history.keys()))
+
+            if t == settings.theta_benchmark_nottrained:
+                _save_metrics('loss', 'ce_nottrained')
+                _save_metrics('loss_function_carl_kl', 'kl_nottrained')
+                _save_metrics('loss_function_ratio_regression', 'logr_nottrained')
+            elif t == settings.theta_benchmark_trained:
+                _save_metrics('loss', 'ce_trained')
+                _save_metrics('loss_function_carl_kl', 'kl_trained')
+                _save_metrics('loss_function_ratio_regression', 'logr_trained')
 
             # carl wrapper
             ratio = ClassifierScoreRatio(clf, prefit=True)
@@ -356,7 +395,8 @@ def point_by_point_inference(algorithm='carl',
 
                     # Neyman construction: load distribution sample
                     X_neyman_distribution = np.load(
-                        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_distribution_' + str(tt) + '.npy')
+                        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_distribution_' + str(
+                            tt) + '.npy')
                     X_neyman_distribution_transformed = scaler.transform(
                         X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 

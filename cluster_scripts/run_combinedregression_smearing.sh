@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=sreg
-#SBATCH --output=slurm_scoreregression.out
+#SBATCH --job-name=creg-smearing
+#SBATCH --output=slurm_combinedregression_smearing.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
@@ -18,6 +18,4 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-# python -u experiments.py score -o shallow
-python -u experiments.py scoreregression --neyman
-# python -u experiments.py score -o deep
+python -u experiments.py combinedregression --smearing

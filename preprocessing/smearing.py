@@ -162,22 +162,18 @@ def smear_jet_energies(values,
     sigma2 = sanitize_sigmas(sigma2)
 
     # Debug output
-    logging.debug('    Bias 1:    %s', get_statistics(bias1))
-    logging.debug('    Sigma 1:   %s', get_statistics(bias1))
-    logging.debug('    Bias 2:    %s', get_statistics(bias1))
-    logging.debug('    Sigma 2:   %s', get_statistics(bias1))
+    # logging.debug('    Bias 1:    %s', get_statistics(bias1))
+    # logging.debug('    Sigma 1:   %s', get_statistics(sigma1))
+    # logging.debug('    Bias 2:    %s', get_statistics(bias2))
+    # logging.debug('    Sigma 2:   %s', get_statistics(sigma2))
 
-    logging.debug('    Original:  %s', get_statistics(values))
+    # logging.debug('    Original:  %s', get_statistics(values))
     smeared_values = norm(loc=values + bias1, scale=sigma1).rvs(size=values.shape[0])
-    logging.debug('    Smeared 1: %s', get_statistics(smeared_values))
+    # logging.debug('    Smeared 1: %s', get_statistics(smeared_values))
     smeared_values = smeared_values + relative_weight * norm(loc=bias2, scale=sigma2).rvs(size=values.shape[0])
-    logging.debug('    Smeared 2: %s', get_statistics(smeared_values))
+    # logging.debug('    Smeared 2: %s', get_statistics(smeared_values))
     smeared_values = sanitize_energies(smeared_values)
-    logging.debug('    Final:     %s', get_statistics(smeared_values))
-
-    # logging.debug('Jet energy smearing with resolution %s', resolution_factor)
-    # logging.debug('  Before: %s', get_statistics(values))
-    # logging.debug('  After:  %s', get_statistics(smeared_values))
+    # logging.debug('    Final:     %s', get_statistics(smeared_values))
 
     return smeared_values
 
