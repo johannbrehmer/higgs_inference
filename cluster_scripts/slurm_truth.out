@@ -20,3 +20,6 @@
   llr_neyman_distributions.append(-2. * np.sum(np.log(r_neyman_distribution[t]), axis=1))
 /home/jb6504/higgs_inference/higgs_inference/strategies/truth.py:89: RuntimeWarning: divide by zero encountered in log
   llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed[t]), axis=1)
+07.02.2018 08:48:52 INFO    That's it -- have a great day!
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded job memory limit at some point.
