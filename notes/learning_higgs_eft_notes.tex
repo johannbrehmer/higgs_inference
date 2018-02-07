@@ -95,8 +95,7 @@ topsep=3.0pt plus 1.5pt minus 2.5pt}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Higgs inference experiments}
-\author{Cyril Becot, Johann Brehmer, Kyle Cranmer, Lukas Heinrich,\\
-Gilles Louppe, and Juan Pavez}
+\author{Johann Brehmer, Kyle Cranmer, Gilles Louppe, and Juan Pavez}
 \date{\today}
 
 
@@ -413,6 +412,13 @@ observables of this process.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Availability of score and likelihood ratio}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Kyle's tricks\dots
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Inference strategies}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -722,22 +728,22 @@ different setups tested.
     && $\boldtheta_0 = \boldtheta_{T}$ & $\boldtheta_0 = \boldtheta_{NT}$
       & $\boldtheta_{\text{den}} = \boldtheta_1$ & $\boldtheta_{\text{den}} = \hat{\boldtheta}_{\text{MLE}}$ \\
     \midrule
-   AFC & PbP (2) & \emph{0.094} & \emph{0.119} & \emph{15.4} & \emph{13.8}\\
+   AFC (density est.\ in $\boldx$) & 2d (2) &  &  &  & \\
+   AFC (density est.\ in $\boldx$) & 5d (2) & \emph{0.176} & \emph{0.323} & \emph{32.9} & \emph{20.9}\\
    \midrule
-   carl (PbP, raw) & PbP (2) & \emph{0.061} & \emph{0.167} & \emph{286.2} & \emph{236.4}\\
+   carl (PbP, raw) & PbP (2) & \emph{0.091} & \emph{0.147} & \emph{369.4} & \emph{269.6}\\
    \midrule
-   carl (PbP, cal.) & PbP (2) & \emph{0.027} & \emph{0.031} & \emph{1.7} & \emph{1.7}\\
+   carl (PbP, cal.) & PbP (2) & \emph{0.047} & \emph{0.072} & \emph{12.3} & \emph{8.3}\\
    \midrule
-   carl (param., raw) & Baseline (2) & \emph{0.025} & \emph{0.037} & \emph{19.5} & \emph{23.4}\\
-    & Random $\boldtheta$ (2) & 0.040 & 0.053 & 43.3 & 125.8\\
-    & Physics-aware, baseline (2) & 0.265 & (0.449) & (121.4) & (80.5)\\
-    & Physics-aware, morphing basis (2) &  &  &  & \\
+   carl (param., raw) & Baseline (2) & 0.098 & 0.167 & 191.2 & 12.9\\
+    & Random $\boldtheta$ (2) & \emph{0.063} & \emph{0.122} & \emph{10.3} & \emph{6.1}\\
+    & Physics-aware, baseline (2) &  &  & (93.8) & (83.3)\\
+    & Physics-aware, basis (2) &  &  &  & \\
    \midrule
-   carl (param., cal.) & Baseline (2) & \emph{0.024} & \emph{0.035} & \emph{1.5} & \emph{1.9}\\
-    & Random $\boldtheta$ (2) & 0.028 & 0.039 & 45.4 & 114.3\\
+   carl (param., cal.) & Baseline (2) & 0.058 & 0.113 & \emph{0.9} & \emph{1.1}\\
+    & Random $\boldtheta$ (2) & \emph{0.057} & \emph{0.112} & 2.8 & 2.8\\
     & Physics-aware, baseline (2) &  &  &  & \\
-    & Physics-aware, morphing basis (2) &  &  &  & \\
-
+    & Physics-aware, basis (2) &  &  &  & \\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 1.
@@ -768,19 +774,19 @@ different setups tested.
     && $\boldtheta_0 = \boldtheta_{T}$ & $\boldtheta_0 = \boldtheta_{NT}$
       & $\boldtheta_{\text{den}} = \boldtheta_1$ & $\boldtheta_{\text{den}} = \hat{\boldtheta}_{\text{MLE}}$ \\
    \midrule
-   carl + score (param., raw) & Baseline (2) & \emph{0.022} & \emph{0.023} & \emph{44.8} & \emph{0.9}\\
-    & Random $\boldtheta$ (2) & 0.047 & 0.065 & 48.3 & 149.1\\
-    & Physics-aware, baseline (2) & 0.234 & 0.291 & (61.9) & (78.0)\\
-    & Physics-aware, morphing basis (2) &  &  &  & \\
+   carl + score (param., raw) & Baseline (2) & \emph{0.063} & \emph{0.070} & 219.6 & \emph{2.8}\\
+    & Random $\boldtheta$ (2) & 0.101 & 0.190 & 130.7 & 42.5\\
+    & Physics-aware, baseline (2) &  &  & (\emph{69.0}) & (58.3)\\
+    & Physics-aware, basis (2) &  &  &  & \\
    \midrule
-   carl + score (param., cal.) & Baseline (2) & \emph{0.013} & \emph{0.015} & \emph{2.1} & \emph{1.6}\\
-    & Random $\boldtheta$ (2) & 0.022 & 0.030 & 51.2 & 124.2\\
+   carl + score (param., cal.) & Baseline (2) & \emph{0.020} & \emph{0.032} & \emph{0.5} & \emph{0.2}\\
+    & Random $\boldtheta$ (2) & 0.065 & 0.145 & 20.9 & 18.8\\
     & Physics-aware, baseline (2) &  &  &  & \\
-    & Physics-aware, morphing basis (2) &  &  &  & \\
+    & Physics-aware, basis (2) &  &  &  & \\
    \midrule
-   SM score regression & Fixed density est. on $t$  (2) &  &  &  & \\
-    & Dynamic density est. on $t$  (2) &  &  &  & \\
-    & Density est. on $t \cdot \theta$  (2) & \emph{0.507} & \emph{0.459} & \emph{16.2} & \emph{29.5}\\
+   SM score regression & Fixed density est. on $t$  (2) & 0.036 & 0.034 & \emph{2.4} & \emph{1.2}\\
+    & Dynamic density est. on $t$  (2) & \emph{0.033} & 0.033 & 2.7 & 1.4\\
+    & Density est. on $t \cdot \theta$  (2) & 0.049 & \emph{0.033} & 7.9 & 5.3\\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 2.
@@ -810,17 +816,17 @@ different setups tested.
     && $\boldtheta_0 = \boldtheta_{T}$ & $\boldtheta_0 = \boldtheta_{NT}$
       & $\boldtheta_{\text{den}} = \boldtheta_1$ & $\boldtheta_{\text{den}} = \hat{\boldtheta}_{\text{MLE}}$ \\
     \midrule
-   Regression (PbP, raw) & PbP (2) & \emph{0.002} & \emph{0.003} & \emph{3.1} & \emph{3.2}\\
+   Ratio regression (PbP, raw) & PbP (2) & \emph{0.004} & \emph{0.009} & \emph{10.8} & \emph{12.1}\\
    \midrule
-   Regression (param., raw) & Baseline (2) & \emph{0.004} & \emph{0.005} & \emph{1.1} & \emph{1.0}\\
-    & Random $\boldtheta$ (2) & 0.005 & 0.008 & 2.5 & 3.0\\
-    & Physics-aware, baseline (2) & 0.027 & 0.378 & 183.1 & 174.8\\
-    & Physics-aware, morphing basis (2) & 0.015 & 85.603 & 9484.8 & 17392.3\\
+   Ratio regression (param., raw) & Baseline (2) & 0.014 & \emph{0.025} & 2.2 & 2.2\\
+    & Random $\boldtheta$ (2) & \emph{0.013} & 0.029 & \emph{0.9} & \emph{0.9}\\
+    & Physics-aware, baseline (2) & 0.277 & 0.457 & 32.4 & 53.2\\
+    & Physics-aware, basis (2) &  &  & 9267.4 & 17490.1\\
    \midrule
-   Regr.\ + score (param., raw) & Baseline (2) & \emph{0.005} & \emph{0.006} & \emph{1.7} & 1.3\\
-    & Random $\boldtheta$ (2) & 0.005 & 0.006 & 2.4 & \emph{1.0}\\
-    & Physics-aware, baseline (2) & 0.054 & 0.335 & 178.7 & 180.8\\
-    & Physics-aware, morphing basis (2) &  &  &  & \\
+   Ratio regr.\ + score (param., raw) & Baseline (2) & \emph{0.009} & \emph{0.017} & 2.6 & \emph{0.7}\\
+    & Random $\boldtheta$ (2) & 0.013 & 0.027 & \emph{1.2} & 1.2\\
+    & Physics-aware, baseline (2) &  &  & 195.2 & 194.7\\
+    & Physics-aware, basis (2) &  &  &  & \\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 3.
@@ -849,34 +855,29 @@ different setups tested.
     \cmidrule{3-4} 
     && $\boldtheta_0 = \boldtheta_{T}$ & $\boldtheta_0 = \boldtheta_{NT}$ \\
     \midrule
-   carl & Baseline (2) & \emph{0.67} & \emph{0.95}\\
-    & Random $\boldtheta$ (2) & 0.86 & 1.33\\
-    & Physics-aware, baseline (2) & 221.12 & 1913.99\\
-    & Physics-aware, morphing basis (2) &  & \\
+   carl & Baseline (2) & \emph{2.89} & \emph{759.03}\\
+    & Random $\boldtheta$ (2) & 3.06 & 759.45\\
+    & Physics-aware, baseline (2) &  & \\
+    & Physics-aware, basis (2) &  & \\
    \midrule
-   Score & Baseline (2) & \emph{0.07} & \emph{0.26}\\
-    & Random $\boldtheta$ (2) & 0.38 & 0.73\\
-    & Physics-aware, baseline (2) & 1.06 & 0.94\\
-    & Physics-aware, morphing basis (2) &  & \\
+   carl + score & Baseline (2) & \emph{1.37} & \emph{755.46}\\
+    & Random $\boldtheta$ (2) & 2.44 & 759.26\\
+    & Physics-aware, baseline (2) &  & \\
+    & Physics-aware, basis (2) &  & \\
    \midrule
-   carl + score & Baseline (2) & \emph{0.10} & \emph{0.25}\\
-    & Random $\boldtheta$ (2) & 0.36 & 0.72\\
-    & Physics-aware, baseline (2) & 0.43 & 0.94\\
-    & Physics-aware, morphing basis (2) &  & \\
+   Ratio regression & Baseline (2) & 10.08 & 767.38\\
+    & Random $\boldtheta$ (2) & \emph{4.52} & \emph{760.64}\\
+    & Physics-aware, baseline (2) & 509.49 & 857.51\\
+    & Physics-aware, basis (2) &  & \\
    \midrule
-   Regression & Baseline (2) & \emph{0.13} & \emph{0.26}\\
-    & Random $\boldtheta$ (2) & 0.17 & 0.34\\
-    & Physics-aware, baseline (2) & 6.85 & 650.47\\
-    & Physics-aware, morphing basis (2) & 782.61 & 8.87\\
-   \midrule
-   Regr.\ + score & Baseline (2) & \emph{0.10} & \emph{0.20}\\
-    & Random $\boldtheta$ (2) & 0.14 & 0.31\\
-    & Physics-aware, baseline (2) & 1.61 & 179.09\\
-    & Physics-aware, morphing basis (2) &  & \\
+   Ratio regr.\ + score & Baseline (2) & \emph{1.42} & \emph{755.32}\\
+    & Random $\boldtheta$ (2) & 1.60 & 756.35\\
+    & Physics-aware, baseline (2) &  & \\
+    & Physics-aware, basis (2) &  & \\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 4.
-    In this table we compare the estimation of the scores in the
+    In this table we compare the estimation of the scores evaluated at arbitrary thetas in the
     different parameterized models. The benchmark point $\boldtheta_{T}$
     was part of all training samples (except for the random $\boldtheta$ sample),
     while the benchmark point $\boldtheta_{NT}$ is unknown to the parameterized
@@ -893,7 +894,7 @@ different setups tested.
 
 We show the results of the parameterized baseline experiments in
 Figures~\ref{fig:baseline_r_histo} to
-\ref{fig:baseline_likelihood_ratio_contours}. We find that
+\ref{fig:baseline_expected_llr_contours}. We find that
 calibration is important, and that the combinatino of
 $\toolfont{carl}$ with score information works well. The tested
 diagnostic tool for uncertainties, unfortunately, does not seem to be
@@ -904,7 +905,7 @@ truth.
   \includegraphics[width=\textwidth]{figures/results/r_histograms_vanilla.pdf}%
   \caption{Likelihood ratio histograms for individual phase-space points
     $\boldx$, for one particular hypothesis comparison
-    $(\boldtheta_0, \boldtheta_1)$.  We show the baseline version of
+    $(\boldtheta_0, \boldtheta_1)$. We show the baseline version of
     the different models.}
   \label{fig:baseline_r_histo}
 \end{figure}
@@ -913,9 +914,17 @@ truth.
   \includegraphics[width=\textwidth]{figures/results/r_scatter_vanilla.pdf}%
   \caption{Likelihood ratio scatter plot for individual phase-space points
     $\boldx$, for one particular hypothesis comparison
-    $(\boldtheta_0, \boldtheta_1)$.  We show the baseline version of
+    $(\boldtheta_0, \boldtheta_1)$. We show the baseline version of
     the different models.}
   \label{fig:baseline_r_scatter}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/results/r_error_histograms_vanilla.pdf}%
+  \caption{Histogram of the error on $\log r$ for one particular hypothesis comparison
+    $(\boldtheta_0, \boldtheta_1)$. We show the baseline version of
+    the different models.}
+  \label{fig:baseline_r_error_histograms}
 \end{figure}
 
 \begin{figure}
@@ -942,7 +951,7 @@ truth.
     different values of $\boldtheta_0$, taking the expectation value
     over $\boldx$. We show the baseline version of the different
     parameterized models.}
-  \label{fig:baseline_likelihood_ratio_scatter}
+  \label{fig:baseline_expected_llr_scatter}
 \end{figure}
 
 \begin{figure}
@@ -952,7 +961,7 @@ truth.
     over $\boldx$. For the point-by-point (PbP) versions, the larger dots show the points
     where the estimators are trained (the smaller dots are interpolated). We show the baseline version of the different
     parameterized models.}
-  \label{fig:baseline_likelihood_ratio_errors}
+  \label{fig:baseline_expected_llr_errors}
 \end{figure}
 
 \begin{figure}
@@ -961,7 +970,7 @@ truth.
     $-2 \Delta \log r = 4$ (solid) and $16$ (dashed). The offset from the SM is due to a sanitization
     procedure in the preprocessing of the evaluation sample and will be corrected in future runs. We show the baseline version of
     the different models.}
-  \label{fig:baseline_likelihood_ratio_contours}
+  \label{fig:baseline_expected_llr_contours}
 \end{figure}
 
 The plots shown are based on fully connected neural networks with
@@ -1120,7 +1129,7 @@ we compare different strategies.
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/score_density_estimation/density_estimation_curves.pdf}%
   \caption{Comparison of different density estimation strategies after estimating the score.}
-  \label{fig: score_density_estimation}
+  \label{fig:score_density_estimation}
 \end{figure}
 
 
