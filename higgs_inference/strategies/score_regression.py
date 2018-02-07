@@ -84,15 +84,18 @@ def score_regression_inference(use_smearing=False,
     # Data
     ################################################################################
 
-    X_train = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_scoreregression' + input_filename_addition + '.npy')
+    X_train = np.load(
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_scoreregression' + input_filename_addition + '.npy')
     scores_train = np.load(
         settings.unweighted_events_dir + '/scores_train_scoreregression' + input_filename_addition + '.npy')
 
-    X_calibration = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_calibration' + input_filename_addition + '.npy')
+    X_calibration = np.load(
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_calibration' + input_filename_addition + '.npy')
     weights_calibration = np.load(
         settings.unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
 
-    X_test = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
+    X_test = np.load(
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
     X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
 
@@ -288,6 +291,9 @@ def score_regression_inference(use_smearing=False,
                     placeholder = np.empty(settings.n_neyman_distribution_experiments)
                     placeholder[:] = np.nan
                     llr_neyman_distributions.append(placeholder)
+                    llr_neyman_distributions_scoretheta.append(placeholder)
+                    llr_neyman_distributions_score.append(placeholder)
+                    llr_neyman_distributions_rotatedscore.append(placeholder)
                     continue
 
                 # Neyman construction: load distribution sample
