@@ -18,10 +18,9 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-# python -u experiments.py combinedregression --aware -o shallow
+python -u experiments.py combinedregression --aware -o slowlearning
+python -u experiments.py combinedregression --aware -o factorsm slowlearning
 python -u experiments.py combinedregression --aware
-# python -u experiments.py combinedregression --aware -o deep
-
-# python -u experiments.py combinedregression --aware --training basis -o shallow
-python -u experiments.py combinedregression --aware --training basis
-# python -u experiments.py combinedregression --aware --training basis -o deep
+python -u experiments.py combinedregression --aware -o factorsm
+python -u experiments.py combinedregression --aware -o fastlearning
+python -u experiments.py combinedregression --aware -o factorsm fastlearning
