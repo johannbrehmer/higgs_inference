@@ -1,0 +1,25 @@
+Using TensorFlow backend.
+07.02.2018 19:32:34 INFO    Hi! How are you today?
+07.02.2018 19:32:34 INFO    Startup options:
+07.02.2018 19:32:34 INFO      Algorithm:                     scoreregression
+07.02.2018 19:32:34 INFO      Point by point:                False
+07.02.2018 19:32:34 INFO      Morphing-aware mode:           False
+07.02.2018 19:32:34 INFO      Smeared data:                  True
+07.02.2018 19:32:34 INFO      Training sample:               baseline
+07.02.2018 19:32:34 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+07.02.2018 19:32:34 INFO      Neyman construction toys:      False
+07.02.2018 19:32:34 INFO      Other options:                 
+07.02.2018 19:32:34 INFO      Base directory:                /home/jb6504/higgs_inference
+07.02.2018 19:32:34 INFO      ML-based strategies available: True
+07.02.2018 19:32:34 INFO    Starting score regression inference
+07.02.2018 19:32:34 INFO    Options:
+07.02.2018 19:32:34 INFO      Number of epochs:         20
+07.02.2018 19:32:34 INFO      Number of hidden layers:  2
+Traceback (most recent call last):
+  File "experiments.py", line 116, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/score_regression.py", line 100, in score_regression_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
