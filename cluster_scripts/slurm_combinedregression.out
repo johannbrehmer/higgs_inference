@@ -1,137 +1,42 @@
 Using TensorFlow backend.
-07.02.2018 21:33:57 INFO    Hi! How are you today?
-07.02.2018 21:33:57 INFO    Startup options:
-07.02.2018 21:33:57 INFO      Algorithm:                     combinedregression
-07.02.2018 21:33:57 INFO      Point by point:                False
-07.02.2018 21:33:57 INFO      Morphing-aware mode:           False
-07.02.2018 21:33:57 INFO      Smeared data:                  False
-07.02.2018 21:33:57 INFO      Training sample:               baseline
-07.02.2018 21:33:57 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-07.02.2018 21:33:57 INFO      Neyman construction toys:      False
-07.02.2018 21:33:57 INFO      Other options:                 
-07.02.2018 21:33:57 INFO      Base directory:                /home/jb6504/higgs_inference
-07.02.2018 21:33:57 INFO      ML-based strategies available: True
-07.02.2018 21:33:57 INFO    Starting parameterized inference
-07.02.2018 21:33:57 INFO    Main settings:
-07.02.2018 21:33:57 INFO      Algorithm:                combinedregression
-07.02.2018 21:33:57 INFO      Morphing-aware:           False
-07.02.2018 21:33:57 INFO      Training sample:          baseline
-07.02.2018 21:33:57 INFO    Options:
-07.02.2018 21:33:57 INFO      Number of epochs:         20
-07.02.2018 21:33:57 INFO      Number of hidden layers:  2
-07.02.2018 21:33:57 INFO      alpha carl:               0.35
-07.02.2018 21:33:57 INFO      alpha regression:         0.011
-07.02.2018 21:33:57 INFO      Debug mode:               False
-07.02.2018 21:34:26 INFO    Starting training
+08.02.2018 16:09:46 INFO    Hi! How are you today?
+08.02.2018 16:09:46 INFO    Startup options:
+08.02.2018 16:09:46 INFO      Algorithm:                     combinedregression
+08.02.2018 16:09:46 INFO      Point by point:                False
+08.02.2018 16:09:46 INFO      Morphing-aware mode:           False
+08.02.2018 16:09:46 INFO      Smeared data:                  False
+08.02.2018 16:09:46 INFO      Training sample:               baseline
+08.02.2018 16:09:46 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+08.02.2018 16:09:46 INFO      Neyman construction toys:      False
+08.02.2018 16:09:46 INFO      Other options:                 
+08.02.2018 16:09:46 INFO      Base directory:                /home/jb6504/higgs_inference
+08.02.2018 16:09:46 INFO      ML-based strategies available: True
+08.02.2018 16:09:46 INFO    Starting parameterized inference
+08.02.2018 16:09:46 INFO    Main settings:
+08.02.2018 16:09:46 INFO      Algorithm:                combinedregression
+08.02.2018 16:09:46 INFO      Morphing-aware:           False
+08.02.2018 16:09:46 INFO      Training sample:          baseline
+08.02.2018 16:09:46 INFO    Options:
+08.02.2018 16:09:46 INFO      Learning rate:            0.001
+08.02.2018 16:09:46 INFO      Number of epochs:         20
+08.02.2018 16:09:46 INFO      Number of hidden layers:  2
+08.02.2018 16:09:46 INFO      alpha carl:               0.35
+08.02.2018 16:09:46 INFO      alpha regression:         0.02
+08.02.2018 16:09:46 INFO      Debug mode:               False
+08.02.2018 16:10:16 INFO    Starting training
 Train on 7995920 samples, validate on 1998980 samples
 Epoch 1/20
-2018-02-07 21:34:26.856018: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-07 21:34:26.856370: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-07 21:34:26.856379: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-07 21:34:26.856383: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-07 21:34:26.856387: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-07 21:34:27.153550: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+2018-02-08 16:10:17.739257: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-08 16:10:17.739647: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-08 16:10:17.739656: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-08 16:10:17.739660: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-08 16:10:17.739663: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-08 16:10:18.047319: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
 name: Tesla K80
 major: 3 minor: 7 memoryClockRate (GHz) 0.8235
-pciBusID 0000:85:00.0
+pciBusID 0000:84:00.0
 Total memory: 11.17GiB
 Free memory: 11.10GiB
-2018-02-07 21:34:27.153586: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-02-07 21:34:27.153592: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-02-07 21:34:27.153601: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:85:00.0)
-1530s - loss: 0.0456 - loss_function_carl: 0.6599 - loss_function_carl_kl: 10.6095 - loss_function_ratio_regression: 0.0323 - loss_function_score: 1.2124 - val_loss: 0.0288 - val_loss_function_carl: 0.6599 - val_loss_function_carl_kl: 10.2060 - val_loss_function_ratio_regression: 0.0257 - val_loss_function_score: 0.2778
-Epoch 2/20
-1526s - loss: 0.0286 - loss_function_carl: 0.6590 - loss_function_carl_kl: 10.6031 - loss_function_ratio_regression: 0.0180 - loss_function_score: 0.9710 - val_loss: 0.0310 - val_loss_function_carl: 0.6602 - val_loss_function_carl_kl: 10.6352 - val_loss_function_ratio_regression: 0.0276 - val_loss_function_score: 0.3072
-Epoch 3/20
-1523s - loss: 0.0270 - loss_function_carl: 0.6590 - loss_function_carl_kl: 10.6029 - loss_function_ratio_regression: 0.0167 - loss_function_score: 0.9423 - val_loss: 0.0300 - val_loss_function_carl: 0.6601 - val_loss_function_carl_kl: 10.8186 - val_loss_function_ratio_regression: 0.0266 - val_loss_function_score: 0.3066
-Epoch 4/20
-1522s - loss: 0.0266 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6023 - loss_function_ratio_regression: 0.0162 - loss_function_score: 0.9412 - val_loss: 0.0380 - val_loss_function_carl: 0.6609 - val_loss_function_carl_kl: 10.9433 - val_loss_function_ratio_regression: 0.0346 - val_loss_function_score: 0.3141
-Epoch 5/20
-1523s - loss: 0.0262 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6022 - loss_function_ratio_regression: 0.0160 - loss_function_score: 0.9299 - val_loss: 0.0318 - val_loss_function_carl: 0.6602 - val_loss_function_carl_kl: 10.8639 - val_loss_function_ratio_regression: 0.0284 - val_loss_function_score: 0.3054
-Epoch 6/20
-1523s - loss: 0.0259 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6019 - loss_function_ratio_regression: 0.0157 - loss_function_score: 0.9210 - val_loss: 0.0320 - val_loss_function_carl: 0.6602 - val_loss_function_carl_kl: 10.6446 - val_loss_function_ratio_regression: 0.0285 - val_loss_function_score: 0.3174
-Epoch 7/20
-1523s - loss: 0.0256 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6021 - loss_function_ratio_regression: 0.0156 - loss_function_score: 0.9158 - val_loss: 0.0260 - val_loss_function_carl: 0.6597 - val_loss_function_carl_kl: 10.7320 - val_loss_function_ratio_regression: 0.0226 - val_loss_function_score: 0.3069
-Epoch 8/20
-1521s - loss: 0.0255 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6016 - loss_function_ratio_regression: 0.0155 - loss_function_score: 0.9108 - val_loss: 0.0271 - val_loss_function_carl: 0.6597 - val_loss_function_carl_kl: 10.7897 - val_loss_function_ratio_regression: 0.0235 - val_loss_function_score: 0.3189
-Epoch 9/20
-1524s - loss: 0.0255 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6019 - loss_function_ratio_regression: 0.0155 - loss_function_score: 0.9094 - val_loss: 0.0296 - val_loss_function_carl: 0.6600 - val_loss_function_carl_kl: 10.9058 - val_loss_function_ratio_regression: 0.0264 - val_loss_function_score: 0.2943
-Epoch 10/20
-1525s - loss: 0.0252 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6019 - loss_function_ratio_regression: 0.0153 - loss_function_score: 0.8984 - val_loss: 0.0291 - val_loss_function_carl: 0.6600 - val_loss_function_carl_kl: 10.7350 - val_loss_function_ratio_regression: 0.0258 - val_loss_function_score: 0.2993
-Epoch 11/20
-1524s - loss: 0.0251 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6019 - loss_function_ratio_regression: 0.0152 - loss_function_score: 0.9023 - val_loss: 0.0283 - val_loss_function_carl: 0.6598 - val_loss_function_carl_kl: 10.7191 - val_loss_function_ratio_regression: 0.0250 - val_loss_function_score: 0.3003
-Epoch 12/20
-1524s - loss: 0.0250 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6019 - loss_function_ratio_regression: 0.0151 - loss_function_score: 0.9014 - val_loss: 0.0273 - val_loss_function_carl: 0.6598 - val_loss_function_carl_kl: 10.7739 - val_loss_function_ratio_regression: 0.0240 - val_loss_function_score: 0.3064
-Epoch 13/20
-1525s - loss: 0.0252 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6020 - loss_function_ratio_regression: 0.0152 - loss_function_score: 0.9092 - val_loss: 0.0291 - val_loss_function_carl: 0.6599 - val_loss_function_carl_kl: 10.7638 - val_loss_function_ratio_regression: 0.0256 - val_loss_function_score: 0.3153
-Epoch 00012: early stopping
-08.02.2018 03:04:47 INFO    Starting evaluation
-08.02.2018 03:26:27 INFO    Starting roaming
-08.02.2018 03:26:32 INFO    That's it -- have a great day!
-Using TensorFlow backend.
-08.02.2018 03:26:35 INFO    Hi! How are you today?
-08.02.2018 03:26:35 INFO    Startup options:
-08.02.2018 03:26:35 INFO      Algorithm:                     combinedregression
-08.02.2018 03:26:35 INFO      Point by point:                False
-08.02.2018 03:26:35 INFO      Morphing-aware mode:           False
-08.02.2018 03:26:35 INFO      Smeared data:                  False
-08.02.2018 03:26:35 INFO      Training sample:               random
-08.02.2018 03:26:35 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-08.02.2018 03:26:35 INFO      Neyman construction toys:      False
-08.02.2018 03:26:35 INFO      Other options:                 
-08.02.2018 03:26:35 INFO      Base directory:                /home/jb6504/higgs_inference
-08.02.2018 03:26:35 INFO      ML-based strategies available: True
-08.02.2018 03:26:35 INFO    Starting parameterized inference
-08.02.2018 03:26:35 INFO    Main settings:
-08.02.2018 03:26:35 INFO      Algorithm:                combinedregression
-08.02.2018 03:26:35 INFO      Morphing-aware:           False
-08.02.2018 03:26:35 INFO      Training sample:          random
-08.02.2018 03:26:35 INFO    Options:
-08.02.2018 03:26:35 INFO      Number of epochs:         20
-08.02.2018 03:26:35 INFO      Number of hidden layers:  2
-08.02.2018 03:26:35 INFO      alpha carl:               0.35
-08.02.2018 03:26:35 INFO      alpha regression:         0.011
-08.02.2018 03:26:35 INFO      Debug mode:               False
-08.02.2018 03:27:01 INFO    Starting training
-Train on 7997002 samples, validate on 1999251 samples
-Epoch 1/20
-2018-02-08 03:27:02.791575: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-08 03:27:02.791928: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-08 03:27:02.791937: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-08 03:27:02.791941: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-08 03:27:02.791945: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-08 03:27:03.097067: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
-name: Tesla K80
-major: 3 minor: 7 memoryClockRate (GHz) 0.8235
-pciBusID 0000:85:00.0
-Total memory: 11.17GiB
-Free memory: 11.10GiB
-2018-02-08 03:27:03.097103: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-02-08 03:27:03.097109: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-02-08 03:27:03.097118: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:85:00.0)
-1506s - loss: 0.0510 - loss_function_carl: 0.6603 - loss_function_carl_kl: 10.5911 - loss_function_ratio_regression: 0.0414 - loss_function_score: 0.8646 - val_loss: 0.0370 - val_loss_function_carl: 0.6594 - val_loss_function_carl_kl: 10.4646 - val_loss_function_ratio_regression: 0.0274 - val_loss_function_score: 0.8741
-Epoch 2/20
-1502s - loss: 0.0367 - loss_function_carl: 0.6594 - loss_function_carl_kl: 10.5826 - loss_function_ratio_regression: 0.0263 - loss_function_score: 0.9523 - val_loss: 0.0357 - val_loss_function_carl: 0.6594 - val_loss_function_carl_kl: 10.4470 - val_loss_function_ratio_regression: 0.0258 - val_loss_function_score: 0.9040
-Epoch 3/20
-1502s - loss: 0.0356 - loss_function_carl: 0.6594 - loss_function_carl_kl: 10.5823 - loss_function_ratio_regression: 0.0249 - loss_function_score: 0.9727 - val_loss: 0.0359 - val_loss_function_carl: 0.6593 - val_loss_function_carl_kl: 10.7289 - val_loss_function_ratio_regression: 0.0250 - val_loss_function_score: 0.9959
-Epoch 4/20
-1505s - loss: 0.0354 - loss_function_carl: 0.6593 - loss_function_carl_kl: 10.5818 - loss_function_ratio_regression: 0.0245 - loss_function_score: 0.9834 - val_loss: 0.0352 - val_loss_function_carl: 0.6593 - val_loss_function_carl_kl: 10.7251 - val_loss_function_ratio_regression: 0.0236 - val_loss_function_score: 1.0510
-Epoch 5/20
-1502s - loss: 0.0353 - loss_function_carl: 0.6594 - loss_function_carl_kl: 10.5821 - loss_function_ratio_regression: 0.0243 - loss_function_score: 0.9923 - val_loss: 0.0374 - val_loss_function_carl: 0.6594 - val_loss_function_carl_kl: 10.8185 - val_loss_function_ratio_regression: 0.0266 - val_loss_function_score: 0.9778
-Epoch 6/20
-1502s - loss: 0.0352 - loss_function_carl: 0.6593 - loss_function_carl_kl: 10.5820 - loss_function_ratio_regression: 0.0242 - loss_function_score: 0.9990 - val_loss: 0.0349 - val_loss_function_carl: 0.6594 - val_loss_function_carl_kl: 10.6406 - val_loss_function_ratio_regression: 0.0226 - val_loss_function_score: 1.1225
-Epoch 7/20
-1505s - loss: 0.0351 - loss_function_carl: 0.6593 - loss_function_carl_kl: 10.5818 - loss_function_ratio_regression: 0.0241 - loss_function_score: 1.0008 - val_loss: 0.0387 - val_loss_function_carl: 0.6597 - val_loss_function_carl_kl: 10.3392 - val_loss_function_ratio_regression: 0.0270 - val_loss_function_score: 1.0692
-Epoch 8/20
-1502s - loss: 0.0352 - loss_function_carl: 0.6593 - loss_function_carl_kl: 10.5819 - loss_function_ratio_regression: 0.0241 - loss_function_score: 1.0057 - val_loss: 0.0352 - val_loss_function_carl: 0.6593 - val_loss_function_carl_kl: 10.5272 - val_loss_function_ratio_regression: 0.0244 - val_loss_function_score: 0.9815
-Epoch 9/20
-1502s - loss: 0.0351 - loss_function_carl: 0.6593 - loss_function_carl_kl: 10.5818 - loss_function_ratio_regression: 0.0241 - loss_function_score: 1.0063 - val_loss: 0.0361 - val_loss_function_carl: 0.6593 - val_loss_function_carl_kl: 10.6150 - val_loss_function_ratio_regression: 0.0255 - val_loss_function_score: 0.9618
-Epoch 10/20
-1504s - loss: 0.0352 - loss_function_carl: 0.6593 - loss_function_carl_kl: 10.5816 - loss_function_ratio_regression: 0.0241 - loss_function_score: 1.0099 - val_loss: 0.0348 - val_loss_function_carl: 0.6593 - val_loss_function_carl_kl: 10.5649 - val_loss_function_ratio_regression: 0.0233 - val_loss_function_score: 1.0469
-Epoch 11/20
-1502s - loss: 0.0353 - loss_function_carl: 0.6594 - loss_function_carl_kl: 10.5821 - loss_function_ratio_regression: 0.0241 - loss_function_score: 1.0108 - val_loss: 0.0351 - val_loss_function_carl: 0.6593 - val_loss_function_carl_kl: 10.4937 - val_loss_function_ratio_regression: 0.0231 - val_loss_function_score: 1.0869
-Epoch 12/20
-1502s - loss: 0.0352 - loss_function_carl: 0.6593 - loss_function_carl_kl: 10.5821 - loss_function_ratio_regression: 0.0240 - loss_function_score: 1.0150 - val_loss: 0.0362 - val_loss_function_carl: 0.6593 - val_loss_function_carl_kl: 10.7691 - val_loss_function_ratio_regression: 0.0261 - val_loss_function_score: 0.9180
-Epoch 13/20
-1508s - loss: 0.0351 - loss_function_carl: 0.6593 - loss_function_carl_kl: 10.5819 - loss_function_ratio_regression: 0.0240 - loss_function_score: 1.0151 - val_loss: 0.0360 - val_loss_function_carl: 0.6594 - val_loss_function_carl_kl: 10.5295 - val_loss_function_ratio_regression: 0.0243 - val_loss_function_score: 1.0614
-Epoch 14/20
+2018-02-08 16:10:18.047353: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-08 16:10:18.047359: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-08 16:10:18.047369: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:84:00.0)

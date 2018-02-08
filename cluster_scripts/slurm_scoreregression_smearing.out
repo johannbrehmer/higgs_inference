@@ -1,25 +1,76 @@
 Using TensorFlow backend.
-07.02.2018 19:32:34 INFO    Hi! How are you today?
-07.02.2018 19:32:34 INFO    Startup options:
-07.02.2018 19:32:34 INFO      Algorithm:                     scoreregression
-07.02.2018 19:32:34 INFO      Point by point:                False
-07.02.2018 19:32:34 INFO      Morphing-aware mode:           False
-07.02.2018 19:32:34 INFO      Smeared data:                  True
-07.02.2018 19:32:34 INFO      Training sample:               baseline
-07.02.2018 19:32:34 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-07.02.2018 19:32:34 INFO      Neyman construction toys:      False
-07.02.2018 19:32:34 INFO      Other options:                 
-07.02.2018 19:32:34 INFO      Base directory:                /home/jb6504/higgs_inference
-07.02.2018 19:32:34 INFO      ML-based strategies available: True
-07.02.2018 19:32:34 INFO    Starting score regression inference
-07.02.2018 19:32:34 INFO    Options:
-07.02.2018 19:32:34 INFO      Number of epochs:         20
-07.02.2018 19:32:34 INFO      Number of hidden layers:  2
-Traceback (most recent call last):
-  File "experiments.py", line 116, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/score_regression.py", line 100, in score_regression_inference
-    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
-  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
-    fid = open(file, "rb")
-IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+08.02.2018 09:26:22 INFO    Hi! How are you today?
+08.02.2018 09:26:22 INFO    Startup options:
+08.02.2018 09:26:22 INFO      Algorithm:                     scoreregression
+08.02.2018 09:26:22 INFO      Point by point:                False
+08.02.2018 09:26:22 INFO      Morphing-aware mode:           False
+08.02.2018 09:26:22 INFO      Smeared data:                  True
+08.02.2018 09:26:22 INFO      Training sample:               baseline
+08.02.2018 09:26:22 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+08.02.2018 09:26:22 INFO      Neyman construction toys:      False
+08.02.2018 09:26:22 INFO      Other options:                 
+08.02.2018 09:26:22 INFO      Base directory:                /home/jb6504/higgs_inference
+08.02.2018 09:26:22 INFO      ML-based strategies available: True
+08.02.2018 09:26:22 INFO    Starting score regression inference
+08.02.2018 09:26:22 INFO    Options:
+08.02.2018 09:26:22 INFO      Number of epochs:         20
+08.02.2018 09:26:22 INFO      Number of hidden layers:  2
+08.02.2018 09:26:45 INFO    Starting training of score regression
+Train on 7999812 samples, validate on 1999953 samples
+Epoch 1/20
+2018-02-08 09:26:46.495431: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-08 09:26:46.495845: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-08 09:26:46.495854: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-08 09:26:46.495858: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-08 09:26:46.495862: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-08 09:26:46.791483: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:04:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-08 09:26:46.791516: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-08 09:26:46.791521: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-08 09:26:46.791529: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:04:00.0)
+949s - loss: 0.0488 - val_loss: 0.0359
+Epoch 2/20
+953s - loss: 0.0342 - val_loss: 0.0372
+Epoch 3/20
+952s - loss: 0.0318 - val_loss: 0.0307
+Epoch 4/20
+957s - loss: 0.0303 - val_loss: 0.0273
+Epoch 5/20
+955s - loss: 0.0294 - val_loss: 0.0286
+Epoch 6/20
+950s - loss: 0.0291 - val_loss: 0.0266
+Epoch 7/20
+954s - loss: 0.0286 - val_loss: 0.0288
+Epoch 8/20
+954s - loss: 0.0282 - val_loss: 0.0298
+Epoch 9/20
+952s - loss: 0.0279 - val_loss: 0.0263
+Epoch 10/20
+953s - loss: 0.0277 - val_loss: 0.0279
+Epoch 11/20
+953s - loss: 0.0278 - val_loss: 0.0290
+Epoch 12/20
+951s - loss: 0.0273 - val_loss: 0.0329
+Epoch 13/20
+954s - loss: 0.0272 - val_loss: 0.0255
+Epoch 14/20
+951s - loss: 0.0270 - val_loss: 0.0298
+Epoch 15/20
+951s - loss: 0.0271 - val_loss: 0.0253
+Epoch 16/20
+954s - loss: 0.0264 - val_loss: 0.0299
+Epoch 17/20
+952s - loss: 0.0261 - val_loss: 0.0296
+Epoch 18/20
+954s - loss: 0.0266 - val_loss: 0.0275
+Epoch 19/20
+952s - loss: 0.0263 - val_loss: 0.0278
+Epoch 20/20
+954s - loss: 0.0261 - val_loss: 0.0269
+08.02.2018 14:44:30 INFO    Starting evaluation
+08.02.2018 14:44:35 INFO    Starting density estimation
+08.02.2018 14:46:48 INFO    That's it -- have a great day!
