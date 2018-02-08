@@ -271,8 +271,15 @@ $0.55 \cdot 10^6$ events for the final evaluation.
 In these original samples, the weights are not are not always the same,
 with individual events in the training sample carrying an individual probability
  to be drawn of up to $10^{-3}$. This is, of course, far from ideal ideal, but unfortunately
-a consequence of using $\toolfont{MadMax}$.
+a consequence of using $\toolfont{MadMax}$. 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Smearing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\dots
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -353,6 +360,8 @@ based on different sets of kinematic features.
   $\ope{W}$ and $\ope{WW}$ than production-side
   observables~\cite{johann_thesis, Brehmer:2016nyr}.
 \end{enumerate}
+
+All the results in the main part of this document use the full + derived set of kinematic variables as input. In the appendix, the other configurations are tested as well.
 
 
 
@@ -710,11 +719,11 @@ measure of the uncertainty of the estimators $\hat{r}(\boldx)$. There are differ
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Overview}
+\subsection{Summary tables}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Tables~\ref{tbl:comparison1} to
-\ref{tbl:comparison_score} compare the performance of all
+\ref{tbl:comparison3} compare the performance of all
 different setups tested.
 
 \begin{table}
@@ -728,22 +737,22 @@ different setups tested.
     && $\boldtheta_0 = \boldtheta_{T}$ & $\boldtheta_0 = \boldtheta_{NT}$
       & $\boldtheta_{\text{den}} = \boldtheta_1$ & $\boldtheta_{\text{den}} = \hat{\boldtheta}_{\text{MLE}}$ \\
     \midrule
-   AFC (density est.\ in $\boldx$) & 2d (2) &  &  &  & \\
-   AFC (density est.\ in $\boldx$) & 5d (2) & \emph{0.176} & \emph{0.323} & \emph{32.9} & \emph{20.9}\\
+   AFC (density est.\ in $\boldx$) & 2d (2) & \emph{0.147} & \emph{0.209} & \emph{27.2} & 27.8\\
+   AFC (density est.\ in $\boldx$) & 5d (2) & 0.176 & 0.323 & 32.9 & \emph{20.9}\\
    \midrule
-   carl (PbP, raw) & PbP (2) & \emph{0.091} & \emph{0.147} & \emph{369.4} & \emph{269.6}\\
+   carl (PbP, raw) & PbP (2) & \emph{0.091} & \emph{0.147} & \\
    \midrule
-   carl (PbP, cal.) & PbP (2) & \emph{0.047} & \emph{0.072} & \emph{12.3} & \emph{8.3}\\
+   carl (PbP, cal.) & PbP (2) & \emph{0.047} & \emph{0.072} &\\
    \midrule
-   carl (param., raw) & Baseline (2) & 0.098 & 0.167 & 191.2 & 12.9\\
-    & Random $\boldtheta$ (2) & \emph{0.063} & \emph{0.122} & \emph{10.3} & \emph{6.1}\\
-    & Physics-aware, baseline (2) &  &  & (93.8) & (83.3)\\
-    & Physics-aware, basis (2) &  &  &  & \\
+   carl (param., raw) & Baseline (2) & \emph{0.061} & \emph{0.123} & \emph{13.7} & \emph{17.5}\\
+    & Random $\boldtheta$ (2) & 0.074 & 0.131 & 69.6 & 26.7\\
+    & Aware, baseline (2) &  &  & (93.8) & (83.3)\\
+    & Aware, basis (2) &  &  &  & \\
    \midrule
-   carl (param., cal.) & Baseline (2) & 0.058 & 0.113 & \emph{0.9} & \emph{1.1}\\
-    & Random $\boldtheta$ (2) & \emph{0.057} & \emph{0.112} & 2.8 & 2.8\\
-    & Physics-aware, baseline (2) &  &  &  & \\
-    & Physics-aware, basis (2) &  &  &  & \\
+   carl (param., cal.) & Baseline (2) & \emph{0.055} & \emph{0.104} & 6.8 & 6.0\\
+    & Random $\boldtheta$ (2) & 0.057 & 0.122 & \emph{2.8} & \emph{2.8}\\
+    & Aware, baseline (2) &  &  &  & \\
+    & Aware, basis (2) &  &  &  & \\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 1.
@@ -774,19 +783,19 @@ different setups tested.
     && $\boldtheta_0 = \boldtheta_{T}$ & $\boldtheta_0 = \boldtheta_{NT}$
       & $\boldtheta_{\text{den}} = \boldtheta_1$ & $\boldtheta_{\text{den}} = \hat{\boldtheta}_{\text{MLE}}$ \\
    \midrule
-   carl + score (param., raw) & Baseline (2) & \emph{0.063} & \emph{0.070} & 219.6 & \emph{2.8}\\
-    & Random $\boldtheta$ (2) & 0.101 & 0.190 & 130.7 & 42.5\\
-    & Physics-aware, baseline (2) &  &  & (\emph{69.0}) & (58.3)\\
-    & Physics-aware, basis (2) &  &  &  & \\
+   carl + score (param., raw) & Baseline (2) & 0.123 & \emph{0.137} & 572.6 & \emph{1.1}\\
+    & Random $\boldtheta$ (2) & \emph{0.101} & 0.190 & 130.7 & 42.5\\
+    & Aware, baseline (2) &  &  & (\emph{69.0}) & (58.3)\\
+    & Aware, basis (2) &  &  &  & \\
    \midrule
-   carl + score (param., cal.) & Baseline (2) & \emph{0.020} & \emph{0.032} & \emph{0.5} & \emph{0.2}\\
+   carl + score (param., cal.) & Baseline (2) & \emph{0.019} & \emph{0.032} & \emph{3.6} & \emph{2.5}\\
     & Random $\boldtheta$ (2) & 0.065 & 0.145 & 20.9 & 18.8\\
-    & Physics-aware, baseline (2) &  &  &  & \\
-    & Physics-aware, basis (2) &  &  &  & \\
+    & Aware, baseline (2) &  &  &  & \\
+    & Aware, basis (2) &  &  &  & \\
    \midrule
-   SM score regression & Fixed density est. on $t$  (2) & 0.036 & 0.034 & \emph{2.4} & \emph{1.2}\\
-    & Dynamic density est. on $t$  (2) & \emph{0.033} & 0.033 & 2.7 & 1.4\\
-    & Density est. on $t \cdot \theta$  (2) & 0.049 & \emph{0.033} & 7.9 & 5.3\\
+   SM score regression & Fixed density est. on $t$  (2) & 0.038 & 0.037 & \emph{2.4} & \emph{1.2}\\
+    & Dyn. dens. est. on $t$  (2) & \emph{0.036} & 0.035 & 2.7 & 1.4\\
+    & Dens. est. on $t \cdot \theta$  (2) & 0.052 & \emph{0.034} & 7.9 & 5.3\\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 2.
@@ -816,17 +825,17 @@ different setups tested.
     && $\boldtheta_0 = \boldtheta_{T}$ & $\boldtheta_0 = \boldtheta_{NT}$
       & $\boldtheta_{\text{den}} = \boldtheta_1$ & $\boldtheta_{\text{den}} = \hat{\boldtheta}_{\text{MLE}}$ \\
     \midrule
-   Ratio regression (PbP, raw) & PbP (2) & \emph{0.004} & \emph{0.009} & \emph{10.8} & \emph{12.1}\\
+   Ratio regression (PbP, raw) & PbP (2) & \emph{0.004} & \emph{0.009} & \\
    \midrule
-   Ratio regression (param., raw) & Baseline (2) & 0.014 & \emph{0.025} & 2.2 & 2.2\\
-    & Random $\boldtheta$ (2) & \emph{0.013} & 0.029 & \emph{0.9} & \emph{0.9}\\
-    & Physics-aware, baseline (2) & 0.277 & 0.457 & 32.4 & 53.2\\
-    & Physics-aware, basis (2) &  &  & 9267.4 & 17490.1\\
+   Ratio regression (param., raw) & Baseline (2) & \emph{0.009} & 0.021 & 14.3 & 13.3\\
+    & Random $\boldtheta$ (2) & 0.010 & \emph{0.018} & \emph{0.5} & \emph{0.6}\\
+    & Aware, baseline (2) & 0.277 & 0.457 & 32.4 & 53.2\\
+    & Aware, basis (2) & 0.108 & 69.365 & 73428.2 & 141763.6\\
    \midrule
-   Ratio regr.\ + score (param., raw) & Baseline (2) & \emph{0.009} & \emph{0.017} & 2.6 & \emph{0.7}\\
-    & Random $\boldtheta$ (2) & 0.013 & 0.027 & \emph{1.2} & 1.2\\
-    & Physics-aware, baseline (2) &  &  & 195.2 & 194.7\\
-    & Physics-aware, basis (2) &  &  &  & \\
+   Ratio regr.\ + score (param., raw) & Baseline (2) & \emph{0.008} & \emph{0.016} & 5.6 & 3.5\\
+    & Random $\boldtheta$ (2) & 0.013 & 0.027 & \emph{1.2} & \emph{1.2}\\
+    & Aware, baseline (2) &  &  & 195.2 & 194.7\\
+    & Aware, basis (2) &  &  &  & \\
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 3.
@@ -847,59 +856,54 @@ different setups tested.
 \end{table}
 
 
-\begin{table}
-  \footnotesize
-  \begin{tabular}{ll rr rr}
-    \toprule
-    Algorithm & Setup & \multicolumn{2}{c}{$\MSE_\boldx \left[ \boldt (\boldx; \boldtheta_0, \boldtheta_1) \right]$} \\
-    \cmidrule{3-4} 
-    && $\boldtheta_0 = \boldtheta_{T}$ & $\boldtheta_0 = \boldtheta_{NT}$ \\
-    \midrule
-   carl & Baseline (2) & \emph{2.89} & \emph{759.03}\\
-    & Random $\boldtheta$ (2) & 3.06 & 759.45\\
-    & Physics-aware, baseline (2) &  & \\
-    & Physics-aware, basis (2) &  & \\
-   \midrule
-   carl + score & Baseline (2) & \emph{1.37} & \emph{755.46}\\
-    & Random $\boldtheta$ (2) & 2.44 & 759.26\\
-    & Physics-aware, baseline (2) &  & \\
-    & Physics-aware, basis (2) &  & \\
-   \midrule
-   Ratio regression & Baseline (2) & 10.08 & 767.38\\
-    & Random $\boldtheta$ (2) & \emph{4.52} & \emph{760.64}\\
-    & Physics-aware, baseline (2) & 509.49 & 857.51\\
-    & Physics-aware, basis (2) &  & \\
-   \midrule
-   Ratio regr.\ + score & Baseline (2) & \emph{1.42} & \emph{755.32}\\
-    & Random $\boldtheta$ (2) & 1.60 & 756.35\\
-    & Physics-aware, baseline (2) &  & \\
-    & Physics-aware, basis (2) &  & \\
-    \bottomrule
-  \end{tabular}
-  \caption{Comparison of different inference strategies, part 4.
-    In this table we compare the estimation of the scores evaluated at arbitrary thetas in the
-    different parameterized models. The benchmark point $\boldtheta_{T}$
-    was part of all training samples (except for the random $\boldtheta$ sample),
-    while the benchmark point $\boldtheta_{NT}$ is unknown to the parameterized
-    models.
-    The numbers in brackets denote the number of hidden layers in the
-    neural networks.  Results in brackets mean that some NaN values had to be ignored.}
-  \label{tbl:comparison_score}
-\end{table}
+% \begin{table}
+%   \footnotesize
+%   \begin{tabular}{ll rr rr}
+%     \toprule
+%     Algorithm & Setup & \multicolumn{2}{c}{$\MSE_\boldx \left[ \boldt (\boldx; \boldtheta_0, \boldtheta_1) \right]$} \\
+%     \cmidrule{3-4} 
+%     && $\boldtheta_0 = \boldtheta_{T}$ & $\boldtheta_0 = \boldtheta_{NT}$ \\
+%     \midrule
+%    carl & Baseline (2) & \emph{3.09} & 759.39\\
+%     & Random $\boldtheta$ (2) & 3.42 & \emph{758.92}\\
+%     & Physics-aware, baseline (2) &  & \\
+%     & Physics-aware, morphing basis (2) &  & \\
+%    \midrule
+%    carl + score & Baseline (2) & \emph{1.38} & \emph{758.98}\\
+%     & Random $\boldtheta$ (2) & 2.44 & 759.26\\
+%     & Physics-aware, baseline (2) &  & \\
+%     & Physics-aware, morphing basis (2) &  & \\
+%    \midrule
+%    Ratio regression & Baseline (2) & \emph{1.47} & 758.01\\
+%     & Random $\boldtheta$ (2) & 1.53 & \emph{757.58}\\
+%     & Physics-aware, baseline (2) & 509.49 & 857.51\\
+%     & Physics-aware, morphing basis (2) & 1008789.83 & 1053.95\\
+%    \midrule
+%    Ratio regr.\ + score & Baseline (2) & \emph{1.34} & \emph{754.67}\\
+%     & Random $\boldtheta$ (2) & 1.60 & 756.35\\
+%     & Physics-aware, baseline (2) &  & \\
+%     & Physics-aware, morphing basis (2) &  & \\
+%     \bottomrule
+%   \end{tabular}
+%   \caption{Comparison of different inference strategies, part 4.
+%     In this table we compare the estimation of the scores evaluated at arbitrary thetas in the
+%     different parameterized models. The benchmark point $\boldtheta_{T}$
+%     was part of all training samples (except for the random $\boldtheta$ sample),
+%     while the benchmark point $\boldtheta_{NT}$ is unknown to the parameterized
+%     models.
+%     The numbers in brackets denote the number of hidden layers in the
+%     neural networks.  Results in brackets mean that some NaN values had to be ignored.}
+%   \label{tbl:comparison_score}
+% \end{table}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Baseline results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We show the results of the parameterized baseline experiments in
+Some of our results are shown in
 Figures~\ref{fig:baseline_r_histo} to
-\ref{fig:baseline_expected_llr_contours}. We find that
-calibration is important, and that the combinatino of
-$\toolfont{carl}$ with score information works well. The tested
-diagnostic tool for uncertainties, unfortunately, does not seem to be
-particularly useful: it wrongly assisngs sizeable errors to the ground
-truth.
+\ref{fig:baseline_expected_llr_contours}.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/results/r_histograms_vanilla.pdf}%
@@ -974,10 +978,107 @@ truth.
 \end{figure}
 
 The plots shown are based on fully connected neural networks with
-three hidden layers of 100 units. We are currently experimenting with
-more shallow or deeper networks.
+two hidden layers of 100 units.
 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Smearing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figures~\ref{fig:smearing_r_histo} to \ref{fig:smearing_expected_llr_contours} show the same plots, but with
+models trained and evaluated on the smeared data set.
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/results_smearing/r_histograms_smearing.pdf}%
+  \caption{Likelihood ratio histograms for individual phase-space points
+    $\boldx$, for one particular hypothesis comparison
+    $(\boldtheta_0, \boldtheta_1)$. We show the baseline version of
+    the different models, trained and evaluated on the smeared data set.}
+  \label{fig:smearing_r_histo}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/results_smearing/r_scatter_smearing.pdf}%
+  \caption{Likelihood ratio scatter plot for individual phase-space points
+    $\boldx$, for one particular hypothesis comparison
+    $(\boldtheta_0, \boldtheta_1)$. We show the baseline version of
+    the different models, trained and evaluated on the smeared data set.}
+  \label{fig:smearing_r_scatter}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/results_smearing/r_error_histograms_smearing.pdf}%
+  \caption{Histogram of the error on $\log r$ for one particular hypothesis comparison
+    $(\boldtheta_0, \boldtheta_1)$.  We show the baseline version of
+    the different models, trained and evaluated on the smeared data set.}
+  \label{fig:smearing_r_error_histograms}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/results_smearing/score_scatter_smearing.pdf}%
+  \caption{Score scatter plots for individual phase-space points $\boldx$, for one
+    particular hypothesis comparison $(\boldtheta_0, \boldtheta_1)$.
+    We show the baseline version of
+    the different models, trained and evaluated on the smeared data set.}
+  \label{fig:smearing_score_scatter}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/results_smearing/theta_dependence_comparison_smearing.pdf}%
+  \caption{Exact and estimated likelihood ratios as a function of
+    $\boldtheta_0$, for four different individual events $\boldx$
+    (columns).  We show the baseline version of
+    the different models (rows), trained and evaluated on the smeared data set.}
+  \label{fig:smearing_theta_dependence}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/results_smearing/expected_likelihood_scatter_smearing.pdf}%
+  \caption{Scatter plot of the expected likelihood ratios for
+    different values of $\boldtheta_0$, taking the expectation value
+    over $\boldx$.  We show the baseline version of
+    the different models, trained and evaluated on the smeared data set.}
+  \label{fig:smearing_expected_llr_scatter}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/results_smearing/expected_likelihood_errors_over_theta_smearing.pdf}%
+  \caption{Error in estimating the expected log likelihood ratio over $\boldtheta_0$,
+    taking the expectation value
+    over $\boldx$. For the point-by-point (PbP) versions, the larger dots show the points
+    where the estimators are trained (the smaller dots are interpolated).  We show the baseline version of
+    the different models, trained and evaluated on the smeared data set.}
+  \label{fig:smearing_expected_llr_errors}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/results_smearing/likelihood_contours_smearing.pdf}%
+  \caption{Contours of the expected likelihood ratio at
+    $-2 \Delta \log r = 4$ (solid) and $16$ (dashed).  We show the baseline version of
+    the different models, trained and evaluated on the smeared data set.}
+  \label{fig:smearing_expected_llr_contours}
+\end{figure}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Learning curves}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{fig:learning_curves} shows the evolution of different loss functions during the training, for the different parameterized approaches trained either on the truth data or the smeared data.
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/learning_curves/learning_curves.pdf}%
+  \caption{Evolution of loss functions during training, evaluated on the training set (solid) and on a validation set (dotted).
+    The left column shows parameterized estimators trained
+  on the truth data, the right column shows parameterized estimators trained on the smeared data. We show the
+  mean squared error on the (truth-level) log likelihood ratio, the cross-entropy differentiating between the numerator
+  and denominator samples, and the mean squared error on the scores.}
+  \label{fig:learning_curves}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1123,7 +1224,7 @@ we compare different strategies.
     \bottomrule
   \end{tabular}
   \caption{Comparison of different density estimation strategies after estimating the score.}
-  \label{tbl: score_density_estimation_strategies}
+  \label{tbl:score_density_estimation_strategies}
 \end{table}
 
 \begin{figure}
