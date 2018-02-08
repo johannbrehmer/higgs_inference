@@ -6,7 +6,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
 #SBATCH --time=7-00:00:00
-#SBATCH --gres=gpu:1
+# #SBATCH --gres=gpu:1
 
 # Modules
 module purge
@@ -18,5 +18,7 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py afc
-python -u experiments.py afc -x 1 41
+# python -u experiments.py afc
+# python -u experiments.py afc -x 1 41
+python -u experiments.py afc --epsilon 0.2
+python -u experiments.py afc -x 1 41 --epsilon 0.1

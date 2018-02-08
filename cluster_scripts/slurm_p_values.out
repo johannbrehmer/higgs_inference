@@ -1,15 +1,512 @@
-08.02.2018 09:00:13 INFO    Hi! How are you today?
-08.02.2018 09:00:13 INFO    Startup options:
-08.02.2018 09:00:13 INFO      Algorithm:                     cl
-08.02.2018 09:00:13 INFO      Point by point:                False
-08.02.2018 09:00:13 INFO      Morphing-aware mode:           False
-08.02.2018 09:00:13 INFO      Smeared data:                  False
-08.02.2018 09:00:13 INFO      Training sample:               baseline
-08.02.2018 09:00:13 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-08.02.2018 09:00:13 INFO      Neyman construction toys:      False
-08.02.2018 09:00:13 INFO      Other options:                 
-08.02.2018 09:00:13 INFO      Base directory:                /home/jb6504/higgs_inference
-08.02.2018 09:00:13 INFO      ML-based strategies available: False
-08.02.2018 09:00:13 INFO    Starting p-value calculation
-08.02.2018 09:00:13 INFO    Subtracting MLE for truth truth
-slurmstepd: error: *** JOB 4450287 ON c39-02 CANCELLED AT 2018-02-08T09:00:32 ***
+08.02.2018 16:12:59 INFO    Hi! How are you today?
+08.02.2018 16:12:59 INFO    Startup options:
+08.02.2018 16:12:59 INFO      Algorithm:                     cl
+08.02.2018 16:12:59 INFO      Point by point:                False
+08.02.2018 16:12:59 INFO      Morphing-aware mode:           False
+08.02.2018 16:12:59 INFO      Smeared data:                  False
+08.02.2018 16:12:59 INFO      Training sample:               baseline
+08.02.2018 16:12:59 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+08.02.2018 16:12:59 INFO      Neyman construction toys:      False
+08.02.2018 16:12:59 INFO      Other options:                 
+08.02.2018 16:12:59 INFO      Base directory:                /home/jb6504/higgs_inference
+08.02.2018 16:12:59 INFO      ML-based strategies available: False
+08.02.2018 16:12:59 INFO    Starting p-value calculation
+08.02.2018 16:12:59 INFO    Subtracting MLE for truth truth
+08.02.2018 16:14:07 DEBUG    Found 2034 files, didn't find 0 files, found 0 files with wrong shape
+08.02.2018 16:14:37 DEBUG    MLEs distribution:
+[[ 463    4  513 ...,  420  420  508]
+ [ 513  468  301 ...,  441  420  413]
+ [ 445  367  359 ...,  436  425  453]
+ ..., 
+ [ 906  917 1005 ..., 1014   16  723]
+ [ 723 1011  587 ...,  839  839  810]
+ [1016 1001 1001 ...,  912  964 1007]]
+08.02.2018 16:14:37 DEBUG    MLEs observed:
+[464 329 423   1 536 456 516 417 171 419 548 437 441 598   1 440 513 453
+ 441   4   0 569   1 350 325 421 567 526 340 645 500 398 471 436 562 468
+ 554 519 375 412 330 487 387   8 547 676 562 208 385 404 608]
+08.02.2018 16:14:38 INFO    Calculating p-values for truth truth
+08.02.2018 16:14:38 INFO    Subtracting MLE for score_regression scoreregression
+08.02.2018 16:15:51 DEBUG    Found 2034 files, didn't find 0 files, found 0 files with wrong shape
+08.02.2018 16:16:22 DEBUG    MLEs distribution:
+[[  14   13   14 ...,   13   14   14]
+ [  14   13   13 ...,   13   13   13]
+ [  13   14   14 ...,   13   14   14]
+ ..., 
+ [  16   16   16 ...,   16   16 1014]
+ [1013 1000 1000 ...,   16   16 1000]
+ [  15   15   15 ...,   16   16 1000]]
+08.02.2018 16:16:22 DEBUG    MLEs observed:
+[ 961  999   14   13   14   14   15   14  967   13  967   14   13  989   14
+   14   14   14   14  967   14   14   14   14   14   13   14   14   14 1008
+  967   14   13   13  967   13  989  967   13   14   16   13   13   14   14
+   16  967 1016   13   15  989]
+08.02.2018 16:16:23 INFO    Calculating p-values for score_regression scoreregression
+08.02.2018 16:16:23 INFO    Subtracting MLE for score_regression scoreregression_scoretheta
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_938.npy has wrong shape (40, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_940.npy has wrong shape (55, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_941.npy has wrong shape (27, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_942.npy has wrong shape (60, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_943.npy has wrong shape (35, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_944.npy has wrong shape (68, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_945.npy has wrong shape (44, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_946.npy has wrong shape (33, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_947.npy has wrong shape (55, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_948.npy has wrong shape (58, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_949.npy has wrong shape (53, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_950.npy has wrong shape (50, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_951.npy has wrong shape (57, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_952.npy has wrong shape (50, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_953.npy has wrong shape (43, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_954.npy has wrong shape (54, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_955.npy has wrong shape (52, 500)
+08.02.2018 16:17:32 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_957.npy has wrong shape (51, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_958.npy has wrong shape (49, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_959.npy has wrong shape (52, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_960.npy has wrong shape (50, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_961.npy has wrong shape (23, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_962.npy has wrong shape (53, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_964.npy has wrong shape (55, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_965.npy has wrong shape (46, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_966.npy has wrong shape (44, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_967.npy has wrong shape (25, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_968.npy has wrong shape (26, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_969.npy has wrong shape (46, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_970.npy has wrong shape (46, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_971.npy has wrong shape (41, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_972.npy has wrong shape (51, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_974.npy has wrong shape (44, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_976.npy has wrong shape (45, 500)
+08.02.2018 16:17:33 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_977.npy has wrong shape (38, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_979.npy has wrong shape (52, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_980.npy has wrong shape (45, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_981.npy has wrong shape (42, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_982.npy has wrong shape (27, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_983.npy has wrong shape (40, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_984.npy has wrong shape (44, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_985.npy has wrong shape (40, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_987.npy has wrong shape (24, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_988.npy has wrong shape (39, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_989.npy has wrong shape (25, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_990.npy has wrong shape (37, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_991.npy has wrong shape (39, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_992.npy has wrong shape (31, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_993.npy has wrong shape (39, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_994.npy has wrong shape (33, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_995.npy has wrong shape (49, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_996.npy has wrong shape (38, 500)
+08.02.2018 16:17:34 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_997.npy has wrong shape (36, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_998.npy has wrong shape (39, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_999.npy has wrong shape (30, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1001.npy has wrong shape (39, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1002.npy has wrong shape (38, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1003.npy has wrong shape (19, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1004.npy has wrong shape (28, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1005.npy has wrong shape (36, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1006.npy has wrong shape (39, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1007.npy has wrong shape (35, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1008.npy has wrong shape (31, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1009.npy has wrong shape (34, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1010.npy has wrong shape (35, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1011.npy has wrong shape (35, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1012.npy has wrong shape (35, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1013.npy has wrong shape (37, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1014.npy has wrong shape (36, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1015.npy has wrong shape (37, 500)
+08.02.2018 16:17:35 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_scoretheta_1016.npy has wrong shape (39, 500)
+08.02.2018 16:17:35 DEBUG    Found 1963 files, didn't find 0 files, found 71 files with wrong shape
+08.02.2018 16:18:05 DEBUG    MLEs distribution:
+[[425   4 508 ..., 441 420   3]
+ [533 498 356 ..., 420 387 413]
+ [420 381 398 ..., 471 390 478]
+ ..., 
+ [849 908 916 ..., 978  14 777]
+ [777 933 675 ...,  89 777 925]
+ [926 956 956 ..., 963  15 963]]
+08.02.2018 16:18:05 DEBUG    MLEs observed:
+[477 329 423 487 514   3 562 389 519 372 340 390 445 649 471 463 490 425
+   1 526   1   5 433 357 377   1 524 518 343 673 476 288 487 420 610 444
+   4 562 381 412 305 451 387 554 350 652 564 240 405 347 591]
+08.02.2018 16:18:07 INFO    Calculating p-values for score_regression scoreregression_scoretheta
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:18:07 INFO    Subtracting MLE for score_regression scoreregression_score
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_940.npy has wrong shape (55, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_941.npy has wrong shape (27, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_942.npy has wrong shape (60, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_943.npy has wrong shape (35, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_944.npy has wrong shape (68, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_945.npy has wrong shape (44, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_946.npy has wrong shape (33, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_947.npy has wrong shape (55, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_948.npy has wrong shape (58, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_949.npy has wrong shape (53, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_950.npy has wrong shape (50, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_951.npy has wrong shape (57, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_952.npy has wrong shape (50, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_953.npy has wrong shape (43, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_954.npy has wrong shape (54, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_955.npy has wrong shape (52, 500)
+08.02.2018 16:19:15 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_957.npy has wrong shape (51, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_958.npy has wrong shape (49, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_959.npy has wrong shape (52, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_960.npy has wrong shape (50, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_961.npy has wrong shape (23, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_962.npy has wrong shape (53, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_964.npy has wrong shape (55, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_965.npy has wrong shape (46, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_966.npy has wrong shape (44, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_967.npy has wrong shape (25, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_968.npy has wrong shape (26, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_969.npy has wrong shape (46, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_970.npy has wrong shape (46, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_971.npy has wrong shape (41, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_972.npy has wrong shape (51, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_974.npy has wrong shape (44, 500)
+08.02.2018 16:19:16 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_976.npy has wrong shape (45, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_977.npy has wrong shape (38, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_979.npy has wrong shape (52, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_980.npy has wrong shape (45, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_981.npy has wrong shape (42, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_982.npy has wrong shape (27, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_983.npy has wrong shape (40, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_984.npy has wrong shape (44, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_985.npy has wrong shape (40, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_987.npy has wrong shape (24, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_988.npy has wrong shape (39, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_989.npy has wrong shape (25, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_990.npy has wrong shape (37, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_991.npy has wrong shape (39, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_992.npy has wrong shape (31, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_993.npy has wrong shape (39, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_994.npy has wrong shape (33, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_995.npy has wrong shape (49, 500)
+08.02.2018 16:19:17 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_996.npy has wrong shape (38, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_997.npy has wrong shape (36, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_998.npy has wrong shape (39, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_999.npy has wrong shape (30, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1001.npy has wrong shape (39, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1002.npy has wrong shape (38, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1003.npy has wrong shape (19, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1004.npy has wrong shape (28, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1005.npy has wrong shape (36, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1006.npy has wrong shape (39, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1007.npy has wrong shape (35, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1008.npy has wrong shape (31, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1009.npy has wrong shape (34, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1010.npy has wrong shape (35, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1011.npy has wrong shape (35, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1012.npy has wrong shape (35, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1013.npy has wrong shape (37, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1014.npy has wrong shape (36, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1015.npy has wrong shape (37, 500)
+08.02.2018 16:19:18 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_score_1016.npy has wrong shape (39, 500)
+08.02.2018 16:19:18 DEBUG    Found 1964 files, didn't find 0 files, found 70 files with wrong shape
+08.02.2018 16:19:45 DEBUG    MLEs distribution:
+[[456 487 508 ..., 420 420 463]
+ [513 468 301 ..., 441 420 413]
+ [445 367 363 ..., 441 398 453]
+ ..., 
+ [701 908 901 ...,  16  16 723]
+ [723 986 587 ...,  89 899 810]
+ [975 956 956 ..., 975 986 975]]
+08.02.2018 16:19:45 DEBUG    MLEs observed:
+[464 329 423   1   5 451 498 417 498 421 531 430 441 608   1 417 513 425
+ 441   4 518   8 441 350 325 444 547 518 354 646 493 398 471 433 564 468
+ 554 498 375 412 338   1 387 536   5 672 562 207 385 279 610]
+08.02.2018 16:19:46 INFO    Calculating p-values for score_regression scoreregression_score
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:19:46 INFO    Subtracting MLE for score_regression scoreregression_rotatedscore
+08.02.2018 16:20:51 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_940.npy has wrong shape (55, 500)
+08.02.2018 16:20:51 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_941.npy has wrong shape (27, 500)
+08.02.2018 16:20:51 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_942.npy has wrong shape (60, 500)
+08.02.2018 16:20:51 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_943.npy has wrong shape (35, 500)
+08.02.2018 16:20:51 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_944.npy has wrong shape (68, 500)
+08.02.2018 16:20:51 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_945.npy has wrong shape (44, 500)
+08.02.2018 16:20:51 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_946.npy has wrong shape (33, 500)
+08.02.2018 16:20:51 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_947.npy has wrong shape (55, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_948.npy has wrong shape (58, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_949.npy has wrong shape (53, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_950.npy has wrong shape (50, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_951.npy has wrong shape (57, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_952.npy has wrong shape (50, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_953.npy has wrong shape (43, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_954.npy has wrong shape (54, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_955.npy has wrong shape (52, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_957.npy has wrong shape (51, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_958.npy has wrong shape (49, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_959.npy has wrong shape (52, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_960.npy has wrong shape (50, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_961.npy has wrong shape (23, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_962.npy has wrong shape (53, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_964.npy has wrong shape (55, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_965.npy has wrong shape (46, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_966.npy has wrong shape (44, 500)
+08.02.2018 16:20:52 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_967.npy has wrong shape (25, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_968.npy has wrong shape (26, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_969.npy has wrong shape (46, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_970.npy has wrong shape (46, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_971.npy has wrong shape (41, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_972.npy has wrong shape (51, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_974.npy has wrong shape (44, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_976.npy has wrong shape (45, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_977.npy has wrong shape (38, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_979.npy has wrong shape (52, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_980.npy has wrong shape (45, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_981.npy has wrong shape (42, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_982.npy has wrong shape (27, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_983.npy has wrong shape (40, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_984.npy has wrong shape (44, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_985.npy has wrong shape (40, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_987.npy has wrong shape (24, 500)
+08.02.2018 16:20:53 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_988.npy has wrong shape (39, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_989.npy has wrong shape (25, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_990.npy has wrong shape (37, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_991.npy has wrong shape (39, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_992.npy has wrong shape (31, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_993.npy has wrong shape (39, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_994.npy has wrong shape (33, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_995.npy has wrong shape (49, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_996.npy has wrong shape (38, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_997.npy has wrong shape (36, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_998.npy has wrong shape (39, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_999.npy has wrong shape (30, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1001.npy has wrong shape (39, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1002.npy has wrong shape (38, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1003.npy has wrong shape (19, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1004.npy has wrong shape (28, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1005.npy has wrong shape (36, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1006.npy has wrong shape (39, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1007.npy has wrong shape (35, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1008.npy has wrong shape (31, 500)
+08.02.2018 16:20:54 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1009.npy has wrong shape (34, 500)
+08.02.2018 16:20:55 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1010.npy has wrong shape (35, 500)
+08.02.2018 16:20:55 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1011.npy has wrong shape (35, 500)
+08.02.2018 16:20:55 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1012.npy has wrong shape (35, 500)
+08.02.2018 16:20:55 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1013.npy has wrong shape (37, 500)
+08.02.2018 16:20:55 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1014.npy has wrong shape (36, 500)
+08.02.2018 16:20:55 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1015.npy has wrong shape (37, 500)
+08.02.2018 16:20:55 WARNING    File /scratch/jb6504/higgs_inference/results/neyman/score_regression/neyman_llr_distribution_scoreregression_rotatedscore_1016.npy has wrong shape (39, 500)
+08.02.2018 16:20:55 DEBUG    Found 1964 files, didn't find 0 files, found 70 files with wrong shape
+08.02.2018 16:21:22 DEBUG    MLEs distribution:
+[[456 519 490 ..., 436 420 508]
+ [490 444 301 ..., 433 445 408]
+ [498 367 361 ..., 436 390 430]
+ ..., 
+ [701 901 917 ...,  16  16 740]
+ [804 978 587 ...,  89 839 873]
+ [926 956 973 ..., 975 874 956]]
+08.02.2018 16:21:22 DEBUG    MLEs observed:
+[465 347 381 423 528 451 510 389 159 347 261 480 471 646   1 412 480 386
+ 420 554   4   5   1 317 363 429 547   4 354 641 465 389 459 420 591 436
+   4 303 408 417 346   1 327 528 262 672 562 211 429 281 599]
+08.02.2018 16:21:23 INFO    Calculating p-values for score_regression scoreregression_rotatedscore
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 WARNING    Found 500 NaNs in null hypothesis and 0 NaNs in alternate hypothesis
+08.02.2018 16:21:23 INFO    That's it -- have a great day!

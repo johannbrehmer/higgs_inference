@@ -62,6 +62,7 @@ parser.add_argument("-s", "--smearing", action='store_true', help='Train and eva
 parser.add_argument("-t", "--training", default='baseline', help='Training sample: "baseline", "basis", or "random".')
 parser.add_argument("-x", "--xindices", type=int, nargs='+', default=[1, 38, 39, 40, 41],
                     help='X components to be used in AFC.')
+parser.add_argument("-e", "--epsilon", type=float, default=None, help='Epsilon for AFC')
 parser.add_argument("-n", "--neyman", action='store_true',
                     help='Calculate toy experiments for the Neyman construction.')
 parser.add_argument("-o", "--options", nargs='+', default='', help="Further options to be passed on to the algorithm.")
@@ -75,6 +76,7 @@ logging.info('  Morphing-aware mode:           %s', args.aware)
 logging.info('  Smeared data:                  %s', args.smearing)
 logging.info('  Training sample:               %s', args.training)
 logging.info('  AFC X indices:                 %s', args.xindices)
+logging.info('  AFC epsilon:                   %s', args.epsilon)
 logging.info('  Neyman construction toys:      %s', args.neyman)
 logging.info('  Other options:                 %s', args.options)
 logging.info('  Base directory:                %s', settings.base_dir)
@@ -105,6 +107,7 @@ elif args.algorithm == 'localmodel':
 
 elif args.algorithm == 'afc':
     afc_inference(indices_X=args.xindices,
+                  epsilon=args.epsilon,
                   use_smearing=args.smearing,
                   do_neyman=args.neyman,
                   options=args.options)

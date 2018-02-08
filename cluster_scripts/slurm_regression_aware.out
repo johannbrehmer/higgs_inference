@@ -163,3 +163,48 @@ Using TensorFlow backend.
 08.02.2018 16:11:57 INFO      alpha carl:               0.35
 08.02.2018 16:11:57 INFO      alpha regression:         0.02
 08.02.2018 16:11:57 INFO      Debug mode:               False
+Traceback (most recent call last):
+  File "experiments.py", line 132, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 245, in parameterized_inference
+    verbose=2)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 57, in __init__
+    self.check_params(sk_params)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 87, in check_params
+    '{} is not a legal parameter'.format(params_name))
+ValueError: factor_out_sm is not a legal parameter
+Using TensorFlow backend.
+08.02.2018 16:12:25 INFO    Hi! How are you today?
+08.02.2018 16:12:25 INFO    Startup options:
+08.02.2018 16:12:25 INFO      Algorithm:                     regression
+08.02.2018 16:12:25 INFO      Point by point:                False
+08.02.2018 16:12:25 INFO      Morphing-aware mode:           True
+08.02.2018 16:12:25 INFO      Smeared data:                  False
+08.02.2018 16:12:25 INFO      Training sample:               baseline
+08.02.2018 16:12:25 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+08.02.2018 16:12:25 INFO      Neyman construction toys:      False
+08.02.2018 16:12:25 INFO      Other options:                 ['factorsm', 'fastlearning']
+08.02.2018 16:12:25 INFO      Base directory:                /home/jb6504/higgs_inference
+08.02.2018 16:12:25 INFO      ML-based strategies available: True
+08.02.2018 16:12:25 INFO    Starting parameterized inference
+08.02.2018 16:12:25 INFO    Main settings:
+08.02.2018 16:12:25 INFO      Algorithm:                regression
+08.02.2018 16:12:25 INFO      Morphing-aware:           True
+08.02.2018 16:12:25 INFO      Training sample:          baseline
+08.02.2018 16:12:25 INFO    Options:
+08.02.2018 16:12:25 INFO      Learning rate:            0.01
+08.02.2018 16:12:25 INFO      Number of epochs:         20
+08.02.2018 16:12:25 INFO      Number of hidden layers:  2
+08.02.2018 16:12:25 INFO      alpha carl:               0.35
+08.02.2018 16:12:25 INFO      alpha regression:         0.02
+08.02.2018 16:12:25 INFO      Debug mode:               False
+Traceback (most recent call last):
+  File "experiments.py", line 132, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 245, in parameterized_inference
+    verbose=2)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 57, in __init__
+    self.check_params(sk_params)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 87, in check_params
+    '{} is not a legal parameter'.format(params_name))
+ValueError: factor_out_sm is not a legal parameter
