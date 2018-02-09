@@ -241,7 +241,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                                                                            factor_out_sm=factor_out_sm_in_aware_mode,
                                                                            learning_rate=learning_rate),
                                       epochs=n_epochs, validation_split=settings.validation_split,
-                                      factor_out_sm=factor_out_sm_in_aware_mode,
                                       verbose=2)
             else:
                 regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
