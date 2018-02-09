@@ -40,3 +40,15 @@ Free memory: 11.10GiB
 2018-02-08 16:10:37.317943: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
 2018-02-08 16:10:37.317950: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
 2018-02-08 16:10:37.317960: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:84:00.0)
+8853s - loss: 2654.5330 - loss_function_carl: 2.2318 - loss_function_carl_kl: 13.2969 - loss_function_ratio_regression: 18.1528 - loss_function_score: 131819.0106 - val_loss: 4169.6626 - val_loss_function_carl: 3.3113 - val_loss_function_carl_kl: 12.9744 - val_loss_function_ratio_regression: 30.1100 - val_loss_function_score: 206977.6346
+Epoch 2/20
+8798s - loss: 2453.8395 - loss_function_carl: 2.1721 - loss_function_carl_kl: 13.2592 - loss_function_ratio_regression: 17.4623 - loss_function_score: 121818.8588 - val_loss: 2291.8416 - val_loss_function_carl: 3.2986 - val_loss_function_carl_kl: 12.9576 - val_loss_function_ratio_regression: 29.9702 - val_loss_function_score: 113093.5696
+Epoch 3/20
+8756s - loss: 1976.7141 - loss_function_carl: 2.1625 - loss_function_carl_kl: 13.2624 - loss_function_ratio_regression: 17.3487 - loss_function_score: 97968.2753 - val_loss: 2934.7160 - val_loss_function_carl: 3.2939 - val_loss_function_carl_kl: 12.9554 - val_loss_function_ratio_regression: 29.9155 - val_loss_function_score: 145240.0201
+Epoch 4/20
+8746s - loss: 2215.4674 - loss_function_carl: 2.1580 - loss_function_carl_kl: 13.2649 - loss_function_ratio_regression: 17.2968 - loss_function_score: 109908.5351 - val_loss: 3415.8970 - val_loss_function_carl: 3.2909 - val_loss_function_carl_kl: 12.9570 - val_loss_function_ratio_regression: 29.8795 - val_loss_function_score: 169300.8761
+Epoch 5/20
+8744s - loss: 4960.0203 - loss_function_carl: 2.1551 - loss_function_carl_kl: 13.2686 - loss_function_ratio_regression: 17.2632 - loss_function_score: 247137.8630 - val_loss: 5131.8920 - val_loss_function_carl: 3.2891 - val_loss_function_carl_kl: 12.9567 - val_loss_function_ratio_regression: 29.8599 - val_loss_function_score: 255101.6145
+Epoch 6/20
+8739s - loss: 2143.9716 - loss_function_carl: 2.1531 - loss_function_carl_kl: 13.2710 - loss_function_ratio_regression: 17.2406 - loss_function_score: 106336.5525 - val_loss: 3119.2710 - val_loss_function_carl: 3.2875 - val_loss_function_carl_kl: 12.9584 - val_loss_function_ratio_regression: 29.8422 - val_loss_function_score: 154471.4420
+Epoch 7/20

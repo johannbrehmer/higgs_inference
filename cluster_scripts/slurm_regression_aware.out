@@ -1,210 +1,43 @@
 Using TensorFlow backend.
-08.02.2018 16:10:02 INFO    Hi! How are you today?
-08.02.2018 16:10:02 INFO    Startup options:
-08.02.2018 16:10:02 INFO      Algorithm:                     regression
-08.02.2018 16:10:02 INFO      Point by point:                False
-08.02.2018 16:10:02 INFO      Morphing-aware mode:           True
-08.02.2018 16:10:02 INFO      Smeared data:                  False
-08.02.2018 16:10:02 INFO      Training sample:               baseline
-08.02.2018 16:10:02 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-08.02.2018 16:10:02 INFO      Neyman construction toys:      False
-08.02.2018 16:10:02 INFO      Other options:                 ['slowlearning']
-08.02.2018 16:10:02 INFO      Base directory:                /home/jb6504/higgs_inference
-08.02.2018 16:10:02 INFO      ML-based strategies available: True
-08.02.2018 16:10:02 INFO    Starting parameterized inference
-08.02.2018 16:10:02 INFO    Main settings:
-08.02.2018 16:10:02 INFO      Algorithm:                regression
-08.02.2018 16:10:02 INFO      Morphing-aware:           True
-08.02.2018 16:10:02 INFO      Training sample:          baseline
-08.02.2018 16:10:02 INFO    Options:
-08.02.2018 16:10:02 INFO      Learning rate:            0.0001
-08.02.2018 16:10:02 INFO      Number of epochs:         20
-08.02.2018 16:10:02 INFO      Number of hidden layers:  2
-08.02.2018 16:10:02 INFO      alpha carl:               0.35
-08.02.2018 16:10:02 INFO      alpha regression:         0.02
-08.02.2018 16:10:02 INFO      Debug mode:               False
-Traceback (most recent call last):
-  File "experiments.py", line 132, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 245, in parameterized_inference
-    verbose=2)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 57, in __init__
-    self.check_params(sk_params)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 87, in check_params
-    '{} is not a legal parameter'.format(params_name))
-ValueError: factor_out_sm is not a legal parameter
-Using TensorFlow backend.
-08.02.2018 16:10:31 INFO    Hi! How are you today?
-08.02.2018 16:10:31 INFO    Startup options:
-08.02.2018 16:10:31 INFO      Algorithm:                     regression
-08.02.2018 16:10:31 INFO      Point by point:                False
-08.02.2018 16:10:31 INFO      Morphing-aware mode:           True
-08.02.2018 16:10:31 INFO      Smeared data:                  False
-08.02.2018 16:10:31 INFO      Training sample:               baseline
-08.02.2018 16:10:31 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-08.02.2018 16:10:31 INFO      Neyman construction toys:      False
-08.02.2018 16:10:31 INFO      Other options:                 ['factorsm', 'slowlearning']
-08.02.2018 16:10:31 INFO      Base directory:                /home/jb6504/higgs_inference
-08.02.2018 16:10:31 INFO      ML-based strategies available: True
-08.02.2018 16:10:31 INFO    Starting parameterized inference
-08.02.2018 16:10:31 INFO    Main settings:
-08.02.2018 16:10:31 INFO      Algorithm:                regression
-08.02.2018 16:10:31 INFO      Morphing-aware:           True
-08.02.2018 16:10:31 INFO      Training sample:          baseline
-08.02.2018 16:10:31 INFO    Options:
-08.02.2018 16:10:31 INFO      Learning rate:            0.0001
-08.02.2018 16:10:31 INFO      Number of epochs:         20
-08.02.2018 16:10:31 INFO      Number of hidden layers:  2
-08.02.2018 16:10:31 INFO      alpha carl:               0.35
-08.02.2018 16:10:31 INFO      alpha regression:         0.02
-08.02.2018 16:10:31 INFO      Debug mode:               False
-Traceback (most recent call last):
-  File "experiments.py", line 132, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 245, in parameterized_inference
-    verbose=2)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 57, in __init__
-    self.check_params(sk_params)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 87, in check_params
-    '{} is not a legal parameter'.format(params_name))
-ValueError: factor_out_sm is not a legal parameter
-Using TensorFlow backend.
-08.02.2018 16:10:59 INFO    Hi! How are you today?
-08.02.2018 16:10:59 INFO    Startup options:
-08.02.2018 16:10:59 INFO      Algorithm:                     regression
-08.02.2018 16:10:59 INFO      Point by point:                False
-08.02.2018 16:10:59 INFO      Morphing-aware mode:           True
-08.02.2018 16:10:59 INFO      Smeared data:                  False
-08.02.2018 16:10:59 INFO      Training sample:               baseline
-08.02.2018 16:10:59 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-08.02.2018 16:10:59 INFO      Neyman construction toys:      False
-08.02.2018 16:10:59 INFO      Other options:                 
-08.02.2018 16:10:59 INFO      Base directory:                /home/jb6504/higgs_inference
-08.02.2018 16:10:59 INFO      ML-based strategies available: True
-08.02.2018 16:10:59 INFO    Starting parameterized inference
-08.02.2018 16:10:59 INFO    Main settings:
-08.02.2018 16:10:59 INFO      Algorithm:                regression
-08.02.2018 16:10:59 INFO      Morphing-aware:           True
-08.02.2018 16:10:59 INFO      Training sample:          baseline
-08.02.2018 16:10:59 INFO    Options:
-08.02.2018 16:10:59 INFO      Learning rate:            0.001
-08.02.2018 16:10:59 INFO      Number of epochs:         20
-08.02.2018 16:10:59 INFO      Number of hidden layers:  2
-08.02.2018 16:10:59 INFO      alpha carl:               0.35
-08.02.2018 16:10:59 INFO      alpha regression:         0.02
-08.02.2018 16:10:59 INFO      Debug mode:               False
-Traceback (most recent call last):
-  File "experiments.py", line 132, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 245, in parameterized_inference
-    verbose=2)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 57, in __init__
-    self.check_params(sk_params)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 87, in check_params
-    '{} is not a legal parameter'.format(params_name))
-ValueError: factor_out_sm is not a legal parameter
-Using TensorFlow backend.
-08.02.2018 16:11:28 INFO    Hi! How are you today?
-08.02.2018 16:11:28 INFO    Startup options:
-08.02.2018 16:11:28 INFO      Algorithm:                     regression
-08.02.2018 16:11:28 INFO      Point by point:                False
-08.02.2018 16:11:28 INFO      Morphing-aware mode:           True
-08.02.2018 16:11:28 INFO      Smeared data:                  False
-08.02.2018 16:11:28 INFO      Training sample:               baseline
-08.02.2018 16:11:28 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-08.02.2018 16:11:28 INFO      Neyman construction toys:      False
-08.02.2018 16:11:28 INFO      Other options:                 ['factorsm']
-08.02.2018 16:11:28 INFO      Base directory:                /home/jb6504/higgs_inference
-08.02.2018 16:11:28 INFO      ML-based strategies available: True
-08.02.2018 16:11:28 INFO    Starting parameterized inference
-08.02.2018 16:11:28 INFO    Main settings:
-08.02.2018 16:11:28 INFO      Algorithm:                regression
-08.02.2018 16:11:28 INFO      Morphing-aware:           True
-08.02.2018 16:11:28 INFO      Training sample:          baseline
-08.02.2018 16:11:28 INFO    Options:
-08.02.2018 16:11:28 INFO      Learning rate:            0.001
-08.02.2018 16:11:28 INFO      Number of epochs:         20
-08.02.2018 16:11:28 INFO      Number of hidden layers:  2
-08.02.2018 16:11:28 INFO      alpha carl:               0.35
-08.02.2018 16:11:28 INFO      alpha regression:         0.02
-08.02.2018 16:11:28 INFO      Debug mode:               False
-Traceback (most recent call last):
-  File "experiments.py", line 132, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 245, in parameterized_inference
-    verbose=2)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 57, in __init__
-    self.check_params(sk_params)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 87, in check_params
-    '{} is not a legal parameter'.format(params_name))
-ValueError: factor_out_sm is not a legal parameter
-Using TensorFlow backend.
-08.02.2018 16:11:57 INFO    Hi! How are you today?
-08.02.2018 16:11:57 INFO    Startup options:
-08.02.2018 16:11:57 INFO      Algorithm:                     regression
-08.02.2018 16:11:57 INFO      Point by point:                False
-08.02.2018 16:11:57 INFO      Morphing-aware mode:           True
-08.02.2018 16:11:57 INFO      Smeared data:                  False
-08.02.2018 16:11:57 INFO      Training sample:               baseline
-08.02.2018 16:11:57 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-08.02.2018 16:11:57 INFO      Neyman construction toys:      False
-08.02.2018 16:11:57 INFO      Other options:                 ['fastlearning']
-08.02.2018 16:11:57 INFO      Base directory:                /home/jb6504/higgs_inference
-08.02.2018 16:11:57 INFO      ML-based strategies available: True
-08.02.2018 16:11:57 INFO    Starting parameterized inference
-08.02.2018 16:11:57 INFO    Main settings:
-08.02.2018 16:11:57 INFO      Algorithm:                regression
-08.02.2018 16:11:57 INFO      Morphing-aware:           True
-08.02.2018 16:11:57 INFO      Training sample:          baseline
-08.02.2018 16:11:57 INFO    Options:
-08.02.2018 16:11:57 INFO      Learning rate:            0.01
-08.02.2018 16:11:57 INFO      Number of epochs:         20
-08.02.2018 16:11:57 INFO      Number of hidden layers:  2
-08.02.2018 16:11:57 INFO      alpha carl:               0.35
-08.02.2018 16:11:57 INFO      alpha regression:         0.02
-08.02.2018 16:11:57 INFO      Debug mode:               False
-Traceback (most recent call last):
-  File "experiments.py", line 132, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 245, in parameterized_inference
-    verbose=2)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 57, in __init__
-    self.check_params(sk_params)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 87, in check_params
-    '{} is not a legal parameter'.format(params_name))
-ValueError: factor_out_sm is not a legal parameter
-Using TensorFlow backend.
-08.02.2018 16:12:25 INFO    Hi! How are you today?
-08.02.2018 16:12:25 INFO    Startup options:
-08.02.2018 16:12:25 INFO      Algorithm:                     regression
-08.02.2018 16:12:25 INFO      Point by point:                False
-08.02.2018 16:12:25 INFO      Morphing-aware mode:           True
-08.02.2018 16:12:25 INFO      Smeared data:                  False
-08.02.2018 16:12:25 INFO      Training sample:               baseline
-08.02.2018 16:12:25 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-08.02.2018 16:12:25 INFO      Neyman construction toys:      False
-08.02.2018 16:12:25 INFO      Other options:                 ['factorsm', 'fastlearning']
-08.02.2018 16:12:25 INFO      Base directory:                /home/jb6504/higgs_inference
-08.02.2018 16:12:25 INFO      ML-based strategies available: True
-08.02.2018 16:12:25 INFO    Starting parameterized inference
-08.02.2018 16:12:25 INFO    Main settings:
-08.02.2018 16:12:25 INFO      Algorithm:                regression
-08.02.2018 16:12:25 INFO      Morphing-aware:           True
-08.02.2018 16:12:25 INFO      Training sample:          baseline
-08.02.2018 16:12:25 INFO    Options:
-08.02.2018 16:12:25 INFO      Learning rate:            0.01
-08.02.2018 16:12:25 INFO      Number of epochs:         20
-08.02.2018 16:12:25 INFO      Number of hidden layers:  2
-08.02.2018 16:12:25 INFO      alpha carl:               0.35
-08.02.2018 16:12:25 INFO      alpha regression:         0.02
-08.02.2018 16:12:25 INFO      Debug mode:               False
-Traceback (most recent call last):
-  File "experiments.py", line 132, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 245, in parameterized_inference
-    verbose=2)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 57, in __init__
-    self.check_params(sk_params)
-  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 87, in check_params
-    '{} is not a legal parameter'.format(params_name))
-ValueError: factor_out_sm is not a legal parameter
+09.02.2018 09:03:11 INFO    Hi! How are you today?
+09.02.2018 09:03:11 INFO    Startup options:
+09.02.2018 09:03:11 INFO      Algorithm:                     regression
+09.02.2018 09:03:11 INFO      Point by point:                False
+09.02.2018 09:03:11 INFO      Morphing-aware mode:           True
+09.02.2018 09:03:11 INFO      Smeared data:                  False
+09.02.2018 09:03:11 INFO      Training sample:               baseline
+09.02.2018 09:03:11 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+09.02.2018 09:03:11 INFO      AFC epsilon:                   None
+09.02.2018 09:03:11 INFO      Neyman construction toys:      False
+09.02.2018 09:03:11 INFO      Other options:                 ['slowlearning']
+09.02.2018 09:03:11 INFO      Base directory:                /home/jb6504/higgs_inference
+09.02.2018 09:03:11 INFO      ML-based strategies available: True
+09.02.2018 09:03:11 INFO    Starting parameterized inference
+09.02.2018 09:03:11 INFO    Main settings:
+09.02.2018 09:03:11 INFO      Algorithm:                regression
+09.02.2018 09:03:11 INFO      Morphing-aware:           True
+09.02.2018 09:03:11 INFO      Training sample:          baseline
+09.02.2018 09:03:11 INFO    Options:
+09.02.2018 09:03:11 INFO      Learning rate:            0.0001
+09.02.2018 09:03:11 INFO      Number of epochs:         20
+09.02.2018 09:03:11 INFO      Number of hidden layers:  2
+09.02.2018 09:03:11 INFO      alpha carl:               0.35
+09.02.2018 09:03:11 INFO      alpha regression:         0.02
+09.02.2018 09:03:11 INFO      Debug mode:               False
+09.02.2018 09:03:35 INFO    Starting training
+Train on 7995920 samples, validate on 1998980 samples
+Epoch 1/20
+2018-02-09 09:03:40.945622: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-09 09:03:40.946042: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-09 09:03:40.946053: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-09 09:03:40.946058: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-09 09:03:40.946063: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-09 09:03:41.266230: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:84:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-09 09:03:41.266271: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-09 09:03:41.266278: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-09 09:03:41.266289: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:84:00.0)

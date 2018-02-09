@@ -40,3 +40,22 @@ Free memory: 11.10GiB
 2018-02-08 16:10:11.977221: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
 2018-02-08 16:10:11.977228: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
 2018-02-08 16:10:11.977237: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:05:00.0)
+1504s - loss: 0.0739 - loss_function_carl: 0.6608 - loss_function_carl_kl: 10.6141 - loss_function_ratio_regression: 0.0460 - loss_function_score: 1.3937 - val_loss: 0.0401 - val_loss_function_carl: 0.6604 - val_loss_function_carl_kl: 10.3489 - val_loss_function_ratio_regression: 0.0339 - val_loss_function_score: 0.3141
+Epoch 2/20
+1491s - loss: 0.0561 - loss_function_carl: 0.6599 - loss_function_carl_kl: 10.6074 - loss_function_ratio_regression: 0.0319 - loss_function_score: 1.2145 - val_loss: 0.0382 - val_loss_function_carl: 0.6602 - val_loss_function_carl_kl: 10.4837 - val_loss_function_ratio_regression: 0.0320 - val_loss_function_score: 0.3106
+Epoch 3/20
+1494s - loss: 0.0549 - loss_function_carl: 0.6598 - loss_function_carl_kl: 10.6065 - loss_function_ratio_regression: 0.0307 - loss_function_score: 1.2115 - val_loss: 0.0425 - val_loss_function_carl: 0.6606 - val_loss_function_carl_kl: 10.5574 - val_loss_function_ratio_regression: 0.0361 - val_loss_function_score: 0.3220
+Epoch 4/20
+1495s - loss: 0.0541 - loss_function_carl: 0.6598 - loss_function_carl_kl: 10.6062 - loss_function_ratio_regression: 0.0302 - loss_function_score: 1.1954 - val_loss: 0.0420 - val_loss_function_carl: 0.6605 - val_loss_function_carl_kl: 10.7709 - val_loss_function_ratio_regression: 0.0353 - val_loss_function_score: 0.3330
+Epoch 5/20
+1565s - loss: 0.0537 - loss_function_carl: 0.6598 - loss_function_carl_kl: 10.6066 - loss_function_ratio_regression: 0.0298 - loss_function_score: 1.1946 - val_loss: 0.0476 - val_loss_function_carl: 0.6612 - val_loss_function_carl_kl: 10.2619 - val_loss_function_ratio_regression: 0.0411 - val_loss_function_score: 0.3275
+Epoch 6/20
+1540s - loss: 0.0538 - loss_function_carl: 0.6598 - loss_function_carl_kl: 10.6065 - loss_function_ratio_regression: 0.0298 - loss_function_score: 1.2003 - val_loss: 0.0415 - val_loss_function_carl: 0.6604 - val_loss_function_carl_kl: 10.4686 - val_loss_function_ratio_regression: 0.0350 - val_loss_function_score: 0.3227
+Epoch 7/20
+1556s - loss: 0.0537 - loss_function_carl: 0.6598 - loss_function_carl_kl: 10.6061 - loss_function_ratio_regression: 0.0297 - loss_function_score: 1.2006 - val_loss: 0.0389 - val_loss_function_carl: 0.6603 - val_loss_function_carl_kl: 10.4586 - val_loss_function_ratio_regression: 0.0324 - val_loss_function_score: 0.3261
+Epoch 8/20
+1513s - loss: 0.0535 - loss_function_carl: 0.6598 - loss_function_carl_kl: 10.6063 - loss_function_ratio_regression: 0.0297 - loss_function_score: 1.1913 - val_loss: 0.0468 - val_loss_function_carl: 0.6611 - val_loss_function_carl_kl: 10.5689 - val_loss_function_ratio_regression: 0.0400 - val_loss_function_score: 0.3420
+Epoch 00007: early stopping
+08.02.2018 19:32:54 INFO    Starting evaluation
+08.02.2018 19:54:43 INFO    Starting roaming
+08.02.2018 19:54:48 INFO    That's it -- have a great day!
