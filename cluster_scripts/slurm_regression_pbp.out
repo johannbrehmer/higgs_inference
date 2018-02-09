@@ -2396,3 +2396,73 @@ Epoch 00011: early stopping
 09.02.2018 09:05:42 INFO    Starting theta 73/100: number 978 ([ 0.9400757   0.37123973])
 Train on 900000 samples, validate on 100000 samples
 Epoch 1/20
+238s - loss: 0.0034 - loss_function_carl: 0.6736 - loss_function_carl_kl: 9.5448 - val_loss: 0.0014 - val_loss_function_carl: 0.6669 - val_loss_function_carl_kl: 21.3419
+Epoch 2/20
+238s - loss: 0.0010 - loss_function_carl: 0.6733 - loss_function_carl_kl: 9.5381 - val_loss: 0.0012 - val_loss_function_carl: 0.6751 - val_loss_function_carl_kl: 21.6044
+Epoch 3/20
+238s - loss: 8.3825e-04 - loss_function_carl: 0.6733 - loss_function_carl_kl: 9.5374 - val_loss: 7.0687e-04 - val_loss_function_carl: 0.6718 - val_loss_function_carl_kl: 21.4975
+Epoch 4/20
+250s - loss: 7.4900e-04 - loss_function_carl: 0.6733 - loss_function_carl_kl: 9.5374 - val_loss: 6.2234e-04 - val_loss_function_carl: 0.6698 - val_loss_function_carl_kl: 21.4344
+Epoch 5/20
+250s - loss: 7.0306e-04 - loss_function_carl: 0.6733 - loss_function_carl_kl: 9.5375 - val_loss: 5.4111e-04 - val_loss_function_carl: 0.6719 - val_loss_function_carl_kl: 21.4998
+Epoch 6/20
+249s - loss: 6.5888e-04 - loss_function_carl: 0.6733 - loss_function_carl_kl: 9.5373 - val_loss: 5.8543e-04 - val_loss_function_carl: 0.6731 - val_loss_function_carl_kl: 21.5378
+Epoch 7/20
+248s - loss: 6.3063e-04 - loss_function_carl: 0.6733 - loss_function_carl_kl: 9.5375 - val_loss: 5.2745e-04 - val_loss_function_carl: 0.6766 - val_loss_function_carl_kl: 21.6519
+Epoch 8/20
+248s - loss: 6.1322e-04 - loss_function_carl: 0.6733 - loss_function_carl_kl: 9.5372 - val_loss: 6.5874e-04 - val_loss_function_carl: 0.6723 - val_loss_function_carl_kl: 21.5128
+Epoch 9/20
+249s - loss: 5.8849e-04 - loss_function_carl: 0.6733 - loss_function_carl_kl: 9.5373 - val_loss: 4.3627e-04 - val_loss_function_carl: 0.6693 - val_loss_function_carl_kl: 21.4185
+Epoch 10/20
+249s - loss: 5.7899e-04 - loss_function_carl: 0.6733 - loss_function_carl_kl: 9.5370 - val_loss: 6.1687e-04 - val_loss_function_carl: 0.6691 - val_loss_function_carl_kl: 21.4103
+Epoch 11/20
+250s - loss: 5.6407e-04 - loss_function_carl: 0.6733 - loss_function_carl_kl: 9.5374 - val_loss: 5.9776e-04 - val_loss_function_carl: 0.6738 - val_loss_function_carl_kl: 21.5625
+Epoch 12/20
+249s - loss: 5.5198e-04 - loss_function_carl: 0.6733 - loss_function_carl_kl: 9.5374 - val_loss: 5.0868e-04 - val_loss_function_carl: 0.6680 - val_loss_function_carl_kl: 21.3773
+Epoch 13/20
+253s - loss: 5.4846e-04 - loss_function_carl: 0.6733 - loss_function_carl_kl: 9.5372 - val_loss: 4.8584e-04 - val_loss_function_carl: 0.6687 - val_loss_function_carl_kl: 21.3969
+Epoch 00012: early stopping
+09.02.2018 09:59:23 INFO    Starting theta 74/100: number 41 ([-0.9466884  -0.84207419])
+Train on 899246 samples, validate on 99917 samples
+Epoch 1/20
+254s - loss: 0.0571 - loss_function_carl: 0.6281 - loss_function_carl_kl: 9.0146 - val_loss: 0.0346 - val_loss_function_carl: 0.6372 - val_loss_function_carl_kl: 20.3890
+Epoch 2/20
+252s - loss: 0.0154 - loss_function_carl: 0.6257 - loss_function_carl_kl: 9.0155 - val_loss: 0.0254 - val_loss_function_carl: 0.6348 - val_loss_function_carl_kl: 20.3131
+Epoch 3/20
+250s - loss: 0.0121 - loss_function_carl: 0.6255 - loss_function_carl_kl: 9.0147 - val_loss: 0.0189 - val_loss_function_carl: 0.6303 - val_loss_function_carl_kl: 20.1677
+Epoch 4/20
+249s - loss: 0.0105 - loss_function_carl: 0.6255 - loss_function_carl_kl: 9.0144 - val_loss: 0.0197 - val_loss_function_carl: 0.6259 - val_loss_function_carl_kl: 20.0262
+Epoch 5/20
+250s - loss: 0.0096 - loss_function_carl: 0.6254 - loss_function_carl_kl: 9.0138 - val_loss: 0.0184 - val_loss_function_carl: 0.6334 - val_loss_function_carl_kl: 20.2659
+Epoch 6/20
+251s - loss: 0.0088 - loss_function_carl: 0.6253 - loss_function_carl_kl: 9.0138 - val_loss: 0.0163 - val_loss_function_carl: 0.6347 - val_loss_function_carl_kl: 20.3086
+Epoch 7/20
+251s - loss: 0.0084 - loss_function_carl: 0.6253 - loss_function_carl_kl: 9.0141 - val_loss: 0.0147 - val_loss_function_carl: 0.6292 - val_loss_function_carl_kl: 20.1335
+Epoch 8/20
+250s - loss: 0.0079 - loss_function_carl: 0.6253 - loss_function_carl_kl: 9.0132 - val_loss: 0.0127 - val_loss_function_carl: 0.6329 - val_loss_function_carl_kl: 20.2529
+Epoch 9/20
+249s - loss: 0.0076 - loss_function_carl: 0.6253 - loss_function_carl_kl: 9.0133 - val_loss: 0.0099 - val_loss_function_carl: 0.6327 - val_loss_function_carl_kl: 20.2462
+Epoch 10/20
+249s - loss: 0.0073 - loss_function_carl: 0.6253 - loss_function_carl_kl: 9.0137 - val_loss: 0.0143 - val_loss_function_carl: 0.6338 - val_loss_function_carl_kl: 20.2806
+Epoch 11/20
+249s - loss: 0.0070 - loss_function_carl: 0.6253 - loss_function_carl_kl: 9.0136 - val_loss: 0.0155 - val_loss_function_carl: 0.6368 - val_loss_function_carl_kl: 20.3765
+Epoch 12/20
+248s - loss: 0.0068 - loss_function_carl: 0.6253 - loss_function_carl_kl: 9.0140 - val_loss: 0.0113 - val_loss_function_carl: 0.6317 - val_loss_function_carl_kl: 20.2130
+Epoch 13/20
+248s - loss: 0.0067 - loss_function_carl: 0.6253 - loss_function_carl_kl: 9.0138 - val_loss: 0.0112 - val_loss_function_carl: 0.6318 - val_loss_function_carl_kl: 20.2153
+Epoch 00012: early stopping
+09.02.2018 10:53:45 INFO    Starting theta 75/100: number 873 ([ 0.70219015 -0.19960724])
+Train on 899958 samples, validate on 99996 samples
+Epoch 1/20
+250s - loss: 0.0123 - loss_function_carl: 0.6621 - loss_function_carl_kl: 9.4030 - val_loss: 0.0059 - val_loss_function_carl: 0.6610 - val_loss_function_carl_kl: 21.1498
+Epoch 2/20
+249s - loss: 0.0045 - loss_function_carl: 0.6615 - loss_function_carl_kl: 9.3952 - val_loss: 0.0056 - val_loss_function_carl: 0.6589 - val_loss_function_carl_kl: 21.0839
+Epoch 3/20
+254s - loss: 0.0036 - loss_function_carl: 0.6614 - loss_function_carl_kl: 9.3940 - val_loss: 0.0038 - val_loss_function_carl: 0.6561 - val_loss_function_carl_kl: 20.9934
+Epoch 4/20
+254s - loss: 0.0031 - loss_function_carl: 0.6614 - loss_function_carl_kl: 9.3935 - val_loss: 0.0038 - val_loss_function_carl: 0.6663 - val_loss_function_carl_kl: 21.3216
+Epoch 5/20
+254s - loss: 0.0028 - loss_function_carl: 0.6614 - loss_function_carl_kl: 9.3936 - val_loss: 0.0036 - val_loss_function_carl: 0.6587 - val_loss_function_carl_kl: 21.0786
+Epoch 6/20
+255s - loss: 0.0027 - loss_function_carl: 0.6614 - loss_function_carl_kl: 9.3935 - val_loss: 0.0051 - val_loss_function_carl: 0.6685 - val_loss_function_carl_kl: 21.3906
+Epoch 7/20
