@@ -117,8 +117,8 @@ def subtract_mle(filename, folder, theta_sm=0):
     # Find MLE
     theta_mle_distribution = np.nanargmin(llr_distributions, axis=0)  # Shape: (n_thetas_assumed_true, n_experiments)
     theta_mle_observed = np.nanargmin(llr_observeds, axis=0)  # Shape: (n_experiments,)
-    logging.debug('MLEs distribution:\n%s', theta_mle_distribution)
-    logging.debug('MLEs observed:\n%s', theta_mle_observed)
+    # logging.debug('MLEs distribution:\n%s', theta_mle_distribution)
+    # logging.debug('MLEs observed:\n%s', theta_mle_observed)
 
     # Subtract MLE
     llr_compared_to_mle_distributions = np.zeros( (llr_distributions.shape[1], llr_distributions.shape[2]) )
@@ -228,12 +228,12 @@ def calculate_all_CL():
     #calculate_CL('carl_calibrated', 'point_by_point')
     #calculate_CL('regression', 'point_by_point')
 
-    #calculate_CL('carl', 'parameterized')
+    calculate_CL('carl', 'parameterized')
     #calculate_CL('carl_calibrated', 'parameterized')
-    #calculate_CL('combined', 'parameterized')
+    calculate_CL('combined', 'parameterized')
     #calculate_CL('combined_calibrated', 'parameterized')
     #calculate_CL('regression', 'parameterized')
-    #calculate_CL('combinedregression', 'parameterized')
+    calculate_CL('combinedregression', 'parameterized')
 
     calculate_CL('scoreregression', 'score_regression')
     calculate_CL('scoreregression_scoretheta', 'score_regression')

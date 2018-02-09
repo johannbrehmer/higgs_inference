@@ -77,6 +77,10 @@ def decide_toy_evaluation(theta_hypothesis, theta_evaluation, distance_threshold
 def interpolate(thetas, z_thetas,
                 xx, yy,
                 method='linear',
+                matern_exponent=0.5,
+                length_scale_min=0.001,
+                length_scale_default=1.,
+                length_scale_max=1000.,
                 z_uncertainties_thetas=None,
                 subtract_min=False):
 
@@ -91,13 +95,20 @@ def interpolate(thetas, z_thetas,
 
         if z_uncertainties_thetas is not None:
             gp = GaussianProcessRegressor(normalize_y=True,
-                                          kernel=C(1.0) * Matern(1.0,nu=0.5),
-                                          n_restarts_optimizer=10, alpha=z_uncertainties_thetas)
+                                          kernel=C(1.0, (1.e-9, 1.e9)) * Matern(length_scale=length_scale_default,
+                                                                                length_scale_bounds=(length_scale_min,
+                                                                                                     length_scale_max),
+                                                                                nu=matern_exponent),
+                                          n_restarts_optimizer=10,
+                                          alpha=z_uncertainties_thetas)
         else:
             gp = GaussianProcessRegressor(normalize_y=True,
-                                          kernel=C(1.0) * Matern(1.0,nu=0.5),
-                                          # kernel=C(1.0, (1.e-9, 1.e9)) + C(1.0, (1.e-9, 1.e9)) * Matern(1.0, nu=0.5),
-                                          n_restarts_optimizer=10, alpha=1.e-6)
+                                          kernel=C(1.0, (1.e-9, 1.e9)) * Matern(length_scale=length_scale_default,
+                                                                                length_scale_bounds=(length_scale_min,
+                                                                                                     length_scale_max),
+                                                                                nu=matern_exponent),
+                                          n_restarts_optimizer=10,
+                                          alpha=1.e-6)
 
         gp.fit(thetas[:], z_thetas[:])
 
