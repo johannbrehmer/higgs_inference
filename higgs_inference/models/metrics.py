@@ -15,7 +15,7 @@ from higgs_inference import settings
 def trimmed_cross_entropy(y_true, y_pred):
 
     # Number of samples to be trimmed at each end
-    n_samples = y_true.shape[0]
+    n_samples = int(y_true.shape[0])
     n_trim = int(round(settings.trim_mean_fraction * n_samples), 0)
 
     # Calculate cross entropies
@@ -34,7 +34,7 @@ def trimmed_cross_entropy(y_true, y_pred):
 def trimmed_mse_log_r(y_true, y_pred):
 
     # Number of samples to be trimmed at each end
-    n_samples = y_true.shape[0]
+    n_samples = int(y_true.shape[0])
     n_trim = int(round(settings.trim_mean_fraction * n_samples), 0)
 
     # Calculate cross entropies
@@ -53,7 +53,7 @@ def trimmed_mse_log_r(y_true, y_pred):
 def trimmed_mse_score(y_true, y_pred):
 
     # Number of samples to be trimmed at each end
-    n_samples = y_true.shape[0]
+    n_samples = int(y_true.shape[0])
     n_trim = int(round(settings.trim_mean_fraction * n_samples), 0)
 
     # Calculate cross entropies
