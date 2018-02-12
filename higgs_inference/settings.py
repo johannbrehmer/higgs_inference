@@ -154,3 +154,4 @@ max_score = 50.
 max_logr = 100.
 
 trim_mean_fraction = 0.05  # Fraction of best-fit and worst-fit events thrown away in the trimmed mean
+trim_mean_absolute = 2  # For default batch size of 32

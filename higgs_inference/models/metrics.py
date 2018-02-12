@@ -2,10 +2,11 @@
 # Imports
 ################################################################################
 
-import keras.backend as K
 import tensorflow as tf
 
 from higgs_inference import settings
+from higgs_inference.models.loss_functions import loss_function_carl, loss_function_ratio_regression, \
+    loss_function_score
 
 
 ################################################################################
@@ -13,17 +14,12 @@ from higgs_inference import settings
 ################################################################################
 
 def trimmed_cross_entropy(y_true, y_pred):
-
-    # Number of samples to be trimmed at each end
-    n_samples = int(y_true.shape[0])
-    n_trim = int(round(settings.trim_mean_fraction * n_samples), 0)
-
     # Calculate cross entropies
-    cross_entropies = K.mean(K.binary_crossentropy(y_true[:, 0], y_pred[:, 0]), axis=-1)
+    cross_entropies = loss_function_carl(y_true, y_pred)
 
     # Trim at bottom and then at top
-    _, top_indices = tf.nn.top_k(cross_entropies, n_trim)
-    _, bottom_indices = tf.nn.top_k(- cross_entropies, n_trim)
+    _, top_indices = tf.nn.top_k(cross_entropies, settings.trim_mean_absolute)
+    _, bottom_indices = tf.nn.top_k(- cross_entropies, settings.trim_mean_absolute)
     cross_entropies[top_indices] = 0.
     cross_entropies[bottom_indices] = 0.
 
@@ -32,17 +28,12 @@ def trimmed_cross_entropy(y_true, y_pred):
 
 
 def trimmed_mse_log_r(y_true, y_pred):
-
-    # Number of samples to be trimmed at each end
-    n_samples = int(y_true.shape[0])
-    n_trim = int(round(settings.trim_mean_fraction * n_samples), 0)
-
-    # Calculate cross entropies
-    mse = K.mean(K.square(y_true[:, 1] - y_pred[:, 1]), axis=-1)
+    # Calculate MSE
+    mse = loss_function_ratio_regression(y_true, y_pred)
 
     # Set loss for top and bottom indices to zero
-    _, top_indices = tf.nn.top_k(mse, n_trim)
-    _, bottom_indices = tf.nn.top_k(- mse, n_trim)
+    _, top_indices = tf.nn.top_k(mse, settings.trim_mean_absolute)
+    _, bottom_indices = tf.nn.top_k(- mse, settings.trim_mean_absolute)
     mse[top_indices] = 0.
     mse[bottom_indices] = 0.
 
@@ -51,17 +42,12 @@ def trimmed_mse_log_r(y_true, y_pred):
 
 
 def trimmed_mse_score(y_true, y_pred):
-
-    # Number of samples to be trimmed at each end
-    n_samples = int(y_true.shape[0])
-    n_trim = int(round(settings.trim_mean_fraction * n_samples), 0)
-
     # Calculate cross entropies
-    mse = K.sum(K.square(y_true[:, 2:settings.n_params + 2] - y_pred[:, 2:settings.n_params + 2]), axis=-1)
+    mse = loss_function_score(y_true, y_pred)
 
     # Set loss for top and bottom indices to zero
-    _, top_indices = tf.nn.top_k(mse, n_trim)
-    _, bottom_indices = tf.nn.top_k(- mse, n_trim)
+    _, top_indices = tf.nn.top_k(mse, settings.trim_mean_absolute)
+    _, bottom_indices = tf.nn.top_k(- mse, settings.trim_mean_absolute)
     mse[top_indices] = 0.
     mse[bottom_indices] = 0.
 
