@@ -18,11 +18,8 @@ def trimmed_cross_entropy(y_true, y_pred):
     cross_entropies = loss_function_carl(y_true, y_pred)
 
     # Trim at bottom and then at top
-    try:
-        _, top_indices = tf.nn.top_k(cross_entropies, settings.trim_mean_absolute)
-        _, bottom_indices = tf.nn.top_k(- cross_entropies, settings.trim_mean_absolute)
-    except ValueError:
-        raise ValueError((y_true.shape, y_pred.shape, cross_entropies.shape))
+    _, top_indices = tf.nn.top_k(cross_entropies, settings.trim_mean_absolute)
+    _, bottom_indices = tf.nn.top_k(- cross_entropies, settings.trim_mean_absolute)
 
     cross_entropies[top_indices] = 0.
     cross_entropies[bottom_indices] = 0.
