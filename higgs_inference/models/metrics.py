@@ -10,12 +10,14 @@ from higgs_inference.models.loss_functions import loss_function_carl, loss_funct
 
 
 ################################################################################
-# Metrics ignoring 5% outliers
+# Metrics ignoring top and bottom 5% per batch
 ################################################################################
 
 def trimmed_cross_entropy(y_true, y_pred):
     # Calculate cross entropies
     cross_entropies = loss_function_carl(y_true, y_pred)
+
+    print(y_true.shape, y_pred.shape, cross_entropies.shape)
 
     # Trim at bottom and then at top
     _, top_indices = tf.nn.top_k(cross_entropies, settings.trim_mean_absolute)

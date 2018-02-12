@@ -9,9 +9,7 @@ cd /home/jb6504/higgs_inference/cluster_scripts
 
 # sbatch run_truth.sh
 
-sbatch run_regression.sh # Urgent
-
-sleep 60
+# sleep 60
 
 
 ################################################################################
@@ -23,23 +21,23 @@ sbatch run_combined_smearing.sh
 sbatch run_regression_smearing.sh
 sbatch run_combinedregression_smearing.sh
 
-sbatch run_scoreregression_smearing.sh
+# sbatch run_scoreregression_smearing.sh
 
 # sbatch run_carl_point_by_point_smearing.sh
 # sbatch run_regression_point_by_point_smearing.sh
 
-sleep 60
+# sleep 60
 
 
 ################################################################################
-# More true data
+# True data
 ################################################################################
 
 # sbatch run_scoreregression.sh
 
 sbatch run_carl.sh
 sbatch run_combined.sh
-# sbatch run_regression.sh
+sbatch run_regression.sh
 sbatch run_combinedregression.sh
 
 # sbatch run_carl_point_by_point.sh
