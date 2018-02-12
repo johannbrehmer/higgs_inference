@@ -45,7 +45,7 @@ def build_hidden_layers(n,
 class DetailedHistory(Callback):
 
     def __init__(self, detailed_history):
-        super(DetailedHistory).__init__()
+        super(DetailedHistory, self).__init__()
         self.detailed_history = detailed_history
 
     def on_batch_end(self, batch, logs=None):
