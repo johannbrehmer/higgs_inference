@@ -24,6 +24,7 @@ from higgs_inference.models.models_parameterized import make_classifier_score, m
 from higgs_inference.models.models_parameterized import make_classifier_combined, make_classifier_combined_morphingaware
 from higgs_inference.models.models_parameterized import make_regressor, make_regressor_morphingaware
 from higgs_inference.models.models_parameterized import make_combined_regressor, make_combined_regressor_morphingaware
+from higgs_inference.models.ml_utils import DetailedHistory
 
 
 def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'regression', 'combinedregression'
@@ -230,7 +231,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         n_events_test = len(X_test_transformed)
 
     ################################################################################
-    # Regression (basic or augmented with score)
+    # Ratio regression (plain or augmented with score)
     ################################################################################
 
     if algorithm in ['regression', 'combinedregression']:
@@ -261,27 +262,37 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                                       epochs=n_epochs, validation_split=settings.validation_split,
                                       verbose=2)
 
+        # Training
         logging.info('Starting training')
-        history = regr.fit(X_thetas_train, y_logr_score_train,
-                           callbacks=([EarlyStopping(verbose=1,
-                                                     patience=settings.early_stopping_patience)] if early_stopping else None))
+        detailed_history = {}
+        if early_stopping:
+            callbacks = [EarlyStopping(verbose=1, patience=settings.early_stopping_patience),
+                         DetailedHistory(detailed_history)]
+        else:
+            callbacks = [DetailedHistory(detailed_history)]
+        history = regr.fit(X_thetas_train, y_logr_score_train, callbacks=callbacks)
 
         # Save metrics
         def _save_metrics(key, filename):
             try:
                 metrics = np.asarray([history.history[key], history.history['val_' + key]])
+                detailed_metrics = np.asarray([detailed_history[key], detailed_history['val_' + key]])
                 np.save(results_dir + '/traininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
                         metrics)
+                np.save(results_dir + '/detailedtraininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
+                        detailed_metrics)
             except KeyError:
                 logging.warning('Key %s not found. Available keys: %s', key, list(history.history.keys()))
 
         _save_metrics('loss_function_carl', 'ce')
-        _save_metrics('loss_function_carl_kl', 'kl')
         if algorithm == 'regression':
             _save_metrics('loss', 'logr')
         else:
             _save_metrics('loss_function_ratio_regression', 'logr')
         _save_metrics('loss_function_score', 'scores')
+        _save_metrics('trimmed_cross_entropy', 'ce_trimmed')
+        _save_metrics('trimmed_mse_log_r', 'logr_trimmed')
+        _save_metrics('trimmed_mse_score', 'scores_trimmed')
 
         logging.info('Starting evaluation')
         expected_llr = []
@@ -382,7 +393,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     else:
 
-        logging.info('Starting training')
         if algorithm == 'carl':
             if morphing_aware:
                 clf = KerasRegressor(lambda: make_classifier_carl_morphingaware(n_hidden_layers=n_hidden_layers,
@@ -425,22 +435,28 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         else:
             raise ValueError()
 
-        # Fit
-        history = clf.fit(X_thetas_train[::], y_logr_score_train[::],
-                          callbacks=(
-                              [EarlyStopping(verbose=1,
-                                             patience=settings.early_stopping_patience)] if early_stopping else None))
+        # Training
+        logging.info('Starting training')
+        detailed_history = {}
+        if early_stopping:
+            callbacks = [EarlyStopping(verbose=1, patience=settings.early_stopping_patience),
+                         DetailedHistory(detailed_history)]
+        else:
+            callbacks = [DetailedHistory(detailed_history)]
+        history = clf.fit(X_thetas_train[::], y_logr_score_train[::], callbacks=callbacks)
 
         # Save metrics
         def _save_metrics(key, filename):
             try:
                 metrics = np.asarray([history.history[key], history.history['val_' + key]])
+                detailed_metrics = np.asarray([detailed_history[key], detailed_history['val_' + key]])
                 np.save(results_dir + '/traininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
                         metrics)
+                np.save(results_dir + '/detailedtraininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
+                        detailed_metrics)
             except KeyError:
                 logging.warning('Key %s not found. Available keys: %s', key, list(history.history.keys()))
 
-        _save_metrics('loss_function_carl_kl', 'kl')
         _save_metrics('loss_function_ratio_regression', 'logr')
         if algorithm == 'carl':
             _save_metrics('loss', 'ce')
@@ -451,6 +467,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         else:
             _save_metrics('loss_function_carl', 'ce')
             _save_metrics('loss_function_score', 'scores')
+        _save_metrics('trimmed_cross_entropy', 'ce_trimmed')
+        _save_metrics('trimmed_mse_log_r', 'logr_trimmed')
+        _save_metrics('trimmed_mse_score', 'scores_trimmed')
 
         # carl ratio object
         ratio = ClassifierScoreRatio(clf, prefit=True)
