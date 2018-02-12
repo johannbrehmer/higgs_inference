@@ -123,8 +123,8 @@ n_events_randomtheta_num = 5000000
 n_events_randomtheta_den = 5000000
 
 # PbP training, per PbP theta
-n_events_n_point_by_point_num = 500000
-n_events_n_point_by_point_den = 500000
+n_events_n_point_by_point_num = 500000  # Next run: reduce
+n_events_n_point_by_point_den = 500000  # Next run: reduce
 
 # Score regression training, total
 n_events_score_regression = 10000000
@@ -142,6 +142,15 @@ n_events_roam = 20
 # Smearing (approximate shower + detector simulation)
 ################################################################################
 
-smearing_eta_phi = 0.1 # Original: 0.1
-smearing_jet_energies = 0.5  # times sqrt(E). Original: 0.5
+smearing_eta_phi = 0.1  # Original: 0.1
+smearing_jet_energies = 0.5  # times sqrt(E). Original: 0.5. Not used in current version.
 smearing_lepton_pt = 3.e-4  # times pT^2. Original: 3.e-4
+
+################################################################################
+# Sanitization cuts to avoid large impact of a few extreme events.
+################################################################################
+
+max_score = 50.
+max_logr = 100.
+
+trim_mean_fraction = 0.05  # Fraction of best-fit and worst-fit events thrown away in the trimmed mean

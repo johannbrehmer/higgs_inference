@@ -6,8 +6,10 @@ from __future__ import absolute_import, division, print_function
 
 import numpy as np
 from scipy.interpolate import LinearNDInterpolator, CloughTocher2DInterpolator
-from sklearn.gaussian_process import GaussianProcessRegressor
-from sklearn.gaussian_process.kernels import ConstantKernel as C, Matern
+# from sklearn.gaussian_process import GaussianProcessRegressor
+# from sklearn.gaussian_process.kernels import ConstantKernel, Matern
+from skopt.learning import GaussianProcessRegressor
+from skopt.learning.gaussian_process.kernels import ConstantKernel, Matern, WhiteKernel
 
 from higgs_inference import settings
 
@@ -69,7 +71,6 @@ def decide_toy_evaluation(theta_hypothesis, theta_evaluation, distance_threshold
     return (delta_theta <= distance_threshold)
 
 
-
 ################################################################################
 # Interpolation
 ################################################################################
@@ -77,45 +78,46 @@ def decide_toy_evaluation(theta_hypothesis, theta_evaluation, distance_threshold
 def interpolate(thetas, z_thetas,
                 xx, yy,
                 method='linear',
+                z_uncertainties_thetas=None,
                 matern_exponent=0.5,
                 length_scale_min=0.001,
                 length_scale_default=1.,
                 length_scale_max=1000.,
-                z_uncertainties_thetas=None,
+                noise_level=0.001,
                 subtract_min=False):
-
-    if method=='cubic':
+    if method == 'cubic':
 
         interpolator = CloughTocher2DInterpolator(thetas[:], z_thetas)
 
         zz = interpolator(np.dstack((xx.flatten(), yy.flatten())))
         zi = zz.reshape(xx.shape)
 
-    elif method=='gp':
+    elif method == 'gp':
 
         if z_uncertainties_thetas is not None:
             gp = GaussianProcessRegressor(normalize_y=True,
-                                          kernel=C(1.0, (1.e-9, 1.e9)) * Matern(length_scale=length_scale_default,
-                                                                                length_scale_bounds=(length_scale_min,
-                                                                                                     length_scale_max),
-                                                                                nu=matern_exponent),
+                                          kernel=ConstantKernel(1.0, (1.e-9, 1.e9))
+                                                 * Matern(length_scale=[length_scale_default],
+                                                          length_scale_bounds=[(length_scale_min, length_scale_max)],
+                                                          nu=matern_exponent)
+                                                 + WhiteKernel(noise_level),
                                           n_restarts_optimizer=10,
                                           alpha=z_uncertainties_thetas)
         else:
             gp = GaussianProcessRegressor(normalize_y=True,
-                                          kernel=C(1.0, (1.e-9, 1.e9)) * Matern(length_scale=length_scale_default,
-                                                                                length_scale_bounds=(length_scale_min,
-                                                                                                     length_scale_max),
-                                                                                nu=matern_exponent),
-                                          n_restarts_optimizer=10,
-                                          alpha=1.e-6)
+                                          kernel=ConstantKernel(1.0, (1.e-9, 1.e9))
+                                                 * Matern(length_scale=length_scale_default,
+                                                          length_scale_bounds=(length_scale_min, length_scale_max),
+                                                          nu=matern_exponent)
+                                                 + WhiteKernel(noise_level),
+                                          n_restarts_optimizer=10)
 
         gp.fit(thetas[:], z_thetas[:])
 
         zz, _ = gp.predict(np.c_[xx.ravel(), yy.ravel()], return_std=True)
         zi = zz.reshape(xx.shape)
 
-    elif method=='linear':
+    elif method == 'linear':
         interpolator = LinearNDInterpolator(thetas[:], z_thetas)
         zz = interpolator(np.dstack((xx.flatten(), yy.flatten())))
         zi = zz.reshape(xx.shape)

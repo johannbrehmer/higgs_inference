@@ -200,7 +200,8 @@ if args.train:
         ))
 
         # filter out bad events
-        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < 2500.) & (np.log(r) ** 2 < 10000.)
+        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
+                np.log(r) ** 2 < settings.max_logr ** 2)
 
         return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut], p0[cut], p1[
             cut]
@@ -288,7 +289,8 @@ if args.basis:
         ))
 
         # filter out bad events
-        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < 2500.) & (np.log(r) ** 2 < 10000.)
+        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
+                np.log(r) ** 2 < settings.max_logr ** 2)
 
         return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut], p0[cut], p1[
             cut]
@@ -376,7 +378,8 @@ if args.pointbypoint:
         ))
 
         # filter out bad events
-        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < 2500.) & (np.log(r) ** 2 < 10000.) & (np.isfinite(np.log(r)))
+        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
+                np.log(r) ** 2 < settings.max_logr ** 2) & (np.isfinite(np.log(r)))
 
         return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut], p0[cut], p1[
             cut]
@@ -458,7 +461,8 @@ if args.random:
         thetas1[:] = thetas[theta1]
 
         # filter out bad events
-        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < 2500.) & (np.log(r) ** 2 < 10000.)
+        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
+                np.log(r) ** 2 < settings.max_logr ** 2)
 
         return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut]
 
@@ -508,7 +512,7 @@ if args.calibration:
             r[t, :] = np.array(weights_train[t][indices] / weights_train[theta_observed][indices])
 
         # filter out bad events
-        cut = np.all(np.log(r) ** 2 < 10000., axis=0)
+        cut = np.all(np.log(r) ** 2 < settings.max_logr ** 2, axis=0)
 
         return X[cut], r[:, cut]
 
@@ -547,7 +551,7 @@ if args.scoreregression:
         p = np.array(weights_train[theta][indices])
 
         # filter out bad events
-        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < 2500.)
+        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2)
 
         return X[cut], scores[cut], p[cut]
 
@@ -586,22 +590,8 @@ if args.test:
         p1 = np.array(weights_test[theta1][indices])
 
         # filter out bad events
-        cut = ((scores[theta_observed, :, 0] ** 2 + scores[theta_observed, :, 1] ** 2 < 2500.)
-               & (np.log(r[theta_observed, :]) ** 2 < 10000.)
-               & np.all(np.isfinite(np.log(r[:, :])) & np.isfinite(scores[:, :, 0]) & np.isfinite(scores[:, :, 1]),
-                        axis=0))
-
-        # Some immediate truth-level testing
-        logging.info('Cut efficiency: %s / %s events survive', np.sum(cut), cut.shape[0])
-        expected_score = np.sum(scores[0, :, :], axis=0) / scores.shape[1]
-        logging.info('Expected score without sanitization: %s', expected_score)
-        expected_score = np.sum(scores[0, cut, :], axis=0) / np.sum(cut)
-        logging.info('Expected score with sanitization:    %s', expected_score)
-
-        mle = np.nanargmax(np.sum(np.log(r), axis=1))
-        logging.info('MLE theta without sanitization: %s (%s)', mle, thetas[mle])
-        mle = np.nanargmax(np.sum(np.log(r[:, cut]), axis=1))
-        logging.info('MLE theta without sanitization: %s (%s)', mle, thetas[mle])
+        cut = np.all(np.isfinite(np.log(r[:, :])) & np.isfinite(scores[:, :, 0]) & np.isfinite(scores[:, :, 1]),
+                     axis=0)
 
         return X[cut], scores[:, cut, :], r[:, cut], p1[cut]
 
