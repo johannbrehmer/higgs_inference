@@ -6,10 +6,14 @@ from __future__ import absolute_import, division, print_function
 
 import numpy as np
 from scipy.interpolate import LinearNDInterpolator, CloughTocher2DInterpolator
-# from sklearn.gaussian_process import GaussianProcessRegressor
-# from sklearn.gaussian_process.kernels import ConstantKernel, Matern
-from skopt.learning import GaussianProcessRegressor
-from skopt.learning.gaussian_process.kernels import ConstantKernel, Matern, WhiteKernel
+
+try:
+    from skopt.learning import GaussianProcessRegressor
+    from skopt.learning.gaussian_process.kernels import ConstantKernel, Matern, WhiteKernel
+except ImportError:
+    from sklearn.gaussian_process import GaussianProcessRegressor
+    from sklearn.gaussian_process.kernels import ConstantKernel, Matern, WhiteKernel
+
 
 from higgs_inference import settings
 
