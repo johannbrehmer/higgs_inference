@@ -258,7 +258,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                     verbose=2)
             else:
                 regr = KerasRegressor(lambda: make_combined_regressor(n_hidden_layers=n_hidden_layers,
-                                                                      alpha=alpha_regression),
+                                                                      alpha=alpha_regression,
+                                                                      learning_rate=learning_rate),
                                       epochs=n_epochs, validation_split=settings.validation_split,
                                       verbose=2)
 
@@ -279,8 +280,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 detailed_metrics = np.asarray([detailed_history[key], detailed_history['val_' + key]])
                 np.save(results_dir + '/traininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
                         metrics)
-                np.save(results_dir + '/detailedtraininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
-                        detailed_metrics)
+                np.save(
+                    results_dir + '/detailedtraininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
+                    detailed_metrics)
             except KeyError:
                 logging.warning('Key %s not found. Available keys: %s', key, list(history.history.keys()))
 
@@ -396,24 +398,28 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         if algorithm == 'carl':
             if morphing_aware:
                 clf = KerasRegressor(lambda: make_classifier_carl_morphingaware(n_hidden_layers=n_hidden_layers,
-                                                                                learn_log_r=learn_logr_mode),
+                                                                                learn_log_r=learn_logr_mode,
+                                                                                learning_rate=learning_rate),
                                      epochs=n_epochs, validation_split=settings.validation_split,
                                      verbose=2)
             else:
                 clf = KerasRegressor(lambda: make_classifier_carl(n_hidden_layers=n_hidden_layers,
-                                                                  learn_log_r=learn_logr_mode),
+                                                                  learn_log_r=learn_logr_mode,
+                                                                  learning_rate=learning_rate),
                                      epochs=n_epochs, validation_split=settings.validation_split,
                                      verbose=2)
 
         elif algorithm == 'score':
             if morphing_aware:
                 clf = KerasRegressor(lambda: make_classifier_score_morphingaware(n_hidden_layers=n_hidden_layers,
-                                                                                 learn_log_r=learn_logr_mode),
+                                                                                 learn_log_r=learn_logr_mode,
+                                                                                 learning_rate=learning_rate),
                                      epochs=n_epochs, validation_split=settings.validation_split,
                                      verbose=2)
             else:
                 clf = KerasRegressor(lambda: make_classifier_score(n_hidden_layers=n_hidden_layers,
-                                                                   learn_log_r=learn_logr_mode),
+                                                                   learn_log_r=learn_logr_mode,
+                                                                   learning_rate=learning_rate),
                                      epochs=n_epochs, validation_split=settings.validation_split,
                                      verbose=2)
 
@@ -422,13 +428,15 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 clf = KerasRegressor(
                     lambda: make_classifier_combined_morphingaware(n_hidden_layers=n_hidden_layers,
                                                                    learn_log_r=learn_logr_mode,
-                                                                   alpha=alpha_carl),
+                                                                   alpha=alpha_carl,
+                                                                   learning_rate=learning_rate),
                     epochs=n_epochs, validation_split=settings.validation_split,
                     verbose=2)
             else:
                 clf = KerasRegressor(lambda: make_classifier_combined(n_hidden_layers=n_hidden_layers,
                                                                       learn_log_r=learn_logr_mode,
-                                                                      alpha=alpha_carl),
+                                                                      alpha=alpha_carl,
+                                                                      learning_rate=learning_rate),
                                      epochs=n_epochs, validation_split=settings.validation_split,
                                      verbose=2)
 
@@ -452,8 +460,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 detailed_metrics = np.asarray([detailed_history[key], detailed_history['val_' + key]])
                 np.save(results_dir + '/traininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
                         metrics)
-                np.save(results_dir + '/detailedtraininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
-                        detailed_metrics)
+                np.save(
+                    results_dir + '/detailedtraininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
+                    detailed_metrics)
             except KeyError:
                 logging.warning('Key %s not found. Available keys: %s', key, list(history.history.keys()))
 

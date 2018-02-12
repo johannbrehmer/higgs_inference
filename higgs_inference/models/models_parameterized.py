@@ -23,7 +23,9 @@ from higgs_inference.models.morphing import generate_wi_layer, generate_wtilde_l
 def make_regressor(n_hidden_layers=3,
                    hidden_layer_size=100,
                    activation='tanh',
-                   dropout_prob=0.0):
+                   dropout_prob=0.0,
+                   learning_rate=1.e-3,
+                   lr_decay=0.05):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
 
@@ -54,7 +56,7 @@ def make_regressor(n_hidden_layers=3,
     model.compile(loss=loss_function_ratio_regression,
                   metrics=[loss_function_carl, loss_function_carl_kl, loss_function_score,
                            trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
-                  optimizer=optimizers.Adam(clipnorm=1.))
+                  optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
 
@@ -145,7 +147,9 @@ def make_combined_regressor(n_hidden_layers=3,
                             hidden_layer_size=100,
                             activation='tanh',
                             dropout_prob=0.0,
-                            alpha=0.005):
+                            alpha=0.005,
+                            learning_rate=1.e-3,
+                            lr_decay=0.05):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
 
@@ -177,7 +181,7 @@ def make_combined_regressor(n_hidden_layers=3,
                   metrics=[loss_function_carl, loss_function_carl_kl, loss_function_ratio_regression,
                            loss_function_score,
                            trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
-                  optimizer=optimizers.Adam(clipnorm=1.))
+                  optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
 
@@ -271,7 +275,9 @@ def make_classifier_carl(n_hidden_layers=3,
                          hidden_layer_size=100,
                          activation='tanh',
                          dropout_prob=0.0,
-                         learn_log_r=False):
+                         learn_log_r=False,
+                         learning_rate=1.e-3,
+                         lr_decay=0.05):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
 
@@ -307,7 +313,7 @@ def make_classifier_carl(n_hidden_layers=3,
     model.compile(loss=loss_function_carl,
                   metrics=[loss_function_ratio_regression, loss_function_carl_kl, loss_function_score,
                            trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
-                  optimizer=optimizers.Adam(clipnorm=1.))
+                  optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
 
@@ -317,7 +323,9 @@ def make_classifier_carl_morphingaware(n_hidden_layers=2,
                                        activation='tanh',
                                        dropout_prob=0.0,
                                        learn_log_r=False,
-                                       epsilon=1.e-4):
+                                       epsilon=1.e-4,
+                                       learning_rate=1.e-3,
+                                       lr_decay=0.05):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
     x_layer = Lambda(lambda x: x[:, :settings.n_features], output_shape=(settings.n_features,))(input_layer)
@@ -368,7 +376,7 @@ def make_classifier_carl_morphingaware(n_hidden_layers=2,
     model.compile(loss=loss_function_carl,
                   metrics=[loss_function_ratio_regression, loss_function_carl_kl, loss_function_score,
                            trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
-                  optimizer=optimizers.Adam(clipnorm=1.))
+                  optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
 
@@ -382,7 +390,9 @@ def make_classifier_score(n_hidden_layers=3,
                           activation='tanh',
                           dropout_prob=0.0,
                           learn_log_r=False,
-                          l2_regularization=0.001):
+                          l2_regularization=0.001,
+                          learning_rate=1.e-3,
+                          lr_decay=0.05):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
 
@@ -419,7 +429,7 @@ def make_classifier_score(n_hidden_layers=3,
     model.compile(loss=loss_function_score,
                   metrics=[loss_function_ratio_regression, loss_function_carl, loss_function_carl_kl,
                            trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
-                  optimizer=optimizers.Adam(clipnorm=1.))
+                  optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
 
@@ -430,7 +440,9 @@ def make_classifier_score_morphingaware(n_hidden_layers=2,
                                         dropout_prob=0.0,
                                         l2_regularization=0.001,
                                         learn_log_r=False,
-                                        epsilon=1.e-4):
+                                        epsilon=1.e-4,
+                                        learning_rate=1.e-3,
+                                        lr_decay=0.05):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
     x_layer = Lambda(lambda x: x[:, :settings.n_features], output_shape=(settings.n_features,))(input_layer)
@@ -482,7 +494,7 @@ def make_classifier_score_morphingaware(n_hidden_layers=2,
     model.compile(loss=loss_function_score,
                   metrics=[loss_function_ratio_regression, loss_function_carl, loss_function_carl_kl,
                            trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
-                  optimizer=optimizers.Adam(clipnorm=1.))
+                  optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
 
@@ -496,7 +508,9 @@ def make_classifier_combined(n_hidden_layers=3,
                              activation='tanh',
                              dropout_prob=0.0,
                              learn_log_r=False,
-                             alpha=0.1):
+                             alpha=0.1,
+                             learning_rate=1.e-3,
+                             lr_decay=0.05):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
 
@@ -533,7 +547,7 @@ def make_classifier_combined(n_hidden_layers=3,
                   metrics=[loss_function_ratio_regression, loss_function_carl, loss_function_carl_kl,
                            loss_function_score,
                            trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
-                  optimizer=optimizers.Adam(clipnorm=1.))
+                  optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
 
@@ -544,7 +558,9 @@ def make_classifier_combined_morphingaware(n_hidden_layers=2,
                                            dropout_prob=0.0,
                                            alpha=0.1,
                                            learn_log_r=False,
-                                           epsilon=1.e-4):
+                                           epsilon=1.e-4,
+                                           learning_rate=1.e-3,
+                                           lr_decay=0.05):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
     x_layer = Lambda(lambda x: x[:, :settings.n_features], output_shape=(settings.n_features,))(input_layer)
@@ -596,6 +612,6 @@ def make_classifier_combined_morphingaware(n_hidden_layers=2,
                   metrics=[loss_function_ratio_regression, loss_function_carl, loss_function_carl_kl,
                            loss_function_score,
                            trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
-                  optimizer=optimizers.Adam(clipnorm=1.))
+                  optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
