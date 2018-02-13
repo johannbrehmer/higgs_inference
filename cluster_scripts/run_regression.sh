@@ -23,5 +23,5 @@ python -u experiments.py regression
 # python -u experiments.py regression -o deep
 
 # python -u experiments.py regression --training random -o shallow
-python -u experiments.py regression --training random
+# python -u experiments.py regression --training random
 # python -u experiments.py regression --training random -o deep
