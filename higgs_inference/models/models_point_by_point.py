@@ -14,7 +14,7 @@ from higgs_inference.models.metrics import full_cross_entropy, full_mse_log_r
 from higgs_inference.models.metrics import trimmed_cross_entropy, trimmed_mse_log_r
 
 metrics = [full_cross_entropy, trimmed_cross_entropy,
-           full_mse_log_r, trimmed_mse_log_r],
+           full_mse_log_r, trimmed_mse_log_r]
 
 
 ################################################################################

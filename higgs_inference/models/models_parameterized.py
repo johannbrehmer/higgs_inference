@@ -18,7 +18,7 @@ from higgs_inference.models.morphing import generate_wi_layer, generate_wtilde_l
 
 metrics = [full_cross_entropy, trimmed_cross_entropy,
            full_mse_log_r, trimmed_mse_log_r,
-           full_mse_score, trimmed_mse_score],
+           full_mse_score, trimmed_mse_score]
 
 
 ################################################################################
