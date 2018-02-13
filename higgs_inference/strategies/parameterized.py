@@ -277,14 +277,19 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         def _save_metrics(key, filename):
             try:
                 metrics = np.asarray([history.history[key], history.history['val_' + key]])
-                detailed_metrics = np.asarray([detailed_history[key], detailed_history['val_' + key]])
                 np.save(results_dir + '/traininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
                         metrics)
+            except KeyError:
+                logging.warning('Key %s not found in per-epoch history. Available keys: %s', key,
+                                list(history.history.keys()))
+            try:
+                detailed_metrics = np.asarray([detailed_history[key], detailed_history['val_' + key]])
                 np.save(
                     results_dir + '/detailedtraininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
                     detailed_metrics)
             except KeyError:
-                logging.warning('Key %s not found. Available keys: %s', key, list(history.history.keys()))
+                logging.warning('Key %s not found in per-batch history. Available keys: %s', key,
+                                list(detailed_metrics.keys()))
 
         _save_metrics('loss_function_carl', 'ce')
         if algorithm == 'regression':
@@ -457,14 +462,19 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         def _save_metrics(key, filename):
             try:
                 metrics = np.asarray([history.history[key], history.history['val_' + key]])
-                detailed_metrics = np.asarray([detailed_history[key], detailed_history['val_' + key]])
                 np.save(results_dir + '/traininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
                         metrics)
+            except KeyError:
+                logging.warning('Key %s not found in per-epoch history. Available keys: %s', key,
+                                list(history.history.keys()))
+            try:
+                detailed_metrics = np.asarray([detailed_history[key], detailed_history['val_' + key]])
                 np.save(
                     results_dir + '/detailedtraininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
                     detailed_metrics)
             except KeyError:
-                logging.warning('Key %s not found. Available keys: %s', key, list(history.history.keys()))
+                logging.warning('Key %s not found in per-batch history. Available keys: %s', key,
+                                list(detailed_metrics.keys()))
 
         _save_metrics('loss_function_ratio_regression', 'logr')
         if algorithm == 'carl':
