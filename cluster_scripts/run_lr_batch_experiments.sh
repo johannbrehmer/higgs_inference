@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=le3
-#SBATCH --output=slurm_learning_experiments3.out
+#SBATCH --job-name=lr-batch
+#SBATCH --output=slurm_lr_batch_experiments.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
@@ -18,11 +18,13 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-#python -u experiments.py regression -o largebatch
-#python -u experiments.py regression -o largebatch fastlearning
-#python -u experiments.py regression -o largebatch slowlearning
-#python -u experiments.py regression -o fastlearning
+python -u experiments.py regression -o largebatch
+python -u experiments.py regression -o largebatch fastlearning
+python -u experiments.py regression -o largebatch slowlearning
+
+python -u experiments.py regression -o fastlearning
 python -u experiments.py regression -o slowlearning
+
 python -u experiments.py regression -o smallbatch
-#python -u experiments.py regression -o smallbatch fastlearning
-#python -u experiments.py regression -o smallbatch slowlearning
+python -u experiments.py regression -o smallbatch fastlearning
+python -u experiments.py regression -o smallbatch slowlearning

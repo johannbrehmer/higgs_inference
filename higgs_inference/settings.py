@@ -113,9 +113,9 @@ learning_rate_large = 0.01
 
 # Batch size
 batch_size = 32  # Will be overwritten at startup
-batch_size_default = 32
-batch_size_small = 16
-batch_size_large = 64
+batch_size_default = 128
+batch_size_small = 64
+batch_size_large = 256
 
 ################################################################################
 # Size of unweighted event samples
@@ -134,8 +134,8 @@ n_events_randomtheta_num = 5000000
 n_events_randomtheta_den = 5000000
 
 # PbP training, per PbP theta
-n_events_n_point_by_point_num = 500000  # Next run: reduce
-n_events_n_point_by_point_den = 500000  # Next run: reduce
+n_events_n_point_by_point_num = 50000
+n_events_n_point_by_point_den = 50000
 
 # Score regression training, total
 n_events_score_regression = 10000000
@@ -165,4 +165,3 @@ max_score = 50.
 max_logr = 100.
 
 trim_mean_fraction = 0.05  # Fraction of best-fit and worst-fit events thrown away in the trimmed mean
-trim_mean_absolute = 2  # For default batch size of 32
