@@ -303,12 +303,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 logging.warning('Key %s not found in per-batch history. Available keys: %s', key,
                                 list(detailed_history.keys()))
 
-        _save_metrics('loss_function_carl', 'ce')
-        if algorithm == 'regression':
-            _save_metrics('loss', 'logr')
-        else:
-            _save_metrics('loss_function_ratio_regression', 'logr')
-        _save_metrics('loss_function_score', 'scores')
+        _save_metrics('loss', 'loss')
+        _save_metrics('full_cross_entropy', 'ce')
+        _save_metrics('full_mse_log_r', 'logr')
+        _save_metrics('full_mse_score', 'scores')
         _save_metrics('trimmed_cross_entropy', 'ce_trimmed')
         _save_metrics('trimmed_mse_log_r', 'logr_trimmed')
         _save_metrics('trimmed_mse_score', 'scores_trimmed')
@@ -488,16 +486,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 logging.warning('Key %s not found in per-batch history. Available keys: %s', key,
                                 list(detailed_history.keys()))
 
-        _save_metrics('loss_function_ratio_regression', 'logr')
-        if algorithm == 'carl':
-            _save_metrics('loss', 'ce')
-            _save_metrics('loss_function_score', 'scores')
-        elif algorithm == 'score':
-            _save_metrics('loss', 'scores')
-            _save_metrics('loss_function_carl', 'ce')
-        else:
-            _save_metrics('loss_function_carl', 'ce')
-            _save_metrics('loss_function_score', 'scores')
+        _save_metrics('loss', 'loss')
+        _save_metrics('full_cross_entropy', 'ce')
+        _save_metrics('full_mse_log_r', 'logr')
+        _save_metrics('full_mse_score', 'scores')
         _save_metrics('trimmed_cross_entropy', 'ce_trimmed')
         _save_metrics('trimmed_mse_log_r', 'logr_trimmed')
         _save_metrics('trimmed_mse_score', 'scores_trimmed')

@@ -95,9 +95,9 @@ n_hidden_layers_deep = 3
 
 # Carl / regression + score: relative weight in loss function
 alpha_regression_default = 0.02
-alpha_carl_default = 0.35
+alpha_carl_default = 0.7
 alpha_regression_small = 0.01
-alpha_carl_small = 0.1
+alpha_carl_small = 0.2
 
 # Training length
 n_epochs_short = 1

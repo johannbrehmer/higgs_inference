@@ -172,13 +172,21 @@ def point_by_point_inference(algorithm='carl',
                     logging.warning('Key %s not found. Available keys: %s', key, list(history.history.keys()))
 
             if t == settings.theta_benchmark_nottrained:
-                _save_metrics('loss_function_carl', 'ce_nottrained')
-                _save_metrics('loss_function_carl_kl', 'kl_nottrained')
-                _save_metrics('loss', 'logr_nottrained')
+                _save_metrics('loss', 'loss_nottrained')
+                _save_metrics('full_cross_entropy', 'ce_nottrained')
+                _save_metrics('full_mse_log_r', 'logr_nottrained')
+                _save_metrics('full_mse_score', 'scores_nottrained')
+                _save_metrics('trimmed_cross_entropy', 'ce_trimmed_nottrained')
+                _save_metrics('trimmed_mse_log_r', 'logr_trimmed_nottrained')
+                _save_metrics('trimmed_mse_score', 'scores_trimmed_nottrained')
             elif t == settings.theta_benchmark_trained:
-                _save_metrics('loss_function_carl', 'ce_trained')
-                _save_metrics('loss_function_carl_kl', 'kl_trained')
-                _save_metrics('loss', 'logr_trained')
+                _save_metrics('loss', 'loss_trained')
+                _save_metrics('full_cross_entropy', 'ce_trained')
+                _save_metrics('full_mse_log_r', 'logr_trained')
+                _save_metrics('full_mse_score', 'scores_trained')
+                _save_metrics('trimmed_cross_entropy', 'ce_trimmed_trained')
+                _save_metrics('trimmed_mse_log_r', 'logr_trimmed_trained')
+                _save_metrics('trimmed_mse_score', 'scores_trimmed_trained')
 
             # Evaluation
             prediction = regr.predict(X_test_transformed)
@@ -297,13 +305,21 @@ def point_by_point_inference(algorithm='carl',
                     logging.warning('Key %s not found. Available keys: %s', key, list(history.history.keys()))
 
             if t == settings.theta_benchmark_nottrained:
-                _save_metrics('loss', 'ce_nottrained')
-                _save_metrics('loss_function_carl_kl', 'kl_nottrained')
-                _save_metrics('loss_function_ratio_regression', 'logr_nottrained')
+                _save_metrics('loss', 'loss_nottrained')
+                _save_metrics('full_cross_entropy', 'ce_nottrained')
+                _save_metrics('full_mse_log_r', 'logr_nottrained')
+                _save_metrics('full_mse_score', 'scores_nottrained')
+                _save_metrics('trimmed_cross_entropy', 'ce_trimmed_nottrained')
+                _save_metrics('trimmed_mse_log_r', 'logr_trimmed_nottrained')
+                _save_metrics('trimmed_mse_score', 'scores_trimmed_nottrained')
             elif t == settings.theta_benchmark_trained:
-                _save_metrics('loss', 'ce_trained')
-                _save_metrics('loss_function_carl_kl', 'kl_trained')
-                _save_metrics('loss_function_ratio_regression', 'logr_trained')
+                _save_metrics('loss', 'loss_trained')
+                _save_metrics('full_cross_entropy', 'ce_trained')
+                _save_metrics('full_mse_log_r', 'logr_trained')
+                _save_metrics('full_mse_score', 'scores_trained')
+                _save_metrics('trimmed_cross_entropy', 'ce_trimmed_trained')
+                _save_metrics('trimmed_mse_log_r', 'logr_trimmed_trained')
+                _save_metrics('trimmed_mse_score', 'scores_trimmed_trained')
 
             # carl wrapper
             ratio = ClassifierScoreRatio(clf, prefit=True)

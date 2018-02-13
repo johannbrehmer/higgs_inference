@@ -11,9 +11,14 @@ import keras.backend as K
 from higgs_inference import settings
 from higgs_inference.models.ml_utils import build_hidden_layers
 from higgs_inference.models.loss_functions import loss_function_carl, loss_function_combined, \
-    loss_function_combinedregression, loss_function_ratio_regression, loss_function_score, loss_function_carl_kl
+    loss_function_combinedregression, loss_function_ratio_regression, loss_function_score
+from higgs_inference.models.metrics import full_cross_entropy, full_mse_log_r, full_mse_score
 from higgs_inference.models.metrics import trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score
 from higgs_inference.models.morphing import generate_wi_layer, generate_wtilde_layer
+
+metrics = [full_cross_entropy, trimmed_cross_entropy,
+           full_mse_log_r, trimmed_mse_log_r,
+           full_mse_score, trimmed_mse_score],
 
 
 ################################################################################
@@ -54,8 +59,7 @@ def make_regressor(n_hidden_layers=3,
 
     # Compile model
     model.compile(loss=loss_function_ratio_regression,
-                  metrics=[loss_function_carl, loss_function_carl_kl, loss_function_score,
-                           trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
+                  metrics=metrics,
                   optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
@@ -132,8 +136,7 @@ def make_regressor_morphingaware(n_hidden_layers=2,
 
     # Compile model
     model.compile(loss=loss_function_ratio_regression,
-                  metrics=[loss_function_carl, loss_function_carl_kl, loss_function_score,
-                           trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
+                  metrics=metrics,
                   optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=10.))
 
     return model
@@ -178,9 +181,7 @@ def make_combined_regressor(n_hidden_layers=3,
 
     # Compile model
     model.compile(loss=lambda x, y: loss_function_combinedregression(x, y, alpha=alpha),
-                  metrics=[loss_function_carl, loss_function_carl_kl, loss_function_ratio_regression,
-                           loss_function_score,
-                           trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
+                  metrics=metrics,
                   optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
@@ -259,9 +260,7 @@ def make_combined_regressor_morphingaware(n_hidden_layers=2,
 
     # Compile model
     model.compile(loss=lambda x, y: loss_function_combinedregression(x, y, alpha=alpha),
-                  metrics=[loss_function_carl, loss_function_carl_kl, loss_function_ratio_regression,
-                           loss_function_score,
-                           trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
+                  metrics=metrics,
                   optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=10.))
 
     return model
@@ -311,8 +310,7 @@ def make_classifier_carl(n_hidden_layers=3,
 
     # Compile model
     model.compile(loss=loss_function_carl,
-                  metrics=[loss_function_ratio_regression, loss_function_carl_kl, loss_function_score,
-                           trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
+                  metrics=metrics,
                   optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
@@ -374,8 +372,7 @@ def make_classifier_carl_morphingaware(n_hidden_layers=2,
 
     # Compile model
     model.compile(loss=loss_function_carl,
-                  metrics=[loss_function_ratio_regression, loss_function_carl_kl, loss_function_score,
-                           trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
+                  metrics=metrics,
                   optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
@@ -427,8 +424,7 @@ def make_classifier_score(n_hidden_layers=3,
 
     # Compile model
     model.compile(loss=loss_function_score,
-                  metrics=[loss_function_ratio_regression, loss_function_carl, loss_function_carl_kl,
-                           trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
+                  metrics=metrics,
                   optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
@@ -492,8 +488,7 @@ def make_classifier_score_morphingaware(n_hidden_layers=2,
 
     # Compile model
     model.compile(loss=loss_function_score,
-                  metrics=[loss_function_ratio_regression, loss_function_carl, loss_function_carl_kl,
-                           trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
+                  metrics=metrics,
                   optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
@@ -544,9 +539,7 @@ def make_classifier_combined(n_hidden_layers=3,
 
     # Compile model
     model.compile(loss=lambda x, y: loss_function_combined(x, y, alpha=alpha),
-                  metrics=[loss_function_ratio_regression, loss_function_carl, loss_function_carl_kl,
-                           loss_function_score,
-                           trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
+                  metrics=metrics,
                   optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model
@@ -609,9 +602,7 @@ def make_classifier_combined_morphingaware(n_hidden_layers=2,
 
     # Compile model
     model.compile(loss=lambda x, y: loss_function_combined(x, y, alpha=alpha),
-                  metrics=[loss_function_ratio_regression, loss_function_carl, loss_function_carl_kl,
-                           loss_function_score,
-                           trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score],
+                  metrics=metrics,
                   optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
 
     return model

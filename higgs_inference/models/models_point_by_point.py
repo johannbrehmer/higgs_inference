@@ -9,8 +9,12 @@ import keras.backend as K
 
 from higgs_inference import settings
 from higgs_inference.models.ml_utils import build_hidden_layers
-from higgs_inference.models.loss_functions import loss_function_carl, loss_function_carl_kl, \
-    loss_function_ratio_regression
+from higgs_inference.models.loss_functions import loss_function_carl, loss_function_ratio_regression
+from higgs_inference.models.metrics import full_cross_entropy, full_mse_log_r
+from higgs_inference.models.metrics import trimmed_cross_entropy, trimmed_mse_log_r
+
+metrics = [full_cross_entropy, trimmed_cross_entropy,
+           full_mse_log_r, trimmed_mse_log_r],
 
 
 ################################################################################
@@ -44,7 +48,7 @@ def make_regressor(n_hidden_layers=3,
 
     # Compile model
     model.compile(loss=loss_function_ratio_regression,
-                  metrics=[loss_function_carl, loss_function_carl_kl],
+                  metrics=metrics,
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
@@ -87,7 +91,7 @@ def make_classifier(n_hidden_layers=3,
 
     # Compile model
     model.compile(loss=loss_function_carl,
-                  metrics=[loss_function_ratio_regression, loss_function_carl_kl],
+                  metrics=metrics,
                   optimizer=optimizers.Adam(clipnorm=1.))
 
     return model
