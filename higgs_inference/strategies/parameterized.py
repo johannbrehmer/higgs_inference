@@ -71,6 +71,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     factor_out_sm_in_aware_mode = morphing_aware and ('factorsm' in options)
     small_lr_mode = ('slowlearning' in options)
     large_lr_mode = ('fastlearning' in options)
+    large_batch_mode = ('largebatch' in options)
+    small_batch_mode = ('smallbatch' in options)
 
     filename_addition = ''
     if morphing_aware:
@@ -94,6 +96,14 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     elif large_lr_mode:
         filename_addition += '_fastlearning'
         learning_rate = 0.01
+
+    batch_size = 32
+    if large_batch_mode:
+        filename_addition += '_largebatch'
+        batch_size = 64
+    elif small_batch_mode:
+        filename_addition += '_smallbatch'
+        batch_size = 16
 
     alpha_regression = settings.alpha_regression_default
     alpha_carl = settings.alpha_carl_default
@@ -271,7 +281,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                          DetailedHistory(detailed_history)]
         else:
             callbacks = [DetailedHistory(detailed_history)]
-        history = regr.fit(X_thetas_train, y_logr_score_train, callbacks=callbacks)
+        history = regr.fit(X_thetas_train, y_logr_score_train, callbacks=callbacks, batch_size=batch_size)
 
         # Save metrics
         def _save_metrics(key, filename):
@@ -456,7 +466,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                          DetailedHistory(detailed_history)]
         else:
             callbacks = [DetailedHistory(detailed_history)]
-        history = clf.fit(X_thetas_train[::], y_logr_score_train[::], callbacks=callbacks)
+        history = clf.fit(X_thetas_train[::], y_logr_score_train[::], callbacks=callbacks, batch_size=batch_size)
 
         # Save metrics
         def _save_metrics(key, filename):
