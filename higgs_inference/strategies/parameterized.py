@@ -289,7 +289,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                     detailed_metrics)
             except KeyError:
                 logging.warning('Key %s not found in per-batch history. Available keys: %s', key,
-                                list(detailed_metrics.keys()))
+                                list(detailed_history.keys()))
 
         _save_metrics('loss_function_carl', 'ce')
         if algorithm == 'regression':
@@ -474,7 +474,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                     detailed_metrics)
             except KeyError:
                 logging.warning('Key %s not found in per-batch history. Available keys: %s', key,
-                                list(detailed_metrics.keys()))
+                                list(detailed_history.keys()))
 
         _save_metrics('loss_function_ratio_regression', 'logr')
         if algorithm == 'carl':
