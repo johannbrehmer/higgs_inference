@@ -1,64 +1,44 @@
 Using TensorFlow backend.
-13.02.2018 10:31:23 INFO    Hi! How are you today?
-13.02.2018 10:31:23 INFO    Startup options:
-13.02.2018 10:31:23 INFO      Algorithm:                     regression
-13.02.2018 10:31:23 INFO      Point by point:                False
-13.02.2018 10:31:23 INFO      Morphing-aware mode:           False
-13.02.2018 10:31:23 INFO      Smeared data:                  False
-13.02.2018 10:31:23 INFO      Training sample:               baseline
-13.02.2018 10:31:23 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-13.02.2018 10:31:23 INFO      AFC epsilon:                   None
-13.02.2018 10:31:23 INFO      Neyman construction toys:      False
-13.02.2018 10:31:23 INFO      Other options:                 
-13.02.2018 10:31:23 INFO      Base directory:                /home/jb6504/higgs_inference
-13.02.2018 10:31:23 INFO      ML-based strategies available: True
-13.02.2018 10:31:23 INFO    Starting parameterized inference
-13.02.2018 10:31:23 INFO    Main settings:
-13.02.2018 10:31:23 INFO      Algorithm:                regression
-13.02.2018 10:31:23 INFO      Morphing-aware:           False
-13.02.2018 10:31:23 INFO      Training sample:          baseline
-13.02.2018 10:31:23 INFO    Options:
-13.02.2018 10:31:23 INFO      Learning rate:            0.001
-13.02.2018 10:31:23 INFO      Number of epochs:         20
-13.02.2018 10:31:23 INFO      Number of hidden layers:  2
-13.02.2018 10:31:23 INFO      alpha carl:               0.35
-13.02.2018 10:31:23 INFO      alpha regression:         0.02
-13.02.2018 10:31:23 INFO      Debug mode:               False
-13.02.2018 10:31:52 INFO    Starting training
+13.02.2018 16:30:21 INFO    Hi! How are you today?
+13.02.2018 16:30:21 INFO    Startup options:
+13.02.2018 16:30:21 INFO      Algorithm:                     regression
+13.02.2018 16:30:21 INFO      Point by point:                False
+13.02.2018 16:30:21 INFO      Morphing-aware mode:           False
+13.02.2018 16:30:21 INFO      Smeared data:                  False
+13.02.2018 16:30:21 INFO      Training sample:               baseline
+13.02.2018 16:30:21 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+13.02.2018 16:30:21 INFO      AFC epsilon:                   None
+13.02.2018 16:30:21 INFO      Neyman construction toys:      False
+13.02.2018 16:30:21 INFO      Other options:                 
+13.02.2018 16:30:21 INFO      Base directory:                /home/jb6504/higgs_inference
+13.02.2018 16:30:21 INFO      ML-based strategies available: True
+13.02.2018 16:30:21 INFO    Starting parameterized inference
+13.02.2018 16:30:21 INFO    Main settings:
+13.02.2018 16:30:21 INFO      Algorithm:                regression
+13.02.2018 16:30:21 INFO      Morphing-aware:           False
+13.02.2018 16:30:21 INFO      Training sample:          baseline
+13.02.2018 16:30:21 INFO    Options:
+13.02.2018 16:30:21 INFO      Number of hidden layers:  2
+13.02.2018 16:30:21 INFO      alpha carl:               0.1
+13.02.2018 16:30:21 INFO      alpha regression:         100.0
+13.02.2018 16:30:21 INFO      Batch size:               128
+13.02.2018 16:30:21 INFO      Learning rate:            0.001
+13.02.2018 16:30:21 INFO      Number of epochs:         20
+13.02.2018 16:30:21 INFO      Debug mode:               False
+13.02.2018 16:30:45 INFO    Starting training
 Train on 7995920 samples, validate on 1998980 samples
 Epoch 1/20
-2018-02-13 10:31:52.979373: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-13 10:31:52.981109: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-13 10:31:52.981120: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-13 10:31:52.981125: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-13 10:31:52.981130: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-13 10:31:53.309351: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
-name: Tesla P40
-major: 6 minor: 1 memoryClockRate (GHz) 1.531
-pciBusID 0000:84:00.0
-Total memory: 22.38GiB
-Free memory: 22.21GiB
-2018-02-13 10:31:53.309393: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-02-13 10:31:53.309400: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-02-13 10:31:53.309410: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:84:00.0)
-1741s - loss: 0.0340 - loss_function_carl: 0.6600 - loss_function_carl_kl: 10.6086 - loss_function_score: 1.3444 - trimmed_cross_entropy: 0.6188 - trimmed_mse_log_r: 0.0319 - trimmed_mse_score: 0.1494 - val_loss: 0.0443 - val_loss_function_carl: 0.6617 - val_loss_function_carl_kl: 10.4993 - val_loss_function_score: 0.3494 - val_trimmed_cross_entropy: 0.6203 - val_trimmed_mse_log_r: 0.0416 - val_trimmed_mse_score: 0.1293
-Epoch 2/20
-1738s - loss: 0.0183 - loss_function_carl: 0.6590 - loss_function_carl_kl: 10.6029 - loss_function_score: 1.1156 - trimmed_cross_entropy: 0.6178 - trimmed_mse_log_r: 0.0172 - trimmed_mse_score: 0.1238 - val_loss: 0.0366 - val_loss_function_carl: 0.6612 - val_loss_function_carl_kl: 10.5662 - val_loss_function_score: 0.3674 - val_trimmed_cross_entropy: 0.6198 - val_trimmed_mse_log_r: 0.0343 - val_trimmed_mse_score: 0.1478
-Epoch 3/20
-1739s - loss: 0.0172 - loss_function_carl: 0.6590 - loss_function_carl_kl: 10.6030 - loss_function_score: 1.1067 - trimmed_cross_entropy: 0.6178 - trimmed_mse_log_r: 0.0162 - trimmed_mse_score: 0.1305 - val_loss: 0.0285 - val_loss_function_carl: 0.6602 - val_loss_function_carl_kl: 10.4126 - val_loss_function_score: 0.3922 - val_trimmed_cross_entropy: 0.6190 - val_trimmed_mse_log_r: 0.0267 - val_trimmed_mse_score: 0.1608
-Epoch 4/20
-1736s - loss: 0.0167 - loss_function_carl: 0.6590 - loss_function_carl_kl: 10.6028 - loss_function_score: 1.1175 - trimmed_cross_entropy: 0.6178 - trimmed_mse_log_r: 0.0157 - trimmed_mse_score: 0.1390 - val_loss: 0.0392 - val_loss_function_carl: 0.6611 - val_loss_function_carl_kl: 10.4673 - val_loss_function_score: 0.3980 - val_trimmed_cross_entropy: 0.6198 - val_trimmed_mse_log_r: 0.0367 - val_trimmed_mse_score: 0.1655
-Epoch 5/20
-1735s - loss: 0.0163 - loss_function_carl: 0.6590 - loss_function_carl_kl: 10.6027 - loss_function_score: 1.1201 - trimmed_cross_entropy: 0.6178 - trimmed_mse_log_r: 0.0152 - trimmed_mse_score: 0.1455 - val_loss: 0.0374 - val_loss_function_carl: 0.6610 - val_loss_function_carl_kl: 10.6490 - val_loss_function_score: 0.4069 - val_trimmed_cross_entropy: 0.6197 - val_trimmed_mse_log_r: 0.0351 - val_trimmed_mse_score: 0.1710
-Epoch 6/20
-1735s - loss: 0.0160 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6023 - loss_function_score: 1.1295 - trimmed_cross_entropy: 0.6177 - trimmed_mse_log_r: 0.0150 - trimmed_mse_score: 0.1497 - val_loss: 0.0440 - val_loss_function_carl: 0.6615 - val_loss_function_carl_kl: 10.3265 - val_loss_function_score: 0.4161 - val_trimmed_cross_entropy: 0.6201 - val_trimmed_mse_log_r: 0.0413 - val_trimmed_mse_score: 0.1679
-Epoch 7/20
-1736s - loss: 0.0158 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6028 - loss_function_score: 1.1458 - trimmed_cross_entropy: 0.6177 - trimmed_mse_log_r: 0.0148 - trimmed_mse_score: 0.1552 - val_loss: 0.0315 - val_loss_function_carl: 0.6603 - val_loss_function_carl_kl: 10.3656 - val_loss_function_score: 0.4238 - val_trimmed_cross_entropy: 0.6190 - val_trimmed_mse_log_r: 0.0295 - val_trimmed_mse_score: 0.1646
-Epoch 8/20
-1736s - loss: 0.0157 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6028 - loss_function_score: 1.1577 - trimmed_cross_entropy: 0.6177 - trimmed_mse_log_r: 0.0147 - trimmed_mse_score: 0.1632 - val_loss: 0.0424 - val_loss_function_carl: 0.6612 - val_loss_function_carl_kl: 10.3455 - val_loss_function_score: 0.4267 - val_trimmed_cross_entropy: 0.6199 - val_trimmed_mse_log_r: 0.0398 - val_trimmed_mse_score: 0.1627
-Epoch 9/20
-1735s - loss: 0.0156 - loss_function_carl: 0.6589 - loss_function_carl_kl: 10.6029 - loss_function_score: 1.1749 - trimmed_cross_entropy: 0.6177 - trimmed_mse_log_r: 0.0146 - trimmed_mse_score: 0.1673 - val_loss: 0.0386 - val_loss_function_carl: 0.6609 - val_loss_function_carl_kl: 10.3899 - val_loss_function_score: 0.4226 - val_trimmed_cross_entropy: 0.6196 - val_trimmed_mse_log_r: 0.0361 - val_trimmed_mse_score: 0.1612
-Epoch 00008: early stopping
-13.02.2018 14:52:30 INFO    Starting evaluation
-13.02.2018 15:11:09 INFO    Starting roaming
-13.02.2018 15:11:14 INFO    That's it -- have a great day!
+2018-02-13 16:30:46.765364: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-13 16:30:46.765673: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-13 16:30:46.765681: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-13 16:30:46.765685: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-13 16:30:46.765688: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-13 16:30:47.369877: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:05:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-13 16:30:47.369900: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-13 16:30:47.369906: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-13 16:30:47.369912: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:05:00.0)
