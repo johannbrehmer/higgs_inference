@@ -2,9 +2,9 @@
 # Imports
 ################################################################################
 
-import logging
+# import logging
 
-import tensorflow as tf
+# import tensorflow as tf
 from keras import backend as K
 
 from higgs_inference import settings
@@ -20,16 +20,17 @@ def trimmed_cross_entropy(y_true, y_pred):
     # Calculate cross entropies
     cross_entropies = loss_function_carl(y_true, y_pred)
 
-    cross_entropies = cross_entropies - K.max(cross_entropies) / 32 - K.min(cross_entropies) / 32
+    cross_entropies = cross_entropies - K.max(cross_entropies) / settings.batch_size - K.min(
+        cross_entropies) / settings.batch_size
 
     # Trim at bottom and then at top
-    #if cross_entropies.shape is not None:
+    # if cross_entropies.shape is not None:
     #    if cross_entropies.shape.ndims >= 1:
     #        if cross_entropies.shape[0].value is not None:
-    #_, top_indices = tf.nn.top_k(cross_entropies, 2)
-    #_, bottom_indices = tf.nn.top_k(- cross_entropies, 2)
-    #cross_entropies[top_indices] = 0.
-    #cross_entropies[bottom_indices] = 0.
+    # _, top_indices = tf.nn.top_k(cross_entropies, 2)
+    # _, bottom_indices = tf.nn.top_k(- cross_entropies, 2)
+    # cross_entropies[top_indices] = 0.
+    # cross_entropies[bottom_indices] = 0.
 
     #            logging.debug('CE values: %s %s %s', cross_entropies, top_indices, bottom_indices)
 
@@ -38,7 +39,7 @@ def trimmed_cross_entropy(y_true, y_pred):
 
     #    else:
     #        logging.debug('CE shapes: %s %s', cross_entropies.shape, cross_entropies.shape.ndims)
-    #else:
+    # else:
     #    logging.debug('CE shapes: %s', cross_entropies.shape)
 
     return cross_entropies
@@ -48,7 +49,7 @@ def trimmed_mse_log_r(y_true, y_pred):
     # Calculate MSE
     mse = loss_function_ratio_regression(y_true, y_pred)
 
-    mse = mse - K.max(mse) / 32 - K.min(mse) / 32
+    mse = mse - K.max(mse) / settings.batch_size - K.min(mse) / settings.batch_size
 
     # # Set loss for top and bottom indices to zero
     # if mse.shape is not None:
@@ -67,7 +68,7 @@ def trimmed_mse_score(y_true, y_pred):
     # Calculate cross entropies
     mse = loss_function_score(y_true, y_pred)
 
-    mse = mse - K.max(mse) / 32 - K.min(mse) / 32
+    mse = mse - K.max(mse) / settings.batch_size - K.min(mse) / settings.batch_size
 
     # # Set loss for top and bottom indices to zero
     # if mse.shape is not None:

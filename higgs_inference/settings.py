@@ -106,6 +106,17 @@ n_epochs_long = 50
 early_stopping_patience = 5
 validation_split = 0.2
 
+# Learning rate
+learning_rate_default = 0.001
+learning_rate_small = 0.0001
+learning_rate_large = 0.01
+
+# Batch size
+batch_size = 32  # Will be overwritten at startup
+batch_size_default = 32
+batch_size_small = 16
+batch_size_large = 64
+
 ################################################################################
 # Size of unweighted event samples
 ################################################################################

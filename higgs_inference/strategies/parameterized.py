@@ -89,21 +89,22 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     if factor_out_sm_in_aware_mode:
         filename_addition += '_factorsm'
 
-    learning_rate = 0.001
+    learning_rate = settings.learning_rate_default
     if small_lr_mode:
         filename_addition += '_slowlearning'
-        learning_rate = 0.0001
+        learning_rate = settings.learning_rate_small
     elif large_lr_mode:
         filename_addition += '_fastlearning'
-        learning_rate = 0.01
+        learning_rate = settings.learning_rate_large
 
-    batch_size = 32
+    batch_size = settings.batch_size_default
     if large_batch_mode:
         filename_addition += '_largebatch'
-        batch_size = 64
+        batch_size = settings.batch_size_large
     elif small_batch_mode:
         filename_addition += '_smallbatch'
-        batch_size = 16
+        batch_size = settings.batch_size_small
+    settings.batch_size = batch_size
 
     alpha_regression = settings.alpha_regression_default
     alpha_carl = settings.alpha_carl_default
