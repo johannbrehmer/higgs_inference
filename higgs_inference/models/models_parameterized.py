@@ -25,7 +25,7 @@ def make_regressor(n_hidden_layers=3,
                    activation='tanh',
                    dropout_prob=0.0,
                    learning_rate=1.e-3,
-                   lr_decay=0.05):
+                   lr_decay=0.):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
 
@@ -68,7 +68,7 @@ def make_regressor_morphingaware(n_hidden_layers=2,
                                  factor_out_sm=True,
                                  epsilon=1.e-4,
                                  learning_rate=1.e-3,
-                                 lr_decay=0.05):
+                                 lr_decay=0.):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
     x_layer = Lambda(lambda x: x[:, :settings.n_features], output_shape=(settings.n_features,))(input_layer)
@@ -149,7 +149,7 @@ def make_combined_regressor(n_hidden_layers=3,
                             dropout_prob=0.0,
                             alpha=0.005,
                             learning_rate=1.e-3,
-                            lr_decay=0.05):
+                            lr_decay=0.):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
 
@@ -194,7 +194,7 @@ def make_combined_regressor_morphingaware(n_hidden_layers=2,
                                           alpha=0.005,
                                           epsilon=1.e-4,
                                           learning_rate=1.e-3,
-                                          lr_decay=0.05):
+                                          lr_decay=0.):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
     x_layer = Lambda(lambda x: x[:, :settings.n_features], output_shape=(settings.n_features,))(input_layer)
@@ -277,7 +277,7 @@ def make_classifier_carl(n_hidden_layers=3,
                          dropout_prob=0.0,
                          learn_log_r=False,
                          learning_rate=1.e-3,
-                         lr_decay=0.05):
+                         lr_decay=0.):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
 
@@ -325,7 +325,7 @@ def make_classifier_carl_morphingaware(n_hidden_layers=2,
                                        learn_log_r=False,
                                        epsilon=1.e-4,
                                        learning_rate=1.e-3,
-                                       lr_decay=0.05):
+                                       lr_decay=0.):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
     x_layer = Lambda(lambda x: x[:, :settings.n_features], output_shape=(settings.n_features,))(input_layer)
@@ -392,7 +392,7 @@ def make_classifier_score(n_hidden_layers=3,
                           learn_log_r=False,
                           l2_regularization=0.001,
                           learning_rate=1.e-3,
-                          lr_decay=0.05):
+                          lr_decay=0.):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
 
@@ -442,7 +442,7 @@ def make_classifier_score_morphingaware(n_hidden_layers=2,
                                         learn_log_r=False,
                                         epsilon=1.e-4,
                                         learning_rate=1.e-3,
-                                        lr_decay=0.05):
+                                        lr_decay=0.):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
     x_layer = Lambda(lambda x: x[:, :settings.n_features], output_shape=(settings.n_features,))(input_layer)
@@ -510,7 +510,7 @@ def make_classifier_combined(n_hidden_layers=3,
                              learn_log_r=False,
                              alpha=0.1,
                              learning_rate=1.e-3,
-                             lr_decay=0.05):
+                             lr_decay=0.):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
 
@@ -560,7 +560,7 @@ def make_classifier_combined_morphingaware(n_hidden_layers=2,
                                            learn_log_r=False,
                                            epsilon=1.e-4,
                                            learning_rate=1.e-3,
-                                           lr_decay=0.05):
+                                           lr_decay=0.):
     # Inputs
     input_layer = Input(shape=(settings.n_thetas_features,))
     x_layer = Lambda(lambda x: x[:, :settings.n_features], output_shape=(settings.n_features,))(input_layer)
