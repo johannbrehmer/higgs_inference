@@ -283,7 +283,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 logging.warning('Key %s not found in per-epoch history. Available keys: %s', key,
                                 list(history.history.keys()))
             try:
-                detailed_metrics = np.asarray([detailed_history[key], detailed_history['val_' + key]])
+                detailed_metrics = np.asarray(detailed_history[key])
                 np.save(
                     results_dir + '/detailedtraininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
                     detailed_metrics)
@@ -468,7 +468,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 logging.warning('Key %s not found in per-epoch history. Available keys: %s', key,
                                 list(history.history.keys()))
             try:
-                detailed_metrics = np.asarray([detailed_history[key], detailed_history['val_' + key]])
+                detailed_metrics = np.asarray(detailed_history[key])
                 np.save(
                     results_dir + '/detailedtraininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
                     detailed_metrics)
