@@ -24,3 +24,23 @@ Using TensorFlow backend.
 13.02.2018 09:56:15 INFO      alpha carl:               0.35
 13.02.2018 09:56:15 INFO      alpha regression:         0.02
 13.02.2018 09:56:15 INFO      Debug mode:               False
+13.02.2018 09:56:41 INFO    Starting training
+Train on 7995920 samples, validate on 1998980 samples
+Epoch 1/20
+2018-02-13 09:56:42.161846: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-13 09:56:42.162222: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-13 09:56:42.162231: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-13 09:56:42.162235: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-13 09:56:42.162239: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-13 09:56:42.462299: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:85:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-13 09:56:42.462337: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-13 09:56:42.462343: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-13 09:56:42.462352: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:85:00.0)
+1655s - loss: 1.1888 - loss_function_ratio_regression: 0.0954 - loss_function_carl: 0.6653 - loss_function_carl_kl: 10.7044 - loss_function_score: 1.4958 - trimmed_cross_entropy: 0.6237 - trimmed_mse_log_r: 0.0894 - trimmed_mse_score: 0.1452 - val_loss: 0.7465 - val_loss_function_ratio_regression: 0.0668 - val_loss_function_carl: 0.6638 - val_loss_function_carl_kl: 11.3015 - val_loss_function_score: 0.2362 - val_trimmed_cross_entropy: 0.6223 - val_trimmed_mse_log_r: 0.0627 - val_trimmed_mse_score: 0.0447
+Epoch 2/20
+slurmstepd: error: *** JOB 4520595 ON gpu-03 CANCELLED AT 2018-02-13T10:31:32 ***
