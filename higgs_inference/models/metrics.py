@@ -2,6 +2,8 @@
 # Imports
 ################################################################################
 
+import logging
+
 import tensorflow as tf
 
 from higgs_inference import settings
@@ -25,6 +27,14 @@ def trimmed_cross_entropy(y_true, y_pred):
                 _, bottom_indices = tf.nn.top_k(- cross_entropies, settings.trim_mean_absolute)
                 cross_entropies[top_indices] = 0.
                 cross_entropies[bottom_indices] = 0.
+
+            logging.debug('CE: %s %s %s', cross_entropies.shape, cross_entropies.shape.ndims,
+                          cross_entropies.shape[0].value)
+
+        else:
+            logging.debug('CE: %s %s', cross_entropies.shape, cross_entropies.shape.ndims)
+    else:
+        logging.debug('CE: %s', cross_entropies.shape)
 
     # Mean
     return cross_entropies
