@@ -102,3 +102,6 @@ Free memory: 11.10GiB
 2018-02-13 14:56:12.764978: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
 2018-02-13 14:56:12.764984: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
 2018-02-13 14:56:12.764994: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:85:00.0)
+3082s - loss: 0.0368 - loss_function_carl: 0.6601 - loss_function_carl_kl: 5.3065 - loss_function_score: 1.4616 - trimmed_cross_entropy: 0.5776 - trimmed_mse_log_r: 0.0322 - trimmed_mse_score: 0.1113 - val_loss: 0.0398 - val_loss_function_carl: 0.6614 - val_loss_function_carl_kl: 5.2678 - val_loss_function_score: 0.3993 - val_trimmed_cross_entropy: 0.5787 - val_trimmed_mse_log_r: 0.0348 - val_trimmed_mse_score: 0.1407
+Epoch 2/20
+slurmstepd: error: *** JOB 4520927 ON gpu-07 CANCELLED AT 2018-02-13T16:06:55 ***

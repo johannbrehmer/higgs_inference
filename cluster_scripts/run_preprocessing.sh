@@ -4,7 +4,7 @@
 #SBATCH --output=slurm_preprocessing.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=256GB
+#SBATCH --mem=512GB
 #SBATCH --time=2:00:00
 
 # Modules
