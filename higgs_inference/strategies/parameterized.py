@@ -155,11 +155,12 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     logging.info('  Morphing-aware:           %s', morphing_aware)
     logging.info('  Training sample:          %s', training_sample)
     logging.info('Options:')
-    logging.info('  Learning rate:            %s', learning_rate)
-    logging.info('  Number of epochs:         %s', n_epochs)
     logging.info('  Number of hidden layers:  %s', n_hidden_layers)
     logging.info('  alpha carl:               %s', alpha_carl)
     logging.info('  alpha regression:         %s', alpha_regression)
+    logging.info('  Batch size:               %s', batch_size)
+    logging.info('  Learning rate:            %s', learning_rate)
+    logging.info('  Number of epochs:         %s', n_epochs)
     logging.info('  Debug mode:               %s', debug_mode)
 
     ################################################################################
