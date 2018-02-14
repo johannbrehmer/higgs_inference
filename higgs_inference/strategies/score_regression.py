@@ -8,6 +8,7 @@ import logging
 import numpy as np
 
 from sklearn.preprocessing import StandardScaler
+from sklearn.utils import shuffle
 
 from keras.wrappers.scikit_learn import KerasRegressor
 from keras.callbacks import EarlyStopping
@@ -84,6 +85,7 @@ def score_regression_inference(use_smearing=False,
     # Data
     ################################################################################
 
+    # Load data
     X_train = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_scoreregression' + input_filename_addition + '.npy')
     scores_train = np.load(
@@ -100,9 +102,13 @@ def score_regression_inference(use_smearing=False,
     if do_neyman:
         X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
 
+    # Shuffle training data
+    X_train, scores_train = shuffle(X_train, scores_train, random_seed=44)
+
     n_events_test = X_test.shape[0]
     assert settings.n_thetas == r_test.shape[0]
 
+    # Normalize data
     scaler = StandardScaler()
     scaler.fit(np.array(X_train, dtype=np.float64))
     X_train_transformed = scaler.transform(X_train)

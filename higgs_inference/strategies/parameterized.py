@@ -10,6 +10,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import ConstantKernel as C, Matern
+from sklearn.utils import shuffle
 
 from keras.wrappers.scikit_learn import KerasRegressor
 from keras.callbacks import EarlyStopping
@@ -167,6 +168,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     # Data
     ################################################################################
 
+    # Load data
     if random_theta_mode:
         X_train = np.load(
             settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_random' + input_filename_addition + '.npy')
@@ -212,6 +214,11 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     n_events_test = X_test.shape[0]
     assert settings.n_thetas == r_test.shape[0]
 
+    # Shuffle training data
+    X_train, y_train, scores_train, r_train, theta0_train = shuffle(X_train, y_train, scores_train, r_train,
+                                                                    theta0_train, random_seed=44)
+
+    # Normalize data
     scaler = StandardScaler()
     scaler.fit(np.array(X_train, dtype=np.float64))
     X_train_transformed = scaler.transform(X_train)
@@ -222,6 +229,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         X_neyman_observed_transformed = scaler.transform(
             X_neyman_observed.reshape((-1, X_neyman_observed.shape[2])))
 
+    # Roaming data
     X_thetas_train = np.hstack((X_train_transformed, theta0_train))
     y_logr_score_train = np.hstack((y_train.reshape(-1, 1), np.log(r_train).reshape((-1, 1)), scores_train))
     xi = np.linspace(-1.0, 1.0, settings.n_thetas_roam)
