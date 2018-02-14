@@ -313,11 +313,13 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
         _save_metrics('loss', 'loss')
         _save_metrics('full_cross_entropy', 'ce')
-        _save_metrics('full_mse_log_r', 'logr')
-        _save_metrics('full_mse_score', 'scores')
-        _save_metrics('trimmed_cross_entropy', 'ce_trimmed')
-        _save_metrics('trimmed_mse_log_r', 'logr_trimmed')
-        _save_metrics('trimmed_mse_score', 'scores_trimmed')
+        _save_metrics('full_mse_log_r', 'mse_logr')
+        _save_metrics('full_mse_score', 'mse_scores')
+        _save_metrics('full_mae_log_r', 'mae_logr')
+        _save_metrics('full_mae_score', 'mae_scores')
+        _save_metrics('trimmed_cross_entropy', 'trimmed_ce')
+        _save_metrics('trimmed_mse_log_r', 'trimmed_mse_logr')
+        _save_metrics('trimmed_mse_score', 'trimmed_mse_scores')
 
         logging.info('Starting evaluation')
         expected_llr = []
@@ -496,11 +498,13 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
         _save_metrics('loss', 'loss')
         _save_metrics('full_cross_entropy', 'ce')
-        _save_metrics('full_mse_log_r', 'logr')
-        _save_metrics('full_mse_score', 'scores')
-        _save_metrics('trimmed_cross_entropy', 'ce_trimmed')
-        _save_metrics('trimmed_mse_log_r', 'logr_trimmed')
-        _save_metrics('trimmed_mse_score', 'scores_trimmed')
+        _save_metrics('full_mse_log_r', 'mse_logr')
+        _save_metrics('full_mse_score', 'mse_scores')
+        _save_metrics('full_mae_log_r', 'mae_logr')
+        _save_metrics('full_mae_score', 'mae_scores')
+        _save_metrics('trimmed_cross_entropy', 'trimmed_ce')
+        _save_metrics('trimmed_mse_log_r', 'trimmed_mse_logr')
+        _save_metrics('trimmed_mse_score', 'trimmed_mse_scores')
 
         # carl ratio object
         ratio = ClassifierScoreRatio(clf, prefit=True)

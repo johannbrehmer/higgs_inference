@@ -27,6 +27,14 @@ def full_mse_score(y_true, y_pred):
     return losses.mean_squared_error(y_true[:, 2:settings.n_params + 2], y_pred[:, 2:settings.n_params + 2])
 
 
+def full_mae_log_r(y_true, y_pred):
+    return losses.mean_absolute_error(y_true[:, 1], y_pred[:, 1])
+
+
+def full_mae_score(y_true, y_pred):
+    return losses.mean_absolute_error(y_true[:, 2:settings.n_params + 2], y_pred[:, 2:settings.n_params + 2])
+
+
 ################################################################################
 # Metrics ignoring top and bottom event of each batch
 ################################################################################
