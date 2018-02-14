@@ -72,3 +72,72 @@ Epoch 14/20
 Epoch 15/20
 501s - loss: 709.5455 - full_cross_entropy: 0.6606 - trimmed_cross_entropy: 0.6502 - full_mse_log_r: 0.0297 - trimmed_mse_log_r: 0.0293 - full_mae_log_r: 0.1130 - full_mse_score: 0.7410 - trimmed_mse_score: 0.1107 - full_mae_score: 0.1289 - val_loss: 683.2012 - val_full_cross_entropy: 0.6607 - val_trimmed_cross_entropy: 0.6503 - val_full_mse_log_r: 0.0324 - val_trimmed_mse_log_r: 0.0319 - val_full_mae_log_r: 0.1252 - val_full_mse_score: 0.8124 - val_trimmed_mse_score: 0.1289 - val_full_mae_score: 0.1317
 Epoch 16/20
+500s - loss: 711.9790 - full_cross_entropy: 0.6606 - trimmed_cross_entropy: 0.6503 - full_mse_log_r: 0.0302 - trimmed_mse_log_r: 0.0297 - full_mae_log_r: 0.1142 - full_mse_score: 0.7388 - trimmed_mse_score: 0.1089 - full_mae_score: 0.1286 - val_loss: 679.4700 - val_full_cross_entropy: 0.6595 - val_trimmed_cross_entropy: 0.6491 - val_full_mse_log_r: 0.0211 - val_trimmed_mse_log_r: 0.0208 - val_full_mae_log_r: 0.0812 - val_full_mse_score: 0.7593 - val_trimmed_mse_score: 0.1101 - val_full_mae_score: 0.1302
+Epoch 17/20
+501s - loss: 719.5270 - full_cross_entropy: 0.6606 - trimmed_cross_entropy: 0.6502 - full_mse_log_r: 0.0297 - trimmed_mse_log_r: 0.0293 - full_mae_log_r: 0.1132 - full_mse_score: 0.7343 - trimmed_mse_score: 0.1073 - full_mae_score: 0.1280 - val_loss: 659.4074 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6494 - val_full_mse_log_r: 0.0227 - val_trimmed_mse_log_r: 0.0223 - val_full_mae_log_r: 0.0857 - val_full_mse_score: 0.7316 - val_trimmed_mse_score: 0.1102 - val_full_mae_score: 0.1270
+Epoch 00016: early stopping
+14.02.2018 13:42:30 INFO    Starting evaluation
+14.02.2018 14:04:19 INFO    Starting roaming
+14.02.2018 14:04:25 INFO    That's it -- have a great day!
+Using TensorFlow backend.
+14.02.2018 14:04:27 INFO    Hi! How are you today?
+14.02.2018 14:04:27 INFO    Startup options:
+14.02.2018 14:04:27 INFO      Algorithm:                     combinedregression
+14.02.2018 14:04:27 INFO      Point by point:                False
+14.02.2018 14:04:27 INFO      Morphing-aware mode:           False
+14.02.2018 14:04:27 INFO      Smeared data:                  False
+14.02.2018 14:04:27 INFO      Training sample:               random
+14.02.2018 14:04:27 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+14.02.2018 14:04:27 INFO      AFC epsilon:                   None
+14.02.2018 14:04:27 INFO      Neyman construction toys:      False
+14.02.2018 14:04:27 INFO      Other options:                 
+14.02.2018 14:04:27 INFO      Base directory:                /home/jb6504/higgs_inference
+14.02.2018 14:04:27 INFO      ML-based strategies available: True
+14.02.2018 14:04:27 INFO    Starting parameterized inference
+14.02.2018 14:04:27 INFO    Main settings:
+14.02.2018 14:04:27 INFO      Algorithm:                combinedregression
+14.02.2018 14:04:27 INFO      Morphing-aware:           False
+14.02.2018 14:04:27 INFO      Training sample:          random
+14.02.2018 14:04:27 INFO    Options:
+14.02.2018 14:04:27 INFO      Number of hidden layers:  2
+14.02.2018 14:04:27 INFO      alpha carl:               0.1
+14.02.2018 14:04:27 INFO      alpha regression:         100.0
+14.02.2018 14:04:27 INFO      Batch size:               128
+14.02.2018 14:04:27 INFO      Learning rate:            0.001
+14.02.2018 14:04:27 INFO      Number of epochs:         20
+14.02.2018 14:04:27 INFO      Debug mode:               False
+14.02.2018 14:04:54 INFO    Starting training
+Train on 7997002 samples, validate on 1999251 samples
+Epoch 1/20
+2018-02-14 14:04:55.077490: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-14 14:04:55.077787: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-14 14:04:55.077797: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-14 14:04:55.077801: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-14 14:04:55.077805: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-14 14:04:55.376627: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:84:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-14 14:04:55.376662: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-14 14:04:55.376667: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-14 14:04:55.376676: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:84:00.0)
+506s - loss: 6058.7016 - full_cross_entropy: 0.6684 - trimmed_cross_entropy: 0.6579 - full_mse_log_r: 0.1166 - trimmed_mse_log_r: 0.1148 - full_mae_log_r: 0.1972 - full_mse_score: 0.8599 - trimmed_mse_score: 0.5023 - full_mae_score: 0.3179 - val_loss: 5923.7784 - val_full_cross_entropy: 0.6635 - val_trimmed_cross_entropy: 0.6531 - val_full_mse_log_r: 0.0613 - val_trimmed_mse_log_r: 0.0603 - val_full_mae_log_r: 0.1689 - val_full_mse_score: 1.1811 - val_trimmed_mse_score: 0.6533 - val_full_mae_score: 0.3336
+Epoch 2/20
+504s - loss: 5975.4958 - full_cross_entropy: 0.6627 - trimmed_cross_entropy: 0.6523 - full_mse_log_r: 0.0545 - trimmed_mse_log_r: 0.0536 - full_mae_log_r: 0.1396 - full_mse_score: 1.1950 - trimmed_mse_score: 0.6396 - full_mae_score: 0.3290 - val_loss: 5935.6856 - val_full_cross_entropy: 0.6617 - val_trimmed_cross_entropy: 0.6513 - val_full_mse_log_r: 0.0437 - val_trimmed_mse_log_r: 0.0430 - val_full_mae_log_r: 0.1305 - val_full_mse_score: 1.2021 - val_trimmed_mse_score: 0.6227 - val_full_mae_score: 0.3238
+Epoch 3/20
+505s - loss: 5904.4026 - full_cross_entropy: 0.6622 - trimmed_cross_entropy: 0.6518 - full_mse_log_r: 0.0478 - trimmed_mse_log_r: 0.0470 - full_mae_log_r: 0.1329 - full_mse_score: 1.3048 - trimmed_mse_score: 0.6700 - full_mae_score: 0.3317 - val_loss: 5867.2895 - val_full_cross_entropy: 0.6611 - val_trimmed_cross_entropy: 0.6507 - val_full_mse_log_r: 0.0391 - val_trimmed_mse_log_r: 0.0385 - val_full_mae_log_r: 0.1029 - val_full_mse_score: 1.4373 - val_trimmed_mse_score: 0.7311 - val_full_mae_score: 0.3423
+Epoch 4/20
+505s - loss: 5889.7056 - full_cross_entropy: 0.6618 - trimmed_cross_entropy: 0.6515 - full_mse_log_r: 0.0438 - trimmed_mse_log_r: 0.0431 - full_mae_log_r: 0.1284 - full_mse_score: 1.3774 - trimmed_mse_score: 0.6900 - full_mae_score: 0.3333 - val_loss: 5796.5978 - val_full_cross_entropy: 0.6682 - val_trimmed_cross_entropy: 0.6578 - val_full_mse_log_r: 0.0959 - val_trimmed_mse_log_r: 0.0944 - val_full_mae_log_r: 0.2731 - val_full_mse_score: 1.4287 - val_trimmed_mse_score: 0.7049 - val_full_mae_score: 0.3367
+Epoch 5/20
+505s - loss: 5868.6207 - full_cross_entropy: 0.6617 - trimmed_cross_entropy: 0.6513 - full_mse_log_r: 0.0416 - trimmed_mse_log_r: 0.0410 - full_mae_log_r: 0.1266 - full_mse_score: 1.4255 - trimmed_mse_score: 0.7048 - full_mae_score: 0.3351 - val_loss: 5750.7682 - val_full_cross_entropy: 0.6629 - val_trimmed_cross_entropy: 0.6525 - val_full_mse_log_r: 0.0500 - val_trimmed_mse_log_r: 0.0492 - val_full_mae_log_r: 0.1703 - val_full_mse_score: 1.5047 - val_trimmed_mse_score: 0.7112 - val_full_mae_score: 0.3336
+Epoch 6/20
+506s - loss: 5847.5210 - full_cross_entropy: 0.6616 - trimmed_cross_entropy: 0.6513 - full_mse_log_r: 0.0404 - trimmed_mse_log_r: 0.0398 - full_mae_log_r: 0.1249 - full_mse_score: 1.4508 - trimmed_mse_score: 0.7108 - full_mae_score: 0.3354 - val_loss: 5783.3543 - val_full_cross_entropy: 0.6633 - val_trimmed_cross_entropy: 0.6529 - val_full_mse_log_r: 0.0538 - val_trimmed_mse_log_r: 0.0529 - val_full_mae_log_r: 0.1807 - val_full_mse_score: 1.3672 - val_trimmed_mse_score: 0.6740 - val_full_mae_score: 0.3361
+Epoch 7/20
+505s - loss: 5848.1197 - full_cross_entropy: 0.6615 - trimmed_cross_entropy: 0.6512 - full_mse_log_r: 0.0391 - trimmed_mse_log_r: 0.0385 - full_mae_log_r: 0.1234 - full_mse_score: 1.4823 - trimmed_mse_score: 0.7190 - full_mae_score: 0.3364 - val_loss: 5806.1856 - val_full_cross_entropy: 0.6604 - val_trimmed_cross_entropy: 0.6501 - val_full_mse_log_r: 0.0292 - val_trimmed_mse_log_r: 0.0288 - val_full_mae_log_r: 0.0962 - val_full_mse_score: 1.5749 - val_trimmed_mse_score: 0.7394 - val_full_mae_score: 0.3391
+Epoch 8/20
+505s - loss: 5837.7986 - full_cross_entropy: 0.6614 - trimmed_cross_entropy: 0.6510 - full_mse_log_r: 0.0384 - trimmed_mse_log_r: 0.0378 - full_mae_log_r: 0.1225 - full_mse_score: 1.5071 - trimmed_mse_score: 0.7240 - full_mae_score: 0.3370 - val_loss: 5744.3049 - val_full_cross_entropy: 0.6680 - val_trimmed_cross_entropy: 0.6575 - val_full_mse_log_r: 0.0932 - val_trimmed_mse_log_r: 0.0918 - val_full_mae_log_r: 0.2693 - val_full_mse_score: 1.6389 - val_trimmed_mse_score: 0.7467 - val_full_mae_score: 0.3375
+Epoch 9/20
+505s - loss: 5813.9383 - full_cross_entropy: 0.6614 - trimmed_cross_entropy: 0.6511 - full_mse_log_r: 0.0382 - trimmed_mse_log_r: 0.0376 - full_mae_log_r: 0.1234 - full_mse_score: 1.5374 - trimmed_mse_score: 0.7334 - full_mae_score: 0.3381 - val_loss: 5719.1569 - val_full_cross_entropy: 0.6607 - val_trimmed_cross_entropy: 0.6504 - val_full_mse_log_r: 0.0315 - val_trimmed_mse_log_r: 0.0310 - val_full_mae_log_r: 0.1092 - val_full_mse_score: 1.5820 - val_trimmed_mse_score: 0.7456 - val_full_mae_score: 0.3430
+Epoch 10/20

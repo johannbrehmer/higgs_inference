@@ -16,7 +16,9 @@ cd /home/jb6504/higgs_inference/cluster_scripts
 ################################################################################
 
 sbatch run_carl_learning_experiments.sh
-# sbatch run_regression_learning_experiments.sh
+sbatch run_carl_learning_experiments2.sh
+sbatch run_regression_learning_experiments.sh
+sbatch run_regression_learning_experiments2.sh
 
 sbatch run_combined_tuning.sh
 sbatch run_combinedregression_tuning.sh
