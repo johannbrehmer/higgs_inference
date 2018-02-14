@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=lr-batch
-#SBATCH --output=slurm_lr_batch_experiments.out
+#SBATCH --job-name=regr-learning
+#SBATCH --output=slurm_regression_learning_experiments.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB

@@ -62,6 +62,8 @@ parser.add_argument("-s", "--smearing", action='store_true', help='Train and eva
 parser.add_argument("-t", "--training", default='baseline', help='Training sample: "baseline", "basis", or "random".')
 parser.add_argument("-x", "--xindices", type=int, nargs='+', default=[1, 38, 39, 40, 41],
                     help='X components to be used in AFC.')
+parser.add_argument("--alpha", type=float, default=None, help='Factor scaling the score regression loss in the'
+                    + ' parameterized combined approaches.')
 parser.add_argument("-e", "--epsilon", type=float, default=None, help='Epsilon for AFC')
 parser.add_argument("-n", "--neyman", action='store_true',
                     help='Calculate toy experiments for the Neyman construction.')
@@ -76,6 +78,7 @@ logging.info('  Morphing-aware mode:           %s', args.aware)
 logging.info('  Smeared data:                  %s', args.smearing)
 logging.info('  Training sample:               %s', args.training)
 logging.info('  AFC X indices:                 %s', args.xindices)
+logging.info('  alpha:                         %s', args.alpha)
 logging.info('  AFC epsilon:                   %s', args.epsilon)
 logging.info('  Neyman construction toys:      %s', args.neyman)
 logging.info('  Other options:                 %s', args.options)
@@ -131,6 +134,7 @@ else:
                             morphing_aware=args.aware,
                             use_smearing=args.smearing,
                             training_sample=args.training,
+                            alpha=args.alpha,
                             do_neyman=args.neyman,
                             options=args.options)
 

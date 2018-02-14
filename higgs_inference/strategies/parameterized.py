@@ -6,6 +6,7 @@ from __future__ import absolute_import, division, print_function
 
 import logging
 import numpy as np
+import math
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.gaussian_process import GaussianProcessRegressor
@@ -19,7 +20,7 @@ from carl.ratios import ClassifierScoreRatio
 from carl.learning import CalibratedClassifierScoreCV
 
 from higgs_inference import settings
-from higgs_inference.various.utils import decide_toy_evaluation
+from higgs_inference.various.utils import decide_toy_evaluation, format_number
 from higgs_inference.models.models_parameterized import make_classifier_carl, make_classifier_carl_morphingaware
 from higgs_inference.models.models_parameterized import make_classifier_score, make_classifier_score_morphingaware
 from higgs_inference.models.models_parameterized import make_classifier_combined, make_classifier_combined_morphingaware
@@ -32,6 +33,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                             morphing_aware=False,
                             training_sample='baseline',  # 'baseline', 'basis', 'random'
                             use_smearing=False,
+                            alpha=None,
                             do_neyman=False,
                             do_neyman_calibrated=False,
                             options=''):  # all other options in a string
@@ -39,6 +41,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     """
     Trains and evaluates one of the parameterized higgs_inference methods.
 
+    :param alpha:
     :param use_smearing:
     :param do_neyman:
     :param do_neyman_calibrated:
@@ -65,7 +68,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     denom1_mode = ('denom1' in options)
     short_mode = ('short' in options)
     long_mode = ('long' in options)
-    small_alpha_mode = ('smallalpha' in options)
     deep_mode = ('deep' in options)
     shallow_mode = ('shallow' in options)
     debug_mode = ('debug' in options)
@@ -109,10 +111,11 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     alpha_regression = settings.alpha_regression_default
     alpha_carl = settings.alpha_carl_default
-    if small_alpha_mode:
-        alpha_regression = settings.alpha_regression_small
-        alpha_carl = settings.alpha_carl_small
-        filename_addition += '_smallalpha'
+    if alpha is not None:
+        alpha_regression = alpha
+        alpha_carl = alpha
+        precision = max(- math.floor(np.log10(alpha)) + 1, 0)
+        filename_addition += '_alpha_' + format_number(alpha, precision)
 
     n_hidden_layers = settings.n_hidden_layers_default
     if shallow_mode:
@@ -157,8 +160,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     logging.info('  Training sample:          %s', training_sample)
     logging.info('Options:')
     logging.info('  Number of hidden layers:  %s', n_hidden_layers)
-    logging.info('  alpha carl:               %s', alpha_carl)
-    logging.info('  alpha regression:         %s', alpha_regression)
+    if algorithm == 'combined':
+        logging.info('  alpha:                    %s', alpha_carl)
+    elif algorithm == 'combinedregression':
+        logging.info('  alpha:                    %s', alpha_regression)
     logging.info('  Batch size:               %s', batch_size)
     logging.info('  Learning rate:            %s', learning_rate)
     logging.info('  Number of epochs:         %s', n_epochs)
