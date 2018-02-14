@@ -1,31 +1,24 @@
-05.02.2018 15:06:30 Welcome! How are you today?
-05.02.2018 15:06:30 Tasks:
-05.02.2018 15:06:30   Baseline training:       False
-05.02.2018 15:06:30   Random training:         False
-05.02.2018 15:06:30   Morphing training:       False
-05.02.2018 15:06:30   Point-by-point training: False
-05.02.2018 15:06:30   Calibration:             False
-05.02.2018 15:06:30   Likelihood ratio eval:   True
-05.02.2018 15:06:30   Neyman construction:     False
-05.02.2018 15:06:30   Roaming:                 False
-05.02.2018 15:06:30 Options:
-05.02.2018 15:06:30   Dry run:                 False
-05.02.2018 15:06:30   Denominator:             standard
-05.02.2018 15:15:39 Splitting...
-05.02.2018 15:16:01 Number of events:
-05.02.2018 15:16:01   All:    821636
-05.02.2018 15:16:01   Training:    575145
-05.02.2018 15:16:01   Calibration: 82164
-05.02.2018 15:16:01   Evaluation:  164327
-05.02.2018 15:16:01 Normalizing probabilities
-05.02.2018 15:17:50 Generating likelihood ratio evaluation sample
-generate_data.py:593: RuntimeWarning: divide by zero encountered in log
-  & np.all(np.isfinite(np.log(r[:, :])) & np.isfinite(scores[:, :, 0]) & np.isfinite(scores[:, :, 1]),
-05.02.2018 15:38:18 Cut efficiency: 49980 / 50000 events survive
-05.02.2018 15:38:18 Expected score without sanitization: [-0.00237202  0.00525759]
-05.02.2018 15:38:18 Expected score with sanitization:    [-0.00294219  0.00378138]
-generate_data.py:603: RuntimeWarning: divide by zero encountered in log
-  mle = np.nanargmax(np.sum(np.log(r), axis=1))
-05.02.2018 15:38:19 MLE theta without sanitization: 0 ([ 0.  0.])
-05.02.2018 15:38:20 MLE theta without sanitization: 0 ([ 0.  0.])
-05.02.2018 15:38:28 Done!
+14.02.2018 11:10:17 INFO    Welcome! How are you today?
+14.02.2018 11:10:17 INFO    Tasks:
+14.02.2018 11:10:17 INFO      Baseline training:       False
+14.02.2018 11:10:17 INFO      Random training:         False
+14.02.2018 11:10:17 INFO      Morphing training:       False
+14.02.2018 11:10:17 INFO      Point-by-point training: True
+14.02.2018 11:10:17 INFO      Calibration:             False
+14.02.2018 11:10:17 INFO      Likelihood ratio eval:   False
+14.02.2018 11:10:17 INFO      Neyman construction:     False
+14.02.2018 11:10:17 INFO      Roaming:                 False
+14.02.2018 11:10:17 INFO    Options:
+14.02.2018 11:10:17 INFO      Dry run:                 False
+14.02.2018 11:10:17 INFO      Denominator:             standard
+14.02.2018 11:23:17 INFO    Splitting...
+14.02.2018 11:23:57 INFO    Number of events:
+14.02.2018 11:23:57 INFO      All:    821636
+14.02.2018 11:23:57 INFO      Training:    575145
+14.02.2018 11:23:57 INFO      Calibration: 82164
+14.02.2018 11:23:57 INFO      Evaluation:  164327
+14.02.2018 11:23:57 INFO    Normalizing probabilities
+14.02.2018 11:26:12 INFO    Generating point-by-point training samples
+generate_data.py:382: RuntimeWarning: divide by zero encountered in log
+  np.log(r) ** 2 < settings.max_logr ** 2) & (np.isfinite(np.log(r)))
+14.02.2018 11:51:47 INFO    Done!

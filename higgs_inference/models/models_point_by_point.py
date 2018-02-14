@@ -49,7 +49,7 @@ def make_regressor(n_hidden_layers=3,
     # Compile model
     model.compile(loss=loss_function_ratio_regression,
                   metrics=metrics,
-                  optimizer=optimizers.Adam(clipnorm=1.))
+                  optimizer=optimizers.Adam(clipnorm=10.))
 
     return model
 

@@ -56,7 +56,7 @@ sleep 60
 # Physics-aware
 ################################################################################
 
-sbatch run_carl_aware.sh
-sbatch run_combined_aware.sh
-sbatch run_regression_aware.sh
-sbatch run_combinedregression_aware.sh
+# sbatch run_carl_aware.sh
+# sbatch run_combined_aware.sh
+# sbatch run_regression_aware.sh
+# sbatch run_combinedregression_aware.sh

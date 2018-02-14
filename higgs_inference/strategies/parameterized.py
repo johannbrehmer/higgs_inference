@@ -216,7 +216,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     # Shuffle training data
     X_train, y_train, scores_train, r_train, theta0_train = shuffle(X_train, y_train, scores_train, r_train,
-                                                                    theta0_train, random_seed=44)
+                                                                    theta0_train, random_state=44)
 
     # Normalize data
     scaler = StandardScaler()

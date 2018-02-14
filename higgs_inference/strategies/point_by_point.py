@@ -141,7 +141,7 @@ def point_by_point_inference(algorithm='carl',
                 settings.unweighted_events_dir + '/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
 
             # Shuffle training data
-            X_train, r_train, y_train = shuffle(X_train, r_train, y_train, random_seed=44)
+            X_train, r_train, y_train = shuffle(X_train, r_train, y_train, random_state=44)
 
             # Mash together
             y_logr_train = np.hstack((y_train.reshape(-1, 1), np.log(r_train).reshape((-1, 1))))
@@ -279,7 +279,7 @@ def point_by_point_inference(algorithm='carl',
                 settings.unweighted_events_dir + '/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
 
             # Shuffle training data
-            X_train, y_train, r_train = shuffle(X_train, y_train, r_train, random_seed=44)
+            X_train, y_train, r_train = shuffle(X_train, y_train, r_train, random_state=44)
 
             # Mash together
             y_logr_train = np.hstack((y_train.reshape(-1, 1), np.log(r_train).reshape((-1, 1))))

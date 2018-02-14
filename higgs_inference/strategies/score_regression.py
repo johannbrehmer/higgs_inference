@@ -103,7 +103,7 @@ def score_regression_inference(use_smearing=False,
         X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
 
     # Shuffle training data
-    X_train, scores_train = shuffle(X_train, scores_train, random_seed=44)
+    X_train, scores_train = shuffle(X_train, scores_train, random_state=44)
 
     n_events_test = X_test.shape[0]
     assert settings.n_thetas == r_test.shape[0]

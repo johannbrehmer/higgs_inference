@@ -63,7 +63,7 @@ def make_regressor(n_hidden_layers=3,
     # Compile model
     model.compile(loss=loss_function_ratio_regression,
                   metrics=metrics,
-                  optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
+                  optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=10.))
 
     return model
 
@@ -185,7 +185,7 @@ def make_combined_regressor(n_hidden_layers=3,
     # Compile model
     model.compile(loss=lambda x, y: loss_function_combinedregression(x, y, alpha=alpha),
                   metrics=metrics,
-                  optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=1.))
+                  optimizer=optimizers.Adam(lr=learning_rate, decay=lr_decay, clipnorm=10.))
 
     return model
 

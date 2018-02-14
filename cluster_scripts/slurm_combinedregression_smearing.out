@@ -1,64 +1,74 @@
 Using TensorFlow backend.
-14.02.2018 07:47:06 INFO    Hi! How are you today?
-14.02.2018 07:47:06 INFO    Startup options:
-14.02.2018 07:47:06 INFO      Algorithm:                     combinedregression
-14.02.2018 07:47:06 INFO      Point by point:                False
-14.02.2018 07:47:06 INFO      Morphing-aware mode:           False
-14.02.2018 07:47:06 INFO      Smeared data:                  True
-14.02.2018 07:47:06 INFO      Training sample:               baseline
-14.02.2018 07:47:06 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-14.02.2018 07:47:06 INFO      AFC epsilon:                   None
-14.02.2018 07:47:06 INFO      Neyman construction toys:      False
-14.02.2018 07:47:06 INFO      Other options:                 
-14.02.2018 07:47:06 INFO      Base directory:                /home/jb6504/higgs_inference
-14.02.2018 07:47:06 INFO      ML-based strategies available: True
-14.02.2018 07:47:06 INFO    Starting parameterized inference
-14.02.2018 07:47:06 INFO    Main settings:
-14.02.2018 07:47:06 INFO      Algorithm:                combinedregression
-14.02.2018 07:47:06 INFO      Morphing-aware:           False
-14.02.2018 07:47:06 INFO      Training sample:          baseline
-14.02.2018 07:47:06 INFO    Options:
-14.02.2018 07:47:06 INFO      Number of hidden layers:  2
-14.02.2018 07:47:06 INFO      alpha carl:               0.1
-14.02.2018 07:47:06 INFO      alpha regression:         100.0
-14.02.2018 07:47:06 INFO      Batch size:               128
-14.02.2018 07:47:06 INFO      Learning rate:            0.001
-14.02.2018 07:47:06 INFO      Number of epochs:         20
-14.02.2018 07:47:06 INFO      Debug mode:               False
-14.02.2018 07:47:32 INFO    Starting training
-Train on 7995920 samples, validate on 1998980 samples
-Epoch 1/20
-2018-02-14 07:47:33.356068: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-14 07:47:33.356457: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-14 07:47:33.356466: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-14 07:47:33.356470: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-14 07:47:33.356474: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-14 07:47:33.648199: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
-name: Tesla K80
-major: 3 minor: 7 memoryClockRate (GHz) 0.8235
-pciBusID 0000:05:00.0
-Total memory: 11.17GiB
-Free memory: 11.10GiB
-2018-02-14 07:47:33.648235: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-02-14 07:47:33.648240: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-02-14 07:47:33.648249: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:05:00.0)
-434s - loss: 959.3653 - full_cross_entropy: 0.6692 - trimmed_cross_entropy: 0.6588 - full_mse_log_r: 0.1273 - trimmed_mse_log_r: 0.1253 - full_mse_score: 1.6364 - trimmed_mse_score: 0.4339 - val_loss: 2.5989 - val_full_cross_entropy: 0.6669 - val_trimmed_cross_entropy: 0.6565 - val_full_mse_log_r: 0.0937 - val_trimmed_mse_log_r: 0.0922 - val_full_mse_score: 0.2253 - val_trimmed_mse_score: 0.0640
-Epoch 2/20
-433s - loss: 947.4695 - full_cross_entropy: 0.6638 - trimmed_cross_entropy: 0.6534 - full_mse_log_r: 0.0689 - trimmed_mse_log_r: 0.0678 - full_mse_score: 1.3266 - trimmed_mse_score: 0.2872 - val_loss: 2.2133 - val_full_cross_entropy: 0.6653 - val_trimmed_cross_entropy: 0.6549 - val_full_mse_log_r: 0.0753 - val_trimmed_mse_log_r: 0.0741 - val_full_mse_score: 0.2158 - val_trimmed_mse_score: 0.0600
-Epoch 3/20
-433s - loss: 935.9827 - full_cross_entropy: 0.6633 - trimmed_cross_entropy: 0.6529 - full_mse_log_r: 0.0634 - trimmed_mse_log_r: 0.0624 - full_mse_score: 1.2662 - trimmed_mse_score: 0.2631 - val_loss: 2.3352 - val_full_cross_entropy: 0.6650 - val_trimmed_cross_entropy: 0.6546 - val_full_mse_log_r: 0.0731 - val_trimmed_mse_log_r: 0.0720 - val_full_mse_score: 0.2318 - val_trimmed_mse_score: 0.0631
-Epoch 4/20
-433s - loss: 928.7743 - full_cross_entropy: 0.6631 - trimmed_cross_entropy: 0.6527 - full_mse_log_r: 0.0611 - trimmed_mse_log_r: 0.0602 - full_mse_score: 1.2348 - trimmed_mse_score: 0.2523 - val_loss: 2.4331 - val_full_cross_entropy: 0.6681 - val_trimmed_cross_entropy: 0.6577 - val_full_mse_log_r: 0.1031 - val_trimmed_mse_log_r: 0.1015 - val_full_mse_score: 0.2258 - val_trimmed_mse_score: 0.0621
-Epoch 5/20
-433s - loss: 922.1033 - full_cross_entropy: 0.6629 - trimmed_cross_entropy: 0.6526 - full_mse_log_r: 0.0589 - trimmed_mse_log_r: 0.0579 - full_mse_score: 1.2162 - trimmed_mse_score: 0.2472 - val_loss: 2.3530 - val_full_cross_entropy: 0.6626 - val_trimmed_cross_entropy: 0.6522 - val_full_mse_log_r: 0.0497 - val_trimmed_mse_log_r: 0.0489 - val_full_mse_score: 0.2107 - val_trimmed_mse_score: 0.0589
-Epoch 6/20
-432s - loss: 940.2073 - full_cross_entropy: 0.6629 - trimmed_cross_entropy: 0.6525 - full_mse_log_r: 0.0576 - trimmed_mse_log_r: 0.0567 - full_mse_score: 1.2065 - trimmed_mse_score: 0.2438 - val_loss: 2.2892 - val_full_cross_entropy: 0.6611 - val_trimmed_cross_entropy: 0.6507 - val_full_mse_log_r: 0.0368 - val_trimmed_mse_log_r: 0.0362 - val_full_mse_score: 0.2163 - val_trimmed_mse_score: 0.0599
-Epoch 7/20
-433s - loss: 929.9763 - full_cross_entropy: 0.6628 - trimmed_cross_entropy: 0.6524 - full_mse_log_r: 0.0571 - trimmed_mse_log_r: 0.0562 - full_mse_score: 1.1938 - trimmed_mse_score: 0.2400 - val_loss: 2.2594 - val_full_cross_entropy: 0.6617 - val_trimmed_cross_entropy: 0.6513 - val_full_mse_log_r: 0.0436 - val_trimmed_mse_log_r: 0.0429 - val_full_mse_score: 0.2107 - val_trimmed_mse_score: 0.0591
-Epoch 8/20
-432s - loss: 927.0371 - full_cross_entropy: 0.6627 - trimmed_cross_entropy: 0.6523 - full_mse_log_r: 0.0558 - trimmed_mse_log_r: 0.0550 - full_mse_score: 1.1788 - trimmed_mse_score: 0.2352 - val_loss: 2.1076 - val_full_cross_entropy: 0.6608 - val_trimmed_cross_entropy: 0.6505 - val_full_mse_log_r: 0.0337 - val_trimmed_mse_log_r: 0.0332 - val_full_mse_score: 0.2087 - val_trimmed_mse_score: 0.0565
-Epoch 9/20
-432s - loss: 904.7847 - full_cross_entropy: 0.6626 - trimmed_cross_entropy: 0.6523 - full_mse_log_r: 0.0553 - trimmed_mse_log_r: 0.0544 - full_mse_score: 1.1810 - trimmed_mse_score: 0.2345 - val_loss: 2.2583 - val_full_cross_entropy: 0.6610 - val_trimmed_cross_entropy: 0.6506 - val_full_mse_log_r: 0.0348 - val_trimmed_mse_log_r: 0.0343 - val_full_mse_score: 0.2119 - val_trimmed_mse_score: 0.0586
-Epoch 10/20
-433s - loss: 908.6161 - full_cross_entropy: 0.6626 - trimmed_cross_entropy: 0.6522 - full_mse_log_r: 0.0549 - trimmed_mse_log_r: 0.0540 - full_mse_score: 1.1779 - trimmed_mse_score: 0.2334 - val_loss: 3.0863 - val_full_cross_entropy: 0.6742 - val_trimmed_cross_entropy: 0.6636 - val_full_mse_log_r: 0.1481 - val_trimmed_mse_log_r: 0.1458 - val_full_mse_score: 0.2197 - val_trimmed_mse_score: 0.0679
-Epoch 11/20
+14.02.2018 11:17:01 INFO    Hi! How are you today?
+14.02.2018 11:17:01 INFO    Startup options:
+14.02.2018 11:17:01 INFO      Algorithm:                     combinedregression
+14.02.2018 11:17:01 INFO      Point by point:                False
+14.02.2018 11:17:01 INFO      Morphing-aware mode:           False
+14.02.2018 11:17:01 INFO      Smeared data:                  True
+14.02.2018 11:17:01 INFO      Training sample:               baseline
+14.02.2018 11:17:01 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+14.02.2018 11:17:01 INFO      AFC epsilon:                   None
+14.02.2018 11:17:01 INFO      Neyman construction toys:      False
+14.02.2018 11:17:01 INFO      Other options:                 
+14.02.2018 11:17:01 INFO      Base directory:                /home/jb6504/higgs_inference
+14.02.2018 11:17:01 INFO      ML-based strategies available: True
+14.02.2018 11:17:01 INFO    Starting parameterized inference
+14.02.2018 11:17:01 INFO    Main settings:
+14.02.2018 11:17:01 INFO      Algorithm:                combinedregression
+14.02.2018 11:17:01 INFO      Morphing-aware:           False
+14.02.2018 11:17:01 INFO      Training sample:          baseline
+14.02.2018 11:17:01 INFO    Options:
+14.02.2018 11:17:01 INFO      Number of hidden layers:  2
+14.02.2018 11:17:01 INFO      alpha carl:               0.1
+14.02.2018 11:17:01 INFO      alpha regression:         100.0
+14.02.2018 11:17:01 INFO      Batch size:               128
+14.02.2018 11:17:01 INFO      Learning rate:            0.001
+14.02.2018 11:17:01 INFO      Number of epochs:         20
+14.02.2018 11:17:01 INFO      Debug mode:               False
+Traceback (most recent call last):
+  File "experiments.py", line 135, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 219, in parameterized_inference
+    theta0_train, random_seed=44)
+  File "/share/apps/scikit-learn/0.18.1/intel/lib/python2.7/site-packages/sklearn/utils/__init__.py", line 285, in shuffle
+    return resample(*arrays, **options)
+  File "/share/apps/scikit-learn/0.18.1/intel/lib/python2.7/site-packages/sklearn/utils/__init__.py", line 189, in resample
+    raise ValueError("Unexpected kw arguments: %r" % options.keys())
+ValueError: Unexpected kw arguments: ['random_seed']
+Using TensorFlow backend.
+14.02.2018 11:17:05 INFO    Hi! How are you today?
+14.02.2018 11:17:05 INFO    Startup options:
+14.02.2018 11:17:05 INFO      Algorithm:                     combinedregression
+14.02.2018 11:17:05 INFO      Point by point:                False
+14.02.2018 11:17:05 INFO      Morphing-aware mode:           False
+14.02.2018 11:17:05 INFO      Smeared data:                  True
+14.02.2018 11:17:05 INFO      Training sample:               random
+14.02.2018 11:17:05 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+14.02.2018 11:17:05 INFO      AFC epsilon:                   None
+14.02.2018 11:17:05 INFO      Neyman construction toys:      False
+14.02.2018 11:17:05 INFO      Other options:                 
+14.02.2018 11:17:05 INFO      Base directory:                /home/jb6504/higgs_inference
+14.02.2018 11:17:05 INFO      ML-based strategies available: True
+14.02.2018 11:17:05 INFO    Starting parameterized inference
+14.02.2018 11:17:05 INFO    Main settings:
+14.02.2018 11:17:05 INFO      Algorithm:                combinedregression
+14.02.2018 11:17:05 INFO      Morphing-aware:           False
+14.02.2018 11:17:05 INFO      Training sample:          random
+14.02.2018 11:17:05 INFO    Options:
+14.02.2018 11:17:05 INFO      Number of hidden layers:  2
+14.02.2018 11:17:05 INFO      alpha carl:               0.1
+14.02.2018 11:17:05 INFO      alpha regression:         100.0
+14.02.2018 11:17:05 INFO      Batch size:               128
+14.02.2018 11:17:05 INFO      Learning rate:            0.001
+14.02.2018 11:17:05 INFO      Number of epochs:         20
+14.02.2018 11:17:05 INFO      Debug mode:               False
+Traceback (most recent call last):
+  File "experiments.py", line 135, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 219, in parameterized_inference
+    theta0_train, random_seed=44)
+  File "/share/apps/scikit-learn/0.18.1/intel/lib/python2.7/site-packages/sklearn/utils/__init__.py", line 285, in shuffle
+    return resample(*arrays, **options)
+  File "/share/apps/scikit-learn/0.18.1/intel/lib/python2.7/site-packages/sklearn/utils/__init__.py", line 189, in resample
+    raise ValueError("Unexpected kw arguments: %r" % options.keys())
+ValueError: Unexpected kw arguments: ['random_seed']
