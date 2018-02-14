@@ -82,3 +82,55 @@ Epoch 19/20
 Epoch 20/20
 219s - loss: 705.6066 - full_cross_entropy: 0.6627 - trimmed_cross_entropy: 0.6575 - full_mse_log_r: 0.0485 - trimmed_mse_log_r: 0.0481 - full_mae_log_r: 0.1502 - full_mse_score: 1.3401 - trimmed_mse_score: 0.7292 - full_mae_score: 0.5397 - val_loss: 640.7948 - val_full_cross_entropy: 0.6623 - val_trimmed_cross_entropy: 0.6571 - val_full_mse_log_r: 0.0450 - val_trimmed_mse_log_r: 0.0447 - val_full_mae_log_r: 0.1347 - val_full_mse_score: 1.3468 - val_trimmed_mse_score: 0.7205 - val_full_mae_score: 0.5261
 14.02.2018 12:34:09 INFO    Starting evaluation
+14.02.2018 12:55:26 INFO    Starting roaming
+14.02.2018 12:55:32 INFO    That's it -- have a great day!
+Using TensorFlow backend.
+14.02.2018 12:55:35 INFO    Hi! How are you today?
+14.02.2018 12:55:35 INFO    Startup options:
+14.02.2018 12:55:35 INFO      Algorithm:                     regression
+14.02.2018 12:55:35 INFO      Point by point:                False
+14.02.2018 12:55:35 INFO      Morphing-aware mode:           False
+14.02.2018 12:55:35 INFO      Smeared data:                  False
+14.02.2018 12:55:35 INFO      Training sample:               baseline
+14.02.2018 12:55:35 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+14.02.2018 12:55:35 INFO      AFC epsilon:                   None
+14.02.2018 12:55:35 INFO      Neyman construction toys:      False
+14.02.2018 12:55:35 INFO      Other options:                 ['largebatch', 'fastlearning']
+14.02.2018 12:55:35 INFO      Base directory:                /home/jb6504/higgs_inference
+14.02.2018 12:55:35 INFO      ML-based strategies available: True
+14.02.2018 12:55:35 INFO    Starting parameterized inference
+14.02.2018 12:55:35 INFO    Main settings:
+14.02.2018 12:55:35 INFO      Algorithm:                regression
+14.02.2018 12:55:35 INFO      Morphing-aware:           False
+14.02.2018 12:55:35 INFO      Training sample:          baseline
+14.02.2018 12:55:35 INFO    Options:
+14.02.2018 12:55:35 INFO      Number of hidden layers:  2
+14.02.2018 12:55:35 INFO      alpha carl:               0.1
+14.02.2018 12:55:35 INFO      alpha regression:         100.0
+14.02.2018 12:55:35 INFO      Batch size:               256
+14.02.2018 12:55:35 INFO      Learning rate:            0.01
+14.02.2018 12:55:35 INFO      Number of epochs:         20
+14.02.2018 12:55:35 INFO      Debug mode:               False
+14.02.2018 12:56:02 INFO    Starting training
+Train on 7995920 samples, validate on 1998980 samples
+Epoch 1/20
+2018-02-14 12:56:03.518415: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-14 12:56:03.520116: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-14 12:56:03.520126: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-14 12:56:03.520134: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-14 12:56:03.520138: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-14 12:56:03.829944: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:85:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-14 12:56:03.829984: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-14 12:56:03.829991: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-14 12:56:03.830001: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:85:00.0)
+220s - loss: 797.5662 - full_cross_entropy: 0.6800 - trimmed_cross_entropy: 0.6747 - full_mse_log_r: 0.2270 - trimmed_mse_log_r: 0.2252 - full_mae_log_r: 0.3112 - full_mse_score: 1.9723 - trimmed_mse_score: 1.0258 - full_mae_score: 0.5742 - val_loss: 714.6530 - val_full_cross_entropy: 0.6679 - val_trimmed_cross_entropy: 0.6626 - val_full_mse_log_r: 0.1066 - val_trimmed_mse_log_r: 0.1058 - val_full_mae_log_r: 0.2116 - val_full_mse_score: 1.6523 - val_trimmed_mse_score: 0.8022 - val_full_mae_score: 0.5347
+Epoch 2/20
+218s - loss: 761.2734 - full_cross_entropy: 0.6671 - trimmed_cross_entropy: 0.6619 - full_mse_log_r: 0.0953 - trimmed_mse_log_r: 0.0946 - full_mae_log_r: 0.2069 - full_mse_score: 1.5908 - trimmed_mse_score: 0.7874 - full_mae_score: 0.5452 - val_loss: 701.1624 - val_full_cross_entropy: 0.6654 - val_trimmed_cross_entropy: 0.6602 - val_full_mse_log_r: 0.0801 - val_trimmed_mse_log_r: 0.0795 - val_full_mae_log_r: 0.1877 - val_full_mse_score: 1.4960 - val_trimmed_mse_score: 0.7577 - val_full_mae_score: 0.5375
+Epoch 3/20
+218s - loss: 734.2875 - full_cross_entropy: 0.6656 - trimmed_cross_entropy: 0.6604 - full_mse_log_r: 0.0798 - trimmed_mse_log_r: 0.0792 - full_mae_log_r: 0.1907 - full_mse_score: 1.4747 - trimmed_mse_score: 0.7348 - full_mae_score: 0.5307 - val_loss: 688.3973 - val_full_cross_entropy: 0.6641 - val_trimmed_cross_entropy: 0.6589 - val_full_mse_log_r: 0.0660 - val_trimmed_mse_log_r: 0.0655 - val_full_mae_log_r: 0.1720 - val_full_mse_score: 1.4245 - val_trimmed_mse_score: 0.7155 - val_full_mae_score: 0.5311
+Epoch 4/20
