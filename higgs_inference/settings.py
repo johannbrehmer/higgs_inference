@@ -109,8 +109,11 @@ learning_rate_default = 0.001
 learning_rate_small = 0.0001
 learning_rate_large = 0.01
 
+# Learning rate decay, only active with option "lrdecay"
+learning_rate_decay = - 1. / n_epochs_default * np.log(0.1)  # Exponential decay to 10%
+
 # Batch size
-batch_size = 32  # Will be overwritten at startup
+batch_size = 128  # Will be overwritten at startup
 batch_size_default = 128
 batch_size_small = 64
 batch_size_large = 256

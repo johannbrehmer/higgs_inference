@@ -14,7 +14,7 @@ from sklearn.gaussian_process.kernels import ConstantKernel as C, Matern
 from sklearn.utils import shuffle
 
 from keras.wrappers.scikit_learn import KerasRegressor
-from keras.callbacks import EarlyStopping
+from keras.callbacks import EarlyStopping, LearningRateScheduler
 
 from carl.ratios import ClassifierScoreRatio
 from carl.learning import CalibratedClassifierScoreCV
@@ -76,6 +76,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     large_lr_mode = ('fastlearning' in options)
     large_batch_mode = ('largebatch' in options)
     small_batch_mode = ('smallbatch' in options)
+    lr_decay_mode = ('lrdecay' in options)
 
     filename_addition = ''
     if morphing_aware:
@@ -99,6 +100,11 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     elif large_lr_mode:
         filename_addition += '_fastlearning'
         learning_rate = settings.learning_rate_large
+
+    lr_decay = 0.
+    if lr_decay_mode:
+        lr_decay = settings.learning_rate_decay
+        filename_addition += '_lrdecay'
 
     batch_size = settings.batch_size_default
     if large_batch_mode:
@@ -166,6 +172,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         logging.info('  alpha:                    %s', alpha_regression)
     logging.info('  Batch size:               %s', batch_size)
     logging.info('  Learning rate:            %s', learning_rate)
+    logging.info('  Learning rate decay:      %s', lr_decay)
     logging.info('  Number of epochs:         %s', n_epochs)
     logging.info('  Debug mode:               %s', debug_mode)
 
@@ -288,14 +295,19 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                                       epochs=n_epochs, validation_split=settings.validation_split,
                                       verbose=2)
 
+        # Callbacks
+        callbacks = []
+        detailed_history = {}
+        callbacks.append(DetailedHistory(detailed_history))
+        if lr_decay_mode:
+            def lr_scheduler(epoch):
+                return learning_rate * np.exp(- epoch * lr_decay)
+            callbacks.append(LearningRateScheduler(lr_scheduler))
+        if early_stopping:
+            callbacks.append(EarlyStopping(verbose=1, patience=settings.early_stopping_patience))
+
         # Training
         logging.info('Starting training')
-        detailed_history = {}
-        if early_stopping:
-            callbacks = [EarlyStopping(verbose=1, patience=settings.early_stopping_patience),
-                         DetailedHistory(detailed_history)]
-        else:
-            callbacks = [DetailedHistory(detailed_history)]
         history = regr.fit(X_thetas_train, y_logr_score_train, callbacks=callbacks, batch_size=batch_size)
 
         # Save metrics
@@ -473,14 +485,19 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         else:
             raise ValueError()
 
+        # Callbacks
+        callbacks = []
+        detailed_history = {}
+        callbacks.append(DetailedHistory(detailed_history))
+        if lr_decay_mode:
+            def lr_scheduler(epoch):
+                return learning_rate * np.exp(- epoch * lr_decay)
+            callbacks.append(LearningRateScheduler(lr_scheduler))
+        if early_stopping:
+            callbacks.append(EarlyStopping(verbose=1, patience=settings.early_stopping_patience))
+
         # Training
         logging.info('Starting training')
-        detailed_history = {}
-        if early_stopping:
-            callbacks = [EarlyStopping(verbose=1, patience=settings.early_stopping_patience),
-                         DetailedHistory(detailed_history)]
-        else:
-            callbacks = [DetailedHistory(detailed_history)]
         history = clf.fit(X_thetas_train[::], y_logr_score_train[::], callbacks=callbacks, batch_size=batch_size)
 
         # Save metrics
