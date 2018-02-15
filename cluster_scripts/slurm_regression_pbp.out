@@ -1,0 +1,28 @@
+Using TensorFlow backend.
+14.02.2018 17:14:55 INFO    Hi! How are you today?
+14.02.2018 17:14:55 INFO    Startup options:
+14.02.2018 17:14:55 INFO      Algorithm:                     regression
+14.02.2018 17:14:55 INFO      Point by point:                True
+14.02.2018 17:14:55 INFO      Morphing-aware mode:           False
+14.02.2018 17:14:55 INFO      Smeared data:                  False
+14.02.2018 17:14:55 INFO      Training sample:               baseline
+14.02.2018 17:14:55 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+14.02.2018 17:14:55 INFO      alpha:                         None
+14.02.2018 17:14:55 INFO      AFC epsilon:                   None
+14.02.2018 17:14:55 INFO      Neyman construction toys:      False
+14.02.2018 17:14:55 INFO      Other options:                 
+14.02.2018 17:14:55 INFO      Base directory:                /home/jb6504/higgs_inference
+14.02.2018 17:14:55 INFO      ML-based strategies available: True
+14.02.2018 17:14:55 INFO    Starting point-by-point inference
+14.02.2018 17:14:55 INFO    Main settings:
+14.02.2018 17:14:55 INFO      Algorithm:               regression
+14.02.2018 17:14:55 INFO    Options:
+14.02.2018 17:14:55 INFO      Number of epochs:        20
+14.02.2018 17:14:55 INFO      Number of hidden layers: 2
+14.02.2018 17:14:56 INFO    Starting theta 1/100: number 0 ([ 0.  0.])
+Traceback (most recent call last):
+  File "experiments.py", line 129, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/point_by_point.py", line 144, in point_by_point_inference
+    X_train, r_train, y_train = shuffle(X_train, r_train, y_train, random_state=44)
+NameError: global name 'shuffle' is not defined

@@ -120,7 +120,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     if alpha is not None:
         alpha_regression = alpha
         alpha_carl = alpha
-        precision = max(- math.floor(np.log10(alpha)) + 1, 0)
+        precision = int(max(- math.floor(np.log10(alpha)) + 1, 0))
         filename_addition += '_alpha_' + format_number(alpha, precision)
 
     n_hidden_layers = settings.n_hidden_layers_default

@@ -1,0 +1,29 @@
+Using TensorFlow backend.
+14.02.2018 17:15:01 INFO    Hi! How are you today?
+14.02.2018 17:15:01 INFO    Startup options:
+14.02.2018 17:15:01 INFO      Algorithm:                     regression
+14.02.2018 17:15:01 INFO      Point by point:                True
+14.02.2018 17:15:01 INFO      Morphing-aware mode:           False
+14.02.2018 17:15:01 INFO      Smeared data:                  True
+14.02.2018 17:15:01 INFO      Training sample:               baseline
+14.02.2018 17:15:01 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+14.02.2018 17:15:01 INFO      alpha:                         None
+14.02.2018 17:15:01 INFO      AFC epsilon:                   None
+14.02.2018 17:15:01 INFO      Neyman construction toys:      False
+14.02.2018 17:15:01 INFO      Other options:                 
+14.02.2018 17:15:01 INFO      Base directory:                /home/jb6504/higgs_inference
+14.02.2018 17:15:01 INFO      ML-based strategies available: True
+14.02.2018 17:15:01 INFO    Starting point-by-point inference
+14.02.2018 17:15:01 INFO    Main settings:
+14.02.2018 17:15:01 INFO      Algorithm:               regression
+14.02.2018 17:15:01 INFO    Options:
+14.02.2018 17:15:01 INFO      Number of epochs:        20
+14.02.2018 17:15:01 INFO      Number of hidden layers: 2
+Traceback (most recent call last):
+  File "experiments.py", line 129, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/point_by_point.py", line 115, in point_by_point_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
