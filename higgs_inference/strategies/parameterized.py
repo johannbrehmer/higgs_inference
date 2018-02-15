@@ -76,7 +76,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     large_lr_mode = ('fastlearning' in options)
     large_batch_mode = ('largebatch' in options)
     small_batch_mode = ('smallbatch' in options)
-    lr_decay_mode = ('lrdecay' in options)
+    constant_lr_mode = ('constantlr' in options)
 
     filename_addition = ''
     if morphing_aware:
@@ -101,10 +101,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         filename_addition += '_fastlearning'
         learning_rate = settings.learning_rate_large
 
-    lr_decay = 0.
-    if lr_decay_mode:
-        lr_decay = settings.learning_rate_decay
-        filename_addition += '_lrdecay'
+    lr_decay = settings.learning_rate_decay
+    if constant_lr_mode:
+        lr_decay = 0.
+        filename_addition += '_constantlr'
 
     batch_size = settings.batch_size_default
     if large_batch_mode:
@@ -299,7 +299,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         callbacks = []
         detailed_history = {}
         callbacks.append(DetailedHistory(detailed_history))
-        if lr_decay_mode:
+        if not constant_lr_mode:
             def lr_scheduler(epoch):
                 return learning_rate * np.exp(- epoch * lr_decay)
             callbacks.append(LearningRateScheduler(lr_scheduler))
@@ -489,7 +489,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         callbacks = []
         detailed_history = {}
         callbacks.append(DetailedHistory(detailed_history))
-        if lr_decay_mode:
+        if not constant_lr_mode:
             def lr_scheduler(epoch):
                 return learning_rate * np.exp(- epoch * lr_decay)
             callbacks.append(LearningRateScheduler(lr_scheduler))

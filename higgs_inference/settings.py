@@ -99,9 +99,9 @@ alpha_carl_default = 0.1
 
 # Training length
 n_epochs_short = 1
-n_epochs_default = 20
-n_epochs_long = 50
-early_stopping_patience = 5
+n_epochs_default = 50
+n_epochs_long = 100
+early_stopping_patience = 10
 validation_split = 0.2
 
 # Learning rate
@@ -109,8 +109,8 @@ learning_rate_default = 0.001
 learning_rate_small = 0.0001
 learning_rate_large = 0.01
 
-# Learning rate decay, only active with option "lrdecay"
-learning_rate_decay = - 1. / n_epochs_default * np.log(0.1)  # Exponential decay to 10%
+# Learning rate decay
+learning_rate_decay = - 1. / n_epochs_default * np.log(0.01)  # Exponential decay to 1% of original weight
 
 # Batch size
 batch_size = 128  # Will be overwritten at startup

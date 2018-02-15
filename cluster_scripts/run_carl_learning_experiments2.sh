@@ -18,14 +18,14 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py carl -o largebatch lrdecay
-python -u experiments.py carl -o largebatch fastlearning lrdecay
-python -u experiments.py carl -o largebatch slowlearning lrdecay
+python -u experiments.py carl -o largebatch constantlr
+python -u experiments.py carl -o largebatch fastlearning constantlr
+python -u experiments.py carl -o largebatch slowlearning constantlr
 
-python -u experiments.py carl -o lrdecay
-python -u experiments.py carl -o fastlearning lrdecay
-python -u experiments.py carl -o slowlearning lrdecay
+python -u experiments.py carl -o constantlr
+python -u experiments.py carl -o fastlearning constantlr
+python -u experiments.py carl -o slowlearning constantlr
 
-python -u experiments.py carl -o smallbatch lrdecay
-python -u experiments.py carl -o smallbatch fastlearning lrdecay
-python -u experiments.py carl -o smallbatch slowlearning lrdecay
+python -u experiments.py carl -o smallbatch constantlr
+python -u experiments.py carl -o smallbatch fastlearning constantlr
+python -u experiments.py carl -o smallbatch slowlearning constantlr
