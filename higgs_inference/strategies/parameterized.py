@@ -385,7 +385,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     # Evaluation
     ################################################################################
 
-    # carl ratio object
+    # carl wrapper
     # ratio = ClassifierScoreRatio(regr, prefit=True)
 
     logging.info('Starting evaluation')

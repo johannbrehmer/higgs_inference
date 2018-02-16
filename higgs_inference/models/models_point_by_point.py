@@ -24,6 +24,7 @@ metrics = [full_cross_entropy, trimmed_cross_entropy,
 def make_regressor(n_hidden_layers=3,
                    hidden_layer_size=100,
                    activation='tanh',
+                   learning_rate=0.001,
                    dropout_prob=0.0):
     # Inputs
     input_layer = Input(shape=(settings.n_features,))
@@ -49,7 +50,7 @@ def make_regressor(n_hidden_layers=3,
     # Compile model
     model.compile(loss=loss_function_ratio_regression,
                   metrics=metrics,
-                  optimizer=optimizers.Adam(clipnorm=10.))
+                  optimizer=optimizers.Adam(lr=learning_rate, clipnorm=10.))
 
     return model
 
@@ -62,6 +63,7 @@ def make_classifier(n_hidden_layers=3,
                     hidden_layer_size=100,
                     activation='tanh',
                     dropout_prob=0.0,
+                    learning_rate=0.001,
                     learn_log_r=False):
     # Inputs
     input_layer = Input(shape=(settings.n_features,))
@@ -92,6 +94,6 @@ def make_classifier(n_hidden_layers=3,
     # Compile model
     model.compile(loss=loss_function_carl,
                   metrics=metrics,
-                  optimizer=optimizers.Adam(clipnorm=1.))
+                  optimizer=optimizers.Adam(lr=learning_rate, clipnorm=1.))
 
     return model
