@@ -15,12 +15,12 @@ cd /home/jb6504/higgs_inference/cluster_scripts
 # Hyperparameter scans
 ################################################################################
 
-sbatch run_carl_learning_experiments.sh
-sbatch run_carl_learning_experiments2.sh
+# sbatch run_carl_learning_experiments.sh
+# sbatch run_carl_learning_experiments2.sh
 sbatch run_regression_learning_experiments.sh
 sbatch run_regression_learning_experiments2.sh
 
-sbatch run_combined_tuning.sh
+# sbatch run_combined_tuning.sh
 sbatch run_combinedregression_tuning.sh
 
 # sleep 60
@@ -30,10 +30,10 @@ sbatch run_combinedregression_tuning.sh
 # True data
 ################################################################################
 
-sbatch run_carl.sh
-sbatch run_combined.sh
-sbatch run_regression.sh
-sbatch run_combinedregression.sh
+# sbatch run_carl.sh
+# sbatch run_combined.sh
+# sbatch run_regression.sh
+# sbatch run_combinedregression.sh
 
 # sbatch run_carl_point_by_point.sh
 # sbatch run_regression_point_by_point.sh
@@ -49,8 +49,8 @@ sbatch run_combinedregression.sh
 # Smearing
 ################################################################################
 
-sbatch run_carl_smearing.sh
-sbatch run_combined_smearing.sh
+# sbatch run_carl_smearing.sh
+# sbatch run_combined_smearing.sh
 sbatch run_regression_smearing.sh
 sbatch run_combinedregression_smearing.sh
 
