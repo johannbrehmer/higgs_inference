@@ -51,6 +51,7 @@ class DetailedHistory(Callback):
         self.detailed_history = detailed_history
         self.buffer = {}
         self.n_batches_in_buffer = 0
+        self.n_batches_per_entry = n_batches_per_entry
 
     def on_train_begin(self, logs={}):
         self.buffer = {}
