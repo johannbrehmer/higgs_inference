@@ -350,7 +350,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     if not constant_lr_mode:
         def lr_scheduler(epoch):
             return learning_rate * np.exp(- epoch * lr_decay)
-
         callbacks.append(LearningRateScheduler(lr_scheduler))
     if early_stopping:
         callbacks.append(EarlyStopping(verbose=1, patience=settings.early_stopping_patience))

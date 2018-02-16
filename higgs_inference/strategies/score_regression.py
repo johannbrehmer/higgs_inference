@@ -11,7 +11,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.utils import shuffle
 
 from keras.wrappers.scikit_learn import KerasRegressor
-from keras.callbacks import EarlyStopping
+from keras.callbacks import EarlyStopping, LearningRateScheduler
 
 from carl.learning.calibration import HistogramCalibrator, NDHistogramCalibrator
 
@@ -42,8 +42,36 @@ def score_regression_inference(use_smearing=False,
     short_mode = ('short' in options)
     long_mode = ('long' in options)
     denom1_mode = ('denom1' in options)
+    small_lr_mode = ('slowlearning' in options)
+    large_lr_mode = ('fastlearning' in options)
+    large_batch_mode = ('largebatch' in options)
+    small_batch_mode = ('smallbatch' in options)
+    constant_lr_mode = ('constantlr' in options)
 
     filename_addition = ''
+
+    learning_rate = settings.learning_rate_default
+    if small_lr_mode:
+        filename_addition += '_slowlearning'
+        learning_rate = settings.learning_rate_small
+    elif large_lr_mode:
+        filename_addition += '_fastlearning'
+        learning_rate = settings.learning_rate_large
+
+    lr_decay = settings.learning_rate_decay
+    if constant_lr_mode:
+        lr_decay = 0.
+        filename_addition += '_constantlr'
+
+    batch_size = settings.batch_size_default
+    if large_batch_mode:
+        filename_addition += '_largebatch'
+        batch_size = settings.batch_size_large
+    elif small_batch_mode:
+        filename_addition += '_smallbatch'
+        batch_size = settings.batch_size_small
+    settings.batch_size = batch_size
+
     n_hidden_layers = settings.n_hidden_layers_default
     if shallow_mode:
         n_hidden_layers = settings.n_hidden_layers_shallow
@@ -78,8 +106,11 @@ def score_regression_inference(use_smearing=False,
     neyman_dir = settings.neyman_dir + '/score_regression'
 
     logging.info('Options:')
-    logging.info('  Number of epochs:         %s', n_epochs)
-    logging.info('  Number of hidden layers:  %s', n_hidden_layers)
+    logging.info('  Number of hidden layers: %s', n_hidden_layers)
+    logging.info('  Batch size:              %s', batch_size)
+    logging.info('  Learning rate:           %s', learning_rate)
+    logging.info('  Learning rate decay:     %s', lr_decay)
+    logging.info('  Number of epochs:        %s', n_epochs)
 
     ################################################################################
     # Data
@@ -118,21 +149,36 @@ def score_regression_inference(use_smearing=False,
         X_neyman_observed_transformed = scaler.transform(X_neyman_observed.reshape((-1, X_neyman_observed.shape[2])))
 
     ################################################################################
-    # Score regression
+    # Training
     ################################################################################
 
-    regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
+    regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers,
+                                                 learning_rate=learning_rate),
                           epochs=n_epochs, verbose=2, validation_split=settings.validation_split,
                           callbacks=[EarlyStopping(verbose=1, patience=settings.early_stopping_patience)])
 
     logging.info('Starting training of score regression')
-    regr.fit(X_train_transformed, scores_train,
-             callbacks=(
-                 [EarlyStopping(verbose=1, patience=settings.early_stopping_patience)] if early_stopping else None))
+
+    # Callbacks
+    callbacks = []
+    if not constant_lr_mode:
+        def lr_scheduler(epoch):
+            return learning_rate * np.exp(- epoch * lr_decay)
+
+        callbacks.append(LearningRateScheduler(lr_scheduler))
+    if early_stopping:
+        callbacks.append(EarlyStopping(verbose=1, patience=settings.early_stopping_patience))
+
+    # Training
+    regr.fit(X_train_transformed, scores_train, callbacks=callbacks)
 
     logging.info('Starting evaluation')
     that_calibration = regr.predict(X_calibration_transformed)
     that_test = regr.predict(X_test_transformed)
+
+    ################################################################################
+    # Evaluation and density estimation
+    ################################################################################
 
     logging.info('Starting density estimation')
     expected_llr = []

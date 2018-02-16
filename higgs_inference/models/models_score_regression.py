@@ -17,7 +17,8 @@ from higgs_inference.models.loss_functions import loss_function_score_regression
 def make_regressor(n_hidden_layers=3,
                    hidden_layer_size=100,
                    activation='tanh',
-                   dropout_prob=0.0):
+                   dropout_prob=0.0,
+                   learning_rate=1.e-3,):
     # Inputs
     input_layer = Input(shape=(42,))
 
@@ -36,6 +37,6 @@ def make_regressor(n_hidden_layers=3,
 
     # Compile model
     model.compile(loss=loss_function_score_regression,
-                  optimizer=optimizers.Adam(clipnorm=1.))
+                  optimizer=optimizers.Adam(lr=learning_rate, clipnorm=1.))
 
     return model
