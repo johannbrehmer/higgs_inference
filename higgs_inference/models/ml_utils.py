@@ -4,6 +4,8 @@
 
 from __future__ import absolute_import, division, print_function
 
+import numpy as np
+
 from keras.layers import Dense, Dropout
 from keras.callbacks import Callback
 
@@ -44,11 +46,31 @@ def build_hidden_layers(n,
 
 class DetailedHistory(Callback):
 
-    def __init__(self, detailed_history):
+    def __init__(self, detailed_history, n_batches_per_entry=100):
         super(DetailedHistory, self).__init__()
         self.detailed_history = detailed_history
+        self.buffer = {}
+        self.n_batches_in_buffer = 0
+
+    def on_train_begin(self, logs={}):
+        self.buffer = {}
+        self.n_batches_in_buffer = 0
 
     def on_batch_end(self, batch, logs=None):
         logs = logs or {}
         for k, v in logs.items():
-            self.detailed_history.setdefault(k, []).append(v)
+            self.buffer.setdefault(k, []).append(v)
+        self.n_batches_in_buffer += 1
+
+        if self.n_batches_in_buffer >= self.n_batches_per_entry:
+            for k, v in self.buffer.iteritems():
+                self.detailed_history.setdefault(k, []).append(np.mean(v))
+            self.buffer = {}
+            self.n_batches_in_buffer = 0
+
+    def on_epoch_end(self, epoch, logs={}):
+        if self.n_batches_in_buffer > 0:
+            for k, v in self.buffer.iteritems():
+                self.detailed_history.setdefault(k, []).append(np.mean(v))
+            self.buffer = {}
+            self.n_batches_in_buffer = 0

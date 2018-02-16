@@ -322,7 +322,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             try:
                 detailed_metrics = np.asarray(detailed_history[key])
                 np.save(
-                    results_dir + '/detailedtraininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
+                    results_dir + '/traininghistory_100batches_' + filename + '_' + algorithm + filename_addition + '.npy',
                     detailed_metrics)
             except KeyError:
                 logging.warning('Key %s not found in per-batch history. Available keys: %s', key,
@@ -332,11 +332,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         _save_metrics('full_cross_entropy', 'ce')
         _save_metrics('full_mse_log_r', 'mse_logr')
         _save_metrics('full_mse_score', 'mse_scores')
-        _save_metrics('full_mae_log_r', 'mae_logr')
-        _save_metrics('full_mae_score', 'mae_scores')
-        _save_metrics('trimmed_cross_entropy', 'trimmed_ce')
-        _save_metrics('trimmed_mse_log_r', 'trimmed_mse_logr')
-        _save_metrics('trimmed_mse_score', 'trimmed_mse_scores')
 
         logging.info('Starting evaluation')
         expected_llr = []
@@ -512,7 +507,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             try:
                 detailed_metrics = np.asarray(detailed_history[key])
                 np.save(
-                    results_dir + '/detailedtraininghistory_' + filename + '_' + algorithm + filename_addition + '.npy',
+                    results_dir + '/traininghistory_100batches_' + filename + '_' + algorithm + filename_addition + '.npy',
                     detailed_metrics)
             except KeyError:
                 logging.warning('Key %s not found in per-batch history. Available keys: %s', key,
@@ -522,11 +517,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         _save_metrics('full_cross_entropy', 'ce')
         _save_metrics('full_mse_log_r', 'mse_logr')
         _save_metrics('full_mse_score', 'mse_scores')
-        _save_metrics('full_mae_log_r', 'mae_logr')
-        _save_metrics('full_mae_score', 'mae_scores')
-        _save_metrics('trimmed_cross_entropy', 'trimmed_ce')
-        _save_metrics('trimmed_mse_log_r', 'trimmed_mse_logr')
-        _save_metrics('trimmed_mse_score', 'trimmed_mse_scores')
 
         # carl ratio object
         ratio = ClassifierScoreRatio(clf, prefit=True)

@@ -316,16 +316,10 @@ def point_by_point_inference(algorithm='carl',
                 _save_metrics('loss', 'loss_nottrained')
                 _save_metrics('full_cross_entropy', 'ce_nottrained')
                 _save_metrics('full_mse_log_r', 'mse_logr_nottrained')
-                _save_metrics('full_mae_log_r', 'mae_logr_nottrained')
-                _save_metrics('trimmed_cross_entropy', 'trimmed_ce_nottrained')
-                _save_metrics('trimmed_mse_log_r', 'trimmed_mse_logr_nottrained')
             elif t == settings.theta_benchmark_trained:
                 _save_metrics('loss', 'loss_trained')
                 _save_metrics('full_cross_entropy', 'ce_trained')
                 _save_metrics('full_mse_log_r', 'mse_logr_trained')
-                _save_metrics('full_mae_log_r', 'mae_logr_trained')
-                _save_metrics('trimmed_cross_entropy', 'trimmed_ce_trained')
-                _save_metrics('trimmed_mse_log_r', 'trimmed_mse_logr_trained')
 
             # carl wrapper
             ratio = ClassifierScoreRatio(clf, prefit=True)
