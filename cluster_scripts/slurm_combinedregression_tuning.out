@@ -469,3 +469,22 @@ Epoch 10/50
 Epoch 11/50
 510s - loss: 699.7897 - full_cross_entropy: 0.6595 - trimmed_cross_entropy: 0.6491 - full_mse_log_r: 0.0175 - trimmed_mse_log_r: 0.0172 - full_mae_log_r: 0.0828 - full_mse_score: 0.5593 - trimmed_mse_score: 0.0658 - full_mae_score: 0.0875 - val_loss: 626.9777 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6494 - val_full_mse_log_r: 0.0201 - val_trimmed_mse_log_r: 0.0197 - val_full_mae_log_r: 0.0990 - val_full_mse_score: 0.5937 - val_trimmed_mse_score: 0.0707 - val_full_mae_score: 0.0876
 Epoch 12/50
+510s - loss: 703.2259 - full_cross_entropy: 0.6592 - trimmed_cross_entropy: 0.6489 - full_mse_log_r: 0.0150 - trimmed_mse_log_r: 0.0147 - full_mae_log_r: 0.0759 - full_mse_score: 0.5231 - trimmed_mse_score: 0.0572 - full_mae_score: 0.0828 - val_loss: 633.6420 - val_full_cross_entropy: 0.6591 - val_trimmed_cross_entropy: 0.6488 - val_full_mse_log_r: 0.0152 - val_trimmed_mse_log_r: 0.0149 - val_full_mae_log_r: 0.0696 - val_full_mse_score: 0.5570 - val_trimmed_mse_score: 0.0642 - val_full_mae_score: 0.0850
+Traceback (most recent call last):
+  File "experiments.py", line 139, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 311, in parameterized_inference
+    history = regr.fit(X_thetas_train, y_logr_score_train, callbacks=callbacks, batch_size=batch_size)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 149, in fit
+    history = self.model.fit(x, y, **fit_args)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1485, in fit
+    initial_epoch=initial_epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1160, in _fit_loop
+    callbacks.on_epoch_end(epoch, epoch_logs)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 75, in on_epoch_end
+    callback.on_epoch_end(epoch, logs)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 292, in on_epoch_end
+    self.progbar.update(self.seen, self.log_values, force=True)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/utils/generic_utils.py", line 317, in update
+    sys.stdout.write(info + "\n")
+IOError: [Errno 122] Disk quota exceeded
