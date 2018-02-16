@@ -18,7 +18,9 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-# python -u experiments.py afc
-# python -u experiments.py afc -x 1 41
+python -u experiments.py afc --epsilon 0.4
+python -u experiments.py afc -x 1 41 --epsilon 0.2
 python -u experiments.py afc --epsilon 0.2
 python -u experiments.py afc -x 1 41 --epsilon 0.1
+python -u experiments.py afc --epsilon 0.1
+python -u experiments.py afc -x 1 41 --epsilon 0.05
