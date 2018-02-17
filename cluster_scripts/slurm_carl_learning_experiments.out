@@ -675,3 +675,214 @@ Epoch 50/50
 16.02.2018 10:00:33 INFO    Starting evaluation
 16.02.2018 10:22:07 INFO    Starting roaming
 16.02.2018 10:22:12 INFO    Starting calibrated evaluation and roaming
+16.02.2018 13:42:04 INFO    Interpolating calibrated roaming
+16.02.2018 13:43:56 INFO    That's it -- have a great day!
+Using TensorFlow backend.
+16.02.2018 13:43:59 INFO    Hi! How are you today?
+16.02.2018 13:43:59 INFO    Startup options:
+16.02.2018 13:43:59 INFO      Algorithm:                     carl
+16.02.2018 13:43:59 INFO      Point by point:                False
+16.02.2018 13:43:59 INFO      Morphing-aware mode:           False
+16.02.2018 13:43:59 INFO      Smeared data:                  False
+16.02.2018 13:43:59 INFO      Training sample:               baseline
+16.02.2018 13:43:59 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+16.02.2018 13:43:59 INFO      alpha:                         None
+16.02.2018 13:43:59 INFO      AFC epsilon:                   None
+16.02.2018 13:43:59 INFO      Neyman construction toys:      False
+16.02.2018 13:43:59 INFO      Other options:                 ['smallbatch']
+16.02.2018 13:43:59 INFO      Base directory:                /home/jb6504/higgs_inference
+16.02.2018 13:43:59 INFO      ML-based strategies available: True
+16.02.2018 13:43:59 INFO    Starting parameterized inference
+16.02.2018 13:43:59 INFO    Main settings:
+16.02.2018 13:43:59 INFO      Algorithm:                carl
+16.02.2018 13:43:59 INFO      Morphing-aware:           False
+16.02.2018 13:43:59 INFO      Training sample:          baseline
+16.02.2018 13:43:59 INFO    Options:
+16.02.2018 13:43:59 INFO      Number of hidden layers:  2
+16.02.2018 13:43:59 INFO      Batch size:               64
+16.02.2018 13:43:59 INFO      Learning rate:            0.001
+16.02.2018 13:43:59 INFO      Learning rate decay:      0.0921034037198
+16.02.2018 13:43:59 INFO      Number of epochs:         50
+16.02.2018 13:43:59 INFO      Debug mode:               False
+16.02.2018 13:44:27 INFO    Starting training
+Train on 7995920 samples, validate on 1998980 samples
+2018-02-16 13:44:27.997345: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-16 13:44:27.997697: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-16 13:44:27.997706: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-16 13:44:27.997711: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-16 13:44:27.997715: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-16 13:44:28.305468: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:04:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-16 13:44:28.305504: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-16 13:44:28.305510: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-16 13:44:28.305519: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:04:00.0)
+Epoch 1/50
+781s - loss: 0.6664 - full_cross_entropy: 0.6664 - trimmed_cross_entropy: 0.6456 - full_mse_log_r: 0.1355 - trimmed_mse_log_r: 0.1312 - full_mae_log_r: 0.1895 - full_mse_score: 1.9431 - trimmed_mse_score: 0.5101 - full_mae_score: 0.4197 - val_loss: 0.6639 - val_full_cross_entropy: 0.6639 - val_trimmed_cross_entropy: 0.6431 - val_full_mse_log_r: 0.1003 - val_trimmed_mse_log_r: 0.0972 - val_full_mae_log_r: 0.1640 - val_full_mse_score: 1.8558 - val_trimmed_mse_score: 0.4609 - val_full_mae_score: 0.4246
+Epoch 2/50
+781s - loss: 0.6634 - full_cross_entropy: 0.6634 - trimmed_cross_entropy: 0.6426 - full_mse_log_r: 0.0896 - trimmed_mse_log_r: 0.0868 - full_mae_log_r: 0.1626 - full_mse_score: 1.8315 - trimmed_mse_score: 0.4637 - full_mae_score: 0.4228 - val_loss: 0.6624 - val_full_cross_entropy: 0.6624 - val_trimmed_cross_entropy: 0.6417 - val_full_mse_log_r: 0.0793 - val_trimmed_mse_log_r: 0.0768 - val_full_mae_log_r: 0.1354 - val_full_mse_score: 1.8061 - val_trimmed_mse_score: 0.4543 - val_full_mae_score: 0.4230
+Epoch 3/50
+781s - loss: 0.6628 - full_cross_entropy: 0.6628 - trimmed_cross_entropy: 0.6421 - full_mse_log_r: 0.0815 - trimmed_mse_log_r: 0.0789 - full_mae_log_r: 0.1567 - full_mse_score: 1.8236 - trimmed_mse_score: 0.4674 - full_mae_score: 0.4354 - val_loss: 0.6621 - val_full_cross_entropy: 0.6621 - val_trimmed_cross_entropy: 0.6414 - val_full_mse_log_r: 0.0697 - val_trimmed_mse_log_r: 0.0675 - val_full_mae_log_r: 0.1416 - val_full_mse_score: 1.7979 - val_trimmed_mse_score: 0.4561 - val_full_mae_score: 0.4335
+Epoch 4/50
+781s - loss: 0.6623 - full_cross_entropy: 0.6623 - trimmed_cross_entropy: 0.6416 - full_mse_log_r: 0.0741 - trimmed_mse_log_r: 0.0717 - full_mae_log_r: 0.1492 - full_mse_score: 1.8054 - trimmed_mse_score: 0.4702 - full_mae_score: 0.4401 - val_loss: 0.6637 - val_full_cross_entropy: 0.6637 - val_trimmed_cross_entropy: 0.6429 - val_full_mse_log_r: 0.0819 - val_trimmed_mse_log_r: 0.0793 - val_full_mae_log_r: 0.1834 - val_full_mse_score: 1.8332 - val_trimmed_mse_score: 0.4705 - val_full_mae_score: 0.4391
+Epoch 5/50
+780s - loss: 0.6618 - full_cross_entropy: 0.6618 - trimmed_cross_entropy: 0.6412 - full_mse_log_r: 0.0694 - trimmed_mse_log_r: 0.0673 - full_mae_log_r: 0.1445 - full_mse_score: 1.7950 - trimmed_mse_score: 0.4667 - full_mae_score: 0.4425 - val_loss: 0.6614 - val_full_cross_entropy: 0.6614 - val_trimmed_cross_entropy: 0.6407 - val_full_mse_log_r: 0.0613 - val_trimmed_mse_log_r: 0.0594 - val_full_mae_log_r: 0.1253 - val_full_mse_score: 1.8393 - val_trimmed_mse_score: 0.4726 - val_full_mae_score: 0.4458
+Epoch 6/50
+780s - loss: 0.6615 - full_cross_entropy: 0.6615 - trimmed_cross_entropy: 0.6408 - full_mse_log_r: 0.0647 - trimmed_mse_log_r: 0.0627 - full_mae_log_r: 0.1384 - full_mse_score: 1.7768 - trimmed_mse_score: 0.4612 - full_mae_score: 0.4408 - val_loss: 0.6620 - val_full_cross_entropy: 0.6620 - val_trimmed_cross_entropy: 0.6414 - val_full_mse_log_r: 0.0653 - val_trimmed_mse_log_r: 0.0633 - val_full_mae_log_r: 0.1496 - val_full_mse_score: 1.7642 - val_trimmed_mse_score: 0.4619 - val_full_mae_score: 0.4429
+Epoch 7/50
+780s - loss: 0.6612 - full_cross_entropy: 0.6612 - trimmed_cross_entropy: 0.6405 - full_mse_log_r: 0.0605 - trimmed_mse_log_r: 0.0586 - full_mae_log_r: 0.1331 - full_mse_score: 1.7617 - trimmed_mse_score: 0.4605 - full_mae_score: 0.4423 - val_loss: 0.6627 - val_full_cross_entropy: 0.6627 - val_trimmed_cross_entropy: 0.6420 - val_full_mse_log_r: 0.0703 - val_trimmed_mse_log_r: 0.0681 - val_full_mae_log_r: 0.1631 - val_full_mse_score: 1.7637 - val_trimmed_mse_score: 0.4443 - val_full_mae_score: 0.4329
+Epoch 8/50
+781s - loss: 0.6609 - full_cross_entropy: 0.6609 - trimmed_cross_entropy: 0.6402 - full_mse_log_r: 0.0573 - trimmed_mse_log_r: 0.0555 - full_mae_log_r: 0.1291 - full_mse_score: 1.7292 - trimmed_mse_score: 0.4492 - full_mae_score: 0.4404 - val_loss: 0.6610 - val_full_cross_entropy: 0.6610 - val_trimmed_cross_entropy: 0.6403 - val_full_mse_log_r: 0.0566 - val_trimmed_mse_log_r: 0.0548 - val_full_mae_log_r: 0.1229 - val_full_mse_score: 1.7175 - val_trimmed_mse_score: 0.4297 - val_full_mae_score: 0.4293
+Epoch 9/50
+780s - loss: 0.6606 - full_cross_entropy: 0.6606 - trimmed_cross_entropy: 0.6400 - full_mse_log_r: 0.0541 - trimmed_mse_log_r: 0.0524 - full_mae_log_r: 0.1252 - full_mse_score: 1.7140 - trimmed_mse_score: 0.4456 - full_mae_score: 0.4401 - val_loss: 0.6608 - val_full_cross_entropy: 0.6608 - val_trimmed_cross_entropy: 0.6401 - val_full_mse_log_r: 0.0529 - val_trimmed_mse_log_r: 0.0513 - val_full_mae_log_r: 0.1144 - val_full_mse_score: 1.7026 - val_trimmed_mse_score: 0.4356 - val_full_mae_score: 0.4343
+Epoch 10/50
+782s - loss: 0.6604 - full_cross_entropy: 0.6604 - trimmed_cross_entropy: 0.6398 - full_mse_log_r: 0.0518 - trimmed_mse_log_r: 0.0502 - full_mae_log_r: 0.1222 - full_mse_score: 1.7118 - trimmed_mse_score: 0.4451 - full_mae_score: 0.4392 - val_loss: 0.6611 - val_full_cross_entropy: 0.6611 - val_trimmed_cross_entropy: 0.6404 - val_full_mse_log_r: 0.0527 - val_trimmed_mse_log_r: 0.0510 - val_full_mae_log_r: 0.1335 - val_full_mse_score: 1.7254 - val_trimmed_mse_score: 0.4479 - val_full_mae_score: 0.4442
+Epoch 11/50
+779s - loss: 0.6602 - full_cross_entropy: 0.6602 - trimmed_cross_entropy: 0.6395 - full_mse_log_r: 0.0495 - trimmed_mse_log_r: 0.0479 - full_mae_log_r: 0.1187 - full_mse_score: 1.6975 - trimmed_mse_score: 0.4387 - full_mae_score: 0.4395 - val_loss: 0.6606 - val_full_cross_entropy: 0.6606 - val_trimmed_cross_entropy: 0.6399 - val_full_mse_log_r: 0.0492 - val_trimmed_mse_log_r: 0.0477 - val_full_mae_log_r: 0.1143 - val_full_mse_score: 1.7037 - val_trimmed_mse_score: 0.4386 - val_full_mae_score: 0.4429
+Epoch 12/50
+781s - loss: 0.6600 - full_cross_entropy: 0.6600 - trimmed_cross_entropy: 0.6394 - full_mse_log_r: 0.0475 - trimmed_mse_log_r: 0.0460 - full_mae_log_r: 0.1156 - full_mse_score: 1.6859 - trimmed_mse_score: 0.4391 - full_mae_score: 0.4396 - val_loss: 0.6610 - val_full_cross_entropy: 0.6610 - val_trimmed_cross_entropy: 0.6404 - val_full_mse_log_r: 0.0530 - val_trimmed_mse_log_r: 0.0514 - val_full_mae_log_r: 0.1242 - val_full_mse_score: 1.7204 - val_trimmed_mse_score: 0.4455 - val_full_mae_score: 0.4339
+Epoch 13/50
+779s - loss: 0.6598 - full_cross_entropy: 0.6598 - trimmed_cross_entropy: 0.6392 - full_mse_log_r: 0.0455 - trimmed_mse_log_r: 0.0441 - full_mae_log_r: 0.1126 - full_mse_score: 1.6633 - trimmed_mse_score: 0.4303 - full_mae_score: 0.4341 - val_loss: 0.6605 - val_full_cross_entropy: 0.6605 - val_trimmed_cross_entropy: 0.6398 - val_full_mse_log_r: 0.0447 - val_trimmed_mse_log_r: 0.0434 - val_full_mae_log_r: 0.1123 - val_full_mse_score: 1.6552 - val_trimmed_mse_score: 0.4168 - val_full_mae_score: 0.4285
+Epoch 14/50
+782s - loss: 0.6596 - full_cross_entropy: 0.6596 - trimmed_cross_entropy: 0.6390 - full_mse_log_r: 0.0439 - trimmed_mse_log_r: 0.0425 - full_mae_log_r: 0.1104 - full_mse_score: 1.6571 - trimmed_mse_score: 0.4274 - full_mae_score: 0.4334 - val_loss: 0.6602 - val_full_cross_entropy: 0.6602 - val_trimmed_cross_entropy: 0.6396 - val_full_mse_log_r: 0.0435 - val_trimmed_mse_log_r: 0.0421 - val_full_mae_log_r: 0.1014 - val_full_mse_score: 1.7009 - val_trimmed_mse_score: 0.4399 - val_full_mae_score: 0.4349
+Epoch 15/50
+781s - loss: 0.6594 - full_cross_entropy: 0.6594 - trimmed_cross_entropy: 0.6388 - full_mse_log_r: 0.0427 - trimmed_mse_log_r: 0.0413 - full_mae_log_r: 0.1081 - full_mse_score: 1.6427 - trimmed_mse_score: 0.4250 - full_mae_score: 0.4332 - val_loss: 0.6603 - val_full_cross_entropy: 0.6603 - val_trimmed_cross_entropy: 0.6396 - val_full_mse_log_r: 0.0428 - val_trimmed_mse_log_r: 0.0415 - val_full_mae_log_r: 0.1083 - val_full_mse_score: 1.6604 - val_trimmed_mse_score: 0.4193 - val_full_mae_score: 0.4309
+Epoch 16/50
+780s - loss: 0.6593 - full_cross_entropy: 0.6593 - trimmed_cross_entropy: 0.6387 - full_mse_log_r: 0.0417 - trimmed_mse_log_r: 0.0404 - full_mae_log_r: 0.1062 - full_mse_score: 1.6414 - trimmed_mse_score: 0.4215 - full_mae_score: 0.4329 - val_loss: 0.6601 - val_full_cross_entropy: 0.6601 - val_trimmed_cross_entropy: 0.6395 - val_full_mse_log_r: 0.0415 - val_trimmed_mse_log_r: 0.0402 - val_full_mae_log_r: 0.1050 - val_full_mse_score: 1.6321 - val_trimmed_mse_score: 0.4075 - val_full_mae_score: 0.4282
+Epoch 17/50
+781s - loss: 0.6591 - full_cross_entropy: 0.6591 - trimmed_cross_entropy: 0.6385 - full_mse_log_r: 0.0406 - trimmed_mse_log_r: 0.0394 - full_mae_log_r: 0.1051 - full_mse_score: 1.6269 - trimmed_mse_score: 0.4170 - full_mae_score: 0.4323 - val_loss: 0.6599 - val_full_cross_entropy: 0.6599 - val_trimmed_cross_entropy: 0.6393 - val_full_mse_log_r: 0.0401 - val_trimmed_mse_log_r: 0.0388 - val_full_mae_log_r: 0.0971 - val_full_mse_score: 1.6239 - val_trimmed_mse_score: 0.4100 - val_full_mae_score: 0.4309
+Epoch 18/50
+781s - loss: 0.6590 - full_cross_entropy: 0.6590 - trimmed_cross_entropy: 0.6384 - full_mse_log_r: 0.0397 - trimmed_mse_log_r: 0.0384 - full_mae_log_r: 0.1031 - full_mse_score: 1.6253 - trimmed_mse_score: 0.4169 - full_mae_score: 0.4320 - val_loss: 0.6600 - val_full_cross_entropy: 0.6600 - val_trimmed_cross_entropy: 0.6393 - val_full_mse_log_r: 0.0394 - val_trimmed_mse_log_r: 0.0381 - val_full_mae_log_r: 0.0965 - val_full_mse_score: 1.6277 - val_trimmed_mse_score: 0.4167 - val_full_mae_score: 0.4381
+Epoch 19/50
+780s - loss: 0.6589 - full_cross_entropy: 0.6589 - trimmed_cross_entropy: 0.6383 - full_mse_log_r: 0.0388 - trimmed_mse_log_r: 0.0376 - full_mae_log_r: 0.1016 - full_mse_score: 1.6152 - trimmed_mse_score: 0.4148 - full_mae_score: 0.4313 - val_loss: 0.6601 - val_full_cross_entropy: 0.6601 - val_trimmed_cross_entropy: 0.6395 - val_full_mse_log_r: 0.0401 - val_trimmed_mse_log_r: 0.0388 - val_full_mae_log_r: 0.1057 - val_full_mse_score: 1.6406 - val_trimmed_mse_score: 0.4248 - val_full_mae_score: 0.4387
+Epoch 20/50
+780s - loss: 0.6588 - full_cross_entropy: 0.6588 - trimmed_cross_entropy: 0.6382 - full_mse_log_r: 0.0381 - trimmed_mse_log_r: 0.0369 - full_mae_log_r: 0.1004 - full_mse_score: 1.6109 - trimmed_mse_score: 0.4152 - full_mae_score: 0.4309 - val_loss: 0.6601 - val_full_cross_entropy: 0.6601 - val_trimmed_cross_entropy: 0.6395 - val_full_mse_log_r: 0.0388 - val_trimmed_mse_log_r: 0.0375 - val_full_mae_log_r: 0.1069 - val_full_mse_score: 1.6019 - val_trimmed_mse_score: 0.4060 - val_full_mae_score: 0.4335
+Epoch 21/50
+779s - loss: 0.6587 - full_cross_entropy: 0.6587 - trimmed_cross_entropy: 0.6381 - full_mse_log_r: 0.0374 - trimmed_mse_log_r: 0.0362 - full_mae_log_r: 0.0991 - full_mse_score: 1.6046 - trimmed_mse_score: 0.4118 - full_mae_score: 0.4319 - val_loss: 0.6601 - val_full_cross_entropy: 0.6601 - val_trimmed_cross_entropy: 0.6394 - val_full_mse_log_r: 0.0385 - val_trimmed_mse_log_r: 0.0373 - val_full_mae_log_r: 0.1064 - val_full_mse_score: 1.5848 - val_trimmed_mse_score: 0.3959 - val_full_mae_score: 0.4252
+Epoch 22/50
+780s - loss: 0.6586 - full_cross_entropy: 0.6586 - trimmed_cross_entropy: 0.6380 - full_mse_log_r: 0.0370 - trimmed_mse_log_r: 0.0359 - full_mae_log_r: 0.0986 - full_mse_score: 1.6028 - trimmed_mse_score: 0.4116 - full_mae_score: 0.4322 - val_loss: 0.6598 - val_full_cross_entropy: 0.6598 - val_trimmed_cross_entropy: 0.6392 - val_full_mse_log_r: 0.0369 - val_trimmed_mse_log_r: 0.0357 - val_full_mae_log_r: 0.0956 - val_full_mse_score: 1.6219 - val_trimmed_mse_score: 0.4140 - val_full_mae_score: 0.4366
+Epoch 23/50
+781s - loss: 0.6585 - full_cross_entropy: 0.6585 - trimmed_cross_entropy: 0.6380 - full_mse_log_r: 0.0363 - trimmed_mse_log_r: 0.0352 - full_mae_log_r: 0.0974 - full_mse_score: 1.5952 - trimmed_mse_score: 0.4103 - full_mae_score: 0.4318 - val_loss: 0.6598 - val_full_cross_entropy: 0.6598 - val_trimmed_cross_entropy: 0.6392 - val_full_mse_log_r: 0.0363 - val_trimmed_mse_log_r: 0.0352 - val_full_mae_log_r: 0.0964 - val_full_mse_score: 1.6106 - val_trimmed_mse_score: 0.4045 - val_full_mae_score: 0.4291
+Epoch 24/50
+780s - loss: 0.6585 - full_cross_entropy: 0.6585 - trimmed_cross_entropy: 0.6379 - full_mse_log_r: 0.0359 - trimmed_mse_log_r: 0.0348 - full_mae_log_r: 0.0968 - full_mse_score: 1.5932 - trimmed_mse_score: 0.4086 - full_mae_score: 0.4328 - val_loss: 0.6598 - val_full_cross_entropy: 0.6598 - val_trimmed_cross_entropy: 0.6392 - val_full_mse_log_r: 0.0361 - val_trimmed_mse_log_r: 0.0350 - val_full_mae_log_r: 0.0943 - val_full_mse_score: 1.6007 - val_trimmed_mse_score: 0.4037 - val_full_mae_score: 0.4298
+Epoch 25/50
+780s - loss: 0.6584 - full_cross_entropy: 0.6584 - trimmed_cross_entropy: 0.6378 - full_mse_log_r: 0.0354 - trimmed_mse_log_r: 0.0343 - full_mae_log_r: 0.0957 - full_mse_score: 1.5898 - trimmed_mse_score: 0.4090 - full_mae_score: 0.4328 - val_loss: 0.6598 - val_full_cross_entropy: 0.6598 - val_trimmed_cross_entropy: 0.6392 - val_full_mse_log_r: 0.0365 - val_trimmed_mse_log_r: 0.0354 - val_full_mae_log_r: 0.0938 - val_full_mse_score: 1.5721 - val_trimmed_mse_score: 0.4036 - val_full_mae_score: 0.4342
+Epoch 26/50
+781s - loss: 0.6583 - full_cross_entropy: 0.6583 - trimmed_cross_entropy: 0.6377 - full_mse_log_r: 0.0353 - trimmed_mse_log_r: 0.0342 - full_mae_log_r: 0.0956 - full_mse_score: 1.5860 - trimmed_mse_score: 0.4094 - full_mae_score: 0.4347 - val_loss: 0.6599 - val_full_cross_entropy: 0.6599 - val_trimmed_cross_entropy: 0.6393 - val_full_mse_log_r: 0.0370 - val_trimmed_mse_log_r: 0.0359 - val_full_mae_log_r: 0.1007 - val_full_mse_score: 1.5880 - val_trimmed_mse_score: 0.4013 - val_full_mae_score: 0.4293
+Epoch 27/50
+779s - loss: 0.6583 - full_cross_entropy: 0.6583 - trimmed_cross_entropy: 0.6377 - full_mse_log_r: 0.0349 - trimmed_mse_log_r: 0.0338 - full_mae_log_r: 0.0947 - full_mse_score: 1.5860 - trimmed_mse_score: 0.4115 - full_mae_score: 0.4346 - val_loss: 0.6598 - val_full_cross_entropy: 0.6598 - val_trimmed_cross_entropy: 0.6392 - val_full_mse_log_r: 0.0353 - val_trimmed_mse_log_r: 0.0342 - val_full_mae_log_r: 0.0956 - val_full_mse_score: 1.5972 - val_trimmed_mse_score: 0.4076 - val_full_mae_score: 0.4378
+Epoch 28/50
+782s - loss: 0.6582 - full_cross_entropy: 0.6582 - trimmed_cross_entropy: 0.6376 - full_mse_log_r: 0.0346 - trimmed_mse_log_r: 0.0335 - full_mae_log_r: 0.0944 - full_mse_score: 1.5815 - trimmed_mse_score: 0.4063 - full_mae_score: 0.4358 - val_loss: 0.6597 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6391 - val_full_mse_log_r: 0.0340 - val_trimmed_mse_log_r: 0.0329 - val_full_mae_log_r: 0.0899 - val_full_mse_score: 1.5777 - val_trimmed_mse_score: 0.3988 - val_full_mae_score: 0.4307
+Epoch 29/50
+780s - loss: 0.6582 - full_cross_entropy: 0.6582 - trimmed_cross_entropy: 0.6376 - full_mse_log_r: 0.0343 - trimmed_mse_log_r: 0.0332 - full_mae_log_r: 0.0938 - full_mse_score: 1.5803 - trimmed_mse_score: 0.4065 - full_mae_score: 0.4353 - val_loss: 0.6598 - val_full_cross_entropy: 0.6598 - val_trimmed_cross_entropy: 0.6392 - val_full_mse_log_r: 0.0350 - val_trimmed_mse_log_r: 0.0339 - val_full_mae_log_r: 0.0954 - val_full_mse_score: 1.5607 - val_trimmed_mse_score: 0.3972 - val_full_mae_score: 0.4311
+Epoch 30/50
+780s - loss: 0.6581 - full_cross_entropy: 0.6581 - trimmed_cross_entropy: 0.6376 - full_mse_log_r: 0.0341 - trimmed_mse_log_r: 0.0331 - full_mae_log_r: 0.0935 - full_mse_score: 1.5724 - trimmed_mse_score: 0.4081 - full_mae_score: 0.4359 - val_loss: 0.6597 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6390 - val_full_mse_log_r: 0.0340 - val_trimmed_mse_log_r: 0.0329 - val_full_mae_log_r: 0.0894 - val_full_mse_score: 1.5865 - val_trimmed_mse_score: 0.4011 - val_full_mae_score: 0.4328
+Epoch 31/50
+779s - loss: 0.6581 - full_cross_entropy: 0.6581 - trimmed_cross_entropy: 0.6375 - full_mse_log_r: 0.0339 - trimmed_mse_log_r: 0.0328 - full_mae_log_r: 0.0931 - full_mse_score: 1.5761 - trimmed_mse_score: 0.4062 - full_mae_score: 0.4365 - val_loss: 0.6598 - val_full_cross_entropy: 0.6598 - val_trimmed_cross_entropy: 0.6392 - val_full_mse_log_r: 0.0342 - val_trimmed_mse_log_r: 0.0331 - val_full_mae_log_r: 0.0943 - val_full_mse_score: 1.5864 - val_trimmed_mse_score: 0.4039 - val_full_mae_score: 0.4362
+Epoch 32/50
+781s - loss: 0.6580 - full_cross_entropy: 0.6580 - trimmed_cross_entropy: 0.6375 - full_mse_log_r: 0.0337 - trimmed_mse_log_r: 0.0327 - full_mae_log_r: 0.0928 - full_mse_score: 1.5732 - trimmed_mse_score: 0.4068 - full_mae_score: 0.4376 - val_loss: 0.6597 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6391 - val_full_mse_log_r: 0.0336 - val_trimmed_mse_log_r: 0.0325 - val_full_mae_log_r: 0.0908 - val_full_mse_score: 1.5822 - val_trimmed_mse_score: 0.4016 - val_full_mae_score: 0.4350
+Epoch 33/50
+780s - loss: 0.6580 - full_cross_entropy: 0.6580 - trimmed_cross_entropy: 0.6374 - full_mse_log_r: 0.0335 - trimmed_mse_log_r: 0.0325 - full_mae_log_r: 0.0925 - full_mse_score: 1.5716 - trimmed_mse_score: 0.4086 - full_mae_score: 0.4379 - val_loss: 0.6597 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6390 - val_full_mse_log_r: 0.0337 - val_trimmed_mse_log_r: 0.0326 - val_full_mae_log_r: 0.0898 - val_full_mse_score: 1.5816 - val_trimmed_mse_score: 0.4013 - val_full_mae_score: 0.4348
+Epoch 34/50
+780s - loss: 0.6580 - full_cross_entropy: 0.6580 - trimmed_cross_entropy: 0.6374 - full_mse_log_r: 0.0334 - trimmed_mse_log_r: 0.0324 - full_mae_log_r: 0.0923 - full_mse_score: 1.5726 - trimmed_mse_score: 0.4072 - full_mae_score: 0.4385 - val_loss: 0.6597 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6390 - val_full_mse_log_r: 0.0338 - val_trimmed_mse_log_r: 0.0327 - val_full_mae_log_r: 0.0904 - val_full_mse_score: 1.5708 - val_trimmed_mse_score: 0.4006 - val_full_mae_score: 0.4359
+Epoch 35/50
+781s - loss: 0.6580 - full_cross_entropy: 0.6580 - trimmed_cross_entropy: 0.6374 - full_mse_log_r: 0.0333 - trimmed_mse_log_r: 0.0322 - full_mae_log_r: 0.0919 - full_mse_score: 1.5690 - trimmed_mse_score: 0.4067 - full_mae_score: 0.4382 - val_loss: 0.6597 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6391 - val_full_mse_log_r: 0.0336 - val_trimmed_mse_log_r: 0.0325 - val_full_mae_log_r: 0.0909 - val_full_mse_score: 1.5806 - val_trimmed_mse_score: 0.4055 - val_full_mae_score: 0.4398
+Epoch 36/50
+780s - loss: 0.6579 - full_cross_entropy: 0.6579 - trimmed_cross_entropy: 0.6374 - full_mse_log_r: 0.0331 - trimmed_mse_log_r: 0.0321 - full_mae_log_r: 0.0917 - full_mse_score: 1.5678 - trimmed_mse_score: 0.4087 - full_mae_score: 0.4390 - val_loss: 0.6597 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6391 - val_full_mse_log_r: 0.0335 - val_trimmed_mse_log_r: 0.0325 - val_full_mae_log_r: 0.0902 - val_full_mse_score: 1.5769 - val_trimmed_mse_score: 0.4041 - val_full_mae_score: 0.4381
+Epoch 37/50
+780s - loss: 0.6579 - full_cross_entropy: 0.6579 - trimmed_cross_entropy: 0.6373 - full_mse_log_r: 0.0331 - trimmed_mse_log_r: 0.0320 - full_mae_log_r: 0.0914 - full_mse_score: 1.5673 - trimmed_mse_score: 0.4071 - full_mae_score: 0.4390 - val_loss: 0.6597 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6391 - val_full_mse_log_r: 0.0334 - val_trimmed_mse_log_r: 0.0324 - val_full_mae_log_r: 0.0919 - val_full_mse_score: 1.5948 - val_trimmed_mse_score: 0.4140 - val_full_mae_score: 0.4449
+Epoch 38/50
+781s - loss: 0.6579 - full_cross_entropy: 0.6579 - trimmed_cross_entropy: 0.6373 - full_mse_log_r: 0.0330 - trimmed_mse_log_r: 0.0319 - full_mae_log_r: 0.0916 - full_mse_score: 1.5702 - trimmed_mse_score: 0.4095 - full_mae_score: 0.4407 - val_loss: 0.6597 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6391 - val_full_mse_log_r: 0.0333 - val_trimmed_mse_log_r: 0.0323 - val_full_mae_log_r: 0.0915 - val_full_mse_score: 1.5806 - val_trimmed_mse_score: 0.4051 - val_full_mae_score: 0.4385
+Epoch 39/50
+779s - loss: 0.6579 - full_cross_entropy: 0.6579 - trimmed_cross_entropy: 0.6373 - full_mse_log_r: 0.0329 - trimmed_mse_log_r: 0.0318 - full_mae_log_r: 0.0913 - full_mse_score: 1.5681 - trimmed_mse_score: 0.4118 - full_mae_score: 0.4403 - val_loss: 0.6597 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6391 - val_full_mse_log_r: 0.0339 - val_trimmed_mse_log_r: 0.0329 - val_full_mae_log_r: 0.0940 - val_full_mse_score: 1.5675 - val_trimmed_mse_score: 0.3991 - val_full_mae_score: 0.4352
+Epoch 40/50
+780s - loss: 0.6578 - full_cross_entropy: 0.6578 - trimmed_cross_entropy: 0.6373 - full_mse_log_r: 0.0328 - trimmed_mse_log_r: 0.0318 - full_mae_log_r: 0.0910 - full_mse_score: 1.5659 - trimmed_mse_score: 0.4106 - full_mae_score: 0.4398 - val_loss: 0.6597 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6391 - val_full_mse_log_r: 0.0332 - val_trimmed_mse_log_r: 0.0322 - val_full_mae_log_r: 0.0910 - val_full_mse_score: 1.5824 - val_trimmed_mse_score: 0.4079 - val_full_mae_score: 0.4413
+Epoch 41/50
+781s - loss: 0.6578 - full_cross_entropy: 0.6578 - trimmed_cross_entropy: 0.6373 - full_mse_log_r: 0.0327 - trimmed_mse_log_r: 0.0317 - full_mae_log_r: 0.0909 - full_mse_score: 1.5652 - trimmed_mse_score: 0.4096 - full_mae_score: 0.4404 - val_loss: 0.6597 - val_full_cross_entropy: 0.6597 - val_trimmed_cross_entropy: 0.6391 - val_full_mse_log_r: 0.0333 - val_trimmed_mse_log_r: 0.0322 - val_full_mae_log_r: 0.0914 - val_full_mse_score: 1.5918 - val_trimmed_mse_score: 0.4137 - val_full_mae_score: 0.4452
+Epoch 00040: early stopping
+16.02.2018 22:38:06 INFO    Starting evaluation
+16.02.2018 22:59:17 INFO    Starting roaming
+16.02.2018 22:59:22 INFO    Starting calibrated evaluation and roaming
+17.02.2018 02:16:31 INFO    Interpolating calibrated roaming
+17.02.2018 02:17:58 INFO    That's it -- have a great day!
+Using TensorFlow backend.
+17.02.2018 02:18:01 INFO    Hi! How are you today?
+17.02.2018 02:18:01 INFO    Startup options:
+17.02.2018 02:18:01 INFO      Algorithm:                     carl
+17.02.2018 02:18:01 INFO      Point by point:                False
+17.02.2018 02:18:01 INFO      Morphing-aware mode:           False
+17.02.2018 02:18:01 INFO      Smeared data:                  False
+17.02.2018 02:18:01 INFO      Training sample:               baseline
+17.02.2018 02:18:01 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+17.02.2018 02:18:01 INFO      alpha:                         None
+17.02.2018 02:18:01 INFO      AFC epsilon:                   None
+17.02.2018 02:18:01 INFO      Neyman construction toys:      False
+17.02.2018 02:18:01 INFO      Other options:                 ['smallbatch', 'fastlearning']
+17.02.2018 02:18:01 INFO      Base directory:                /home/jb6504/higgs_inference
+17.02.2018 02:18:01 INFO      ML-based strategies available: True
+17.02.2018 02:18:01 INFO    Starting parameterized inference
+17.02.2018 02:18:01 INFO    Main settings:
+17.02.2018 02:18:01 INFO      Algorithm:                carl
+17.02.2018 02:18:01 INFO      Morphing-aware:           False
+17.02.2018 02:18:01 INFO      Training sample:          baseline
+17.02.2018 02:18:01 INFO    Options:
+17.02.2018 02:18:01 INFO      Number of hidden layers:  2
+17.02.2018 02:18:01 INFO      Batch size:               64
+17.02.2018 02:18:01 INFO      Learning rate:            0.01
+17.02.2018 02:18:01 INFO      Learning rate decay:      0.0921034037198
+17.02.2018 02:18:01 INFO      Number of epochs:         50
+17.02.2018 02:18:01 INFO      Debug mode:               False
+17.02.2018 02:18:29 INFO    Starting training
+Train on 7995920 samples, validate on 1998980 samples
+2018-02-17 02:18:29.882953: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-17 02:18:29.895323: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-17 02:18:29.895334: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-17 02:18:29.895339: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-17 02:18:29.895343: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-17 02:18:30.202226: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:04:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-17 02:18:30.202262: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-17 02:18:30.202268: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-17 02:18:30.202277: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:04:00.0)
+Epoch 1/50
+756s - loss: 0.6935 - full_cross_entropy: 0.6935 - trimmed_cross_entropy: 0.6718 - full_mse_log_r: 0.4360 - trimmed_mse_log_r: 0.4224 - full_mae_log_r: 0.4348 - full_mse_score: 4.4601 - trimmed_mse_score: 2.4072 - full_mae_score: 1.0017 - val_loss: 0.6855 - val_full_cross_entropy: 0.6855 - val_trimmed_cross_entropy: 0.6641 - val_full_mse_log_r: 0.3627 - val_trimmed_mse_log_r: 0.3513 - val_full_mae_log_r: 0.3618 - val_full_mse_score: 7.0648 - val_trimmed_mse_score: 3.9334 - val_full_mae_score: 1.2303
+Epoch 2/50
+749s - loss: 0.6893 - full_cross_entropy: 0.6893 - trimmed_cross_entropy: 0.6678 - full_mse_log_r: 0.3889 - trimmed_mse_log_r: 0.3768 - full_mae_log_r: 0.4092 - full_mse_score: 8.1903 - trimmed_mse_score: 4.3638 - full_mae_score: 1.2705 - val_loss: 0.6831 - val_full_cross_entropy: 0.6831 - val_trimmed_cross_entropy: 0.6618 - val_full_mse_log_r: 0.3376 - val_trimmed_mse_log_r: 0.3270 - val_full_mae_log_r: 0.3539 - val_full_mse_score: 8.5768 - val_trimmed_mse_score: 4.2474 - val_full_mae_score: 1.2392
+Epoch 3/50
+751s - loss: 0.6871 - full_cross_entropy: 0.6871 - trimmed_cross_entropy: 0.6656 - full_mse_log_r: 0.3645 - trimmed_mse_log_r: 0.3532 - full_mae_log_r: 0.3934 - full_mse_score: 10.5831 - trimmed_mse_score: 5.1699 - full_mae_score: 1.3293 - val_loss: 0.6876 - val_full_cross_entropy: 0.6876 - val_trimmed_cross_entropy: 0.6661 - val_full_mse_log_r: 0.3790 - val_trimmed_mse_log_r: 0.3672 - val_full_mae_log_r: 0.3909 - val_full_mse_score: 12.3556 - val_trimmed_mse_score: 5.8640 - val_full_mae_score: 1.3877
+Epoch 4/50
+753s - loss: 0.6849 - full_cross_entropy: 0.6849 - trimmed_cross_entropy: 0.6635 - full_mse_log_r: 0.3418 - trimmed_mse_log_r: 0.3311 - full_mae_log_r: 0.3783 - full_mse_score: 13.6171 - trimmed_mse_score: 6.0044 - full_mae_score: 1.3932 - val_loss: 0.6943 - val_full_cross_entropy: 0.6943 - val_trimmed_cross_entropy: 0.6726 - val_full_mse_log_r: 0.4209 - val_trimmed_mse_log_r: 0.4077 - val_full_mae_log_r: 0.4633 - val_full_mse_score: 14.7192 - val_trimmed_mse_score: 6.2949 - val_full_mae_score: 1.4118
+Epoch 5/50
+750s - loss: 0.6831 - full_cross_entropy: 0.6831 - trimmed_cross_entropy: 0.6617 - full_mse_log_r: 0.3213 - trimmed_mse_log_r: 0.3112 - full_mae_log_r: 0.3641 - full_mse_score: 15.5569 - trimmed_mse_score: 6.4714 - full_mae_score: 1.4197 - val_loss: 0.6790 - val_full_cross_entropy: 0.6790 - val_trimmed_cross_entropy: 0.6578 - val_full_mse_log_r: 0.2887 - val_trimmed_mse_log_r: 0.2797 - val_full_mae_log_r: 0.3218 - val_full_mse_score: 16.8373 - val_trimmed_mse_score: 6.3842 - val_full_mae_score: 1.3941
+Epoch 6/50
+751s - loss: 0.6821 - full_cross_entropy: 0.6821 - trimmed_cross_entropy: 0.6607 - full_mse_log_r: 0.3110 - trimmed_mse_log_r: 0.3013 - full_mae_log_r: 0.3546 - full_mse_score: 18.3336 - trimmed_mse_score: 7.0248 - full_mae_score: 1.4610 - val_loss: 0.6835 - val_full_cross_entropy: 0.6835 - val_trimmed_cross_entropy: 0.6622 - val_full_mse_log_r: 0.3328 - val_trimmed_mse_log_r: 0.3224 - val_full_mae_log_r: 0.3735 - val_full_mse_score: 19.6440 - val_trimmed_mse_score: 6.9987 - val_full_mae_score: 1.4629
+Epoch 7/50
+753s - loss: 0.6809 - full_cross_entropy: 0.6809 - trimmed_cross_entropy: 0.6596 - full_mse_log_r: 0.3002 - trimmed_mse_log_r: 0.2908 - full_mae_log_r: 0.3464 - full_mse_score: 19.6658 - trimmed_mse_score: 7.1532 - full_mae_score: 1.4692 - val_loss: 0.6855 - val_full_cross_entropy: 0.6855 - val_trimmed_cross_entropy: 0.6641 - val_full_mse_log_r: 0.3434 - val_trimmed_mse_log_r: 0.3327 - val_full_mae_log_r: 0.3849 - val_full_mse_score: 22.2495 - val_trimmed_mse_score: 7.3459 - val_full_mae_score: 1.4778
+Epoch 8/50
+751s - loss: 0.6794 - full_cross_entropy: 0.6794 - trimmed_cross_entropy: 0.6582 - full_mse_log_r: 0.2858 - trimmed_mse_log_r: 0.2768 - full_mae_log_r: 0.3340 - full_mse_score: 20.4784 - trimmed_mse_score: 7.3380 - full_mae_score: 1.4714 - val_loss: 0.6787 - val_full_cross_entropy: 0.6787 - val_trimmed_cross_entropy: 0.6575 - val_full_mse_log_r: 0.2763 - val_trimmed_mse_log_r: 0.2677 - val_full_mae_log_r: 0.3328 - val_full_mse_score: 22.3342 - val_trimmed_mse_score: 7.4381 - val_full_mae_score: 1.4669
+Epoch 9/50
+750s - loss: 0.6784 - full_cross_entropy: 0.6784 - trimmed_cross_entropy: 0.6572 - full_mse_log_r: 0.2736 - trimmed_mse_log_r: 0.2651 - full_mae_log_r: 0.3246 - full_mse_score: 22.4444 - trimmed_mse_score: 7.6632 - full_mae_score: 1.4923 - val_loss: 0.6767 - val_full_cross_entropy: 0.6767 - val_trimmed_cross_entropy: 0.6555 - val_full_mse_log_r: 0.2610 - val_trimmed_mse_log_r: 0.2529 - val_full_mae_log_r: 0.3086 - val_full_mse_score: 22.7230 - val_trimmed_mse_score: 7.6467 - val_full_mae_score: 1.4800
+Epoch 10/50
+752s - loss: 0.6773 - full_cross_entropy: 0.6773 - trimmed_cross_entropy: 0.6561 - full_mse_log_r: 0.2612 - trimmed_mse_log_r: 0.2530 - full_mae_log_r: 0.3139 - full_mse_score: 23.6091 - trimmed_mse_score: 7.9681 - full_mae_score: 1.5031 - val_loss: 0.6742 - val_full_cross_entropy: 0.6742 - val_trimmed_cross_entropy: 0.6531 - val_full_mse_log_r: 0.2259 - val_trimmed_mse_log_r: 0.2188 - val_full_mae_log_r: 0.2746 - val_full_mse_score: 25.9001 - val_trimmed_mse_score: 9.3706 - val_full_mae_score: 1.6264
+Epoch 11/50
+750s - loss: 0.6763 - full_cross_entropy: 0.6763 - trimmed_cross_entropy: 0.6552 - full_mse_log_r: 0.2519 - trimmed_mse_log_r: 0.2440 - full_mae_log_r: 0.3054 - full_mse_score: 23.9690 - trimmed_mse_score: 7.9155 - full_mae_score: 1.4946 - val_loss: 0.6777 - val_full_cross_entropy: 0.6777 - val_trimmed_cross_entropy: 0.6565 - val_full_mse_log_r: 0.2677 - val_trimmed_mse_log_r: 0.2593 - val_full_mae_log_r: 0.3273 - val_full_mse_score: 22.3965 - val_trimmed_mse_score: 7.8597 - val_full_mae_score: 1.5010
+Epoch 12/50
+750s - loss: 0.6755 - full_cross_entropy: 0.6755 - trimmed_cross_entropy: 0.6544 - full_mse_log_r: 0.2441 - trimmed_mse_log_r: 0.2365 - full_mae_log_r: 0.2980 - full_mse_score: 23.4859 - trimmed_mse_score: 7.8997 - full_mae_score: 1.4836 - val_loss: 0.6746 - val_full_cross_entropy: 0.6746 - val_trimmed_cross_entropy: 0.6536 - val_full_mse_log_r: 0.2351 - val_trimmed_mse_log_r: 0.2278 - val_full_mae_log_r: 0.2923 - val_full_mse_score: 24.1234 - val_trimmed_mse_score: 8.4948 - val_full_mae_score: 1.5353
+Epoch 13/50
+753s - loss: 0.6747 - full_cross_entropy: 0.6747 - trimmed_cross_entropy: 0.6536 - full_mse_log_r: 0.2357 - trimmed_mse_log_r: 0.2284 - full_mae_log_r: 0.2897 - full_mse_score: 24.1702 - trimmed_mse_score: 8.1323 - full_mae_score: 1.4956 - val_loss: 0.6721 - val_full_cross_entropy: 0.6721 - val_trimmed_cross_entropy: 0.6511 - val_full_mse_log_r: 0.2131 - val_trimmed_mse_log_r: 0.2064 - val_full_mae_log_r: 0.2527 - val_full_mse_score: 23.3569 - val_trimmed_mse_score: 7.4103 - val_full_mae_score: 1.4465
+Epoch 14/50
+751s - loss: 0.6737 - full_cross_entropy: 0.6737 - trimmed_cross_entropy: 0.6527 - full_mse_log_r: 0.2264 - trimmed_mse_log_r: 0.2193 - full_mae_log_r: 0.2815 - full_mse_score: 25.0851 - trimmed_mse_score: 8.0236 - full_mae_score: 1.4835 - val_loss: 0.6723 - val_full_cross_entropy: 0.6723 - val_trimmed_cross_entropy: 0.6513 - val_full_mse_log_r: 0.2141 - val_trimmed_mse_log_r: 0.2074 - val_full_mae_log_r: 0.2677 - val_full_mse_score: 24.3474 - val_trimmed_mse_score: 7.9529 - val_full_mae_score: 1.4795
+Epoch 15/50
+750s - loss: 0.6732 - full_cross_entropy: 0.6732 - trimmed_cross_entropy: 0.6521 - full_mse_log_r: 0.2198 - trimmed_mse_log_r: 0.2130 - full_mae_log_r: 0.2745 - full_mse_score: 24.8260 - trimmed_mse_score: 7.8478 - full_mae_score: 1.4708 - val_loss: 0.6706 - val_full_cross_entropy: 0.6706 - val_trimmed_cross_entropy: 0.6496 - val_full_mse_log_r: 0.2002 - val_trimmed_mse_log_r: 0.1940 - val_full_mae_log_r: 0.2353 - val_full_mse_score: 23.4372 - val_trimmed_mse_score: 7.6288 - val_full_mae_score: 1.4386
+Epoch 16/50
+751s - loss: 0.6727 - full_cross_entropy: 0.6727 - trimmed_cross_entropy: 0.6517 - full_mse_log_r: 0.2160 - trimmed_mse_log_r: 0.2092 - full_mae_log_r: 0.2692 - full_mse_score: 25.1252 - trimmed_mse_score: 7.9365 - full_mae_score: 1.4680 - val_loss: 0.6736 - val_full_cross_entropy: 0.6736 - val_trimmed_cross_entropy: 0.6526 - val_full_mse_log_r: 0.2233 - val_trimmed_mse_log_r: 0.2163 - val_full_mae_log_r: 0.2834 - val_full_mse_score: 24.9355 - val_trimmed_mse_score: 8.0539 - val_full_mae_score: 1.4817
+Epoch 17/50
+748s - loss: 0.6723 - full_cross_entropy: 0.6723 - trimmed_cross_entropy: 0.6513 - full_mse_log_r: 0.2115 - trimmed_mse_log_r: 0.2049 - full_mae_log_r: 0.2636 - full_mse_score: 24.6430 - trimmed_mse_score: 7.7401 - full_mae_score: 1.4477 - val_loss: 0.6765 - val_full_cross_entropy: 0.6765 - val_trimmed_cross_entropy: 0.6554 - val_full_mse_log_r: 0.2511 - val_trimmed_mse_log_r: 0.2432 - val_full_mae_log_r: 0.3287 - val_full_mse_score: 24.2507 - val_trimmed_mse_score: 7.6825 - val_full_mae_score: 1.4600
+Epoch 18/50
