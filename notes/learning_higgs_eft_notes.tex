@@ -728,134 +728,185 @@ different setups tested.
 
 \begin{table}
   \footnotesize
-  \begin{tabular}{ll rr rr r}
+  \begin{tabular}{ll rr}
     \toprule
-    Algorithm & Setup & \multicolumn{2}{c}{RMS error on $\log  r(\boldx; \boldtheta_0, \boldtheta_1)$}
-    & RMS error on $E[\log r(\boldx; \boldtheta, \boldtheta_1) | \boldx \sim \boldtheta_{\text{SM}} ]$ \\
+    Algorithm & Setup & \multicolumn{2}{c}{RMS error on} \\
     \cmidrule{3-4}
-    && All & Trimmed \\
+    && $\log  r(\boldx; \boldtheta_0, \boldtheta_1)$
+    & $E[\log r(\boldx; \boldtheta, \boldtheta_1) | \boldx \sim \boldtheta_{\text{SM}} ]$ \\
     \midrule
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   AFC (density est.\ in $\boldx$) & 2d, $\epsilon = 0.55$ (2) & \emph{0.46} & \emph{0.16} & \emph{5.2}\\
-   AFC (density est.\ in $\boldx$) & 5d, $\epsilon = 0.2$ (2) & 0.57 & 0.21 & 5.7\\
+   AFC & 2d, $\epsilon = 0.2$ (2) & \emph{0.154} & 5.1\\
+    & \emph{2d, $\epsilon = 0.1$ (2)} & 0.160 & 4.2\\
+    & 2d, $\epsilon = 0.05$ (2) & 0.182 & 3.8\\
+    & 5d, $\epsilon = 0.4$ (2) & 0.172 & 5.3\\
+    & 5d, $\epsilon = 0.2$ (2) & 0.244 & 3.6\\
+    & 5d, $\epsilon = 0.1$ (2) & 0.970 & \emph{2.7}\\
    \midrule
-   carl (param., raw) & Baseline (2) & 0.21 & 0.07 & 0.8\\
-    & Baseline, large batch (2) & \emph{0.20} & 0.06 & \emph{0.5}\\
-    & Baseline, LR decay (2) & 0.31 & 0.16 & 5.4\\
-    & Baseline, LR decay, large batch size (2) & 0.27 & 0.11 & 6.4\\
-    & Baseline, LR decay, small batch size (2) & 0.27 & 0.11 & 6.4\\
-    & Baseline, small LR, large batch size (2) & 0.29 & 0.07 & 1.8\\
-    & Baseline, small constant LR, large batch size (2) & 0.21 & \emph{0.06} & 1.3\\
-    & Baseline, large LR (2) & 0.53 & 0.27 & 6.3\\
-    & Baseline, large LR, large batch size (2) & 0.35 & 0.13 & 1.9\\
-    & Baseline, large constant LR, large batch size (2) & 0.58 & 0.41 & 27.7\\
-    & Random $\boldtheta$ (2) & 0.20 & 0.07 & 0.6\\
+   carl (param., raw) & Baseline (1) & 0.103 & 2.3\\
+    & Baseline (2) & 0.072 & 0.8\\
+    & Baseline (3) & 0.080 & 1.1\\
+    & Baseline, large batches (2) & 0.062 & \emph{0.5}\\
+    & Baseline, small batches (2) & 0.076 & 1.3\\
+    & Baseline, const.\  LR (2) & 0.161 & 5.4\\
+    & Baseline, const.\  LR, large batches (2) & 0.113 & 6.4\\
+    & Baseline, const.\  LR, small batches (2) & 0.113 & 6.4\\
+    & Baseline, small LR (2) & 0.057 & 1.2\\
+    & Baseline, small LR, large batches (2) & 0.068 & 1.8\\
+    & Baseline, small LR, small batches (2) & \emph{0.051} & 1.2\\
+    & Baseline, small const.\  LR (2) & 0.078 & 3.4\\
+    & Baseline, small const.\  LR, large batches (2) & 0.061 & 1.3\\
+    & Baseline, small const.\  LR, small batches (2) & 0.072 & 3.1\\
+    & Baseline, large LR (2) & 0.267 & 6.3\\
+    & Baseline, large LR, large batches (2) & 0.125 & 1.9\\
+    & Baseline, large LR, small batches (2) & 0.183 & 3.8\\
+    & Baseline, large const.\  LR (2) & 0.298 & 12.1\\
+    & Baseline, large const.\  LR, large batches (2) & 0.405 & 27.7\\
+    & Baseline, large const.\  LR, small batches (2) & 0.305 & 6.5\\
+    & Random $\boldtheta$ (1) & 0.096 & 2.5\\
+    & \emph{Random $\boldtheta$ (2)} & 0.070 & 0.6\\
    \midrule
-   carl (param., cal.) & Baseline (2) & 0.21 & 0.07 & 0.7\\
-    & Baseline, large batch (2) & \emph{0.20} & 0.06 & 0.6\\
-    & Baseline, LR decay (2) & 0.28 & 0.10 & \\
-    & Baseline, LR decay, large batch size (2) & 0.27 & 0.09 & 1.0\\
-    & Baseline, LR decay, small batch size (2) & 0.27 & 0.09 & 1.0\\
-    & Baseline, small LR, large batch size (2) & 0.26 & 0.06 & 1.0\\
-    & Baseline, small constant LR, large batch size (2) & 0.20 & \emph{0.05} & 0.7\\
-    & Baseline, large LR (2) & 0.50 & 0.22 & \\
-    & Baseline, large LR, large batch size (2) & 0.35 & 0.12 & 1.7\\
-    & Baseline, large constant LR, large batch size (2) & 0.45 & 0.19 & 4.3\\
-    & Random $\boldtheta$ (2) & 0.21 & 0.07 & \emph{0.6}\\
+   carl (param., cal.) & Baseline (1) & 0.090 & 1.7\\
+    & Baseline (2) & 0.070 & 0.7\\
+    & Baseline (3) & 0.073 & \\
+    & Baseline, large batches (2) & 0.059 & 0.6\\
+    & Baseline, small batches (2) & 0.073 & 0.8\\
+    & Baseline, const.\  LR (2) & 0.101 & 0.8\\
+    & Baseline, const.\  LR, large batches (2) & 0.087 & 1.0\\
+    & Baseline, const.\  LR, small batches (2) & 0.087 & 1.0\\
+    & Baseline, small LR (2) & 0.055 & 0.8\\
+    & Baseline, small LR, large batches (2) & 0.064 & 1.0\\
+    & Baseline, small LR, small batches (2) & \emph{0.048} & 0.7\\
+    & Baseline, small const.\  LR (2) & 0.059 & 0.7\\
+    & Baseline, small const.\  LR, large batches (2) & 0.055 & 0.7\\
+    & Baseline, small const.\  LR, small batches (2) & 0.060 & 0.6\\
+    & Baseline, large LR (2) & 0.216 & \\
+    & Baseline, large LR, large batches (2) & 0.123 & 1.7\\
+    & Baseline, large LR, small batches (2) & 0.167 & 2.3\\
+    & Baseline, large const.\  LR (2) & 0.234 & 3.2\\
+    & Baseline, large const.\  LR, large batches (2) & 0.190 & 4.3\\
+    & Baseline, large const.\  LR, small batches (2) & 0.261 & 5.9\\
+    & Random $\boldtheta$ (1) & 0.089 & 1.8\\
+    & \emph{Random $\boldtheta$ (2)} & 0.067 & \emph{0.6}\\
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 1.
-    In this table we show likelihood-free strategies based on a
-    point-by-point (PbP) or parameterized setup. 
+    In this table we show likelihood-free strategies that only use samples generated from different hypotheses..
     The numbers in brackets denote the number of hidden layers in the
-    neural networks.  We show two types metrics: the (trimmed) root mean squared
+    neural networks.  We show two metrics: the trimmed root mean squared
     error of $\log r$ for a fixed pair of hypotheses
     over different phase-space points, and the root mean squared error of the expectation 
-    value of $\log r$ for different pairs of hypotheses, drawn from a flat prior. Results in brackets
-    mean that some NaN values had to be ignored.}
+    value of $\log r$ for different pairs of hypotheses, drawn from a flat prior. Entries with bold text are shown in the
+  plots in the next section.}
   \label{tbl:comparison1}
 \end{table}
 
 
 \begin{table}
   \footnotesize
-  \begin{tabular}{ll rr rr r}
+  \begin{tabular}{ll rr}
     \toprule
-    Algorithm & Setup & \multicolumn{2}{c}{RMS error on $\log  r(\boldx; \boldtheta_0, \boldtheta_1)$}
-    & RMS error on $E[\log r(\boldx; \boldtheta, \boldtheta_1) | \boldx \sim \boldtheta_{\text{SM}} ]$ \\
+    Algorithm & Setup & \multicolumn{2}{c}{RMS error on} \\
     \cmidrule{3-4}
-    && All & Trimmed \\
+    && $\log  r(\boldx; \boldtheta_0, \boldtheta_1)$
+    & $E[\log r(\boldx; \boldtheta, \boldtheta_1) | \boldx \sim \boldtheta_{\text{SM}} ]$ \\
     \midrule
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   carl + score (param., raw) & Baseline (2) & \emph{0.14} & \emph{0.03} & 0.6\\
-    & Random $\boldtheta$ (2) & 0.14 & 0.03 & \emph{0.4}\\
+   carl + score (param., raw) & Baseline (1) & 0.082 & 2.4\\
+     & Baseline (2) & 0.032 & 0.6\\
+    & Baseline, $\alpha = 0.01$ (2) & 0.056 & 0.5\\
+    & Baseline, $\alpha = 0.03$ (2) & 0.043 & 0.5\\
+    & Baseline, $\alpha = 0.3$ (2) & 0.027 & 1.0\\
+    & \emph{Baseline, $\alpha = 1$ (2)} & \emph{0.023} & 0.6\\
+    & Random $\boldtheta$ (1) & 0.080 & 1.9\\
+    & Random $\boldtheta$ (2) & 0.034 & \emph{0.4}\\
    \midrule
-   carl + score (param., cal.) & Baseline (2) & 0.12 & \emph{0.03} & \emph{0.4}\\
-    & Random $\boldtheta$ (2) & \emph{0.12} & 0.03 & 0.4\\
+   carl + score (param., cal.) & Baseline (1) & 0.078 & 1.6\\
+     & Baseline (2) & 0.031 & 0.4\\
+    & Baseline, $\alpha = 0.01$ (2) & 0.055 & 0.5\\
+    & Baseline, $\alpha = 0.03$ (2) & 0.042 & 0.4\\
+    & Baseline, $\alpha = 0.3$ (2) & 0.025 & 0.4\\
+    & \emph{Baseline, $\alpha = 1$ (2)} & \emph{0.022} & \emph{0.4}\\
+    & Random $\boldtheta$ (1) & 0.073 & \\
+    & Random $\boldtheta$ (2) & 0.033 & 0.4\\
    \midrule
-   SM score regression & Fixed density est. on $t$  (2) & 0.19 & 0.06 & \emph{1.7}\\
-    & Dyn. dens. est. on $t$  (2) & 0.19 & 0.06 & 1.8\\
-    & Dens. est. on $t \cdot \theta$  (2) & \emph{0.19} & \emph{0.05} & 3.1\\
+   SM score regr.& \emph{Fixed density est. on $t$  (2)} & 0.057 & \emph{1.7}\\
+    & Dyn. dens. est. on $t$  (2) & 0.056 & 1.8\\
+    & Dens. est. on $t \cdot \theta$  (2) & \emph{0.045} & 3.1\\
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 2.
-    In this table we show parameterized architectures that utilize the score information. 
+    In this table we show strategies that use the score.
     The numbers in brackets denote the number of hidden layers in the
-    neural networks.  We show two types metrics: the root mean squared or median
+    neural networks.  We show two metrics: the trimmed root mean squared
     error of $\log r$ for a fixed pair of hypotheses
-    over different phase-space points, and the root mean squared or median of the expectation 
-    value of $\log r$ for different pairs of hypotheses, drawn from a flat prior. Results in brackets
-    mean that some NaN values had to be ignored.}
+    over different phase-space points, and the root mean squared error of the expectation 
+    value of $\log r$ for different pairs of hypotheses, drawn from a flat prior.  Entries with bold text are shown in the
+  plots in the next section.}
   \label{tbl:comparison2}
 \end{table}
 
 
 \begin{table}
   \footnotesize
-  \begin{tabular}{ll rr rr r}
+  \begin{tabular}{ll rr}
     \toprule
-    Algorithm & Setup & \multicolumn{2}{c}{RMS error on $\log  r(\boldx; \boldtheta_0, \boldtheta_1)$}
-    & RMS error on $E[\log r(\boldx; \boldtheta, \boldtheta_1) | \boldx \sim \boldtheta_{\text{SM}} ]$ \\
+    Algorithm & Setup & \multicolumn{2}{c}{RMS error on} \\
     \cmidrule{3-4}
-    && All & Trimmed \\
+    && $\log  r(\boldx; \boldtheta_0, \boldtheta_1)$
+    & $E[\log r(\boldx; \boldtheta, \boldtheta_1) | \boldx \sim \boldtheta_{\text{SM}} ]$ \\
     \midrule
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   Ratio regression (param., raw) & Baseline (2) & \emph{0.12} & \emph{0.07} & 8.2\\
-    & Baseline, large batch (2) & 0.15 & 0.10 & \emph{0.8}\\
-    & Baseline, small batch (2) & 0.19 & 0.12 & 2.9\\
-    & Baseline, LR decay (2) & 0.20 & 0.13 & 2.3\\
-    & Baseline, LR decay, large batch size (2) & 0.22 & 0.16 & 4.7\\
-    & Baseline, LR decay, small batch size (2) & 0.22 & 0.16 & 4.7\\
-    & Baseline, small LR (2) & 0.20 & 0.14 & 7.3\\
-    & Baseline, small LR, large batch size (2) & 0.26 & 0.17 & 1.7\\
-    & Baseline, small constant LR (2) & 0.20 & 0.13 & 4.6\\
-    & Baseline, small constant LR, large batch size (2) & 0.20 & 0.14 & 3.2\\
-    & Baseline, large LR (2) & 0.33 & 0.20 & 2.4\\
-    & Baseline, large LR, large batch size (2) & 0.35 & 0.24 & 3.3\\
-    & Baseline, large LR, small batch size (2) & 0.20 & 0.12 & 4.2\\
-    & Baseline, large constant LR (2) & 0.19 & 0.12 & 3.2\\
-    & Baseline, large constant LR, large batch size (2) & 0.21 & 0.15 & 4.6\\
-    & Random $\boldtheta$ (2) & 0.22 & 0.15 & 5.2\\
+   Ratio regr.\ (param., raw) & Baseline (1) & 0.219 & 4.3\\
+    & \emph{Baseline (2)} & 0.063 & \emph{0.6}\\
+    & Baseline, large batches (2) & 0.100 & 1.0\\
+    & Baseline, small batches (2) & \emph{0.053} & 0.6\\
+    & Baseline, const.\  LR (2) & 0.122 & 3.8\\
+    & Baseline, const.\  LR, large batches (2) & 0.181 & 5.3\\
+    & Baseline, const.\  LR, small batches (2) & 0.181 & 5.3\\
+    & Baseline, small LR (2) & 0.099 & 1.2\\
+    & Baseline, small LR, large batches (2) & 0.195 & 2.4\\
+    & Baseline, small const.\  LR (2) & 0.199 & 11.2\\
+    & Baseline, small const.\  LR, large batches (2) & 0.146 & 4.6\\
+    & Baseline, large LR (2) & 0.231 & 3.7\\
+    & Baseline, large LR, large batches (2) & 0.252 & 4.1\\
+    & Baseline, large LR, small batches (2) & 0.341 & 14.7\\
+    & Baseline, large const.\  LR (2) & 0.121 & 2.3\\
+    & Baseline, large const.\  LR, large batches (2) & 0.167 & 3.7\\
+    & Random $\boldtheta$ (1) & 0.266 & 4.6\\
+    & Random $\boldtheta$ (2) & 0.076 & 1.4\\
    \midrule
-   Ratio regr.\ + score (param., raw) & Baseline (2) & 0.16 & 0.08 & 2.1\\
-   Ratio regr.\ + score (param., raw) & Baseline, $\alpha = 30$ (2) & 0.09 & \emph{0.03} & \emph{0.3}\\
-   Ratio regr.\ + score (param., raw) & Baseline, $\alpha = 300$ (2) & \emph{0.09} & 0.03 & 1.0\\
-   Ratio regr.\ + score (param., raw) & Baseline, $\alpha = 1000$ (2) & 0.17 & 0.09 & 4.5\\
-    & Random $\boldtheta$ (2) & 0.17 & 0.11 & 5.5\\
+   Ratio regr.\ (param., cal.) & Baseline (1) & 0.167 & 2.3\\
+    & \emph{Baseline (2)} & 0.061 & \emph{0.3}\\
+    & Baseline, large batches (2) & 0.088 & 0.7\\
+    & Baseline, small batches (2) & \emph{0.050} & 0.4\\
+    & Baseline, const.\  LR (2) & 0.109 & 1.0\\
+    & Baseline, const.\  LR, large batches (2) & 0.137 & 0.9\\
+    & Baseline, const.\  LR, small batches (2) & 0.137 & 0.9\\
+    & Baseline, small LR (2) & 0.083 & 0.6\\
+    & Baseline, small LR, large batches (2) & 0.151 & 1.5\\
+    & Baseline, small const.\  LR (2) & 0.123 & 1.3\\
+    & Baseline, small const.\  LR, large batches (2) & 0.125 & 1.0\\
+    & Baseline, large LR (2) & 0.209 & 3.3\\
+    & Baseline, large LR, large batches (2) & 0.236 & 4.2\\
+    & Baseline, large LR, small batches (2) & 0.218 & 4.0\\
+    & Baseline, large const.\  LR (2) & 0.117 & 1.0\\
+    & Baseline, large const.\  LR, large batches (2) & 0.139 & 1.9\\
+    & Random $\boldtheta$ (1) & 0.184 & 3.1\\
+    & Random $\boldtheta$ (2) & 0.068 & 0.4\\
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 3.
-    In this table we show point-by-point (PbP) and parameterized
-    architectures that require a tractable likelihood.
+    In this table we show strategies that use the likelihood ratio directly.
     The numbers in brackets denote the number of hidden layers in the
-    neural networks.  We show two types metrics: the (trimmed) root mean squared
+    neural networks.  We show two metrics: the trimmed root mean squared
     error of $\log r$ for a fixed pair of hypotheses
     over different phase-space points, and the root mean squared error of the expectation 
-    value of $\log r$ for different pairs of hypotheses, drawn from a flat prior. Results in brackets
-    mean that some NaN values had to be ignored.}
+    value of $\log r$ for different pairs of hypotheses, drawn from a flat prior.  Entries with bold text are shown in the
+  plots in the next section.}
   \label{tbl:comparison3}
 \end{table}
 
@@ -864,40 +915,122 @@ different setups tested.
   \footnotesize
   \begin{tabular}{ll rr}
     \toprule
-    Algorithm & Setup & \multicolumn{2}{c}{RMS error on $\left[ \boldt (\boldx; \boldtheta_0, \boldtheta_1) \right]$} \\
-    \cmidrule{3-4} 
-    && All & Trimmed \\
+    Algorithm & Setup & \multicolumn{2}{c}{RMS error on} \\
+    \cmidrule{3-4}
+    && $\log  r(\boldx; \boldtheta_0, \boldtheta_1)$
+    & $E[\log r(\boldx; \boldtheta, \boldtheta_1) | \boldx \sim \boldtheta_{\text{SM}} ]$ \\
     \midrule
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   carl & Baseline (2) & 27.6 & \emph{0.26}\\
-    & Random $\boldtheta$ (2) & \emph{27.5} & 0.31\\
-    & Aware, baseline (2) &  & \\
-    & Aware, basis (2) &  & \\
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    Ratio + score regr.\ (param., raw) & Baseline (1) & 0.234 & 3.9\\
+    & Baseline (2) & 0.030 & 0.5\\
+    & Baseline, $\alpha = 10$ (2) & 0.030 & \emph{0.3}\\
+    & \emph{Baseline, $\alpha = 30$ (2)} & \emph{0.029} & 0.4\\
+    & Baseline, $\alpha = 300$ (2) & 0.036 & 0.4\\
+    & Baseline, $\alpha = 1000$ (2) & 0.041 & 0.4\\
+    & Random $\boldtheta$ (1) & 0.237 & 3.7\\
+    & Random $\boldtheta$ (2) & 0.032 & 1.2\\
    \midrule
-   carl + score & Baseline (2) & \emph{27.5} & \emph{0.06}\\
-    & Random $\boldtheta$ (2) & 27.6 & 0.10\\
-    & Aware, baseline (2) &  & \\
-    & Aware, basis (2) &  & \\
-   \midrule
-   Ratio regression & Baseline (2) & 27.5 & \emph{0.09}\\
-    & Random $\boldtheta$ (2) & \emph{27.5} & 0.09\\
-    & Aware, baseline (2) & 29.3 & 0.14\\
-    & Aware, basis (2) & 32.5 & 0.22\\
-   \midrule
-   Ratio regr.\ + score & Baseline (2) & \emph{27.5} & \emph{0.07}\\
-    & Random $\boldtheta$ (2) & 27.5 & 0.07\\
-    & Aware, baseline (2) &  & \\
-    & Aware, basis (2) &  & \\
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   Ratio + score regr.\ (param., cal.) & Baseline (1) & 0.156 & 4.2\\
+    & Baseline (2) & 0.029 & 0.4\\
+    & Baseline, $\alpha = 10$ (2) & 0.030 & 0.4\\
+    & \emph{Baseline, $\alpha = 30$ (2)} & \emph{0.029} & 0.4\\
+    & Baseline, $\alpha = 300$ (2) & 0.033 & 0.4\\
+    & Baseline, $\alpha = 1000$ (2) & 0.038 & 0.4\\
+    & Random $\boldtheta$ (1) & 0.166 & 4.4\\
+    & Random $\boldtheta$ (2) & 0.029 & \emph{0.3}\\
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \bottomrule
   \end{tabular}
   \caption{Comparison of different inference strategies, part 4.
-    In this table we compare the estimation of the scores at a fixed $\boldtheta_0$ for varying phase-space points $\boldx$ between the
-    different parameterized models. We show the (trimmed) root mean squared error on the scores.
+    In this table we show strategies that use both the likelihood ratio as well as the score.
     The numbers in brackets denote the number of hidden layers in the
-    neural networks.  Results in brackets mean that some NaN values had to be ignored.}
+    neural networks.  We show two metrics: the trimmed root mean squared
+    error of $\log r$ for a fixed pair of hypotheses
+    over different phase-space points, and the root mean squared error of the expectation 
+    value of $\log r$ for different pairs of hypotheses, drawn from a flat prior.  Entries with bold text are shown in the
+  plots in the next section.}
+  \label{tbl:comparison4}
+\end{table}
+
+
+\begin{table}
+  \footnotesize
+  \begin{tabular}{ll r}
+    \toprule
+    Algorithm & Setup & RMSE $\left[ \boldt (\boldx; \boldtheta_0, \boldtheta_1) \right]$ \\
+    \midrule
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   carl & Baseline (1) & 0.47\\
+    & Baseline (2) & 0.39\\
+    & Baseline (3) & 0.61\\
+    & Baseline, large batches (2) & 0.30\\
+    & Baseline, small batches (2) & 0.54\\
+    & Baseline, const.\  LR (2) & 0.79\\
+    & Baseline, const.\  LR, large batches (2) & 0.67\\
+    & Baseline, const.\  LR, small batches (2) & 0.67\\
+    & Baseline, small LR (2) & 0.21\\
+    & Baseline, small LR, large batches (2) & 0.22\\
+    & Baseline, small LR, small batches (2) & \emph{0.19}\\
+    & Baseline, small const.\  LR (2) & 0.24\\
+    & Baseline, small const.\  LR, large batches (2) & 0.21\\
+    & Baseline, small const.\  LR, small batches (2) & 0.26\\
+    & Baseline, large LR (2) & 2.94\\
+    & Baseline, large LR, large batches (2) & 1.67\\
+    & Baseline, large LR, small batches (2) & 2.22\\
+    & Baseline, large const.\  LR (2) & 2.68\\
+    & Baseline, large const.\  LR, large batches (2) & 2.50\\
+    & Baseline, large const.\  LR, small batches (2) & 2.68\\
+    & Random $\boldtheta$ (1) & 0.45\\
+    & Random $\boldtheta$ (2) & 0.35\\
+   \midrule
+   carl + score & Baseline (1) & 0.27\\
+    & Baseline (2) & 0.09\\
+    & Baseline, $\alpha = 0.01$ (2) & 0.22\\
+    & Baseline, $\alpha = 0.03$ (2) & 0.15\\
+    & Baseline, $\alpha = 0.3$ (2) & 0.06\\
+    & Baseline, $\alpha = 1$ (2) & \emph{0.05}\\
+    & Random $\boldtheta$ (1) & 0.27\\
+    & Random $\boldtheta$ (2) & 0.09\\
+   \midrule
+   Ratio regression & Baseline (1) & 1.23\\
+    & Baseline (2) & 0.35\\
+    & Baseline, large batches (2) & 0.49\\
+    & Baseline, small batches (2) & \emph{0.32}\\
+    & Baseline, const.\  LR (2) & 0.82\\
+    & Baseline, const.\  LR, large batches (2) & 1.01\\
+    & Baseline, const.\  LR, small batches (2) & 1.01\\
+    & Baseline, small LR (2) & 0.42\\
+    & Baseline, small LR, large batches (2) & 0.76\\
+    & Baseline, small const.\  LR (2) & 0.84\\
+    & Baseline, small const.\  LR, large batches (2) & 0.95\\
+    & Baseline, large LR (2) & 2.19\\
+    & Baseline, large LR, large batches (2) & 1.29\\
+    & Baseline, large LR, small batches (2) & 1.31\\
+    & Baseline, large const.\  LR (2) & 0.78\\
+    & Baseline, large const.\  LR, large batches (2) & 1.06\\
+    & Random $\boldtheta$ (1) & 1.47\\
+    & Random $\boldtheta$ (2) & 0.47\\
+   \midrule
+   Ratio + score regr. & Baseline (1) & 0.19\\
+    & Baseline (2) & 0.05\\
+    & Baseline, $\alpha = 10$ (2) & 0.08\\
+    & Baseline, $\alpha = 30$ (2) & 0.06\\
+    & Baseline, $\alpha = 300$ (2) & 0.05\\
+    & Baseline, $\alpha = 1000$ (2) & \emph{0.05}\\
+    & Random $\boldtheta$ (1) & 0.23\\
+    & Random $\boldtheta$ (2) & 0.05\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \bottomrule
+  \end{tabular}
+  \caption{Comparison of different inference strategies, part 5.
+    In this table we compare the estimation of the scores at a fixed $\boldtheta_0$ for varying phase-space points $\boldx$ between the
+    different parameterized models. We show the trimmed root mean squared error on the scores.
+    The numbers in brackets denote the number of hidden layers in the
+    neural networks.}
   \label{tbl:comparison_score}
 \end{table}
+
+\clearpage
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -906,7 +1039,7 @@ different setups tested.
 
 Some of our results are shown in
 Figures~\ref{fig:baseline_r_histo} to
-\ref{fig:baseline_expected_llr_contours}.
+\ref{fig:baseline_expected_llr_contours}. The strategies shown correspond to the bold entries in the tables in the previous section.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/results/r_histograms_vanilla.pdf}%
@@ -980,8 +1113,7 @@ Figures~\ref{fig:baseline_r_histo} to
   \label{fig:baseline_expected_llr_contours}
 \end{figure}
 
-The plots shown are based on fully connected neural networks with
-two hidden layers of 100 units.
+\clearpage
 
 
 
@@ -1064,6 +1196,8 @@ models trained and evaluated on the smeared data set.
   \label{fig:smearing_expected_llr_contours}
 \end{figure}
 
+\clearpage
+
 
 
 
@@ -1082,6 +1216,9 @@ Figure~\ref{fig:learning_curves} shows the evolution of different loss functions
   and denominator samples, and the mean squared error on the scores.}
   \label{fig:learning_curves}
 \end{figure}
+
+\clearpage
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
