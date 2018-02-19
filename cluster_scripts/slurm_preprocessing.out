@@ -1,24 +1,24 @@
-14.02.2018 11:10:17 INFO    Welcome! How are you today?
-14.02.2018 11:10:17 INFO    Tasks:
-14.02.2018 11:10:17 INFO      Baseline training:       False
-14.02.2018 11:10:17 INFO      Random training:         False
-14.02.2018 11:10:17 INFO      Morphing training:       False
-14.02.2018 11:10:17 INFO      Point-by-point training: True
-14.02.2018 11:10:17 INFO      Calibration:             False
-14.02.2018 11:10:17 INFO      Likelihood ratio eval:   False
-14.02.2018 11:10:17 INFO      Neyman construction:     False
-14.02.2018 11:10:17 INFO      Roaming:                 False
-14.02.2018 11:10:17 INFO    Options:
-14.02.2018 11:10:17 INFO      Dry run:                 False
-14.02.2018 11:10:17 INFO      Denominator:             standard
-14.02.2018 11:23:17 INFO    Splitting...
-14.02.2018 11:23:57 INFO    Number of events:
-14.02.2018 11:23:57 INFO      All:    821636
-14.02.2018 11:23:57 INFO      Training:    575145
-14.02.2018 11:23:57 INFO      Calibration: 82164
-14.02.2018 11:23:57 INFO      Evaluation:  164327
-14.02.2018 11:23:57 INFO    Normalizing probabilities
-14.02.2018 11:26:12 INFO    Generating point-by-point training samples
-generate_data.py:382: RuntimeWarning: divide by zero encountered in log
-  np.log(r) ** 2 < settings.max_logr ** 2) & (np.isfinite(np.log(r)))
-14.02.2018 11:51:47 INFO    Done!
+19.02.2018 09:29:16 INFO    Welcome! How are you today?
+19.02.2018 09:29:16 INFO    Tasks:
+19.02.2018 09:29:16 INFO      Baseline training:       False
+19.02.2018 09:29:16 INFO      Random training:         True
+19.02.2018 09:29:16 INFO      Morphing training:       False
+19.02.2018 09:29:16 INFO      Point-by-point training: False
+19.02.2018 09:29:16 INFO      Calibration:             False
+19.02.2018 09:29:16 INFO      Likelihood ratio eval:   False
+19.02.2018 09:29:16 INFO      Neyman construction:     False
+19.02.2018 09:29:16 INFO      Roaming:                 False
+19.02.2018 09:29:16 INFO    Options:
+19.02.2018 09:29:16 INFO      Dry run:                 False
+19.02.2018 09:29:16 INFO      Denominator:             standard
+19.02.2018 09:42:52 INFO    Splitting...
+19.02.2018 09:43:23 INFO    Number of events:
+19.02.2018 09:43:23 INFO      All:    821636
+19.02.2018 09:43:23 INFO      Training:    575145
+19.02.2018 09:43:23 INFO      Calibration: 82164
+19.02.2018 09:43:23 INFO      Evaluation:  164327
+19.02.2018 09:43:23 INFO    Normalizing probabilities
+19.02.2018 09:45:40 INFO    Generating random theta training sample
+generate_data.py:463: RuntimeWarning: divide by zero encountered in log
+  np.log(r) ** 2 < settings.max_logr ** 2)
+19.02.2018 10:47:36 INFO    Done!

@@ -1,0 +1,95 @@
+Using TensorFlow backend.
+19.02.2018 09:30:38 INFO    Hi! How are you today?
+19.02.2018 09:30:38 INFO    Startup options:
+19.02.2018 09:30:38 INFO      Algorithm:                     scoreregression
+19.02.2018 09:30:38 INFO      Point by point:                False
+19.02.2018 09:30:38 INFO      Morphing-aware mode:           False
+19.02.2018 09:30:38 INFO      Smeared data:                  True
+19.02.2018 09:30:38 INFO      Training sample:               baseline
+19.02.2018 09:30:38 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
+19.02.2018 09:30:38 INFO      alpha:                         None
+19.02.2018 09:30:38 INFO      AFC epsilon:                   None
+19.02.2018 09:30:38 INFO      Neyman construction toys:      False
+19.02.2018 09:30:38 INFO      Other options:                 
+19.02.2018 09:30:38 INFO      Base directory:                /home/jb6504/higgs_inference
+19.02.2018 09:30:38 INFO      ML-based strategies available: True
+19.02.2018 09:30:38 INFO    Starting score regression inference
+19.02.2018 09:30:38 INFO    Options:
+19.02.2018 09:30:38 INFO      Number of hidden layers: 2
+19.02.2018 09:30:38 INFO      Batch size:              128
+19.02.2018 09:30:38 INFO      Learning rate:           0.001
+19.02.2018 09:30:38 INFO      Learning rate decay:     0.0921034037198
+19.02.2018 09:30:38 INFO      Number of epochs:        50
+19.02.2018 09:31:06 INFO    Starting training of score regression
+Train on 7999812 samples, validate on 1999953 samples
+2018-02-19 09:31:06.911194: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-19 09:31:06.911603: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-19 09:31:06.911613: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-19 09:31:06.911617: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-19 09:31:06.911621: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-19 09:31:07.249759: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:85:00.0
+Total memory: 22.38GiB
+Free memory: 22.21GiB
+2018-02-19 09:31:07.249815: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-19 09:31:07.249821: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-19 09:31:07.249830: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:85:00.0)
+Epoch 1/50
+276s - loss: 0.0436 - val_loss: 0.0306
+Epoch 2/50
+275s - loss: 0.0251 - val_loss: 0.0244
+Epoch 3/50
+275s - loss: 0.0219 - val_loss: 0.0192
+Epoch 4/50
+274s - loss: 0.0201 - val_loss: 0.0225
+Epoch 5/50
+274s - loss: 0.0186 - val_loss: 0.0174
+Epoch 6/50
+274s - loss: 0.0172 - val_loss: 0.0172
+Epoch 7/50
+273s - loss: 0.0162 - val_loss: 0.0164
+Epoch 8/50
+273s - loss: 0.0155 - val_loss: 0.0157
+Epoch 9/50
+273s - loss: 0.0148 - val_loss: 0.0146
+Epoch 10/50
+273s - loss: 0.0140 - val_loss: 0.0141
+Epoch 11/50
+273s - loss: 0.0136 - val_loss: 0.0139
+Epoch 12/50
+273s - loss: 0.0130 - val_loss: 0.0139
+Epoch 13/50
+275s - loss: 0.0126 - val_loss: 0.0126
+Epoch 14/50
+275s - loss: 0.0122 - val_loss: 0.0126
+Epoch 15/50
+275s - loss: 0.0119 - val_loss: 0.0122
+Epoch 16/50
+275s - loss: 0.0116 - val_loss: 0.0120
+Epoch 17/50
+275s - loss: 0.0113 - val_loss: 0.0118
+Epoch 18/50
+275s - loss: 0.0111 - val_loss: 0.0113
+Epoch 19/50
+275s - loss: 0.0109 - val_loss: 0.0115
+Epoch 20/50
+275s - loss: 0.0108 - val_loss: 0.0115
+Epoch 21/50
+275s - loss: 0.0105 - val_loss: 0.0114
+Epoch 22/50
+275s - loss: 0.0104 - val_loss: 0.0110
+Epoch 23/50
+275s - loss: 0.0103 - val_loss: 0.0111
+Epoch 24/50
+275s - loss: 0.0102 - val_loss: 0.0106
+Epoch 25/50
+275s - loss: 0.0101 - val_loss: 0.0106
+Epoch 26/50
+274s - loss: 0.0100 - val_loss: 0.0109
+Epoch 27/50
+274s - loss: 0.0099 - val_loss: 0.0104
+Epoch 28/50
+273s - loss: 0.0098 - val_loss: 0.0103
+Epoch 29/50
