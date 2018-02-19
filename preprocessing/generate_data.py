@@ -440,14 +440,12 @@ if args.random:
                        np.array(accepted_den['p_randomtheta_' + str(randomtheta0)]
                                 / accepted_den['p_theta_' + str(theta1)])))
 
-        subset_scores_den = [weighted_data_train.columns.get_loc(x)
-                             for x in ['score_theta_' + str(theta1) + '_0', 'score_theta_' + str(theta1) + '_1']]
-        subset_scores_num = [weighted_data_train.columns.get_loc(x)
+        subset_scores = [weighted_data_train.columns.get_loc(x)
                              for x in ['score_randomtheta_' + str(randomtheta0) + '_0',
                                        'score_randomtheta_' + str(randomtheta0) + '_1']]
         scores = np.vstack((
-            np.array(accepted_num.iloc[:, subset_scores_num]),
-            np.array(accepted_den.iloc[:, subset_scores_den])
+            np.array(accepted_num.iloc[:, subset_scores]),
+            np.array(accepted_den.iloc[:, subset_scores])
         ))
 
         subset_randomthetas = [weighted_data_train.columns.get_loc(x)
