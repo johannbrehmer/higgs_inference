@@ -28,3 +28,16 @@ python -u experiments.py regression -o slowlearning
 python -u experiments.py regression -o smallbatch
 python -u experiments.py regression -o smallbatch fastlearning
 python -u experiments.py regression -o smallbatch slowlearning
+
+python -u experiments.py regression -o largebatch constantlr
+python -u experiments.py regression -o largebatch fastlearning constantlr
+python -u experiments.py regression -o largebatch slowlearning constantlr
+
+python -u experiments.py regression -o constantlr
+python -u experiments.py regression -o fastlearning constantlr
+python -u experiments.py regression -o slowlearning constantlr
+
+python -u experiments.py regression -o smallbatch constantlr
+python -u experiments.py regression -o smallbatch fastlearning constantlr
+python -u experiments.py regression -o smallbatch slowlearning constantlr
+

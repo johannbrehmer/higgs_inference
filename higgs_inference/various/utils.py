@@ -6,6 +6,8 @@ from __future__ import absolute_import, division, print_function
 
 import numpy as np
 from scipy.interpolate import LinearNDInterpolator, CloughTocher2DInterpolator
+from scipy.stats import trim_mean
+from sklearn.metrics import mean_squared_error
 
 try:
     from skopt.learning import GaussianProcessRegressor
@@ -13,7 +15,6 @@ try:
 except ImportError:
     from sklearn.gaussian_process import GaussianProcessRegressor
     from sklearn.gaussian_process.kernels import ConstantKernel, Matern, WhiteKernel
-
 
 from higgs_inference import settings
 
@@ -28,6 +29,21 @@ def s_from_r(r):
 
 def r_from_s(s, epsilon=1.e-3):
     return np.clip((1. - s + epsilon) / (s + epsilon), epsilon, None)
+
+
+################################################################################
+# Normal and trimmed mean squared error
+################################################################################
+
+def calculate_mean_squared_error(y_true, y_pred, trim='auto'):
+    trim_ = trim
+    if trim_ == 'auto':
+        trim_ = settings.trim_mean_fraction
+
+    if trim > 0.:
+        return trim_mean((y_true - y_pred) ** 2, trim_)
+
+    return mean_squared_error(y_true, y_pred)
 
 
 ################################################################################

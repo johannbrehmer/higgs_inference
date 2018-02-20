@@ -89,13 +89,13 @@ n_neyman_observed_experiments = 51
 ################################################################################
 
 # Depth
-n_hidden_layers_shallow = 1
-n_hidden_layers_default = 2
-n_hidden_layers_deep = 3
+n_hidden_layers_shallow = 2
+n_hidden_layers_default = 3
+n_hidden_layers_deep = 5
 
 # Carl / regression + score: relative weight in loss function
-alpha_regression_default = 100.
-alpha_carl_default = 0.1
+alpha_regression_default = 20.
+alpha_carl_default = 1.
 
 # Training length
 n_epochs_short = 1

@@ -18,7 +18,7 @@ from carl.ratios import ClassifierScoreRatio
 from carl.learning import CalibratedClassifierScoreCV
 
 from higgs_inference import settings
-from higgs_inference.various.utils import decide_toy_evaluation
+from higgs_inference.various.utils import decide_toy_evaluation, calculate_mean_squared_error
 from higgs_inference.models.models_point_by_point import make_classifier, make_regressor
 from higgs_inference.models.ml_utils import DetailedHistory
 
@@ -155,6 +155,10 @@ def point_by_point_inference(algorithm='carl',
 
     expected_llr = []
     expected_llr_calibrated = []
+    mse_log_r = []
+    mse_log_r_calibrated = []
+    trimmed_mse_log_r = []
+    trimmed_mse_log_r_calibrated = []
 
     # Loop over the 15 thetas
     for i, t in enumerate(settings.pbp_training_thetas):
@@ -250,14 +254,18 @@ def point_by_point_inference(algorithm='carl',
 
         # Evaluation
         prediction = regr.predict(X_test_transformed)
-        this_logr = prediction[:, 1]
+        this_log_r = prediction[:, 1]
 
-        expected_llr.append(- 2. * settings.n_expected_events / n_events_test * np.sum(this_logr))
+        # Extract numbers of interest
+        expected_llr.append(- 2. * settings.n_expected_events / n_events_test * np.sum(this_log_r))
+        mse_log_r.append(calculate_mean_squared_error(np.log(r_test[t]), this_log_r, 0.))
+        trimmed_mse_log_r.append(calculate_mean_squared_error(np.log(r_test[t]), this_log_r, 'auto'))
 
+        # For benchmark thetas, save more info
         if t == settings.theta_benchmark_nottrained:
-            np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', np.exp(this_logr))
+            np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', np.exp(this_log_r))
         elif t == settings.theta_benchmark_trained:
-            np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', np.exp(this_logr))
+            np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', np.exp(this_log_r))
 
         ################################################################################
         # Calibration
@@ -281,29 +289,25 @@ def point_by_point_inference(algorithm='carl',
 
         # Evaluation of calibrated classifier
         this_r, _ = ratio_calibrated.predict(X_test_transformed)
-        expected_llr_calibrated.append(- 2. * settings.n_expected_events / n_events_test * np.sum(np.log(this_r)))
 
+        # Extract numbers of interest
+        expected_llr_calibrated.append(- 2. * settings.n_expected_events / n_events_test * np.sum(np.log(this_r)))
+        mse_log_r_calibrated.append(calculate_mean_squared_error(np.log(r_test[t]), np.log(this_r), 0.))
+        trimmed_mse_log_r_calibrated.append(calculate_mean_squared_error(np.log(r_test[t]), np.log(this_r), 'auto'))
+
+        # For benchmark theta, save more data
         if t == settings.theta_benchmark_nottrained:
             np.save(results_dir + '/r_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
 
             # Save calibration histograms
             np.save(results_dir + '/calvalues_nottrained_' + algorithm + filename_addition + '.npy',
                     ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
-            # np.save(results_dir + '/cal0histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
-            # np.save(results_dir + '/cal0edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
-            # np.save(results_dir + '/cal1histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
-            # np.save(results_dir + '/cal1edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
-
         elif t == settings.theta_benchmark_trained:
             np.save(results_dir + '/r_trained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
 
             # Save calibration histograms
             np.save(results_dir + '/calvalues_trained_' + algorithm + filename_addition + '.npy',
                     ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
-            # np.save(results_dir + '/cal0histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
-            # np.save(results_dir + '/cal0edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
-            # np.save(results_dir + '/cal1histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
-            # np.save(results_dir + '/cal1edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
 
         ################################################################################
         # Neyman construction
@@ -370,8 +374,13 @@ def point_by_point_inference(algorithm='carl',
                         + filename_addition + '.npy',
                         llr_neyman_distributions_calibrated)
 
+    # Interpolate and save evaluation results
     expected_llr = np.asarray(expected_llr)
     expected_llr_calibrated = np.asarray(expected_llr_calibrated)
+    mse_log_r = np.asarray(mse_log_r)
+    trimmed_mse_log_r = np.asarray(trimmed_mse_log_r)
+    mse_log_r_calibrated = np.asarray(mse_log_r_calibrated)
+    trimmed_mse_log_r_calibrated = np.asarray(trimmed_mse_log_r_calibrated)
 
     logging.info('Starting interpolation')
 
@@ -391,3 +400,23 @@ def point_by_point_inference(algorithm='carl',
     # expected_llr_calibrated_all = gp.predict(thetas)
     np.save(results_dir + '/llr_' + algorithm + '_calibrated' + filename_addition + '.npy',
             expected_llr_calibrated_all)
+
+    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], mse_log_r)
+    mse_log_r_all = interpolator(settings.thetas)
+    np.save(results_dir + '/mse_logr_' + algorithm + filename_addition + '.npy',
+            mse_log_r_all)
+
+    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], mse_log_r_calibrated)
+    mse_log_r_calibrated_all = interpolator(settings.thetas)
+    np.save(results_dir + '/mse_logr_' + algorithm + '_calibrated' + filename_addition + '.npy',
+            mse_log_r_calibrated_all)
+
+    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], trimmed_mse_log_r)
+    trimmed_mse_log_r_all = interpolator(settings.thetas)
+    np.save(results_dir + '/trimmed_mse_logr_' + algorithm + filename_addition + '.npy',
+            trimmed_mse_log_r_all)
+
+    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], trimmed_mse_log_r_calibrated)
+    trimmed_mse_log_r_calibrated_all = interpolator(settings.thetas)
+    np.save(results_dir + '/trimmed_mse_logr_' + algorithm + '_calibrated' + filename_addition + '.npy',
+            trimmed_mse_log_r_calibrated_all)

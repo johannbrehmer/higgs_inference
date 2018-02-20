@@ -28,3 +28,15 @@ python -u experiments.py carl -o slowlearning
 python -u experiments.py carl -o smallbatch
 python -u experiments.py carl -o smallbatch fastlearning
 python -u experiments.py carl -o smallbatch slowlearning
+
+python -u experiments.py carl -o largebatch constantlr
+python -u experiments.py carl -o largebatch fastlearning constantlr
+python -u experiments.py carl -o largebatch slowlearning constantlr
+
+python -u experiments.py carl -o constantlr
+python -u experiments.py carl -o fastlearning constantlr
+python -u experiments.py carl -o slowlearning constantlr
+
+python -u experiments.py carl -o smallbatch constantlr
+python -u experiments.py carl -o smallbatch fastlearning constantlr
+python -u experiments.py carl -o smallbatch slowlearning constantlr

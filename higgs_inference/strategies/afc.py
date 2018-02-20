@@ -12,7 +12,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KernelDensity
 
 from higgs_inference import settings
-from higgs_inference.various.utils import format_number, decide_toy_evaluation
+from higgs_inference.various.utils import format_number, decide_toy_evaluation, calculate_mean_squared_error
 
 
 def afc_inference(statistics='x',
@@ -93,7 +93,9 @@ def afc_inference(statistics='x',
     # Data
     ################################################################################
 
-    X_test = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
+    X_test = np.load(
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
+    r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
     X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
     n_events_test = X_test.shape[0]
 
@@ -102,6 +104,8 @@ def afc_inference(statistics='x',
     ################################################################################
 
     expected_llr = []
+    mse_log_r = []
+    trimmed_mse_log_r = []
 
     # Loop over the hypothesis thetas
     for i, t in enumerate(settings.pbp_training_thetas):
@@ -111,7 +115,8 @@ def afc_inference(statistics='x',
 
         # Load data
         X_train = np.load(
-            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_point_by_point_' + str(
+                t) + input_filename_addition + '.npy')
         y_train = np.load(
             settings.unweighted_events_dir + '/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
 
@@ -128,7 +133,9 @@ def afc_inference(statistics='x',
         else:
             raise NotImplementedError
 
-        # logging.debug('Setting up KDE')
+        ################################################################################
+        # "Training"
+        ################################################################################
 
         # Set up KDEs for numerator and denominator
         kde_num = KernelDensity(bandwidth=epsilon, kernel=kernel, rtol=kde_relative_tolerance,
@@ -136,13 +143,13 @@ def afc_inference(statistics='x',
         kde_den = KernelDensity(bandwidth=epsilon, kernel=kernel, rtol=kde_relative_tolerance,
                                 atol=kde_absolute_tolerance)
 
-        # logging.debug('Fitting KDE')
-
         # Fit KDEs for numerator and denominator
         kde_num.fit(summary_statistics_train[y_train == 0])
         kde_den.fit(summary_statistics_train[y_train == 1])
 
-        # logging.debug('Evaluation')
+        ################################################################################
+        # Evaluation
+        ################################################################################
 
         # Evaluation
         log_p_hat_num_test = kde_num.score_samples(summary_statistics_test)
@@ -154,14 +161,10 @@ def afc_inference(statistics='x',
 
         log_r_hat_test = log_p_hat_num_test - log_p_hat_den_test
 
-        # logging.debug('Test log p (num): shape %s, %s nans, content \n %s',
-        #               log_p_hat_num_test.shape, np.sum(np.isnan(log_p_hat_num_test)), log_p_hat_num_test)
-        # logging.debug('Test log p (den): shape %s, %s nans, content \n %s',
-        #               log_p_hat_den_test.shape, np.sum(np.isnan(log_p_hat_den_test)), log_p_hat_den_test)
-        # logging.debug('Test log r: shape %s, %s nans, content \n %s',
-        #               log_r_hat_test.shape, np.sum(np.isnan(log_r_hat_test)), log_r_hat_test)
-
+        # Extract numbers of interest
         expected_llr.append(- 2. * settings.n_expected_events / n_events_test * np.sum(log_r_hat_test))
+        mse_log_r.append(calculate_mean_squared_error(np.log(r_test[t]), log_r_hat_test, 0.))
+        trimmed_mse_log_r.append(calculate_mean_squared_error(np.log(r_test[t]), log_r_hat_test, 'auto'))
 
         # For some benchmark thetas, save r for each phase-space point
         if t == settings.theta_benchmark_nottrained:
@@ -259,7 +262,10 @@ def afc_inference(statistics='x',
             np.save(neyman_dir + '/neyman_llr_distribution_afc' + '_' + str(t) + filename_addition + '.npy',
                     llr_neyman_distributions)
 
+    # Interpolate and save evaluation results
     expected_llr = np.asarray(expected_llr)
+    mse_log_r = np.asarray(mse_log_r)
+    trimmed_mse_log_r = np.asarray(trimmed_mse_log_r)
 
     logging.info('Interpolation')
 
@@ -270,3 +276,13 @@ def afc_inference(statistics='x',
     # gp.fit(thetas[settings.pbp_training_thetas], expected_llr)
     # expected_llr_all = gp.predict(thetas)
     np.save(results_dir + '/llr_afc' + filename_addition + '.npy', expected_llr_all)
+
+    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], mse_log_r)
+    mse_log_r_all = interpolator(settings.thetas)
+    np.save(results_dir + '/mse_logr_afc' + filename_addition + '.npy',
+            mse_log_r_all)
+
+    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], trimmed_mse_log_r)
+    trimmed_mse_log_r_all = interpolator(settings.thetas)
+    np.save(results_dir + '/trimmed_mse_logr_afc' + filename_addition + '.npy',
+            trimmed_mse_log_r_all)

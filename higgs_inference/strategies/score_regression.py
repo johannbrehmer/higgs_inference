@@ -17,7 +17,7 @@ from carl.learning.calibration import HistogramCalibrator, NDHistogramCalibrator
 
 from higgs_inference import settings
 from higgs_inference.models.models_score_regression import make_regressor
-from higgs_inference.various.utils import r_from_s, decide_toy_evaluation
+from higgs_inference.various.utils import r_from_s, decide_toy_evaluation, calculate_mean_squared_error
 
 
 def score_regression_inference(use_smearing=False,
@@ -184,6 +184,14 @@ def score_regression_inference(use_smearing=False,
     expected_llr_scoretheta = []
     expected_llr_score = []
     expected_llr_rotatedscore = []
+    mse_log_r = []
+    mse_log_r_scoretheta = []
+    mse_log_r_score = []
+    mse_log_r_rotatedscore = []
+    trimmed_mse_log_r = []
+    trimmed_mse_log_r_scoretheta = []
+    trimmed_mse_log_r_score = []
+    trimmed_mse_log_r_rotatedscore = []
 
     for t, theta in enumerate(settings.thetas):
 
@@ -258,19 +266,34 @@ def score_regression_inference(use_smearing=False,
         # Evaluation
         tthat_test = that_test.dot(delta_theta)
         that_rotated_test = that_test.dot(rotation_matrix)
-        expected_llr.append(-2. * settings.n_expected_events / n_events_test * np.sum(tthat_test))
 
         # Calibration
         r_hat_scoretheta_test = r_from_s(calibrator_scoretheta.predict(tthat_test.reshape((-1,))))
         r_hat_score_test = r_from_s(calibrator_score.predict(that_test))
         r_hat_rotatedscore_test = r_from_s(calibrator_rotatedscore.predict(that_rotated_test))
 
+        # Extract relevant numnbers
+        expected_llr.append(-2. * settings.n_expected_events / n_events_test * np.sum(tthat_test))
         expected_llr_scoretheta.append(- 2. * settings.n_expected_events / n_events_test
                                        * np.sum(np.log(r_hat_scoretheta_test)))
         expected_llr_score.append(- 2. * settings.n_expected_events / n_events_test
                                   * np.sum(np.log(r_hat_score_test)))
         expected_llr_rotatedscore.append(- 2. * settings.n_expected_events / n_events_test
                                          * np.sum(np.log(r_hat_rotatedscore_test)))
+
+        mse_log_r.append(calculate_mean_squared_error(np.log(r_test[t]), tthat_test, 0.))
+        mse_log_r_scoretheta.append(calculate_mean_squared_error(np.log(r_test[t]), np.log(r_hat_scoretheta_test), 0.))
+        mse_log_r_score.append(calculate_mean_squared_error(np.log(r_test[t]), np.log(r_hat_score_test), 0.))
+        mse_log_r_rotatedscore.append(
+            calculate_mean_squared_error(np.log(r_test[t]), np.log(r_hat_rotatedscore_test), 0.))
+
+        trimmed_mse_log_r.append(calculate_mean_squared_error(np.log(r_test[t]), tthat_test, 'auto'))
+        trimmed_mse_log_r_score.append(
+            calculate_mean_squared_error(np.log(r_test[t]), np.log(r_hat_score_test), 'auto'))
+        trimmed_mse_log_r_scoretheta.append(
+            calculate_mean_squared_error(np.log(r_test[t]), np.log(r_hat_scoretheta_test), 'auto'))
+        trimmed_mse_log_r_rotatedscore.append(
+            calculate_mean_squared_error(np.log(r_test[t]), np.log(r_hat_rotatedscore_test), 'auto'))
 
         # For some benchmark thetas, save r for each phase-space point
         if t == settings.theta_benchmark_nottrained:
@@ -406,7 +429,30 @@ def score_regression_inference(use_smearing=False,
     expected_llr_score = np.asarray(expected_llr_score)
     expected_llr_rotatedscore = np.asarray(expected_llr_rotatedscore)
 
+    mse_log_r = np.asarray(mse_log_r)
+    mse_log_r_scoretheta = np.asarray(mse_log_r_scoretheta)
+    mse_log_r_score = np.asarray(mse_log_r_score)
+    mse_log_r_rotatedscore = np.asarray(mse_log_r_rotatedscore)
+
+    trimmed_mse_log_r = np.asarray(trimmed_mse_log_r)
+    trimmed_mse_log_r_scoretheta = np.asarray(trimmed_mse_log_r_scoretheta)
+    trimmed_mse_log_r_score = np.asarray(trimmed_mse_log_r_score)
+    trimmed_mse_log_r_rotatedscore = np.asarray(trimmed_mse_log_r_rotatedscore)
+
     np.save(results_dir + '/llr_scoreregression' + filename_addition + '.npy', expected_llr)
     np.save(results_dir + '/llr_scoreregression_scoretheta' + filename_addition + '.npy', expected_llr_scoretheta)
     np.save(results_dir + '/llr_scoreregression_score' + filename_addition + '.npy', expected_llr_score)
     np.save(results_dir + '/llr_scoreregression_rotatedscore' + filename_addition + '.npy', expected_llr_rotatedscore)
+
+    np.save(results_dir + '/mse_logr_scoreregression' + filename_addition + '.npy', mse_log_r)
+    np.save(results_dir + '/mse_logr_scoreregression_scoretheta' + filename_addition + '.npy', mse_log_r_scoretheta)
+    np.save(results_dir + '/mse_logr_scoreregression_score' + filename_addition + '.npy', mse_log_r_score)
+    np.save(results_dir + '/mse_logr_scoreregression_rotatedscore' + filename_addition + '.npy', mse_log_r_rotatedscore)
+
+    np.save(results_dir + '/trimmed_mse_logr_scoreregression' + filename_addition + '.npy', trimmed_mse_log_r)
+    np.save(results_dir + '/trimmed_mse_logr_scoreregression_scoretheta' + filename_addition + '.npy',
+            trimmed_mse_log_r_scoretheta)
+    np.save(results_dir + '/trimmed_mse_logr_scoreregression_score' + filename_addition + '.npy',
+            trimmed_mse_log_r_score)
+    np.save(results_dir + '/trimmed_mse_logr_scoreregression_rotatedscore' + filename_addition + '.npy',
+            trimmed_mse_log_r_rotatedscore)

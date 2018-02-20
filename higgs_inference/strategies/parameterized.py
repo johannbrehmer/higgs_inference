@@ -20,7 +20,7 @@ from carl.ratios import ClassifierScoreRatio
 from carl.learning import CalibratedClassifierScoreCV
 
 from higgs_inference import settings
-from higgs_inference.various.utils import decide_toy_evaluation, format_number
+from higgs_inference.various.utils import decide_toy_evaluation, format_number, calculate_mean_squared_error
 from higgs_inference.models.models_parameterized import make_classifier_carl, make_classifier_carl_morphingaware
 from higgs_inference.models.models_parameterized import make_classifier_score, make_classifier_score_morphingaware
 from higgs_inference.models.models_parameterized import make_classifier_combined, make_classifier_combined_morphingaware
@@ -350,6 +350,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     if not constant_lr_mode:
         def lr_scheduler(epoch):
             return learning_rate * np.exp(- epoch * lr_decay)
+
         callbacks.append(LearningRateScheduler(lr_scheduler))
     if early_stopping:
         callbacks.append(EarlyStopping(verbose=1, patience=settings.early_stopping_patience))
@@ -390,6 +391,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     logging.info('Starting evaluation')
     expected_llr = []
+    mse_log_r = []
+    trimmed_mse_log_r = []
 
     for t, theta in enumerate(settings.thetas):
 
@@ -400,24 +403,27 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
         # Evaluation
         prediction = regr.predict(X_thetas_test)
-        this_logr = prediction[:, 1]
+        this_log_r = prediction[:, 1]
         this_score = prediction[:, 2:4]
         if morphing_aware:
             this_wi = prediction[:, 4:19]
             this_ri = prediction[:, 19:]
             logging.debug('Morphing weights for theta %s (%s): %s', t, theta, this_wi[0])
 
-        expected_llr.append(- 2. * settings.n_expected_events / n_events_test * np.sum(this_logr))
+        # Extract numbers of interest
+        expected_llr.append(- 2. * settings.n_expected_events / n_events_test * np.sum(this_log_r))
+        mse_log_r.append(calculate_mean_squared_error(np.log(r_test[t]), this_log_r, 0.))
+        trimmed_mse_log_r.append(calculate_mean_squared_error(np.log(r_test[t]), this_log_r, 'auto'))
 
         # For benchmark thetas, save more info
         if t == settings.theta_benchmark_nottrained:
-            np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', np.exp(this_logr))
+            np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', np.exp(this_log_r))
             np.save(results_dir + '/scores_nottrained_' + algorithm + filename_addition + '.npy', this_score)
             if morphing_aware:
                 np.save(results_dir + '/morphing_ri_nottrained_' + algorithm + filename_addition + '.npy', this_ri)
                 np.save(results_dir + '/morphing_wi_nottrained_' + algorithm + filename_addition + '.npy', this_wi)
         elif t == settings.theta_benchmark_trained:
-            np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', np.exp(this_logr))
+            np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', np.exp(this_log_r))
             np.save(results_dir + '/scores_trained_' + algorithm + filename_addition + '.npy', this_score)
             if morphing_aware:
                 np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_ri)
@@ -471,8 +477,13 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 neyman_dir + '/neyman_llr_distribution_' + algorithm + '_' + str(t) + filename_addition + '.npy',
                 llr_neyman_distributions)
 
+    # Save evaluation results
     expected_llr = np.asarray(expected_llr)
+    mse_log_r = np.asarray(mse_log_r)
+    trimmed_mse_log_r = np.asarray(trimmed_mse_log_r)
     np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', expected_llr)
+    np.save(results_dir + '/mse_logr_' + algorithm + filename_addition + '.npy', mse_log_r)
+    np.save(results_dir + '/trimmed_mse_logr_' + algorithm + filename_addition + '.npy', trimmed_mse_log_r)
 
     logging.info('Starting roaming')
     r_roam = []
@@ -488,6 +499,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     logging.info('Starting calibrated evaluation and roaming')
     expected_llr_calibrated = []
+    mse_log_r_calibrated = []
+    trimmed_mse_log_r_calibrated = []
     r_roam_temp = np.zeros((settings.n_thetas, n_roaming))
 
     for t, theta in enumerate(settings.thetas):
@@ -518,7 +531,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         this_r, this_other = ratio_calibrated.predict(X_thetas_test)
         this_score = this_other[:, 1:3]
 
+        # Extract numbers of interest
         expected_llr_calibrated.append(- 2. * settings.n_expected_events / n_events_test * np.sum(np.log(this_r)))
+        mse_log_r_calibrated.append(calculate_mean_squared_error(np.log(r_test[t]), np.log(this_r), 0.))
+        trimmed_mse_log_r_calibrated.append(calculate_mean_squared_error(np.log(r_test[t]), np.log(this_r), 'auto'))
 
         # For benchmark theta, save more data
         if t == settings.theta_benchmark_nottrained:
@@ -591,10 +607,15 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         X_thetas_roaming_temp = np.hstack((X_roam_transformed, thetas0_array))
         r_roam_temp[t, :], _ = ratio_calibrated.predict(X_thetas_roaming_temp)
 
-    # Save LLR
+    # Save evaluation results
     expected_llr_calibrated = np.asarray(expected_llr_calibrated)
+    mse_log_r_calibrated = np.asarray(mse_log_r_calibrated)
+    trimmed_mse_log_r_calibrated = np.asarray(trimmed_mse_log_r_calibrated)
     np.save(results_dir + '/llr_' + algorithm + '_calibrated' + filename_addition + '.npy',
             expected_llr_calibrated)
+    np.save(results_dir + '/mse_logr_' + algorithm + '_calibrated' + filename_addition + '.npy', mse_log_r_calibrated)
+    np.save(results_dir + '/trimmed_mse_logr_' + algorithm + '_calibrated' + filename_addition + '.npy',
+            trimmed_mse_log_r_calibrated)
 
     logging.info('Interpolating calibrated roaming')
     gp = GaussianProcessRegressor(normalize_y=True,
