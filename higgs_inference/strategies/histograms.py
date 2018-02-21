@@ -50,7 +50,11 @@ def histo_inference(indices_X=None,
     if binning == 'optimized':
 
         if histogram_dimensionality == 2 and indices_X == [1, 41]:
-            bins_pt = np.concatenate((np.linspace(0., 800., 17), [14000.]))  # steps of 50 GeV plus overflow
+            bins_pt = np.concatenate((
+                np.linspace(0., 200., 11), # steps of 20 GeV
+                np.linspace(250., 400., 4), # steps of 50 GeV
+                [500.,600.,800.,1000.,14000.]
+            ))
             bins_deltaphi = np.linspace(0., np.pi, 11)  # steps of 50 GeV plus overflow
             bins = (bins_pt, bins_deltaphi)
 
@@ -60,10 +64,18 @@ def histo_inference(indices_X=None,
             bins = (bins_deltaphi, bins_pt)
 
         elif histogram_dimensionality == 1 and indices_X == [1]:
-            bins = np.concatenate((np.linspace(0., 800., 17), [14000.]))  # steps of 50 GeV plus overflow
+            bins = np.concatenate((
+                np.linspace(0., 200., 11), # steps of 20 GeV
+                np.linspace(250., 400., 4), # steps of 50 GeV
+                [500.,600.,800.,1000.,14000.]
+            ))
+
+            filename_addition = '_ptj'
 
         elif histogram_dimensionality == 1 and indices_X == [41]:
             bins = np.linspace(0., np.pi, 11)  # steps of 50 GeV plus overflow
+
+            filename_addition = '_deltaphi'
 
         else:
             raise ValueError(indices_X)
