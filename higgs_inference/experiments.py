@@ -24,6 +24,7 @@ from higgs_inference.various.p_values import calculate_all_CL
 from higgs_inference.strategies.truth import truth_inference
 from higgs_inference.strategies.local_model import local_model_truth_inference
 from higgs_inference.strategies.afc import afc_inference
+from higgs_inference.strategies.histograms import histo_inference
 
 try:
     from higgs_inference.strategies.parameterized import parameterized_inference
@@ -50,7 +51,7 @@ parser = argparse.ArgumentParser(description='Inference experiments for Higgs EF
 
 parser.add_argument('algorithm', help='Algorithm type. Options are "p" or "cl" for the calculation of p values '
                                       + 'through the Neyman construction; "truth", "localmodel", '
-                                      + '"afc", "carl", "score" (in the carl setup), '
+                                      + '"afc", "histo", "carl", "score" (in the carl setup), '
                                       + '"combined" (carl + score), "regression", "combinedregression" '
                                       + '(regression + score), or "scoreregression" (regresses on the score and '
                                       + 'performs density estimation on theta times score.')
@@ -61,9 +62,9 @@ parser.add_argument("-a", "--aware", action="store_true",
 parser.add_argument("-s", "--smearing", action='store_true', help='Train and evaluate on smeared observables.')
 parser.add_argument("-t", "--training", default='baseline', help='Training sample: "baseline", "basis", or "random".')
 parser.add_argument("-x", "--xindices", type=int, nargs='+', default=[1, 38, 39, 40, 41],
-                    help='X components to be used in AFC.')
+                    help='X components to be used for histograms and AFC.')
 parser.add_argument("--alpha", type=float, default=None, help='Factor scaling the score regression loss in the'
-                    + ' parameterized combined approaches.')
+                                                              + ' parameterized combined approaches.')
 parser.add_argument("-e", "--epsilon", type=float, default=None, help='Epsilon for AFC')
 parser.add_argument("-n", "--neyman", action='store_true',
                     help='Calculate toy experiments for the Neyman construction.')
@@ -77,7 +78,7 @@ logging.info('  Point by point:                %s', args.pointbypoint)
 logging.info('  Morphing-aware mode:           %s', args.aware)
 logging.info('  Smeared data:                  %s', args.smearing)
 logging.info('  Training sample:               %s', args.training)
-logging.info('  AFC X indices:                 %s', args.xindices)
+logging.info('  Histogram / AFC X indices:     %s', args.xindices)
 logging.info('  alpha:                         %s', args.alpha)
 logging.info('  AFC epsilon:                   %s', args.epsilon)
 logging.info('  Neyman construction toys:      %s', args.neyman)
@@ -87,7 +88,7 @@ logging.info('  ML-based strategies available: %s', loaded_ml_strategies)
 
 # Sanity checks
 assert args.algorithm in ['p', 'cl', 'pvalues',
-                          'truth', 'localmodel', 'afc',
+                          'truth', 'localmodel', 'histo', 'afc',
                           'carl', 'score', 'combined', 'regression', 'combinedregression',
                           'scoreregression']
 assert args.training in ['baseline', 'basis', 'random']
@@ -107,6 +108,12 @@ elif args.algorithm == 'truth':
 elif args.algorithm == 'localmodel':
     local_model_truth_inference(do_neyman=args.neyman,
                                 options=args.options)
+
+elif args.algorithm == 'histo':
+    histo_inference(indices_X=args.xindices,
+                    use_smearing=args.smearing,
+                    do_neyman=args.neyman,
+                    options=args.options)
 
 elif args.algorithm == 'afc':
     afc_inference(indices_X=args.xindices,
