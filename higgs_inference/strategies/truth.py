@@ -88,13 +88,9 @@ def truth_inference(do_neyman=False,
     # Calculate cross entropy on training sample (for comparison to carl loss)
     logging.info('Calculating cross-entropy on train set')
     s_train = np.clip(s_train, settings.epsilon, 1. - settings.epsilon)
-    cross_entropies = y_train * np.log(s_train) + (1. - y_train) * np.log(1. - s_train).astype(np.float64)
-    logging.debug('Cross entropy terms: shape %s, NaN %s, min %s, max %s, median %s, mean %s,\nvalues %s',
-                  cross_entropies.shape, np.sum(np.isnan(cross_entropies)),
-                  np.nanmin(cross_entropies), np.nanmax(cross_entropies),
-                  np.median(cross_entropies), np.mean(cross_entropies), cross_entropies)
-    cross_entropy_train = np.mean(cross_entropies)
-    logging.info('Train set true cross-entropy: %s', cross_entropy_train)
+    cross_entropy_train = - (y_train * np.log(s_train) + (1. - y_train) * np.log(1. - s_train)).astype(np.float64)
+    cross_entropy_train = np.mean(cross_entropy_train)
+    logging.info('Training cross-entropy: %s', cross_entropy_train)
     np.save(results_dir + '/cross_entropy_truth_train.npy', np.asarray([cross_entropy_train]))
 
     if do_neyman:

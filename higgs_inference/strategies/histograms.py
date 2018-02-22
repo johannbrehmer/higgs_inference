@@ -51,9 +51,9 @@ def histo_inference(indices_X=None,
     if binning == 'optimized':
 
         bins_pt = np.concatenate((
-            np.linspace(0., 200., 11), # steps of 20 GeV
-            np.linspace(250., 400., 4), # steps of 50 GeV
-            [500.,600.,800.,1000.,14000.]
+            np.linspace(0., 200., 11),  # steps of 20 GeV
+            np.linspace(250., 400., 4),  # steps of 50 GeV
+            [500., 600., 800., 1000., 14000.]
         ))
         bins_deltaphi = np.linspace(0., np.pi, 11)  # steps of 50 GeV plus overflow
 
@@ -103,12 +103,13 @@ def histo_inference(indices_X=None,
     n_events_test = X_test.shape[0]
 
     ################################################################################
-    # Histogram-based inference
+    # Loop over theta
     ################################################################################
 
     expected_llr = []
     mse_log_r = []
     trimmed_mse_log_r = []
+    cross_entropies = []
 
     # Loop over the hypothesis thetas
     for i, t in enumerate(settings.pbp_training_thetas):
@@ -142,6 +143,7 @@ def histo_inference(indices_X=None,
 
         # Evaluation
         s_hat_test = histogram.predict(summary_statistics_test)
+        s_hat_train = histogram.predict(summary_statistics_train)
         log_r_hat_test = np.log(r_from_s(s_hat_test))
 
         # Extract numbers of interest
@@ -154,6 +156,16 @@ def histo_inference(indices_X=None,
             np.save(results_dir + '/r_nottrained_histo' + filename_addition + '.npy', np.exp(log_r_hat_test))
         elif t == settings.theta_benchmark_trained:
             np.save(results_dir + '/r_trained_histo' + filename_addition + '.npy', np.exp(log_r_hat_test))
+
+        # Calculate cross-entropy
+        cross_entropy_train = - (y_train * np.log(s_hat_train)
+                                 + (1. - y_train) * np.log(1. - s_hat_train)).astype(np.float64)
+        cross_entropy_train = np.mean(cross_entropy_train)
+        cross_entropies.append(cross_entropy_train)
+
+        ################################################################################
+        # Neyman construction toys
+        ################################################################################
 
         if do_neyman:
             # Neyman construction: prepare observed data and construct summary statistics
@@ -203,6 +215,7 @@ def histo_inference(indices_X=None,
     expected_llr = np.asarray(expected_llr)
     mse_log_r = np.asarray(mse_log_r)
     trimmed_mse_log_r = np.asarray(trimmed_mse_log_r)
+    cross_entropies = np.asarray(cross_entropies)
 
     logging.info('Interpolation')
 
@@ -219,3 +232,9 @@ def histo_inference(indices_X=None,
     trimmed_mse_log_r_all = interpolator(settings.thetas)
     np.save(results_dir + '/trimmed_mse_logr_histo' + filename_addition + '.npy',
             trimmed_mse_log_r_all)
+
+    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], cross_entropies)
+    cross_entropy_train_mean = np.mean(interpolator(settings.thetas[settings.thetas_train]))
+    logging.info('Training cross-entropy: %s', cross_entropy_train_mean)
+    np.save(results_dir + '/cross_entropy_histo' + filename_addition + '_train.npy',
+            [cross_entropy_train_mean])
