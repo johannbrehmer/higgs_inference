@@ -118,7 +118,8 @@ def histo_inference(indices_X=None,
     expected_llr = []
     mse_log_r = []
     trimmed_mse_log_r = []
-    cross_entropies = []
+    mse_log_r_train = []
+    cross_entropies_train = []
 
     # Loop over the hypothesis thetas
     for i, t in enumerate(settings.pbp_training_thetas):
@@ -132,6 +133,8 @@ def histo_inference(indices_X=None,
                 t) + input_filename_addition + '.npy')
         y_train = np.load(
             settings.unweighted_events_dir + '/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+        r_train = np.load(
+            settings.unweighted_events_dir + '/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
 
         # Construct summary statistics
         summary_statistics_train = X_train[:, indices_X]
@@ -152,8 +155,9 @@ def histo_inference(indices_X=None,
 
         # Evaluation
         s_hat_test = histogram.predict(summary_statistics_test)
-        s_hat_train = histogram.predict(summary_statistics_train)
         log_r_hat_test = np.log(r_from_s(s_hat_test))
+        s_hat_train = histogram.predict(summary_statistics_train)
+        log_r_hat_train = np.log(r_from_s(s_hat_train))
 
         # Extract numbers of interest
         expected_llr.append(- 2. * settings.n_expected_events / n_events_test * np.sum(log_r_hat_test))
@@ -167,10 +171,11 @@ def histo_inference(indices_X=None,
             np.save(results_dir + '/r_trained_histo' + filename_addition + '.npy', np.exp(log_r_hat_test))
 
         # Calculate cross-entropy
+        mse_log_r_train.append(calculate_mean_squared_error(np.log(r_train[t]), log_r_hat_train, 0.))
         cross_entropy_train = - (y_train * np.log(s_hat_train)
                                  + (1. - y_train) * np.log(1. - s_hat_train)).astype(np.float64)
         cross_entropy_train = np.mean(cross_entropy_train)
-        cross_entropies.append(cross_entropy_train)
+        cross_entropies_train.append(cross_entropy_train)
 
         ################################################################################
         # Neyman construction toys
@@ -224,7 +229,7 @@ def histo_inference(indices_X=None,
     expected_llr = np.asarray(expected_llr)
     mse_log_r = np.asarray(mse_log_r)
     trimmed_mse_log_r = np.asarray(trimmed_mse_log_r)
-    cross_entropies = np.asarray(cross_entropies)
+    cross_entropies_train = np.asarray(cross_entropies_train)
 
     logging.info('Interpolation')
 
@@ -242,8 +247,14 @@ def histo_inference(indices_X=None,
     np.save(results_dir + '/trimmed_mse_logr_histo' + filename_addition + '.npy',
             trimmed_mse_log_r_all)
 
-    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], cross_entropies)
+    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], cross_entropies_train)
     cross_entropy_train_mean = np.mean(interpolator(settings.thetas[settings.thetas_train]))
     logging.info('Training cross-entropy: %s', cross_entropy_train_mean)
-    np.save(results_dir + '/cross_entropy_histo' + filename_addition + '_train.npy',
+    np.save(results_dir + '/cross_entropy_train_histo' + filename_addition + '.npy',
+            [cross_entropy_train_mean])
+
+    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], mse_log_r_train)
+    mse_log_r_train_mean = np.mean(interpolator(settings.thetas[settings.thetas_train]))
+    logging.info('Training MSE log r: %s', mse_log_r_train_mean)
+    np.save(results_dir + '/mse_logr_train_histo' + filename_addition + '.npy',
             [cross_entropy_train_mean])
