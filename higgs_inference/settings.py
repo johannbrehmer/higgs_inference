@@ -81,8 +81,8 @@ pbp_training_thetas = [0, 13, 14, 15, 16, 9, 422, 956, 666, 802, 675, 839, 699, 
 n_expected_events = 36
 
 # Number of toy experiments
-n_neyman_distribution_experiments = 500
-n_neyman_observed_experiments = 51
+n_neyman_distribution_experiments = 1000
+n_neyman_observed_experiments = 101
 
 ################################################################################
 # Network architecture and training
@@ -135,8 +135,8 @@ n_events_randomtheta_num = 5000000
 n_events_randomtheta_den = 5000000
 
 # PbP training, per PbP theta
-n_events_n_point_by_point_num = 50000
-n_events_n_point_by_point_den = 50000
+n_events_n_point_by_point_num = 250000
+n_events_n_point_by_point_den = 250000
 
 # Score regression training, total
 n_events_score_regression = 10000000
