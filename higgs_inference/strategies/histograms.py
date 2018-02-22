@@ -50,24 +50,33 @@ def histo_inference(indices_X=None,
     # Manually chosen histogram binning
     if binning == 'optimized':
 
-        bins_pt = np.concatenate((
-            np.linspace(0., 200., 11),  # steps of 20 GeV
-            np.linspace(250., 400., 4),  # steps of 50 GeV
-            [500., 600., 800., 1000., 14000.]
-        ))
-        bins_deltaphi = np.linspace(0., np.pi, 11)  # steps of 50 GeV plus overflow
-
         if histogram_dimensionality == 2 and indices_X == [1, 41]:
+            bins_pt = np.concatenate((
+                np.linspace(0., 100., 6),  # steps of 20 GeV
+                [130., 160., 200., 250., 300., 400., 600., 1000., 14000.]
+            ))
+            bins_deltaphi = np.linspace(0., np.pi, 11)
             bins = (bins_pt, bins_deltaphi)
 
         elif histogram_dimensionality == 2 and indices_X == [41, 1]:
+            bins_pt = np.concatenate((
+                np.linspace(0., 100., 6),  # steps of 20 GeV
+                [130., 160., 200., 250., 300., 400., 600., 1000., 14000.]
+            ))
+            bins_deltaphi = np.linspace(0., np.pi, 11)
             bins = (bins_deltaphi, bins_pt)
 
         elif histogram_dimensionality == 1 and indices_X == [1]:
+            bins_pt = np.concatenate((
+                np.linspace(0., 200., 21),  # steps of 10 GeV
+                np.linspace(225., 400., 8),  # steps of 25 GeV
+                [450., 500., 600., 800., 1000., 14000.]
+            ))
             bins = (bins_pt,)
             filename_addition = '_ptj'
 
         elif histogram_dimensionality == 1 and indices_X == [41]:
+            bins_deltaphi = np.linspace(0., np.pi, 21)
             bins = (bins_deltaphi,)
             filename_addition = '_deltaphi'
 
