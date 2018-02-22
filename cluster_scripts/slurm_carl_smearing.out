@@ -123,3 +123,44 @@ Epoch 00038: early stopping
 21.02.2018 09:35:19 INFO    Starting evaluation
 21.02.2018 09:59:58 INFO    Starting roaming
 21.02.2018 10:00:03 INFO    Starting calibrated evaluation and roaming
+21.02.2018 13:45:09 INFO    Interpolating calibrated roaming
+21.02.2018 13:46:48 INFO    That's it -- have a great day!
+Using TensorFlow backend.
+21.02.2018 13:46:51 INFO    Hi! How are you today?
+21.02.2018 13:46:51 INFO    Startup options:
+21.02.2018 13:46:51 INFO      Algorithm:                     carl
+21.02.2018 13:46:51 INFO      Point by point:                False
+21.02.2018 13:46:51 INFO      Morphing-aware mode:           False
+21.02.2018 13:46:51 INFO      Smeared data:                  True
+21.02.2018 13:46:51 INFO      Training sample:               random
+21.02.2018 13:46:51 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+21.02.2018 13:46:51 INFO      alpha:                         None
+21.02.2018 13:46:51 INFO      AFC epsilon:                   None
+21.02.2018 13:46:51 INFO      Neyman construction toys:      False
+21.02.2018 13:46:51 INFO      Other options:                 
+21.02.2018 13:46:51 INFO      Base directory:                /home/jb6504/higgs_inference
+21.02.2018 13:46:51 INFO      ML-based strategies available: True
+21.02.2018 13:46:51 INFO    Starting parameterized inference
+21.02.2018 13:46:51 INFO    Main settings:
+21.02.2018 13:46:51 INFO      Algorithm:                carl
+21.02.2018 13:46:51 INFO      Morphing-aware:           False
+21.02.2018 13:46:51 INFO      Training sample:          random
+21.02.2018 13:46:51 INFO    Options:
+21.02.2018 13:46:51 INFO      Number of hidden layers:  3
+21.02.2018 13:46:51 INFO      Batch size:               128
+21.02.2018 13:46:51 INFO      Learning rate:            0.001
+21.02.2018 13:46:51 INFO      Learning rate decay:      0.0921034037198
+21.02.2018 13:46:51 INFO      Number of epochs:         50
+21.02.2018 13:46:51 INFO      Debug mode:               False
+Traceback (most recent call last):
+  File "experiments.py", line 146, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 232, in parameterized_inference
+    theta0_train, random_state=44)
+  File "/share/apps/scikit-learn/0.18.1/intel/lib/python2.7/site-packages/sklearn/utils/__init__.py", line 285, in shuffle
+    return resample(*arrays, **options)
+  File "/share/apps/scikit-learn/0.18.1/intel/lib/python2.7/site-packages/sklearn/utils/__init__.py", line 204, in resample
+    check_consistent_length(*arrays)
+  File "/share/apps/scikit-learn/0.18.1/intel/lib/python2.7/site-packages/sklearn/utils/validation.py", line 181, in check_consistent_length
+    " samples: %r" % [int(l) for l in lengths])
+ValueError: Found input variables with inconsistent numbers of samples: [9996253, 9987256, 9987256, 9987256, 9987256]
