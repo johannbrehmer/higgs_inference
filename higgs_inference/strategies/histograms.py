@@ -171,7 +171,7 @@ def histo_inference(indices_X=None,
             np.save(results_dir + '/r_trained_histo' + filename_addition + '.npy', np.exp(log_r_hat_test))
 
         # Calculate cross-entropy
-        mse_log_r_train.append(calculate_mean_squared_error(np.log(r_train[t]), log_r_hat_train, 0.))
+        mse_log_r_train.append(calculate_mean_squared_error(np.log(r_train), log_r_hat_train, 0.))
         cross_entropy_train = - (y_train * np.log(s_hat_train)
                                  + (1. - y_train) * np.log(1. - s_hat_train)).astype(np.float64)
         cross_entropy_train = np.mean(cross_entropy_train)
