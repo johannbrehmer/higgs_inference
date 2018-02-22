@@ -20,10 +20,14 @@ cd /home/jb6504/higgs_inference/higgs_inference
 
 python -u experiments.py combinedregression --alpha 5.
 python -u experiments.py combinedregression --alpha 10.
+python -u experiments.py combinedregression --alpha 20.
 python -u experiments.py combinedregression --alpha 50.
 python -u experiments.py combinedregression --alpha 100.
+python -u experiments.py combinedregression --alpha 200.
 
 python -u experiments.py combinedregression --training random --alpha 5.
 python -u experiments.py combinedregression --training random --alpha 10.
+python -u experiments.py combinedregression --training random --alpha 20.
 python -u experiments.py combinedregression --training random --alpha 50.
 python -u experiments.py combinedregression --training random --alpha 100.
+python -u experiments.py combinedregression --training random --alpha 200.

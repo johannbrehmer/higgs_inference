@@ -11,7 +11,7 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import ConstantKernel as C, Matern
 
 from higgs_inference import settings
-from higgs_inference.various.utils import decide_toy_evaluation
+from higgs_inference.various.utils import decide_toy_evaluation, s_from_r
 
 
 def truth_inference(do_neyman=False,
@@ -43,6 +43,10 @@ def truth_inference(do_neyman=False,
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
     r_roam = np.load(settings.unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
     r_neyman_observed = np.load(settings.unweighted_events_dir + '/r_neyman_observed.npy')
+
+    # To calculate cross entropy on train set
+    s_train = s_from_r(np.load(settings.unweighted_events_dir + '/r_train' + input_filename_addition + '.npy'))
+    y_train = np.load(settings.unweighted_events_dir + '/y_train' + input_filename_addition + '.npy')
 
     n_events_test = r_test.shape[1]
     assert settings.n_thetas == r_test.shape[0]
@@ -80,6 +84,13 @@ def truth_inference(do_neyman=False,
     gp.fit(settings.thetas[:], np.log(r_roam))
     r_roam_truth = np.exp(gp.predict(np.c_[xx.ravel(), yy.ravel()])).T
     np.save(results_dir + '/r_roam_truth' + filename_addition + '.npy', r_roam_truth)
+
+    # Calculate cross entropy on training sample (for comparison to carl loss)
+    logging.info('Calculating cross-entropy on train set')
+    s_train = np.clip(s_train, settings.epsilon, 1. - settings.epsilon)
+    cross_entropy_train = np.mean(y_train * np.log(s_train) + (1. - y_train) * np.log(1. - s_train))
+    logging.info('Train set true cross-entropy: %s', cross_entropy_train)
+    np.save(results_dir + '/cross_entropy_truth_train.npy', np.asarray([cross_entropy_train]))
 
     if do_neyman:
         logging.info('Starting evaluation of Neyman experiments')
