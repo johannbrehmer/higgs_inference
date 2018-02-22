@@ -1,0 +1,23 @@
+22.02.2018 05:40:02 INFO    Hi! How are you today?
+22.02.2018 05:40:02 INFO    Startup options:
+22.02.2018 05:40:02 INFO      Algorithm:                     truth
+22.02.2018 05:40:02 INFO      Point by point:                False
+22.02.2018 05:40:02 INFO      Morphing-aware mode:           False
+22.02.2018 05:40:02 INFO      Smeared data:                  False
+22.02.2018 05:40:02 INFO      Training sample:               baseline
+22.02.2018 05:40:02 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+22.02.2018 05:40:02 INFO      alpha:                         None
+22.02.2018 05:40:02 INFO      AFC epsilon:                   None
+22.02.2018 05:40:02 INFO      Neyman construction toys:      False
+22.02.2018 05:40:02 INFO      Other options:                 
+22.02.2018 05:40:02 INFO      Base directory:                /home/jb6504/higgs_inference
+22.02.2018 05:40:02 INFO      ML-based strategies available: False
+22.02.2018 05:40:02 INFO    Starting truth calculation
+22.02.2018 05:40:04 INFO    Starting evaluation
+22.02.2018 05:40:05 INFO    Starting roaming
+22.02.2018 05:41:40 INFO    Calculating cross-entropy on train set
+22.02.2018 05:41:41 DEBUG    Cross entropy terms: shape (9994900,), NaN 0, min -6.23828125, max -0.000977516174316, median -0.66162109375, mean -0.657932534292,
+values [-0.28833008 -0.67773438 -0.14245605 ..., -0.53271484 -0.60693359
+ -1.43359375]
+22.02.2018 05:41:41 INFO    Train set true cross-entropy: -0.657932534292
+22.02.2018 05:41:42 INFO    That's it -- have a great day!
