@@ -4,8 +4,8 @@
 #SBATCH --output=slurm_truth.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=64GB
-#SBATCH --time=24:00:00
+#SBATCH --mem=16GB
+#SBATCH --time=2-00:00:00
 # #SBATCH --gres=gpu:1
 
 # Modules
@@ -18,4 +18,4 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py truth
+python -u experiments.py truth --neyman

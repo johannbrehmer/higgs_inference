@@ -1,29 +1,29 @@
 Using TensorFlow backend.
-21.02.2018 04:21:50 INFO    Hi! How are you today?
-21.02.2018 04:21:50 INFO    Startup options:
-21.02.2018 04:21:50 INFO      Algorithm:                     regression
-21.02.2018 04:21:50 INFO      Point by point:                True
-21.02.2018 04:21:50 INFO      Morphing-aware mode:           False
-21.02.2018 04:21:50 INFO      Smeared data:                  True
-21.02.2018 04:21:50 INFO      Training sample:               baseline
-21.02.2018 04:21:50 INFO      AFC X indices:                 [1, 38, 39, 40, 41]
-21.02.2018 04:21:50 INFO      alpha:                         None
-21.02.2018 04:21:50 INFO      AFC epsilon:                   None
-21.02.2018 04:21:50 INFO      Neyman construction toys:      False
-21.02.2018 04:21:50 INFO      Other options:                 
-21.02.2018 04:21:50 INFO      Base directory:                /home/jb6504/higgs_inference
-21.02.2018 04:21:50 INFO      ML-based strategies available: True
-21.02.2018 04:21:50 INFO    Starting point-by-point inference
-21.02.2018 04:21:50 INFO    Main settings:
-21.02.2018 04:21:50 INFO      Algorithm:               regression
-21.02.2018 04:21:50 INFO    Options:
-21.02.2018 04:21:50 INFO      Number of hidden layers: 3
-21.02.2018 04:21:50 INFO      Batch size:              128
-21.02.2018 04:21:50 INFO      Learning rate:           0.001
-21.02.2018 04:21:50 INFO      Learning rate decay:     0.0921034037198
-21.02.2018 04:21:50 INFO      Number of epochs:        50
+23.02.2018 07:12:38 INFO    Hi! How are you today?
+23.02.2018 07:12:38 INFO    Startup options:
+23.02.2018 07:12:38 INFO      Algorithm:                     regression
+23.02.2018 07:12:38 INFO      Point by point:                True
+23.02.2018 07:12:38 INFO      Morphing-aware mode:           False
+23.02.2018 07:12:38 INFO      Smeared data:                  True
+23.02.2018 07:12:38 INFO      Training sample:               baseline
+23.02.2018 07:12:38 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+23.02.2018 07:12:38 INFO      alpha:                         None
+23.02.2018 07:12:38 INFO      AFC epsilon:                   None
+23.02.2018 07:12:38 INFO      Neyman construction toys:      False
+23.02.2018 07:12:38 INFO      Other options:                 
+23.02.2018 07:12:38 INFO      Base directory:                /home/jb6504/higgs_inference
+23.02.2018 07:12:38 INFO      ML-based strategies available: True
+23.02.2018 07:12:38 INFO    Starting point-by-point inference
+23.02.2018 07:12:38 INFO    Main settings:
+23.02.2018 07:12:38 INFO      Algorithm:               regression
+23.02.2018 07:12:38 INFO    Options:
+23.02.2018 07:12:38 INFO      Number of hidden layers: 3
+23.02.2018 07:12:38 INFO      Batch size:              128
+23.02.2018 07:12:38 INFO      Learning rate:           0.001
+23.02.2018 07:12:38 INFO      Learning rate decay:     0.0921034037198
+23.02.2018 07:12:38 INFO      Number of epochs:        50
 Traceback (most recent call last):
-  File "experiments.py", line 129, in <module>
+  File "experiments.py", line 136, in <module>
     options=args.options)
   File "/home/jb6504/higgs_inference/higgs_inference/strategies/point_by_point.py", line 147, in point_by_point_inference
     X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
