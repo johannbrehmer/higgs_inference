@@ -1,4 +1,4 @@
-################################################################################
+>################################################################################
 # Imports
 ################################################################################
 
@@ -219,7 +219,7 @@ def calculate_all_CL():
 
     logging.info('Starting p-value calculation')
 
-    calculate_CL('truth', 'truth')
+    #calculate_CL('truth', 'truth')
     #calculate_CL('localmodel', 'truth')
     
     #calculate_CL('afc', 'afc')
