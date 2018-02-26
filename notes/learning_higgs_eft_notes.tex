@@ -799,11 +799,17 @@ different setups tested.
     & Baseline, $\alpha = 0.2$ & $0.00110$\\
     & Baseline, $\alpha = 0.5$ & $0.00083$\\
     & Baseline, $\alpha = 2$ & $0.00057$\\
-    & Baseline, $\alpha = 5$ & $\mathbf{0.00053}$\\
+    & Baseline, $\alpha = 5$ & $0.00053$\\
     & Baseline, $\alpha = 10$ & $0.00096$\\
     & Random $\boldtheta$ & $0.00075$\\
     & Random $\boldtheta$, shallow & $0.00094$\\
     & Random $\boldtheta$, deep & $0.00133$\\
+    & Random $\boldtheta$, $\alpha = 0.1$ & $0.00129$\\
+    & Random $\boldtheta$, $\alpha = 0.2$ & $0.00114$\\
+    & Random $\boldtheta$, $\alpha = 0.5$ & $0.00075$\\
+    & Random $\boldtheta$, $\alpha = 2$ & $0.00075$\\
+    & Random $\boldtheta$, $\alpha = 5$ & $0.00059$\\
+    & Random $\boldtheta$, $\alpha = 10$ & $\mathbf{0.00052}$\\
    \midrule
    carl + score (param., cal.) & Baseline & $0.00058$\\
     & Baseline, shallow & $0.00071$\\
@@ -817,6 +823,12 @@ different setups tested.
     & Random $\boldtheta$ & $0.00060$\\
     & Random $\boldtheta$, shallow & $0.00074$\\
     & Random $\boldtheta$, deep & $0.00056$\\
+    & Random $\boldtheta$, $\alpha = 0.1$ & $0.00129$\\
+    & Random $\boldtheta$, $\alpha = 0.2$ & $0.00096$\\
+    & Random $\boldtheta$, $\alpha = 0.5$ & $0.00066$\\
+    & Random $\boldtheta$, $\alpha = 2$ & $0.00052$\\
+    & Random $\boldtheta$, $\alpha = 5$ & $0.00055$\\
+    & Random $\boldtheta$, $\alpha = 10$ & $0.00052$\\
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \bottomrule
   \end{tabular}
@@ -868,7 +880,7 @@ different setups tested.
     Algorithm & Setup & Expected trimmed MSE \\
     \midrule
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    Ratio + score regr.\ (param., raw) & Baseline & $0.00070$\\
+   Ratio + score regr.\ (param., raw) & Baseline & $0.00070$\\
     & Baseline, shallow & $0.00120$\\
     & Baseline, deep & $0.00074$\\
     & Baseline, $\alpha = 5$ & $0.00090$\\
@@ -877,7 +889,11 @@ different setups tested.
     & Baseline, $\alpha = 100$ & $0.00071$\\
     & Random $\boldtheta$ & $0.00071$\\
     & Random $\boldtheta$, shallow & $0.00112$\\
-    & Random $\boldtheta$, deep & $\mathbf{0.00066}$\\
+    & Random $\boldtheta$, deep & $0.00066$\\
+    & Random $\boldtheta$, $\alpha = 5$ & $0.00109$\\
+    & Random $\boldtheta$, $\alpha = 10$ & $0.00087$\\
+    & Random $\boldtheta$, $\alpha = 50$ & $0.00068$\\
+    & Random $\boldtheta$, $\alpha = 100$ & $\mathbf{0.00061}$\\
    \midrule
    Ratio + score regr.\ (param., cal.) & Baseline & $0.00070$\\
     & Baseline, shallow & $0.00118$\\
@@ -885,10 +901,14 @@ different setups tested.
     & Baseline, $\alpha = 5$ & $0.00089$\\
     & Baseline, $\alpha = 10$ & $0.00077$\\
     & Baseline, $\alpha = 50$ & $0.00065$\\
-    & Baseline, $\alpha = 100$ & $\mathbf{0.00062}$\\
+    & Baseline, $\alpha = 100$ & $0.00062$\\
     & Random $\boldtheta$ & $0.00072$\\
     & Random $\boldtheta$, shallow & $0.00112$\\
     & Random $\boldtheta$, deep & $0.00066$\\
+    & Random $\boldtheta$, $\alpha = 5$ & $0.00109$\\
+    & Random $\boldtheta$, $\alpha = 10$ & $0.00086$\\
+    & Random $\boldtheta$, $\alpha = 50$ & $0.00061$\\
+    & Random $\boldtheta$, $\alpha = 100$ & $\mathbf{0.00061}$\\
    \midrule
    Ratio + score regr.\ (aware, raw) & Random $\boldtheta$ & $\mathbf{0.30585}$\\
    \midrule
