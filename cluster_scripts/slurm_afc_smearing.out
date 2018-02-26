@@ -1,0 +1,380 @@
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '33349')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/jb6504/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-centos-7.3.1611-Core-x86_64-2.7.12-64/lock_dir
+26.02.2018 07:02:14 INFO    Hi! How are you today?
+26.02.2018 07:02:14 INFO    Startup options:
+26.02.2018 07:02:14 INFO      Algorithm:                     afc
+26.02.2018 07:02:14 INFO      Point by point:                False
+26.02.2018 07:02:14 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:14 INFO      Smeared data:                  True
+26.02.2018 07:02:14 INFO      Training sample:               baseline
+26.02.2018 07:02:14 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+26.02.2018 07:02:14 INFO      alpha:                         None
+26.02.2018 07:02:14 INFO      AFC epsilon:                   1.0
+26.02.2018 07:02:14 INFO      Neyman construction toys:      False
+26.02.2018 07:02:14 INFO      Other options:                 
+26.02.2018 07:02:14 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:14 INFO      ML-based strategies available: False
+26.02.2018 07:02:14 INFO    Starting AFC inference
+26.02.2018 07:02:14 INFO    Settings:
+26.02.2018 07:02:14 INFO      Statistics:              x [1, 38, 39, 40, 41]
+26.02.2018 07:02:14 INFO      Epsilon (bandwidth):     1.0
+26.02.2018 07:02:14 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+26.02.2018 07:02:15 INFO    Hi! How are you today?
+26.02.2018 07:02:15 INFO    Startup options:
+26.02.2018 07:02:15 INFO      Algorithm:                     afc
+26.02.2018 07:02:15 INFO      Point by point:                False
+26.02.2018 07:02:15 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:15 INFO      Smeared data:                  True
+26.02.2018 07:02:15 INFO      Training sample:               baseline
+26.02.2018 07:02:15 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+26.02.2018 07:02:15 INFO      alpha:                         None
+26.02.2018 07:02:15 INFO      AFC epsilon:                   0.5
+26.02.2018 07:02:15 INFO      Neyman construction toys:      False
+26.02.2018 07:02:15 INFO      Other options:                 
+26.02.2018 07:02:15 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:15 INFO      ML-based strategies available: False
+26.02.2018 07:02:15 INFO    Starting AFC inference
+26.02.2018 07:02:15 INFO    Settings:
+26.02.2018 07:02:15 INFO      Statistics:              x [1, 38, 39, 40, 41]
+26.02.2018 07:02:15 INFO      Epsilon (bandwidth):     0.5
+26.02.2018 07:02:15 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+26.02.2018 07:02:16 INFO    Hi! How are you today?
+26.02.2018 07:02:16 INFO    Startup options:
+26.02.2018 07:02:16 INFO      Algorithm:                     afc
+26.02.2018 07:02:16 INFO      Point by point:                False
+26.02.2018 07:02:16 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:16 INFO      Smeared data:                  True
+26.02.2018 07:02:16 INFO      Training sample:               baseline
+26.02.2018 07:02:16 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+26.02.2018 07:02:16 INFO      alpha:                         None
+26.02.2018 07:02:16 INFO      AFC epsilon:                   0.2
+26.02.2018 07:02:16 INFO      Neyman construction toys:      False
+26.02.2018 07:02:16 INFO      Other options:                 
+26.02.2018 07:02:16 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:16 INFO      ML-based strategies available: False
+26.02.2018 07:02:16 INFO    Starting AFC inference
+26.02.2018 07:02:16 INFO    Settings:
+26.02.2018 07:02:16 INFO      Statistics:              x [1, 38, 39, 40, 41]
+26.02.2018 07:02:16 INFO      Epsilon (bandwidth):     0.2
+26.02.2018 07:02:16 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+26.02.2018 07:02:17 INFO    Hi! How are you today?
+26.02.2018 07:02:17 INFO    Startup options:
+26.02.2018 07:02:17 INFO      Algorithm:                     afc
+26.02.2018 07:02:17 INFO      Point by point:                False
+26.02.2018 07:02:17 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:17 INFO      Smeared data:                  True
+26.02.2018 07:02:17 INFO      Training sample:               baseline
+26.02.2018 07:02:17 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+26.02.2018 07:02:17 INFO      alpha:                         None
+26.02.2018 07:02:17 INFO      AFC epsilon:                   0.1
+26.02.2018 07:02:17 INFO      Neyman construction toys:      False
+26.02.2018 07:02:17 INFO      Other options:                 
+26.02.2018 07:02:17 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:17 INFO      ML-based strategies available: False
+26.02.2018 07:02:17 INFO    Starting AFC inference
+26.02.2018 07:02:17 INFO    Settings:
+26.02.2018 07:02:17 INFO      Statistics:              x [1, 38, 39, 40, 41]
+26.02.2018 07:02:17 INFO      Epsilon (bandwidth):     0.1
+26.02.2018 07:02:17 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+26.02.2018 07:02:18 INFO    Hi! How are you today?
+26.02.2018 07:02:18 INFO    Startup options:
+26.02.2018 07:02:18 INFO      Algorithm:                     afc
+26.02.2018 07:02:18 INFO      Point by point:                False
+26.02.2018 07:02:18 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:18 INFO      Smeared data:                  True
+26.02.2018 07:02:18 INFO      Training sample:               baseline
+26.02.2018 07:02:18 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+26.02.2018 07:02:18 INFO      alpha:                         None
+26.02.2018 07:02:18 INFO      AFC epsilon:                   0.05
+26.02.2018 07:02:18 INFO      Neyman construction toys:      False
+26.02.2018 07:02:18 INFO      Other options:                 
+26.02.2018 07:02:18 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:18 INFO      ML-based strategies available: False
+26.02.2018 07:02:18 INFO    Starting AFC inference
+26.02.2018 07:02:18 INFO    Settings:
+26.02.2018 07:02:18 INFO      Statistics:              x [1, 38, 39, 40, 41]
+26.02.2018 07:02:18 INFO      Epsilon (bandwidth):     0.05
+26.02.2018 07:02:18 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+26.02.2018 07:02:19 INFO    Hi! How are you today?
+26.02.2018 07:02:19 INFO    Startup options:
+26.02.2018 07:02:19 INFO      Algorithm:                     afc
+26.02.2018 07:02:19 INFO      Point by point:                False
+26.02.2018 07:02:19 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:19 INFO      Smeared data:                  True
+26.02.2018 07:02:19 INFO      Training sample:               baseline
+26.02.2018 07:02:19 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+26.02.2018 07:02:19 INFO      alpha:                         None
+26.02.2018 07:02:19 INFO      AFC epsilon:                   0.02
+26.02.2018 07:02:19 INFO      Neyman construction toys:      False
+26.02.2018 07:02:19 INFO      Other options:                 
+26.02.2018 07:02:19 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:19 INFO      ML-based strategies available: False
+26.02.2018 07:02:19 INFO    Starting AFC inference
+26.02.2018 07:02:19 INFO    Settings:
+26.02.2018 07:02:19 INFO      Statistics:              x [1, 38, 39, 40, 41]
+26.02.2018 07:02:19 INFO      Epsilon (bandwidth):     0.02
+26.02.2018 07:02:19 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+26.02.2018 07:02:20 INFO    Hi! How are you today?
+26.02.2018 07:02:20 INFO    Startup options:
+26.02.2018 07:02:20 INFO      Algorithm:                     afc
+26.02.2018 07:02:20 INFO      Point by point:                False
+26.02.2018 07:02:20 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:20 INFO      Smeared data:                  True
+26.02.2018 07:02:20 INFO      Training sample:               baseline
+26.02.2018 07:02:20 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+26.02.2018 07:02:20 INFO      alpha:                         None
+26.02.2018 07:02:20 INFO      AFC epsilon:                   0.01
+26.02.2018 07:02:20 INFO      Neyman construction toys:      False
+26.02.2018 07:02:20 INFO      Other options:                 
+26.02.2018 07:02:20 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:20 INFO      ML-based strategies available: False
+26.02.2018 07:02:20 INFO    Starting AFC inference
+26.02.2018 07:02:20 INFO    Settings:
+26.02.2018 07:02:20 INFO      Statistics:              x [1, 38, 39, 40, 41]
+26.02.2018 07:02:20 INFO      Epsilon (bandwidth):     0.01
+26.02.2018 07:02:20 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+26.02.2018 07:02:21 INFO    Hi! How are you today?
+26.02.2018 07:02:21 INFO    Startup options:
+26.02.2018 07:02:21 INFO      Algorithm:                     afc
+26.02.2018 07:02:21 INFO      Point by point:                False
+26.02.2018 07:02:21 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:21 INFO      Smeared data:                  True
+26.02.2018 07:02:21 INFO      Training sample:               baseline
+26.02.2018 07:02:21 INFO      Histogram / AFC X indices:     [1, 41]
+26.02.2018 07:02:21 INFO      alpha:                         None
+26.02.2018 07:02:21 INFO      AFC epsilon:                   1.0
+26.02.2018 07:02:21 INFO      Neyman construction toys:      False
+26.02.2018 07:02:21 INFO      Other options:                 
+26.02.2018 07:02:21 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:21 INFO      ML-based strategies available: False
+26.02.2018 07:02:21 INFO    Starting AFC inference
+26.02.2018 07:02:21 INFO    Settings:
+26.02.2018 07:02:21 INFO      Statistics:              x [1, 41]
+26.02.2018 07:02:21 INFO      Epsilon (bandwidth):     1.0
+26.02.2018 07:02:21 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+26.02.2018 07:02:22 INFO    Hi! How are you today?
+26.02.2018 07:02:22 INFO    Startup options:
+26.02.2018 07:02:22 INFO      Algorithm:                     afc
+26.02.2018 07:02:22 INFO      Point by point:                False
+26.02.2018 07:02:22 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:22 INFO      Smeared data:                  True
+26.02.2018 07:02:22 INFO      Training sample:               baseline
+26.02.2018 07:02:22 INFO      Histogram / AFC X indices:     [1, 41]
+26.02.2018 07:02:22 INFO      alpha:                         None
+26.02.2018 07:02:22 INFO      AFC epsilon:                   0.5
+26.02.2018 07:02:22 INFO      Neyman construction toys:      False
+26.02.2018 07:02:22 INFO      Other options:                 
+26.02.2018 07:02:22 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:22 INFO      ML-based strategies available: False
+26.02.2018 07:02:22 INFO    Starting AFC inference
+26.02.2018 07:02:22 INFO    Settings:
+26.02.2018 07:02:22 INFO      Statistics:              x [1, 41]
+26.02.2018 07:02:22 INFO      Epsilon (bandwidth):     0.5
+26.02.2018 07:02:22 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+26.02.2018 07:02:23 INFO    Hi! How are you today?
+26.02.2018 07:02:23 INFO    Startup options:
+26.02.2018 07:02:23 INFO      Algorithm:                     afc
+26.02.2018 07:02:23 INFO      Point by point:                False
+26.02.2018 07:02:23 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:23 INFO      Smeared data:                  True
+26.02.2018 07:02:23 INFO      Training sample:               baseline
+26.02.2018 07:02:23 INFO      Histogram / AFC X indices:     [1, 41]
+26.02.2018 07:02:23 INFO      alpha:                         None
+26.02.2018 07:02:23 INFO      AFC epsilon:                   0.2
+26.02.2018 07:02:23 INFO      Neyman construction toys:      False
+26.02.2018 07:02:23 INFO      Other options:                 
+26.02.2018 07:02:23 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:23 INFO      ML-based strategies available: False
+26.02.2018 07:02:23 INFO    Starting AFC inference
+26.02.2018 07:02:23 INFO    Settings:
+26.02.2018 07:02:23 INFO      Statistics:              x [1, 41]
+26.02.2018 07:02:23 INFO      Epsilon (bandwidth):     0.2
+26.02.2018 07:02:23 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+26.02.2018 07:02:24 INFO    Hi! How are you today?
+26.02.2018 07:02:24 INFO    Startup options:
+26.02.2018 07:02:24 INFO      Algorithm:                     afc
+26.02.2018 07:02:24 INFO      Point by point:                False
+26.02.2018 07:02:24 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:24 INFO      Smeared data:                  True
+26.02.2018 07:02:24 INFO      Training sample:               baseline
+26.02.2018 07:02:24 INFO      Histogram / AFC X indices:     [1, 41]
+26.02.2018 07:02:24 INFO      alpha:                         None
+26.02.2018 07:02:24 INFO      AFC epsilon:                   0.1
+26.02.2018 07:02:24 INFO      Neyman construction toys:      False
+26.02.2018 07:02:24 INFO      Other options:                 
+26.02.2018 07:02:24 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:24 INFO      ML-based strategies available: False
+26.02.2018 07:02:24 INFO    Starting AFC inference
+26.02.2018 07:02:24 INFO    Settings:
+26.02.2018 07:02:24 INFO      Statistics:              x [1, 41]
+26.02.2018 07:02:24 INFO      Epsilon (bandwidth):     0.1
+26.02.2018 07:02:24 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+26.02.2018 07:02:25 INFO    Hi! How are you today?
+26.02.2018 07:02:25 INFO    Startup options:
+26.02.2018 07:02:25 INFO      Algorithm:                     afc
+26.02.2018 07:02:25 INFO      Point by point:                False
+26.02.2018 07:02:25 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:25 INFO      Smeared data:                  True
+26.02.2018 07:02:25 INFO      Training sample:               baseline
+26.02.2018 07:02:25 INFO      Histogram / AFC X indices:     [1, 41]
+26.02.2018 07:02:25 INFO      alpha:                         None
+26.02.2018 07:02:25 INFO      AFC epsilon:                   0.05
+26.02.2018 07:02:25 INFO      Neyman construction toys:      False
+26.02.2018 07:02:25 INFO      Other options:                 
+26.02.2018 07:02:25 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:25 INFO      ML-based strategies available: False
+26.02.2018 07:02:25 INFO    Starting AFC inference
+26.02.2018 07:02:25 INFO    Settings:
+26.02.2018 07:02:25 INFO      Statistics:              x [1, 41]
+26.02.2018 07:02:25 INFO      Epsilon (bandwidth):     0.05
+26.02.2018 07:02:25 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+26.02.2018 07:02:26 INFO    Hi! How are you today?
+26.02.2018 07:02:26 INFO    Startup options:
+26.02.2018 07:02:26 INFO      Algorithm:                     afc
+26.02.2018 07:02:26 INFO      Point by point:                False
+26.02.2018 07:02:26 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:26 INFO      Smeared data:                  True
+26.02.2018 07:02:26 INFO      Training sample:               baseline
+26.02.2018 07:02:26 INFO      Histogram / AFC X indices:     [1, 41]
+26.02.2018 07:02:26 INFO      alpha:                         None
+26.02.2018 07:02:26 INFO      AFC epsilon:                   0.02
+26.02.2018 07:02:26 INFO      Neyman construction toys:      False
+26.02.2018 07:02:26 INFO      Other options:                 
+26.02.2018 07:02:26 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:26 INFO      ML-based strategies available: False
+26.02.2018 07:02:26 INFO    Starting AFC inference
+26.02.2018 07:02:26 INFO    Settings:
+26.02.2018 07:02:26 INFO      Statistics:              x [1, 41]
+26.02.2018 07:02:26 INFO      Epsilon (bandwidth):     0.02
+26.02.2018 07:02:26 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
+26.02.2018 07:02:27 INFO    Hi! How are you today?
+26.02.2018 07:02:27 INFO    Startup options:
+26.02.2018 07:02:27 INFO      Algorithm:                     afc
+26.02.2018 07:02:27 INFO      Point by point:                False
+26.02.2018 07:02:27 INFO      Morphing-aware mode:           False
+26.02.2018 07:02:27 INFO      Smeared data:                  True
+26.02.2018 07:02:27 INFO      Training sample:               baseline
+26.02.2018 07:02:27 INFO      Histogram / AFC X indices:     [1, 41]
+26.02.2018 07:02:27 INFO      alpha:                         None
+26.02.2018 07:02:27 INFO      AFC epsilon:                   0.01
+26.02.2018 07:02:27 INFO      Neyman construction toys:      False
+26.02.2018 07:02:27 INFO      Other options:                 
+26.02.2018 07:02:27 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 07:02:27 INFO      ML-based strategies available: False
+26.02.2018 07:02:27 INFO    Starting AFC inference
+26.02.2018 07:02:27 INFO    Settings:
+26.02.2018 07:02:27 INFO      Statistics:              x [1, 41]
+26.02.2018 07:02:27 INFO      Epsilon (bandwidth):     0.01
+26.02.2018 07:02:27 INFO      Kernel:                  gaussian
+Traceback (most recent call last):
+  File "experiments.py", line 123, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/afc.py", line 99, in afc_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'

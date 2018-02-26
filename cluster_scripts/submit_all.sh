@@ -2,6 +2,7 @@
 
 cd /home/jb6504/higgs_inference/cluster_scripts
 
+sbatch run_truth.sh
 
 ################################################################################
 # Default settings
@@ -17,7 +18,7 @@ sbatch run_combinedregression.sh
 
 # sbatch run_scoreregression.sh
 
-# sbatch run_afc.sh
+sbatch run_afc.sh
 
 sleep 30
 
@@ -64,7 +65,7 @@ sbatch run_histo_smearing.sh
 # Physics-aware
 ################################################################################
 
-# sbatch run_carl_aware.sh
-# sbatch run_combined_aware.sh
-# sbatch run_regression_aware.sh
-# sbatch run_combinedregression_aware.sh
+sbatch run_carl_aware.sh
+sbatch run_combined_aware.sh
+sbatch run_regression_aware.sh
+sbatch run_combinedregression_aware.sh

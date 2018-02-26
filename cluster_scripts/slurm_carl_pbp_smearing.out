@@ -1,27 +1,27 @@
 Using TensorFlow backend.
-23.02.2018 07:12:37 INFO    Hi! How are you today?
-23.02.2018 07:12:37 INFO    Startup options:
-23.02.2018 07:12:37 INFO      Algorithm:                     carl
-23.02.2018 07:12:37 INFO      Point by point:                True
-23.02.2018 07:12:37 INFO      Morphing-aware mode:           False
-23.02.2018 07:12:37 INFO      Smeared data:                  True
-23.02.2018 07:12:37 INFO      Training sample:               baseline
-23.02.2018 07:12:37 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-23.02.2018 07:12:37 INFO      alpha:                         None
-23.02.2018 07:12:37 INFO      AFC epsilon:                   None
-23.02.2018 07:12:37 INFO      Neyman construction toys:      False
-23.02.2018 07:12:37 INFO      Other options:                 
-23.02.2018 07:12:37 INFO      Base directory:                /home/jb6504/higgs_inference
-23.02.2018 07:12:37 INFO      ML-based strategies available: True
-23.02.2018 07:12:37 INFO    Starting point-by-point inference
-23.02.2018 07:12:37 INFO    Main settings:
-23.02.2018 07:12:37 INFO      Algorithm:               carl
-23.02.2018 07:12:37 INFO    Options:
-23.02.2018 07:12:37 INFO      Number of hidden layers: 3
-23.02.2018 07:12:37 INFO      Batch size:              128
-23.02.2018 07:12:37 INFO      Learning rate:           0.001
-23.02.2018 07:12:37 INFO      Learning rate decay:     0.0921034037198
-23.02.2018 07:12:37 INFO      Number of epochs:        50
+26.02.2018 06:57:37 INFO    Hi! How are you today?
+26.02.2018 06:57:37 INFO    Startup options:
+26.02.2018 06:57:37 INFO      Algorithm:                     carl
+26.02.2018 06:57:37 INFO      Point by point:                True
+26.02.2018 06:57:37 INFO      Morphing-aware mode:           False
+26.02.2018 06:57:37 INFO      Smeared data:                  True
+26.02.2018 06:57:37 INFO      Training sample:               baseline
+26.02.2018 06:57:37 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+26.02.2018 06:57:37 INFO      alpha:                         None
+26.02.2018 06:57:37 INFO      AFC epsilon:                   None
+26.02.2018 06:57:37 INFO      Neyman construction toys:      False
+26.02.2018 06:57:37 INFO      Other options:                 
+26.02.2018 06:57:37 INFO      Base directory:                /home/jb6504/higgs_inference
+26.02.2018 06:57:37 INFO      ML-based strategies available: True
+26.02.2018 06:57:37 INFO    Starting point-by-point inference
+26.02.2018 06:57:37 INFO    Main settings:
+26.02.2018 06:57:37 INFO      Algorithm:               carl
+26.02.2018 06:57:37 INFO    Options:
+26.02.2018 06:57:37 INFO      Number of hidden layers: 3
+26.02.2018 06:57:37 INFO      Batch size:              128
+26.02.2018 06:57:37 INFO      Learning rate:           0.001
+26.02.2018 06:57:37 INFO      Learning rate decay:     0.0921034037198
+26.02.2018 06:57:37 INFO      Number of epochs:        50
 Traceback (most recent call last):
   File "experiments.py", line 136, in <module>
     options=args.options)
