@@ -228,14 +228,14 @@ def calculate_all_CL():
     #calculate_CL('carl_calibrated', 'point_by_point')
     #calculate_CL('regression', 'point_by_point')
 
-    calculate_CL('carl', 'parameterized')
+    #calculate_CL('carl', 'parameterized')
     #calculate_CL('carl_calibrated', 'parameterized')
-    calculate_CL('combined', 'parameterized')
+    #calculate_CL('combined', 'parameterized')
     #calculate_CL('combined_calibrated', 'parameterized')
     #calculate_CL('regression', 'parameterized')
     calculate_CL('combinedregression', 'parameterized')
-
-    calculate_CL('scoreregression', 'score_regression')
+    
+    #calculate_CL('scoreregression', 'score_regression')
     calculate_CL('scoreregression_scoretheta', 'score_regression')
     calculate_CL('scoreregression_score', 'score_regression')
     calculate_CL('scoreregression_rotatedscore', 'score_regression')
