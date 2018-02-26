@@ -18,19 +18,23 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py combined --alpha 0.1
-python -u experiments.py combined --alpha 0.2
-python -u experiments.py combined --alpha 0.5
-python -u experiments.py combined --alpha 1.
-python -u experiments.py combined --alpha 2.
-python -u experiments.py combined --alpha 5.
-python -u experiments.py combined --alpha 10.
+# python -u experiments.py combined --alpha 0.1
+# python -u experiments.py combined --alpha 0.2
+# python -u experiments.py combined --alpha 0.5
+# python -u experiments.py combined --alpha 1.
+# python -u experiments.py combined --alpha 2.
+# python -u experiments.py combined --alpha 5.
+# python -u experiments.py combined --alpha 10.
 python -u experiments.py combined --alpha 20.
+python -u experiments.py combined --alpha 50.
+python -u experiments.py combined --alpha 100.
 
-python -u experiments.py combined --training random --alpha 0.1
-python -u experiments.py combined --training random --alpha 0.2
-python -u experiments.py combined --training random --alpha 0.5
-python -u experiments.py combined --training random --alpha 2.
-python -u experiments.py combined --training random --alpha 5.
-python -u experiments.py combined --training random --alpha 10.
+# python -u experiments.py combined --training random --alpha 0.1
+# python -u experiments.py combined --training random --alpha 0.2
+# python -u experiments.py combined --training random --alpha 0.5
+# python -u experiments.py combined --training random --alpha 2.
+# python -u experiments.py combined --training random --alpha 5.
+# python -u experiments.py combined --training random --alpha 10.
 python -u experiments.py combined --training random --alpha 20.
+python -u experiments.py combined --training random --alpha 50.
+python -u experiments.py combined --training random --alpha 100.
