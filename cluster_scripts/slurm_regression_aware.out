@@ -1,14 +1,54 @@
-Traceback (most recent call last):
-  File "experiments.py", line 23, in <module>
-    from higgs_inference.various.p_values import calculate_all_CL
-  File "/home/jb6504/higgs_inference/higgs_inference/various/p_values.py", line 1
-    >################################################################################
-    ^
-SyntaxError: invalid syntax
-Traceback (most recent call last):
-  File "experiments.py", line 23, in <module>
-    from higgs_inference.various.p_values import calculate_all_CL
-  File "/home/jb6504/higgs_inference/higgs_inference/various/p_values.py", line 1
-    >################################################################################
-    ^
-SyntaxError: invalid syntax
+Using TensorFlow backend.
+27.02.2018 03:57:24 INFO    Hi! How are you today?
+27.02.2018 03:57:24 INFO    Startup options:
+27.02.2018 03:57:24 INFO      Algorithm:                     regression
+27.02.2018 03:57:24 INFO      Point by point:                False
+27.02.2018 03:57:24 INFO      Morphing-aware mode:           True
+27.02.2018 03:57:24 INFO      Smeared data:                  False
+27.02.2018 03:57:24 INFO      Training sample:               baseline
+27.02.2018 03:57:24 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+27.02.2018 03:57:24 INFO      alpha:                         None
+27.02.2018 03:57:24 INFO      AFC epsilon:                   None
+27.02.2018 03:57:24 INFO      Neyman construction toys:      False
+27.02.2018 03:57:24 INFO      Other options:                 
+27.02.2018 03:57:24 INFO      Base directory:                /home/jb6504/higgs_inference
+27.02.2018 03:57:24 INFO      ML-based strategies available: True
+27.02.2018 03:57:24 INFO    Starting parameterized inference
+27.02.2018 03:57:24 INFO    Main settings:
+27.02.2018 03:57:24 INFO      Algorithm:                regression
+27.02.2018 03:57:24 INFO      Morphing-aware:           True
+27.02.2018 03:57:24 INFO      Training sample:          baseline
+27.02.2018 03:57:24 INFO    Options:
+27.02.2018 03:57:24 INFO      Number of hidden layers:  3
+27.02.2018 03:57:24 INFO      Batch size:               128
+27.02.2018 03:57:24 INFO      Learning rate:            0.001
+27.02.2018 03:57:24 INFO      Learning rate decay:      0.0921034037198
+27.02.2018 03:57:24 INFO      Number of epochs:         50
+27.02.2018 03:57:24 INFO      Debug mode:               False
+27.02.2018 03:57:49 INFO    Starting training
+Train on 7995920 samples, validate on 1998980 samples
+2018-02-27 03:57:56.056537: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-27 03:57:56.056873: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-27 03:57:56.056883: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-27 03:57:56.056887: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-27 03:57:56.056891: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-27 03:57:56.383143: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:84:00.0
+Total memory: 22.38GiB
+Free memory: 22.21GiB
+2018-02-27 03:57:56.383180: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-27 03:57:56.383186: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-27 03:57:56.383195: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:84:00.0)
+Epoch 1/50
+3112s - loss: 1539693.3748 - full_cross_entropy: 0.9198 - trimmed_cross_entropy: 0.9054 - full_mse_log_r: 3.0906 - trimmed_mse_log_r: 3.0423 - full_mae_log_r: 0.8431 - full_mse_score: 11594.8537 - trimmed_mse_score: 44.9332 - full_mae_score: 2.9224 - val_loss: 894325.3444 - val_full_cross_entropy: 0.8085 - val_trimmed_cross_entropy: 0.7959 - val_full_mse_log_r: 1.8489 - val_trimmed_mse_log_r: 1.8200 - val_full_mae_log_r: 0.7016 - val_full_mse_score: 4227.4038 - val_trimmed_mse_score: 11.6736 - val_full_mae_score: 2.4078
+Epoch 2/50
+3113s - loss: 879076.6936 - full_cross_entropy: 0.8099 - trimmed_cross_entropy: 0.7973 - full_mse_log_r: 1.8208 - trimmed_mse_log_r: 1.7924 - full_mae_log_r: 0.6953 - full_mse_score: 4212.6536 - trimmed_mse_score: 16.8214 - full_mae_score: 2.3628 - val_loss: 951324.5022 - val_full_cross_entropy: 0.8152 - val_trimmed_cross_entropy: 0.8025 - val_full_mse_log_r: 1.9181 - val_trimmed_mse_log_r: 1.8881 - val_full_mae_log_r: 0.7012 - val_full_mse_score: 3727.0523 - val_trimmed_mse_score: 14.8333 - val_full_mae_score: 2.4670
+Epoch 3/50
+3111s - loss: 849792.4085 - full_cross_entropy: 0.8037 - trimmed_cross_entropy: 0.7912 - full_mse_log_r: 1.7475 - trimmed_mse_log_r: 1.7202 - full_mae_log_r: 0.6791 - full_mse_score: 5170.7169 - trimmed_mse_score: 15.0996 - full_mae_score: 2.2932 - val_loss: 1089908.4883 - val_full_cross_entropy: 0.8263 - val_trimmed_cross_entropy: 0.8134 - val_full_mse_log_r: 2.0589 - val_trimmed_mse_log_r: 2.0267 - val_full_mae_log_r: 0.6983 - val_full_mse_score: 8027.9197 - val_trimmed_mse_score: 12.9488 - val_full_mae_score: 2.4175
+Epoch 4/50
+3113s - loss: 826186.8191 - full_cross_entropy: 0.7962 - trimmed_cross_entropy: 0.7838 - full_mse_log_r: 1.6717 - trimmed_mse_log_r: 1.6456 - full_mae_log_r: 0.6602 - full_mse_score: 3740.2619 - trimmed_mse_score: 19.7504 - full_mae_score: 2.2413 - val_loss: 640142.2369 - val_full_cross_entropy: 0.7548 - val_trimmed_cross_entropy: 0.7430 - val_full_mse_log_r: 1.2462 - val_trimmed_mse_log_r: 1.2267 - val_full_mae_log_r: 0.5749 - val_full_mse_score: 1427.8275 - val_trimmed_mse_score: 6.3927 - val_full_mae_score: 1.7377
+Epoch 5/50
+3109s - loss: 785154.7858 - full_cross_entropy: 0.7879 - trimmed_cross_entropy: 0.7756 - full_mse_log_r: 1.5768 - trimmed_mse_log_r: 1.5522 - full_mae_log_r: 0.6378 - full_mse_score: 3630.0421 - trimmed_mse_score: 12.3047 - full_mae_score: 2.1550 - val_loss: 700888.7750 - val_full_cross_entropy: 0.7774 - val_trimmed_cross_entropy: 0.7653 - val_full_mse_log_r: 1.4519 - val_trimmed_mse_log_r: 1.4292 - val_full_mae_log_r: 0.6211 - val_full_mse_score: 2657.5954 - val_trimmed_mse_score: 8.8574 - val_full_mae_score: 2.1360
+Epoch 6/50
