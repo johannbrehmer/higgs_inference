@@ -28,8 +28,8 @@ def calculate_median_p_value(llr_distribution, llr_observed):
     p_values = 0.5 * (p_values_left + p_values_right)
 
     # Some things Kyle suggested
-    q_cut = (distribution[474] + distribution[475]) / 2
-    q_cut_uncertainty = (distribution[475] - distribution[474]) / 2
+    q_cut = (distribution[949] + distribution[950]) / 2
+    q_cut_uncertainty = (distribution[950] - distribution[949]) / 2
     q_median = np.median(llr_observed)
 
     return np.median(p_values), q_cut, q_cut_uncertainty, q_median
