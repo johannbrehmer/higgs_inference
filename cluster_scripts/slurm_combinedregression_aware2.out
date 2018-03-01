@@ -1,0 +1,47 @@
+Using TensorFlow backend.
+28.02.2018 21:42:10 INFO    Hi! How are you today?
+28.02.2018 21:42:10 INFO    Startup options:
+28.02.2018 21:42:10 INFO      Algorithm:                     combinedregression
+28.02.2018 21:42:10 INFO      Point by point:                False
+28.02.2018 21:42:10 INFO      Morphing-aware mode:           True
+28.02.2018 21:42:10 INFO      Smeared data:                  False
+28.02.2018 21:42:10 INFO      Training sample:               baseline
+28.02.2018 21:42:10 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+28.02.2018 21:42:10 INFO      alpha:                         None
+28.02.2018 21:42:10 INFO      AFC epsilon:                   None
+28.02.2018 21:42:10 INFO      Neyman construction toys:      False
+28.02.2018 21:42:10 INFO      Other options:                 ['shallow']
+28.02.2018 21:42:10 INFO      Base directory:                /home/jb6504/higgs_inference
+28.02.2018 21:42:10 INFO      ML-based strategies available: True
+28.02.2018 21:42:10 INFO    Starting parameterized inference
+28.02.2018 21:42:10 INFO    Main settings:
+28.02.2018 21:42:10 INFO      Algorithm:                combinedregression
+28.02.2018 21:42:10 INFO      Morphing-aware:           True
+28.02.2018 21:42:10 INFO      Training sample:          baseline
+28.02.2018 21:42:10 INFO    Options:
+28.02.2018 21:42:10 INFO      Number of hidden layers:  2
+28.02.2018 21:42:10 INFO      alpha:                    100.0
+28.02.2018 21:42:10 INFO      Batch size:               128
+28.02.2018 21:42:10 INFO      Learning rate:            0.001
+28.02.2018 21:42:10 INFO      Learning rate decay:      0.0921034037198
+28.02.2018 21:42:10 INFO      Number of epochs:         50
+28.02.2018 21:42:10 INFO      Debug mode:               False
+28.02.2018 21:42:41 INFO    Starting training
+Train on 7995920 samples, validate on 1998980 samples
+2018-02-28 21:42:46.980306: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-28 21:42:46.981928: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-28 21:42:46.981939: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-28 21:42:46.981943: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-28 21:42:46.981948: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-28 21:42:47.282761: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:84:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-02-28 21:42:47.282797: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-28 21:42:47.282803: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-28 21:42:47.282813: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:84:00.0)
+Epoch 1/50
+2296s - loss: 13870691.5000 - full_cross_entropy: 0.8063 - trimmed_cross_entropy: 0.7937 - full_mse_log_r: 1.7683 - trimmed_mse_log_r: 1.7406 - full_mae_log_r: 0.6078 - full_mse_score: 135454.3252 - trimmed_mse_score: 52.8882 - full_mae_score: 1.5641 - val_loss: 47640.2429 - val_full_cross_entropy: 0.6909 - val_trimmed_cross_entropy: 0.6801 - val_full_mse_log_r: 0.4477 - val_trimmed_mse_log_r: 0.4407 - val_full_mae_log_r: 0.4212 - val_full_mse_score: 303.7803 - val_trimmed_mse_score: 1.1186 - val_full_mae_score: 0.6068
+Epoch 2/50

@@ -1,397 +1,64 @@
 Using TensorFlow backend.
-27.02.2018 03:57:24 INFO    Hi! How are you today?
-27.02.2018 03:57:24 INFO    Startup options:
-27.02.2018 03:57:24 INFO      Algorithm:                     regression
-27.02.2018 03:57:24 INFO      Point by point:                False
-27.02.2018 03:57:24 INFO      Morphing-aware mode:           True
-27.02.2018 03:57:24 INFO      Smeared data:                  False
-27.02.2018 03:57:24 INFO      Training sample:               baseline
-27.02.2018 03:57:24 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-27.02.2018 03:57:24 INFO      alpha:                         None
-27.02.2018 03:57:24 INFO      AFC epsilon:                   None
-27.02.2018 03:57:24 INFO      Neyman construction toys:      False
-27.02.2018 03:57:24 INFO      Other options:                 
-27.02.2018 03:57:24 INFO      Base directory:                /home/jb6504/higgs_inference
-27.02.2018 03:57:24 INFO      ML-based strategies available: True
-27.02.2018 03:57:24 INFO    Starting parameterized inference
-27.02.2018 03:57:24 INFO    Main settings:
-27.02.2018 03:57:24 INFO      Algorithm:                regression
-27.02.2018 03:57:24 INFO      Morphing-aware:           True
-27.02.2018 03:57:24 INFO      Training sample:          baseline
-27.02.2018 03:57:24 INFO    Options:
-27.02.2018 03:57:24 INFO      Number of hidden layers:  3
-27.02.2018 03:57:24 INFO      Batch size:               128
-27.02.2018 03:57:24 INFO      Learning rate:            0.001
-27.02.2018 03:57:24 INFO      Learning rate decay:      0.0921034037198
-27.02.2018 03:57:24 INFO      Number of epochs:         50
-27.02.2018 03:57:24 INFO      Debug mode:               False
-27.02.2018 03:57:49 INFO    Starting training
+28.02.2018 17:04:56 INFO    Hi! How are you today?
+28.02.2018 17:04:56 INFO    Startup options:
+28.02.2018 17:04:56 INFO      Algorithm:                     regression
+28.02.2018 17:04:56 INFO      Point by point:                False
+28.02.2018 17:04:56 INFO      Morphing-aware mode:           True
+28.02.2018 17:04:56 INFO      Smeared data:                  False
+28.02.2018 17:04:56 INFO      Training sample:               baseline
+28.02.2018 17:04:56 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+28.02.2018 17:04:56 INFO      alpha:                         None
+28.02.2018 17:04:56 INFO      AFC epsilon:                   None
+28.02.2018 17:04:56 INFO      Neyman construction toys:      False
+28.02.2018 17:04:56 INFO      Other options:                 ['shallow']
+28.02.2018 17:04:56 INFO      Base directory:                /home/jb6504/higgs_inference
+28.02.2018 17:04:56 INFO      ML-based strategies available: True
+28.02.2018 17:04:56 INFO    Starting parameterized inference
+28.02.2018 17:04:56 INFO    Main settings:
+28.02.2018 17:04:56 INFO      Algorithm:                regression
+28.02.2018 17:04:56 INFO      Morphing-aware:           True
+28.02.2018 17:04:56 INFO      Training sample:          baseline
+28.02.2018 17:04:56 INFO    Options:
+28.02.2018 17:04:56 INFO      Number of hidden layers:  2
+28.02.2018 17:04:56 INFO      Batch size:               128
+28.02.2018 17:04:56 INFO      Learning rate:            0.001
+28.02.2018 17:04:56 INFO      Learning rate decay:      0.0921034037198
+28.02.2018 17:04:56 INFO      Number of epochs:         50
+28.02.2018 17:04:56 INFO      Debug mode:               False
+28.02.2018 17:05:21 INFO    Starting training
 Train on 7995920 samples, validate on 1998980 samples
-2018-02-27 03:57:56.056537: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-27 03:57:56.056873: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-27 03:57:56.056883: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-27 03:57:56.056887: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-27 03:57:56.056891: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-27 03:57:56.383143: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+2018-02-28 17:05:26.511894: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-28 17:05:26.512277: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-28 17:05:26.512286: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-28 17:05:26.512290: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-28 17:05:26.512294: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-02-28 17:05:26.827814: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
 name: Tesla P40
 major: 6 minor: 1 memoryClockRate (GHz) 1.531
-pciBusID 0000:84:00.0
+pciBusID 0000:85:00.0
 Total memory: 22.38GiB
 Free memory: 22.21GiB
-2018-02-27 03:57:56.383180: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-02-27 03:57:56.383186: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-02-27 03:57:56.383195: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:84:00.0)
+2018-02-28 17:05:26.827848: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-02-28 17:05:26.827854: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-02-28 17:05:26.827861: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:85:00.0)
 Epoch 1/50
-3112s - loss: 1539693.3748 - full_cross_entropy: 0.9198 - trimmed_cross_entropy: 0.9054 - full_mse_log_r: 3.0906 - trimmed_mse_log_r: 3.0423 - full_mae_log_r: 0.8431 - full_mse_score: 11594.8537 - trimmed_mse_score: 44.9332 - full_mae_score: 2.9224 - val_loss: 894325.3444 - val_full_cross_entropy: 0.8085 - val_trimmed_cross_entropy: 0.7959 - val_full_mse_log_r: 1.8489 - val_trimmed_mse_log_r: 1.8200 - val_full_mae_log_r: 0.7016 - val_full_mse_score: 4227.4038 - val_trimmed_mse_score: 11.6736 - val_full_mae_score: 2.4078
+1974s - loss: 1632988.7092 - full_cross_entropy: 0.9384 - trimmed_cross_entropy: 0.9238 - full_mse_log_r: 3.2805 - trimmed_mse_log_r: 3.2292 - full_mae_log_r: 0.8764 - full_mse_score: 9565.1425 - trimmed_mse_score: 61.1348 - full_mae_score: 3.0303 - val_loss: 942064.9557 - val_full_cross_entropy: 0.8240 - val_trimmed_cross_entropy: 0.8111 - val_full_mse_log_r: 1.9586 - val_trimmed_mse_log_r: 1.9279 - val_full_mae_log_r: 0.7107 - val_full_mse_score: 4272.6189 - val_trimmed_mse_score: 15.9038 - val_full_mae_score: 2.4280
 Epoch 2/50
-3113s - loss: 879076.6936 - full_cross_entropy: 0.8099 - trimmed_cross_entropy: 0.7973 - full_mse_log_r: 1.8208 - trimmed_mse_log_r: 1.7924 - full_mae_log_r: 0.6953 - full_mse_score: 4212.6536 - trimmed_mse_score: 16.8214 - full_mae_score: 2.3628 - val_loss: 951324.5022 - val_full_cross_entropy: 0.8152 - val_trimmed_cross_entropy: 0.8025 - val_full_mse_log_r: 1.9181 - val_trimmed_mse_log_r: 1.8881 - val_full_mae_log_r: 0.7012 - val_full_mse_score: 3727.0523 - val_trimmed_mse_score: 14.8333 - val_full_mae_score: 2.4670
+1972s - loss: 776087.6348 - full_cross_entropy: 0.7917 - trimmed_cross_entropy: 0.7793 - full_mse_log_r: 1.6073 - trimmed_mse_log_r: 1.5822 - full_mae_log_r: 0.6545 - full_mse_score: 3258.6550 - trimmed_mse_score: 12.0719 - full_mae_score: 2.1958 - val_loss: 688423.1750 - val_full_cross_entropy: 0.7672 - val_trimmed_cross_entropy: 0.7552 - val_full_mse_log_r: 1.3703 - val_trimmed_mse_log_r: 1.3489 - val_full_mae_log_r: 0.6099 - val_full_mse_score: 1437.2561 - val_trimmed_mse_score: 7.8921 - val_full_mae_score: 1.8917
 Epoch 3/50
-3111s - loss: 849792.4085 - full_cross_entropy: 0.8037 - trimmed_cross_entropy: 0.7912 - full_mse_log_r: 1.7475 - trimmed_mse_log_r: 1.7202 - full_mae_log_r: 0.6791 - full_mse_score: 5170.7169 - trimmed_mse_score: 15.0996 - full_mae_score: 2.2932 - val_loss: 1089908.4883 - val_full_cross_entropy: 0.8263 - val_trimmed_cross_entropy: 0.8134 - val_full_mse_log_r: 2.0589 - val_trimmed_mse_log_r: 2.0267 - val_full_mae_log_r: 0.6983 - val_full_mse_score: 8027.9197 - val_trimmed_mse_score: 12.9488 - val_full_mae_score: 2.4175
+1976s - loss: 729012.1147 - full_cross_entropy: 0.7807 - trimmed_cross_entropy: 0.7685 - full_mse_log_r: 1.4872 - trimmed_mse_log_r: 1.4639 - full_mae_log_r: 0.6266 - full_mse_score: 3585.8087 - trimmed_mse_score: 12.6791 - full_mae_score: 2.1227 - val_loss: 506466.8734 - val_full_cross_entropy: 0.7457 - val_trimmed_cross_entropy: 0.7341 - val_full_mse_log_r: 1.0818 - val_trimmed_mse_log_r: 1.0649 - val_full_mae_log_r: 0.5751 - val_full_mse_score: 1784.5011 - val_trimmed_mse_score: 6.0317 - val_full_mae_score: 1.8027
 Epoch 4/50
-3113s - loss: 826186.8191 - full_cross_entropy: 0.7962 - trimmed_cross_entropy: 0.7838 - full_mse_log_r: 1.6717 - trimmed_mse_log_r: 1.6456 - full_mae_log_r: 0.6602 - full_mse_score: 3740.2619 - trimmed_mse_score: 19.7504 - full_mae_score: 2.2413 - val_loss: 640142.2369 - val_full_cross_entropy: 0.7548 - val_trimmed_cross_entropy: 0.7430 - val_full_mse_log_r: 1.2462 - val_trimmed_mse_log_r: 1.2267 - val_full_mae_log_r: 0.5749 - val_full_mse_score: 1427.8275 - val_trimmed_mse_score: 6.3927 - val_full_mae_score: 1.7377
+1974s - loss: 697377.1882 - full_cross_entropy: 0.7716 - trimmed_cross_entropy: 0.7595 - full_mse_log_r: 1.3944 - trimmed_mse_log_r: 1.3726 - full_mae_log_r: 0.6026 - full_mse_score: 12119.2739 - trimmed_mse_score: 9.7598 - full_mae_score: 2.0516 - val_loss: 1281275.5188 - val_full_cross_entropy: 0.8725 - val_trimmed_cross_entropy: 0.8588 - val_full_mse_log_r: 2.5310 - val_trimmed_mse_log_r: 2.4914 - val_full_mae_log_r: 0.7764 - val_full_mse_score: 7381.7436 - val_trimmed_mse_score: 29.6944 - val_full_mae_score: 3.1119
 Epoch 5/50
-3109s - loss: 785154.7858 - full_cross_entropy: 0.7879 - trimmed_cross_entropy: 0.7756 - full_mse_log_r: 1.5768 - trimmed_mse_log_r: 1.5522 - full_mae_log_r: 0.6378 - full_mse_score: 3630.0421 - trimmed_mse_score: 12.3047 - full_mae_score: 2.1550 - val_loss: 700888.7750 - val_full_cross_entropy: 0.7774 - val_trimmed_cross_entropy: 0.7653 - val_full_mse_log_r: 1.4519 - val_trimmed_mse_log_r: 1.4292 - val_full_mae_log_r: 0.6211 - val_full_mse_score: 2657.5954 - val_trimmed_mse_score: 8.8574 - val_full_mae_score: 2.1360
+1972s - loss: 660919.9448 - full_cross_entropy: 0.7634 - trimmed_cross_entropy: 0.7514 - full_mse_log_r: 1.3046 - trimmed_mse_log_r: 1.2842 - full_mae_log_r: 0.5789 - full_mse_score: 3365.1595 - trimmed_mse_score: 8.7757 - full_mae_score: 1.9671 - val_loss: 1532679.7668 - val_full_cross_entropy: 0.8968 - val_trimmed_cross_entropy: 0.8828 - val_full_mse_log_r: 2.8749 - val_trimmed_mse_log_r: 2.8299 - val_full_mae_log_r: 0.7931 - val_full_mse_score: 9249.9253 - val_trimmed_mse_score: 30.1068 - val_full_mae_score: 3.0361
 Epoch 6/50
-3107s - loss: 761287.3947 - full_cross_entropy: 0.7812 - trimmed_cross_entropy: 0.7690 - full_mse_log_r: 1.5023 - trimmed_mse_log_r: 1.4789 - full_mae_log_r: 0.6184 - full_mse_score: 3801.3529 - trimmed_mse_score: 26.3561 - full_mae_score: 2.1101 - val_loss: 633902.7740 - val_full_cross_entropy: 0.7604 - val_trimmed_cross_entropy: 0.7485 - val_full_mse_log_r: 1.2977 - val_trimmed_mse_log_r: 1.2774 - val_full_mae_log_r: 0.6347 - val_full_mse_score: 4023.1163 - val_trimmed_mse_score: 8.5728 - val_full_mae_score: 2.2009
+1973s - loss: 625317.8480 - full_cross_entropy: 0.7552 - trimmed_cross_entropy: 0.7434 - full_mse_log_r: 1.2170 - trimmed_mse_log_r: 1.1980 - full_mae_log_r: 0.5545 - full_mse_score: 3063.1246 - trimmed_mse_score: 9.8040 - full_mae_score: 1.9028 - val_loss: 646467.7797 - val_full_cross_entropy: 0.7544 - val_trimmed_cross_entropy: 0.7426 - val_full_mse_log_r: 1.2310 - val_trimmed_mse_log_r: 1.2117 - val_full_mae_log_r: 0.5539 - val_full_mse_score: 1748.1344 - val_trimmed_mse_score: 7.4186 - val_full_mae_score: 1.7725
 Epoch 7/50
-3108s - loss: 730692.9141 - full_cross_entropy: 0.7723 - trimmed_cross_entropy: 0.7603 - full_mse_log_r: 1.4196 - trimmed_mse_log_r: 1.3974 - full_mae_log_r: 0.5971 - full_mse_score: 5796.7366 - trimmed_mse_score: 10.9753 - full_mae_score: 2.0396 - val_loss: 597132.0278 - val_full_cross_entropy: 0.7435 - val_trimmed_cross_entropy: 0.7319 - val_full_mse_log_r: 1.1167 - val_trimmed_mse_log_r: 1.0993 - val_full_mae_log_r: 0.5358 - val_full_mse_score: 1101.0574 - val_trimmed_mse_score: 6.5470 - val_full_mae_score: 1.6721
+1971s - loss: 606539.7979 - full_cross_entropy: 0.7498 - trimmed_cross_entropy: 0.7381 - full_mse_log_r: 1.1569 - trimmed_mse_log_r: 1.1388 - full_mae_log_r: 0.5379 - full_mse_score: 4564.1204 - trimmed_mse_score: 10.9298 - full_mae_score: 1.8632 - val_loss: 720343.4129 - val_full_cross_entropy: 0.7740 - val_trimmed_cross_entropy: 0.7619 - val_full_mse_log_r: 1.4088 - val_trimmed_mse_log_r: 1.3868 - val_full_mae_log_r: 0.5686 - val_full_mse_score: 6068.5634 - val_trimmed_mse_score: 10.0547 - val_full_mae_score: 2.0895
 Epoch 8/50
-3109s - loss: 693948.0672 - full_cross_entropy: 0.7651 - trimmed_cross_entropy: 0.7532 - full_mse_log_r: 1.3327 - trimmed_mse_log_r: 1.3119 - full_mae_log_r: 0.5758 - full_mse_score: 4052.1298 - trimmed_mse_score: 11.6356 - full_mae_score: 1.9866 - val_loss: 561221.6300 - val_full_cross_entropy: 0.7406 - val_trimmed_cross_entropy: 0.7290 - val_full_mse_log_r: 1.0638 - val_trimmed_mse_log_r: 1.0471 - val_full_mae_log_r: 0.5402 - val_full_mse_score: 2090.5370 - val_trimmed_mse_score: 5.6861 - val_full_mae_score: 1.7028
+1972s - loss: 576418.5033 - full_cross_entropy: 0.7427 - trimmed_cross_entropy: 0.7311 - full_mse_log_r: 1.0829 - trimmed_mse_log_r: 1.0660 - full_mae_log_r: 0.5190 - full_mse_score: 3066.0981 - trimmed_mse_score: 7.7931 - full_mae_score: 1.7827 - val_loss: 554702.3680 - val_full_cross_entropy: 0.7347 - val_trimmed_cross_entropy: 0.7232 - val_full_mse_log_r: 1.0146 - val_trimmed_mse_log_r: 0.9987 - val_full_mae_log_r: 0.4982 - val_full_mse_score: 1674.8315 - val_trimmed_mse_score: 5.4673 - val_full_mae_score: 1.7006
 Epoch 9/50
-3106s - loss: 661771.2154 - full_cross_entropy: 0.7582 - trimmed_cross_entropy: 0.7464 - full_mse_log_r: 1.2531 - trimmed_mse_log_r: 1.2335 - full_mae_log_r: 0.5564 - full_mse_score: 3563.7686 - trimmed_mse_score: 10.7463 - full_mae_score: 1.8909 - val_loss: 580310.7168 - val_full_cross_entropy: 0.7381 - val_trimmed_cross_entropy: 0.7266 - val_full_mse_log_r: 1.0531 - val_trimmed_mse_log_r: 1.0367 - val_full_mae_log_r: 0.5094 - val_full_mse_score: 2369.5986 - val_trimmed_mse_score: 6.8696 - val_full_mae_score: 1.6122
+1972s - loss: 554435.6743 - full_cross_entropy: 0.7381 - trimmed_cross_entropy: 0.7266 - full_mse_log_r: 1.0280 - trimmed_mse_log_r: 1.0119 - full_mae_log_r: 0.5007 - full_mse_score: 2165.6776 - trimmed_mse_score: 7.7639 - full_mae_score: 1.7140 - val_loss: 561883.3058 - val_full_cross_entropy: 0.7379 - val_trimmed_cross_entropy: 0.7264 - val_full_mse_log_r: 1.0479 - val_trimmed_mse_log_r: 1.0315 - val_full_mae_log_r: 0.5136 - val_full_mse_score: 3223.1471 - val_trimmed_mse_score: 7.3538 - val_full_mae_score: 1.8168
 Epoch 10/50
-3108s - loss: 640464.7289 - full_cross_entropy: 0.7526 - trimmed_cross_entropy: 0.7408 - full_mse_log_r: 1.1956 - trimmed_mse_log_r: 1.1769 - full_mae_log_r: 0.5399 - full_mse_score: 3831.4681 - trimmed_mse_score: 8.6532 - full_mae_score: 1.8610 - val_loss: 991903.9498 - val_full_cross_entropy: 0.8085 - val_trimmed_cross_entropy: 0.7958 - val_full_mse_log_r: 1.8533 - val_trimmed_mse_log_r: 1.8243 - val_full_mae_log_r: 0.6335 - val_full_mse_score: 8684.1668 - val_trimmed_mse_score: 47.1265 - val_full_mae_score: 2.4318
+1971s - loss: 544861.8383 - full_cross_entropy: 0.7336 - trimmed_cross_entropy: 0.7221 - full_mse_log_r: 0.9859 - trimmed_mse_log_r: 0.9705 - full_mae_log_r: 0.4839 - full_mse_score: 3535.6020 - trimmed_mse_score: 8.1852 - full_mae_score: 1.7089 - val_loss: 754363.4646 - val_full_cross_entropy: 0.7599 - val_trimmed_cross_entropy: 0.7481 - val_full_mse_log_r: 1.3356 - val_trimmed_mse_log_r: 1.3148 - val_full_mae_log_r: 0.5354 - val_full_mse_score: 5607.8497 - val_trimmed_mse_score: 7.9982 - val_full_mae_score: 1.9360
 Epoch 11/50
-3108s - loss: 614811.5506 - full_cross_entropy: 0.7462 - trimmed_cross_entropy: 0.7345 - full_mse_log_r: 1.1294 - trimmed_mse_log_r: 1.1117 - full_mae_log_r: 0.5234 - full_mse_score: 3298.1545 - trimmed_mse_score: 10.7798 - full_mae_score: 1.7983 - val_loss: 679224.5657 - val_full_cross_entropy: 0.7381 - val_trimmed_cross_entropy: 0.7266 - val_full_mse_log_r: 1.1272 - val_trimmed_mse_log_r: 1.1096 - val_full_mae_log_r: 0.5032 - val_full_mse_score: 2566.4372 - val_trimmed_mse_score: 9.3211 - val_full_mae_score: 1.8066
-Epoch 12/50
-3108s - loss: 580202.9693 - full_cross_entropy: 0.7395 - trimmed_cross_entropy: 0.7280 - full_mse_log_r: 1.0524 - trimmed_mse_log_r: 1.0360 - full_mae_log_r: 0.5050 - full_mse_score: 2801.0207 - trimmed_mse_score: 8.4458 - full_mae_score: 1.7455 - val_loss: 526686.9442 - val_full_cross_entropy: 0.7352 - val_trimmed_cross_entropy: 0.7237 - val_full_mse_log_r: 0.9857 - val_trimmed_mse_log_r: 0.9703 - val_full_mae_log_r: 0.4973 - val_full_mse_score: 6567.0973 - val_trimmed_mse_score: 9.6472 - val_full_mae_score: 1.8905
-Epoch 13/50
-3107s - loss: 557436.1551 - full_cross_entropy: 0.7340 - trimmed_cross_entropy: 0.7225 - full_mse_log_r: 0.9951 - trimmed_mse_log_r: 0.9796 - full_mae_log_r: 0.4907 - full_mse_score: 2314.3656 - trimmed_mse_score: 10.7484 - full_mae_score: 1.6889 - val_loss: 639064.6625 - val_full_cross_entropy: 0.7488 - val_trimmed_cross_entropy: 0.7371 - val_full_mse_log_r: 1.1774 - val_trimmed_mse_log_r: 1.1590 - val_full_mae_log_r: 0.5468 - val_full_mse_score: 4228.6236 - val_trimmed_mse_score: 11.5357 - val_full_mae_score: 2.0957
-Epoch 14/50
-3101s - loss: 531610.5776 - full_cross_entropy: 0.7290 - trimmed_cross_entropy: 0.7176 - full_mse_log_r: 0.9360 - trimmed_mse_log_r: 0.9213 - full_mae_log_r: 0.4751 - full_mse_score: 1495.7769 - trimmed_mse_score: 6.8312 - full_mae_score: 1.6314 - val_loss: 388488.0140 - val_full_cross_entropy: 0.7177 - val_trimmed_cross_entropy: 0.7065 - val_full_mse_log_r: 0.7638 - val_trimmed_mse_log_r: 0.7519 - val_full_mae_log_r: 0.4689 - val_full_mse_score: 927.7785 - val_trimmed_mse_score: 4.8889 - val_full_mae_score: 1.5472
-Epoch 15/50
-3102s - loss: 514173.2888 - full_cross_entropy: 0.7247 - trimmed_cross_entropy: 0.7133 - full_mse_log_r: 0.8889 - trimmed_mse_log_r: 0.8750 - full_mae_log_r: 0.4618 - full_mse_score: 2393.4057 - trimmed_mse_score: 6.5807 - full_mae_score: 1.6110 - val_loss: 458698.9327 - val_full_cross_entropy: 0.7178 - val_trimmed_cross_entropy: 0.7066 - val_full_mse_log_r: 0.8053 - val_trimmed_mse_log_r: 0.7927 - val_full_mae_log_r: 0.4347 - val_full_mse_score: 1017.8855 - val_trimmed_mse_score: 4.9283 - val_full_mae_score: 1.4415
-Epoch 16/50
-3103s - loss: 495296.5312 - full_cross_entropy: 0.7208 - trimmed_cross_entropy: 0.7095 - full_mse_log_r: 0.8452 - trimmed_mse_log_r: 0.8320 - full_mae_log_r: 0.4505 - full_mse_score: 2280.2655 - trimmed_mse_score: 5.6430 - full_mae_score: 1.5671 - val_loss: 608321.0297 - val_full_cross_entropy: 0.7301 - val_trimmed_cross_entropy: 0.7187 - val_full_mse_log_r: 0.9989 - val_trimmed_mse_log_r: 0.9833 - val_full_mae_log_r: 0.4668 - val_full_mse_score: 1232.0100 - val_trimmed_mse_score: 6.9884 - val_full_mae_score: 1.6429
-Epoch 17/50
-3107s - loss: 478869.7439 - full_cross_entropy: 0.7173 - trimmed_cross_entropy: 0.7061 - full_mse_log_r: 0.8063 - trimmed_mse_log_r: 0.7937 - full_mae_log_r: 0.4392 - full_mse_score: 1427.8421 - trimmed_mse_score: 5.8953 - full_mae_score: 1.5234 - val_loss: 462407.8741 - val_full_cross_entropy: 0.7128 - val_trimmed_cross_entropy: 0.7016 - val_full_mse_log_r: 0.7623 - val_trimmed_mse_log_r: 0.7504 - val_full_mae_log_r: 0.4237 - val_full_mse_score: 556.4996 - val_trimmed_mse_score: 4.9617 - val_full_mae_score: 1.4265
-Epoch 18/50
-3114s - loss: 458101.0821 - full_cross_entropy: 0.7132 - trimmed_cross_entropy: 0.7021 - full_mse_log_r: 0.7605 - trimmed_mse_log_r: 0.7486 - full_mae_log_r: 0.4284 - full_mse_score: 2959.7771 - trimmed_mse_score: 5.1961 - full_mae_score: 1.5374 - val_loss: 624656.9690 - val_full_cross_entropy: 0.7302 - val_trimmed_cross_entropy: 0.7187 - val_full_mse_log_r: 1.0222 - val_trimmed_mse_log_r: 1.0062 - val_full_mae_log_r: 0.4716 - val_full_mse_score: 11558.3059 - val_trimmed_mse_score: 7.7174 - val_full_mae_score: 1.8737
-Epoch 19/50
-3109s - loss: 445310.9527 - full_cross_entropy: 0.7105 - trimmed_cross_entropy: 0.6994 - full_mse_log_r: 0.7276 - trimmed_mse_log_r: 0.7162 - full_mae_log_r: 0.4188 - full_mse_score: 1776.8129 - trimmed_mse_score: 5.0006 - full_mae_score: 1.4959 - val_loss: 462662.3753 - val_full_cross_entropy: 0.7082 - val_trimmed_cross_entropy: 0.6972 - val_full_mse_log_r: 0.7346 - val_trimmed_mse_log_r: 0.7232 - val_full_mae_log_r: 0.4130 - val_full_mse_score: 1581.7927 - val_trimmed_mse_score: 4.7682 - val_full_mae_score: 1.4078
-Epoch 20/50
-3110s - loss: 430675.3665 - full_cross_entropy: 0.7081 - trimmed_cross_entropy: 0.6971 - full_mse_log_r: 0.6980 - trimmed_mse_log_r: 0.6871 - full_mae_log_r: 0.4101 - full_mse_score: 1228.8202 - trimmed_mse_score: 4.7981 - full_mae_score: 1.4436 - val_loss: 439366.4876 - val_full_cross_entropy: 0.7063 - val_trimmed_cross_entropy: 0.6953 - val_full_mse_log_r: 0.6990 - val_trimmed_mse_log_r: 0.6880 - val_full_mae_log_r: 0.3959 - val_full_mse_score: 646.0600 - val_trimmed_mse_score: 4.3368 - val_full_mae_score: 1.4024
-Epoch 21/50
-3102s - loss: 421303.0299 - full_cross_entropy: 0.7056 - trimmed_cross_entropy: 0.6945 - full_mse_log_r: 0.6697 - trimmed_mse_log_r: 0.6592 - full_mae_log_r: 0.4023 - full_mse_score: 2334.6550 - trimmed_mse_score: 5.2799 - full_mae_score: 1.4480 - val_loss: 488144.5347 - val_full_cross_entropy: 0.7078 - val_trimmed_cross_entropy: 0.6968 - val_full_mse_log_r: 0.7429 - val_trimmed_mse_log_r: 0.7313 - val_full_mae_log_r: 0.4041 - val_full_mse_score: 937.2179 - val_trimmed_mse_score: 4.1278 - val_full_mae_score: 1.3932
-Epoch 22/50
-3100s - loss: 412060.6305 - full_cross_entropy: 0.7038 - trimmed_cross_entropy: 0.6928 - full_mse_log_r: 0.6496 - trimmed_mse_log_r: 0.6394 - full_mae_log_r: 0.3963 - full_mse_score: 1199.7089 - trimmed_mse_score: 4.5543 - full_mae_score: 1.4174 - val_loss: 403066.9001 - val_full_cross_entropy: 0.7116 - val_trimmed_cross_entropy: 0.7005 - val_full_mse_log_r: 0.7209 - val_trimmed_mse_log_r: 0.7097 - val_full_mae_log_r: 0.4297 - val_full_mse_score: 1722.7973 - val_trimmed_mse_score: 9.4057 - val_full_mae_score: 1.7343
-Epoch 23/50
-3100s - loss: 411794.6740 - full_cross_entropy: 0.7026 - trimmed_cross_entropy: 0.6916 - full_mse_log_r: 0.6378 - trimmed_mse_log_r: 0.6278 - full_mae_log_r: 0.3911 - full_mse_score: 1069.6415 - trimmed_mse_score: 4.7199 - full_mae_score: 1.4162 - val_loss: 401095.1865 - val_full_cross_entropy: 0.7004 - val_trimmed_cross_entropy: 0.6894 - val_full_mse_log_r: 0.6215 - val_trimmed_mse_log_r: 0.6117 - val_full_mae_log_r: 0.3823 - val_full_mse_score: 689.3242 - val_trimmed_mse_score: 4.3821 - val_full_mae_score: 1.3765
-Epoch 24/50
-3099s - loss: 396120.7643 - full_cross_entropy: 0.7008 - trimmed_cross_entropy: 0.6899 - full_mse_log_r: 0.6114 - trimmed_mse_log_r: 0.6019 - full_mae_log_r: 0.3843 - full_mse_score: 540.8236 - trimmed_mse_score: 4.0056 - full_mae_score: 1.3763 - val_loss: 356442.8696 - val_full_cross_entropy: 0.6980 - val_trimmed_cross_entropy: 0.6871 - val_full_mse_log_r: 0.5708 - val_trimmed_mse_log_r: 0.5619 - val_full_mae_log_r: 0.3724 - val_full_mse_score: 851.8413 - val_trimmed_mse_score: 3.1341 - val_full_mae_score: 1.3141
-Epoch 25/50
-3099s - loss: 393828.2239 - full_cross_entropy: 0.6994 - trimmed_cross_entropy: 0.6885 - full_mse_log_r: 0.5984 - trimmed_mse_log_r: 0.5891 - full_mae_log_r: 0.3802 - full_mse_score: 941.4525 - trimmed_mse_score: 3.9221 - full_mae_score: 1.3666 - val_loss: 339345.9676 - val_full_cross_entropy: 0.6962 - val_trimmed_cross_entropy: 0.6853 - val_full_mse_log_r: 0.5463 - val_trimmed_mse_log_r: 0.5377 - val_full_mae_log_r: 0.3728 - val_full_mse_score: 1846.8828 - val_trimmed_mse_score: 3.2785 - val_full_mae_score: 1.3371
-Epoch 26/50
-3104s - loss: 386602.8810 - full_cross_entropy: 0.6981 - trimmed_cross_entropy: 0.6872 - full_mse_log_r: 0.5828 - trimmed_mse_log_r: 0.5737 - full_mae_log_r: 0.3753 - full_mse_score: 623.4343 - trimmed_mse_score: 4.2411 - full_mae_score: 1.3488 - val_loss: 406040.5663 - val_full_cross_entropy: 0.7001 - val_trimmed_cross_entropy: 0.6892 - val_full_mse_log_r: 0.6231 - val_trimmed_mse_log_r: 0.6134 - val_full_mae_log_r: 0.3836 - val_full_mse_score: 299.7938 - val_trimmed_mse_score: 4.9163 - val_full_mae_score: 1.2689
-Epoch 27/50
-3110s - loss: 380056.6781 - full_cross_entropy: 0.6970 - trimmed_cross_entropy: 0.6861 - full_mse_log_r: 0.5670 - trimmed_mse_log_r: 0.5582 - full_mae_log_r: 0.3709 - full_mse_score: 891.4381 - trimmed_mse_score: 5.6294 - full_mae_score: 1.3449 - val_loss: 344665.4683 - val_full_cross_entropy: 0.6961 - val_trimmed_cross_entropy: 0.6852 - val_full_mse_log_r: 0.5427 - val_trimmed_mse_log_r: 0.5342 - val_full_mae_log_r: 0.3633 - val_full_mse_score: 459.9146 - val_trimmed_mse_score: 3.1269 - val_full_mae_score: 1.2633
-Epoch 28/50
-3110s - loss: 371297.7589 - full_cross_entropy: 0.6951 - trimmed_cross_entropy: 0.6843 - full_mse_log_r: 0.5473 - trimmed_mse_log_r: 0.5388 - full_mae_log_r: 0.3646 - full_mse_score: 810.8305 - trimmed_mse_score: 4.0086 - full_mae_score: 1.3201 - val_loss: 399195.2126 - val_full_cross_entropy: 0.6959 - val_trimmed_cross_entropy: 0.6850 - val_full_mse_log_r: 0.5863 - val_trimmed_mse_log_r: 0.5771 - val_full_mae_log_r: 0.3628 - val_full_mse_score: 914.5962 - val_trimmed_mse_score: 63.4355 - val_full_mae_score: 1.3680
-Epoch 29/50
-3111s - loss: 365524.5882 - full_cross_entropy: 0.6935 - trimmed_cross_entropy: 0.6826 - full_mse_log_r: 0.5300 - trimmed_mse_log_r: 0.5217 - full_mae_log_r: 0.3571 - full_mse_score: 1636.8114 - trimmed_mse_score: 5.5842 - full_mae_score: 1.3092 - val_loss: 319396.8851 - val_full_cross_entropy: 0.6928 - val_trimmed_cross_entropy: 0.6819 - val_full_mse_log_r: 0.4990 - val_trimmed_mse_log_r: 0.4912 - val_full_mae_log_r: 0.3476 - val_full_mse_score: 1755.8232 - val_trimmed_mse_score: 3.0173 - val_full_mae_score: 1.3101
-Epoch 30/50
-3112s - loss: 361261.9276 - full_cross_entropy: 0.6922 - trimmed_cross_entropy: 0.6814 - full_mse_log_r: 0.5155 - trimmed_mse_log_r: 0.5075 - full_mae_log_r: 0.3519 - full_mse_score: 787.6972 - trimmed_mse_score: 3.3906 - full_mae_score: 1.2791 - val_loss: 382390.1662 - val_full_cross_entropy: 0.6924 - val_trimmed_cross_entropy: 0.6816 - val_full_mse_log_r: 0.5438 - val_trimmed_mse_log_r: 0.5353 - val_full_mae_log_r: 0.3525 - val_full_mse_score: 745.2520 - val_trimmed_mse_score: 5.0094 - val_full_mae_score: 1.2302
-Epoch 31/50
-3113s - loss: 364203.8687 - full_cross_entropy: 0.6908 - trimmed_cross_entropy: 0.6800 - full_mse_log_r: 0.5073 - trimmed_mse_log_r: 0.4993 - full_mae_log_r: 0.3427 - full_mse_score: 992.0278 - trimmed_mse_score: 3.4944 - full_mae_score: 1.2412 - val_loss: 446999.2003 - val_full_cross_entropy: 0.6970 - val_trimmed_cross_entropy: 0.6861 - val_full_mse_log_r: 0.6233 - val_trimmed_mse_log_r: 0.6135 - val_full_mae_log_r: 0.3602 - val_full_mse_score: 793.6531 - val_trimmed_mse_score: 5.2025 - val_full_mae_score: 1.4163
-Epoch 32/50
-3113s - loss: 360234.3397 - full_cross_entropy: 0.6893 - trimmed_cross_entropy: 0.6785 - full_mse_log_r: 0.4918 - trimmed_mse_log_r: 0.4841 - full_mae_log_r: 0.3313 - full_mse_score: 658.3746 - trimmed_mse_score: 3.3713 - full_mae_score: 1.1922 - val_loss: 334422.2239 - val_full_cross_entropy: 0.6889 - val_trimmed_cross_entropy: 0.6781 - val_full_mse_log_r: 0.4766 - val_trimmed_mse_log_r: 0.4692 - val_full_mae_log_r: 0.3243 - val_full_mse_score: 1339.0318 - val_trimmed_mse_score: 2.8401 - val_full_mae_score: 1.1843
-Epoch 33/50
-3112s - loss: 358922.9591 - full_cross_entropy: 0.6878 - trimmed_cross_entropy: 0.6770 - full_mse_log_r: 0.4799 - trimmed_mse_log_r: 0.4724 - full_mae_log_r: 0.3225 - full_mse_score: 765.9059 - trimmed_mse_score: 3.0329 - full_mae_score: 1.1600 - val_loss: 381777.3948 - val_full_cross_entropy: 0.6892 - val_trimmed_cross_entropy: 0.6784 - val_full_mse_log_r: 0.5208 - val_trimmed_mse_log_r: 0.5127 - val_full_mae_log_r: 0.3273 - val_full_mse_score: 3796.8534 - val_trimmed_mse_score: 3.1993 - val_full_mae_score: 1.2293
-Epoch 34/50
-3112s - loss: 355559.4894 - full_cross_entropy: 0.6869 - trimmed_cross_entropy: 0.6762 - full_mse_log_r: 0.4691 - trimmed_mse_log_r: 0.4617 - full_mae_log_r: 0.3157 - full_mse_score: 457.6889 - trimmed_mse_score: 2.8342 - full_mae_score: 1.1119 - val_loss: 431624.2625 - val_full_cross_entropy: 0.6922 - val_trimmed_cross_entropy: 0.6814 - val_full_mse_log_r: 0.5788 - val_trimmed_mse_log_r: 0.5697 - val_full_mae_log_r: 0.3279 - val_full_mse_score: 819.5916 - val_trimmed_mse_score: 3.4393 - val_full_mae_score: 1.2075
-Epoch 35/50
-3116s - loss: 349139.0204 - full_cross_entropy: 0.6858 - trimmed_cross_entropy: 0.6751 - full_mse_log_r: 0.4560 - trimmed_mse_log_r: 0.4489 - full_mae_log_r: 0.3100 - full_mse_score: 584.0762 - trimmed_mse_score: 4.5784 - full_mae_score: 1.1040 - val_loss: 347008.8056 - val_full_cross_entropy: 0.6839 - val_trimmed_cross_entropy: 0.6732 - val_full_mse_log_r: 0.4509 - val_trimmed_mse_log_r: 0.4438 - val_full_mae_log_r: 0.3026 - val_full_mse_score: 12473.1391 - val_trimmed_mse_score: 2.5175 - val_full_mae_score: 1.1647
-Epoch 36/50
-3105s - loss: 348387.8969 - full_cross_entropy: 0.6850 - trimmed_cross_entropy: 0.6743 - full_mse_log_r: 0.4489 - trimmed_mse_log_r: 0.4419 - full_mae_log_r: 0.3052 - full_mse_score: 522.3143 - trimmed_mse_score: 3.3655 - full_mae_score: 1.0825 - val_loss: 374670.2262 - val_full_cross_entropy: 0.6865 - val_trimmed_cross_entropy: 0.6758 - val_full_mse_log_r: 0.4906 - val_trimmed_mse_log_r: 0.4830 - val_full_mae_log_r: 0.3046 - val_full_mse_score: 724.2635 - val_trimmed_mse_score: 3.5649 - val_full_mae_score: 1.0974
-Epoch 37/50
-3110s - loss: 341991.1271 - full_cross_entropy: 0.6840 - trimmed_cross_entropy: 0.6733 - full_mse_log_r: 0.4361 - trimmed_mse_log_r: 0.4293 - full_mae_log_r: 0.3004 - full_mse_score: 15766.9191 - trimmed_mse_score: 2.7153 - full_mae_score: 1.1358 - val_loss: 336872.0914 - val_full_cross_entropy: 0.6840 - val_trimmed_cross_entropy: 0.6733 - val_full_mse_log_r: 0.4435 - val_trimmed_mse_log_r: 0.4365 - val_full_mae_log_r: 0.3002 - val_full_mse_score: 527.7881 - val_trimmed_mse_score: 2.5414 - val_full_mae_score: 1.0392
-Epoch 38/50
-3111s - loss: 339733.4682 - full_cross_entropy: 0.6833 - trimmed_cross_entropy: 0.6726 - full_mse_log_r: 0.4298 - trimmed_mse_log_r: 0.4231 - full_mae_log_r: 0.2971 - full_mse_score: 640.9256 - trimmed_mse_score: 2.6635 - full_mae_score: 1.0532 - val_loss: 331450.5862 - val_full_cross_entropy: 0.6834 - val_trimmed_cross_entropy: 0.6727 - val_full_mse_log_r: 0.4365 - val_trimmed_mse_log_r: 0.4296 - val_full_mae_log_r: 0.2971 - val_full_mse_score: 524.1298 - val_trimmed_mse_score: 2.4939 - val_full_mae_score: 1.0445
-Epoch 39/50
-3117s - loss: 336098.0628 - full_cross_entropy: 0.6827 - trimmed_cross_entropy: 0.6720 - full_mse_log_r: 0.4219 - trimmed_mse_log_r: 0.4153 - full_mae_log_r: 0.2938 - full_mse_score: 1922.9935 - trimmed_mse_score: 2.6517 - full_mae_score: 1.0725 - val_loss: 335788.2741 - val_full_cross_entropy: 0.6837 - val_trimmed_cross_entropy: 0.6730 - val_full_mse_log_r: 0.4411 - val_trimmed_mse_log_r: 0.4342 - val_full_mae_log_r: 0.2933 - val_full_mse_score: 2861.4434 - val_trimmed_mse_score: 2.7799 - val_full_mae_score: 1.0822
-Epoch 40/50
-3117s - loss: 331867.9345 - full_cross_entropy: 0.6821 - trimmed_cross_entropy: 0.6714 - full_mse_log_r: 0.4134 - trimmed_mse_log_r: 0.4070 - full_mae_log_r: 0.2904 - full_mse_score: 644.9310 - trimmed_mse_score: 2.9760 - full_mae_score: 1.0374 - val_loss: 324454.2217 - val_full_cross_entropy: 0.6823 - val_trimmed_cross_entropy: 0.6716 - val_full_mse_log_r: 0.4202 - val_trimmed_mse_log_r: 0.4136 - val_full_mae_log_r: 0.2879 - val_full_mse_score: 858.7368 - val_trimmed_mse_score: 2.9638 - val_full_mae_score: 1.0621
-Epoch 00039: early stopping
-28.02.2018 14:30:35 INFO    Starting evaluation
-28.02.2018 14:30:43 DEBUG    Morphing weights for theta 0 ([ 0.  0.]): [ 0.99999994  0.          0.          0.          0.          0.          0.
-  0.          0.          0.          0.          0.          0.          0.
-  0.        ]
-28.02.2018 14:30:51 DEBUG    Morphing weights for theta 1 ([-0.1 -0.1]): [-0.27106059  0.0618627  -0.00921822 -0.05311769  0.09277745 -0.17950103
- -0.10638476  0.90956128 -0.54444438  0.09414374  0.15044376  0.09835529
- -0.00692404  0.79574531 -0.03223869]
-28.02.2018 14:30:59 DEBUG    Morphing weights for theta 2 ([-0.1  0. ]): [ 0.17959055  0.03835158 -0.00447984 -0.04629806  0.07272816 -0.08964139
- -0.07773479  0.74595743 -0.44033766  0.08286396 -0.10824949  0.12156954
- -0.02962743  0.59210104 -0.03679359]
-28.02.2018 14:31:06 DEBUG    Morphing weights for theta 3 ([-0.1  0.1]): [-0.30772689  0.06193896 -0.0017342  -0.09050263  0.11511692 -0.11513191
- -0.13558146  1.43342733 -0.74980259  0.15870966 -0.28701568  0.25734133
- -0.08137885  0.81350255 -0.07116245]
-28.02.2018 14:31:14 DEBUG    Morphing weights for theta 4 ([ 0.  -0.1]): [ 0.56905562  0.01904487 -0.00468119 -0.0085112   0.02491085 -0.0663151
- -0.02452098  0.16093627 -0.12764354  0.01307596  0.266213   -0.01177346
-  0.01323112  0.17602375  0.00095407]
-28.02.2018 14:31:22 DEBUG    Morphing weights for theta 5 ([ 0.   0.1]): [ 0.5604803   0.0229969   0.00185122 -0.037362    0.03440617 -0.03782792
- -0.05515962  0.62958586 -0.25645345  0.06386237 -0.18940648  0.11559153
- -0.0388005   0.21234907 -0.02611347]
-28.02.2018 14:31:30 DEBUG    Morphing weights for theta 6 ([ 0.1 -0.1]): [ 1.81868804 -0.06035683  0.00562664  0.07155    -0.10121919  0.14502399
-  0.12468661 -1.17612505  0.6334244  -0.11764884  0.40241072 -0.19987804
-  0.04025029 -0.62766695  0.04123404]
-28.02.2018 14:31:38 DEBUG    Morphing weights for theta 7 ([ 0.1  0. ]): [ 2.2098732  -0.07147061  0.00927746  0.07604371 -0.12638557  0.18361817
-  0.13859668 -1.30236328  0.76321948 -0.12643085  0.11624559 -0.18627055
-  0.03691448 -0.76363224  0.04276451]
-28.02.2018 14:31:46 DEBUG    Morphing weights for theta 8 ([ 0.1  0.1]): [ 1.77209961 -0.04358637  0.00965333  0.03834543 -0.09364184  0.12488861
-  0.0760804  -0.6750859   0.52727789 -0.06638582 -0.09467088 -0.07372916
-  0.0083414  -0.53127944  0.02169252]
-28.02.2018 14:31:54 DEBUG    Morphing weights for theta 9 ([-0.5 -0.5]): [-6.84154654  0.32128537  0.14411899 -0.26008308  0.17167953 -0.96405602
- -0.53578919  4.50989771 -1.68269813  0.46183938  1.00120735  0.44210222
- -0.02847112  4.4114399  -0.15092601]
-28.02.2018 14:32:02 DEBUG    Morphing weights for theta 10 ([-0.5  0.5]): [-5.77190304  0.38073054  0.01810526 -0.43238708  0.40525326 -0.10183874
- -0.45558783  5.56041384 -2.79278922  0.68437934 -0.07399642  1.06967962
- -0.47054324  3.35601234 -0.37552872]
-28.02.2018 14:32:10 DEBUG    Morphing weights for theta 11 ([ 0.5 -0.5]): [ 0.37220931 -0.20182887  0.03346204  0.36094165 -0.19469103  0.55274838
-  0.28046012 -1.79141092  1.06986749 -0.09078919  1.86510396 -0.36462116
- -0.08704516 -0.76521021 -0.0391964 ]
-28.02.2018 14:32:18 DEBUG    Morphing weights for theta 12 ([ 0.5  0.5]): [ -2.07575607e+00   1.65700704e-01  -1.31750864e-03  -2.06216946e-01
-   1.84251398e-01  -3.98950458e-01  -3.13113868e-01   2.14790821e+00
-  -1.50766134e-01   3.75315160e-01  -2.95502156e-01   5.30454874e-01
-  -1.72318086e-01   1.30426788e+00  -9.39568877e-02]
-28.02.2018 14:32:25 DEBUG    Morphing weights for theta 13 ([-1. -1.]): [ -4.64034891   0.6584506    1.76276374  -0.92474496   1.63498247
-  -1.51939476  -1.29527497  11.05956841  -8.10128689   1.44984174
-  -1.98087323   2.61178946  -1.49888349   1.8124795   -0.02906836]
-28.02.2018 14:32:33 DEBUG    Morphing weights for theta 14 ([-1.  1.]): [ 7.96765089  1.41343498 -0.06369181  0.69912297 -0.38228709  0.1239958
-  0.2994692  -6.02403975  2.90477443 -0.88324428 -0.33988109 -1.62355125
-  0.83205634 -4.52702808  0.60321981]
-28.02.2018 14:32:41 DEBUG    Morphing weights for theta 15 ([ 1. -1.]): [ 0.57561845  0.42597175 -0.10745768  2.21509171  0.39442614 -1.04684401
- -0.53247803  2.92977476 -1.98527586  0.12903038 -2.07729983 -0.93257892
-  0.57615626  0.15590777  0.27995721]
-28.02.2018 14:32:49 DEBUG    Morphing weights for theta 16 ([ 1.  1.]): [ -2.48989620e+01   1.88303423e+00  -1.57661438e-02  -2.25422549e+00
-   4.44536877e+00  -4.63021898e+00  -3.57141018e+00   2.80589485e+01
-  -1.67872486e+01   3.92992759e+00  -2.41839457e+00   5.70815563e+00
-  -1.92505479e+00   1.43933773e+01  -9.17530298e-01]
-28.02.2018 14:32:57 DEBUG    Morphing weights for theta 17 ([-0.99977661 -0.72535637]): [-65.58786011   4.56357861   0.74240041  -5.15113592   6.03728151
- -12.22652435  -8.2418375   70.90773773 -38.14973831   8.5315485
-  -1.30507958  12.63461399  -5.37928581  33.77981186  -0.15551433]
-28.02.2018 14:33:05 DEBUG    Morphing weights for theta 18 ([-0.99849038  0.13674514]): [ 19.21401787  -0.90564525  -0.42310655   1.57443249  -0.26942229
-   3.92367435   1.14825356 -11.57260132   3.88867044  -1.56781423
-   0.64678031  -4.45247698   3.06105995 -17.08753586   3.82171273]
-28.02.2018 14:33:13 DEBUG    Morphing weights for theta 19 ([-0.99363937 -0.24264621]): [-18.67032814   1.57272089  -0.23209724  -1.63200283   2.66306472
-  -4.11611032  -2.95538807  26.43831062 -15.72932339   3.26057839
-  -1.35243928   3.81325912  -0.62438399   5.59368563   2.97045517]
-28.02.2018 14:33:20 DEBUG    Morphing weights for theta 20 ([-0.99018862  0.29001175]): [ 21.89376831  -1.06119657  -0.38864127   1.97948587  -0.67305487
-   5.04742146   1.43427444 -15.6031971    6.36003447  -2.19795251
-   1.65551758  -5.57971287   3.35182261 -18.55221367   3.33364511]
-28.02.2018 14:33:28 DEBUG    Morphing weights for theta 21 ([-0.99001034  0.12161145]): [ 18.44144821  -0.87034702  -0.40656039   1.4885745   -0.25040144
-   3.73317051   1.10555112 -11.04475307   3.68181038  -1.48430073
-   0.5289852   -4.19968414   2.91137266 -16.37178802   3.73692155]
-28.02.2018 14:33:36 DEBUG    Morphing weights for theta 22 ([-0.98964516  0.26949282]): [ 21.88919067  -1.069556    -0.39223966   1.95053613  -0.65249813
-   4.96936083   1.44183815 -15.45678997   6.24110031  -2.15997171
-   1.52279925  -5.48837614   3.33356881 -18.52658272   3.39762044]
-28.02.2018 14:33:44 DEBUG    Morphing weights for theta 23 ([-0.98859265 -0.40941243]): [ -4.20572853e+01   3.07099795e+00   1.43186480e-03  -3.39595413e+00
-   4.31348038e+00  -8.37084770e+00  -5.53380537e+00   4.86885948e+01
-  -2.68840599e+01   5.93511295e+00  -1.50030863e+00   8.23049641e+00
-  -2.82853913e+00   1.94679871e+01   1.86269391e+00]
-28.02.2018 14:33:52 DEBUG    Morphing weights for theta 24 ([-0.98559634 -0.63717827]): [-62.46920013   4.34212542   0.49406609  -4.87502337   5.70154476
- -11.73138237  -7.80647087  67.48669434 -36.20623398   8.12665939
-  -1.20632029  11.91563988  -4.92341232  31.87420654   0.27711278]
-28.02.2018 14:34:00 DEBUG    Morphing weights for theta 25 ([-0.98522774 -0.12924231]): [ -2.91122627   0.52558982  -0.31457424  -0.3815302    1.42747521
-  -1.0170629   -1.1740824   10.5939846   -7.54555225   1.30982769
-  -0.90779191   0.66781861   0.78264487  -3.44504333   3.38952208]
-28.02.2018 14:34:08 DEBUG    Morphing weights for theta 26 ([-0.9781217   0.23700188]): [ 21.30832481  -1.06019938  -0.37734511   1.84678781  -0.63557923
-   4.74612045   1.4362793  -15.027174     6.05238676  -2.06493974
-   1.26328826  -5.16638851   3.16931486 -17.85160065   3.36072326]
-28.02.2018 14:34:15 DEBUG    Morphing weights for theta 27 ([-0.97760686 -0.30977076]): [-26.62870216   2.05484509  -0.12982331  -2.22211885   3.11630559
-  -5.54614067  -3.7546618   33.34403229 -18.99053192   4.08778715
-  -1.33620954   5.31828213  -1.46816301  10.72177124   2.4333241 ]
-28.02.2018 14:34:23 DEBUG    Morphing weights for theta 28 ([-0.97478621  0.29712926]): [ 21.22027206  -1.03909194  -0.35957423   1.91359305  -0.70830631
-   4.95972919   1.42292643 -15.48254108   6.44638348  -2.17150164
-   1.61711717  -5.37427807   3.17850733 -17.74978447   3.12654901]
-28.02.2018 14:34:31 DEBUG    Morphing weights for theta 29 ([-0.97360987  0.97429593]): [ 6.42957687  1.33447111 -0.05249531  0.57043439 -0.3097634   0.13463017
-  0.23474094 -4.88477039  2.35771275 -0.72039199 -0.21562435 -1.34043086
-  0.68325877 -3.71527672  0.49392778]
-28.02.2018 14:34:39 DEBUG    Morphing weights for theta 30 ([-0.97236472 -0.01248182]): [  9.64872646  -0.32365218  -0.34972447   0.66337067   0.37643793
-   1.6490792    0.25129554  -2.50287032  -0.65407741  -0.33744586
-  -0.29666829  -1.98243308   1.88604689 -10.54966354   3.52157831]
-28.02.2018 14:34:47 DEBUG    Morphing weights for theta 31 ([-0.96716726  0.46008898]): [ 16.92783928  -0.65559578  -0.29471216   1.7523036   -0.60944092
-   4.61346197   0.95649433 -12.73769569   5.49525976  -1.9526453
-   2.33403492  -5.04270363   2.79611039 -14.92608261   2.34337306]
-28.02.2018 14:34:55 DEBUG    Morphing weights for theta 32 ([-0.96658096  0.99934851]): [ 7.3897028   1.36355877 -0.03366386  0.54038167 -0.40507102 -0.05647041
-  0.43662331 -5.910254    2.89414001 -0.76677293 -0.70736837 -1.14886463
-  0.58791351 -3.63668966  0.45283371]
-28.02.2018 14:35:02 DEBUG    Morphing weights for theta 33 ([-0.96213299  0.4313221 ]): [ 17.65809059  -0.73917317  -0.29770121   1.77162874  -0.65045899
-   4.69482136   1.05836761 -13.36086369   5.77581739  -2.00216055
-   2.19385123  -5.06591082   2.82480025 -15.28572845   2.42462063]
-28.02.2018 14:35:10 DEBUG    Morphing weights for theta 34 ([-0.96193774  0.84764521]): [ 4.01988792  0.98496217 -0.10559253  0.65150893 -0.07632493  1.07122374
- -0.19133466 -2.48915029  1.06765044 -0.61383355  1.28393865 -1.91562986
-  0.97853714 -4.30970716  0.64386523]
-28.02.2018 14:35:18 DEBUG    Morphing weights for theta 35 ([-0.95441757  0.47148343]): [ 15.75831795  -0.58800066  -0.27091175   1.64572287  -0.5851661
-   4.41091681   0.87998486 -11.9855547    5.21779203  -1.84621406
-   2.26554799  -4.74186897   2.60424209 -13.9208374    2.15602922]
-28.02.2018 14:35:26 DEBUG    Morphing weights for theta 36 ([-0.95382857 -0.79313087]): [-45.90518188   3.17174101   0.94943374  -3.58652234   4.17700148
-  -8.44837379  -5.74520636  49.17751312 -26.38545418   5.88240004
-  -0.70753258   8.80806732  -3.94962311  23.9180069   -0.35626861]
-28.02.2018 14:35:34 DEBUG    Morphing weights for theta 37 ([-0.95370299 -0.14644991]): [-3.28485036  0.49367976 -0.25100332 -0.40021467  1.24266517 -1.02660322
- -1.06644797  9.62394142 -6.67077351  1.19145167 -0.81324404  0.78049713
-  0.52886862 -2.34806657  3.00009894]
-28.02.2018 14:35:42 DEBUG    Morphing weights for theta 38 ([-0.95244973  0.90774037]): [ 4.09555864  1.17008018 -0.06649116  0.50402963 -0.14310968  0.47203863
- -0.03379961 -2.82893515  1.31399643 -0.53932661  0.50476241 -1.35541499
-  0.68675506 -3.24348617  0.46334198]
-28.02.2018 14:35:50 DEBUG    Morphing weights for theta 39 ([-0.95133402  0.57034919]): [ 11.48240089  -0.18510117  -0.22574465   1.3677659   -0.38938114
-   3.65977454   0.43989137  -8.56126881   3.71391702  -1.46087396
-   2.39933872  -4.03793859   2.16356897 -11.02059841   1.65424955]
-28.02.2018 14:35:58 DEBUG    Morphing weights for theta 40 ([-0.9483803   0.43107104]): [ 16.89230537  -0.71110106  -0.27677959   1.68618238  -0.64755422
-   4.55089617   1.0288074  -12.94734383   5.65195131  -1.9302088
-   2.08906078  -4.81248045   2.66358995 -14.51792145   2.28059673]
-28.02.2018 14:36:05 DEBUG    Morphing weights for theta 41 ([-0.9466884  -0.84207419]): [-35.30197144   2.47252059   1.10500395  -2.8186276    3.34357238
-  -6.53424883  -4.50089741  38.43297577 -20.85770035   4.60285044
-  -0.71488076   6.96376705  -3.21088767  18.37983704  -0.3613106 ]
-28.02.2018 14:36:13 DEBUG    Morphing weights for theta 42 ([-0.94633792  0.39938759]): [ 17.80867004  -0.80021256  -0.28435975   1.72245181  -0.6895929
-   4.6499896    1.14002466 -13.66899395   5.96173191  -1.99442589
-   1.95317507  -4.882658     2.72432923 -15.03998661   2.39985752]
-28.02.2018 14:36:21 DEBUG    Morphing weights for theta 43 ([-0.9424576   0.85193067]): [ 3.2607615   1.00610101 -0.08405197  0.52777845 -0.06622302  0.85647976
- -0.16856508 -2.03820848  0.88790077 -0.50245064  1.03446996 -1.54734027
-  0.78547835 -3.46629548  0.51416487]
-28.02.2018 14:36:29 DEBUG    Morphing weights for theta 44 ([-0.94036398  0.14433632]): [ 18.48115158  -0.94882435  -0.32011998   1.48055601  -0.54147023
-   3.90143776   1.30577457 -12.91457748   5.14315414  -1.69800556
-   0.58023161  -4.06962681   2.57483172 -15.10641098   3.13189673]
-28.02.2018 14:36:37 DEBUG    Morphing weights for theta 45 ([-0.93864497 -0.20102259]): [ -8.86988163   0.83118623  -0.18764363  -0.826729     1.55467248
-  -2.08954763  -1.60928619  14.45166683  -8.9430685    1.7817179
-  -0.87099689   1.88161981  -0.07740527   1.33074141   2.64295483]
-28.02.2018 14:36:45 DEBUG    Morphing weights for theta 46 ([-0.93604963  0.70569779]): [ 5.39225626  0.44513428 -0.14591329  0.8480702  -0.12041936  2.19832706
- -0.08325918 -3.67224431  1.54807901 -0.81729686  2.00078559 -2.60021138
-  1.34903586 -6.27242899  0.93008482]
-28.02.2018 14:36:53 DEBUG    Morphing weights for theta 47 ([-0.93542439 -0.97620146]): [  9.56849384e+00  -4.02728885e-01   1.57409918e+00   3.19978893e-01
-   2.48982832e-02   1.21293437e+00   6.69259191e-01  -5.62517595e+00
-   1.42763138e+00  -5.71087420e-01  -1.33536887e+00  -5.25857389e-01
-   5.43542253e-03  -5.53635406e+00   1.93840548e-01]
-28.02.2018 14:37:00 DEBUG    Morphing weights for theta 48 ([-0.93217958  0.76517421]): [ 3.67348266  0.69836253 -0.11447746  0.65670514 -0.05411483  1.56824195
- -0.19306491 -2.31083274  0.95442462 -0.60443014  1.645751   -2.02624297
-  1.0389266  -4.62240124  0.68967003]
-28.02.2018 14:37:08 DEBUG    Morphing weights for theta 49 ([-0.93085102 -0.76786446]): [-42.82564163   2.92500901   0.86196375  -3.28951693   3.77506709
-  -7.82569742  -5.28271294  45.23905563 -24.05679321   5.39319897
-  -0.44110849   8.04684067  -3.61187625  22.39448929  -0.30227339]
-28.02.2018 14:37:16 DEBUG    Morphing weights for theta 50 ([-0.93042815  0.12899857]): [ 17.79470253  -0.91948056  -0.30403638   1.40512538  -0.52974093
-   3.72845006   1.27264011 -12.4782877    4.98486757  -1.62723446
-   0.47486249  -3.84500241   2.43699026 -14.43839264   3.04453731]
-28.02.2018 14:37:24 DEBUG    Morphing weights for theta 51 ([-0.9269444  -0.95681223]): [ 4.65266848 -0.11101978  1.48835707  0.01368382  0.30913243  0.41989309
-  0.14748684 -1.2077105  -0.65279603 -0.06359233 -1.13213849  0.18043342
- -0.28486547 -2.86700892  0.10747632]
-28.02.2018 14:37:32 DEBUG    Morphing weights for theta 52 ([-0.92568077  0.24722516]): [ 19.41054535  -1.01137662  -0.28932455   1.65105224  -0.75162596
-   4.47409153   1.42654693 -14.78799725   6.37257433  -1.99277341
-   1.10060465  -4.5439496    2.64604211 -15.4458065    2.74139833]
-28.02.2018 14:37:39 DEBUG    Morphing weights for theta 53 ([-0.92561801 -0.21787504]): [-10.04963207   0.88533056  -0.15592818  -0.90591371   1.55748248
-  -2.28452969  -1.68179202  15.07138634  -9.10537529   1.85354185
-  -0.82144678   2.0986433   -0.25649041   2.34232521   2.45239782]
-28.02.2018 14:37:47 DEBUG    Morphing weights for theta 54 ([-0.92476776  0.26418742]): [ 19.31261063  -1.00105512  -0.28529021   1.66109526  -0.76166368
-   4.51723099   1.4138279  -14.81250954   6.42047787  -2.00772357
-   1.18507707  -4.5801487    2.64437819 -15.38715839   2.68085313]
-28.02.2018 14:37:55 DEBUG    Morphing weights for theta 55 ([-0.92401207 -0.80766047]): [-35.21047592   2.41863108   0.97850037  -2.73165679   3.16367888
-  -6.43619061  -4.38296318  37.45379257 -20.02736092   4.46441841
-  -0.42423838   6.7029624   -3.07049584  18.42969894  -0.3283045 ]
-28.02.2018 14:38:03 DEBUG    Morphing weights for theta 56 ([-0.92209795  0.51812278]): [ 11.955513    -0.33686498  -0.20834646   1.31866086  -0.46322781
-   3.73256421   0.59391522  -9.26812363   4.10636282  -1.48055506
-   2.09816957  -3.8415947    2.05520701 -10.88673592   1.62505615]
-28.02.2018 14:38:11 DEBUG    Morphing weights for theta 57 ([-0.92016324  0.95722702]): [ 4.78917074  1.24065626 -0.016977    0.33017063 -0.27447602 -0.06554538
-  0.31852373 -3.92055655  1.92855966 -0.48952734 -0.50469297 -0.6860218
-  0.34811446 -2.27255726  0.27515882]
-28.02.2018 14:38:19 DEBUG    Morphing weights for theta 58 ([-0.91682215  0.12073418]): [ 17.24478531  -0.90292537  -0.28286755   1.34667742  -0.54867482
-   3.61231375   1.26388323 -12.31087112   5.00127745  -1.59293461
-   0.40656748  -3.66168237   2.2976656  -13.7823801    2.90916586]
-28.02.2018 14:38:27 DEBUG    Morphing weights for theta 59 ([-0.91310001 -0.35779821]): [ -2.57914886e+01   1.87098312e+00   8.10607336e-03  -2.05620861e+00
-   2.58719444e+00  -5.14628172e+00  -3.35425568e+00   2.95771656e+01
-  -1.62237072e+01   3.58485699e+00  -7.69171774e-01   4.96554422e+00
-  -1.72643924e+00   1.18311310e+01   1.64257157e+00]
-28.02.2018 14:38:34 DEBUG    Morphing weights for theta 60 ([-0.91267127 -0.46166296]): [-36.83965302   2.56501818   0.16159451  -2.84486318   3.34113359
-  -7.05854559  -4.57012892  39.91038895 -21.34920692   4.80046606
-  -0.63191229   6.90258789  -2.71903038  18.29959106   1.03255701]
-28.02.2018 14:38:42 DEBUG    Morphing weights for theta 61 ([-0.91078885 -0.84575817]): [-24.02874565   1.67526102   1.08716667  -1.90817773   2.2540431
-  -4.42465305  -3.05041599  26.01479721 -14.08209896   3.10509014
-  -0.41337311   4.712183    -2.22294688  12.55251598  -0.27064332]
-28.02.2018 14:38:50 DEBUG    Morphing weights for theta 62 ([-0.91016569  0.09832916]): [ 16.33499146  -0.85376072  -0.27156371   1.25339437  -0.50149035
-   3.37140155   1.1952765  -11.5330286    4.63561344  -1.48032534
-   0.28505793  -3.39769793   2.16003346 -13.05988979   2.86198688]
-28.02.2018 14:38:58 DEBUG    Morphing weights for theta 63 ([-0.9085301   0.12914961]): [ 17.31369591  -0.91781509  -0.27093098   1.35490775  -0.59533578
-   3.66482282   1.29690731 -12.64644432   5.24612474  -1.63427544
-   0.43325719  -3.67047787   2.26164079 -13.6479702    2.81189728]
-28.02.2018 14:39:06 DEBUG    Morphing weights for theta 64 ([-0.9064187   0.38546421]): [ 16.0578289   -0.75388974  -0.23168956   1.50930524  -0.69262147
-   4.28798294   1.09418964 -12.77668667   5.71676683  -1.82197356
-   1.62852931  -4.23688602   2.3183074  -13.15294933   2.05378675]
-28.02.2018 14:39:14 DEBUG    Morphing weights for theta 65 ([-0.9028891   0.82317364]): [ 1.79745376  0.92693287 -0.06150204  0.35859334 -0.01634867  0.75950509
- -0.18309383 -1.04061306  0.43396583 -0.32258266  0.91627061 -1.10197771
-  0.5548228  -2.37618327  0.35475692]
-28.02.2018 14:39:21 DEBUG    Morphing weights for theta 66 ([-0.89913448 -0.075021  ]): [ 5.68509007 -0.17556295 -0.21224399  0.33158991  0.26848724  0.90463918
-  0.12228946 -1.13740408 -0.64134318 -0.13567223 -0.39789441 -0.98020655
-  1.04726064 -6.33661318  2.65758491]
-28.02.2018 14:39:29 DEBUG    Morphing weights for theta 67 ([-0.89904189 -0.95661358]): [ 13.45842743  -0.72308815   1.44478691   0.71078712  -0.52440864
-   2.02028155   1.26988661 -10.72730827   4.51759672  -1.19551551
-  -1.00785291  -1.53928792   0.54214114  -7.49941444   0.25296819]
-28.02.2018 14:39:37 DEBUG    Morphing weights for theta 68 ([-0.89716622  0.39851005]): [ 15.12921524  -0.69678319  -0.21593498   1.43525267  -0.66567433
-   4.14429569   1.02247214 -12.13478565   5.46272564  -1.73911059
-   1.61377716  -4.03586102   2.18934464 -12.42108822   1.91215479]
-28.02.2018 14:39:45 DEBUG    Morphing weights for theta 69 ([-0.88982187  0.74424566]): [ 2.11719704  0.66445684 -0.08291213  0.45422906 -0.01233861  1.33590543
- -0.20238693 -1.28147054  0.51073152 -0.40314803  1.36978841 -1.45485282
-  0.73856598 -3.23438001  0.48061475]
-28.02.2018 14:39:53 DEBUG    Morphing weights for theta 70 ([-0.88836747 -0.90115276]): [-2.93724465  0.29193822  1.24018824 -0.37986407  0.57983524 -0.7135942
- -0.55652118  4.7512722  -3.10379004  0.59840679 -0.54374158  1.027753
- -0.58163267  1.35052466 -0.02352979]
-28.02.2018 14:40:01 DEBUG    Morphing weights for theta 71 ([-0.88742975  0.44076527]): [ 13.06129169  -0.54147464  -0.19150496   1.29385507  -0.57830065
-   3.83867788   0.82773948 -10.53777122   4.77091789  -1.55231953
-   1.67374575  -3.67734313   1.96593118 -11.00149632   1.6480521 ]
-28.02.2018 14:40:09 DEBUG    Morphing weights for theta 72 ([-0.88515882  0.33843224]): [ 16.24848938  -0.82241535  -0.2157432    1.45175445  -0.73902214
-   4.19616413   1.19153905 -13.13901043   5.9359374   -1.81196189
-   1.31775606  -4.01443291   2.19471836 -12.82427311   2.03049922]
-28.02.2018 14:40:16 DEBUG    Morphing weights for theta 73 ([-0.88029397  0.90634071]): [  2.26513863e+00   1.12069714e+00  -1.07080154e-02   1.68828338e-01
-  -1.26660943e-01  -1.18732639e-03   1.33233964e-01  -1.84363127e+00
-   9.05125260e-01  -2.40579665e-01  -1.71440750e-01  -3.71826768e-01
-   1.86392412e-01  -1.15631557e+00   1.42934859e-01]
-28.02.2018 14:40:24 DEBUG    Morphing weights for theta 74 ([-0.87845248  0.70868899]): [ 2.38681412  0.54294693 -0.08687863  0.47995669 -0.02890424  1.54774916
- -0.16809507 -1.55651879  0.63757175 -0.4387075   1.45042038 -1.54086268
-  0.78402966 -3.52832031  0.51879919]
-28.02.2018 14:40:32 DEBUG    Morphing weights for theta 75 ([-0.87667303  0.5630439 ]): [ 7.41191721 -0.05004325 -0.13918696  0.89769977 -0.29124337  2.84554386
-  0.27577326 -5.84563065  2.62724853 -0.99599767  1.75379968 -2.67484617
-  1.39223611 -7.25293684  1.04566765]
-28.02.2018 14:40:40 DEBUG    Morphing weights for theta 76 ([-0.87426483  0.35372424]): [ 15.26933765  -0.76407003  -0.19876742   1.37612295  -0.71216071
-   4.05509758   1.11562133 -12.47369671   5.67710209  -1.72739875
-   1.31262875  -3.81021094   2.06062937 -12.05305576   1.87281966]
-28.02.2018 14:40:48 DEBUG    Morphing weights for theta 77 ([-0.87211605 -0.45329944]): [-30.7545948    2.10352349   0.17160684  -2.32367873   2.65778184
-  -5.82628345  -3.72810411  32.5204277  -17.17204094   3.88799143
-  -0.28250375   5.62227726  -2.29107809  15.54551315   0.86915886]
-28.02.2018 14:40:56 DEBUG    Morphing weights for theta 78 ([-0.87142727 -0.44899037]): [-30.31290245   2.07494807   0.16546553  -2.29169345   2.62435722
-  -5.74919701  -3.67711282  32.086483   -16.95066261   3.83678532
-  -0.28556278   5.5444355   -2.25410819  15.30025959   0.88850379]
-28.02.2018 14:41:04 DEBUG    Morphing weights for theta 79 ([-0.87002123 -0.30739386]): [ -1.62886677e+01   1.19458258e+00  -1.16844522e-02  -1.30201530e+00
-   1.67104292e+00  -3.29713535e+00  -2.14209437e+00   1.89573555e+01
-  -1.04471426e+01   2.29363227e+00  -4.91517454e-01   3.12957740e+00
-  -1.04509902e+00   7.17578840e+00   1.60337651e+00]
-28.02.2018 14:41:11 DEBUG    Morphing weights for theta 80 ([-0.86734779 -0.10804466]): [  3.52995086e+00  -7.73797706e-02  -1.57778770e-01   1.70983374e-01
-   2.73673683e-01   5.02995014e-01   1.42880226e-03  -1.80881342e-03
-  -9.45562065e-01   9.66503844e-03  -3.92930686e-01  -5.26248574e-01
-   6.96822464e-01  -4.38251448e+00   2.29870391e+00]
-28.02.2018 14:41:19 DEBUG    Morphing weights for theta 81 ([-0.86614396  0.21806733]): [ 17.05299187  -0.93978304  -0.21083413   1.3848145   -0.7852447
-   3.96222782   1.36865985 -13.76841927   6.19753027  -1.79657447
-   0.72231811  -3.72234869   2.08329725 -12.76965618   2.22101974]
-28.02.2018 14:41:27 DEBUG    Morphing weights for theta 82 ([-0.86582211  0.18873229]): [ 16.98880577  -0.94143617  -0.21250018   1.35462713  -0.76749778
-   3.84928489   1.37273026 -13.60529995   6.08530521  -1.75913799
-   0.59599501  -3.625319     2.0529182  -12.67336559   2.28489184]
-28.02.2018 14:41:35 DEBUG    Morphing weights for theta 83 ([-0.86393797 -0.75386318]): [-28.4324379    1.87742007   0.78458875  -2.08025885   2.29314637
-  -5.05981398  -3.37333751  28.83258438 -14.95589447   3.3975215
-   0.1422132    5.03196239  -2.30880499  15.09524727  -0.24413453]
-28.02.2018 14:41:43 DEBUG    Morphing weights for theta 84 ([-0.86162839 -0.08011449]): [ 5.85299015 -0.23465361 -0.16387178  0.35414052  0.08199014  0.99523783
-  0.26521227 -2.4098196   0.31408489 -0.28651443 -0.32595313 -0.98148429
-  0.88555402 -5.65223551  2.30532265]
-28.02.2018 14:41:51 DEBUG    Morphing weights for theta 85 ([-0.86039119 -0.36222772]): [-21.13345337   1.48434937   0.05615678  -1.63086152   1.94727004
-  -4.12989283  -2.63406539  23.16122437 -12.42928314   2.78294826
-  -0.35968682   3.93612456  -1.4894284   10.16384792   1.27475178]
-28.02.2018 14:41:59 DEBUG    Morphing weights for theta 86 ([-0.85678382 -0.34072907]): [-18.68750954   1.32520807   0.03410712  -1.45264888   1.76279962
-  -3.68662882  -2.35520744  20.75253487 -11.20153141   2.49687791
-  -0.36719036   3.50186276  -1.2893908    8.80946159   1.3572551 ]
-28.02.2018 14:42:06 DEBUG    Morphing weights for theta 87 ([-0.85489617 -0.28954799]): [-13.36742878   0.98708725  -0.01687695  -1.07188582   1.39197195
-  -2.72512507  -1.77175546  15.70236874  -8.68179798   1.89892566
-  -0.41446149   2.57106662  -0.83886987   5.75637817   1.58040357]
