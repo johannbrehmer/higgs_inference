@@ -18,6 +18,6 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py combined --aware
-python -u experiments.py combined --aware --training random
-python -u experiments.py combined --aware --training basis
+python -u experiments.py combined --aware -o shallow
+python -u experiments.py combined --aware --training random -o shallow
+python -u experiments.py combined --aware --training basis -o shallow
