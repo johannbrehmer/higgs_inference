@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=regr
-#SBATCH --output=slurm_regression.out
+#SBATCH --output=slurm_regression2.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
@@ -18,5 +18,5 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py regression --neyman
-# python -u experiments.py regression --training random
+python -u experiments.py regression --neyman -o new
+python -u experiments.py regression --neyman --training random -o new

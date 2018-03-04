@@ -47,6 +47,7 @@ def score_regression_inference(use_smearing=False,
     large_batch_mode = ('largebatch' in options)
     small_batch_mode = ('smallbatch' in options)
     constant_lr_mode = ('constantlr' in options)
+    new_sample_mode = ('new' in options)
 
     filename_addition = ''
 
@@ -102,6 +103,9 @@ def score_regression_inference(use_smearing=False,
         filename_addition += '_denom1'
         theta1 = settings.theta1_alternative
 
+    if new_sample_mode:
+        filename_addition += '_new'
+
     results_dir = settings.base_dir + '/results/score_regression'
     neyman_dir = settings.neyman_dir + '/score_regression'
 
@@ -117,10 +121,16 @@ def score_regression_inference(use_smearing=False,
     ################################################################################
 
     # Load data
-    X_train = np.load(
-        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_scoreregression' + input_filename_addition + '.npy')
-    scores_train = np.load(
-        settings.unweighted_events_dir + '/scores_train_scoreregression' + input_filename_addition + '.npy')
+    if new_sample_mode:
+        X_train = np.load(
+            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_scoreregression' + input_filename_addition + '_new.npy')
+        scores_train = np.load(
+            settings.unweighted_events_dir + '/scores_train_scoreregression' + input_filename_addition + '_new.npy')
+    else:
+        X_train = np.load(
+            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_scoreregression' + input_filename_addition + '.npy')
+        scores_train = np.load(
+            settings.unweighted_events_dir + '/scores_train_scoreregression' + input_filename_addition + '.npy')
 
     X_calibration = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_calibration' + input_filename_addition + '.npy')
@@ -194,6 +204,9 @@ def score_regression_inference(use_smearing=False,
     trimmed_mse_log_r_rotatedscore = []
 
     for t, theta in enumerate(settings.thetas):
+
+        if (t + 1) % 100 == 0:
+            logging.info('Starting theta %s / %s', t + 1, settings.n_thetas)
 
         # Delta_theta
         delta_theta = theta - settings.thetas[theta1]

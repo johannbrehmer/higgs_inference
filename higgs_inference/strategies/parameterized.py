@@ -67,6 +67,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     learn_logr_mode = ('learns' not in options)
     denom1_mode = ('denom1' in options)
+    new_sample_mode = ('new' in options)
     short_mode = ('short' in options)
     long_mode = ('long' in options)
     deep_mode = ('deep' in options)
@@ -158,6 +159,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         filename_addition += '_denom1'
         theta1 = settings.theta1_alternative
 
+    if new_sample_mode:
+        filename_addition += '_new'
+
     results_dir = settings.base_dir + '/results/parameterized'
     neyman_dir = settings.neyman_dir + '/parameterized'
 
@@ -182,31 +186,20 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     ################################################################################
 
     # Load data
+    train_filename = '_train'
     if random_theta_mode:
-        X_train = np.load(
-            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_random' + input_filename_addition + '.npy')
-        y_train = np.load(settings.unweighted_events_dir + '/y_train_random' + input_filename_addition + '.npy')
-        scores_train = np.load(
-            settings.unweighted_events_dir + '/scores_train_random' + input_filename_addition + '.npy')
-        r_train = np.load(settings.unweighted_events_dir + '/r_train_random' + input_filename_addition + '.npy')
-        theta0_train = np.load(
-            settings.unweighted_events_dir + '/theta0_train_random' + input_filename_addition + '.npy')
+        train_filename += '_random'
     elif basis_theta_mode:
-        X_train = np.load(
-            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_basis' + input_filename_addition + '.npy')
-        y_train = np.load(settings.unweighted_events_dir + '/y_train_basis' + input_filename_addition + '.npy')
-        scores_train = np.load(
-            settings.unweighted_events_dir + '/scores_train_basis' + input_filename_addition + '.npy')
-        r_train = np.load(settings.unweighted_events_dir + '/r_train_basis' + input_filename_addition + '.npy')
-        theta0_train = np.load(
-            settings.unweighted_events_dir + '/theta0_train_basis' + input_filename_addition + '.npy')
-    else:
-        X_train = np.load(
-            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train' + input_filename_addition + '.npy')
-        y_train = np.load(settings.unweighted_events_dir + '/y_train' + input_filename_addition + '.npy')
-        scores_train = np.load(settings.unweighted_events_dir + '/scores_train' + input_filename_addition + '.npy')
-        r_train = np.load(settings.unweighted_events_dir + '/r_train' + input_filename_addition + '.npy')
-        theta0_train = np.load(settings.unweighted_events_dir + '/theta0_train' + input_filename_addition + '.npy')
+        train_filename += '_basis'
+    train_filename += input_filename_addition
+    if new_sample_mode:
+        train_filename += '_new'
+
+    X_train = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X' + train_filename + '.npy')
+    y_train = np.load(settings.unweighted_events_dir + '/y' + train_filename + '.npy')
+    scores_train = np.load(settings.unweighted_events_dir + '/scores' + train_filename + '.npy')
+    r_train = np.load(settings.unweighted_events_dir + '/r' + train_filename + '.npy')
+    theta0_train = np.load(settings.unweighted_events_dir + '/theta0' + train_filename + '.npy')
 
     X_calibration = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_calibration' + input_filename_addition + '.npy')
@@ -395,6 +388,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     trimmed_mse_log_r = []
 
     for t, theta in enumerate(settings.thetas):
+
+        if (t + 1) % 100 == 0:
+            logging.info('Starting theta %s / %s', t + 1, settings.n_thetas)
 
         # Prepare test data
         thetas0_array = np.zeros((X_test_transformed.shape[0], 2), dtype=X_test_transformed.dtype)

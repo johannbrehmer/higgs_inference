@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=carl
-#SBATCH --output=slurm_carl.out
+#SBATCH --output=slurm_carl2.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
@@ -18,5 +18,5 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py carl --neyman -o shallow
-# python -u experiments.py carl --training random
+python -u experiments.py carl --neyman -o shallow new
+python -u experiments.py carl --neyman --training random -o shallow new

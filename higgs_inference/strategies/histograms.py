@@ -89,10 +89,15 @@ def histo_inference(indices_X=None,
         filename_addition += '_smeared'
 
     denom1_mode = ('denom1' in options)
+    new_sample_mode = ('new' in options)
+
     input_filename_addition = ''
     if denom1_mode:
         input_filename_addition = '_denom1'
         filename_addition += '_denom1'
+
+    if new_sample_mode:
+        filename_addition += '_new'
 
     results_dir = settings.base_dir + '/results/histo'
     neyman_dir = settings.neyman_dir + '/histo'
@@ -105,9 +110,15 @@ def histo_inference(indices_X=None,
     # Data
     ################################################################################
 
-    X_test = np.load(
-        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
-    r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
+    if new_sample_mode:
+        X_test = np.load(
+            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '_new.npy')
+        r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '_new.npy')
+    else:
+        X_test = np.load(
+            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
+        r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
+
     X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
     n_events_test = X_test.shape[0]
 
