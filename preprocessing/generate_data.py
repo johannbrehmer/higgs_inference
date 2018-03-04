@@ -54,6 +54,8 @@ parser.add_argument("-x", "--roam", action="store_true",
                     help="Generate roaming evaluation sample")
 parser.add_argument("--alternativedenom", action="store_true",
                     help="Use alternative denominator theta")
+parser.add_argument("--new", action="store_true",
+                    help="Generate alternative training set with filename part _new")
 parser.add_argument("--dry", action="store_true",
                     help="Don't save results")
 
@@ -77,7 +79,9 @@ else:
 
 filename_addition = ''
 if args.alternativedenom:
-    filename_addition = '_denom1'
+    filename_addition += '_denom1'
+if args.new:
+    filename_addition += '_new'
 
 data_dir = settings.base_dir + '/data'
 
@@ -200,8 +204,9 @@ if args.train:
         ))
 
         # filter out bad events
-        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
-                np.log(r) ** 2 < settings.max_logr ** 2)
+        # cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
+        #        np.log(r) ** 2 < settings.max_logr ** 2)
+        cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
 
         return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut], p0[cut], p1[
             cut]
@@ -289,8 +294,9 @@ if args.basis:
         ))
 
         # filter out bad events
-        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
-                np.log(r) ** 2 < settings.max_logr ** 2)
+        # cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
+        #        np.log(r) ** 2 < settings.max_logr ** 2)
+        cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
 
         return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut], p0[cut], p1[
             cut]
@@ -378,8 +384,9 @@ if args.pointbypoint:
         ))
 
         # filter out bad events
-        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
-                np.log(r) ** 2 < settings.max_logr ** 2) & (np.isfinite(np.log(r)))
+        # cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
+        #        np.log(r) ** 2 < settings.max_logr ** 2) & (np.isfinite(np.log(r)))
+        cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
 
         return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut], p0[cut], p1[
             cut]
@@ -441,8 +448,8 @@ if args.random:
                                 / accepted_den['p_theta_' + str(theta1)])))
 
         subset_scores = [weighted_data_train.columns.get_loc(x)
-                             for x in ['score_randomtheta_' + str(randomtheta0) + '_0',
-                                       'score_randomtheta_' + str(randomtheta0) + '_1']]
+                         for x in ['score_randomtheta_' + str(randomtheta0) + '_0',
+                                   'score_randomtheta_' + str(randomtheta0) + '_1']]
         scores = np.vstack((
             np.array(accepted_num.iloc[:, subset_scores]),
             np.array(accepted_den.iloc[:, subset_scores])
@@ -459,8 +466,9 @@ if args.random:
         thetas1[:] = thetas[theta1]
 
         # filter out bad events
-        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
-                np.log(r) ** 2 < settings.max_logr ** 2)
+        # cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
+        #        np.log(r) ** 2 < settings.max_logr ** 2)
+        cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
 
         return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut]
 
@@ -510,7 +518,8 @@ if args.calibration:
             r[t, :] = np.array(weights_train[t][indices] / weights_train[theta_observed][indices])
 
         # filter out bad events
-        cut = np.all(np.log(r) ** 2 < settings.max_logr ** 2, axis=0)
+        # cut = np.all(np.log(r) ** 2 < settings.max_logr ** 2, axis=0)
+        cut = np.all(np.isfinite(np.log(r)), axis=0)
 
         return X[cut], r[:, cut]
 
@@ -549,7 +558,8 @@ if args.scoreregression:
         p = np.array(weights_train[theta][indices])
 
         # filter out bad events
-        cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2)
+        # cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2)
+        cut = np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
 
         return X[cut], scores[cut], p[cut]
 
