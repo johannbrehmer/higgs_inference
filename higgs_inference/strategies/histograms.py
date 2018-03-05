@@ -110,14 +110,9 @@ def histo_inference(indices_X=None,
     # Data
     ################################################################################
 
-    if new_sample_mode:
-        X_test = np.load(
-            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '_new.npy')
-        r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '_new.npy')
-    else:
-        X_test = np.load(
-            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
-        r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
+    X_test = np.load(
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
+    r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
 
     X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
     n_events_test = X_test.shape[0]
@@ -139,13 +134,16 @@ def histo_inference(indices_X=None,
                      i + 1, len(settings.pbp_training_thetas), t, settings.thetas[t])
 
         # Load data
+        new_sample_prefix = '_new' if new_sample_mode else ''
         X_train = np.load(
             settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_point_by_point_' + str(
-                t) + input_filename_addition + '.npy')
+                t) + input_filename_addition + new_sample_prefix + '.npy')
         y_train = np.load(
-            settings.unweighted_events_dir + '/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            settings.unweighted_events_dir + '/y_train_point_by_point_' + str(
+                t) + input_filename_addition + new_sample_prefix + '.npy')
         r_train = np.load(
-            settings.unweighted_events_dir + '/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            settings.unweighted_events_dir + '/r_train_point_by_point_' + str(
+                t) + input_filename_addition + new_sample_prefix + '.npy')
 
         # Construct summary statistics
         summary_statistics_train = X_train[:, indices_X]
