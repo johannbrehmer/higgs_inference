@@ -19,4 +19,4 @@ module load keras/2.0.2
 cd /home/jb6504/higgs_inference/higgs_inference
 
 python -u experiments.py regression --neyman -o new
-python -u experiments.py regression --neyman --training random -o new
+# python -u experiments.py regression --training random -o new

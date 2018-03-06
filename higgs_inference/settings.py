@@ -79,10 +79,15 @@ pbp_training_thetas = [0, 13, 14, 15, 16, 9, 422, 956, 666, 802, 675, 839, 699, 
 
 # Numnber of events
 n_expected_events = 36
+n_expected_events_nc = 36  # 20
 
 # Number of toy experiments
-n_neyman_distribution_experiments = 1000
-n_neyman_observed_experiments = 101
+n_neyman_distribution_experiments = 1000  # 2000
+n_neyman_observed_experiments = 101  # 501
+
+# Confidence limit
+confidence_limit = 0.95  # 0.68
+q_threshold = - 2. * np.log(1. - confidence_limit)
 
 ################################################################################
 # Network architecture and training

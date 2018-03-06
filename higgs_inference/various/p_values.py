@@ -20,7 +20,7 @@ def calculate_median_p_value(llr_distribution, llr_observed):
     nans_distribution = np.sum(np.isnan(distribution))
     nans_observed = np.sum(np.isnan(llr_observed))
     if nans_distribution + nans_observed > 0:
-        logging.warning('Found %s NaNs in null hypothesis and %s NaNs in alternate hypothesis', nans_distribution,
+        logging.debug('Found %s NaNs in null hypothesis and %s NaNs in alternate hypothesis', nans_distribution,
                         nans_observed)
 
     p_values_left = 1. - np.searchsorted(distribution, llr_observed, side='left').astype('float') / len(distribution)
@@ -28,8 +28,9 @@ def calculate_median_p_value(llr_distribution, llr_observed):
     p_values = 0.5 * (p_values_left + p_values_right)
 
     # Some things Kyle suggested
-    q_cut = (distribution[949] + distribution[950]) / 2
-    q_cut_uncertainty = (distribution[950] - distribution[949]) / 2
+    q_cut_index = settings.confidence_limit * settings.n_neyman_distribution_experiments - 1
+    q_cut = (distribution[q_cut_index] + distribution[q_cut_index + 1]) / 2
+    q_cut_uncertainty = (distribution[q_cut_index + 1] - distribution[q_cut_index]) / 2
     q_median = np.median(llr_observed)
 
     return np.median(p_values), q_cut, q_cut_uncertainty, q_median

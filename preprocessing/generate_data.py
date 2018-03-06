@@ -623,12 +623,12 @@ if args.neyman:
 
     def generate_data_neyman(theta_observed, n_toy_experiments, theta1, theta_score):
 
-        indices = np.random.choice(list(range(n_events_test)), n_toy_experiments * settings.n_expected_events,
+        indices = np.random.choice(list(range(n_events_test)), n_toy_experiments * settings.n_expected_events_nc,
                                    p=weights_test[theta_observed])
 
         X = np.asarray(weighted_data_test.iloc[indices, subset_features])
 
-        r = np.zeros((settings.n_thetas, n_toy_experiments * settings.n_expected_events))
+        r = np.zeros((settings.n_thetas, n_toy_experiments * settings.n_expected_events_nc))
         for t in range(settings.n_thetas):
             r[t, :] = np.array(weights_test[t][indices] / weights_test[theta1][indices])
 
@@ -638,9 +638,9 @@ if args.neyman:
         scores = np.array(weighted_data_test.iloc[indices, subset_scores])
 
         # Reshape to experiments x expected events
-        X = X.reshape((n_toy_experiments, settings.n_expected_events, -1))
-        r = r.reshape((settings.n_thetas, n_toy_experiments, settings.n_expected_events))
-        scores = scores.reshape((n_toy_experiments, settings.n_expected_events, 2))
+        X = X.reshape((n_toy_experiments, settings.n_expected_events_nc, -1))
+        r = r.reshape((settings.n_thetas, n_toy_experiments, settings.n_expected_events_nc))
+        scores = scores.reshape((n_toy_experiments, settings.n_expected_events_nc, 2))
 
         return X, r, scores
 

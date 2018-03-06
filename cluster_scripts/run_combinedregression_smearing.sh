@@ -18,5 +18,4 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py combinedregression --smearing
-python -u experiments.py combinedregression --smearing --training random
+python -u experiments.py combinedregression --neyman --smearing -o deep new
