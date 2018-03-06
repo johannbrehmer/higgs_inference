@@ -218,7 +218,7 @@ def histo_inference(indices_X=None,
                 # Neyman construction: load distribution sample and construct summary statistics
                 X_neyman_distribution = np.load(
                     settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_distribution_' + str(tt) + '.npy')
-                summary_statistics_neyman_distribution = X_neyman_observed.reshape(
+                summary_statistics_neyman_distribution = X_neyman_distribution.reshape(
                     (-1, X_neyman_distribution.shape[2]))[:, indices_X]
 
                 # Evaluation
@@ -226,9 +226,7 @@ def histo_inference(indices_X=None,
                 log_r_hat_neyman_distribution = np.log(r_from_s(s_hat_neyman_distribution))
                 log_r_hat_neyman_distribution = log_r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
 
-                llr_neyman_distribution = -2. * np.sum(log_r_hat_neyman_distribution, axis=1)
-                np.save(neyman_dir + '/neyman_llr_distribution_histo' + '_' + str(t) + filename_addition + '.npy',
-                        llr_neyman_distribution)
+                llr_neyman_distributions.append(-2. * np.sum(log_r_hat_neyman_distribution, axis=1))
 
             llr_neyman_distributions = np.asarray(llr_neyman_distributions)
             np.save(neyman_dir + '/neyman_llr_distribution_histo' + '_' + str(t) + filename_addition + '.npy',
