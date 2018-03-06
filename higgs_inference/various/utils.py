@@ -79,7 +79,7 @@ def format_number(number,
 # Decide if two a given Neyman toy experiment should be evaluated at a given theta
 ################################################################################
 
-def decide_toy_evaluation(theta_hypothesis, theta_evaluation, distance_threshold=0.3):
+def decide_toy_evaluation(theta_hypothesis, theta_evaluation, distance_threshold=0.3): # distance_threshold = 0.5
     if theta_evaluation == theta_hypothesis:
         return True
 

@@ -86,7 +86,7 @@ n_neyman_distribution_experiments = 1000  # 2000
 n_neyman_observed_experiments = 101  # 501
 
 # Confidence limit
-confidence_limit = 0.95  # 0.68
+confidence_limit = 0.68  # 0.68
 q_threshold = - 2. * np.log(1. - confidence_limit)
 
 ################################################################################

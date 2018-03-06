@@ -626,6 +626,11 @@ if args.neyman:
         indices = np.random.choice(list(range(n_events_test)), n_toy_experiments * settings.n_expected_events_nc,
                                    p=weights_test[theta_observed])
 
+        # Check how many repeated entries we have
+        unique, counts = np.unique(indices.flatten(), return_counts=True)
+        counts =  - np.sort(- counts)
+        logging.debug('Repeated events: %s', counts[:5])
+
         X = np.asarray(weighted_data_test.iloc[indices, subset_features])
 
         r = np.zeros((settings.n_thetas, n_toy_experiments * settings.n_expected_events_nc))
@@ -652,9 +657,10 @@ if args.neyman:
     logging.info('Generated %s "observed" toy experiments with %s events each according to theta = %s',
                  X.shape[0], X.shape[1], thetas[settings.theta_observed])
 
-    np.save(settings.unweighted_events_dir + '/X_neyman_observed' + filename_addition + '.npy', X)
-    np.save(settings.unweighted_events_dir + '/r_neyman_observed' + filename_addition + '.npy', r)
-    np.save(settings.unweighted_events_dir + '/scores_neyman_observed' + filename_addition + '.npy', scores)
+    if not args.dry:
+        np.save(settings.unweighted_events_dir + '/X_neyman_observed' + filename_addition + '.npy', X)
+        np.save(settings.unweighted_events_dir + '/r_neyman_observed' + filename_addition + '.npy', r)
+        np.save(settings.unweighted_events_dir + '/scores_neyman_observed' + filename_addition + '.npy', scores)
 
     # Distribution
     for t, theta in enumerate(thetas):
@@ -664,10 +670,11 @@ if args.neyman:
         logging.info('Generated %s "distribution" toy experiments with %s events each according to theta = %s',
                      X.shape[0], X.shape[1], theta)
 
-        np.save(settings.unweighted_events_dir + '/X_neyman_distribution_' + str(t) + filename_addition + '.npy', X)
-        np.save(settings.unweighted_events_dir + '/r_neyman_distribution_' + str(t) + filename_addition + '.npy', r)
-        np.save(settings.unweighted_events_dir + '/scores_neyman_distribution_' + str(t) + filename_addition + '.npy',
-                scores)
+        if not args.dry:
+            np.save(settings.unweighted_events_dir + '/X_neyman_distribution_' + str(t) + filename_addition + '.npy', X)
+            np.save(settings.unweighted_events_dir + '/r_neyman_distribution_' + str(t) + filename_addition + '.npy', r)
+            np.save(settings.unweighted_events_dir + '/scores_neyman_distribution_' + str(t) + filename_addition + '.npy',
+                    scores)
 
 ################################################################################
 # Roam data
