@@ -220,7 +220,7 @@ def calculate_all_CL():
     logging.info('Starting p-value calculation')
 
     calculate_CL('truth', '', 'truth')
-    calculate_CL('histo', '_2d', 'histo')
+    calculate_CL('histo', '_2d_new', 'histo')
     calculate_CL('scoreregression_score', '', 'score_regression')
     calculate_CL('carl', '_shallow_new', 'parameterized')
     calculate_CL('combined', 'deep_new', 'parameterized')
