@@ -35,11 +35,11 @@ def calculate_median_p_value(llr_distribution, llr_observed):
     return np.median(p_values), q_cut, q_cut_uncertainty, q_median
 
 
-def subtract_mle(filename, folder, theta_sm=0):
+def subtract_mle(filename, filename_suffix, folder, theta_sm=0):
     """ For a given filename and folder, takes the log likelihood ratios with respect to some arbitrary denominator
     theta and subtracts the log likelihood ratios of the maximum likelihood estimators. """
 
-    logging.info('Subtracting MLE for ' + folder + ' ' + filename)
+    logging.info('Subtracting MLE for ' + folder + ' ' + filename + filename_suffix)
 
     # Settings
     neyman_dir = settings.neyman_dir + '/' + folder
@@ -56,7 +56,7 @@ def subtract_mle(filename, folder, theta_sm=0):
 
     for t in range(n_thetas):
         try:
-            entry = np.load(neyman_dir + '/neyman_llr_distribution_' + filename + '_' + str(t) + '.npy')
+            entry = np.load(neyman_dir + '/neyman_llr_distribution_' + filename + '_' + str(t) + filename_suffix + '.npy')
             assert entry.shape == (settings.n_thetas, settings.n_neyman_distribution_experiments)
             llr_distributions.append(entry)
             files_found += 1
@@ -72,7 +72,7 @@ def subtract_mle(filename, folder, theta_sm=0):
             files_not_found += 1
         
         except AssertionError as err:
-            logging.warning("File %s has wrong shape %s", neyman_dir + '/neyman_llr_distribution_' + filename + '_' + str(t) + '.npy', entry.shape)
+            logging.warning("File %s has wrong shape %s", neyman_dir + '/neyman_llr_distribution_' + filename + '_' + str(t) + filename_suffix + '.npy', entry.shape)
 
             placeholder = np.empty((settings.n_thetas, settings.n_neyman_distribution_experiments))
             placeholder[:,:] = np.nan
@@ -82,7 +82,7 @@ def subtract_mle(filename, folder, theta_sm=0):
 
         try:
             llr_observeds.append(
-                np.load(neyman_dir + '/neyman_llr_observed_' + filename + '_' + str(t) + '.npy'))
+                np.load(neyman_dir + '/neyman_llr_observed_' + filename + '_' + str(t) + filename_suffix + '.npy'))
             files_found += 1
 
         except IOError as err:
@@ -160,9 +160,9 @@ def subtract_mle(filename, folder, theta_sm=0):
     #                                                        - llr_observeds[theta_sm, exp])
 
     # Save results
-    np.save(result_dir + '/neyman_llr_vs_mle_distributions_' + filename + '.npy',
+    np.save(result_dir + '/neyman_llr_vs_mle_distributions_' + filename + filename_suffix + '.npy',
             llr_compared_to_mle_distributions)
-    np.save(result_dir + '/neyman_llr_vs_mle_observeds_' + filename + '.npy',
+    np.save(result_dir + '/neyman_llr_vs_mle_observeds_' + filename + filename_suffix + '.npy',
             llr_compared_to_mle_observeds)
     # np.save(result_dir + '/neyman_llr_vs_true_distributions_' + filename + '.npy',
     #         llr_compared_to_true_distributions)
@@ -170,25 +170,25 @@ def subtract_mle(filename, folder, theta_sm=0):
     #         llr_compared_to_true_observeds)
 
 
-def calculate_CL(filename, folder):
+def calculate_CL(filename, filename_suffix, folder):
     """ Steers the calculation of all p-values for a given filename and folder. """
 
     # Preprocessing
     try:
-        subtract_mle(filename, folder)
+        subtract_mle(filename, filename_suffix, folder)
     except ValueError:
         logging.warning('Error in MLE subtraction, skipping set')
         return
 
-    logging.info('Calculating p-values for ' + folder + ' ' + filename)
+    logging.info('Calculating p-values for ' + folder + ' ' + filename + filename_suffix)
 
     # Settings
     result_dir = settings.base_dir + '/results/' + folder
     n_thetas = 1017
 
     # Load LLR
-    llr_compared_to_mle_distributions = np.load(result_dir + '/neyman_llr_vs_mle_distributions_' + filename + '.npy')
-    llr_compared_to_mle_observeds = np.load(result_dir + '/neyman_llr_vs_mle_observeds_' + filename + '.npy')
+    llr_compared_to_mle_distributions = np.load(result_dir + '/neyman_llr_vs_mle_distributions_' + filename + filename_suffix + '.npy')
+    llr_compared_to_mle_observeds = np.load(result_dir + '/neyman_llr_vs_mle_observeds_' + filename + filename_suffix + '.npy')
     #llr_compared_to_true_distributions = np.load(result_dir + '/neyman_llr_vs_true_distributions_' + filename + '.npy')
     #llr_compared_to_true_observeds = np.load(result_dir + '/neyman_llr_vs_true_observeds_' + filename + '.npy')
 
@@ -206,12 +206,12 @@ def calculate_CL(filename, folder):
         #p_values_true[t] = calculate_median_p_value(llr_compared_to_true_distributions[t, :],
         #                                            llr_compared_to_true_observeds[t, :])
 
-    np.save(result_dir + '/p_values_' + filename + '.npy', p_values_mle)
+    np.save(result_dir + '/p_values_' + filename + filename_suffix + '.npy', p_values_mle)
     #np.save(result_dir + '/p_values_ratio_vs_true_' + filename + '.npy', p_values_true)
 
-    np.save(result_dir + '/neyman_qcut_' + filename + '.npy', q_cut_values_mle)
-    np.save(result_dir + '/neyman_qcut_uncertainties_' + filename + '.npy', q_cut_uncertainties_mle)
-    np.save(result_dir + '/neyman_qmedian_' + filename + '.npy', q_median_values_mle)
+    np.save(result_dir + '/neyman_qcut_' + filename + filename_suffix + '.npy', q_cut_values_mle)
+    np.save(result_dir + '/neyman_qcut_uncertainties_' + filename + filename_suffix + '.npy', q_cut_uncertainties_mle)
+    np.save(result_dir + '/neyman_qmedian_' + filename + filename_suffix + '.npy', q_median_values_mle)
 
 
 def calculate_all_CL():
@@ -219,24 +219,11 @@ def calculate_all_CL():
 
     logging.info('Starting p-value calculation')
 
-    calculate_CL('truth', 'truth')
-    #calculate_CL('localmodel', 'truth')
-    
-    #calculate_CL('afc', 'afc')
-    
-    #calculate_CL('carl', 'point_by_point')
-    #calculate_CL('carl_calibrated', 'point_by_point')
-    #calculate_CL('regression', 'point_by_point')
-
-    #calculate_CL('carl', 'parameterized')
-    #calculate_CL('carl_calibrated', 'parameterized')
-    #calculate_CL('combined', 'parameterized')
-    #calculate_CL('combined_calibrated', 'parameterized')
-    #calculate_CL('regression', 'parameterized')
-    calculate_CL('combinedregression', 'parameterized')
-    
-    #calculate_CL('scoreregression', 'score_regression')
-    calculate_CL('scoreregression_scoretheta', 'score_regression')
-    calculate_CL('scoreregression_score', 'score_regression')
-    calculate_CL('scoreregression_rotatedscore', 'score_regression')
+    calculate_CL('truth', '', 'truth')
+    calculate_CL('histo', '_2d', 'histo')
+    calculate_CL('scoreregression_score', '', 'score_regression')
+    calculate_CL('carl', '_shallow_new', 'parameterized')
+    calculate_CL('combined', 'deep_new', 'parameterized')
+    calculate_CL('regression', '_new', 'parameterized')
+    calculate_CL('combinedregression', '_deep_new', 'parameterized')
     
