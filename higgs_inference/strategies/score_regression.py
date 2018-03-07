@@ -48,6 +48,7 @@ def score_regression_inference(use_smearing=False,
     small_batch_mode = ('smallbatch' in options)
     constant_lr_mode = ('constantlr' in options)
     new_sample_mode = ('new' in options)
+    neyman2_mode = ('neyman2' in options)
 
     filename_addition = ''
 
@@ -106,6 +107,16 @@ def score_regression_inference(use_smearing=False,
     if new_sample_mode:
         filename_addition += '_new'
 
+    n_expected_events_neyman = settings.n_expected_events_neyman
+    n_neyman_distribution_experiments = settings.n_neyman_distribution_experiments
+    n_neyman_observed_experiments = settings.n_neyman_observed_experiments
+    neyman_filename = 'neyman'
+    if neyman2_mode:
+        neyman_filename = 'neyman2'
+        n_expected_events_neyman = settings.n_expected_events_neyman2
+        n_neyman_distribution_experiments = settings.n_neyman2_distribution_experiments
+        n_neyman_observed_experiments = settings.n_neyman2_observed_experiments
+
     results_dir = settings.base_dir + '/results/score_regression'
     neyman_dir = settings.neyman_dir + '/score_regression'
 
@@ -115,6 +126,11 @@ def score_regression_inference(use_smearing=False,
     logging.info('  Learning rate:           %s', learning_rate)
     logging.info('  Learning rate decay:     %s', lr_decay)
     logging.info('  Number of epochs:        %s', n_epochs)
+    if do_neyman:
+        logging.info('  NC experiments:          (%s alternate + %s null) experiments with %s observed events each',
+                     n_neyman_observed_experiments, n_neyman_distribution_experiments, n_expected_events_neyman)
+    else:
+        logging.info('  NC experiments:          False')
 
     ################################################################################
     # Data
@@ -141,7 +157,7 @@ def score_regression_inference(use_smearing=False,
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
     if do_neyman:
-        X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+        X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_observed.npy')
 
     # Shuffle training data
     X_train, scores_train = shuffle(X_train, scores_train, random_state=44)
@@ -335,36 +351,36 @@ def score_regression_inference(use_smearing=False,
             tthat_neyman_observed = that_neyman_observed.dot(delta_theta)
             that_rotated_neyman_observed = that_neyman_observed.dot(rotation_matrix)
 
-            llr_raw_neyman_observed = -2. * np.sum(tthat_neyman_observed.reshape((-1, settings.n_expected_events)),
+            llr_raw_neyman_observed = -2. * np.sum(tthat_neyman_observed.reshape((-1, n_expected_events_neyman)),
                                                    axis=1)
-            np.save(neyman_dir + '/neyman_llr_observed_scoreregression_' + str(t) + filename_addition + '.npy',
+            np.save(neyman_dir + '/' + neyman_filename + '_llr_observed_scoreregression_' + str(t) + filename_addition + '.npy',
                     llr_raw_neyman_observed)
 
             # Neyman construction: evaluate observed sample (calibrated) -- score * theta calibration
             s_hat_neyman_observed = calibrator_scoretheta.predict(tthat_neyman_observed.reshape((-1,)))
             r_hat_neyman_observed = r_from_s(s_hat_neyman_observed)
-            r_hat_neyman_observed = r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
+            r_hat_neyman_observed = r_hat_neyman_observed.reshape((-1, n_expected_events_neyman))
             llr_calibrated_neyman_observed = -2. * np.sum(np.log(r_hat_neyman_observed), axis=1)
             np.save(
-                neyman_dir + '/neyman_llr_observed_scoreregression_scoretheta_' + str(t) + filename_addition + '.npy',
+                neyman_dir + '/' + neyman_filename + '_llr_observed_scoreregression_scoretheta_' + str(t) + filename_addition + '.npy',
                 llr_calibrated_neyman_observed)
 
             # Neyman construction: evaluate observed sample (calibrated) -- score calibration
             s_hat_neyman_observed = calibrator_score.predict(that_neyman_observed)
             r_hat_neyman_observed = r_from_s(s_hat_neyman_observed)
-            r_hat_neyman_observed = r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
+            r_hat_neyman_observed = r_hat_neyman_observed.reshape((-1, n_expected_events_neyman))
             llr_calibrated_neyman_observed = -2. * np.sum(np.log(r_hat_neyman_observed), axis=1)
             np.save(
-                neyman_dir + '/neyman_llr_observed_scoreregression_score_' + str(t) + filename_addition + '.npy',
+                neyman_dir + '/' + neyman_filename + '_llr_observed_scoreregression_score_' + str(t) + filename_addition + '.npy',
                 llr_calibrated_neyman_observed)
 
             # Neyman construction: evaluate observed sample (calibrated) -- rotated score claibration
             s_hat_neyman_observed = calibrator_rotatedscore.predict(that_rotated_neyman_observed)
             r_hat_neyman_observed = r_from_s(s_hat_neyman_observed)
-            r_hat_neyman_observed = r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
+            r_hat_neyman_observed = r_hat_neyman_observed.reshape((-1, n_expected_events_neyman))
             llr_calibrated_neyman_observed = -2. * np.sum(np.log(r_hat_neyman_observed), axis=1)
             np.save(
-                neyman_dir + '/neyman_llr_observed_scoreregression_rotatedscore_' + str(t) + filename_addition + '.npy',
+                neyman_dir + '/' + neyman_filename + '_llr_observed_scoreregression_rotatedscore_' + str(t) + filename_addition + '.npy',
                 llr_calibrated_neyman_observed)
 
             # Neyman construction: loop over distribution samples generated from different thetas
@@ -377,7 +393,7 @@ def score_regression_inference(use_smearing=False,
 
                 # Only evaluate certain combinations of thetas to save computation time
                 if not decide_toy_evaluation(tt, t):
-                    placeholder = np.empty(settings.n_neyman_distribution_experiments)
+                    placeholder = np.empty(n_neyman_distribution_experiments)
                     placeholder[:] = np.nan
                     llr_neyman_distributions.append(placeholder)
                     llr_neyman_distributions_scoretheta.append(placeholder)
@@ -387,7 +403,7 @@ def score_regression_inference(use_smearing=False,
 
                 # Neyman construction: load distribution sample
                 X_neyman_distribution = np.load(
-                    settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_distribution_' + str(tt) + '.npy')
+                    settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_distribution_' + str(tt) + '.npy')
                 X_neyman_distribution_transformed = scaler.transform(
                     X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
@@ -397,24 +413,24 @@ def score_regression_inference(use_smearing=False,
                 that_rotated_neyman_distribution = that_neyman_distribution.dot(rotation_matrix)
 
                 llr_neyman_distributions.append(
-                    -2. * np.sum(tthat_neyman_distribution.reshape((-1, settings.n_expected_events)), axis=1))
+                    -2. * np.sum(tthat_neyman_distribution.reshape((-1, n_expected_events_neyman)), axis=1))
 
                 # Neyman construction: evaluate distribution sample (score * theta calibration)
                 s_hat_neyman_distribution = calibrator_scoretheta.predict(tthat_neyman_distribution.reshape((-1,)))
                 r_hat_neyman_distribution = r_from_s(s_hat_neyman_distribution)
-                r_hat_neyman_distribution = r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
+                r_hat_neyman_distribution = r_hat_neyman_distribution.reshape((-1, n_expected_events_neyman))
                 llr_neyman_distributions_scoretheta.append(-2. * np.sum(np.log(r_hat_neyman_distribution), axis=1))
 
                 # Neyman construction: evaluate distribution sample (score calibration)
                 s_hat_neyman_distribution = calibrator_score.predict(that_neyman_distribution)
                 r_hat_neyman_distribution = r_from_s(s_hat_neyman_distribution)
-                r_hat_neyman_distribution = r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
+                r_hat_neyman_distribution = r_hat_neyman_distribution.reshape((-1, n_expected_events_neyman))
                 llr_neyman_distributions_score.append(-2. * np.sum(np.log(r_hat_neyman_distribution), axis=1))
 
                 # Neyman construction: evaluate distribution sample (rotated score calibration)
                 s_hat_neyman_distribution = calibrator_rotatedscore.predict(that_rotated_neyman_distribution)
                 r_hat_neyman_distribution = r_from_s(s_hat_neyman_distribution)
-                r_hat_neyman_distribution = r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
+                r_hat_neyman_distribution = r_hat_neyman_distribution.reshape((-1, n_expected_events_neyman))
                 llr_neyman_distributions_rotatedscore.append(-2. * np.sum(np.log(r_hat_neyman_distribution), axis=1))
 
             llr_neyman_distributions = np.asarray(llr_neyman_distributions)
@@ -422,17 +438,17 @@ def score_regression_inference(use_smearing=False,
             llr_neyman_distributions_score = np.asarray(llr_neyman_distributions_score)
             llr_neyman_distributions_rotatedscore = np.asarray(llr_neyman_distributions_rotatedscore)
 
-            np.save(neyman_dir + '/neyman_llr_distribution_scoreregression_' + str(t) + filename_addition + '.npy',
+            np.save(neyman_dir + '/' + neyman_filename + '_llr_distribution_scoreregression_' + str(t) + filename_addition + '.npy',
                     llr_neyman_distributions)
             np.save(
-                neyman_dir + '/neyman_llr_distribution_scoreregression_scoretheta_' + str(
+                neyman_dir + '/' + neyman_filename + '_llr_distribution_scoreregression_scoretheta_' + str(
                     t) + filename_addition + '.npy',
                 llr_neyman_distributions_scoretheta)
             np.save(
-                neyman_dir + '/neyman_llr_distribution_scoreregression_score_' + str(t) + filename_addition + '.npy',
+                neyman_dir + '/' + neyman_filename + '_llr_distribution_scoreregression_score_' + str(t) + filename_addition + '.npy',
                 llr_neyman_distributions_score)
             np.save(
-                neyman_dir + '/neyman_llr_distribution_scoreregression_rotatedscore_' + str(
+                neyman_dir + '/' + neyman_filename + '_llr_distribution_scoreregression_rotatedscore_' + str(
                     t) + filename_addition + '.npy',
                 llr_neyman_distributions_rotatedscore)
 

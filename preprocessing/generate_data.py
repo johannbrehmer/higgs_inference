@@ -64,20 +64,21 @@ parser.add_argument("--dry", action="store_true",
 args = parser.parse_args()
 
 logging.info('Tasks:')
-logging.info('  Baseline training:       %s', args.train)
-logging.info('  Random training:         %s', args.random)
-logging.info('  Morphing training:       %s', args.basis)
-logging.info('  Point-by-point training: %s', args.pointbypoint)
-logging.info('  Calibration:             %s', args.calibration)
-logging.info('  Likelihood ratio eval:   %s', args.test)
-logging.info('  Neyman construction:     %s', args.neyman)
-logging.info('  Roaming:                 %s', args.roam)
+logging.info('  Baseline training:                 %s', args.train)
+logging.info('  Random training:                   %s', args.random)
+logging.info('  Morphing training:                 %s', args.basis)
+logging.info('  Point-by-point training:           %s', args.pointbypoint)
+logging.info('  Calibration:                       %s', args.calibration)
+logging.info('  Likelihood ratio eval:             %s', args.test)
+logging.info('  Neyman construction:               %s', args.neyman)
+logging.info('  Neyman construction (alternative): %s', args.neyman2)
+logging.info('  Roaming:                           %s', args.roam)
 logging.info('Options:')
-logging.info('  Dry run:                 %s', args.dry)
+logging.info('  Dry run:                           %s', args.dry)
 if args.alternativedenom:
-    logging.info('  Denominator:             alternative')
+    logging.info('  Denominator:                       alternative')
 else:
-    logging.info('  Denominator:             standard')
+    logging.info('  Denominator:                       standard')
 
 filename_addition = ''
 if args.alternativedenom:

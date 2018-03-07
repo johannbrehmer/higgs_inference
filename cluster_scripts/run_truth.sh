@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=truth
-#SBATCH --output=slurm_truth2.out
+#SBATCH --output=slurm_truth.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=16GB
@@ -18,4 +18,4 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py truth
+python -u experiments.py truth -o neyman2

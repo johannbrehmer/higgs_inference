@@ -79,6 +79,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     large_batch_mode = ('largebatch' in options)
     small_batch_mode = ('smallbatch' in options)
     constant_lr_mode = ('constantlr' in options)
+    neyman2_mode = ('neyman2' in options)
 
     filename_addition = ''
     if morphing_aware:
@@ -162,6 +163,16 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     if new_sample_mode:
         filename_addition += '_new'
 
+    n_expected_events_neyman = settings.n_expected_events_neyman
+    n_neyman_distribution_experiments = settings.n_neyman_distribution_experiments
+    n_neyman_observed_experiments = settings.n_neyman_observed_experiments
+    neyman_filename = 'neyman'
+    if neyman2_mode:
+        neyman_filename = 'neyman2'
+        n_expected_events_neyman = settings.n_expected_events_neyman2
+        n_neyman_distribution_experiments = settings.n_neyman2_distribution_experiments
+        n_neyman_observed_experiments = settings.n_neyman2_observed_experiments
+
     results_dir = settings.base_dir + '/results/parameterized'
     neyman_dir = settings.neyman_dir + '/parameterized'
 
@@ -179,6 +190,11 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     logging.info('  Learning rate:            %s', learning_rate)
     logging.info('  Learning rate decay:      %s', lr_decay)
     logging.info('  Number of epochs:         %s', n_epochs)
+    if do_neyman:
+        logging.info('  NC experiments:           (%s alternate + %s null) experiments with %s observed events each',
+                     n_neyman_observed_experiments, n_neyman_distribution_experiments, n_expected_events_neyman)
+    else:
+        logging.info('  NC experiments:           False')
     logging.info('  Debug mode:               %s', debug_mode)
 
     ################################################################################
@@ -215,7 +231,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     n_roaming = len(X_roam)
 
     if do_neyman:
-        X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+        X_neyman_observed = np.load(
+            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_observed.npy')
 
     n_events_test = X_test.shape[0]
     assert settings.n_thetas == r_test.shape[0]
@@ -434,9 +451,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # Neyman construction: evaluate observed sample (raw)
             log_r_neyman_observed = regr.predict(X_thetas_neyman_observed)[:, 1]
-            llr_neyman_observed = -2. * np.sum(log_r_neyman_observed.reshape((-1, settings.n_expected_events)),
+            llr_neyman_observed = -2. * np.sum(log_r_neyman_observed.reshape((-1, n_expected_events_neyman)),
                                                axis=1)
-            np.save(neyman_dir + '/neyman_llr_observed_' + algorithm + '_' + str(t) + filename_addition + '.npy',
+            np.save(neyman_dir + '/' + neyman_filename + '_llr_observed_' + algorithm + '_' + str(
+                t) + filename_addition + '.npy',
                     llr_neyman_observed)
 
             # Neyman construction: loop over distribution samples generated from different thetas
@@ -445,14 +463,14 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
                 # Only evaluate certain combinations of thetas to save computation time
                 if not decide_toy_evaluation(tt, t):
-                    placeholder = np.empty(settings.n_neyman_distribution_experiments)
+                    placeholder = np.empty(n_neyman_distribution_experiments)
                     placeholder[:] = np.nan
                     llr_neyman_distributions.append(placeholder)
                     continue
 
                 # Neyman construction: load distribution sample
                 X_neyman_distribution = np.load(
-                    settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_distribution_' + str(
+                    settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_distribution_' + str(
                         tt) + '.npy')
                 X_neyman_distribution_transformed = scaler.transform(
                     X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
@@ -466,11 +484,12 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 # Neyman construction: evaluate distribution sample (raw)
                 log_r_neyman_distribution = regr.predict(X_thetas_neyman_distribution)[:, 1]
                 llr_neyman_distributions.append(
-                    -2. * np.sum(log_r_neyman_distribution.reshape((-1, settings.n_expected_events)), axis=1))
+                    -2. * np.sum(log_r_neyman_distribution.reshape((-1, n_expected_events_neyman)), axis=1))
 
             llr_neyman_distributions = np.asarray(llr_neyman_distributions)
             np.save(
-                neyman_dir + '/neyman_llr_distribution_' + algorithm + '_' + str(t) + filename_addition + '.npy',
+                neyman_dir + '/' + neyman_filename + '_llr_distribution_' + algorithm + '_' + str(
+                    t) + filename_addition + '.npy',
                 llr_neyman_distributions)
 
     # Save evaluation results
@@ -567,7 +586,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
                                                axis=1)
             np.save(
-                neyman_dir + '/neyman_llr_observed_' + algorithm + '_calibrated_' + str(
+                neyman_dir + '/' + neyman_filename + '_llr_observed_' + algorithm + '_calibrated_' + str(
                     t) + filename_addition + '.npy',
                 llr_neyman_observed)
 
@@ -576,7 +595,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             for tt in range(settings.n_thetas):
                 # Neyman construction: load distribution sample
                 X_neyman_distribution = np.load(
-                    settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_distribution_' + str(
+                    settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_distribution_' + str(
                         tt) + '.npy')
                 X_neyman_distribution_transformed = scaler.transform(
                     X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
@@ -590,10 +609,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 # Neyman construction: evaluate distribution sample (calibrated)
                 r_neyman_distribution, _ = ratio_calibrated.predict(X_thetas_neyman_distribution)
                 llr_neyman_distributions.append(
-                    -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, settings.n_expected_events)), axis=1))
+                    -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, n_expected_events_neyman)), axis=1))
 
             llr_neyman_distributions = np.asarray(llr_neyman_distributions)
-            np.save(neyman_dir + '/neyman_llr_distribution_' + algorithm + '_calibrated_' + str(
+            np.save(neyman_dir + '/' + neyman_filename + '_llr_distribution_' + algorithm + '_calibrated_' + str(
                 t) + filename_addition + '.npy',
                     llr_neyman_distributions)
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=creg
-#SBATCH --output=slurm_combinedregression2.out
+#SBATCH --output=slurm_combinedregression.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
@@ -18,5 +18,5 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py combinedregression --neyman -o deep new
+python -u experiments.py combinedregression --neyman -o deep new neyman2
 # python -u experiments.py combinedregression --training random -o deep new

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=histo
-#SBATCH --output=slurm_histo2.out
+#SBATCH --output=slurm_histo.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
@@ -18,6 +18,6 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py histo -x 1 41 --neyman -o new
-python -u experiments.py histo -x 1 --neyman -o new
-python -u experiments.py histo -x 41 --neyman -o new
+python -u experiments.py histo -x 1 41 --neyman -o new neyman2
+python -u experiments.py histo -x 1 --neyman -o new neyman2
+python -u experiments.py histo -x 41 --neyman -o new neyman2
