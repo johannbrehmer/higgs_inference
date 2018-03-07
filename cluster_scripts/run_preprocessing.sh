@@ -15,4 +15,4 @@ module load scikit-learn/intel/0.18.1
 cd /home/jb6504/higgs_inference/preprocessing
 
 #python -u generate_data.py --train --random --basis --pointbypoint --scoreregression --new
-python -u generate_data.py --neyman --dry
+python -u generate_data.py --neyman2
