@@ -1,45 +1,35 @@
 Using TensorFlow backend.
-26.02.2018 06:57:31 INFO    Hi! How are you today?
-26.02.2018 06:57:31 INFO    Startup options:
-26.02.2018 06:57:31 INFO      Algorithm:                     carl
-26.02.2018 06:57:31 INFO      Point by point:                False
-26.02.2018 06:57:31 INFO      Morphing-aware mode:           False
-26.02.2018 06:57:31 INFO      Smeared data:                  True
-26.02.2018 06:57:31 INFO      Training sample:               random
-26.02.2018 06:57:31 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-26.02.2018 06:57:31 INFO      alpha:                         None
-26.02.2018 06:57:31 INFO      AFC epsilon:                   None
-26.02.2018 06:57:31 INFO      Neyman construction toys:      False
-26.02.2018 06:57:31 INFO      Other options:                 
-26.02.2018 06:57:31 INFO      Base directory:                /home/jb6504/higgs_inference
-26.02.2018 06:57:31 INFO      ML-based strategies available: True
-26.02.2018 06:57:31 INFO    Starting parameterized inference
-26.02.2018 06:57:31 INFO    Main settings:
-26.02.2018 06:57:31 INFO      Algorithm:                carl
-26.02.2018 06:57:31 INFO      Morphing-aware:           False
-26.02.2018 06:57:31 INFO      Training sample:          random
-26.02.2018 06:57:31 INFO    Options:
-26.02.2018 06:57:31 INFO      Number of hidden layers:  3
-26.02.2018 06:57:31 INFO      Batch size:               128
-26.02.2018 06:57:31 INFO      Learning rate:            0.001
-26.02.2018 06:57:31 INFO      Learning rate decay:      0.0921034037198
-26.02.2018 06:57:31 INFO      Number of epochs:         50
-26.02.2018 06:57:31 INFO      Debug mode:               False
-26.02.2018 06:58:01 INFO    Starting training
-Train on 7989804 samples, validate on 1997452 samples
-2018-02-26 06:58:02.514737: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-26 06:58:02.515119: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-26 06:58:02.515127: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-26 06:58:02.515131: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-26 06:58:02.515134: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-02-26 06:58:02.834477: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
-name: Tesla P40
-major: 6 minor: 1 memoryClockRate (GHz) 1.531
-pciBusID 0000:04:00.0
-Total memory: 22.38GiB
-Free memory: 22.21GiB
-2018-02-26 06:58:02.834514: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-02-26 06:58:02.834519: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-02-26 06:58:02.834528: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:04:00.0)
-Epoch 1/50
-slurmstepd: error: *** JOB 4664012 ON gpu-38 CANCELLED AT 2018-02-26T06:58:26 ***
+06.03.2018 18:14:27 INFO    Hi! How are you today?
+06.03.2018 18:14:27 INFO    Startup options:
+06.03.2018 18:14:27 INFO      Algorithm:                     carl
+06.03.2018 18:14:27 INFO      Point by point:                False
+06.03.2018 18:14:27 INFO      Morphing-aware mode:           False
+06.03.2018 18:14:27 INFO      Smeared data:                  True
+06.03.2018 18:14:27 INFO      Training sample:               baseline
+06.03.2018 18:14:27 INFO      alpha:                         None
+06.03.2018 18:14:27 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+06.03.2018 18:14:27 INFO      AFC epsilon:                   None
+06.03.2018 18:14:27 INFO      Neyman construction toys:      True
+06.03.2018 18:14:27 INFO      Other options:                 ['shallow', 'new']
+06.03.2018 18:14:27 INFO      Base directory:                /home/jb6504/higgs_inference
+06.03.2018 18:14:27 INFO      ML-based strategies available: True
+06.03.2018 18:14:27 INFO    Starting parameterized inference
+06.03.2018 18:14:27 INFO    Main settings:
+06.03.2018 18:14:27 INFO      Algorithm:                carl
+06.03.2018 18:14:27 INFO      Morphing-aware:           False
+06.03.2018 18:14:27 INFO      Training sample:          baseline
+06.03.2018 18:14:27 INFO    Options:
+06.03.2018 18:14:27 INFO      Number of hidden layers:  2
+06.03.2018 18:14:27 INFO      Batch size:               128
+06.03.2018 18:14:27 INFO      Learning rate:            0.001
+06.03.2018 18:14:27 INFO      Learning rate decay:      0.0921034037198
+06.03.2018 18:14:27 INFO      Number of epochs:         50
+06.03.2018 18:14:27 INFO      Debug mode:               False
+Traceback (most recent call last):
+  File "experiments.py", line 146, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 218, in parameterized_inference
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'

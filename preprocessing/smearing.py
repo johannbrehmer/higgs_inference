@@ -527,6 +527,8 @@ parser.add_argument("-x", "--roam", action="store_true",
                     help="Smear roaming evaluation sample")
 parser.add_argument("--dry", action="store_true",
                     help="Don't save results")
+parser.add_argument("--new", action="store_true",
+                    help="Apply to new generation of samples")
 
 args = parser.parse_args()
 
@@ -541,39 +543,42 @@ logging.info('  Neyman construction:     %s', args.neyman)
 logging.info('  Roaming:                 %s', args.roam)
 logging.info('Options:')
 logging.info('  Dry run:                 %s', args.dry)
+logging.info('  New samples:             %s', args.new)
 
 ################################################################################
 # Go!
 ################################################################################
 
+suffix = '_new' if args.new else ''
+
 if args.train:
-    apply_smearing('train', args.dry)
+    apply_smearing('train' + suffix, args.dry)
 
 if args.basis:
-    apply_smearing('train_basis', args.dry)
+    apply_smearing('train_basis' + suffix, args.dry)
 
 if args.pointbypoint:
     for t in settings.pbp_training_thetas:
-        apply_smearing('train_point_by_point_' + str(t), args.dry)
+        apply_smearing('train_point_by_point_' + str(t) + suffix, args.dry)
 
 if args.random:
-    apply_smearing('train_random', args.dry)
+    apply_smearing('train_random' + suffix, args.dry)
 
 if args.scoreregression:
-    apply_smearing('train_scoreregression', args.dry)
+    apply_smearing('train_scoreregression' + suffix, args.dry)
 
 if args.calibration:
-    apply_smearing('calibration', args.dry)
+    apply_smearing('calibration' + suffix, args.dry)
 
 if args.test:
-    apply_smearing('test', args.dry)
+    apply_smearing('test' + suffix, args.dry)
 
 if args.neyman:
-    apply_smearing('neyman_observed', args.dry)
+    apply_smearing('neyman_observed' + suffix, args.dry)
     for t in range(settings.n_thetas):
-        apply_smearing('neyman_distribution_' + str(t), args.dry)
+        apply_smearing('neyman_distribution_' + str(t) + suffix, args.dry)
 
 if args.roam:
-    apply_smearing('roam', args.dry)
+    apply_smearing('roam' + suffix, args.dry)
 
 logging.info("That's it!")
