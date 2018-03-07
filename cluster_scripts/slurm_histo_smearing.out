@@ -1,21 +1,21 @@
-06.03.2018 15:51:53 INFO    Hi! How are you today?
-06.03.2018 15:51:53 INFO    Startup options:
-06.03.2018 15:51:53 INFO      Algorithm:                     histo
-06.03.2018 15:51:53 INFO      Point by point:                False
-06.03.2018 15:51:53 INFO      Morphing-aware mode:           False
-06.03.2018 15:51:53 INFO      Smeared data:                  True
-06.03.2018 15:51:53 INFO      Training sample:               baseline
-06.03.2018 15:51:53 INFO      alpha:                         None
-06.03.2018 15:51:53 INFO      Histogram / AFC X indices:     [1, 41]
-06.03.2018 15:51:53 INFO      AFC epsilon:                   None
-06.03.2018 15:51:53 INFO      Neyman construction toys:      True
-06.03.2018 15:51:53 INFO      Other options:                 ['new']
-06.03.2018 15:51:53 INFO      Base directory:                /home/jb6504/higgs_inference
-06.03.2018 15:51:53 INFO      ML-based strategies available: False
-06.03.2018 15:51:53 INFO    Starting histogram-based inference
-06.03.2018 15:51:53 INFO    Settings:
-06.03.2018 15:51:53 INFO      Statistics:              x [1, 41]
-06.03.2018 15:51:53 INFO      Binning:                 optimized
+06.03.2018 23:16:27 INFO    Hi! How are you today?
+06.03.2018 23:16:27 INFO    Startup options:
+06.03.2018 23:16:27 INFO      Algorithm:                     histo
+06.03.2018 23:16:27 INFO      Point by point:                False
+06.03.2018 23:16:27 INFO      Morphing-aware mode:           False
+06.03.2018 23:16:27 INFO      Smeared data:                  True
+06.03.2018 23:16:27 INFO      Training sample:               baseline
+06.03.2018 23:16:27 INFO      alpha:                         None
+06.03.2018 23:16:27 INFO      Histogram / AFC X indices:     [1, 41]
+06.03.2018 23:16:27 INFO      AFC epsilon:                   None
+06.03.2018 23:16:27 INFO      Neyman construction toys:      False
+06.03.2018 23:16:27 INFO      Other options:                 ['new']
+06.03.2018 23:16:27 INFO      Base directory:                /home/jb6504/higgs_inference
+06.03.2018 23:16:27 INFO      ML-based strategies available: False
+06.03.2018 23:16:27 INFO    Starting histogram-based inference
+06.03.2018 23:16:27 INFO    Settings:
+06.03.2018 23:16:27 INFO      Statistics:              x [1, 41]
+06.03.2018 23:16:27 INFO      Binning:                 optimized
 Traceback (most recent call last):
   File "experiments.py", line 116, in <module>
     options=args.options)
@@ -24,24 +24,24 @@ Traceback (most recent call last):
   File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
     fid = open(file, "rb")
 IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
-06.03.2018 15:51:55 INFO    Hi! How are you today?
-06.03.2018 15:51:55 INFO    Startup options:
-06.03.2018 15:51:55 INFO      Algorithm:                     histo
-06.03.2018 15:51:55 INFO      Point by point:                False
-06.03.2018 15:51:55 INFO      Morphing-aware mode:           False
-06.03.2018 15:51:55 INFO      Smeared data:                  True
-06.03.2018 15:51:55 INFO      Training sample:               baseline
-06.03.2018 15:51:55 INFO      alpha:                         None
-06.03.2018 15:51:55 INFO      Histogram / AFC X indices:     [1]
-06.03.2018 15:51:55 INFO      AFC epsilon:                   None
-06.03.2018 15:51:55 INFO      Neyman construction toys:      True
-06.03.2018 15:51:55 INFO      Other options:                 ['new']
-06.03.2018 15:51:55 INFO      Base directory:                /home/jb6504/higgs_inference
-06.03.2018 15:51:55 INFO      ML-based strategies available: False
-06.03.2018 15:51:55 INFO    Starting histogram-based inference
-06.03.2018 15:51:55 INFO    Settings:
-06.03.2018 15:51:55 INFO      Statistics:              x [1]
-06.03.2018 15:51:55 INFO      Binning:                 optimized
+06.03.2018 23:16:29 INFO    Hi! How are you today?
+06.03.2018 23:16:29 INFO    Startup options:
+06.03.2018 23:16:29 INFO      Algorithm:                     histo
+06.03.2018 23:16:29 INFO      Point by point:                False
+06.03.2018 23:16:29 INFO      Morphing-aware mode:           False
+06.03.2018 23:16:29 INFO      Smeared data:                  True
+06.03.2018 23:16:29 INFO      Training sample:               baseline
+06.03.2018 23:16:29 INFO      alpha:                         None
+06.03.2018 23:16:29 INFO      Histogram / AFC X indices:     [1]
+06.03.2018 23:16:29 INFO      AFC epsilon:                   None
+06.03.2018 23:16:29 INFO      Neyman construction toys:      False
+06.03.2018 23:16:29 INFO      Other options:                 ['new']
+06.03.2018 23:16:29 INFO      Base directory:                /home/jb6504/higgs_inference
+06.03.2018 23:16:29 INFO      ML-based strategies available: False
+06.03.2018 23:16:29 INFO    Starting histogram-based inference
+06.03.2018 23:16:29 INFO    Settings:
+06.03.2018 23:16:29 INFO      Statistics:              x [1]
+06.03.2018 23:16:29 INFO      Binning:                 optimized
 Traceback (most recent call last):
   File "experiments.py", line 116, in <module>
     options=args.options)
@@ -50,24 +50,24 @@ Traceback (most recent call last):
   File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
     fid = open(file, "rb")
 IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/smeared_X_neyman_observed.npy'
-06.03.2018 15:51:56 INFO    Hi! How are you today?
-06.03.2018 15:51:56 INFO    Startup options:
-06.03.2018 15:51:56 INFO      Algorithm:                     histo
-06.03.2018 15:51:56 INFO      Point by point:                False
-06.03.2018 15:51:56 INFO      Morphing-aware mode:           False
-06.03.2018 15:51:56 INFO      Smeared data:                  True
-06.03.2018 15:51:56 INFO      Training sample:               baseline
-06.03.2018 15:51:56 INFO      alpha:                         None
-06.03.2018 15:51:56 INFO      Histogram / AFC X indices:     [41]
-06.03.2018 15:51:56 INFO      AFC epsilon:                   None
-06.03.2018 15:51:56 INFO      Neyman construction toys:      True
-06.03.2018 15:51:56 INFO      Other options:                 ['new']
-06.03.2018 15:51:56 INFO      Base directory:                /home/jb6504/higgs_inference
-06.03.2018 15:51:56 INFO      ML-based strategies available: False
-06.03.2018 15:51:56 INFO    Starting histogram-based inference
-06.03.2018 15:51:56 INFO    Settings:
-06.03.2018 15:51:56 INFO      Statistics:              x [41]
-06.03.2018 15:51:56 INFO      Binning:                 optimized
+06.03.2018 23:16:30 INFO    Hi! How are you today?
+06.03.2018 23:16:30 INFO    Startup options:
+06.03.2018 23:16:30 INFO      Algorithm:                     histo
+06.03.2018 23:16:30 INFO      Point by point:                False
+06.03.2018 23:16:30 INFO      Morphing-aware mode:           False
+06.03.2018 23:16:30 INFO      Smeared data:                  True
+06.03.2018 23:16:30 INFO      Training sample:               baseline
+06.03.2018 23:16:30 INFO      alpha:                         None
+06.03.2018 23:16:30 INFO      Histogram / AFC X indices:     [41]
+06.03.2018 23:16:30 INFO      AFC epsilon:                   None
+06.03.2018 23:16:30 INFO      Neyman construction toys:      False
+06.03.2018 23:16:30 INFO      Other options:                 ['new']
+06.03.2018 23:16:30 INFO      Base directory:                /home/jb6504/higgs_inference
+06.03.2018 23:16:30 INFO      ML-based strategies available: False
+06.03.2018 23:16:30 INFO    Starting histogram-based inference
+06.03.2018 23:16:30 INFO    Settings:
+06.03.2018 23:16:30 INFO      Statistics:              x [41]
+06.03.2018 23:16:30 INFO      Binning:                 optimized
 Traceback (most recent call last):
   File "experiments.py", line 116, in <module>
     options=args.options)

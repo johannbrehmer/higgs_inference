@@ -19,16 +19,16 @@ def calculate_median_p_value(llr_distribution, llr_observed):
     # Check for NaNs
     nans_distribution = np.sum(np.isnan(distribution))
     nans_observed = np.sum(np.isnan(llr_observed))
-    if nans_distribution + nans_observed > 0:
-        logging.debug('Found %s NaNs in null hypothesis and %s NaNs in alternate hypothesis', nans_distribution,
-                        nans_observed)
+    #if nans_distribution + nans_observed > 0:
+    #    logging.debug('Found %s NaNs in null hypothesis and %s NaNs in alternate hypothesis', nans_distribution,
+    #                    nans_observed)
 
     p_values_left = 1. - np.searchsorted(distribution, llr_observed, side='left').astype('float') / len(distribution)
     p_values_right = 1. - np.searchsorted(distribution, llr_observed, side='right').astype('float') / len(distribution)
     p_values = 0.5 * (p_values_left + p_values_right)
 
     # Some things Kyle suggested
-    q_cut_index = settings.confidence_limit * settings.n_neyman_distribution_experiments - 1
+    q_cut_index = int(settings.confidence_limit * settings.n_neyman_distribution_experiments - 1)
     q_cut = (distribution[q_cut_index] + distribution[q_cut_index + 1]) / 2
     q_cut_uncertainty = (distribution[q_cut_index + 1] - distribution[q_cut_index]) / 2
     q_median = np.median(llr_observed)
@@ -224,7 +224,7 @@ def calculate_all_CL():
     calculate_CL('histo', '_2d_new', 'histo')
     calculate_CL('scoreregression_score', '', 'score_regression')
     calculate_CL('carl', '_shallow_new', 'parameterized')
-    calculate_CL('combined', 'deep_new', 'parameterized')
+    calculate_CL('combined', '_deep_new', 'parameterized')
     calculate_CL('regression', '_new', 'parameterized')
     calculate_CL('combinedregression', '_deep_new', 'parameterized')
     
