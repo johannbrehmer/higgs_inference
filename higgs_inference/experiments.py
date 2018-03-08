@@ -99,7 +99,7 @@ assert args.training in ['baseline', 'basis', 'random']
 
 # Start calculation
 if args.algorithm in ['p', 'cl', 'pvalues']:
-    calculate_all_CL()
+    calculate_all_CL(options=args.options)
 
 elif args.algorithm == 'truth':
     truth_inference(do_neyman=args.neyman,

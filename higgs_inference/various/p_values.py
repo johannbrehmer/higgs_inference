@@ -74,7 +74,7 @@ def subtract_mle(filename, filename_suffix, folder, neyman2_mode=False):
             files_found += 1
 
         except IOError as err:
-            # logging.debug("Error loading file: %s", err)
+            logging.debug("Error loading file: %s", err)
             # logging.debug("Didn't find file %s", neyman_dir + '/neyman_llr_distribution_' + filename + '_' + str(t) + '.npy')
 
             placeholder = np.empty((settings.n_thetas, n_neyman_distribution_experiments))
@@ -101,7 +101,7 @@ def subtract_mle(filename, filename_suffix, folder, neyman2_mode=False):
             files_found += 1
 
         except IOError as err:
-            # ("Error loading file: %s", err)
+            logging.debug("Error loading file: %s", err)
             # logging.debug("Didn't find file %s", neyman_dir + '/neyman_llr_observed_' + filename + '_' + str(t) + '.npy')
 
             placeholder = np.empty(n_neyman_observed_experiments)
@@ -193,8 +193,7 @@ def calculate_CL(filename, filename_suffix, folder, neyman2_mode=False):
             t] = calculate_median_p_value(llr_compared_to_mle_distributions[t, :],
                                           llr_compared_to_mle_observeds[t, :])
 
-    np.save(result_dir + '/p_values_' + filename + filename_suffix + '.npy', p_values_mle)
-
+    np.save(result_dir + '/' + neyman_filename + '_pvalues_' + filename + filename_suffix + '.npy', p_values_mle)
     np.save(result_dir + '/' + neyman_filename + '_qcut_' + filename + filename_suffix + '.npy', q_cut_values_mle)
     np.save(result_dir + '/' + neyman_filename + '_qcut_uncertainties_' + filename + filename_suffix + '.npy',
             q_cut_uncertainties_mle)

@@ -46,6 +46,8 @@ def truth_inference(do_neyman=False,
         n_neyman_distribution_experiments = settings.n_neyman2_distribution_experiments
         n_neyman_observed_experiments = settings.n_neyman2_observed_experiments
 
+    logging.debug('NC settings: %s %s %s %s %s', neyman2_mode, neyman_filename, n_expected_events_neyman, n_neyman_distribution_experiments, n_neyman_observed_experiments)
+
     ################################################################################
     # Data
     ################################################################################

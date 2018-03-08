@@ -4,7 +4,7 @@
 #SBATCH --output=slurm_p_values.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=32GB
+#SBATCH --mem=125GB
 #SBATCH --time=4:00:00
 # #SBATCH --gres=gpu:1
 
@@ -18,4 +18,4 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py cl
+python -u experiments.py cl -o neyman2

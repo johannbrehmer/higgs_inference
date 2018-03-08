@@ -1,22 +1,217 @@
-26.02.2018 07:00:51 INFO    Hi! How are you today?
-26.02.2018 07:00:51 INFO    Startup options:
-26.02.2018 07:00:51 INFO      Algorithm:                     truth
-26.02.2018 07:00:51 INFO      Point by point:                False
-26.02.2018 07:00:51 INFO      Morphing-aware mode:           False
-26.02.2018 07:00:51 INFO      Smeared data:                  False
-26.02.2018 07:00:51 INFO      Training sample:               baseline
-26.02.2018 07:00:51 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-26.02.2018 07:00:51 INFO      alpha:                         None
-26.02.2018 07:00:51 INFO      AFC epsilon:                   None
-26.02.2018 07:00:51 INFO      Neyman construction toys:      True
-26.02.2018 07:00:51 INFO      Other options:                 
-26.02.2018 07:00:51 INFO      Base directory:                /home/jb6504/higgs_inference
-26.02.2018 07:00:51 INFO      ML-based strategies available: False
-26.02.2018 07:00:51 INFO    Starting truth calculation
-26.02.2018 07:00:56 INFO    Starting evaluation
-26.02.2018 07:00:58 INFO    Starting roaming
-26.02.2018 07:04:09 INFO    Calculating cross-entropy on train set
-26.02.2018 07:04:10 INFO    Training cross-entropy: 0.657932534292
-26.02.2018 07:04:10 INFO    Starting evaluation of Neyman experiments
-27.02.2018 19:32:15 INFO    That's it -- have a great day!
-/opt/slurm/data/slurmd/job4664020/slurm_script: line 21: 12495 Bus error               (core dumped) python -u experiments.py truth --neyman
+07.03.2018 11:57:16 INFO    Hi! How are you today?
+07.03.2018 11:57:16 INFO    Startup options:
+07.03.2018 11:57:16 INFO      Algorithm:                     truth
+07.03.2018 11:57:16 INFO      Point by point:                False
+07.03.2018 11:57:16 INFO      Morphing-aware mode:           False
+07.03.2018 11:57:16 INFO      Smeared data:                  False
+07.03.2018 11:57:16 INFO      Training sample:               baseline
+07.03.2018 11:57:16 INFO      alpha:                         None
+07.03.2018 11:57:16 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+07.03.2018 11:57:16 INFO      AFC epsilon:                   None
+07.03.2018 11:57:16 INFO      Neyman construction toys:      True
+07.03.2018 11:57:16 INFO      Other options:                 ['neyman2']
+07.03.2018 11:57:16 INFO      Base directory:                /home/jb6504/higgs_inference
+07.03.2018 11:57:16 INFO      ML-based strategies available: False
+07.03.2018 11:57:16 INFO    Starting truth calculation
+07.03.2018 11:57:16 DEBUG    NC settings: True neyman2 12 2500 1001
+07.03.2018 11:57:22 INFO    Starting evaluation
+07.03.2018 11:57:27 INFO    Starting roaming
+07.03.2018 11:59:47 INFO    Calculating cross-entropy on train set
+07.03.2018 11:59:48 INFO    Training cross-entropy: 0.657932534292
+07.03.2018 11:59:48 INFO    Starting evaluation of Neyman experiments
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: stepd_api message engine pthread_create: Cannot allocate memory
+slurmstepd: error: running handle_accept without starting a thread stepd will be unresponsive until done

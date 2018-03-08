@@ -1,40 +1,44 @@
-07.03.2018 08:42:44 INFO    Hi! How are you today?
-07.03.2018 08:42:44 INFO    Startup options:
-07.03.2018 08:42:44 INFO      Algorithm:                     cl
-07.03.2018 08:42:44 INFO      Point by point:                False
-07.03.2018 08:42:44 INFO      Morphing-aware mode:           False
-07.03.2018 08:42:44 INFO      Smeared data:                  False
-07.03.2018 08:42:44 INFO      Training sample:               baseline
-07.03.2018 08:42:44 INFO      alpha:                         None
-07.03.2018 08:42:44 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-07.03.2018 08:42:44 INFO      AFC epsilon:                   None
-07.03.2018 08:42:44 INFO      Neyman construction toys:      False
-07.03.2018 08:42:44 INFO      Other options:                 
-07.03.2018 08:42:44 INFO      Base directory:                /home/jb6504/higgs_inference
-07.03.2018 08:42:44 INFO      ML-based strategies available: False
-07.03.2018 08:42:44 INFO    Starting p-value calculation
-07.03.2018 08:42:44 INFO    Subtracting MLE for truth truth
-07.03.2018 08:44:13 DEBUG    Found 2034 files, didn't find 0 files, found 0 files with wrong shape
-07.03.2018 08:44:54 INFO    Calculating p-values for truth truth
-07.03.2018 08:44:55 INFO    Subtracting MLE for histo histo_2d_new
-07.03.2018 08:45:06 DEBUG    Found 194 files, didn't find 1840 files, found 0 files with wrong shape
-07.03.2018 08:45:46 INFO    Calculating p-values for histo histo_2d_new
-/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/function_base.py:3569: RuntimeWarning: Invalid value encountered in median
-  RuntimeWarning)
-07.03.2018 08:45:46 INFO    Subtracting MLE for score_regression scoreregression_score
-07.03.2018 08:47:14 DEBUG    Found 2034 files, didn't find 0 files, found 0 files with wrong shape
-07.03.2018 08:48:02 INFO    Calculating p-values for score_regression scoreregression_score
-07.03.2018 08:48:02 INFO    Subtracting MLE for parameterized carl_shallow_new
-07.03.2018 08:49:26 DEBUG    Found 2034 files, didn't find 0 files, found 0 files with wrong shape
-07.03.2018 08:50:13 INFO    Calculating p-values for parameterized carl_shallow_new
-07.03.2018 08:50:13 INFO    Subtracting MLE for parameterized combined_deep_new
-07.03.2018 08:51:45 DEBUG    Found 2034 files, didn't find 0 files, found 0 files with wrong shape
-07.03.2018 08:52:32 INFO    Calculating p-values for parameterized combined_deep_new
-07.03.2018 08:52:32 INFO    Subtracting MLE for parameterized regression_new
-07.03.2018 08:53:54 DEBUG    Found 2034 files, didn't find 0 files, found 0 files with wrong shape
-07.03.2018 08:54:41 INFO    Calculating p-values for parameterized regression_new
-07.03.2018 08:54:41 INFO    Subtracting MLE for parameterized combinedregression_deep_new
-07.03.2018 08:55:53 DEBUG    Found 1641 files, didn't find 393 files, found 0 files with wrong shape
-07.03.2018 08:56:38 INFO    Calculating p-values for parameterized combinedregression_deep_new
-07.03.2018 08:56:38 INFO    That's it -- have a great day!
-slurmstepd: error: Exceeded step memory limit at some point.
+07.03.2018 11:42:18 INFO    Hi! How are you today?
+07.03.2018 11:42:18 INFO    Startup options:
+07.03.2018 11:42:18 INFO      Algorithm:                     cl
+07.03.2018 11:42:18 INFO      Point by point:                False
+07.03.2018 11:42:18 INFO      Morphing-aware mode:           False
+07.03.2018 11:42:18 INFO      Smeared data:                  False
+07.03.2018 11:42:18 INFO      Training sample:               baseline
+07.03.2018 11:42:18 INFO      alpha:                         None
+07.03.2018 11:42:18 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+07.03.2018 11:42:18 INFO      AFC epsilon:                   None
+07.03.2018 11:42:18 INFO      Neyman construction toys:      False
+07.03.2018 11:42:18 INFO      Other options:                 ['neyman2']
+07.03.2018 11:42:18 INFO      Base directory:                /home/jb6504/higgs_inference
+07.03.2018 11:42:18 INFO      ML-based strategies available: False
+07.03.2018 11:42:18 INFO    Starting p-value calculation
+07.03.2018 11:42:18 INFO    Subtracting MLE for truth truth
+07.03.2018 11:42:28 DEBUG    Found 0 files, didn't find 2034 files, found 0 files with wrong shape
+07.03.2018 11:42:53 WARNING    Insufficient data to find MLEs for null
+07.03.2018 11:43:05 DEBUG    NaNs distributions:
+[[ True  True  True ...,  True  True  True]
+ [ True  True  True ...,  True  True  True]
+ [ True  True  True ...,  True  True  True]
+ ..., 
+ [ True  True  True ...,  True  True  True]
+ [ True  True  True ...,  True  True  True]
+ [ True  True  True ...,  True  True  True]]
+07.03.2018 11:43:05 DEBUG    NaNs observed:
+[ True  True  True ...,  True  True  True]
+07.03.2018 11:43:05 WARNING    Insufficient data to find MLEs for alternate
+07.03.2018 11:43:15 DEBUG    NaNs distributions:
+[[ True  True  True ...,  True  True  True]
+ [ True  True  True ...,  True  True  True]
+ [ True  True  True ...,  True  True  True]
+ ..., 
+ [ True  True  True ...,  True  True  True]
+ [ True  True  True ...,  True  True  True]
+ [ True  True  True ...,  True  True  True]]
+07.03.2018 11:43:15 DEBUG    NaNs observed:
+[ True  True  True ...,  True  True  True]
+07.03.2018 11:43:15 WARNING    Error in MLE subtraction, skipping set
+07.03.2018 11:43:17 INFO    Subtracting MLE for histo histo_2d_new
+07.03.2018 11:43:41 DEBUG    Found 194 files, didn't find 1840 files, found 0 files with wrong shape
+/opt/slurm/data/slurmd/job4805067/slurm_script: line 21: 146448 Killed                  python -u experiments.py cl -o neyman2
+slurmstepd: error: Exceeded job memory limit at some point.
