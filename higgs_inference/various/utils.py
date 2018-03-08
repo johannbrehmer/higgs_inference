@@ -6,7 +6,7 @@ from __future__ import absolute_import, division, print_function
 
 import numpy as np
 from scipy.interpolate import LinearNDInterpolator, CloughTocher2DInterpolator
-from scipy.stats import trim_mean
+from scipy.stats import trim_mean, ncx2, chi2
 from sklearn.metrics import mean_squared_error
 
 try:
@@ -151,3 +151,14 @@ def interpolate(thetas, z_thetas,
         zi -= zi[mle]
 
     return zi, mle
+
+
+################################################################################
+# Interpolation
+################################################################################
+
+def asymptotic_p_value(asimov_q):
+    median_q = ncx2.ppf(0.5, df=2, nc=max(0.,asimov_q))
+    median_p_value = chi2.sf(median_q, df=2)
+    return median_p_value
+
