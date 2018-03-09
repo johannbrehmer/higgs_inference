@@ -635,7 +635,10 @@ if args.neyman:
     logging.info('Generating Neyman construction samples')
 
 
-    def generate_data_neyman(theta_observed, n_toy_experiments, theta1, theta_score):
+    def generate_data_neyman(theta_observed, n_toy_experiments, theta1, theta_score, thetas_r=None):
+
+        if thetas_r == None:
+            thetas_r = list(range(settings.n_thetas))
 
         indices = np.random.choice(list(range(n_events_test)), n_toy_experiments * settings.n_expected_events_neyman,
                                    p=weights_test[theta_observed])
@@ -648,8 +651,8 @@ if args.neyman:
         X = np.asarray(weighted_data_test.iloc[indices, subset_features])
 
         r = np.zeros((settings.n_thetas, n_toy_experiments * settings.n_expected_events_neyman))
-        for t in range(settings.n_thetas):
-            r[t, :] = np.array(weights_test[t][indices] / weights_test[theta1][indices])
+        for i, t in enumerate(thetas_r):
+            r[i, :] = np.array(weights_test[t][indices] / weights_test[theta1][indices])
 
         # Scores for score regression / local model
         labels_scores = ["score_theta_" + str(theta_score) + "_0", "score_theta_" + str(theta_score) + "_1"]
@@ -683,7 +686,8 @@ if args.neyman:
     # Distribution
     for t, theta in enumerate(thetas):
         X, r, scores = generate_data_neyman(t, settings.n_neyman_null_experiments, theta1,
-                                            settings.theta_score_regression)
+                                            settings.theta_score_regression,
+                                            thetas_r=[settings.theta_observed, t])
 
         logging.info('Generated %s toy experiments with %s events each for the null according to theta = %s',
                      X.shape[0], X.shape[1], theta)
