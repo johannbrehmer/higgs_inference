@@ -650,7 +650,7 @@ if args.neyman:
 
         X = np.asarray(weighted_data_test.iloc[indices, subset_features])
 
-        r = np.zeros((settings.n_thetas, n_toy_experiments * settings.n_expected_events_neyman))
+        r = np.zeros((len(thetas_r), n_toy_experiments * settings.n_expected_events_neyman))
         for i, t in enumerate(thetas_r):
             r[i, :] = np.array(weights_test[t][indices] / weights_test[theta1][indices])
 
