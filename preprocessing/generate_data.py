@@ -676,6 +676,8 @@ if args.neyman:
         np.save(settings.unweighted_events_dir + '/r_neyman_alternate' + filename_addition + '.npy', r)
         np.save(settings.unweighted_events_dir + '/scores_neyman_alternate' + filename_addition + '.npy', scores)
 
+    logging.debug('Memory consumption: X = %s GB, r = %s GB, t = %s GB', X.nbytes * 1.e-6, r.nbytes * 1.e-6, scores.nbytes * 1.e-6)
+
     del X, r, scores
 
     # Distribution
@@ -692,6 +694,8 @@ if args.neyman:
             np.save(
                 settings.unweighted_events_dir + '/scores_neyman_null_' + str(t) + filename_addition + '.npy',
                 scores)
+
+        logging.debug('Memory consumption: X = %s GB, r = %s GB, t = %s GB', X.nbytes * 1.e-6, r.nbytes * 1.e-6, scores.nbytes * 1.e-6)
 
         del X, r, scores
 
