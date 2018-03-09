@@ -12,7 +12,7 @@ from scipy.interpolate import LinearNDInterpolator
 from carl.learning.calibration import NDHistogramCalibrator
 
 from higgs_inference import settings
-from higgs_inference.various.utils import decide_toy_evaluation, calculate_mean_squared_error, r_from_s
+from higgs_inference.various.utils import calculate_mean_squared_error, r_from_s
 
 
 def histo_inference(indices_X=None,
@@ -101,14 +101,10 @@ def histo_inference(indices_X=None,
         filename_addition += '_new'
 
     n_expected_events_neyman = settings.n_expected_events_neyman
-    n_neyman_distribution_experiments = settings.n_neyman_distribution_experiments
-    n_neyman_observed_experiments = settings.n_neyman_observed_experiments
     neyman_filename = 'neyman'
     if neyman2_mode:
         neyman_filename = 'neyman2'
         n_expected_events_neyman = settings.n_expected_events_neyman2
-        n_neyman_distribution_experiments = settings.n_neyman2_distribution_experiments
-        n_neyman_observed_experiments = settings.n_neyman2_observed_experiments
 
     results_dir = settings.base_dir + '/results/histo'
     neyman_dir = settings.neyman_dir + '/histo'
@@ -125,8 +121,8 @@ def histo_inference(indices_X=None,
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
 
-    X_neyman_observed = np.load(
-        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_observed.npy')
+    X_neyman_alternate = np.load(
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_alternate.npy')
     n_events_test = X_test.shape[0]
 
     ################################################################################
@@ -203,49 +199,66 @@ def histo_inference(indices_X=None,
         ################################################################################
 
         if do_neyman:
-            # Neyman construction: prepare observed data and construct summary statistics
-            summary_statistics_neyman_observed = X_neyman_observed.reshape((-1, X_neyman_observed.shape[2]))
-            summary_statistics_neyman_observed = summary_statistics_neyman_observed[:, indices_X]
+            # Neyman construction: prepare alternate data and construct summary statistics
+            summary_statistics_neyman_alternate = X_neyman_alternate.reshape((-1, X_neyman_alternate.shape[2]))
+            summary_statistics_neyman_alternate = summary_statistics_neyman_alternate[:, indices_X]
 
-            # Neyman construction: evaluate observed sample
-            s_hat_neyman_observed = histogram.predict(summary_statistics_neyman_observed)
-            log_r_hat_neyman_observed = np.log(r_from_s(s_hat_neyman_observed))
-            log_r_hat_neyman_observed = log_r_hat_neyman_observed.reshape((-1, n_expected_events_neyman))
+            # Neyman construction: evaluate alternate sample
+            s_hat_neyman_alternate = histogram.predict(summary_statistics_neyman_alternate)
+            log_r_hat_neyman_alternate = np.log(r_from_s(s_hat_neyman_alternate))
+            log_r_hat_neyman_alternate = log_r_hat_neyman_alternate.reshape((-1, n_expected_events_neyman))
 
-            llr_neyman_observed = -2. * np.sum(log_r_hat_neyman_observed, axis=1)
+            llr_neyman_alternate = -2. * np.sum(log_r_hat_neyman_alternate, axis=1)
             np.save(
-                neyman_dir + '/' + neyman_filename + '_llr_observed_histo' + '_' + str(t) + filename_addition + '.npy',
-                llr_neyman_observed)
+                neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_histo' + filename_addition + '.npy',
+                llr_neyman_alternate)
 
-            # Neyman construction: loop over distribution samples generated from different thetas
-            llr_neyman_distributions = []
-            for tt in range(settings.n_thetas):
+            # # Neyman construction: old null
+            # llr_neyman_nulls = []
+            # for tt in range(settings.n_thetas):
+            #
+            #     # Only evaluate certain combinations of thetas to save computation time
+            #     if not decide_toy_evaluation(tt, t):
+            #         placeholder = np.empty(n_neyman_null_experiments)
+            #         placeholder[:] = np.nan
+            #         llr_neyman_nulls.append(placeholder)
+            #         continue
+            #
+            #     # Neyman construction: load null sample and construct summary statistics
+            #     X_neyman_null = np.load(
+            #         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
+            #             tt) + '.npy')
+            #     summary_statistics_neyman_null = X_neyman_null.reshape(
+            #         (-1, X_neyman_null.shape[2]))[:, indices_X]
+            #
+            #     # Evaluation
+            #     s_hat_neyman_null = histogram.predict(summary_statistics_neyman_null)
+            #     log_r_hat_neyman_null = np.log(r_from_s(s_hat_neyman_null))
+            #     log_r_hat_neyman_null = log_r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
+            #
+            #     llr_neyman_nulls.append(-2. * np.sum(log_r_hat_neyman_null, axis=1))
+            #
+            # llr_neyman_nulls = np.asarray(llr_neyman_nulls)
+            # np.save(neyman_dir + '/' + neyman_filename + '_llr_null_histo' + '_' + str(
+            #     t) + filename_addition + '.npy',
+            #         llr_neyman_nulls)
 
-                # Only evaluate certain combinations of thetas to save computation time
-                if not decide_toy_evaluation(tt, t):
-                    placeholder = np.empty(n_neyman_distribution_experiments)
-                    placeholder[:] = np.nan
-                    llr_neyman_distributions.append(placeholder)
-                    continue
+            # Neyman construction: null
+            X_neyman_null = np.load(
+                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
+                    t) + '.npy')
+            summary_statistics_neyman_null = X_neyman_null.reshape(
+                (-1, X_neyman_null.shape[2]))[:, indices_X]
 
-                # Neyman construction: load distribution sample and construct summary statistics
-                X_neyman_distribution = np.load(
-                    settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_distribution_' + str(
-                        tt) + '.npy')
-                summary_statistics_neyman_distribution = X_neyman_distribution.reshape(
-                    (-1, X_neyman_distribution.shape[2]))[:, indices_X]
+            # Evaluation
+            s_hat_neyman_null = histogram.predict(summary_statistics_neyman_null)
+            log_r_hat_neyman_null = np.log(r_from_s(s_hat_neyman_null))
+            log_r_hat_neyman_null = log_r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
+            llr_neyman_null = -2. * np.sum(log_r_hat_neyman_null, axis=1)
 
-                # Evaluation
-                s_hat_neyman_distribution = histogram.predict(summary_statistics_neyman_distribution)
-                log_r_hat_neyman_distribution = np.log(r_from_s(s_hat_neyman_distribution))
-                log_r_hat_neyman_distribution = log_r_hat_neyman_distribution.reshape((-1, n_expected_events_neyman))
-
-                llr_neyman_distributions.append(-2. * np.sum(log_r_hat_neyman_distribution, axis=1))
-
-            llr_neyman_distributions = np.asarray(llr_neyman_distributions)
-            np.save(neyman_dir + '/' + neyman_filename + '_llr_distribution_histo' + '_' + str(
-                t) + filename_addition + '.npy',
-                    llr_neyman_distributions)
+            np.save(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(
+                t) + '_histo' + '_' + filename_addition + '.npy',
+                    llr_neyman_null)
 
     # Interpolate and save evaluation results
     expected_llr = np.asarray(expected_llr)

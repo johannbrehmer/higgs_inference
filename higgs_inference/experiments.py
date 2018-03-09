@@ -20,7 +20,7 @@ except ImportError:
     sys.path.append(base_dir)
     from higgs_inference import settings
 
-from higgs_inference.various.p_values import calculate_all_CL
+from higgs_inference.various.p_values import start_cl_calculation
 from higgs_inference.strategies.truth import truth_inference
 from higgs_inference.strategies.local_model import local_model_truth_inference
 from higgs_inference.strategies.afc import afc_inference
@@ -99,7 +99,7 @@ assert args.training in ['baseline', 'basis', 'random']
 
 # Start calculation
 if args.algorithm in ['p', 'cl', 'pvalues']:
-    calculate_all_CL(options=args.options)
+    start_cl_calculation(options=args.options)
 
 elif args.algorithm == 'truth':
     truth_inference(do_neyman=args.neyman,

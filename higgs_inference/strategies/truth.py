@@ -11,7 +11,7 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import ConstantKernel as C, Matern
 
 from higgs_inference import settings
-from higgs_inference.various.utils import decide_toy_evaluation, s_from_r
+from higgs_inference.various.utils import s_from_r
 
 
 def truth_inference(do_neyman=False,
@@ -37,16 +37,17 @@ def truth_inference(do_neyman=False,
     results_dir = settings.base_dir + '/results/truth'
 
     n_expected_events_neyman = settings.n_expected_events_neyman
-    n_neyman_distribution_experiments = settings.n_neyman_distribution_experiments
-    n_neyman_observed_experiments = settings.n_neyman_observed_experiments
+    n_neyman_null_experiments = settings.n_neyman_null_experiments
+    n_neyman_alternate_experiments = settings.n_neyman_alternate_experiments
     neyman_filename = 'neyman'
     if neyman2_mode:
         neyman_filename = 'neyman2'
         n_expected_events_neyman = settings.n_expected_events_neyman2
-        n_neyman_distribution_experiments = settings.n_neyman2_distribution_experiments
-        n_neyman_observed_experiments = settings.n_neyman2_observed_experiments
+        n_neyman_null_experiments = settings.n_neyman2_null_experiments
+        n_neyman_alternate_experiments = settings.n_neyman2_alternate_experiments
 
-    logging.debug('NC settings: %s %s %s %s %s', neyman2_mode, neyman_filename, n_expected_events_neyman, n_neyman_distribution_experiments, n_neyman_observed_experiments)
+    logging.debug('NC settings: %s %s %s %s %s', neyman2_mode, neyman_filename, n_expected_events_neyman,
+                  n_neyman_null_experiments, n_neyman_alternate_experiments)
 
     ################################################################################
     # Data
@@ -55,7 +56,7 @@ def truth_inference(do_neyman=False,
     scores_test = np.load(settings.unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
     r_roam = np.load(settings.unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
-    r_neyman_observed = np.load(settings.unweighted_events_dir + '/r_' + neyman_filename + '_observed.npy')
+    r_neyman_alternate = np.load(settings.unweighted_events_dir + '/r_' + neyman_filename + '_alternate.npy')
 
     # To calculate cross entropy on train set
     s_train = s_from_r(np.load(settings.unweighted_events_dir + '/r_train' + input_filename_addition + '.npy'))
@@ -110,32 +111,33 @@ def truth_inference(do_neyman=False,
     if do_neyman:
         logging.info('Starting evaluation of Neyman experiments')
         for t in range(settings.n_thetas):
-
             # Alternate
-            llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed[t]), axis=1)
-            np.save(neyman_dir + '/' + neyman_filename + '_llr_observed_truth_' + str(t) + filename_addition + '.npy',
-                    llr_neyman_observed)
+            llr_neyman_alternate = -2. * np.sum(np.log(r_neyman_alternate[t]), axis=1)
+            np.save(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(
+                t) + '_truth_' + filename_addition + '.npy',
+                    llr_neyman_alternate)
 
             # # Old null distributions
-            # llr_neyman_distributions = []
+            # llr_neyman_nulls = []
             # for tt in range(settings.n_thetas):
             #
             #     # Only evaluate certain combinations of thetas to save computation time
             #     if not decide_toy_evaluation(tt, t):
-            #         placeholder = np.empty(n_neyman_distribution_experiments)
+            #         placeholder = np.empty(n_neyman_null_experiments)
             #         placeholder[:] = np.nan
-            #         llr_neyman_distributions.append(placeholder)
+            #         llr_neyman_nulls.append(placeholder)
             #         continue
             #
-            #     r_neyman_distribution = np.load(
-            #         settings.unweighted_events_dir + '/r_' + neyman_filename + '_distribution_' + str(tt) + '.npy')
-            #     llr_neyman_distributions.append(-2. * np.sum(np.log(r_neyman_distribution[t]), axis=1))
+            #     r_neyman_null = np.load(
+            #         settings.unweighted_events_dir + '/r_' + neyman_filename + '_null_' + str(tt) + '.npy')
+            #     llr_neyman_nulls.append(-2. * np.sum(np.log(r_neyman_null[t]), axis=1))
 
             # Null
-            r_neyman_distribution = np.load(
-                settings.unweighted_events_dir + '/r_' + neyman_filename + '_distribution_' + str(t) + '.npy')
-            llr_neyman_distributions = -2. * np.sum(np.log(r_neyman_distribution), axis=2)
+            r_neyman_null = np.load(
+                settings.unweighted_events_dir + '/r_' + neyman_filename + '_null_' + str(t) + '.npy')
+            llr_neyman_null = -2. * np.sum(np.log(r_neyman_null), axis=2)
 
             np.save(
-                neyman_dir + '/' + neyman_filename + '_llr_distribution_truth_' + str(t) + filename_addition + '.npy',
-                llr_neyman_distributions)
+                neyman_dir + '/' + neyman_filename + '_llr_null_' + str(t) + '_truth_' + str(
+                    t) + filename_addition + '.npy',
+                llr_neyman_null)

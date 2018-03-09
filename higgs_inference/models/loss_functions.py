@@ -17,8 +17,9 @@ def loss_function_carl(y_true, y_pred):
 
 
 def loss_function_ratio_regression(y_true, y_pred):
-    r_loss = losses.mean_squared_error(K.exp(K.clip(y_true[:, 1], -10., 10.)), K.exp(K.clip(y_pred[:, 1],-10., 10.)))
-    inverse_r_loss = losses.mean_squared_error(K.exp(-K.clip(y_true[:, 1], -10., 10.)), K.exp(-K.clip(y_pred[:, 1],-10., 10.)))
+    r_loss = losses.mean_squared_error(K.exp(K.clip(y_true[:, 1], -10., 10.)), K.exp(K.clip(y_pred[:, 1], -10., 10.)))
+    inverse_r_loss = losses.mean_squared_error(K.exp(-K.clip(y_true[:, 1], -10., 10.)),
+                                               K.exp(-K.clip(y_pred[:, 1], -10., 10.)))
 
     return y_true[:, 0] * r_loss + (1. - y_true[:, 0]) * inverse_r_loss
 

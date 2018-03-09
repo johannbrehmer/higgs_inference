@@ -40,7 +40,7 @@ def calculate_mean_squared_error(y_true, y_pred, trim='auto'):
     if trim_ == 'auto':
         trim_ = settings.trim_mean_fraction
 
-    if trim > 0.:
+    if trim_ > 0.:
         return trim_mean((y_true - y_pred) ** 2, trim_)
 
     return mean_squared_error(y_true, y_pred)
@@ -79,16 +79,16 @@ def format_number(number,
 # Decide if two a given Neyman toy experiment should be evaluated at a given theta
 ################################################################################
 
-def decide_toy_evaluation(theta_hypothesis, theta_evaluation, distance_threshold=0.5): # distance_threshold = 0.3 in old results
-    if theta_evaluation == theta_hypothesis:
-        return True
-
-    if theta_evaluation in settings.pbp_training_thetas:
-        return True
-
-    delta_theta = np.linalg.norm(settings.thetas[theta_hypothesis] - settings.thetas[theta_evaluation])
-
-    return (delta_theta <= distance_threshold)
+# def decide_toy_evaluation(theta_hypothesis, theta_evaluation, distance_threshold=0.5): # distance_threshold = 0.3 in old results
+#     if theta_evaluation == theta_hypothesis:
+#         return True
+#
+#     if theta_evaluation in settings.pbp_training_thetas:
+#         return True
+#
+#     delta_theta = np.linalg.norm(settings.thetas[theta_hypothesis] - settings.thetas[theta_evaluation])
+#
+#     return (delta_theta <= distance_threshold)
 
 
 ################################################################################
@@ -158,7 +158,6 @@ def interpolate(thetas, z_thetas,
 ################################################################################
 
 def asymptotic_p_value(asimov_q):
-    median_q = ncx2.ppf(0.5, df=2, nc=max(0.,asimov_q))
+    median_q = ncx2.ppf(0.5, df=2, nc=max(0., asimov_q))
     median_p_value = chi2.sf(median_q, df=2)
     return median_p_value
-

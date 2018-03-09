@@ -8,7 +8,6 @@ import logging
 import numpy as np
 
 from higgs_inference import settings
-from higgs_inference.various.utils import decide_toy_evaluation
 
 
 def local_model_truth_inference(do_neyman=False,
@@ -83,37 +82,37 @@ def local_model_truth_inference(do_neyman=False,
     expected_llr = np.asarray(expected_llr)
     np.save(results_dir + '/llr_localmodel' + filename_addition + '.npy', expected_llr)
 
-    # Neyman construction
-    if do_neyman:
-        logging.info('Starting evaluation of Neyman experiments')
-        for t, theta in enumerate(settings.thetas):
-
-            # Contract estimated scores with delta theta
-            delta_theta = theta - settings.thetas[theta1]
-
-            # Neyman construction: evaluate observed sample (raw)
-            tt_neyman_observed = scores_neyman_observed.dot(delta_theta)
-            llr_raw_neyman_observed = -2. * np.sum(tt_neyman_observed, axis=1)
-            np.save(neyman_dir + '/neyman_llr_observed_localmodel_' + str(t) + filename_addition + '.npy',
-                    llr_raw_neyman_observed)
-
-            # Neyman construction: loop over distribution samples generated from different thetas
-            llr_neyman_distributions = []
-            for tt in range(settings.n_thetas):
-
-                # Only evaluate certain combinations of thetas to save computation time
-                if not decide_toy_evaluation(tt, t):
-                    placeholder = np.empty(settings.n_neyman_distribution_experiments)
-                    placeholder[:] = np.nan
-                    llr_neyman_distributions.append(placeholder)
-                    continue
-
-                # Neyman construction: load distribution scores
-                scores_neyman_distribution = np.load(
-                    settings.unweighted_events_dir + '/scores_neyman_distribution_' + str(tt) + '.npy')
-                tt_neyman_distribution = scores_neyman_distribution.dot(delta_theta)
-                llr_neyman_distributions.append(-2. * np.sum(tt_neyman_distribution, axis=1))
-
-            llr_neyman_distributions = np.asarray(llr_neyman_distributions)
-            np.save(neyman_dir + '/neyman_llr_distribution_localmodel_' + str(t) + filename_addition + '.npy',
-                    llr_neyman_distributions)
+    # # Neyman construction
+    # if do_neyman:
+    #     logging.info('Starting evaluation of Neyman experiments')
+    #     for t, theta in enumerate(settings.thetas):
+    #
+    #         # Contract estimated scores with delta theta
+    #         delta_theta = theta - settings.thetas[theta1]
+    #
+    #         # Neyman construction: evaluate observed sample (raw)
+    #         tt_neyman_observed = scores_neyman_observed.dot(delta_theta)
+    #         llr_raw_neyman_observed = -2. * np.sum(tt_neyman_observed, axis=1)
+    #         np.save(neyman_dir + '/neyman_llr_observed_localmodel_' + str(t) + filename_addition + '.npy',
+    #                 llr_raw_neyman_observed)
+    #
+    #         # Neyman construction: loop over distribution samples generated from different thetas
+    #         llr_neyman_distributions = []
+    #         for tt in range(settings.n_thetas):
+    #
+    #             # Only evaluate certain combinations of thetas to save computation time
+    #             if not decide_toy_evaluation(tt, t):
+    #                 placeholder = np.empty(settings.n_neyman_null_experiments)
+    #                 placeholder[:] = np.nan
+    #                 llr_neyman_distributions.append(placeholder)
+    #                 continue
+    #
+    #             # Neyman construction: load distribution scores
+    #             scores_neyman_distribution = np.load(
+    #                 settings.unweighted_events_dir + '/scores_neyman_distribution_' + str(tt) + '.npy')
+    #             tt_neyman_distribution = scores_neyman_distribution.dot(delta_theta)
+    #             llr_neyman_distributions.append(-2. * np.sum(tt_neyman_distribution, axis=1))
+    #
+    #         llr_neyman_distributions = np.asarray(llr_neyman_distributions)
+    #         np.save(neyman_dir + '/neyman_llr_distribution_localmodel_' + str(t) + filename_addition + '.npy',
+    #                 llr_neyman_distributions)
