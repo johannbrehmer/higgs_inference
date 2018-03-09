@@ -121,8 +121,9 @@ def histo_inference(indices_X=None,
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
 
-    X_neyman_alternate = np.load(
-        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_alternate.npy')
+    if do_neyman:
+        X_neyman_alternate = np.load(
+            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_alternate.npy')
     n_events_test = X_test.shape[0]
 
     ################################################################################
