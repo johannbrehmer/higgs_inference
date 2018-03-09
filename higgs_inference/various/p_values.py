@@ -160,20 +160,41 @@ def subtract_sm(filename, folder, neyman2_mode=False):
     n_thetas = settings.n_thetas
 
     n_neyman_null_experiments = settings.n_neyman_null_experiments
+    n_neyman_alternate_experiments = settings.n_neyman_alternate_experiments
     neyman_filename = 'neyman'
     if neyman2_mode:
         neyman_filename = 'neyman2'
         n_neyman_null_experiments = settings.n_neyman2_null_experiments
+        n_neyman_alternate_experiments = settings.n_neyman2_alternate_experiments
 
     # Load log likelihood ratios
     llr_nulls = []
     llr_alternates = []
+    llr_nullsatalternate = []
 
     files_found = 0
     files_not_found = 0
     files_wrong_shape = 0
 
     for t in range(n_thetas):
+        try:
+            entry = np.load(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_' + filename + '.npy')
+            assert entry.shape == (n_neyman_alternate_experiments,)
+            llr_alternates.append(entry)
+            files_found += 1
+        except IOError as err:
+            logging.debug("Error loading file: %s", err)
+            placeholder = np.empty((n_neyman_alternate_experiments,))
+            placeholder[:, :] = np.nan
+            llr_alternates.append(placeholder)
+            files_not_found += 1
+        except AssertionError:
+            logging.warning("File %s has wrong shape %s", neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_' + filename + '.npy', entry.shape)
+            placeholder = np.empty((n_neyman_alternate_experiments,))
+            placeholder[:, :] = np.nan
+            llr_alternates.append(placeholder)
+            files_wrong_shape += 1
+
         try:
             entry = np.load(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(t) + '_' + filename + '.npy')
             assert entry.shape == (n_neyman_null_experiments,)
@@ -193,47 +214,48 @@ def subtract_sm(filename, folder, neyman2_mode=False):
             files_wrong_shape += 1
 
         try:
-            entry = np.load(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_' + filename + '.npy')
+            entry = np.load(neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(t) + '_' + filename + '.npy')
             assert entry.shape == (n_neyman_null_experiments,)
-            llr_alternates.append(entry)
+            llr_nullsatalternate.append(entry)
             files_found += 1
         except IOError as err:
             logging.debug("Error loading file: %s", err)
             placeholder = np.empty((n_neyman_null_experiments,))
             placeholder[:, :] = np.nan
-            llr_alternates.append(placeholder)
+            llr_nullsatalternate.append(placeholder)
             files_not_found += 1
         except AssertionError:
-            logging.warning("File %s has wrong shape %s", neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_' + filename + '.npy', entry.shape)
+            logging.warning("File %s has wrong shape %s", neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(t) + '_' + filename + '.npy', entry.shape)
             placeholder = np.empty((n_neyman_null_experiments,))
             placeholder[:, :] = np.nan
-            llr_alternates.append(placeholder)
+            llr_nullsatalternate.append(placeholder)
             files_wrong_shape += 1
 
     logging.debug("Found %s files, didn't find %s files, found %s files with wrong shape", files_found, files_not_found, files_wrong_shape)
 
     llr_nulls = np.asarray(llr_nulls)  # Shape: (n_thetas, n_experiments)
-    llr_alternates = np.asarray(llr_alternates)  # Shape: (n_thetas_eval, n_experiments)
+    llr_nullsatalternate = np.asarray(llr_nullsatalternate)  # Shape: (n_thetas, n_experiments)
+    llr_alternates = np.asarray(llr_alternates)  # Shape: (n_thetas, n_experiments)
 
-    # Check that some results exist
-    insufficient_data_nulls = np.any(np.all(np.invert(np.isfinite(llr_nulls)), axis=0))
-    insufficient_data_alternate = np.any(np.all(np.invert(np.isfinite(llr_alternates)), axis=0))
-    if insufficient_data_nulls:
-        logging.warning("Insufficient data to find MLEs for null")
-        logging.debug("NaNs nulls:\n%s", np.all(np.invert(np.isfinite(llr_nulls)), axis=0))
-        logging.debug("NaNs alternate:\n%s", np.all(np.invert(np.isfinite(llr_alternates)), axis=0))
-    if insufficient_data_alternate:
-        logging.warning("Insufficient data to find MLEs for alternate")
-        logging.debug("NaNs nulls:\n%s", np.all(np.invert(np.isfinite(llr_nulls)), axis=0))
-        logging.debug("NaNs alternate:\n%s", np.all(np.invert(np.isfinite(llr_alternates)), axis=0))
-    if insufficient_data_alternate or insufficient_data_nulls:
-        raise ValueError
+    # # Check that some results exist
+    # insufficient_data_nulls = np.any(np.all(np.invert(np.isfinite(llr_nulls)), axis=0))
+    # insufficient_data_alternate = np.any(np.all(np.invert(np.isfinite(llr_alternates)), axis=0))
+    # if insufficient_data_nulls:
+    #     logging.warning("Insufficient data to find MLEs for null")
+    #     logging.debug("NaNs nulls:\n%s", np.all(np.invert(np.isfinite(llr_nulls)), axis=0))
+    #     logging.debug("NaNs alternate:\n%s", np.all(np.invert(np.isfinite(llr_alternates)), axis=0))
+    # if insufficient_data_alternate:
+    #     logging.warning("Insufficient data to find MLEs for alternate")
+    #     logging.debug("NaNs nulls:\n%s", np.all(np.invert(np.isfinite(llr_nulls)), axis=0))
+    #     logging.debug("NaNs alternate:\n%s", np.all(np.invert(np.isfinite(llr_alternates)), axis=0))
+    # if insufficient_data_alternate or insufficient_data_nulls:
+    #     raise ValueError
 
     # Subtract SM values
     llr_vs_true_nulls = np.zeros_like(llr_nulls)
     for t in range(llr_nulls.shape[0]):
         for exp in range(llr_nulls.shape[1]):
-            llr_vs_true_nulls[t, exp] = (llr_nulls[t, exp] - llr_nulls[t_alternate, exp])
+            llr_vs_true_nulls[t, exp] = (llr_nulls[t, exp] - llr_nullsatalternate[t, exp])
 
     llr_vs_true_alternates = np.zeros_like(llr_alternates)
     for t in range(llr_alternates.shape[0]):
