@@ -83,13 +83,13 @@ n_expected_events_neyman = 36
 n_expected_events_neyman2 = 12
 
 # Number of toy experiments
-n_neyman_distribution_experiments = 1000
+n_neyman_distribution_experiments = 10000
 n_neyman2_distribution_experiments = 2500
-n_neyman_observed_experiments = 101
+n_neyman_observed_experiments = 1001
 n_neyman2_observed_experiments = 1001
 
 # Confidence limit
-confidence_limit = 0.68  # 0.68
+confidence_limit = 0.95  # 0.68
 q_threshold = - 2. * np.log(1. - confidence_limit)
 
 ################################################################################

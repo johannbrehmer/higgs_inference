@@ -111,27 +111,31 @@ def truth_inference(do_neyman=False,
         logging.info('Starting evaluation of Neyman experiments')
         for t in range(settings.n_thetas):
 
-            # Observed
+            # Alternate
             llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed[t]), axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_observed_truth_' + str(t) + filename_addition + '.npy',
                     llr_neyman_observed)
 
-            # Hypothesis distributions
-            llr_neyman_distributions = []
-            for tt in range(settings.n_thetas):
+            # # Old null distributions
+            # llr_neyman_distributions = []
+            # for tt in range(settings.n_thetas):
+            #
+            #     # Only evaluate certain combinations of thetas to save computation time
+            #     if not decide_toy_evaluation(tt, t):
+            #         placeholder = np.empty(n_neyman_distribution_experiments)
+            #         placeholder[:] = np.nan
+            #         llr_neyman_distributions.append(placeholder)
+            #         continue
+            #
+            #     r_neyman_distribution = np.load(
+            #         settings.unweighted_events_dir + '/r_' + neyman_filename + '_distribution_' + str(tt) + '.npy')
+            #     llr_neyman_distributions.append(-2. * np.sum(np.log(r_neyman_distribution[t]), axis=1))
 
-                # Only evaluate certain combinations of thetas to save computation time
-                if not decide_toy_evaluation(tt, t):
-                    placeholder = np.empty(n_neyman_distribution_experiments)
-                    placeholder[:] = np.nan
-                    llr_neyman_distributions.append(placeholder)
-                    continue
+            # Null
+            r_neyman_distribution = np.load(
+                settings.unweighted_events_dir + '/r_' + neyman_filename + '_distribution_' + str(t) + '.npy')
+            llr_neyman_distributions = -2. * np.sum(np.log(r_neyman_distribution), axis=2)
 
-                r_neyman_distribution = np.load(
-                    settings.unweighted_events_dir + '/r_' + neyman_filename + '_distribution_' + str(tt) + '.npy')
-                llr_neyman_distributions.append(-2. * np.sum(np.log(r_neyman_distribution[t]), axis=1))
-
-            llr_neyman_distributions = np.asarray(llr_neyman_distributions)
             np.save(
                 neyman_dir + '/' + neyman_filename + '_llr_distribution_truth_' + str(t) + filename_addition + '.npy',
                 llr_neyman_distributions)

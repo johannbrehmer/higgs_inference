@@ -443,13 +443,13 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_wi)
 
         if do_neyman:
-            # Prepare observed data for Neyman construction
+            # Prepare alternate data for Neyman construction
             thetas0_array = np.zeros((X_neyman_observed_transformed.shape[0], 2),
                                      dtype=X_neyman_observed_transformed.dtype)
             thetas0_array[:, :] = theta
             X_thetas_neyman_observed = np.hstack((X_neyman_observed_transformed, thetas0_array))
 
-            # Neyman construction: evaluate observed sample (raw)
+            # Neyman construction: evaluate alternate sample (raw)
             log_r_neyman_observed = regr.predict(X_thetas_neyman_observed)[:, 1]
             llr_neyman_observed = -2. * np.sum(log_r_neyman_observed.reshape((-1, n_expected_events_neyman)),
                                                axis=1)
@@ -457,40 +457,57 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 t) + filename_addition + '.npy',
                     llr_neyman_observed)
 
-            # Neyman construction: loop over distribution samples generated from different thetas
-            llr_neyman_distributions = []
-            for tt in range(settings.n_thetas):
+            # # Neyman construction: old null
+            # llr_neyman_distributions = []
+            # for tt in range(settings.n_thetas):
+            #
+            #     # Only evaluate certain combinations of thetas to save computation time
+            #     if not decide_toy_evaluation(tt, t):
+            #         placeholder = np.empty(n_neyman_distribution_experiments)
+            #         placeholder[:] = np.nan
+            #         llr_neyman_distributions.append(placeholder)
+            #         continue
+            #
+            #     # Neyman construction: load distribution sample
+            #     X_neyman_distribution = np.load(
+            #         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_distribution_' + str(
+            #             tt) + '.npy')
+            #     X_neyman_distribution_transformed = scaler.transform(
+            #         X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
+            #
+            #     # Prepare distribution data for Neyman construction
+            #     thetas0_array = np.zeros((X_neyman_distribution_transformed.shape[0], 2),
+            #                              dtype=X_neyman_distribution_transformed.dtype)
+            #     thetas0_array[:, :] = settings.thetas[t]
+            #     X_thetas_neyman_distribution = np.hstack((X_neyman_distribution_transformed, thetas0_array))
+            #
+            #     # Neyman construction: evaluate distribution sample (raw)
+            #     log_r_neyman_distribution = regr.predict(X_thetas_neyman_distribution)[:, 1]
+            #     llr_neyman_distributions.append(
+            #         -2. * np.sum(log_r_neyman_distribution.reshape((-1, n_expected_events_neyman)), axis=1))
 
-                # Only evaluate certain combinations of thetas to save computation time
-                if not decide_toy_evaluation(tt, t):
-                    placeholder = np.empty(n_neyman_distribution_experiments)
-                    placeholder[:] = np.nan
-                    llr_neyman_distributions.append(placeholder)
-                    continue
+            # NC: null
+            X_neyman_distribution = np.load(
+                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_distribution_' + str(
+                    t) + '.npy')
+            X_neyman_distribution_transformed = scaler.transform(
+                X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
-                # Neyman construction: load distribution sample
-                X_neyman_distribution = np.load(
-                    settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_distribution_' + str(
-                        tt) + '.npy')
-                X_neyman_distribution_transformed = scaler.transform(
-                    X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
+            # Prepare distribution data for Neyman construction
+            thetas0_array = np.zeros((X_neyman_distribution_transformed.shape[0], 2),
+                                     dtype=X_neyman_distribution_transformed.dtype)
+            thetas0_array[:, :] = settings.thetas[t]
+            X_thetas_neyman_distribution = np.hstack((X_neyman_distribution_transformed, thetas0_array))
 
-                # Prepare distribution data for Neyman construction
-                thetas0_array = np.zeros((X_neyman_distribution_transformed.shape[0], 2),
-                                         dtype=X_neyman_distribution_transformed.dtype)
-                thetas0_array[:, :] = settings.thetas[t]
-                X_thetas_neyman_distribution = np.hstack((X_neyman_distribution_transformed, thetas0_array))
+            # Neyman construction: evaluate distribution sample (raw)
+            log_r_neyman_distribution = regr.predict(X_thetas_neyman_distribution)[:, 1]
+            llr_neyman_distribution = -2. * np.sum(log_r_neyman_distribution.reshape((-1, n_expected_events_neyman)),
+                                                   axis=1)
 
-                # Neyman construction: evaluate distribution sample (raw)
-                log_r_neyman_distribution = regr.predict(X_thetas_neyman_distribution)[:, 1]
-                llr_neyman_distributions.append(
-                    -2. * np.sum(log_r_neyman_distribution.reshape((-1, n_expected_events_neyman)), axis=1))
-
-            llr_neyman_distributions = np.asarray(llr_neyman_distributions)
             np.save(
                 neyman_dir + '/' + neyman_filename + '_llr_distribution_' + algorithm + '_' + str(
                     t) + filename_addition + '.npy',
-                llr_neyman_distributions)
+                llr_neyman_distribution)
 
     # Save evaluation results
     expected_llr = np.asarray(expected_llr)
@@ -581,7 +598,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             thetas0_array[:, :] = settings.thetas[t]
             X_thetas_neyman_observed = np.hstack((X_neyman_observed_transformed, thetas0_array))
 
-            # Neyman construction: evaluate observed sample (raw)
+            # Neyman construction: alternate (calibrated)
             r_neyman_observed, _ = ratio_calibrated.predict(X_thetas_neyman_observed)
             llr_neyman_observed = -2. * np.sum(np.log(r_neyman_observed).reshape((-1, settings.n_expected_events)),
                                                axis=1)
@@ -590,31 +607,48 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                     t) + filename_addition + '.npy',
                 llr_neyman_observed)
 
-            # Neyman construction: loop over distribution samples generated from different thetas
-            llr_neyman_distributions = []
-            for tt in range(settings.n_thetas):
-                # Neyman construction: load distribution sample
-                X_neyman_distribution = np.load(
-                    settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_distribution_' + str(
-                        tt) + '.npy')
-                X_neyman_distribution_transformed = scaler.transform(
-                    X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
+            # # Neyman construction: old null (calibrated)
+            # llr_neyman_distributions = []
+            # for tt in range(settings.n_thetas):
+            #     # Neyman construction: load distribution sample
+            #     X_neyman_distribution = np.load(
+            #         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_distribution_' + str(
+            #             tt) + '.npy')
+            #     X_neyman_distribution_transformed = scaler.transform(
+            #         X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
+            #
+            #     # Prepare distribution data for Neyman construction
+            #     thetas0_array = np.zeros((X_neyman_distribution_transformed.shape[0], 2),
+            #                              dtype=X_neyman_distribution_transformed.dtype)
+            #     thetas0_array[:, :] = settings.thetas[t]
+            #     X_thetas_neyman_distribution = np.hstack((X_neyman_distribution_transformed, thetas0_array))
+            #
+            #     # Neyman construction: evaluate distribution sample (calibrated)
+            #     r_neyman_distribution, _ = ratio_calibrated.predict(X_thetas_neyman_distribution)
+            #     llr_neyman_distributions.append(
+            #         -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, n_expected_events_neyman)), axis=1))
 
-                # Prepare distribution data for Neyman construction
-                thetas0_array = np.zeros((X_neyman_distribution_transformed.shape[0], 2),
-                                         dtype=X_neyman_distribution_transformed.dtype)
-                thetas0_array[:, :] = settings.thetas[t]
-                X_thetas_neyman_distribution = np.hstack((X_neyman_distribution_transformed, thetas0_array))
+            # Neyman construction: null
+            X_neyman_distribution = np.load(
+                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_distribution_' + str(
+                    t) + '.npy')
+            X_neyman_distribution_transformed = scaler.transform(
+                X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
 
-                # Neyman construction: evaluate distribution sample (calibrated)
-                r_neyman_distribution, _ = ratio_calibrated.predict(X_thetas_neyman_distribution)
-                llr_neyman_distributions.append(
-                    -2. * np.sum(np.log(r_neyman_distribution).reshape((-1, n_expected_events_neyman)), axis=1))
+            # Prepare null data for Neyman construction
+            thetas0_array = np.zeros((X_neyman_distribution_transformed.shape[0], 2),
+                                     dtype=X_neyman_distribution_transformed.dtype)
+            thetas0_array[:, :] = settings.thetas[t]
+            X_thetas_neyman_distribution = np.hstack((X_neyman_distribution_transformed, thetas0_array))
 
-            llr_neyman_distributions = np.asarray(llr_neyman_distributions)
+            # Neyman construction: evaluate null (calibrated)
+            r_neyman_distribution, _ = ratio_calibrated.predict(X_thetas_neyman_distribution)
+            llr_neyman_distribution = -2. * np.sum(
+                np.log(r_neyman_distribution).reshape((-1, n_expected_events_neyman)), axis=1)
+
             np.save(neyman_dir + '/' + neyman_filename + '_llr_distribution_' + algorithm + '_calibrated_' + str(
                 t) + filename_addition + '.npy',
-                    llr_neyman_distributions)
+                    llr_neyman_distribution)
 
         # Roaming
         thetas0_array = np.zeros((n_roaming, 2), dtype=X_roam_transformed.dtype)
