@@ -484,24 +484,36 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # NC: null
             X_neyman_null = np.load(
-                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
-                    t) + '.npy')
+                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(t) + '.npy')
             X_neyman_null_transformed = scaler.transform(
                 X_neyman_null.reshape((-1, X_neyman_null.shape[2])))
 
             # Prepare null data for Neyman construction
-            thetas0_array = np.zeros((X_neyman_null_transformed.shape[0], 2),
-                                     dtype=X_neyman_null_transformed.dtype)
+            thetas0_array = np.zeros((X_neyman_null_transformed.shape[0], 2), dtype=X_neyman_null_transformed.dtype)
             thetas0_array[:, :] = settings.thetas[t]
             X_thetas_neyman_null = np.hstack((X_neyman_null_transformed, thetas0_array))
 
             # Neyman construction: evaluate null sample (raw)
             log_r_neyman_null = regr.predict(X_thetas_neyman_null)[:, 1]
-            llr_neyman_null = -2. * np.sum(log_r_neyman_null.reshape((-1, n_expected_events_neyman)),
-                                           axis=1)
-
+            llr_neyman_null = -2. * np.sum(log_r_neyman_null.reshape((-1, n_expected_events_neyman)), axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(
                 t) + '_' + algorithm + filename_addition + '.npy', llr_neyman_null)
+
+            # NC: null evaluated at alternate
+            if t == settings.theta_observed:
+                for tt in settings.pbp_training_thetas:
+                    X_neyman_null = np.load(
+                        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
+                            tt) + '.npy')
+                    X_neyman_null_transformed = scaler.transform(
+                        X_neyman_null.reshape((-1, X_neyman_null.shape[2])))
+                    X_thetas_neyman_null = np.hstack((X_neyman_null_transformed, thetas0_array))
+
+                    # Neyman construction: evaluate null sample (raw)
+                    log_r_neyman_null = regr.predict(X_thetas_neyman_null)[:, 1]
+                    llr_neyman_null = -2. * np.sum(log_r_neyman_null.reshape((-1, n_expected_events_neyman)), axis=1)
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
+                        tt) + '_' + algorithm + filename_addition + '.npy', llr_neyman_null)
 
     # Save evaluation results
     expected_llr = np.asarray(expected_llr)
@@ -597,7 +609,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             llr_neyman_alternate = -2. * np.sum(np.log(r_neyman_alternate).reshape((-1, settings.n_expected_events)),
                                                 axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(
-                t) + '_' + algorithm + '_calibrated_' + filename_addition + '.npy', llr_neyman_alternate)
+                t) + '_' + algorithm + '_calibrated_=' + filename_addition + '.npy', llr_neyman_alternate)
 
             # # Neyman construction: old null (calibrated)
             # llr_neyman_nulls = []
@@ -639,7 +651,24 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 np.log(r_neyman_null).reshape((-1, n_expected_events_neyman)), axis=1)
 
             np.save(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(
-                t) + '_' + algorithm + '_calibrated_' + filename_addition + '.npy', llr_neyman_null)
+                t) + '_' + algorithm + '_calibrated' + filename_addition + '.npy', llr_neyman_null)
+
+            # NC: null evaluated at alternate
+            if t == settings.theta_observed:
+                for tt in range(settings.n_thetas):
+                    X_neyman_null = np.load(
+                        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
+                            tt) + '.npy')
+                    X_neyman_null_transformed = scaler.transform(
+                        X_neyman_null.reshape((-1, X_neyman_null.shape[2])))
+                    X_thetas_neyman_null = np.hstack((X_neyman_null_transformed, thetas0_array))
+
+                    # Neyman construction: evaluate null sample (calibrated)
+                    r_neyman_null, _ = ratio_calibrated.predict(X_thetas_neyman_null)
+                    llr_neyman_null = -2. * np.sum(
+                        np.log(r_neyman_null).reshape((-1, n_expected_events_neyman)), axis=1)
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
+                        tt) + '_' + algorithm + '_calibrated' + filename_addition + '.npy', llr_neyman_null)
 
         # Roaming
         thetas0_array = np.zeros((n_roaming, 2), dtype=X_roam_transformed.dtype)

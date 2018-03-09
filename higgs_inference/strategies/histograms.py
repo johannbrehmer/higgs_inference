@@ -255,10 +255,27 @@ def histo_inference(indices_X=None,
             log_r_hat_neyman_null = np.log(r_from_s(s_hat_neyman_null))
             log_r_hat_neyman_null = log_r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
             llr_neyman_null = -2. * np.sum(log_r_hat_neyman_null, axis=1)
-
             np.save(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(
                 t) + '_histo' + '_' + filename_addition + '.npy',
                     llr_neyman_null)
+
+            # Neyman construction: null evaluated at alternative
+            if t == settings.theta_observed:
+                for tt in settings.pbp_training_thetas:
+                    X_neyman_null = np.load(
+                        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
+                            tt) + '.npy')
+                    summary_statistics_neyman_null = X_neyman_null.reshape(
+                        (-1, X_neyman_null.shape[2]))[:, indices_X]
+
+                    # Evaluation
+                    s_hat_neyman_null = histogram.predict(summary_statistics_neyman_null)
+                    log_r_hat_neyman_null = np.log(r_from_s(s_hat_neyman_null))
+                    log_r_hat_neyman_null = log_r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
+                    llr_neyman_null = -2. * np.sum(log_r_hat_neyman_null, axis=1)
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
+                        tt) + '_histo' + '_' + filename_addition + '.npy',
+                            llr_neyman_null)
 
     # Interpolate and save evaluation results
     expected_llr = np.asarray(expected_llr)

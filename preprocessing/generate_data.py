@@ -80,6 +80,10 @@ if args.alternativedenom:
 else:
     logging.info('  Denominator:                       standard')
 
+################################################################################
+# Settings
+################################################################################
+
 filename_addition = ''
 if args.alternativedenom:
     filename_addition += '_denom1'
@@ -88,16 +92,16 @@ if args.new:
 
 data_dir = settings.base_dir + '/data'
 
-################################################################################
-# Settings
-################################################################################
-
 thetas = np.load(data_dir + '/thetas/thetas_parameterized.npy')
 n_thetas = len(thetas)
 
 theta1 = settings.theta1_default
 if args.alternativedenom:
     theta1 = settings.theta1_alternative
+
+need_train_sample = args.train or args.random or args.basis or args.pointbypoint
+need_calibration_sample = args.calibration
+need_test_sample = args.test or args.neyman or args.neyman2 or args.roam
 
 ################################################################################
 # Data
@@ -109,7 +113,7 @@ weighted_data = pd.read_csv(settings.weighted_events_dir + '/wbf_4l_supernew.dat
 
 logging.info('Splitting...')
 
-# Split: 60% train, 10% evaluation, 10% calibration, 20% test
+# Split: 70% train + evaluation, 10% calibration, 20% test
 weighted_data_train, weighted_data_test = train_test_split(weighted_data,
                                                            test_size=0.3,
                                                            random_state=42)
@@ -128,32 +132,39 @@ logging.info('  Training:    %s', n_events_train)
 logging.info('  Calibration: %s', n_events_calibrate)
 logging.info('  Evaluation:  %s', n_events_test)
 
+# Clean up now already
 del weighted_data
+if not need_train_sample:
+    del weighted_data_train
+if not need_calibration_sample:
+    del weighted_data_calibrate
+if not need_test_sample:
+    del weighted_data_test
 
 logging.info('Normalizing probabilities')
 
 weights_train = []
-for n in range(n_thetas):
-    temp_weights = np.array(weighted_data_train['p_theta_' + str(n)])
-    temp_weights *= 1. / sum(temp_weights)
-    weights_train.append(temp_weights)
-    # del weighted_data_train['p_theta_' + str(n)]
+if need_train_sample:
+    for n in range(n_thetas):
+        temp_weights = np.array(weighted_data_train['p_theta_' + str(n)])
+        temp_weights *= 1. / sum(temp_weights)
+        weights_train.append(temp_weights)
 weights_train = np.asarray(weights_train)
 
 weights_calibrate = []
-for n in range(n_thetas):
-    temp_weights = np.array(weighted_data_calibrate['p_theta_' + str(n)])
-    temp_weights *= 1. / sum(temp_weights)
-    weights_calibrate.append(temp_weights)
-    # del weighted_data_calibrate['p_theta_' + str(n)]
+if need_calibration_sample:
+    for n in range(n_thetas):
+        temp_weights = np.array(weighted_data_calibrate['p_theta_' + str(n)])
+        temp_weights *= 1. / sum(temp_weights)
+        weights_calibrate.append(temp_weights)
 weights_calibrate = np.asarray(weights_calibrate)
 
 weights_test = []
-for n in range(n_thetas):
-    temp_weights = np.array(weighted_data_test['p_theta_' + str(n)])
-    temp_weights *= 1. / sum(temp_weights)
-    weights_test.append(temp_weights)
-    # del weighted_data_test['p_theta_' + str(n)]
+if need_test_sample:
+    for n in range(n_thetas):
+        temp_weights = np.array(weighted_data_test['p_theta_' + str(n)])
+        temp_weights *= 1. / sum(temp_weights)
+        weights_test.append(temp_weights)
 weights_test = np.asarray(weights_test)
 
 ################################################################################
@@ -665,6 +676,8 @@ if args.neyman:
         np.save(settings.unweighted_events_dir + '/r_neyman_alternate' + filename_addition + '.npy', r)
         np.save(settings.unweighted_events_dir + '/scores_neyman_alternate' + filename_addition + '.npy', scores)
 
+    del X, r, scores
+
     # Distribution
     for t, theta in enumerate(thetas):
         X, r, scores = generate_data_neyman(t, settings.n_neyman_null_experiments, theta1,
@@ -680,13 +693,16 @@ if args.neyman:
                 settings.unweighted_events_dir + '/scores_neyman_null_' + str(t) + filename_addition + '.npy',
                 scores)
 
+        del X, r, scores
+
 ################################################################################
-# Neyman construction, alternate version
+# Neyman construction, alternative version
 ################################################################################
 
 if args.neyman2:
 
     logging.info('Generating Neyman construction samples (alternative settings)')
+
 
     def generate_data_neyman2(theta_observed, n_toy_experiments, theta1, theta_score):
 

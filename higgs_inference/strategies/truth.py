@@ -111,11 +111,10 @@ def truth_inference(do_neyman=False,
     if do_neyman:
         logging.info('Starting evaluation of Neyman experiments')
         for t in range(settings.n_thetas):
-            # Alternate
+            # Alternate evaluated at null
             llr_neyman_alternate = -2. * np.sum(np.log(r_neyman_alternate[t]), axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(
-                t) + '_truth_' + filename_addition + '.npy',
-                    llr_neyman_alternate)
+                t) + '_truth_' + filename_addition + '.npy', llr_neyman_alternate)
 
             # # Old null distributions
             # llr_neyman_nulls = []
@@ -132,12 +131,14 @@ def truth_inference(do_neyman=False,
             #         settings.unweighted_events_dir + '/r_' + neyman_filename + '_null_' + str(tt) + '.npy')
             #     llr_neyman_nulls.append(-2. * np.sum(np.log(r_neyman_null[t]), axis=1))
 
-            # Null
+            # Null evaluated at null
             r_neyman_null = np.load(
                 settings.unweighted_events_dir + '/r_' + neyman_filename + '_null_' + str(t) + '.npy')
-            llr_neyman_null = -2. * np.sum(np.log(r_neyman_null), axis=2)
+            llr_neyman_null = -2. * np.sum(np.log(r_neyman_null[t]), axis=2)
+            np.save(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(t) + '_truth_' + str(
+                t) + filename_addition + '.npy', llr_neyman_null)
 
-            np.save(
-                neyman_dir + '/' + neyman_filename + '_llr_null_' + str(t) + '_truth_' + str(
-                    t) + filename_addition + '.npy',
-                llr_neyman_null)
+            # Null evaluated at alternative
+            llr_neyman_nullatalternative = -2. * np.sum(np.log(r_neyman_null[settings.theta_observed]), axis=2)
+            np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(t) + '_truth_' + str(
+                t) + filename_addition + '.npy', llr_neyman_nullatalternative)

@@ -19,5 +19,5 @@ module load scikit-learn/intel/0.18.1
 cd /home/jb6504/higgs_inference/higgs_inference
 
 python -u experiments.py histo -x 1 41 --neyman -o new
-python -u experiments.py histo -x 1 --neyman -o new
-python -u experiments.py histo -x 41 --neyman -o new
+# python -u experiments.py histo -x 1 -o new
+# python -u experiments.py histo -x 41 -o new

@@ -346,6 +346,10 @@ def score_regression_inference(use_smearing=False,
             np.save(results_dir + '/r_trained_scoreregression_rotatedscore' + filename_addition + '.npy',
                     r_hat_rotatedscore_test)
 
+        ################################################################################
+        # Neyman construction toys
+        ################################################################################
+
         if do_neyman:
             # Neyman construction: evaluate alternate sample (raw)
             that_neyman_alternate = regr.predict(X_neyman_alternate_transformed)
@@ -470,6 +474,49 @@ def score_regression_inference(use_smearing=False,
                 t) + '_scoreregression_score' + filename_addition + '.npy', llr_neyman_null_score)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(
                 t) + '_scoreregression_rotatedscore' + filename_addition + '.npy', llr_neyman_null_rotatedscore)
+
+            # Neyman construction: null data evaluated at alternative
+            if t == settings.theta_observed:
+                for tt in range(settings.n_thetas):
+                    X_neyman_null = np.load(
+                        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
+                            tt) + '.npy')
+                    X_neyman_null_transformed = scaler.transform(
+                        X_neyman_null.reshape((-1, X_neyman_null.shape[2])))
+
+                    # Neyman construction: evaluate null sample (raw)
+                    that_neyman_null = regr.predict(X_neyman_null_transformed)
+                    tthat_neyman_null = that_neyman_null.dot(delta_theta)
+                    that_rotated_neyman_null = that_neyman_null.dot(rotation_matrix)
+                    llr_neyman_null = -2. * np.sum(tthat_neyman_null.reshape((-1, n_expected_events_neyman)), axis=1)
+
+                    # Neyman construction: evaluate null sample (score * theta calibration)
+                    s_hat_neyman_null = calibrator_scoretheta.predict(tthat_neyman_null.reshape((-1,)))
+                    r_hat_neyman_null = r_from_s(s_hat_neyman_null)
+                    r_hat_neyman_null = r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
+                    llr_neyman_null_scoretheta = -2. * np.sum(np.log(r_hat_neyman_null), axis=1)
+
+                    # Neyman construction: evaluate null sample (score calibration)
+                    s_hat_neyman_null = calibrator_score.predict(that_neyman_null)
+                    r_hat_neyman_null = r_from_s(s_hat_neyman_null)
+                    r_hat_neyman_null = r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
+                    llr_neyman_null_score = -2. * np.sum(np.log(r_hat_neyman_null), axis=1)
+
+                    # Neyman construction: evaluate null sample (rotated score calibration)
+                    s_hat_neyman_null = calibrator_rotatedscore.predict(that_rotated_neyman_null)
+                    r_hat_neyman_null = r_from_s(s_hat_neyman_null)
+                    r_hat_neyman_null = r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
+                    llr_neyman_null_rotatedscore = -2. * np.sum(np.log(r_hat_neyman_null), axis=1)
+
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
+                        tt) + '_scoreregression' + filename_addition + '.npy', llr_neyman_null)
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
+                        tt) + '_scoreregression_scoretheta' + filename_addition + '.npy', llr_neyman_null_scoretheta)
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
+                        tt) + '_scoreregression_score' + filename_addition + '.npy', llr_neyman_null_score)
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
+                        tt) + '_scoreregression_rotatedscore' + filename_addition + '.npy',
+                            llr_neyman_null_rotatedscore)
 
     # Save expected LLR
     expected_llr = np.asarray(expected_llr)
