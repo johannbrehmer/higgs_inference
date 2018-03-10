@@ -661,7 +661,7 @@ if args.neyman:
 
         # Reshape to experiments x expected events
         X = X.reshape((n_toy_experiments, settings.n_expected_events_neyman, -1))
-        r = r.reshape((settings.n_thetas, n_toy_experiments, settings.n_expected_events_neyman))
+        r = r.reshape((len(thetas_r), n_toy_experiments, settings.n_expected_events_neyman))
         scores = scores.reshape((n_toy_experiments, settings.n_expected_events_neyman, 2))
 
         return X, r, scores
@@ -679,8 +679,8 @@ if args.neyman:
         np.save(settings.unweighted_events_dir + '/r_neyman_alternate' + filename_addition + '.npy', r)
         np.save(settings.unweighted_events_dir + '/scores_neyman_alternate' + filename_addition + '.npy', scores)
 
-    logging.debug('Memory consumption: X = %s GB, r = %s GB, t = %s GB', X.nbytes * 1.e-6, r.nbytes * 1.e-6,
-                  scores.nbytes * 1.e-6)
+    logging.debug('Memory consumption: X = %s GB, r = %s GB, t = %s GB', X.nbytes * 1.e-9, r.nbytes * 1.e-9,
+                  scores.nbytes * 1.e-9)
 
     del X, r, scores
 
