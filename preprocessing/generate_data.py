@@ -676,10 +676,10 @@ if args.fixtest:
             r = r[:, cut]
             p1 = p1[cut]
 
-            all_X = np.vstack((all_X, X))
-            all_scores = np.vstack((all_scores, scores))
-            all_r = np.vstack((all_r, r))
-            all_p1 = np.hstack((all_p1, p1))
+            all_X = np.concatenate((all_X, X), axis=0)
+            all_scores = np.concatenate((all_scores, scores), axis=1)
+            all_r = np.concatenate((all_r, r), axis=1)
+            all_p1 = np.concatenate((all_p1, p1), axis=0)
 
             n_events = all_X.shape[0]
 
