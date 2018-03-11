@@ -668,7 +668,7 @@ if args.fixtest:
 
         cut = np.all(np.isfinite(np.log(r[:, :])) & np.isfinite(scores[:, :, 0]) & np.isfinite(scores[:, :, 1])
                      & ((scores[theta_observed, :, 0] ** 2 + scores[theta_observed, :, 1] ** 2 > 2500.)
-                        | (np.log(r[theta_observed, :]) ** 2 < 10000.)), axis=0)
+                        | (np.log(r[theta_observed, :]) ** 2 > 10000.)), axis=0)
 
         if sum(cut) > 0:
             X = X[cut]
