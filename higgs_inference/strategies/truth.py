@@ -134,11 +134,11 @@ def truth_inference(do_neyman=False,
             # Null evaluated at null
             r_neyman_null = np.load(
                 settings.unweighted_events_dir + '/r_' + neyman_filename + '_null_' + str(t) + '.npy')
-            llr_neyman_null = -2. * np.sum(np.log(r_neyman_null[1]), axis=2)
+            llr_neyman_null = -2. * np.sum(np.log(r_neyman_null[1]), axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(t) + '_truth_' + str(
                 t) + filename_addition + '.npy', llr_neyman_null)
 
             # Null evaluated at alternative
-            llr_neyman_nullatalternative = -2. * np.sum(np.log(r_neyman_null[0]), axis=2)
+            llr_neyman_nullatalternative = -2. * np.sum(np.log(r_neyman_null[0]), axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(t) + '_truth_' + str(
                 t) + filename_addition + '.npy', llr_neyman_nullatalternative)

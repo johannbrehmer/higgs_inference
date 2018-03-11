@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #SBATCH --job-name=preprocessing
-#SBATCH --output=slurm_preprocessing_small.out
+#SBATCH --output=slurm_preprocessing_verysmall.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=62GB
+#SBATCH --mem=30GB
 #SBATCH --time=8:00:00
 
 # Modules

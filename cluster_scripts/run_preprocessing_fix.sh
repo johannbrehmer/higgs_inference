@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=preprocessing
+#SBATCH --job-name=fix
 #SBATCH --output=slurm_preprocessing_fix.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
