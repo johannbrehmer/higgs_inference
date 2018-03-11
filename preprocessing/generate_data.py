@@ -646,50 +646,47 @@ if args.fixtest:
     all_r = np.load(settings.unweighted_events_dir + '/r_test' + filename_addition + '.npy')
     all_p1 = np.load(settings.unweighted_events_dir + '/p1_test' + filename_addition + '.npy')
 
+    indices = np.random.choice(list(range(n_events_test)), settings.n_events_test,
+                               p=weights_test[theta_observed])
+
+    X = np.asarray(weighted_data_test.iloc[indices, subset_features])
+
+    r = np.zeros((n_thetas, settings.n_events_test))
+    for t in range(n_thetas):
+        r[t, :] = np.array(weights_test[t][indices] / weights_test[theta1][indices])
+
+    scores = np.zeros((n_thetas, settings.n_events_test, 2))
+    for t in range(n_thetas):
+        labels_scores = ["score_theta_" + str(t) + "_0", "score_theta_" + str(t) + "_1"]
+        subset_scores = [weighted_data_test.columns.get_loc(x) for x in labels_scores]
+        scores[t] = np.array(weighted_data_test.iloc[indices, subset_scores])
+
+    p1 = np.array(weights_test[theta1][indices])
+
+    cut = (np.all(np.isfinite(np.log(r[:, :])) & np.isfinite(scores[:, :, 0]) & np.isfinite(scores[:, :, 1]),
+                  axis=0) & ((scores[theta_observed, :, 0] ** 2 + scores[theta_observed, :, 1] ** 2 > 2500.) | (
+            np.log(r[theta_observed, :]) ** 2 > 10000.)))
+
+    if sum(cut) > 0:
+        X = X[cut]
+        scores = scores[:, cut, :]
+        r = r[:, cut]
+        p1 = p1[cut]
+
+        all_X = np.concatenate((all_X, X), axis=0)
+        all_scores = np.concatenate((all_scores, scores), axis=1)
+        all_r = np.concatenate((all_r, r), axis=1)
+        all_p1 = np.concatenate((all_p1, p1), axis=0)
+
     n_events = all_X.shape[0]
 
-    while n_events < settings.n_events_test:
-        indices = np.random.choice(list(range(n_events_test)), 250,
-                                   p=weights_test[theta_observed])
-
-        X = np.asarray(weighted_data_test.iloc[indices, subset_features])
-
-        r = np.zeros((n_thetas, 250))
-        for t in range(n_thetas):
-            r[t, :] = np.array(weights_test[t][indices] / weights_test[theta1][indices])
-
-        scores = np.zeros((n_thetas, 250, 2))
-        for t in range(n_thetas):
-            labels_scores = ["score_theta_" + str(t) + "_0", "score_theta_" + str(t) + "_1"]
-            subset_scores = [weighted_data_test.columns.get_loc(x) for x in labels_scores]
-            scores[t] = np.array(weighted_data_test.iloc[indices, subset_scores])
-
-        p1 = np.array(weights_test[theta1][indices])
-
-        cut = (np.all(np.isfinite(np.log(r[:, :])) & np.isfinite(scores[:, :, 0]) & np.isfinite(scores[:, :, 1]),
-                      axis=0) & ((scores[theta_observed, :, 0] ** 2 + scores[theta_observed, :, 1] ** 2 > 2500.) | (
-                np.log(r[theta_observed, :]) ** 2 > 10000.)))
-
-        if sum(cut) > 0:
-            X = X[cut]
-            scores = scores[:, cut, :]
-            r = r[:, cut]
-            p1 = p1[cut]
-
-            all_X = np.concatenate((all_X, X), axis=0)
-            all_scores = np.concatenate((all_scores, scores), axis=1)
-            all_r = np.concatenate((all_r, r), axis=1)
-            all_p1 = np.concatenate((all_p1, p1), axis=0)
-
-            n_events = all_X.shape[0]
-
-        logging.debug('%s / 250 events pass fix cuts, sample now at %s', sum(cut), n_events)
+    logging.debug('%s / %s events pass fix cuts, sample now at %s', sum(cut), settings.n_events_test, n_events)
 
     if not args.dry:
         np.save(settings.unweighted_events_dir + '/X_test_fixed' + filename_addition + '.npy', all_X)
-    np.save(settings.unweighted_events_dir + '/scores_test_fixed' + filename_addition + '.npy', all_scores)
-    np.save(settings.unweighted_events_dir + '/r_test_fixed' + filename_addition + '.npy', all_r)
-    np.save(settings.unweighted_events_dir + '/p1_test_fixed' + filename_addition + '.npy', all_p1)
+        np.save(settings.unweighted_events_dir + '/scores_test_fixed' + filename_addition + '.npy', all_scores)
+        np.save(settings.unweighted_events_dir + '/r_test_fixed' + filename_addition + '.npy', all_r)
+        np.save(settings.unweighted_events_dir + '/p1_test_fixed' + filename_addition + '.npy', all_p1)
 
     ################################################################################
     # Neyman construction
