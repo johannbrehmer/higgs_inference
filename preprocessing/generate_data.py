@@ -49,6 +49,8 @@ parser.add_argument("-c", "--calibration", action="store_true",
                     help="Generate calibration sample")
 parser.add_argument("-e", "--test", action="store_true",
                     help="Generate likelihood ratio evaluation sample")
+parser.add_argument("--fixtest", action="store_true",
+                    help="Fix evaluation sample")
 parser.add_argument("-n", "--neyman", action="store_true",
                     help="Generate samples for Neyman construction")
 parser.add_argument("--neyman2", action="store_true",
@@ -102,7 +104,7 @@ if args.alternativedenom:
 
 need_train_sample = args.train or args.random or args.basis or args.pointbypoint
 need_calibration_sample = args.calibration
-need_test_sample = args.test or args.neyman or args.neyman2 or args.roam
+need_test_sample = args.test or args.neyman or args.neyman2 or args.roam or args.fixtest
 
 ################################################################################
 # Data
@@ -630,6 +632,66 @@ if args.test:
         np.save(settings.unweighted_events_dir + '/p1_test' + filename_addition + '.npy', p1)
 
 ################################################################################
+# Likelihood ratio evaluation fix
+################################################################################
+
+if args.fixtest:
+
+    logging.info('Adding events to existing likelihood ratio evaluation samples to avoid a very small potential bias')
+
+    theta_observed = settings.theta_observed
+
+    all_X = np.load(settings.unweighted_events_dir + '/X_test' + filename_addition + '.npy')
+    all_scores = np.load(settings.unweighted_events_dir + '/scores_test' + filename_addition + '.npy')
+    all_r = np.load(settings.unweighted_events_dir + '/r_test' + filename_addition + '.npy')
+    all_p1 = np.load(settings.unweighted_events_dir + '/p1_test' + filename_addition + '.npy')
+
+    n_events = all_X.shape[0]
+
+    while n_events < settings.n_events_test:
+        indices = np.random.choice(list(range(n_events_test)), 250,
+                                   p=weights_test[theta_observed])
+
+        X = np.asarray(weighted_data_test.iloc[indices, subset_features])
+
+        r = np.zeros((n_thetas, settings.n_events_test))
+        for t in range(n_thetas):
+            r[t, :] = np.array(weights_test[t][indices] / weights_test[theta1][indices])
+
+        scores = np.zeros((n_thetas, settings.n_events_test, 2))
+        for t in range(n_thetas):
+            labels_scores = ["score_theta_" + str(t) + "_0", "score_theta_" + str(t) + "_1"]
+            subset_scores = [weighted_data_test.columns.get_loc(x) for x in labels_scores]
+            scores[t] = np.array(weighted_data_test.iloc[indices, subset_scores])
+
+        p1 = np.array(weights_test[theta1][indices])
+
+        cut = np.all(np.isfinite(np.log(r[:, :])) & np.isfinite(scores[:, :, 0]) & np.isfinite(scores[:, :, 1])
+                     & ((scores[theta_observed, :, 0] ** 2 + scores[theta_observed, :, 1] ** 2 > 2500.)
+                        | (np.log(r[theta_observed, :]) ** 2 < 10000.)), axis=0)
+
+        if sum(cut) > 0:
+            X = X[cut]
+            scores = scores[:, cut, :]
+            r = r[:, cut]
+            p1 = p1[cut]
+
+            all_X = np.vstack((all_X, X))
+            all_scores = np.vstack((all_scores, scores))
+            all_r = np.vstack((all_r, r))
+            all_p1 = np.hstack((all_p1, p1))
+
+            n_events = all_X.shape[0]
+
+        logging.debug('%s / 250 events pass fix cuts, sample now at %s', sum(cut), n_events)
+
+    if not args.dry:
+        np.save(settings.unweighted_events_dir + '/X_test_fixed' + filename_addition + '.npy', all_X)
+        np.save(settings.unweighted_events_dir + '/scores_test_fixed' + filename_addition + '.npy', all_scores)
+        np.save(settings.unweighted_events_dir + '/r_test_fixed' + filename_addition + '.npy', all_r)
+        np.save(settings.unweighted_events_dir + '/p1_test_fixed' + filename_addition + '.npy', all_p1)
+
+################################################################################
 # Neyman construction
 ################################################################################
 
@@ -641,8 +703,8 @@ if args.neyman:
     def generate_data_neyman(theta_observed, n_toy_experiments, theta1, theta_score, thetas_r=None):
 
         gc.collect()
-        
-        if thetas_r == None:
+
+        if thetas_r is None:
             thetas_r = list(range(settings.n_thetas))
 
         indices = np.random.choice(list(range(n_events_test)), n_toy_experiments * settings.n_expected_events_neyman,
