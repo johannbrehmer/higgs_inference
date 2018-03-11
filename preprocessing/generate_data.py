@@ -11,6 +11,7 @@ import argparse
 import logging
 import numpy as np
 import pandas as pd
+import gc
 from sklearn.model_selection import train_test_split
 
 base_dir = path.abspath(path.join(path.dirname(__file__), '..'))
@@ -140,6 +141,8 @@ if not need_calibration_sample:
     del weighted_data_calibrate
 if not need_test_sample:
     del weighted_data_test
+
+gc.collect()
 
 logging.info('Normalizing probabilities')
 
@@ -637,6 +640,8 @@ if args.neyman:
 
     def generate_data_neyman(theta_observed, n_toy_experiments, theta1, theta_score, thetas_r=None):
 
+        gc.collect()
+        
         if thetas_r == None:
             thetas_r = list(range(settings.n_thetas))
 
