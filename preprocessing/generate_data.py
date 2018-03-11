@@ -654,11 +654,11 @@ if args.fixtest:
 
         X = np.asarray(weighted_data_test.iloc[indices, subset_features])
 
-        r = np.zeros((n_thetas, settings.n_events_test))
+        r = np.zeros((n_thetas, 250))
         for t in range(n_thetas):
             r[t, :] = np.array(weights_test[t][indices] / weights_test[theta1][indices])
 
-        scores = np.zeros((n_thetas, settings.n_events_test, 2))
+        scores = np.zeros((n_thetas, 250, 2))
         for t in range(n_thetas):
             labels_scores = ["score_theta_" + str(t) + "_0", "score_theta_" + str(t) + "_1"]
             subset_scores = [weighted_data_test.columns.get_loc(x) for x in labels_scores]
