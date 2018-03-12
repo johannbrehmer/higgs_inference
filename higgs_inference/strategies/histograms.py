@@ -137,7 +137,7 @@ def histo_inference(indices_X=None,
     cross_entropies_train = []
 
     # Loop over the hypothesis thetas
-    for i, t in enumerate(settings.pbp_training_thetas):
+    for i, t in enumerate(settings.thetas_around_sm): # TODO put back to settings.extended_pbp_training_thetas
 
         logging.info('Starting theta %s/%s: number %s (%s)',
                      i + 1, len(settings.pbp_training_thetas), t, settings.thetas[t])

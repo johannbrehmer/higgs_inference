@@ -411,7 +411,7 @@ if args.pointbypoint:
             cut]
 
 
-    for i, t in enumerate(settings.pbp_training_thetas):
+    for i, t in enumerate(settings.thetas_around_sm): # TODO: switch back to settings.extended_pbp_training_thetas
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1 = generate_data_train_point_by_point(
             t, theta1)
 
