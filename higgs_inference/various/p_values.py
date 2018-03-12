@@ -20,12 +20,15 @@ def calculate_median_p_value(test_statistics_null, test_statistics_alternate):
     p_values_right = 1. - np.searchsorted(null, test_statistics_alternate, side='right').astype('float') / len(null)
     p_values = 0.5 * (p_values_left + p_values_right)
 
-    q_cut_index = int(settings.confidence_limit * len(test_statistics_null)) - 1
-    q_cut = (null[q_cut_index] + null[q_cut_index + 1]) / 2
-    q_cut_uncertainty = (null[q_cut_index + 1] - null[q_cut_index]) / 2
-    q_median = np.median(test_statistics_alternate)
+    q_cuts = []
+    q_cut_uncertainties = []
+    for cl in settings.confidence_levels:
+        q_cut_index = int(cl * len(test_statistics_null)) - 1
+        q_cuts.append((null[q_cut_index] + null[q_cut_index + 1]) / 2)
+        q_cut_uncertainties.append((null[q_cut_index + 1] - null[q_cut_index]) / 2)
 
-    return np.median(p_values), q_cut, q_cut_uncertainty, q_median
+    return np.median(p_values), np.asarray(q_cuts), np.asarray(q_cut_uncertainties), np.median(
+        test_statistics_alternate)
 
 
 # def subtract_mle(filename, filename_suffix, folder, neyman2_mode=False):
@@ -190,7 +193,9 @@ def subtract_sm(filename, folder, neyman2_mode=False):
             llr_alternates.append(placeholder)
             files_not_found += 1
         except AssertionError:
-            logging.warning("File %s has wrong shape %s", neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_' + filename + '.npy', entry.shape)
+            logging.warning("File %s has wrong shape %s",
+                            neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_' + filename + '.npy',
+                            entry.shape)
             placeholder = np.empty((n_neyman_alternate_experiments,))
             placeholder[:] = np.nan
             llr_alternates.append(placeholder)
@@ -209,14 +214,17 @@ def subtract_sm(filename, folder, neyman2_mode=False):
             llr_nulls.append(placeholder)
             files_not_found += 1
         except AssertionError:
-            logging.warning("File %s has wrong shape %s", neyman_dir + '/' + neyman_filename + '_llr_null_' + str(t) + '_' + filename + '.npy', entry.shape)
+            logging.warning("File %s has wrong shape %s",
+                            neyman_dir + '/' + neyman_filename + '_llr_null_' + str(t) + '_' + filename + '.npy',
+                            entry.shape)
             placeholder = np.empty((n_neyman_null_experiments,))
             placeholder[:] = np.nan
             llr_nulls.append(placeholder)
             files_wrong_shape += 1
 
         try:
-            entry = np.load(neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(t) + '_' + filename + '.npy')
+            entry = np.load(
+                neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(t) + '_' + filename + '.npy')
             assert entry.shape == (n_neyman_null_experiments,)
             llr_nullsatalternate.append(entry)
             files_found += 1
@@ -228,13 +236,16 @@ def subtract_sm(filename, folder, neyman2_mode=False):
             llr_nullsatalternate.append(placeholder)
             files_not_found += 1
         except AssertionError:
-            logging.warning("File %s has wrong shape %s", neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(t) + '_' + filename + '.npy', entry.shape)
+            logging.warning("File %s has wrong shape %s",
+                            neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(
+                                t) + '_' + filename + '.npy', entry.shape)
             placeholder = np.empty((n_neyman_null_experiments,))
             placeholder[:] = np.nan
             llr_nullsatalternate.append(placeholder)
             files_wrong_shape += 1
 
-    logging.debug("Found %s files, didn't find %s files, found %s files with wrong shape", files_found, files_not_found, files_wrong_shape)
+    logging.debug("Found %s files, didn't find %s files, found %s files with wrong shape", files_found, files_not_found,
+                  files_wrong_shape)
 
     llr_nulls = np.asarray(llr_nulls)  # Shape: (n_thetas, n_experiments)
     llr_nullsatalternate = np.asarray(llr_nullsatalternate)  # Shape: (n_thetas, n_experiments)
@@ -295,13 +306,14 @@ def calculate_confidence_limits(filename, folder, neyman2_mode=False):
 
     # Quantities to calculate
     p_values_mle = np.zeros(n_thetas)
-    q_cut_values_mle = np.zeros(n_thetas)
+    q_cut_values_mle = np.zeros((n_thetas, len(settings.confidence_levels)))
     q_median_values_mle = np.zeros(n_thetas)
-    q_cut_uncertainties_mle = np.zeros(n_thetas)
+    q_cut_uncertainties_mle = np.zeros((n_thetas, len(settings.confidence_levels)))
 
     # Go!
     for t in range(n_thetas):
-        p_values_mle[t], q_cut_values_mle[t], q_cut_uncertainties_mle[t], q_median_values_mle[t] = calculate_median_p_value(llr_vs_true_nulls[t, :], llr_vs_true_alternates[t, :])
+        p_values_mle[t], q_cut_values_mle[t, :], q_cut_uncertainties_mle[t, :], q_median_values_mle[
+            t] = calculate_median_p_value(llr_vs_true_nulls[t, :], llr_vs_true_alternates[t, :])
 
     np.save(result_dir + '/' + neyman_filename + '_pvalues_' + filename + '.npy', p_values_mle)
     np.save(result_dir + '/' + neyman_filename + '_qcut_' + filename + '.npy', q_cut_values_mle)

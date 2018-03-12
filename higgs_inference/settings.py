@@ -89,8 +89,9 @@ n_neyman_alternate_experiments = 1001
 n_neyman2_alternate_experiments = 1001
 
 # Confidence limit
-confidence_limit = 0.95  # 0.68
-q_threshold = - 2. * np.log(1. - confidence_limit)
+# confidence_limit = 0.95  # 0.68
+confidence_levels = np.asarray([0.68, 0.95, 0.997])
+q_threshold = - 2. * np.log(1. - confidence_levels)
 
 ################################################################################
 # Network architecture and training

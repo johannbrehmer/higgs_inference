@@ -501,7 +501,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # NC: null evaluated at alternate
             if t == settings.theta_observed:
-                for tt in settings.pbp_training_thetas:
+                for tt in range(settings.n_thetas):
                     X_neyman_null = np.load(
                         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
                             tt) + '.npy')
@@ -612,7 +612,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             llr_neyman_alternate = -2. * np.sum(np.log(r_neyman_alternate).reshape((-1, settings.n_expected_events)),
                                                 axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(
-                t) + '_' + algorithm + '_calibrated_=' + filename_addition + '.npy', llr_neyman_alternate)
+                t) + '_' + algorithm + '_calibrated' + filename_addition + '.npy', llr_neyman_alternate)
 
             # # Neyman construction: old null (calibrated)
             # llr_neyman_nulls = []
