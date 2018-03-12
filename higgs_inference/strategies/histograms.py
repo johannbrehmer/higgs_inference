@@ -257,7 +257,7 @@ def histo_inference(indices_X=None,
             log_r_hat_neyman_null = log_r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
             llr_neyman_null = -2. * np.sum(log_r_hat_neyman_null, axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(
-                t) + '_histo' + '_' + filename_addition + '.npy',
+                t) + '_histo' + filename_addition + '.npy',
                     llr_neyman_null)
 
             # Neyman construction: null evaluated at alternative
@@ -274,8 +274,8 @@ def histo_inference(indices_X=None,
                     log_r_hat_neyman_null = np.log(r_from_s(s_hat_neyman_null))
                     log_r_hat_neyman_null = log_r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
                     llr_neyman_null = -2. * np.sum(log_r_hat_neyman_null, axis=1)
-                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
-                        tt) + '_histo' + '_' + filename_addition + '.npy',
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(
+                        tt) + '_histo' + filename_addition + '.npy',
                             llr_neyman_null)
 
     # Interpolate and save evaluation results

@@ -512,7 +512,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                     # Neyman construction: evaluate null sample (raw)
                     log_r_neyman_null = regr.predict(X_thetas_neyman_null)[:, 1]
                     llr_neyman_null = -2. * np.sum(log_r_neyman_null.reshape((-1, n_expected_events_neyman)), axis=1)
-                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(
                         tt) + '_' + algorithm + filename_addition + '.npy', llr_neyman_null)
 
     # Save evaluation results
@@ -670,7 +670,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                     r_neyman_null, _ = ratio_calibrated.predict(X_thetas_neyman_null)
                     llr_neyman_null = -2. * np.sum(
                         np.log(r_neyman_null).reshape((-1, n_expected_events_neyman)), axis=1)
-                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(
                         tt) + '_' + algorithm + '_calibrated' + filename_addition + '.npy', llr_neyman_null)
 
         # Roaming
