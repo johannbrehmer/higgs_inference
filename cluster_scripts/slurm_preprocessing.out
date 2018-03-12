@@ -1,35 +1,33 @@
-09.03.2018 10:27:49 INFO    Welcome! How are you today?
-09.03.2018 10:27:49 INFO    Tasks:
-09.03.2018 10:27:49 INFO      Baseline training:                 False
-09.03.2018 10:27:49 INFO      Random training:                   False
-09.03.2018 10:27:49 INFO      Morphing training:                 False
-09.03.2018 10:27:49 INFO      Point-by-point training:           False
-09.03.2018 10:27:49 INFO      Calibration:                       False
-09.03.2018 10:27:49 INFO      Likelihood ratio eval:             False
-09.03.2018 10:27:49 INFO      Neyman construction:               True
-09.03.2018 10:27:49 INFO      Neyman construction (alternative): False
-09.03.2018 10:27:49 INFO      Roaming:                           False
-09.03.2018 10:27:49 INFO    Options:
-09.03.2018 10:27:49 INFO      Dry run:                           False
-09.03.2018 10:27:49 INFO      Denominator:                       standard
-09.03.2018 10:37:16 INFO    Splitting...
-09.03.2018 10:37:40 INFO    Number of events:
-09.03.2018 10:37:40 INFO      All:    821636
-09.03.2018 10:37:40 INFO      Training:    575145
-09.03.2018 10:37:40 INFO      Calibration: 82164
-09.03.2018 10:37:40 INFO      Evaluation:  164327
-09.03.2018 10:37:40 INFO    Normalizing probabilities
-09.03.2018 10:39:36 INFO    Generating Neyman construction samples
-09.03.2018 10:39:36 DEBUG    Repeated events: [47 28 19 19 16]
-09.03.2018 10:39:39 INFO    Generated 1001 "observed" toy experiments with 36 events each according to theta = [ 0.  0.]
-09.03.2018 10:39:40 DEBUG    Repeated events: [512 244 211 167 163]
-09.03.2018 10:39:55 INFO    Generated 10000 "distribution" toy experiments with 36 events each according to theta = [ 0.  0.]
-09.03.2018 10:39:59 DEBUG    Repeated events: [472 251 222 174 169]
-09.03.2018 10:40:14 INFO    Generated 10000 "distribution" toy experiments with 36 events each according to theta = [-0.1 -0.1]
-09.03.2018 10:40:18 DEBUG    Repeated events: [438 252 200 174 164]
-09.03.2018 10:40:34 INFO    Generated 10000 "distribution" toy experiments with 36 events each according to theta = [-0.1  0. ]
-09.03.2018 10:40:38 DEBUG    Repeated events: [481 253 222 167 144]
-09.03.2018 10:40:56 INFO    Generated 10000 "distribution" toy experiments with 36 events each according to theta = [-0.1  0.1]
-09.03.2018 10:40:59 DEBUG    Repeated events: [480 247 240 160 158]
-/opt/slurm/data/slurmd/job4832522/slurm_script: line 18: 78971 Killed                  python -u generate_data.py --neyman
-slurmstepd: error: Exceeded step memory limit at some point.
+11.03.2018 20:50:33 INFO    Welcome! How are you today?
+11.03.2018 20:50:33 INFO    Tasks:
+11.03.2018 20:50:33 INFO      Baseline training:                 True
+11.03.2018 20:50:33 INFO      Random training:                   True
+11.03.2018 20:50:33 INFO      Morphing training:                 True
+11.03.2018 20:50:33 INFO      Point-by-point training:           True
+11.03.2018 20:50:33 INFO      Calibration:                       False
+11.03.2018 20:50:33 INFO      Likelihood ratio eval:             True
+11.03.2018 20:50:33 INFO      Neyman construction:               True
+11.03.2018 20:50:33 INFO      Neyman construction (alternative): False
+11.03.2018 20:50:33 INFO      Roaming:                           False
+11.03.2018 20:50:33 INFO    Options:
+11.03.2018 20:50:33 INFO      Dry run:                           True
+11.03.2018 20:50:33 INFO      Denominator:                       alternative
+11.03.2018 21:00:45 INFO    Splitting...
+11.03.2018 21:01:09 INFO    Number of events:
+11.03.2018 21:01:09 INFO      All:    821636
+11.03.2018 21:01:09 INFO      Training:    575145
+11.03.2018 21:01:09 INFO      Calibration: 82164
+11.03.2018 21:01:09 INFO      Evaluation:  164327
+11.03.2018 21:01:10 INFO    Normalizing probabilities
+11.03.2018 21:02:59 INFO    Generating baseline training sample
+generate_data.py:228: RuntimeWarning: divide by zero encountered in log
+  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+11.03.2018 21:21:04 INFO    Generating morphing basis training sample
+generate_data.py:318: RuntimeWarning: divide by zero encountered in log
+  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+11.03.2018 21:28:48 INFO    Generating point-by-point training samples
+generate_data.py:408: RuntimeWarning: divide by zero encountered in log
+  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+11.03.2018 22:09:17 INFO    Generating random theta training sample
+generate_data.py:490: RuntimeWarning: divide by zero encountered in log
+  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])

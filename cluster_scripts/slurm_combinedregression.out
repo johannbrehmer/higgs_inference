@@ -147,3 +147,16 @@ Epoch 50/50
 11.03.2018 10:44:05 INFO    Starting theta 100 / 1017
 11.03.2018 11:00:55 INFO    Starting theta 200 / 1017
 11.03.2018 11:17:44 INFO    Starting theta 300 / 1017
+11.03.2018 11:34:34 INFO    Starting theta 400 / 1017
+11.03.2018 11:51:23 INFO    Starting theta 500 / 1017
+11.03.2018 12:08:18 INFO    Starting theta 600 / 1017
+11.03.2018 12:25:16 INFO    Starting theta 700 / 1017
+11.03.2018 12:42:12 INFO    Starting theta 800 / 1017
+11.03.2018 12:59:11 INFO    Starting theta 900 / 1017
+11.03.2018 13:16:08 INFO    Starting theta 1000 / 1017
+11.03.2018 13:19:11 INFO    Starting roaming
+11.03.2018 13:19:16 INFO    Starting calibrated evaluation and roaming
+11.03.2018 21:03:44 INFO    Interpolating calibrated roaming
+11.03.2018 21:05:07 INFO    That's it -- have a great day!
+/opt/slurm/data/slurmd/job4851483/slurm_script: line 21: 103848 Bus error               (core dumped) python -u experiments.py combinedregression --neyman -o deep new
+slurmstepd: error: Exceeded step memory limit at some point.

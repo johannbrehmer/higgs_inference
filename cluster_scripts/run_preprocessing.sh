@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #SBATCH --job-name=preprocessing
-#SBATCH --output=slurm_preprocessing_verysmall.out
+#SBATCH --output=slurm_preprocessing.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=30GB
+#SBATCH --mem=250GB
 #SBATCH --time=8:00:00
 
 # Modules
@@ -14,5 +14,5 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/preprocessing
 
-#python -u generate_data.py --train --random --basis --pointbypoint --scoreregression --new
-python -u generate_data.py --neyman
+python -u generate_data.py --train --random --basis --pointbypoint --scoreregression --test --neyman --alternativedenom --dry
+#python -u generate_data.py --neyman
