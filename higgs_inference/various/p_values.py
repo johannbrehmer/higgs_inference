@@ -183,7 +183,8 @@ def subtract_sm(filename, folder, neyman2_mode=False):
             llr_alternates.append(entry)
             files_found += 1
         except IOError as err:
-            # logging.debug("Error loading file: %s", err)
+            if files_not_found < 10:
+                logging.debug("Error loading file: %s", err)
             placeholder = np.empty((n_neyman_alternate_experiments,))
             placeholder[:] = np.nan
             llr_alternates.append(placeholder)
@@ -201,7 +202,8 @@ def subtract_sm(filename, folder, neyman2_mode=False):
             llr_nulls.append(entry)
             files_found += 1
         except IOError as err:
-            # logging.debug("Error loading file: %s", err)
+            if files_not_found < 10:
+                logging.debug("Error loading file: %s", err)
             placeholder = np.empty((n_neyman_null_experiments,))
             placeholder[:] = np.nan
             llr_nulls.append(placeholder)
@@ -219,7 +221,8 @@ def subtract_sm(filename, folder, neyman2_mode=False):
             llr_nullsatalternate.append(entry)
             files_found += 1
         except IOError as err:
-            # logging.debug("Error loading file: %s", err)
+            if files_not_found < 10:
+                logging.debug("Error loading file: %s", err)
             placeholder = np.empty((n_neyman_null_experiments,))
             placeholder[:] = np.nan
             llr_nullsatalternate.append(placeholder)
