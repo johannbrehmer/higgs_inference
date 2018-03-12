@@ -543,6 +543,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     for t, theta in enumerate(settings.thetas):
 
+        if (t + 1) % 100 == 0:
+            logging.info('Starting theta %s / %s', t + 1, settings.n_thetas)
+
         # Prepare data for calibration
         n_calibration_each = X_calibration_transformed.shape[0]
         thetas0_array = np.zeros((n_calibration_each, 2), dtype=X_calibration_transformed.dtype)
