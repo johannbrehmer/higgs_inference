@@ -281,8 +281,72 @@ def subtract_sm(filename, folder, neyman2_mode=False):
     np.save(result_dir + '/' + neyman_filename + '_llr_vs_sm_alternates_' + filename + '.npy', llr_vs_true_alternates)
 
 
+def find_mle(filename, folder, neyman2_mode=False):
+
+    logging.info('Finding MLE distribution under alternate for ' + folder + ' ' + filename)
+
+    # Settings
+    neyman_dir = settings.neyman_dir + '/' + folder
+    result_dir = settings.base_dir + '/results/' + folder
+    random_thetas = settings.thetas_train
+
+    n_neyman_alternate_experiments = settings.n_neyman_alternate_experiments
+    neyman_filename = 'neyman'
+    if neyman2_mode:
+        neyman_filename = 'neyman2'
+        n_neyman_alternate_experiments = settings.n_neyman2_alternate_experiments
+
+    # Load log likelihood ratios
+    llr_alternates = []
+
+    files_found = 0
+    files_not_found = 0
+    files_wrong_shape = 0
+
+    placeholder = np.empty((n_neyman_alternate_experiments,))
+    placeholder[:] = np.nan
+
+    for t in range(settings.n_thetas):
+        if t in random_thetas:
+            try:
+                entry = np.load(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_' + filename + '.npy')
+                assert entry.shape == (n_neyman_alternate_experiments,)
+                llr_alternates.append(entry)
+                files_found += 1
+            except IOError as err:
+                if files_not_found < 10:
+                    logging.debug("Error loading file: %s", err)
+                llr_alternates.append(placeholder)
+                files_not_found += 1
+            except AssertionError:
+                logging.warning("File %s has wrong shape %s",
+                                neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_' + filename + '.npy',
+                                entry.shape)
+                llr_alternates.append(placeholder)
+                files_wrong_shape += 1
+        else:
+            llr_alternates.append(placeholder)
+
+    logging.debug("Found %s files, didn't find %s files, found %s files with wrong shape", files_found, files_not_found,
+                  files_wrong_shape)
+
+    llr_alternates = np.asarray(llr_alternates)  # Shape: (n_thetas, n_experiments)
+
+    # Find MLE
+    theta_mle_alternate = np.nanargmin(llr_alternates, axis=0)  # Shape: (n_experiments,)
+
+    # Save results
+    np.save(result_dir + '/' + neyman_filename + '_mle_' + filename + '.npy', theta_mle_alternate)
+
+
 def calculate_confidence_limits(filename, folder, neyman2_mode=False):
     """ Steers the calculation of all p-values for a given filename and folder. """
+
+    # Find and save MLEs
+    try:
+        find_mle(filename, folder, neyman2_mode)
+    except ValueError as err:
+        logging.warning('Error in MLE determination: %s', err)
 
     # Preprocessing
     try:

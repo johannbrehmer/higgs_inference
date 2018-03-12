@@ -20,7 +20,7 @@ except ImportError:
     sys.path.append(base_dir)
     from higgs_inference import settings
 
-from higgs_inference.various.p_values import start_cl_calculation
+from higgs_inference.various.neyman_construction import start_cl_calculation
 from higgs_inference.strategies.truth import truth_inference
 from higgs_inference.strategies.local_model import local_model_truth_inference
 from higgs_inference.strategies.afc import afc_inference

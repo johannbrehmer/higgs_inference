@@ -157,7 +157,10 @@ def interpolate(thetas, z_thetas,
 # Interpolation
 ################################################################################
 
-def asymptotic_p_value(asimov_q):
-    median_q = ncx2.ppf(0.5, df=2, nc=max(0., asimov_q))
-    median_p_value = chi2.sf(median_q, df=2)
-    return median_p_value
+def asymptotic_p_value(asimov_q, use_median_rather_than_asimov=False):
+    if use_median_rather_than_asimov:
+        median_q = ncx2.ppf(0.5, df=2, nc=max(0., asimov_q))
+        p_value = chi2.sf(median_q, df=2)
+    else:
+        p_value = chi2.sf(asimov_q, df=2)
+    return p_value
