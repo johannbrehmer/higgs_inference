@@ -508,13 +508,13 @@ def score_regression_inference(use_smearing=False,
                     r_hat_neyman_null = r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
                     llr_neyman_null_rotatedscore = -2. * np.sum(np.log(r_hat_neyman_null), axis=1)
 
-                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(
                         tt) + '_scoreregression' + filename_addition + '.npy', llr_neyman_null)
-                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(
                         tt) + '_scoreregression_scoretheta' + filename_addition + '.npy', llr_neyman_null_scoretheta)
-                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(
                         tt) + '_scoreregression_score' + filename_addition + '.npy', llr_neyman_null_score)
-                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternative_' + str(
+                    np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(
                         tt) + '_scoreregression_rotatedscore' + filename_addition + '.npy',
                             llr_neyman_null_rotatedscore)
 
