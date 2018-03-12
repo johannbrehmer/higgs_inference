@@ -114,7 +114,7 @@ def truth_inference(do_neyman=False,
             # Alternate evaluated at null
             llr_neyman_alternate = -2. * np.sum(np.log(r_neyman_alternate[t]), axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(
-                t) + '_truth_' + filename_addition + '.npy', llr_neyman_alternate)
+                t) + '_truth' + filename_addition + '.npy', llr_neyman_alternate)
 
             # # Old null distributions
             # llr_neyman_nulls = []

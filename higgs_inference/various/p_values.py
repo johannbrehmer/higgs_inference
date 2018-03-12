@@ -185,13 +185,13 @@ def subtract_sm(filename, folder, neyman2_mode=False):
         except IOError as err:
             logging.debug("Error loading file: %s", err)
             placeholder = np.empty((n_neyman_alternate_experiments,))
-            placeholder[:, :] = np.nan
+            placeholder[:] = np.nan
             llr_alternates.append(placeholder)
             files_not_found += 1
         except AssertionError:
             logging.warning("File %s has wrong shape %s", neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_' + filename + '.npy', entry.shape)
             placeholder = np.empty((n_neyman_alternate_experiments,))
-            placeholder[:, :] = np.nan
+            placeholder[:] = np.nan
             llr_alternates.append(placeholder)
             files_wrong_shape += 1
 
@@ -203,13 +203,13 @@ def subtract_sm(filename, folder, neyman2_mode=False):
         except IOError as err:
             logging.debug("Error loading file: %s", err)
             placeholder = np.empty((n_neyman_null_experiments,))
-            placeholder[:, :] = np.nan
+            placeholder[:] = np.nan
             llr_nulls.append(placeholder)
             files_not_found += 1
         except AssertionError:
             logging.warning("File %s has wrong shape %s", neyman_dir + '/' + neyman_filename + '_llr_null_' + str(t) + '_' + filename + '.npy', entry.shape)
             placeholder = np.empty((n_neyman_null_experiments,))
-            placeholder[:, :] = np.nan
+            placeholder[:] = np.nan
             llr_nulls.append(placeholder)
             files_wrong_shape += 1
 
@@ -221,13 +221,13 @@ def subtract_sm(filename, folder, neyman2_mode=False):
         except IOError as err:
             logging.debug("Error loading file: %s", err)
             placeholder = np.empty((n_neyman_null_experiments,))
-            placeholder[:, :] = np.nan
+            placeholder[:] = np.nan
             llr_nullsatalternate.append(placeholder)
             files_not_found += 1
         except AssertionError:
             logging.warning("File %s has wrong shape %s", neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(t) + '_' + filename + '.npy', entry.shape)
             placeholder = np.empty((n_neyman_null_experiments,))
-            placeholder[:, :] = np.nan
+            placeholder[:] = np.nan
             llr_nullsatalternate.append(placeholder)
             files_wrong_shape += 1
 
