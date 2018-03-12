@@ -137,7 +137,7 @@ def histo_inference(indices_X=None,
     cross_entropies_train = []
 
     # Loop over the hypothesis thetas
-    for i, t in enumerate(settings.thetas_around_sm): # TODO put back to settings.extended_pbp_training_thetas
+    for i, t in enumerate(settings.extended_pbp_training_thetas):
 
         logging.info('Starting theta %s/%s: number %s (%s)',
                      i + 1, len(settings.pbp_training_thetas), t, settings.thetas[t])
@@ -286,27 +286,27 @@ def histo_inference(indices_X=None,
 
     logging.info('Interpolation')
 
-    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], expected_llr)
+    interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], expected_llr)
     expected_llr_all = interpolator(settings.thetas)
     np.save(results_dir + '/llr_histo' + filename_addition + '.npy', expected_llr_all)
 
-    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], mse_log_r)
+    interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], mse_log_r)
     mse_log_r_all = interpolator(settings.thetas)
     np.save(results_dir + '/mse_logr_histo' + filename_addition + '.npy',
             mse_log_r_all)
 
-    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], trimmed_mse_log_r)
+    interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], trimmed_mse_log_r)
     trimmed_mse_log_r_all = interpolator(settings.thetas)
     np.save(results_dir + '/trimmed_mse_logr_histo' + filename_addition + '.npy',
             trimmed_mse_log_r_all)
 
-    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], cross_entropies_train)
+    interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], cross_entropies_train)
     cross_entropy_train_mean = np.mean(interpolator(settings.thetas[settings.thetas_train]))
     logging.info('Training cross-entropy: %s', cross_entropy_train_mean)
     np.save(results_dir + '/cross_entropy_train_histo' + filename_addition + '.npy',
             [cross_entropy_train_mean])
 
-    interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], mse_log_r_train)
+    interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], mse_log_r_train)
     mse_log_r_train_mean = np.mean(interpolator(settings.thetas[settings.thetas_train]))
     logging.info('Training MSE log r: %s', mse_log_r_train_mean)
     np.save(results_dir + '/mse_logr_train_histo' + filename_addition + '.npy',

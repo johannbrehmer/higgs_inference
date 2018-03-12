@@ -82,13 +82,13 @@ extended_pbp_training_thetas = pbp_training_thetas + thetas_around_sm
 # Numnber of events
 n_expected_events = 36
 n_expected_events_neyman = 36
-n_expected_events_neyman2 = 12
+n_expected_events_neyman2 = 1
 
 # Number of toy experiments
 n_neyman_null_experiments = 10000
-n_neyman2_null_experiments = 2500
+n_neyman2_null_experiments = 10000
 n_neyman_alternate_experiments = 1001
-n_neyman2_alternate_experiments = 1001
+n_neyman2_alternate_experiments = 10000
 
 # Confidence limit
 # confidence_limit = 0.95  # 0.68
