@@ -741,9 +741,6 @@ if args.neyman:
         np.save(settings.unweighted_events_dir + '/r_neyman_alternate' + filename_addition + '.npy', r)
         np.save(settings.unweighted_events_dir + '/scores_neyman_alternate' + filename_addition + '.npy', scores)
 
-    logging.debug('Memory consumption: X = %s GB, r = %s GB, t = %s GB', X.nbytes * 1.e-9, r.nbytes * 1.e-9,
-                  scores.nbytes * 1.e-9)
-
     del X, r, scores
 
     # Distribution
@@ -762,9 +759,6 @@ if args.neyman:
                 settings.unweighted_events_dir + '/scores_neyman_null_' + str(t) + filename_addition + '.npy',
                 scores)
 
-        logging.debug('Memory consumption: X = %s GB, r = %s GB, t = %s GB', X.nbytes * 1.e-6, r.nbytes * 1.e-6,
-                      scores.nbytes * 1.e-6)
-
         del X, r, scores
 
 ################################################################################
@@ -772,11 +766,14 @@ if args.neyman:
 ################################################################################
 
 if args.neyman2:
+    logging.info('Generating Neyman construction samples')
 
-    logging.info('Generating Neyman construction samples (alternative settings)')
 
+    def generate_data_neyman2(theta_observed, n_toy_experiments, theta1, theta_score, thetas_r=None):
+        gc.collect()
 
-    def generate_data_neyman2(theta_observed, n_toy_experiments, theta1, theta_score):
+        if thetas_r is None:
+            thetas_r = list(range(settings.n_thetas))
 
         indices = np.random.choice(list(range(n_events_test)), n_toy_experiments * settings.n_expected_events_neyman2,
                                    p=weights_test[theta_observed])
@@ -788,9 +785,9 @@ if args.neyman2:
 
         X = np.asarray(weighted_data_test.iloc[indices, subset_features])
 
-        r = np.zeros((settings.n_thetas, n_toy_experiments * settings.n_expected_events_neyman2))
-        for t in range(settings.n_thetas):
-            r[t, :] = np.array(weights_test[t][indices] / weights_test[theta1][indices])
+        r = np.zeros((len(thetas_r), n_toy_experiments * settings.n_expected_events_neyman2))
+        for i, t in enumerate(thetas_r):
+            r[i, :] = np.array(weights_test[t][indices] / weights_test[theta1][indices])
 
         # Scores for score regression / local model
         labels_scores = ["score_theta_" + str(theta_score) + "_0", "score_theta_" + str(theta_score) + "_1"]
@@ -799,15 +796,15 @@ if args.neyman2:
 
         # Reshape to experiments x expected events
         X = X.reshape((n_toy_experiments, settings.n_expected_events_neyman2, -1))
-        r = r.reshape((settings.n_thetas, n_toy_experiments, settings.n_expected_events_neyman2))
+        r = r.reshape((len(thetas_r), n_toy_experiments, settings.n_expected_events_neyman2))
         scores = scores.reshape((n_toy_experiments, settings.n_expected_events_neyman2, 2))
 
         return X, r, scores
 
 
-    # alternate
+    # Observed
     X, r, scores = generate_data_neyman2(settings.theta_observed, settings.n_neyman2_alternate_experiments, theta1,
-                                         settings.theta_score_regression)
+                                        settings.theta_score_regression)
 
     logging.info('Generated %s toy experiments with %s events each for the alternate according to theta = %s',
                  X.shape[0], X.shape[1], thetas[settings.theta_observed])
@@ -817,22 +814,25 @@ if args.neyman2:
         np.save(settings.unweighted_events_dir + '/r_neyman2_alternate' + filename_addition + '.npy', r)
         np.save(settings.unweighted_events_dir + '/scores_neyman2_alternate' + filename_addition + '.npy', scores)
 
-    # null
+    del X, r, scores
+
+    # Distribution
     for t, theta in enumerate(thetas):
         X, r, scores = generate_data_neyman2(t, settings.n_neyman2_null_experiments, theta1,
-                                             settings.theta_score_regression)
+                                            settings.theta_score_regression,
+                                            thetas_r=[settings.theta_observed, t])
 
         logging.info('Generated %s toy experiments with %s events each for the null according to theta = %s',
                      X.shape[0], X.shape[1], theta)
 
         if not args.dry:
-            np.save(settings.unweighted_events_dir + '/X_neyman2_null_' + str(t) + filename_addition + '.npy',
-                    X)
-            np.save(settings.unweighted_events_dir + '/r_neyman2_null_' + str(t) + filename_addition + '.npy',
-                    r)
+            np.save(settings.unweighted_events_dir + '/X_neyman2_null_' + str(t) + filename_addition + '.npy', X)
+            np.save(settings.unweighted_events_dir + '/r_neyman2_null_' + str(t) + filename_addition + '.npy', r)
             np.save(
                 settings.unweighted_events_dir + '/scores_neyman2_null_' + str(t) + filename_addition + '.npy',
                 scores)
+
+        del X, r, scores
 
 ################################################################################
 # Roam data
