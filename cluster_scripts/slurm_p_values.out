@@ -1,39 +1,49 @@
-12.03.2018 09:07:15 INFO    Hi! How are you today?
-12.03.2018 09:07:15 INFO    Startup options:
-12.03.2018 09:07:15 INFO      Algorithm:                     cl
-12.03.2018 09:07:15 INFO      Point by point:                False
-12.03.2018 09:07:15 INFO      Morphing-aware mode:           False
-12.03.2018 09:07:15 INFO      Smeared data:                  False
-12.03.2018 09:07:15 INFO      Training sample:               baseline
-12.03.2018 09:07:15 INFO      alpha:                         None
-12.03.2018 09:07:15 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-12.03.2018 09:07:15 INFO      AFC epsilon:                   None
-12.03.2018 09:07:15 INFO      Neyman construction toys:      False
-12.03.2018 09:07:15 INFO      Other options:                 
-12.03.2018 09:07:15 INFO      Base directory:                /home/jb6504/higgs_inference
-12.03.2018 09:07:15 INFO      ML-based strategies available: False
-12.03.2018 09:07:15 INFO    Starting p-value calculation
-12.03.2018 09:07:15 INFO    Subtracting SM for truth truth
-12.03.2018 09:07:34 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-12.03.2018 09:07:39 INFO    Calculating p-values for truth/truth
-12.03.2018 09:07:40 INFO    Subtracting SM for histo histo_2d_new
-12.03.2018 09:07:46 DEBUG    Found 291 files, didn't find 2760 files, found 0 files with wrong shape
-12.03.2018 09:07:51 INFO    Calculating p-values for histo/histo_2d_new
+12.03.2018 11:12:57 INFO    Hi! How are you today?
+12.03.2018 11:12:57 INFO    Startup options:
+12.03.2018 11:12:57 INFO      Algorithm:                     cl
+12.03.2018 11:12:57 INFO      Point by point:                False
+12.03.2018 11:12:57 INFO      Morphing-aware mode:           False
+12.03.2018 11:12:57 INFO      Smeared data:                  False
+12.03.2018 11:12:57 INFO      Training sample:               baseline
+12.03.2018 11:12:57 INFO      alpha:                         None
+12.03.2018 11:12:57 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+12.03.2018 11:12:57 INFO      AFC epsilon:                   None
+12.03.2018 11:12:57 INFO      Neyman construction toys:      False
+12.03.2018 11:12:57 INFO      Other options:                 
+12.03.2018 11:12:57 INFO      Base directory:                /home/jb6504/higgs_inference
+12.03.2018 11:12:57 INFO      ML-based strategies available: False
+12.03.2018 11:12:57 INFO    Starting p-value calculation
+12.03.2018 11:12:57 INFO    Subtracting SM for truth truth
+12.03.2018 11:13:03 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+12.03.2018 11:13:08 INFO    Calculating p-values for truth/truth
+12.03.2018 11:13:09 INFO    Subtracting SM for histo histo_2d_new
+12.03.2018 11:13:09 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_1_histo_2d_new.npy'
+12.03.2018 11:13:09 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_null_1_histo_2d_new.npy'
+12.03.2018 11:13:09 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_1_histo_2d_new.npy'
+12.03.2018 11:13:09 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_2_histo_2d_new.npy'
+12.03.2018 11:13:09 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_null_2_histo_2d_new.npy'
+12.03.2018 11:13:09 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_2_histo_2d_new.npy'
+12.03.2018 11:13:09 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_3_histo_2d_new.npy'
+12.03.2018 11:13:09 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_null_3_histo_2d_new.npy'
+12.03.2018 11:13:09 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_3_histo_2d_new.npy'
+12.03.2018 11:13:09 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_4_histo_2d_new.npy'
+12.03.2018 11:13:10 DEBUG    Found 291 files, didn't find 2760 files, found 0 files with wrong shape
+12.03.2018 11:13:14 INFO    Calculating p-values for histo/histo_2d_new
 /share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/function_base.py:3569: RuntimeWarning: Invalid value encountered in median
   RuntimeWarning)
-12.03.2018 09:07:51 INFO    Subtracting SM for score_regression scoreregression_score
-12.03.2018 09:07:51 DEBUG    Found 0 files, didn't find 3051 files, found 0 files with wrong shape
-12.03.2018 09:07:56 INFO    Calculating p-values for score_regression/scoreregression_score
-12.03.2018 09:07:57 INFO    Subtracting SM for parameterized carl_shallow_new
-12.03.2018 09:08:36 DEBUG    Found 2131 files, didn't find 920 files, found 0 files with wrong shape
-12.03.2018 09:08:51 INFO    Calculating p-values for parameterized/carl_shallow_new
-12.03.2018 09:08:52 INFO    Subtracting SM for parameterized combined_deep_new
-12.03.2018 09:09:28 DEBUG    Found 2131 files, didn't find 920 files, found 0 files with wrong shape
-12.03.2018 09:09:43 INFO    Calculating p-values for parameterized/combined_deep_new
-12.03.2018 09:09:44 INFO    Subtracting SM for parameterized regression_new
-12.03.2018 09:10:22 DEBUG    Found 2131 files, didn't find 920 files, found 0 files with wrong shape
-12.03.2018 09:10:37 INFO    Calculating p-values for parameterized/regression_new
-12.03.2018 09:10:38 INFO    Subtracting SM for parameterized combinedregression_deep_new
-12.03.2018 09:11:18 DEBUG    Found 2131 files, didn't find 920 files, found 0 files with wrong shape
-12.03.2018 09:11:33 INFO    Calculating p-values for parameterized/combinedregression_deep_new
-12.03.2018 09:11:33 INFO    That's it -- have a great day!
+12.03.2018 11:13:15 INFO    Subtracting SM for score_regression scoreregression_score_deep_new
+12.03.2018 11:13:23 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+12.03.2018 11:13:27 INFO    Calculating p-values for score_regression/scoreregression_score_deep_new
+12.03.2018 11:13:28 INFO    Subtracting SM for parameterized carl_calibrated_shallow_new
+12.03.2018 11:13:56 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+12.03.2018 11:14:01 INFO    Calculating p-values for parameterized/carl_calibrated_shallow_new
+12.03.2018 11:14:01 INFO    Subtracting SM for parameterized combined_calibrated_deep_new
+12.03.2018 11:14:32 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+12.03.2018 11:14:36 INFO    Calculating p-values for parameterized/combined_calibrated_deep_new
+12.03.2018 11:14:37 INFO    Subtracting SM for parameterized regression_calibrated_new
+12.03.2018 11:15:06 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+12.03.2018 11:15:11 INFO    Calculating p-values for parameterized/regression_calibrated_new
+12.03.2018 11:15:12 INFO    Subtracting SM for parameterized combinedregression_calibrated_deep_new
+12.03.2018 11:15:39 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+12.03.2018 11:15:44 INFO    Calculating p-values for parameterized/combinedregression_calibrated_deep_new
+12.03.2018 11:15:45 INFO    That's it -- have a great day!

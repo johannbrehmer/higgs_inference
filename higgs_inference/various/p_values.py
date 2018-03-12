@@ -318,8 +318,8 @@ def start_cl_calculation(options=''):
 
     calculate_confidence_limits('truth', 'truth', neyman2_mode)
     calculate_confidence_limits('histo_2d_new', 'histo', neyman2_mode)
-    calculate_confidence_limits('scoreregression_score', 'score_regression', neyman2_mode)
-    calculate_confidence_limits('carl_shallow_new', 'parameterized', neyman2_mode)
-    calculate_confidence_limits('combined_deep_new', 'parameterized', neyman2_mode)
-    calculate_confidence_limits('regression_new', 'parameterized', neyman2_mode)
-    calculate_confidence_limits('combinedregression_deep_new', 'parameterized', neyman2_mode)
+    calculate_confidence_limits('scoreregression_score_deep_new', 'score_regression', neyman2_mode)
+    calculate_confidence_limits('carl_calibrated_shallow_new', 'parameterized', neyman2_mode)
+    calculate_confidence_limits('combined_calibrated_deep_new', 'parameterized', neyman2_mode)
+    calculate_confidence_limits('regression_calibrated_new', 'parameterized', neyman2_mode)
+    calculate_confidence_limits('combinedregression_calibrated_deep_new', 'parameterized', neyman2_mode)
