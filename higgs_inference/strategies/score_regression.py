@@ -5,6 +5,7 @@
 from __future__ import absolute_import, division, print_function
 
 import logging
+import time
 import numpy as np
 
 from sklearn.preprocessing import StandardScaler
@@ -206,7 +207,11 @@ def score_regression_inference(use_smearing=False,
 
     logging.info('Starting evaluation')
     that_calibration = regr.predict(X_calibration_transformed)
+    time_before = time.time()
     that_test = regr.predict(X_test_transformed)
+    eval_time = time.time() - time_before
+
+    logging.info('Score regression evaluation timing: %s s', eval_time)
 
     ################################################################################
     # Evaluation and density estimation
@@ -225,6 +230,9 @@ def score_regression_inference(use_smearing=False,
     trimmed_mse_log_r_scoretheta = []
     trimmed_mse_log_r_score = []
     trimmed_mse_log_r_rotatedscore = []
+    eval_times_scoretheta = []
+    eval_times_score = []
+    eval_times_rotatedscore = []
 
     for t, theta in enumerate(settings.thetas):
 
@@ -304,9 +312,15 @@ def score_regression_inference(use_smearing=False,
         that_rotated_test = that_test.dot(rotation_matrix)
 
         # Calibration
+        time_before = time.time()
         r_hat_scoretheta_test = r_from_s(calibrator_scoretheta.predict(tthat_test.reshape((-1,))))
+        eval_times_scoretheta.append(time.time() - time_before)
+        time_before = time.time()
         r_hat_score_test = r_from_s(calibrator_score.predict(that_test))
+        eval_times_score.append(time.time() - time_before)
+        time_before = time.time()
         r_hat_rotatedscore_test = r_from_s(calibrator_rotatedscore.predict(that_rotated_test))
+        eval_times_rotatedscore.append(time.time() - time_before)
 
         # Extract relevant numnbers
         expected_llr.append(-2. * settings.n_expected_events / n_events_test * np.sum(tthat_test))
@@ -523,6 +537,14 @@ def score_regression_inference(use_smearing=False,
                     np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(
                         tt) + '_scoreregression_rotatedscore' + filename_addition + '.npy',
                             llr_neyman_null_rotatedscore)
+
+    # Evaluation times
+    logging.info('Score density estimation timing: median %s s, mean %s s',
+                 np.median(eval_times_scoretheta), np.mean(eval_times_scoretheta))
+    logging.info('Rotated score density estimation timing: median %s s, mean %s s',
+                 np.median(eval_times_rotatedscore), np.mean(eval_times_rotatedscore))
+    logging.info('Score times theta density estimation timing: median %s s, mean %s s',
+                 np.median(eval_times_score), np.mean(eval_times_score))
 
     # Save expected LLR
     expected_llr = np.asarray(expected_llr)

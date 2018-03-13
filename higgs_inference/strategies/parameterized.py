@@ -7,6 +7,7 @@ from __future__ import absolute_import, division, print_function
 import logging
 import numpy as np
 import math
+import time
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.gaussian_process import GaussianProcessRegressor
@@ -406,6 +407,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     expected_llr = []
     mse_log_r = []
     trimmed_mse_log_r = []
+    eval_times = []
 
     for t, theta in enumerate(settings.thetas):
 
@@ -418,7 +420,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         X_thetas_test = np.hstack((X_test_transformed, thetas0_array))
 
         # Evaluation
+        time_before = time.time()
         prediction = regr.predict(X_thetas_test)
+        eval_times.append(time.time() - time_before)
+
         this_log_r = prediction[:, 1]
         this_score = prediction[:, 2:4]
         if morphing_aware:
@@ -529,6 +534,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     np.save(results_dir + '/mse_logr_' + algorithm + filename_addition + '.npy', mse_log_r)
     np.save(results_dir + '/trimmed_mse_logr_' + algorithm + filename_addition + '.npy', trimmed_mse_log_r)
 
+    # Evaluation times
+    logging.info('Evaluation timing: median %s s, mean %s s', np.median(eval_times), np.mean(eval_times))
+
     logging.info('Starting roaming')
     r_roam = []
     for i in range(n_roaming):
@@ -546,6 +554,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     mse_log_r_calibrated = []
     trimmed_mse_log_r_calibrated = []
     r_roam_temp = np.zeros((settings.n_thetas, n_roaming))
+    eval_times = []
 
     for t, theta in enumerate(settings.thetas):
 
@@ -575,7 +584,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         thetas0_array[:, :] = settings.thetas[t]
         X_thetas_test = np.hstack((X_test_transformed, thetas0_array))
 
+        time_before = time.time()
         this_r, this_other = ratio_calibrated.predict(X_thetas_test)
+        eval_times.append(time.time() - time_before)
         this_score = this_other[:, 1:3]
 
         # Extract numbers of interest
@@ -694,6 +705,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     np.save(results_dir + '/mse_logr_' + algorithm + '_calibrated' + filename_addition + '.npy', mse_log_r_calibrated)
     np.save(results_dir + '/trimmed_mse_logr_' + algorithm + '_calibrated' + filename_addition + '.npy',
             trimmed_mse_log_r_calibrated)
+
+    # Evalauation times
+    logging.info('Calibrated evaluation timing: median %s s, mean %s s', np.median(eval_times), np.mean(eval_times))
 
     logging.info('Interpolating calibrated roaming')
     gp = GaussianProcessRegressor(normalize_y=True,

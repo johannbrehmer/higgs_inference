@@ -180,4 +180,12 @@ smearing_lepton_pt = 3.e-4  # times pT^2. Original: 3.e-4
 max_score = 50.
 max_logr = 100.
 
+################################################################################
+# Metrics
+################################################################################
+
 trim_mean_fraction = 0.05  # Fraction of best-fit and worst-fit events thrown away in the trimmed mean
+
+theta_prior = np.exp(-(thetas[:,0]**2 + thetas[:,1]**2) / (2. * 2. * 0.2**2))
+theta_prior[:17] = 0.
+theta_prior /= np.sum(theta_prior)
