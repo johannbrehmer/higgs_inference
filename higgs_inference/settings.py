@@ -159,7 +159,7 @@ n_events_calibration = 1000
 n_events_test = 50000
 
 # Roaming, total
-n_events_roam = 20
+n_events_roam = 100
 
 ################################################################################
 # Smearing (approximate shower + detector simulation)

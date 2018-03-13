@@ -609,7 +609,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # Neyman construction: alternate (calibrated)
             r_neyman_alternate, _ = ratio_calibrated.predict(X_thetas_neyman_alternate)
-            llr_neyman_alternate = -2. * np.sum(np.log(r_neyman_alternate).reshape((-1, settings.n_expected_events)),
+            llr_neyman_alternate = -2. * np.sum(np.log(r_neyman_alternate).reshape((-1, n_expected_events_neyman)),
                                                 axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(
                 t) + '_' + algorithm + '_calibrated' + filename_addition + '.npy', llr_neyman_alternate)
