@@ -84,16 +84,24 @@ n_expected_events = 36
 n_neyman_null_experiments = 10000
 n_neyman_alternate_experiments = 1001
 n_expected_events_neyman = 36
+n_convolutions_neyman = 0
 
 # Single-event distributions
 n_expected_events_neyman2 = 1
 n_neyman2_null_experiments = 10000
 n_neyman2_alternate_experiments = 10000
+n_convolutions_neyman2 = 35
 
 # Removing duplicates because why not
-n_expected_events_neyman3 = 36
-n_neyman3_null_experiments = 1000
-n_neyman3_alternate_experiments = 1001
+n_expected_events_neyman3 = 1
+n_neyman3_null_experiments = 10000
+n_neyman3_alternate_experiments = 10000
+n_convolutions_neyman3 = 35
+
+# Convolution settings
+neyman_convolution_min = -50.
+neyman_convolution_max = 50.
+neyman_convolution_bins = 10001
 
 # Confidence limit
 confidence_levels = np.asarray([0.68, 0.95, 0.997])

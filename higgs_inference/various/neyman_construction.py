@@ -6,29 +6,80 @@ from __future__ import absolute_import, division, print_function
 
 import logging
 import numpy as np
+import math
 
 from higgs_inference import settings
+from higgs_inference.various.utils import weighted_quantile
 
 
-def calculate_median_p_value(test_statistics_null, test_statistics_alternate):
+def calculate_self_convolutions(x, convolutions, xmin, xmax, nbins):
+    norm = nbins / (xmax - xmin)
+
+    histo, _ = np.histogram(x, bins=nbins, range=(xmin, xmax))
+    histo = histo * norm / np.sum(histo)
+
+    convolved_histo = histo
+    for c in range(convolutions):
+        convolved_histo = np.convolve(convolved_histo, histo, mode='same')
+        convolved_histo = convolved_histo * norm / np.sum(convolved_histo)
+    return convolved_histo
+
+
+def calculate_median_p_value(test_statistics_null, test_statistics_alternate, n_self_convolutions=0):
     """ Calculates the median p-value given a set of alternate LLR values and a null of LLR values given the
     hypothesis to test """
 
-    null = np.sort(test_statistics_null.flatten())
+    null = test_statistics_null
+    alternate = test_statistics_alternate
 
-    p_values_left = 1. - np.searchsorted(null, test_statistics_alternate, side='left').astype('float') / len(null)
-    p_values_right = 1. - np.searchsorted(null, test_statistics_alternate, side='right').astype('float') / len(null)
-    p_values = 0.5 * (p_values_left + p_values_right)
+    # Self convolutions: require histogram
+    if n_self_convolutions > 0:
+        xmin = settings.neyman_convolution_min
+        xmax = settings.neyman_convolution_max
+        nbins = settings.neyman_convolution_min
+        xvals = np.linspace(xmin + 0.5*(xmax - xmin)/nbins, xmax - 0.5*(xmax - xmin)/nbins, nbins)
 
-    q_cuts = []
-    q_cut_uncertainties = []
-    for cl in settings.confidence_levels:
-        q_cut_index = int(cl * len(test_statistics_null)) - 1
-        q_cuts.append((null[q_cut_index] + null[q_cut_index + 1]) / 2)
-        q_cut_uncertainties.append((null[q_cut_index + 1] - null[q_cut_index]) / 2)
+        null_histo = calculate_self_convolutions(null, n_self_convolutions, xmin, xmax, nbins)
+        alternate_histo = calculate_self_convolutions(alternate, n_self_convolutions, xmin, xmax, nbins)
 
-    return np.median(p_values), np.asarray(q_cuts), np.asarray(q_cut_uncertainties), np.median(
-        test_statistics_alternate)
+        # Calculate alternate median
+        q_median = weighted_quantile(xvals, 0.5, alternate_histo)
+
+        # Calculate null boundaries for given CLs
+        q_cuts = []
+        for cl in settings.confidence_levels:
+            q_cuts.append(weighted_quantile(xvals, cl, null_histo))
+        q_cut_uncertainties = np.ones_like(q_cuts) * 0.5*(xmax - xmin)/nbins
+
+        # Calculate p-values
+        q_median_histo_index = int(math.floor((q_median - xmin) / (xmax - xmin) * nbins))
+        q_median_histo_index = max(q_median_histo_index, 0)
+        q_median_histo_index = min(q_median_histo_index, nbins - 1)
+
+        p_value = ((np.sum(alternate_histo[q_median_histo_index:]) - 0.5 * alternate_histo[q_median_histo_index])
+                   / np.sum(alternate_histo[:]))
+
+    else:
+        # Sort
+        null = np.sort(null.flatten())
+
+        # Calculate p-values
+        p_values_left = 1. - np.searchsorted(null, alternate, side='left').astype('float') / len(null)
+        p_values_right = 1. - np.searchsorted(null, alternate, side='right').astype('float') / len(null)
+        p_value = np.median(0.5 * (p_values_left + p_values_right))
+
+        # Calculate alternate median
+        q_median = np.median(alternate)
+
+        # Calculate null boundaries for given CLs
+        q_cuts = []
+        q_cut_uncertainties = []
+        for cl in settings.confidence_levels:
+            q_cut_index = int(cl * len(test_statistics_null)) - 1
+            q_cuts.append((null[q_cut_index] + null[q_cut_index + 1]) / 2)
+            q_cut_uncertainties.append((null[q_cut_index + 1] - null[q_cut_index]) / 2)
+
+    return p_value, np.asarray(q_cuts), np.asarray(q_cut_uncertainties), q_median
 
 
 # def subtract_mle(filename, filename_suffix, folder, neyman2_mode=False):
