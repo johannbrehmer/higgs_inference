@@ -418,11 +418,15 @@ def calculate_confidence_limits(filename, folder, neyman_set=1):
     # Settings
     result_dir = settings.base_dir + '/results/' + folder
     n_thetas = settings.n_thetas
+
     neyman_filename = 'neyman'
+    n_self_convolutions = settings.n_convolutions_neyman
     if neyman_set == 2:
         neyman_filename = 'neyman2'
+        n_self_convolutions = settings.n_convolutions_neyman2
     if neyman_set == 3:
         neyman_filename = 'neyman3'
+        n_self_convolutions = settings.n_convolutions_neyman3
 
     # Load LLR
     llr_vs_true_nulls = np.load(result_dir + '/' + neyman_filename + '_llr_vs_sm_nulls_' + filename + '.npy')
@@ -436,8 +440,9 @@ def calculate_confidence_limits(filename, folder, neyman_set=1):
 
     # Go!
     for t in range(n_thetas):
-        p_values_mle[t], q_cut_values_mle[t, :], q_cut_uncertainties_mle[t, :], q_median_values_mle[
-            t] = calculate_median_p_value(llr_vs_true_nulls[t, :], llr_vs_true_alternates[t, :])
+        (p_values_mle[t], q_cut_values_mle[t, :], q_cut_uncertainties_mle[t, :],
+         q_median_values_mle[t]) = calculate_median_p_value(llr_vs_true_nulls[t, :], llr_vs_true_alternates[t, :],
+                                                            n_self_convolutions)
 
     np.save(result_dir + '/' + neyman_filename + '_pvalues_' + filename + '.npy', p_values_mle)
     np.save(result_dir + '/' + neyman_filename + '_qcut_' + filename + '.npy', q_cut_values_mle)
