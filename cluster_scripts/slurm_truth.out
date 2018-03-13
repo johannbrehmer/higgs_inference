@@ -1,22 +1,22 @@
-12.03.2018 09:01:33 INFO    Hi! How are you today?
-12.03.2018 09:01:33 INFO    Startup options:
-12.03.2018 09:01:33 INFO      Algorithm:                     truth
-12.03.2018 09:01:33 INFO      Point by point:                False
-12.03.2018 09:01:33 INFO      Morphing-aware mode:           False
-12.03.2018 09:01:33 INFO      Smeared data:                  False
-12.03.2018 09:01:33 INFO      Training sample:               baseline
-12.03.2018 09:01:33 INFO      alpha:                         None
-12.03.2018 09:01:33 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-12.03.2018 09:01:33 INFO      AFC epsilon:                   None
-12.03.2018 09:01:33 INFO      Neyman construction toys:      True
-12.03.2018 09:01:33 INFO      Other options:                 
-12.03.2018 09:01:33 INFO      Base directory:                /home/jb6504/higgs_inference
-12.03.2018 09:01:33 INFO      ML-based strategies available: False
-12.03.2018 09:01:33 INFO    Starting truth calculation
-12.03.2018 09:01:33 DEBUG    NC settings: False neyman 36 10000 1001
-12.03.2018 09:01:39 INFO    Starting evaluation
-12.03.2018 09:01:41 INFO    Starting roaming
-12.03.2018 09:04:20 INFO    Calculating cross-entropy on train set
-12.03.2018 09:04:21 INFO    Training cross-entropy: 0.657932534292
-12.03.2018 09:04:21 INFO    Starting evaluation of Neyman experiments
-12.03.2018 09:05:36 INFO    That's it -- have a great day!
+12.03.2018 18:26:45 INFO    Hi! How are you today?
+12.03.2018 18:26:45 INFO    Startup options:
+12.03.2018 18:26:45 INFO      Algorithm:                     truth
+12.03.2018 18:26:45 INFO      Point by point:                False
+12.03.2018 18:26:45 INFO      Morphing-aware mode:           False
+12.03.2018 18:26:45 INFO      Smeared data:                  False
+12.03.2018 18:26:45 INFO      Training sample:               baseline
+12.03.2018 18:26:45 INFO      alpha:                         None
+12.03.2018 18:26:45 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+12.03.2018 18:26:45 INFO      AFC epsilon:                   None
+12.03.2018 18:26:45 INFO      Neyman construction toys:      True
+12.03.2018 18:26:45 INFO      Other options:                 ['neyman2']
+12.03.2018 18:26:45 INFO      Base directory:                /home/jb6504/higgs_inference
+12.03.2018 18:26:45 INFO      ML-based strategies available: False
+12.03.2018 18:26:45 INFO    Starting truth calculation
+12.03.2018 18:26:45 DEBUG    NC settings: True neyman2 1 10000 10000
+12.03.2018 18:26:49 INFO    Starting evaluation
+12.03.2018 18:26:52 INFO    Starting roaming
+12.03.2018 18:29:07 INFO    Calculating cross-entropy on train set
+12.03.2018 18:29:09 INFO    Training cross-entropy: 0.657932534292
+12.03.2018 18:29:09 INFO    Starting evaluation of Neyman experiments
+12.03.2018 18:29:49 INFO    That's it -- have a great day!

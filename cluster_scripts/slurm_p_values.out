@@ -1,49 +1,157 @@
-12.03.2018 13:45:35 INFO    Hi! How are you today?
-12.03.2018 13:45:35 INFO    Startup options:
-12.03.2018 13:45:35 INFO      Algorithm:                     cl
-12.03.2018 13:45:35 INFO      Point by point:                False
-12.03.2018 13:45:35 INFO      Morphing-aware mode:           False
-12.03.2018 13:45:35 INFO      Smeared data:                  False
-12.03.2018 13:45:35 INFO      Training sample:               baseline
-12.03.2018 13:45:35 INFO      alpha:                         None
-12.03.2018 13:45:35 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-12.03.2018 13:45:35 INFO      AFC epsilon:                   None
-12.03.2018 13:45:35 INFO      Neyman construction toys:      False
-12.03.2018 13:45:35 INFO      Other options:                 
-12.03.2018 13:45:35 INFO      Base directory:                /home/jb6504/higgs_inference
-12.03.2018 13:45:35 INFO      ML-based strategies available: False
-12.03.2018 13:45:35 INFO    Starting p-value calculation
-12.03.2018 13:45:35 INFO    Subtracting SM for truth truth
-12.03.2018 13:49:31 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-12.03.2018 13:49:36 INFO    Calculating p-values for truth/truth
-12.03.2018 13:49:37 INFO    Subtracting SM for histo histo_2d_new
-12.03.2018 13:49:37 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_1_histo_2d_new.npy'
-12.03.2018 13:49:37 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_null_1_histo_2d_new.npy'
-12.03.2018 13:49:37 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_1_histo_2d_new.npy'
-12.03.2018 13:49:37 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_2_histo_2d_new.npy'
-12.03.2018 13:49:37 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_null_2_histo_2d_new.npy'
-12.03.2018 13:49:37 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_2_histo_2d_new.npy'
-12.03.2018 13:49:37 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_3_histo_2d_new.npy'
-12.03.2018 13:49:37 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_null_3_histo_2d_new.npy'
-12.03.2018 13:49:37 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_3_histo_2d_new.npy'
-12.03.2018 13:49:37 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_4_histo_2d_new.npy'
-12.03.2018 13:49:59 DEBUG    Found 291 files, didn't find 2760 files, found 0 files with wrong shape
-12.03.2018 13:50:04 INFO    Calculating p-values for histo/histo_2d_new
+13.03.2018 08:23:59 INFO    Hi! How are you today?
+13.03.2018 08:23:59 INFO    Startup options:
+13.03.2018 08:23:59 INFO      Algorithm:                     cl
+13.03.2018 08:23:59 INFO      Point by point:                False
+13.03.2018 08:23:59 INFO      Morphing-aware mode:           False
+13.03.2018 08:23:59 INFO      Smeared data:                  False
+13.03.2018 08:23:59 INFO      Training sample:               baseline
+13.03.2018 08:23:59 INFO      alpha:                         None
+13.03.2018 08:23:59 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+13.03.2018 08:23:59 INFO      AFC epsilon:                   None
+13.03.2018 08:23:59 INFO      Neyman construction toys:      False
+13.03.2018 08:23:59 INFO      Other options:                 ['neyman2']
+13.03.2018 08:23:59 INFO      Base directory:                /home/jb6504/higgs_inference
+13.03.2018 08:23:59 INFO      ML-based strategies available: False
+13.03.2018 08:23:59 INFO    Starting p-value calculation
+13.03.2018 08:23:59 INFO    Finding MLE distribution under alternate for truth truth
+13.03.2018 08:24:19 DEBUG    Found 1000 files, didn't find 0 files, found 0 files with wrong shape
+13.03.2018 08:24:20 INFO    Subtracting SM for truth truth
+13.03.2018 08:24:59 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+13.03.2018 08:25:07 INFO    Calculating p-values for truth/truth
+13.03.2018 08:25:10 INFO    Finding MLE distribution under alternate for histo histo_2d_new
+13.03.2018 08:25:10 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_17_histo_2d_new.npy'
+13.03.2018 08:25:10 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_19_histo_2d_new.npy'
+13.03.2018 08:25:10 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_20_histo_2d_new.npy'
+13.03.2018 08:25:10 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_21_histo_2d_new.npy'
+13.03.2018 08:25:10 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_22_histo_2d_new.npy'
+13.03.2018 08:25:10 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_23_histo_2d_new.npy'
+13.03.2018 08:25:10 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_24_histo_2d_new.npy'
+13.03.2018 08:25:10 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_25_histo_2d_new.npy'
+13.03.2018 08:25:10 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_26_histo_2d_new.npy'
+13.03.2018 08:25:10 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_27_histo_2d_new.npy'
+13.03.2018 08:25:13 DEBUG    Found 91 files, didn't find 909 files, found 0 files with wrong shape
+13.03.2018 08:25:13 INFO    Subtracting SM for histo histo_2d_new
+13.03.2018 08:25:13 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_nullatalternate_1_histo_2d_new.npy'
+13.03.2018 08:25:13 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_nullatalternate_2_histo_2d_new.npy'
+13.03.2018 08:25:13 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_nullatalternate_3_histo_2d_new.npy'
+13.03.2018 08:25:13 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_nullatalternate_4_histo_2d_new.npy'
+13.03.2018 08:25:13 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_nullatalternate_5_histo_2d_new.npy'
+13.03.2018 08:25:13 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_nullatalternate_6_histo_2d_new.npy'
+13.03.2018 08:25:13 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_nullatalternate_7_histo_2d_new.npy'
+13.03.2018 08:25:13 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_nullatalternate_8_histo_2d_new.npy'
+13.03.2018 08:25:14 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_10_histo_2d_new.npy'
+13.03.2018 08:25:14 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_null_10_histo_2d_new.npy'
+13.03.2018 08:25:18 DEBUG    Found 307 files, didn't find 2744 files, found 0 files with wrong shape
+13.03.2018 08:25:27 INFO    Calculating p-values for histo/histo_2d_new
 /share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/function_base.py:3569: RuntimeWarning: Invalid value encountered in median
   RuntimeWarning)
-12.03.2018 13:50:04 INFO    Subtracting SM for score_regression scoreregression_score_deep_new
-12.03.2018 13:53:10 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-12.03.2018 13:53:15 INFO    Calculating p-values for score_regression/scoreregression_score_deep_new
-12.03.2018 13:53:16 INFO    Subtracting SM for parameterized carl_calibrated_shallow_new
-12.03.2018 13:56:36 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-12.03.2018 13:56:41 INFO    Calculating p-values for parameterized/carl_calibrated_shallow_new
-12.03.2018 13:56:42 INFO    Subtracting SM for parameterized combined_calibrated_deep_new
-12.03.2018 13:59:48 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-12.03.2018 13:59:52 INFO    Calculating p-values for parameterized/combined_calibrated_deep_new
-12.03.2018 13:59:53 INFO    Subtracting SM for parameterized regression_calibrated_new
-12.03.2018 14:02:35 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-12.03.2018 14:02:40 INFO    Calculating p-values for parameterized/regression_calibrated_new
-12.03.2018 14:02:41 INFO    Subtracting SM for parameterized combinedregression_calibrated_deep_new
-12.03.2018 14:06:01 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-12.03.2018 14:06:05 INFO    Calculating p-values for parameterized/combinedregression_calibrated_deep_new
-12.03.2018 14:06:06 INFO    That's it -- have a great day!
+13.03.2018 08:25:28 INFO    Finding MLE distribution under alternate for score_regression scoreregression_score_deep_new
+13.03.2018 08:25:49 DEBUG    Found 1000 files, didn't find 0 files, found 0 files with wrong shape
+13.03.2018 08:25:49 INFO    Subtracting SM for score_regression scoreregression_score_deep_new
+13.03.2018 08:26:34 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+13.03.2018 08:26:43 INFO    Calculating p-values for score_regression/scoreregression_score_deep_new
+13.03.2018 08:26:46 INFO    Finding MLE distribution under alternate for parameterized carl_calibrated_shallow_new
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_17_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_18_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_19_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_20_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_21_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_22_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_23_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_24_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_25_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_26_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Found 0 files, didn't find 1000 files, found 0 files with wrong shape
+13.03.2018 08:26:46 WARNING    Error in MLE determination: All-NaN slice encountered
+13.03.2018 08:26:46 INFO    Subtracting SM for parameterized carl_calibrated_shallow_new
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_0_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_null_0_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_nullatalternate_0_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_1_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_null_1_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_nullatalternate_1_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_2_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_null_2_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_nullatalternate_2_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_3_carl_calibrated_shallow_new.npy'
+13.03.2018 08:26:46 DEBUG    Found 0 files, didn't find 3051 files, found 0 files with wrong shape
+13.03.2018 08:26:55 INFO    Calculating p-values for parameterized/carl_calibrated_shallow_new
+13.03.2018 08:26:56 INFO    Finding MLE distribution under alternate for parameterized combined_calibrated_deep_new
+13.03.2018 08:26:56 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_17_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:56 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_18_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:56 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_19_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:56 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_20_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:56 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_21_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:56 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_22_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:56 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_23_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:56 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_24_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:56 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_25_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:56 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_26_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:56 DEBUG    Found 0 files, didn't find 1000 files, found 0 files with wrong shape
+13.03.2018 08:26:57 WARNING    Error in MLE determination: All-NaN slice encountered
+13.03.2018 08:26:57 INFO    Subtracting SM for parameterized combined_calibrated_deep_new
+13.03.2018 08:26:57 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_0_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:57 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_null_0_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:57 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_nullatalternate_0_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:57 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_1_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:57 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_null_1_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:57 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_nullatalternate_1_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:57 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_2_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:57 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_null_2_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:57 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_nullatalternate_2_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:57 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_3_combined_calibrated_deep_new.npy'
+13.03.2018 08:26:57 DEBUG    Found 0 files, didn't find 3051 files, found 0 files with wrong shape
+13.03.2018 08:27:06 INFO    Calculating p-values for parameterized/combined_calibrated_deep_new
+13.03.2018 08:27:07 INFO    Finding MLE distribution under alternate for parameterized regression_calibrated_new
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_17_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_18_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_19_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_20_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_21_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_22_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_23_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_24_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_25_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_26_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Found 0 files, didn't find 1000 files, found 0 files with wrong shape
+13.03.2018 08:27:07 WARNING    Error in MLE determination: All-NaN slice encountered
+13.03.2018 08:27:07 INFO    Subtracting SM for parameterized regression_calibrated_new
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_0_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_null_0_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_nullatalternate_0_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_1_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_null_1_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_nullatalternate_1_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_2_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_null_2_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_nullatalternate_2_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_3_regression_calibrated_new.npy'
+13.03.2018 08:27:07 DEBUG    Found 0 files, didn't find 3051 files, found 0 files with wrong shape
+13.03.2018 08:27:16 INFO    Calculating p-values for parameterized/regression_calibrated_new
+13.03.2018 08:27:17 INFO    Finding MLE distribution under alternate for parameterized combinedregression_calibrated_deep_new
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_17_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_18_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_19_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_20_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_21_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_22_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_23_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_24_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_25_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_26_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Found 0 files, didn't find 1000 files, found 0 files with wrong shape
+13.03.2018 08:27:17 WARNING    Error in MLE determination: All-NaN slice encountered
+13.03.2018 08:27:17 INFO    Subtracting SM for parameterized combinedregression_calibrated_deep_new
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_0_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_null_0_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_nullatalternate_0_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_1_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_null_1_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_nullatalternate_1_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_2_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_null_2_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_nullatalternate_2_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/parameterized/neyman2_llr_alternate_3_combinedregression_calibrated_deep_new.npy'
+13.03.2018 08:27:17 DEBUG    Found 0 files, didn't find 3051 files, found 0 files with wrong shape
+13.03.2018 08:27:26 INFO    Calculating p-values for parameterized/combinedregression_calibrated_deep_new
+13.03.2018 08:27:27 INFO    That's it -- have a great day!
