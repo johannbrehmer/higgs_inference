@@ -1,43 +1,21 @@
-13.03.2018 13:30:27 INFO    Hi! How are you today?
-13.03.2018 13:30:27 INFO    Startup options:
-13.03.2018 13:30:27 INFO      Algorithm:                     cl
-13.03.2018 13:30:27 INFO      Point by point:                False
-13.03.2018 13:30:27 INFO      Morphing-aware mode:           False
-13.03.2018 13:30:27 INFO      Smeared data:                  False
-13.03.2018 13:30:27 INFO      Training sample:               baseline
-13.03.2018 13:30:27 INFO      alpha:                         None
-13.03.2018 13:30:27 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-13.03.2018 13:30:27 INFO      AFC epsilon:                   None
-13.03.2018 13:30:27 INFO      Neyman construction toys:      False
-13.03.2018 13:30:27 INFO      Other options:                 
-13.03.2018 13:30:27 INFO      Base directory:                /home/jb6504/higgs_inference
-13.03.2018 13:30:27 INFO      ML-based strategies available: False
-13.03.2018 13:30:27 INFO    Starting p-value calculation
-13.03.2018 13:30:27 INFO    Finding MLE distribution under alternate for histo histo_2d_new
-13.03.2018 13:30:27 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_17_histo_2d_new.npy'
-13.03.2018 13:30:27 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_19_histo_2d_new.npy'
-13.03.2018 13:30:27 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_20_histo_2d_new.npy'
-13.03.2018 13:30:27 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_21_histo_2d_new.npy'
-13.03.2018 13:30:27 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_22_histo_2d_new.npy'
-13.03.2018 13:30:27 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_23_histo_2d_new.npy'
-13.03.2018 13:30:27 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_24_histo_2d_new.npy'
-13.03.2018 13:30:27 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_25_histo_2d_new.npy'
-13.03.2018 13:30:27 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_26_histo_2d_new.npy'
-13.03.2018 13:30:27 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_27_histo_2d_new.npy'
-13.03.2018 13:30:29 DEBUG    Found 91 files, didn't find 909 files, found 0 files with wrong shape
-13.03.2018 13:30:29 INFO    Subtracting SM for histo histo_2d_new
-13.03.2018 13:30:29 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_1_histo_2d_new.npy'
-13.03.2018 13:30:29 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_2_histo_2d_new.npy'
-13.03.2018 13:30:29 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_3_histo_2d_new.npy'
-13.03.2018 13:30:29 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_4_histo_2d_new.npy'
-13.03.2018 13:30:29 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_5_histo_2d_new.npy'
-13.03.2018 13:30:29 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_6_histo_2d_new.npy'
-13.03.2018 13:30:29 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_7_histo_2d_new.npy'
-13.03.2018 13:30:29 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_nullatalternate_8_histo_2d_new.npy'
-13.03.2018 13:30:29 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_alternate_10_histo_2d_new.npy'
-13.03.2018 13:30:29 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman_llr_null_10_histo_2d_new.npy'
-13.03.2018 13:30:35 DEBUG    Found 307 files, didn't find 2744 files, found 0 files with wrong shape
-13.03.2018 13:30:41 INFO    Calculating p-values for histo/histo_2d_new
-/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/function_base.py:3569: RuntimeWarning: Invalid value encountered in median
-  RuntimeWarning)
-13.03.2018 13:30:41 INFO    That's it -- have a great day!
+13.03.2018 15:05:51 INFO    Hi! How are you today?
+13.03.2018 15:05:51 INFO    Startup options:
+13.03.2018 15:05:51 INFO      Algorithm:                     cl
+13.03.2018 15:05:51 INFO      Point by point:                False
+13.03.2018 15:05:51 INFO      Morphing-aware mode:           False
+13.03.2018 15:05:51 INFO      Smeared data:                  False
+13.03.2018 15:05:51 INFO      Training sample:               baseline
+13.03.2018 15:05:51 INFO      alpha:                         None
+13.03.2018 15:05:51 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+13.03.2018 15:05:51 INFO      AFC epsilon:                   None
+13.03.2018 15:05:51 INFO      Neyman construction toys:      False
+13.03.2018 15:05:51 INFO      Other options:                 
+13.03.2018 15:05:51 INFO      Base directory:                /home/jb6504/higgs_inference
+13.03.2018 15:05:51 INFO      ML-based strategies available: False
+13.03.2018 15:05:51 INFO    Starting p-value calculation
+13.03.2018 15:05:51 INFO    Finding MLE distribution under alternate for truth truth
+13.03.2018 15:06:11 DEBUG    Found 1000 files, didn't find 0 files, found 0 files with wrong shape
+13.03.2018 15:06:11 INFO    Subtracting SM for truth truth
+13.03.2018 15:07:10 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+13.03.2018 15:07:15 INFO    Calculating p-values for truth/truth
+13.03.2018 15:07:16 INFO    That's it -- have a great day!

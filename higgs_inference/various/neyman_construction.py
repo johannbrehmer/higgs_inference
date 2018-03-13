@@ -456,8 +456,8 @@ def start_cl_calculation(options=''):
 
     logging.info('Starting p-value calculation')
 
-#    calculate_confidence_limits('truth', 'truth', neyman_set)
-    calculate_confidence_limits('histo_2d_new', 'histo', neyman_set)
+    calculate_confidence_limits('truth', 'truth', neyman_set)
+#    calculate_confidence_limits('histo_2d_new', 'histo', neyman_set)
 #    calculate_confidence_limits('scoreregression_score_deep_new', 'score_regression', neyman_set)
 #    calculate_confidence_limits('carl_calibrated_shallow_new', 'parameterized', neyman_set)
 #    calculate_confidence_limits('combined_calibrated_deep_new', 'parameterized', neyman_set)
