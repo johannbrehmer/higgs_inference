@@ -144,7 +144,7 @@ def histo_inference(indices_X=None,
     for i, t in enumerate(settings.extended_pbp_training_thetas):
 
         logging.info('Starting theta %s/%s: number %s (%s)',
-                     i + 1, len(settings.pbp_training_thetas), t, settings.thetas[t])
+                     i + 1, len(settings.extended_pbp_training_thetas), t, settings.thetas[t])
 
         # Load data
         new_sample_prefix = '_new' if new_sample_mode else ''
@@ -266,7 +266,7 @@ def histo_inference(indices_X=None,
 
             # Neyman construction: null evaluated at alternative
             if t == settings.theta_observed:
-                for tt in settings.pbp_training_thetas:
+                for tt in settings.extended_pbp_training_thetas:
                     X_neyman_null = np.load(
                         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
                             tt) + '.npy')
