@@ -77,6 +77,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     small_batch_mode = ('smallbatch' in options)
     constant_lr_mode = ('constantlr' in options)
     neyman2_mode = ('neyman2' in options)
+    neyman3_mode = ('neyman3' in options)
 
     filename_addition = ''
     if morphing_aware:
@@ -169,6 +170,11 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         n_expected_events_neyman = settings.n_expected_events_neyman2
         n_neyman_null_experiments = settings.n_neyman2_null_experiments
         n_neyman_alternate_experiments = settings.n_neyman2_alternate_experiments
+    if neyman3_mode:
+        neyman_filename = 'neyman3'
+        n_expected_events_neyman = settings.n_expected_events_neyman3
+        n_neyman_null_experiments = settings.n_neyman3_null_experiments
+        n_neyman_alternate_experiments = settings.n_neyman3_alternate_experiments
 
     results_dir = settings.base_dir + '/results/parameterized'
     neyman_dir = settings.neyman_dir + '/parameterized'

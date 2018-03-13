@@ -150,7 +150,7 @@ def calculate_median_p_value(test_statistics_null, test_statistics_alternate):
 #             llr_compared_to_mle_alternates)
 
 
-def subtract_sm(filename, folder, neyman2_mode=False):
+def subtract_sm(filename, folder, neyman_set=1):
     """ For a given filename and folder, takes the log likelihood ratios with respect to some arbitrary denominator
     theta and subtracts the log likelihood ratios of the estimators. """
 
@@ -165,10 +165,14 @@ def subtract_sm(filename, folder, neyman2_mode=False):
     n_neyman_null_experiments = settings.n_neyman_null_experiments
     n_neyman_alternate_experiments = settings.n_neyman_alternate_experiments
     neyman_filename = 'neyman'
-    if neyman2_mode:
+    if neyman_set == 2:
         neyman_filename = 'neyman2'
         n_neyman_null_experiments = settings.n_neyman2_null_experiments
         n_neyman_alternate_experiments = settings.n_neyman2_alternate_experiments
+    elif neyman_set == 3:
+        neyman_filename = 'neyman3'
+        n_neyman_null_experiments = settings.n_neyman3_null_experiments
+        n_neyman_alternate_experiments = settings.n_neyman3_alternate_experiments
 
     # Load log likelihood ratios
     llr_nulls = []
@@ -281,7 +285,7 @@ def subtract_sm(filename, folder, neyman2_mode=False):
     np.save(result_dir + '/' + neyman_filename + '_llr_vs_sm_alternates_' + filename + '.npy', llr_vs_true_alternates)
 
 
-def find_mle(filename, folder, neyman2_mode=False):
+def find_mle(filename, folder, neyman_set=1):
 
     logging.info('Finding MLE distribution under alternate for ' + folder + ' ' + filename)
 
@@ -292,9 +296,12 @@ def find_mle(filename, folder, neyman2_mode=False):
 
     n_neyman_alternate_experiments = settings.n_neyman_alternate_experiments
     neyman_filename = 'neyman'
-    if neyman2_mode:
+    if neyman_set == 2:
         neyman_filename = 'neyman2'
         n_neyman_alternate_experiments = settings.n_neyman2_alternate_experiments
+    elif neyman_set == 3:
+        neyman_filename = 'neyman3'
+        n_neyman_alternate_experiments = settings.n_neyman3_alternate_experiments
 
     # Load log likelihood ratios
     llr_alternates = []
@@ -339,18 +346,18 @@ def find_mle(filename, folder, neyman2_mode=False):
     np.save(result_dir + '/' + neyman_filename + '_mle_' + filename + '.npy', theta_mle_alternate)
 
 
-def calculate_confidence_limits(filename, folder, neyman2_mode=False):
+def calculate_confidence_limits(filename, folder, neyman_set=1):
     """ Steers the calculation of all p-values for a given filename and folder. """
 
     # Find and save MLEs
     try:
-        find_mle(filename, folder, neyman2_mode)
+        find_mle(filename, folder, neyman_set)
     except ValueError as err:
         logging.warning('Error in MLE determination: %s', err)
 
     # Preprocessing
     try:
-        subtract_sm(filename, folder, neyman2_mode)
+        subtract_sm(filename, folder, neyman_set)
     except ValueError:
         logging.warning('Error in SM subtraction, skipping set')
         return
@@ -361,8 +368,10 @@ def calculate_confidence_limits(filename, folder, neyman2_mode=False):
     result_dir = settings.base_dir + '/results/' + folder
     n_thetas = settings.n_thetas
     neyman_filename = 'neyman'
-    if neyman2_mode:
+    if neyman_set == 2:
         neyman_filename = 'neyman2'
+    if neyman_set == 3:
+        neyman_filename = 'neyman3'
 
     # Load LLR
     llr_vs_true_nulls = np.load(result_dir + '/' + neyman_filename + '_llr_vs_sm_nulls_' + filename + '.npy')
@@ -388,14 +397,18 @@ def calculate_confidence_limits(filename, folder, neyman2_mode=False):
 def start_cl_calculation(options=''):
     """ Starts the p-value calculation for all inference strategies."""
 
-    neyman2_mode = ('neyman2' in options)
+    neyman_set = 1
+    if 'neyman2' in options:
+        neyman_set = 2
+    if 'neyman3' in options:
+        neyman_set = 3
 
     logging.info('Starting p-value calculation')
 
-    calculate_confidence_limits('truth', 'truth', neyman2_mode)
-    calculate_confidence_limits('histo_2d_new', 'histo', neyman2_mode)
-    calculate_confidence_limits('scoreregression_score_deep_new', 'score_regression', neyman2_mode)
-    calculate_confidence_limits('carl_calibrated_shallow_new', 'parameterized', neyman2_mode)
-    calculate_confidence_limits('combined_calibrated_deep_new', 'parameterized', neyman2_mode)
-    calculate_confidence_limits('regression_calibrated_new', 'parameterized', neyman2_mode)
-    calculate_confidence_limits('combinedregression_calibrated_deep_new', 'parameterized', neyman2_mode)
+    calculate_confidence_limits('truth', 'truth', neyman_set)
+    calculate_confidence_limits('histo_2d_new', 'histo', neyman_set)
+    calculate_confidence_limits('scoreregression_score_deep_new', 'score_regression', neyman_set)
+    calculate_confidence_limits('carl_calibrated_shallow_new', 'parameterized', neyman_set)
+    calculate_confidence_limits('combined_calibrated_deep_new', 'parameterized', neyman_set)
+    calculate_confidence_limits('regression_calibrated_new', 'parameterized', neyman_set)
+    calculate_confidence_limits('combinedregression_calibrated_deep_new', 'parameterized', neyman_set)

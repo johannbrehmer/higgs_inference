@@ -91,6 +91,7 @@ def histo_inference(indices_X=None,
     denom1_mode = ('denom1' in options)
     new_sample_mode = ('new' in options)
     neyman2_mode = ('neyman2' in options)
+    neyman3_mode = ('neyman3' in options)
 
     input_filename_addition = ''
     if denom1_mode:
@@ -105,6 +106,9 @@ def histo_inference(indices_X=None,
     if neyman2_mode:
         neyman_filename = 'neyman2'
         n_expected_events_neyman = settings.n_expected_events_neyman2
+    if neyman3_mode:
+        neyman_filename = 'neyman3'
+        n_expected_events_neyman = settings.n_expected_events_neyman3
 
     results_dir = settings.base_dir + '/results/histo'
     neyman_dir = settings.neyman_dir + '/histo'

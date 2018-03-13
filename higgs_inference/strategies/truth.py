@@ -26,6 +26,7 @@ def truth_inference(do_neyman=False,
 
     denom1_mode = ('denom1' in options)
     neyman2_mode = ('neyman2' in options)
+    neyman3_mode = ('neyman3' in options)
 
     filename_addition = ''
     input_filename_addition = ''
@@ -45,6 +46,11 @@ def truth_inference(do_neyman=False,
         n_expected_events_neyman = settings.n_expected_events_neyman2
         n_neyman_null_experiments = settings.n_neyman2_null_experiments
         n_neyman_alternate_experiments = settings.n_neyman2_alternate_experiments
+    if neyman3_mode:
+        neyman_filename = 'neyman3'
+        n_expected_events_neyman = settings.n_expected_events_neyman3
+        n_neyman_null_experiments = settings.n_neyman3_null_experiments
+        n_neyman_alternate_experiments = settings.n_neyman3_alternate_experiments
 
     logging.debug('NC settings: %s %s %s %s %s', neyman2_mode, neyman_filename, n_expected_events_neyman,
                   n_neyman_null_experiments, n_neyman_alternate_experiments)
