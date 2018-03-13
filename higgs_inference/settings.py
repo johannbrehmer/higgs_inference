@@ -92,7 +92,7 @@ n_neyman2_alternate_experiments = 10000
 
 # Removing duplicates because why not
 n_expected_events_neyman3 = 36
-n_neyman3_null_experiments = 10000
+n_neyman3_null_experiments = 1000
 n_neyman3_alternate_experiments = 1001
 
 # Confidence limit
