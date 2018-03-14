@@ -32,11 +32,14 @@ def calculate_median_p_value(test_statistics_null, test_statistics_alternate, n_
     null = test_statistics_null
     alternate = test_statistics_alternate
 
+    if not (np.all(np.isfinite(null)) and np.all(np.isfinite(alternate))):
+        return None, [None] * 3, [None] * 3, None
+
     # Self convolutions: require histogram
     if n_self_convolutions > 0:
         xmin = settings.neyman_convolution_min
         xmax = settings.neyman_convolution_max
-        nbins = settings.neyman_convolution_min
+        nbins = settings.neyman_convolution_bins
         xvals = np.linspace(xmin + 0.5*(xmax - xmin)/nbins, xmax - 0.5*(xmax - xmin)/nbins, nbins)
 
         null_histo = calculate_self_convolutions(null, n_self_convolutions, xmin, xmax, nbins)
@@ -461,10 +464,10 @@ def start_cl_calculation(options=''):
 
     logging.info('Starting p-value calculation')
 
-    calculate_confidence_limits('truth', 'truth', neyman_set)
-#    calculate_confidence_limits('histo_2d_new', 'histo', neyman_set)
-#    calculate_confidence_limits('scoreregression_score_deep_new', 'score_regression', neyman_set)
-#    calculate_confidence_limits('carl_calibrated_shallow_new', 'parameterized', neyman_set)
-#    calculate_confidence_limits('combined_calibrated_deep_new', 'parameterized', neyman_set)
-#    calculate_confidence_limits('regression_calibrated_new', 'parameterized', neyman_set)
-#    calculate_confidence_limits('combinedregression_calibrated_deep_new', 'parameterized', neyman_set)
+#    calculate_confidence_limits('truth', 'truth', neyman_set)
+    calculate_confidence_limits('histo_2d_new', 'histo', neyman_set)
+    calculate_confidence_limits('scoreregression_score_deep_new', 'score_regression', neyman_set)
+    calculate_confidence_limits('carl_calibrated_shallow_new', 'parameterized', neyman_set)
+    calculate_confidence_limits('combined_calibrated_deep_new', 'parameterized', neyman_set)
+    calculate_confidence_limits('regression_calibrated_new', 'parameterized', neyman_set)
+    calculate_confidence_limits('combinedregression_calibrated_deep_new', 'parameterized', neyman_set)
