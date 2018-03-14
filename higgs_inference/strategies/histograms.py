@@ -5,6 +5,7 @@
 from __future__ import absolute_import, division, print_function
 
 import logging
+import time
 import numpy as np
 
 from scipy.interpolate import LinearNDInterpolator
@@ -21,7 +22,7 @@ def histo_inference(indices_X=None,
                     do_neyman=False,
                     options=''):
     """
-    Approximates the likelihood through Approximate Frequentist Inference, a frequentist twist on ABC
+    Approximates the likelihood throungh Approximate Frequentist Inference, a frequentist twist on ABC
     and effectively the same as kernel density estimation in the summary statistics space.
 
     :param use_smearing:
@@ -139,6 +140,7 @@ def histo_inference(indices_X=None,
     trimmed_mse_log_r = []
     mse_log_r_train = []
     cross_entropies_train = []
+    eval_times = []
 
     # Loop over the hypothesis thetas
     for i, t in enumerate(settings.extended_pbp_training_thetas):
@@ -176,7 +178,9 @@ def histo_inference(indices_X=None,
         ################################################################################
 
         # Evaluation
+        time_before = time.time()
         s_hat_test = histogram.predict(summary_statistics_test)
+        eval_times.append(time.time() - time_before)
         log_r_hat_test = np.log(r_from_s(s_hat_test))
         s_hat_train = histogram.predict(summary_statistics_train)
         log_r_hat_train = np.log(r_from_s(s_hat_train))
@@ -195,7 +199,7 @@ def histo_inference(indices_X=None,
         # Calculate cross-entropy
         mse_log_r_train.append(calculate_mean_squared_error(np.log(r_train), log_r_hat_train, 0.))
         cross_entropy_train = - (y_train * np.log(s_hat_train)
-                                 + (1. - y_train) * np.log(1. - s_hat_train)).astype(np.float64)
+                                 + (1. - y_train) * np.log(1. - s_hat_train)).astype(np.float128)
         cross_entropy_train = np.mean(cross_entropy_train)
         cross_entropies_train.append(cross_entropy_train)
 
@@ -281,6 +285,9 @@ def histo_inference(indices_X=None,
                     np.save(neyman_dir + '/' + neyman_filename + '_llr_nullatalternate_' + str(
                         tt) + '_histo' + filename_addition + '.npy',
                             llr_neyman_null)
+
+    # Evaluation times
+    logging.info('Evaluation timing: median %s s, mean %s s', np.median(eval_times), np.mean(eval_times))
 
     # Interpolate and save evaluation results
     expected_llr = np.asarray(expected_llr)
