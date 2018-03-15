@@ -404,10 +404,10 @@ def calculate_confidence_limits(filename, folder, neyman_set=1):
     """ Steers the calculation of all p-values for a given filename and folder. """
 
     # Find and save MLEs
-    try:
-        find_mle(filename, folder, neyman_set)
-    except ValueError as err:
-        logging.warning('Error in MLE determination: %s', err)
+    #try:
+    #    find_mle(filename, folder, neyman_set)
+    #except ValueError as err:
+    #    logging.warning('Error in MLE determination: %s', err)
 
     # Preprocessing
     try:
@@ -464,7 +464,7 @@ def start_cl_calculation(options=''):
 
     logging.info('Starting p-value calculation')
 
-#    calculate_confidence_limits('truth', 'truth', neyman_set)
+    calculate_confidence_limits('truth', 'truth', neyman_set)
     calculate_confidence_limits('histo_2d_new', 'histo', neyman_set)
     calculate_confidence_limits('scoreregression_score_deep_new', 'score_regression', neyman_set)
     calculate_confidence_limits('carl_calibrated_shallow_new', 'parameterized', neyman_set)
