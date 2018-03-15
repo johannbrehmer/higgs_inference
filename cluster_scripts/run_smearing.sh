@@ -5,7 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
-#SBATCH --time=8:00:00
+#SBATCH --time=1-00:00:00
 
 # Modules
 module purge
@@ -14,4 +14,4 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/preprocessing
 
-python -u smearing.py --pointbypoint --train --scoreregression --new
+python -u smearing.py --neyman2 --neyman3

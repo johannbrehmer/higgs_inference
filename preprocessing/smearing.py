@@ -312,10 +312,13 @@ def apply_smearing(filename, dry_run=False):
         logging.error('File %s not found', settings.unweighted_events_dir + '/X_' + filename + '.npy')
         return
 
-    if X_true.shape[1] != 42:
+    if X_true.shape[-1] != 42:
         logging.error('File %s has wrong shape %s',
                       settings.unweighted_events_dir + '/X_' + filename + '.npy', X_true.shape)
         return
+
+    X_shape = X_true.shape
+    X_true.reshape((-1,42))
 
     init_number = -1.e9
     X_smeared = init_number * np.ones_like(X_true)
@@ -491,6 +494,10 @@ def apply_smearing(filename, dry_run=False):
             if uc > 0:
                 logging.debug('  Feature %s: %s untouched values', i, uc)
 
+    # Reshape to original
+    logging.debug('Shape: original %s, during processing %s', X_shape, X_smeared.shape)
+    X_smeared.reshape(X_shape)
+
     # Save result
     if not dry_run:
         np.save(settings.unweighted_events_dir + '/smeared_X_' + filename + '.npy', X_smeared)
@@ -523,6 +530,10 @@ parser.add_argument("-e", "--test", action="store_true",
                     help="Smear evaluation sample")
 parser.add_argument("-n", "--neyman", action="store_true",
                     help="Smear samples for Neyman construction")
+parser.add_argument("--neyman2", action="store_true",
+                    help="Smear samples for Neyman construction 2")
+parser.add_argument("--neyman3", action="store_true",
+                    help="Smear samples for Neyman construction 3")
 parser.add_argument("-x", "--roam", action="store_true",
                     help="Smear roaming evaluation sample")
 parser.add_argument("--dry", action="store_true",
@@ -540,6 +551,8 @@ logging.info('  Point-by-point training: %s', args.pointbypoint)
 logging.info('  Calibration:             %s', args.calibration)
 logging.info('  Likelihood ratio eval:   %s', args.test)
 logging.info('  Neyman construction:     %s', args.neyman)
+logging.info('  Neyman construction (2): %s', args.neyman2)
+logging.info('  Neyman construction (3): %s', args.neyman3)
 logging.info('  Roaming:                 %s', args.roam)
 logging.info('Options:')
 logging.info('  Dry run:                 %s', args.dry)
@@ -574,9 +587,19 @@ if args.test:
     apply_smearing('test' + suffix, args.dry)
 
 if args.neyman:
-    apply_smearing('neyman_observed' + suffix, args.dry)
+    apply_smearing('neyman_alternate' + suffix, args.dry)
     for t in range(settings.n_thetas):
-        apply_smearing('neyman_distribution_' + str(t) + suffix, args.dry)
+        apply_smearing('neyman_null_' + str(t) + suffix, args.dry)
+
+if args.neyman2:
+    apply_smearing('neyman2_alternate' + suffix, args.dry)
+    for t in range(settings.n_thetas):
+        apply_smearing('neyman2_null_' + str(t) + suffix, args.dry)
+
+if args.neyman3:
+    apply_smearing('neyman3_alternate' + suffix, args.dry)
+    for t in range(settings.n_thetas):
+        apply_smearing('neyman3_null_' + str(t) + suffix, args.dry)
 
 if args.roam:
     apply_smearing('roam' + suffix, args.dry)
