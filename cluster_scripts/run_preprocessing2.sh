@@ -1,4 +1,4 @@
-run_preprocessing1.sh#!/bin/bash
+#!/bin/bash
 
 #SBATCH --job-name=pre2
 #SBATCH --output=slurm_preprocessing2.out
@@ -14,4 +14,4 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/preprocessing
 
-python -u generate_data.py --train --pointbypoint --scoreregression --calibration --test --neyman2 --alternativedenom2
+python -u generate_data.py --train --pointbypoint --scoreregression --calibration --test --alternativedenom2
