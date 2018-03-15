@@ -57,7 +57,7 @@ theta_observed = 0
 theta_score_regression = 0
 
 theta1_default = 708
-theta1_alternatives = [0, 389, 686, 486]
+theta1_alternatives = [0, 602, 498, 202]
 
 theta_benchmark_trained = 422
 theta_benchmark_nottrained = 9

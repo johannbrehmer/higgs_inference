@@ -59,8 +59,14 @@ parser.add_argument("--neyman3", action="store_true",
                     help="Generate samples for Neyman construction (alternative settings)")
 parser.add_argument("-x", "--roam", action="store_true",
                     help="Generate roaming evaluation sample")
-parser.add_argument("--alternativedenom", action="store_true",
-                    help="Use alternative denominator theta")
+parser.add_argument("--alternativedenom1", action="store_true",
+                    help="Use alternative denominator theta 1")
+parser.add_argument("--alternativedenom2", action="store_true",
+                    help="Use alternative denominator theta 2")
+parser.add_argument("--alternativedenom3", action="store_true",
+                    help="Use alternative denominator theta 3")
+parser.add_argument("--alternativedenom4", action="store_true",
+                    help="Use alternative denominator theta 4")
 parser.add_argument("--new", action="store_true",
                     help="Generate alternative training set with filename part _new")
 parser.add_argument("--dry", action="store_true",
@@ -81,8 +87,14 @@ logging.info('  Neyman construction (alternative): %s', args.neyman3)
 logging.info('  Roaming:                           %s', args.roam)
 logging.info('Options:')
 logging.info('  Dry run:                           %s', args.dry)
-if args.alternativedenom:
-    logging.info('  Denominator:                       alternative')
+if args.alternativedenom1:
+    logging.info('  Denominator:                       alternative 1')
+elif args.alternativedenom2:
+    logging.info('  Denominator:                       alternative 2')
+elif args.alternativedenom3:
+    logging.info('  Denominator:                       alternative 3')
+elif args.alternativedenom4:
+    logging.info('  Denominator:                       alternative 4')
 else:
     logging.info('  Denominator:                       standard')
 
@@ -90,20 +102,29 @@ else:
 # Settings
 ################################################################################
 
-filename_addition = ''
-if args.alternativedenom:
-    filename_addition += '_denom1'
-if args.new:
-    filename_addition += '_new'
 
 data_dir = settings.base_dir + '/data'
 
 thetas = np.load(data_dir + '/thetas/thetas_parameterized.npy')
 n_thetas = len(thetas)
 
+filename_addition = ''
 theta1 = settings.theta1_default
-if args.alternativedenom:
-    theta1 = settings.theta1_alternative
+if args.alternativedenom1:
+    theta1 = settings.theta1_alternatives[0]
+    filename_addition += '_denom1'
+elif args.alternativedenom2:
+    theta1 = settings.theta1_alternatives[1]
+    filename_addition += '_denom2'
+elif args.alternativedenom3:
+    theta1 = settings.theta1_alternatives[2]
+    filename_addition += '_denom3'
+elif args.alternativedenom4:
+    theta1 = settings.theta1_alternatives[3]
+    filename_addition += '_denom4'
+
+if args.new:
+    filename_addition += '_new'
 
 need_train_sample = args.train or args.random or args.basis or args.pointbypoint
 need_calibration_sample = args.calibration
