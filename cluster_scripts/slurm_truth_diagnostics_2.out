@@ -1,0 +1,26 @@
+16.03.2018 10:38:05 INFO    Hi! How are you today?
+16.03.2018 10:38:05 INFO    Startup options:
+16.03.2018 10:38:05 INFO      Algorithm:                     truth
+16.03.2018 10:38:05 INFO      Point by point:                False
+16.03.2018 10:38:05 INFO      Morphing-aware mode:           False
+16.03.2018 10:38:05 INFO      Smeared data:                  False
+16.03.2018 10:38:05 INFO      Training sample:               baseline
+16.03.2018 10:38:05 INFO      alpha:                         None
+16.03.2018 10:38:05 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+16.03.2018 10:38:05 INFO      AFC epsilon:                   None
+16.03.2018 10:38:05 INFO      Denominator theta:             False
+16.03.2018 10:38:05 INFO      Neyman construction toys:      2
+16.03.2018 10:38:05 INFO      Other options:                 
+16.03.2018 10:38:05 INFO      Base directory:                /home/jb6504/higgs_inference
+16.03.2018 10:38:05 INFO      ML-based strategies available: False
+16.03.2018 10:38:05 INFO    Starting truth calculation
+16.03.2018 10:38:05 DEBUG    NC settings: False neyman 36 10000 1001
+16.03.2018 10:38:05 DEBUG    Diagnostics settings: _denom2 _denom2
+Traceback (most recent call last):
+  File "experiments.py", line 109, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/truth.py", line 65, in truth_inference
+    r_roam = np.load(settings.unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/r_roam_denom2.npy'

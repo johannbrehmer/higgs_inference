@@ -1,0 +1,37 @@
+Using TensorFlow backend.
+16.03.2018 10:44:31 INFO    Hi! How are you today?
+16.03.2018 10:44:31 INFO    Startup options:
+16.03.2018 10:44:31 INFO      Algorithm:                     combinedregression
+16.03.2018 10:44:31 INFO      Point by point:                False
+16.03.2018 10:44:31 INFO      Morphing-aware mode:           False
+16.03.2018 10:44:31 INFO      Smeared data:                  True
+16.03.2018 10:44:31 INFO      Training sample:               baseline
+16.03.2018 10:44:31 INFO      alpha:                         None
+16.03.2018 10:44:31 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+16.03.2018 10:44:31 INFO      AFC epsilon:                   None
+16.03.2018 10:44:31 INFO      Denominator theta:             True
+16.03.2018 10:44:31 INFO      Neyman construction toys:      0
+16.03.2018 10:44:31 INFO      Other options:                 ['deep', 'new', 'neyman2']
+16.03.2018 10:44:31 INFO      Base directory:                /home/jb6504/higgs_inference
+16.03.2018 10:44:31 INFO      ML-based strategies available: True
+16.03.2018 10:44:31 INFO    Starting parameterized inference
+16.03.2018 10:44:31 INFO    Main settings:
+16.03.2018 10:44:31 INFO      Algorithm:                combinedregression
+16.03.2018 10:44:31 INFO      Morphing-aware:           False
+16.03.2018 10:44:31 INFO      Training sample:          baseline
+16.03.2018 10:44:31 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+16.03.2018 10:44:31 INFO    Options:
+16.03.2018 10:44:31 INFO      Number of hidden layers:  5
+16.03.2018 10:44:31 INFO      alpha:                    100.0
+16.03.2018 10:44:31 INFO      Batch size:               128
+16.03.2018 10:44:31 INFO      Learning rate:            0.001
+16.03.2018 10:44:31 INFO      Learning rate decay:      0.0921034037198
+16.03.2018 10:44:31 INFO      Number of epochs:         50
+16.03.2018 10:44:31 INFO      NC experiments:           (10000 alternate + 10000 null) experiments with 1 alternate events each
+16.03.2018 10:44:31 INFO      Debug mode:               False
+Traceback (most recent call last):
+  File "experiments.py", line 150, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 259, in parameterized_inference
+    X_neyman_alternate.reshape((-1, X_neyman_alternate.shape[2])))
+IndexError: tuple index out of range

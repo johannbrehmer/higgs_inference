@@ -14,4 +14,7 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/preprocessing
 
-python -u generate_data.py --train --pointbypoint --scoreregression --calibration --test --alternativedenom1
+python -u generate_data.py --roam --alternativedenom1
+python -u generate_data.py --roam --alternativedenom2
+python -u generate_data.py --roam --alternativedenom3
+python -u generate_data.py --roam --alternativedenom4

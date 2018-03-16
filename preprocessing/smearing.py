@@ -496,7 +496,7 @@ def apply_smearing(filename, dry_run=False):
                 logging.debug('  Feature %s: %s untouched values', i, uc)
 
     # Reshape to original
-    X_smeared.reshape(X_shape)
+    X_smeared = X_smeared.reshape(X_shape)
 
     # Save result
     if not dry_run:

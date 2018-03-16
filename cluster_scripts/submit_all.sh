@@ -33,13 +33,13 @@ cd /home/jb6504/higgs_inference/cluster_scripts
 
 # sbatch --array=1-4 run_truth_diagnostics.sh
 
-sbatch --array=1-4 run_histo_diagnostics.sh
-sbatch --array=1-4 run_scoreregression_diagnostics.sh
+# sbatch --array=1-4 run_histo_diagnostics.sh
+# sbatch --array=1-4 run_scoreregression_diagnostics.sh
 
-sbatch --array=1-4 run_carl_diagnostics.sh
-sbatch --array=1-4 run_combined_diagnostics.sh
-sbatch --array=1-4 run_regression_diagnostics.sh
-sbatch --array=1-4 run_combinedregression_diagnostics.sh
+# sbatch --array=1-4 run_carl_diagnostics.sh
+# sbatch --array=1-4 run_combined_diagnostics.sh
+# sbatch --array=1-4 run_regression_diagnostics.sh
+# sbatch --array=1-4 run_combinedregression_diagnostics.sh
 
 
 ################################################################################
