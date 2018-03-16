@@ -26,23 +26,33 @@ cd /home/jb6504/higgs_inference/cluster_scripts
 # sbatch run_regression_aware.sh
 # sbatch run_combinedregression_aware.sh
 
-# sleep 30
 
 ################################################################################
 # Diagnostics
 ################################################################################
 
-sbatch --array=1-4 run_truth_diagnostics.sh
+# sbatch --array=1-4 run_truth_diagnostics.sh
 
-# sbatch --array=1-4 run_histo_diagnostics.sh
-# sbatch --array=1-4 run_scoreregression_diagnostics.sh
+sbatch --array=1-4 run_histo_diagnostics.sh
+sbatch --array=1-4 run_scoreregression_diagnostics.sh
 
-# sbatch --array=1-4 run_carl_diagnostics.sh
-# sbatch --array=1-4 run_combined_diagnostics.sh
-# sbatch --array=1-4 run_regression_diagnostics.sh
-# sbatch --array=1-4 run_combinedregression_diagnostics.sh
+sbatch --array=1-4 run_carl_diagnostics.sh
+sbatch --array=1-4 run_combined_diagnostics.sh
+sbatch --array=1-4 run_regression_diagnostics.sh
+sbatch --array=1-4 run_combinedregression_diagnostics.sh
 
-# sleep 30
+
+################################################################################
+# Smearing
+################################################################################
+
+sbatch run_histo_smearing.sh
+sbatch run_scoreregression_smearing.sh
+
+sbatch run_carl_smearing.sh
+sbatch run_combined_smearing.sh
+sbatch run_regression_smearing.sh
+sbatch run_combinedregression_smearing.sh
 
 
 ################################################################################
@@ -59,18 +69,4 @@ sbatch --array=1-4 run_truth_diagnostics.sh
 
 # sbatch run_carl_learning_experiments.sh
 # sbatch run_regression_learning_experiments.sh
-
-# sleep 30
-
-
-################################################################################
-# Smearing
-################################################################################
-
-# sbatch run_histo_smearing.sh
-# sbatch run_scoreregression_smearing.sh
-# sbatch run_carl_smearing.sh
-# sbatch run_combined_smearing.sh
-# sbatch run_regression_smearing.sh
-# sbatch run_combinedregression_smearing.sh
 
