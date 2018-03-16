@@ -25,6 +25,10 @@ def truth_inference(do_neyman=False,
     ################################################################################
 
     denom1_mode = ('denom1' in options)
+    denom2_mode = ('denom2' in options)
+    denom3_mode = ('denom3' in options)
+    denom4_mode = ('denom4' in options)
+
     neyman2_mode = ('neyman2' in options)
     neyman3_mode = ('neyman3' in options)
 
@@ -33,6 +37,15 @@ def truth_inference(do_neyman=False,
     if denom1_mode:
         input_filename_addition = '_denom1'
         filename_addition += '_denom1'
+    elif denom2_mode:
+        input_filename_addition = '_denom2'
+        filename_addition += '_denom2'
+    elif denom3_mode:
+        input_filename_addition = '_denom3'
+        filename_addition += '_denom3'
+    elif denom4_mode:
+        input_filename_addition = '_denom4'
+        filename_addition += '_denom4'
 
     neyman_dir = settings.neyman_dir + '/truth'
     results_dir = settings.base_dir + '/results/truth'
@@ -54,6 +67,7 @@ def truth_inference(do_neyman=False,
 
     logging.debug('NC settings: %s %s %s %s %s', neyman2_mode, neyman_filename, n_expected_events_neyman,
                   n_neyman_null_experiments, n_neyman_alternate_experiments)
+    logging.debug('Diagnostics settings: %s %s', input_filename_addition, filename_addition)
 
     ################################################################################
     # Data
