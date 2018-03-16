@@ -259,23 +259,34 @@ if args.train:
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1 = generate_data_train(t, theta1)
 
         if i > 0:
-            th0 = np.vstack((th0, np.array(this_th0, dtype=np.float16)))
-            th1 = np.vstack((th1, np.array(this_th1, dtype=np.float16)))
-            X = np.vstack((X, np.array(this_X, dtype=np.float16)))
-            y = np.hstack((y, np.array(this_y, dtype=np.float16)))
-            scores = np.vstack((scores, np.array(this_scores, dtype=np.float16)))
-            r = np.hstack((r, np.array(this_r, dtype=np.float16)))
-            p0 = np.hstack((r, np.array(this_p0, dtype=np.float16)))
-            p1 = np.hstack((r, np.array(this_p1, dtype=np.float16)))
+            th0 = np.vstack((th0, np.array(this_th0, dtype=np.float32)))
+            th1 = np.vstack((th1, np.array(this_th1, dtype=np.float32)))
+            X = np.vstack((X, np.array(this_X, dtype=np.float32)))
+            y = np.hstack((y, np.array(this_y, dtype=np.float32)))
+            scores = np.vstack((scores, np.array(this_scores, dtype=np.float32)))
+            r = np.hstack((r, np.array(this_r, dtype=np.float32)))
+            p0 = np.hstack((r, np.array(this_p0, dtype=np.float32)))
+            p1 = np.hstack((r, np.array(this_p1, dtype=np.float32)))
         else:
-            th0 = np.array(this_th0, dtype=np.float16)
-            th1 = np.array(this_th1, dtype=np.float16)
-            X = np.array(this_X, dtype=np.float16)
-            y = np.array(this_y, dtype=np.float16)
-            scores = np.array(this_scores, dtype=np.float16)
-            r = np.array(this_r, dtype=np.float16)
-            p0 = np.array(this_p0, dtype=np.float16)
-            p1 = np.array(this_p1, dtype=np.float16)
+            th0 = np.array(this_th0, dtype=np.float32)
+            th1 = np.array(this_th1, dtype=np.float32)
+            X = np.array(this_X, dtype=np.float32)
+            y = np.array(this_y, dtype=np.float32)
+            scores = np.array(this_scores, dtype=np.float32)
+            r = np.array(this_r, dtype=np.float32)
+            p0 = np.array(this_p0, dtype=np.float32)
+            p1 = np.array(this_p1, dtype=np.float32)
+
+    # Just to make sure
+    cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+    th0 = th0[cut]
+    th1 = th1[cut]
+    X = X[cut]
+    y = y[cut]
+    scores = scores[cut]
+    r = r[cut]
+    p0 = p0[cut]
+    p1 = p1[cut]
 
     np.save(settings.unweighted_events_dir + '/theta0_train' + filename_addition + '.npy', th0)
     np.save(settings.unweighted_events_dir + '/theta1_train' + filename_addition + '.npy', th1)
@@ -349,23 +360,34 @@ if args.basis:
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1 = generate_data_train_basis(t, theta1)
 
         if i > 0:
-            th0 = np.vstack((th0, np.array(this_th0, dtype=np.float16)))
-            th1 = np.vstack((th1, np.array(this_th1, dtype=np.float16)))
-            X = np.vstack((X, np.array(this_X, dtype=np.float16)))
-            y = np.hstack((y, np.array(this_y, dtype=np.float16)))
-            scores = np.vstack((scores, np.array(this_scores, dtype=np.float16)))
-            r = np.hstack((r, np.array(this_r, dtype=np.float16)))
-            p0 = np.hstack((r, np.array(this_p0, dtype=np.float16)))
-            p1 = np.hstack((r, np.array(this_p1, dtype=np.float16)))
+            th0 = np.vstack((th0, np.array(this_th0, dtype=np.float32)))
+            th1 = np.vstack((th1, np.array(this_th1, dtype=np.float32)))
+            X = np.vstack((X, np.array(this_X, dtype=np.float32)))
+            y = np.hstack((y, np.array(this_y, dtype=np.float32)))
+            scores = np.vstack((scores, np.array(this_scores, dtype=np.float32)))
+            r = np.hstack((r, np.array(this_r, dtype=np.float32)))
+            p0 = np.hstack((r, np.array(this_p0, dtype=np.float32)))
+            p1 = np.hstack((r, np.array(this_p1, dtype=np.float32)))
         else:
-            th0 = np.array(this_th0, dtype=np.float16)
-            th1 = np.array(this_th1, dtype=np.float16)
-            X = np.array(this_X, dtype=np.float16)
-            y = np.array(this_y, dtype=np.float16)
-            scores = np.array(this_scores, dtype=np.float16)
-            r = np.array(this_r, dtype=np.float16)
-            p0 = np.array(this_p0, dtype=np.float16)
-            p1 = np.array(this_p1, dtype=np.float16)
+            th0 = np.array(this_th0, dtype=np.float32)
+            th1 = np.array(this_th1, dtype=np.float32)
+            X = np.array(this_X, dtype=np.float32)
+            y = np.array(this_y, dtype=np.float32)
+            scores = np.array(this_scores, dtype=np.float32)
+            r = np.array(this_r, dtype=np.float32)
+            p0 = np.array(this_p0, dtype=np.float32)
+            p1 = np.array(this_p1, dtype=np.float32)
+
+    # Just to make sure
+    cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+    th0 = th0[cut]
+    th1 = th1[cut]
+    X = X[cut]
+    y = y[cut]
+    scores = scores[cut]
+    r = r[cut]
+    p0 = p0[cut]
+    p1 = p1[cut]
 
     np.save(settings.unweighted_events_dir + '/theta0_train_basis' + filename_addition + '.npy', th0)
     np.save(settings.unweighted_events_dir + '/theta1_train_basis' + filename_addition + '.npy', th1)
@@ -520,19 +542,28 @@ if args.random:
         this_th0, this_th1, this_X, this_y, this_scores, this_r = generate_random_data_train(t, theta1)
 
         if t > 0:
-            th0 = np.vstack((th0, np.array(this_th0, dtype=np.float16)))
-            th1 = np.vstack((th1, np.array(this_th1, dtype=np.float16)))
-            X = np.vstack((X, np.array(this_X, dtype=np.float16)))
-            y = np.hstack((y, np.array(this_y, dtype=np.float16)))
-            scores = np.vstack((scores, np.array(this_scores, dtype=np.float16)))
-            r = np.hstack((r, np.array(this_r, dtype=np.float16)))
+            th0 = np.vstack((th0, np.array(this_th0, dtype=np.float32)))
+            th1 = np.vstack((th1, np.array(this_th1, dtype=np.float32)))
+            X = np.vstack((X, np.array(this_X, dtype=np.float32)))
+            y = np.hstack((y, np.array(this_y, dtype=np.float32)))
+            scores = np.vstack((scores, np.array(this_scores, dtype=np.float32)))
+            r = np.hstack((r, np.array(this_r, dtype=np.float32)))
         else:
-            th0 = np.array(this_th0, dtype=np.float16)
-            th1 = np.array(this_th1, dtype=np.float16)
-            X = np.array(this_X, dtype=np.float16)
-            y = np.array(this_y, dtype=np.float16)
-            scores = np.array(this_scores, dtype=np.float16)
-            r = np.array(this_r, dtype=np.float16)
+            th0 = np.array(this_th0, dtype=np.float32)
+            th1 = np.array(this_th1, dtype=np.float32)
+            X = np.array(this_X, dtype=np.float32)
+            y = np.array(this_y, dtype=np.float32)
+            scores = np.array(this_scores, dtype=np.float32)
+            r = np.array(this_r, dtype=np.float32)
+
+    # Just to make sure
+    cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+    th0 = th0[cut]
+    th1 = th1[cut]
+    X = X[cut]
+    y = y[cut]
+    scores = scores[cut]
+    r = r[cut]
 
     np.save(settings.unweighted_events_dir + '/theta0_train_random' + filename_addition + '.npy', th0)
     np.save(settings.unweighted_events_dir + '/theta1_train_random' + filename_addition + '.npy', th1)
@@ -571,11 +602,11 @@ if args.calibration:
         this_X, this_weights = generate_data_calibration(t)
 
         if i > 0:
-            X = np.vstack((X, np.array(this_X, dtype=np.float16)))
-            weights = np.hstack((weights, np.array(this_weights, dtype=np.float16)))
+            X = np.vstack((X, np.array(this_X, dtype=np.float32)))
+            weights = np.hstack((weights, np.array(this_weights, dtype=np.float32)))
         else:
-            X = np.array(this_X, dtype=np.float16)
-            weights = np.array(this_weights, dtype=np.float16)
+            X = np.array(this_X, dtype=np.float32)
+            weights = np.array(this_weights, dtype=np.float32)
 
         np.save(settings.unweighted_events_dir + '/X_calibration' + filename_addition + '.npy', X)
         np.save(settings.unweighted_events_dir + '/weights_calibration' + filename_addition + '.npy', weights)
