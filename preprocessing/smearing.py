@@ -318,7 +318,8 @@ def apply_smearing(filename, dry_run=False):
         return
 
     X_shape = X_true.shape
-    X_true.reshape((-1,42))
+    X_true = X_true.reshape((-1,42))
+    logging.debug('X shape: original %s, for processing %s', X_shape, X_true.shape)
 
     init_number = -1.e9
     X_smeared = init_number * np.ones_like(X_true)
@@ -495,7 +496,6 @@ def apply_smearing(filename, dry_run=False):
                 logging.debug('  Feature %s: %s untouched values', i, uc)
 
     # Reshape to original
-    logging.debug('Shape: original %s, during processing %s', X_shape, X_smeared.shape)
     X_smeared.reshape(X_shape)
 
     # Save result
