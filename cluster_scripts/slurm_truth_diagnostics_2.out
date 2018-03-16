@@ -1,23 +1,25 @@
-16.03.2018 11:14:26 INFO    Hi! How are you today?
-16.03.2018 11:14:26 INFO    Startup options:
-16.03.2018 11:14:26 INFO      Algorithm:                     truth
-16.03.2018 11:14:26 INFO      Point by point:                False
-16.03.2018 11:14:26 INFO      Morphing-aware mode:           False
-16.03.2018 11:14:26 INFO      Smeared data:                  False
-16.03.2018 11:14:26 INFO      Training sample:               baseline
-16.03.2018 11:14:26 INFO      alpha:                         None
-16.03.2018 11:14:26 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-16.03.2018 11:14:26 INFO      AFC epsilon:                   None
-16.03.2018 11:14:26 INFO      Denominator theta:             False
-16.03.2018 11:14:26 INFO      Neyman construction toys:      2
-16.03.2018 11:14:26 INFO      Other options:                 
-16.03.2018 11:14:26 INFO      Base directory:                /home/jb6504/higgs_inference
-16.03.2018 11:14:26 INFO      ML-based strategies available: False
-16.03.2018 11:14:26 INFO    Starting truth calculation
-16.03.2018 11:14:26 DEBUG    NC settings: False neyman 36 10000 1001
-16.03.2018 11:14:26 DEBUG    Diagnostics settings: _denom2 _denom2
-16.03.2018 11:14:32 INFO    Starting evaluation
-16.03.2018 11:14:34 INFO    Starting roaming
-16.03.2018 11:20:56 INFO    Calculating cross-entropy on train set
-16.03.2018 11:20:58 INFO    Training cross-entropy: 0.657769637535
-16.03.2018 11:20:58 INFO    That's it -- have a great day!
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '37704')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/jb6504/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-centos-7.3.1611-Core-x86_64-2.7.12-64/lock_dir
+16.03.2018 14:35:23 INFO    Hi! How are you today?
+16.03.2018 14:35:23 INFO    Startup options:
+16.03.2018 14:35:23 INFO      Algorithm:                     truth
+16.03.2018 14:35:23 INFO      Point by point:                False
+16.03.2018 14:35:23 INFO      Morphing-aware mode:           False
+16.03.2018 14:35:23 INFO      Smeared data:                  False
+16.03.2018 14:35:23 INFO      Training sample:               baseline
+16.03.2018 14:35:23 INFO      alpha:                         None
+16.03.2018 14:35:23 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+16.03.2018 14:35:23 INFO      AFC epsilon:                   None
+16.03.2018 14:35:23 INFO      Denominator theta:             False
+16.03.2018 14:35:23 INFO      Neyman construction toys:      2
+16.03.2018 14:35:23 INFO      Other options:                 
+16.03.2018 14:35:23 INFO      Base directory:                /home/jb6504/higgs_inference
+16.03.2018 14:35:23 INFO      ML-based strategies available: False
+16.03.2018 14:35:23 INFO    Starting truth calculation
+16.03.2018 14:35:23 DEBUG    NC settings: False neyman 36 10000 1001
+16.03.2018 14:35:23 DEBUG    Diagnostics settings: _denom2 _denom2
+16.03.2018 14:35:27 INFO    Starting evaluation
+16.03.2018 14:35:31 INFO    Starting roaming
+16.03.2018 14:42:08 INFO    Calculating cross-entropy on train set
+16.03.2018 14:42:08 INFO    Training cross-entropy: 0.657583245094
+16.03.2018 14:42:08 INFO    That's it -- have a great day!
