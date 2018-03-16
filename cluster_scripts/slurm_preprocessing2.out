@@ -1,16 +1,26 @@
-15.03.2018 14:58:56 INFO    Welcome! How are you today?
-15.03.2018 14:58:56 INFO    Tasks:
-15.03.2018 14:58:56 INFO      Baseline training:                 True
-15.03.2018 14:58:56 INFO      Random training:                   False
-15.03.2018 14:58:56 INFO      Morphing training:                 False
-15.03.2018 14:58:56 INFO      Point-by-point training:           True
-15.03.2018 14:58:56 INFO      Calibration:                       True
-15.03.2018 14:58:56 INFO      Likelihood ratio eval:             True
-15.03.2018 14:58:56 INFO      Neyman construction:               False
-15.03.2018 14:58:56 INFO      Neyman construction (alternative): True
-15.03.2018 14:58:56 INFO      Neyman construction (alternative): False
-15.03.2018 14:58:56 INFO      Roaming:                           False
-15.03.2018 14:58:56 INFO    Options:
-15.03.2018 14:58:56 INFO      Dry run:                           False
-15.03.2018 14:58:56 INFO      Denominator:                       alternative 2
-slurmstepd: error: *** JOB 4936722 ON c99-04 CANCELLED AT 2018-03-15T14:59:18 ***
+15.03.2018 22:38:48 INFO    Welcome! How are you today?
+15.03.2018 22:38:48 INFO    Tasks:
+15.03.2018 22:38:48 INFO      Baseline training:                 False
+15.03.2018 22:38:48 INFO      Random training:                   False
+15.03.2018 22:38:48 INFO      Morphing training:                 False
+15.03.2018 22:38:48 INFO      Point-by-point training:           False
+15.03.2018 22:38:48 INFO      Calibration:                       False
+15.03.2018 22:38:48 INFO      Likelihood ratio eval:             True
+15.03.2018 22:38:48 INFO      Neyman construction:               False
+15.03.2018 22:38:48 INFO      Neyman construction (alternative): False
+15.03.2018 22:38:48 INFO      Neyman construction (alternative): False
+15.03.2018 22:38:48 INFO      Roaming:                           False
+15.03.2018 22:38:48 INFO    Options:
+15.03.2018 22:38:48 INFO      Dry run:                           False
+15.03.2018 22:38:48 INFO      Denominator:                       alternative 2
+15.03.2018 22:52:04 INFO    Splitting...
+15.03.2018 22:52:32 INFO    Number of events:
+15.03.2018 22:52:32 INFO      All:    821636
+15.03.2018 22:52:32 INFO      Training:    575145
+15.03.2018 22:52:32 INFO      Calibration: 82164
+15.03.2018 22:52:32 INFO      Evaluation:  164327
+15.03.2018 22:52:34 INFO    Normalizing probabilities
+15.03.2018 22:53:00 INFO    Generating likelihood ratio evaluation sample
+generate_data.py:644: RuntimeWarning: divide by zero encountered in log
+  cut = np.all(np.isfinite(np.log(r[:, :])) & np.isfinite(scores[:, :, 0]) & np.isfinite(scores[:, :, 1]),
+15.03.2018 23:16:47 INFO    Done!

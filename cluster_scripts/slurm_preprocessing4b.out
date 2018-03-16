@@ -12,15 +12,15 @@
 15.03.2018 23:08:37 INFO      Roaming:                           False
 15.03.2018 23:08:37 INFO    Options:
 15.03.2018 23:08:37 INFO      Dry run:                           False
-15.03.2018 23:08:37 INFO      Denominator:                       alternative 1
-15.03.2018 23:18:17 INFO    Splitting...
-15.03.2018 23:18:41 INFO    Number of events:
-15.03.2018 23:18:41 INFO      All:    821636
-15.03.2018 23:18:41 INFO      Training:    575145
-15.03.2018 23:18:41 INFO      Calibration: 82164
-15.03.2018 23:18:41 INFO      Evaluation:  164327
-15.03.2018 23:18:43 INFO    Normalizing probabilities
-15.03.2018 23:19:07 INFO    Generating likelihood ratio evaluation sample
+15.03.2018 23:08:37 INFO      Denominator:                       alternative 4
+15.03.2018 23:18:36 INFO    Splitting...
+15.03.2018 23:18:58 INFO    Number of events:
+15.03.2018 23:18:58 INFO      All:    821636
+15.03.2018 23:18:58 INFO      Training:    575145
+15.03.2018 23:18:58 INFO      Calibration: 82164
+15.03.2018 23:18:58 INFO      Evaluation:  164327
+15.03.2018 23:18:59 INFO    Normalizing probabilities
+15.03.2018 23:19:24 INFO    Generating likelihood ratio evaluation sample
 generate_data.py:644: RuntimeWarning: divide by zero encountered in log
   cut = np.all(np.isfinite(np.log(r[:, :])) & np.isfinite(scores[:, :, 0]) & np.isfinite(scores[:, :, 1]),
-15.03.2018 23:39:00 INFO    Done!
+15.03.2018 23:38:45 INFO    Done!

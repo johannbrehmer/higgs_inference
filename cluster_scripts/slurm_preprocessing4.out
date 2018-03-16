@@ -1,0 +1,33 @@
+15.03.2018 19:46:02 INFO    Welcome! How are you today?
+15.03.2018 19:46:02 INFO    Tasks:
+15.03.2018 19:46:02 INFO      Baseline training:                 True
+15.03.2018 19:46:02 INFO      Random training:                   False
+15.03.2018 19:46:02 INFO      Morphing training:                 False
+15.03.2018 19:46:02 INFO      Point-by-point training:           True
+15.03.2018 19:46:02 INFO      Calibration:                       True
+15.03.2018 19:46:02 INFO      Likelihood ratio eval:             True
+15.03.2018 19:46:02 INFO      Neyman construction:               False
+15.03.2018 19:46:02 INFO      Neyman construction (alternative): False
+15.03.2018 19:46:02 INFO      Neyman construction (alternative): False
+15.03.2018 19:46:02 INFO      Roaming:                           False
+15.03.2018 19:46:02 INFO    Options:
+15.03.2018 19:46:02 INFO      Dry run:                           False
+15.03.2018 19:46:02 INFO      Denominator:                       alternative 4
+15.03.2018 20:00:03 INFO    Splitting...
+15.03.2018 20:00:37 INFO    Number of events:
+15.03.2018 20:00:37 INFO      All:    821636
+15.03.2018 20:00:37 INFO      Training:    575145
+15.03.2018 20:00:37 INFO      Calibration: 82164
+15.03.2018 20:00:37 INFO      Evaluation:  164327
+15.03.2018 20:00:38 INFO    Normalizing probabilities
+15.03.2018 20:02:51 INFO    Generating baseline training sample
+15.03.2018 20:27:07 INFO    Generating point-by-point training samples
+generate_data.py:432: RuntimeWarning: divide by zero encountered in log
+  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+15.03.2018 21:27:51 INFO    Generating calibration sample
+generate_data.py:565: RuntimeWarning: divide by zero encountered in log
+  cut = np.all(np.isfinite(np.log(r)), axis=0)
+15.03.2018 22:21:11 INFO    Generating training sample for score regression
+15.03.2018 22:31:33 INFO    Generating likelihood ratio evaluation sample
+/opt/slurm/data/slurmd/job4944145/slurm_script: line 17: 96357 Killed                  python -u generate_data.py --train --pointbypoint --scoreregression --calibration --test --alternativedenom4
+slurmstepd: error: Exceeded step memory limit at some point.
