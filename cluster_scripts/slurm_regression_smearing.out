@@ -1,55 +1,49 @@
 Using TensorFlow backend.
-16.03.2018 10:58:44 INFO    Hi! How are you today?
-16.03.2018 10:58:44 INFO    Startup options:
-16.03.2018 10:58:44 INFO      Algorithm:                     regression
-16.03.2018 10:58:44 INFO      Point by point:                False
-16.03.2018 10:58:44 INFO      Morphing-aware mode:           False
-16.03.2018 10:58:44 INFO      Smeared data:                  True
-16.03.2018 10:58:44 INFO      Training sample:               baseline
-16.03.2018 10:58:44 INFO      alpha:                         None
-16.03.2018 10:58:44 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-16.03.2018 10:58:44 INFO      AFC epsilon:                   None
-16.03.2018 10:58:44 INFO      Denominator theta:             True
-16.03.2018 10:58:44 INFO      Neyman construction toys:      0
-16.03.2018 10:58:44 INFO      Other options:                 ['new', 'neyman2']
-16.03.2018 10:58:44 INFO      Base directory:                /home/jb6504/higgs_inference
-16.03.2018 10:58:44 INFO      ML-based strategies available: True
-16.03.2018 10:58:44 INFO    Starting parameterized inference
-16.03.2018 10:58:44 INFO    Main settings:
-16.03.2018 10:58:44 INFO      Algorithm:                regression
-16.03.2018 10:58:44 INFO      Morphing-aware:           False
-16.03.2018 10:58:44 INFO      Training sample:          baseline
-16.03.2018 10:58:44 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
-16.03.2018 10:58:44 INFO    Options:
-16.03.2018 10:58:44 INFO      Number of hidden layers:  3
-16.03.2018 10:58:44 INFO      Batch size:               128
-16.03.2018 10:58:44 INFO      Learning rate:            0.001
-16.03.2018 10:58:44 INFO      Learning rate decay:      0.0921034037198
-16.03.2018 10:58:44 INFO      Number of epochs:         50
-16.03.2018 10:58:44 INFO      NC experiments:           (10000 alternate + 10000 null) experiments with 1 alternate events each
-16.03.2018 10:58:44 INFO      Debug mode:               False
-16.03.2018 10:59:05 INFO    Starting training
+16.03.2018 14:10:30 INFO    Hi! How are you today?
+16.03.2018 14:10:30 INFO    Startup options:
+16.03.2018 14:10:30 INFO      Algorithm:                     regression
+16.03.2018 14:10:30 INFO      Point by point:                False
+16.03.2018 14:10:30 INFO      Morphing-aware mode:           False
+16.03.2018 14:10:30 INFO      Smeared data:                  True
+16.03.2018 14:10:30 INFO      Training sample:               baseline
+16.03.2018 14:10:30 INFO      alpha:                         None
+16.03.2018 14:10:30 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+16.03.2018 14:10:30 INFO      AFC epsilon:                   None
+16.03.2018 14:10:30 INFO      Denominator theta:             True
+16.03.2018 14:10:30 INFO      Neyman construction toys:      0
+16.03.2018 14:10:30 INFO      Other options:                 ['new', 'neyman2']
+16.03.2018 14:10:30 INFO      Base directory:                /home/jb6504/higgs_inference
+16.03.2018 14:10:30 INFO      ML-based strategies available: True
+16.03.2018 14:10:30 INFO    Starting parameterized inference
+16.03.2018 14:10:30 INFO    Main settings:
+16.03.2018 14:10:30 INFO      Algorithm:                regression
+16.03.2018 14:10:30 INFO      Morphing-aware:           False
+16.03.2018 14:10:30 INFO      Training sample:          baseline
+16.03.2018 14:10:30 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+16.03.2018 14:10:30 INFO    Options:
+16.03.2018 14:10:30 INFO      Number of hidden layers:  3
+16.03.2018 14:10:30 INFO      Batch size:               128
+16.03.2018 14:10:30 INFO      Learning rate:            0.001
+16.03.2018 14:10:30 INFO      Learning rate decay:      0.0921034037198
+16.03.2018 14:10:30 INFO      Number of epochs:         50
+16.03.2018 14:10:30 INFO      NC experiments:           (10000 alternate + 10000 null) experiments with 1 alternate events each
+16.03.2018 14:10:30 INFO      Debug mode:               False
+16.03.2018 14:10:55 INFO    Starting training
 Train on 7999997 samples, validate on 2000000 samples
-2018-03-16 10:59:05.658158: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-16 10:59:05.658499: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-16 10:59:05.658509: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-16 10:59:05.658513: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-16 10:59:05.658517: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-16 10:59:05.979861: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
-name: Tesla P40
-major: 6 minor: 1 memoryClockRate (GHz) 1.531
+2018-03-16 14:10:56.103891: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 14:10:56.104224: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 14:10:56.104234: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 14:10:56.104238: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 14:10:56.104242: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 14:10:56.401816: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P100-PCIE-16GB
+major: 6 minor: 0 memoryClockRate (GHz) 1.3285
 pciBusID 0000:84:00.0
-Total memory: 22.38GiB
-Free memory: 22.21GiB
-2018-03-16 10:59:05.979900: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-03-16 10:59:05.979906: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-03-16 10:59:05.979915: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:84:00.0)
+Total memory: 15.89GiB
+Free memory: 15.60GiB
+2018-03-16 14:10:56.401858: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-03-16 14:10:56.401864: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-03-16 14:10:56.401873: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:84:00.0)
 Epoch 1/50
-511s - loss: 5346.4214 - full_cross_entropy: 0.6698 - trimmed_cross_entropy: 0.6593 - full_mse_log_r: 0.1435 - trimmed_mse_log_r: 0.1413 - full_mae_log_r: 0.2219 - full_mse_score: 6.7666 - trimmed_mse_score: 0.7507 - full_mae_score: 0.4854 - val_loss: 5418.5285 - val_full_cross_entropy: 0.6657 - val_trimmed_cross_entropy: 0.6553 - val_full_mse_log_r: 0.0972 - val_trimmed_mse_log_r: 0.0957 - val_full_mae_log_r: 0.1846 - val_full_mse_score: 5.0583 - val_trimmed_mse_score: 0.6874 - val_full_mae_score: 0.4807
+512s - loss: 5284.4217 - full_cross_entropy: 0.6696 - trimmed_cross_entropy: 0.6591 - full_mse_log_r: 0.1419 - trimmed_mse_log_r: 0.1396 - full_mae_log_r: 0.2258 - full_mse_score: 6.7371 - trimmed_mse_score: 0.7525 - full_mae_score: 0.5037 - val_loss: 5410.9970 - val_full_cross_entropy: 0.6653 - val_trimmed_cross_entropy: 0.6549 - val_full_mse_log_r: 0.0923 - val_trimmed_mse_log_r: 0.0908 - val_full_mae_log_r: 0.1860 - val_full_mse_score: 5.0669 - val_trimmed_mse_score: 0.7426 - val_full_mae_score: 0.5147
 Epoch 2/50
-512s - loss: 5241.8628 - full_cross_entropy: 0.6651 - trimmed_cross_entropy: 0.6547 - full_mse_log_r: 0.0877 - trimmed_mse_log_r: 0.0863 - full_mae_log_r: 0.1848 - full_mse_score: 6.5733 - trimmed_mse_score: 0.7077 - full_mae_score: 0.4899 - val_loss: 5398.7307 - val_full_cross_entropy: 0.6639 - val_trimmed_cross_entropy: 0.6536 - val_full_mse_log_r: 0.0741 - val_trimmed_mse_log_r: 0.0730 - val_full_mae_log_r: 0.1693 - val_full_mse_score: 4.9339 - val_trimmed_mse_score: 0.7055 - val_full_mae_score: 0.4939
-Epoch 3/50
-511s - loss: 5151.5694 - full_cross_entropy: 0.6644 - trimmed_cross_entropy: 0.6540 - full_mse_log_r: 0.0783 - trimmed_mse_log_r: 0.0771 - full_mae_log_r: 0.1773 - full_mse_score: 6.4640 - trimmed_mse_score: 0.7140 - full_mae_score: 0.4972 - val_loss: 5345.9184 - val_full_cross_entropy: 0.6631 - val_trimmed_cross_entropy: 0.6527 - val_full_mse_log_r: 0.0643 - val_trimmed_mse_log_r: 0.0633 - val_full_mae_log_r: 0.1510 - val_full_mse_score: 4.8714 - val_trimmed_mse_score: 0.6955 - val_full_mae_score: 0.4992
-Epoch 4/50
-511s - loss: 5116.8145 - full_cross_entropy: 0.6638 - trimmed_cross_entropy: 0.6535 - full_mse_log_r: 0.0708 - trimmed_mse_log_r: 0.0696 - full_mae_log_r: 0.1685 - full_mse_score: 6.4576 - trimmed_mse_score: 0.6942 - full_mae_score: 0.4983 - val_loss: 5233.5349 - val_full_cross_entropy: 0.6628 - val_trimmed_cross_entropy: 0.6525 - val_full_mse_log_r: 0.0602 - val_trimmed_mse_log_r: 0.0592 - val_full_mae_log_r: 0.1475 - val_full_mse_score: 4.8200 - val_trimmed_mse_score: 0.6963 - val_full_mae_score: 0.5072
-Epoch 5/50

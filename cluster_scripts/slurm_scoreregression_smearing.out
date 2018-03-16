@@ -1,52 +1,46 @@
 Using TensorFlow backend.
-16.03.2018 10:58:41 INFO    Hi! How are you today?
-16.03.2018 10:58:41 INFO    Startup options:
-16.03.2018 10:58:41 INFO      Algorithm:                     scoreregression
-16.03.2018 10:58:41 INFO      Point by point:                False
-16.03.2018 10:58:41 INFO      Morphing-aware mode:           False
-16.03.2018 10:58:41 INFO      Smeared data:                  True
-16.03.2018 10:58:41 INFO      Training sample:               baseline
-16.03.2018 10:58:41 INFO      alpha:                         None
-16.03.2018 10:58:41 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-16.03.2018 10:58:41 INFO      AFC epsilon:                   None
-16.03.2018 10:58:41 INFO      Denominator theta:             True
-16.03.2018 10:58:41 INFO      Neyman construction toys:      0
-16.03.2018 10:58:41 INFO      Other options:                 ['deep', 'new', 'neyman2']
-16.03.2018 10:58:41 INFO      Base directory:                /home/jb6504/higgs_inference
-16.03.2018 10:58:41 INFO      ML-based strategies available: True
-16.03.2018 10:58:41 INFO    Starting score regression inference
-16.03.2018 10:58:41 INFO    Options:
-16.03.2018 10:58:41 INFO      Denominator theta:       denominator 0 = theta 708 = [ 0.39293227  0.43229216]
-16.03.2018 10:58:41 INFO      Number of hidden layers: 5
-16.03.2018 10:58:41 INFO      Batch size:              128
-16.03.2018 10:58:41 INFO      Learning rate:           0.001
-16.03.2018 10:58:41 INFO      Learning rate decay:     0.0921034037198
-16.03.2018 10:58:41 INFO      Number of epochs:        50
-16.03.2018 10:58:41 INFO      NC experiments:          (10000 alternate + 10000 null) experiments with 1 alternate events each
-16.03.2018 10:58:59 INFO    Starting training of score regression
+16.03.2018 14:10:19 INFO    Hi! How are you today?
+16.03.2018 14:10:19 INFO    Startup options:
+16.03.2018 14:10:19 INFO      Algorithm:                     scoreregression
+16.03.2018 14:10:19 INFO      Point by point:                False
+16.03.2018 14:10:19 INFO      Morphing-aware mode:           False
+16.03.2018 14:10:19 INFO      Smeared data:                  True
+16.03.2018 14:10:19 INFO      Training sample:               baseline
+16.03.2018 14:10:19 INFO      alpha:                         None
+16.03.2018 14:10:19 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+16.03.2018 14:10:19 INFO      AFC epsilon:                   None
+16.03.2018 14:10:19 INFO      Denominator theta:             True
+16.03.2018 14:10:19 INFO      Neyman construction toys:      0
+16.03.2018 14:10:19 INFO      Other options:                 ['deep', 'new', 'neyman2']
+16.03.2018 14:10:19 INFO      Base directory:                /home/jb6504/higgs_inference
+16.03.2018 14:10:19 INFO      ML-based strategies available: True
+16.03.2018 14:10:19 INFO    Starting score regression inference
+16.03.2018 14:10:19 INFO    Options:
+16.03.2018 14:10:19 INFO      Denominator theta:       denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+16.03.2018 14:10:19 INFO      Number of hidden layers: 5
+16.03.2018 14:10:19 INFO      Batch size:              128
+16.03.2018 14:10:19 INFO      Learning rate:           0.001
+16.03.2018 14:10:19 INFO      Learning rate decay:     0.0921034037198
+16.03.2018 14:10:19 INFO      Number of epochs:        50
+16.03.2018 14:10:19 INFO      NC experiments:          (10000 alternate + 10000 null) experiments with 1 alternate events each
+16.03.2018 14:10:51 INFO    Starting training of score regression
 Train on 8000000 samples, validate on 2000000 samples
-2018-03-16 10:59:00.090443: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-16 10:59:00.090781: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-16 10:59:00.090790: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-16 10:59:00.090794: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-16 10:59:00.090797: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-16 10:59:00.420683: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
-name: Tesla P40
-major: 6 minor: 1 memoryClockRate (GHz) 1.531
-pciBusID 0000:85:00.0
-Total memory: 22.38GiB
-Free memory: 22.21GiB
-2018-03-16 10:59:00.420719: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-03-16 10:59:00.420724: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-03-16 10:59:00.420733: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:85:00.0)
+2018-03-16 14:10:52.332253: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 14:10:52.332607: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 14:10:52.332617: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 14:10:52.332621: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 14:10:52.332625: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 14:10:52.631456: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P100-PCIE-16GB
+major: 6 minor: 0 memoryClockRate (GHz) 1.3285
+pciBusID 0000:05:00.0
+Total memory: 15.89GiB
+Free memory: 15.60GiB
+2018-03-16 14:10:52.631492: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-03-16 14:10:52.631498: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-03-16 14:10:52.631506: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:05:00.0)
 Epoch 1/50
-403s - loss: 0.0821 - val_loss: 0.0599
+342s - loss: 0.0790 - val_loss: 0.0611
 Epoch 2/50
-399s - loss: 0.0602 - val_loss: 0.0528
+343s - loss: 0.0568 - val_loss: 0.0542
 Epoch 3/50
-398s - loss: 0.0527 - val_loss: 0.0624
-Epoch 4/50
-398s - loss: 0.0469 - val_loss: 0.0484
-Epoch 5/50
-399s - loss: 0.0450 - val_loss: 0.0383
-Epoch 6/50
