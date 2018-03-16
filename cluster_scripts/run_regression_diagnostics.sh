@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=regr_d%a
+#SBATCH --job-name=regr_diag
 #SBATCH --output=slurm_regression_diagnostics_%a.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
@@ -18,4 +18,4 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py regression -o alternativedenom${SLURM_ARRAY_TASK_ID}
+python -u experiments.py regression --denom ${SLURM_ARRAY_TASK_ID}

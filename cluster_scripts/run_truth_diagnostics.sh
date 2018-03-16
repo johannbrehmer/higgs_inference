@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=truth_d%a
+#SBATCH --job-name=truth_diag
 #SBATCH --output=slurm_truth_diagnostics_%a.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
@@ -18,4 +18,4 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py truth -o alternativedenom${SLURM_ARRAY_TASK_ID}
+python -u experiments.py truth --denom ${SLURM_ARRAY_TASK_ID}

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=comb_d%a
+#SBATCH --job-name=comb_diag
 #SBATCH --output=slurm_combined_diagnostics_%a.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
@@ -18,4 +18,4 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py combined --neyman -o deep alternativedenom${SLURM_ARRAY_TASK_ID}
+python -u experiments.py combined --denom ${SLURM_ARRAY_TASK_ID} -o deep
