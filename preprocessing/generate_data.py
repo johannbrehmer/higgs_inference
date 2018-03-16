@@ -251,12 +251,14 @@ if args.train:
         #        np.log(r) ** 2 < settings.max_logr ** 2)
         cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
 
-        return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut], p0[cut], p1[
-            cut]
+        return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut], p0[cut], p1[cut]
 
 
     for i, t in enumerate(settings.thetas_train):
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1 = generate_data_train(t, theta1)
+
+        logging.debug('Returned shapes: %s %s %s %s %s %s %s %s', this_th0.shape, this_th1.shape, this_X.shape,
+                      this_y.shape, this_scores.shape, this_r.shape, this_p0.shape, this_p1.shape)
 
         if i > 0:
             th0 = np.vstack((th0, np.array(this_th0, dtype=np.float32)))
@@ -265,8 +267,8 @@ if args.train:
             y = np.hstack((y, np.array(this_y, dtype=np.float32)))
             scores = np.vstack((scores, np.array(this_scores, dtype=np.float32)))
             r = np.hstack((r, np.array(this_r, dtype=np.float32)))
-            p0 = np.hstack((r, np.array(this_p0, dtype=np.float32)))
-            p1 = np.hstack((r, np.array(this_p1, dtype=np.float32)))
+            p0 = np.hstack((p0, np.array(this_p0, dtype=np.float32)))
+            p1 = np.hstack((p1, np.array(this_p1, dtype=np.float32)))
         else:
             th0 = np.array(this_th0, dtype=np.float32)
             th1 = np.array(this_th1, dtype=np.float32)
@@ -276,6 +278,9 @@ if args.train:
             r = np.array(this_r, dtype=np.float32)
             p0 = np.array(this_p0, dtype=np.float32)
             p1 = np.array(this_p1, dtype=np.float32)
+
+    logging.debug('Combined shapes: %s %s %s %s %s %s %s %s', th0.shape, th1.shape, X.shape,
+                  y.shape, scores.shape, r.shape, p0.shape, p1.shape)
 
     # Just to make sure
     cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
@@ -287,6 +292,9 @@ if args.train:
     r = r[cut]
     p0 = p0[cut]
     p1 = p1[cut]
+
+    logging.debug('Combined shapes after filter: %s %s %s %s %s %s %s %s', th0.shape, th1.shape, X.shape,
+                  y.shape, scores.shape, r.shape, p0.shape, p1.shape)
 
     np.save(settings.unweighted_events_dir + '/theta0_train' + filename_addition + '.npy', th0)
     np.save(settings.unweighted_events_dir + '/theta1_train' + filename_addition + '.npy', th1)
@@ -366,8 +374,8 @@ if args.basis:
             y = np.hstack((y, np.array(this_y, dtype=np.float32)))
             scores = np.vstack((scores, np.array(this_scores, dtype=np.float32)))
             r = np.hstack((r, np.array(this_r, dtype=np.float32)))
-            p0 = np.hstack((r, np.array(this_p0, dtype=np.float32)))
-            p1 = np.hstack((r, np.array(this_p1, dtype=np.float32)))
+            p0 = np.hstack((p0, np.array(this_p0, dtype=np.float32)))
+            p1 = np.hstack((p1, np.array(this_p1, dtype=np.float32)))
         else:
             th0 = np.array(this_th0, dtype=np.float32)
             th1 = np.array(this_th1, dtype=np.float32)
