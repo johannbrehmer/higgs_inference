@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#SBATCH --job-name=truth_d%a
-#SBATCH --output=slurm_truth_diagnostics_%a.out
+#SBATCH --job-name=histo_d%a
+#SBATCH --output=slurm_histo_diagnostics_%a.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=16GB
+#SBATCH --mem=32GB
 #SBATCH --time=1-00:00:00
 # #SBATCH --gres=gpu:1
 
@@ -18,4 +18,4 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py truth -o alternativedenom${SLURM_ARRAY_TASK_ID}
+python -u experiments.py histo -x 1 41 -o alternativedenom${SLURM_ARRAY_TASK_ID}

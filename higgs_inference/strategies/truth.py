@@ -15,6 +15,7 @@ from higgs_inference.various.utils import s_from_r
 
 
 def truth_inference(do_neyman=False,
+                    denominator=0,
                     options=''):
     """ Extracts the true likelihood ratios for the evaluation samples. """
 
@@ -24,28 +25,14 @@ def truth_inference(do_neyman=False,
     # Settings
     ################################################################################
 
-    denom1_mode = ('denom1' in options)
-    denom2_mode = ('denom2' in options)
-    denom3_mode = ('denom3' in options)
-    denom4_mode = ('denom4' in options)
-
     neyman2_mode = ('neyman2' in options)
     neyman3_mode = ('neyman3' in options)
 
     filename_addition = ''
     input_filename_addition = ''
-    if denom1_mode:
-        input_filename_addition = '_denom1'
-        filename_addition += '_denom1'
-    elif denom2_mode:
-        input_filename_addition = '_denom2'
-        filename_addition += '_denom2'
-    elif denom3_mode:
-        input_filename_addition = '_denom3'
-        filename_addition += '_denom3'
-    elif denom4_mode:
-        input_filename_addition = '_denom4'
-        filename_addition += '_denom4'
+    if denominator > 0:
+        input_filename_addition = '_denom' + str(denominator)
+        filename_addition += '_denom' + str(denominator)
 
     neyman_dir = settings.neyman_dir + '/truth'
     results_dir = settings.base_dir + '/results/truth'

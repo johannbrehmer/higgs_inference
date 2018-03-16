@@ -20,6 +20,7 @@ def afc_inference(statistics='x',
                   epsilon=None,
                   kernel='gaussian',
                   use_smearing=False,
+                  denominator=0,
                   kde_relative_tolerance=1.e-2,
                   kde_absolute_tolerance=1.e-4,
                   do_neyman=False,
@@ -72,11 +73,12 @@ def afc_inference(statistics='x',
         input_X_prefix = 'smeared_'
         filename_addition += '_smeared'
 
-    denom1_mode = ('denom1' in options)
+    theta1 = settings.theta1_default
     input_filename_addition = ''
-    if denom1_mode:
-        input_filename_addition = '_denom1'
-        filename_addition += '_denom1'
+    if denominator > 0:
+        input_filename_addition = '_denom' + str(denominator)
+        filename_addition += '_denom' + str(denominator)
+        theta1 = settings.theta1_alternatives[denominator - 1]
 
     results_dir = settings.base_dir + '/results/afc'
     neyman_dir = settings.neyman_dir + '/afc'
@@ -88,6 +90,8 @@ def afc_inference(statistics='x',
         logging.info('  Statistics:              %s', statistics)
     logging.info('  Epsilon (bandwidth):     %s', epsilon)
     logging.info('  Kernel:                  %s', kernel)
+    logging.info('  Denominator theta:       denominator %s = theta %s = %s', denominator, theta1,
+                 settings.thetas[theta1])
 
     ################################################################################
     # Data

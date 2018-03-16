@@ -25,13 +25,13 @@ from higgs_inference.models.ml_utils import DetailedHistory
 
 def point_by_point_inference(algorithm='carl',
                              use_smearing=False,
+                             denominator=0,
                              do_neyman=False,
                              options=''):
     """
     Trains and evaluates one of the point-by-point higgs_inference methods.
 
     :param use_smearing:
-    :param do_neyman_calibrated:
     :param do_neyman:
     :param algorithm: Type of the algorithm used. Currently supported: 'carl' and 'regression'.
     :param options: Further options in a list of strings or string.
@@ -45,7 +45,6 @@ def point_by_point_inference(algorithm='carl',
 
     assert algorithm in ['carl', 'regression']
 
-    denom1_mode = ('denom1' in options)
     debug_mode = ('debug' in options)
     learn_logr_mode = ('learns' not in options)
     short_mode = ('short' in options)
@@ -114,10 +113,10 @@ def point_by_point_inference(algorithm='carl',
 
     theta1 = settings.theta1_default
     input_filename_addition = ''
-    if denom1_mode:
-        input_filename_addition = '_denom1'
-        filename_addition += '_denom1'
-        theta1 = settings.theta1_alternative
+    if denominator > 0:
+        input_filename_addition = '_denom' + str(denominator)
+        filename_addition += '_denom' + str(denominator)
+        theta1 = settings.theta1_alternatives[denominator - 1]
 
     results_dir = settings.base_dir + '/results/point_by_point'
     neyman_dir = settings.neyman_dir + '/point_by_point'
@@ -130,6 +129,8 @@ def point_by_point_inference(algorithm='carl',
     logging.info('  Learning rate:           %s', learning_rate)
     logging.info('  Learning rate decay:     %s', lr_decay)
     logging.info('  Number of epochs:        %s', n_epochs)
+    logging.info('  Denominator theta:       denominator %s = theta %s = %s', denominator, theta1,
+                 settings.thetas[theta1])
 
     ################################################################################
     # Data

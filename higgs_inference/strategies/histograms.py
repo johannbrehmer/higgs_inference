@@ -19,6 +19,7 @@ from higgs_inference.various.utils import calculate_mean_squared_error, r_from_s
 def histo_inference(indices_X=None,
                     binning='optimized',
                     use_smearing=False,
+                    denominator=0,
                     do_neyman=False,
                     options=''):
     """
@@ -89,15 +90,14 @@ def histo_inference(indices_X=None,
         input_X_prefix = 'smeared_'
         filename_addition += '_smeared'
 
-    denom1_mode = ('denom1' in options)
     new_sample_mode = ('new' in options)
     neyman2_mode = ('neyman2' in options)
     neyman3_mode = ('neyman3' in options)
 
     input_filename_addition = ''
-    if denom1_mode:
-        input_filename_addition = '_denom1'
-        filename_addition += '_denom1'
+    if denominator > 0:
+        input_filename_addition = '_denom' + str(denominator)
+        filename_addition += '_denom' + str(denominator)
 
     if new_sample_mode:
         filename_addition += '_new'

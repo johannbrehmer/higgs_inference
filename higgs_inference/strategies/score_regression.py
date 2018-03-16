@@ -22,6 +22,7 @@ from higgs_inference.various.utils import r_from_s, calculate_mean_squared_error
 
 
 def score_regression_inference(use_smearing=False,
+                               denominator=0,
                                do_neyman=False,
                                options=''):
     """
@@ -42,7 +43,6 @@ def score_regression_inference(use_smearing=False,
     shallow_mode = ('shallow' in options)
     short_mode = ('short' in options)
     long_mode = ('long' in options)
-    denom1_mode = ('denom1' in options)
     small_lr_mode = ('slowlearning' in options)
     large_lr_mode = ('fastlearning' in options)
     large_batch_mode = ('largebatch' in options)
@@ -101,10 +101,10 @@ def score_regression_inference(use_smearing=False,
 
     theta1 = settings.theta1_default
     input_filename_addition = ''
-    if denom1_mode:
-        input_filename_addition = '_denom1'
-        filename_addition += '_denom1'
-        theta1 = settings.theta1_alternative
+    if denominator > 0:
+        input_filename_addition = '_denom' + str(denominator)
+        filename_addition += '_denom' + str(denominator)
+        theta1 = settings.theta1_alternatives[denominator - 1]
 
     if new_sample_mode:
         filename_addition += '_new'
@@ -128,6 +128,8 @@ def score_regression_inference(use_smearing=False,
     neyman_dir = settings.neyman_dir + '/score_regression'
 
     logging.info('Options:')
+    logging.info('  Denominator theta:       denominator %s = theta %s = %s', denominator, theta1,
+                 settings.thetas[theta1])
     logging.info('  Number of hidden layers: %s', n_hidden_layers)
     logging.info('  Batch size:              %s', batch_size)
     logging.info('  Learning rate:           %s', learning_rate)

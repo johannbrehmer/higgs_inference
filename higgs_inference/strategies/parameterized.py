@@ -34,6 +34,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                             morphing_aware=False,
                             training_sample='baseline',  # 'baseline', 'basis', 'random'
                             use_smearing=False,
+                            denominator=0,
                             alpha=None,
                             do_neyman=False,
                             options=''):  # all other options in a string
@@ -64,7 +65,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     basis_theta_mode = training_sample == 'basis'
 
     learn_logr_mode = ('learns' not in options)
-    denom1_mode = ('denom1' in options)
     new_sample_mode = ('new' in options)
     short_mode = ('short' in options)
     long_mode = ('long' in options)
@@ -154,10 +154,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     theta1 = settings.theta1_default
     input_filename_addition = ''
-    if denom1_mode:
-        input_filename_addition = '_denom1'
-        filename_addition += '_denom1'
-        theta1 = settings.theta1_alternative
+    if denominator > 0:
+        input_filename_addition = '_denom' + str(denominator)
+        filename_addition += '_denom' + str(denominator)
+        theta1 = settings.theta1_alternatives[denominator - 1]
 
     if new_sample_mode:
         filename_addition += '_new'
@@ -184,6 +184,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     logging.info('  Algorithm:                %s', algorithm)
     logging.info('  Morphing-aware:           %s', morphing_aware)
     logging.info('  Training sample:          %s', training_sample)
+    logging.info('  Denominator theta:        denominator %s = theta %s = %s', denominator, theta1,
+                 settings.thetas[theta1])
     logging.info('Options:')
     logging.info('  Number of hidden layers:  %s', n_hidden_layers)
     if algorithm == 'combined':

@@ -11,6 +11,7 @@ from higgs_inference import settings
 
 
 def local_model_truth_inference(do_neyman=False,
+                                denominator=0,
                                 options=''):
     """ Extracts the likelihood ratios in the local model based on the true SM scores. """
 
@@ -22,15 +23,13 @@ def local_model_truth_inference(do_neyman=False,
     # Settings
     ################################################################################
 
-    denom1_mode = ('denom1' in options)
-
     theta1 = settings.theta1_default
-    filename_addition = ''
     input_filename_addition = ''
-    if denom1_mode:
-        input_filename_addition = '_denom1'
-        filename_addition += '_denom1'
-        theta1 = settings.theta1_alternative
+    filename_addition = ''
+    if denominator > 0:
+        input_filename_addition = '_denom' + str(denominator)
+        filename_addition += '_denom' + str(denominator)
+        theta1 = settings.theta1_alternatives[denominator - 1]
 
     neyman_dir = settings.neyman_dir + '/truth'
     results_dir = settings.base_dir + '/results/truth'

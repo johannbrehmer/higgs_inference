@@ -22,7 +22,6 @@ except ImportError:
 
 from higgs_inference.various.neyman_construction import start_cl_calculation
 from higgs_inference.strategies.truth import truth_inference
-from higgs_inference.strategies.local_model import local_model_truth_inference
 from higgs_inference.strategies.afc import afc_inference
 from higgs_inference.strategies.histograms import histo_inference
 
@@ -65,8 +64,10 @@ parser.add_argument("-x", "--xindices", type=int, nargs='+', default=[1, 38, 39,
                     help='X components to be used for histograms and AFC.')
 parser.add_argument("--alpha", type=float, default=None, help='Factor scaling the score regression loss in the'
                                                               + ' parameterized combined approaches.')
-parser.add_argument("-e", "--epsilon", type=float, default=None, help='Epsilon for AFC')
-parser.add_argument("-n", "--neyman", action='store_true',
+parser.add_argument("--epsilon", type=float, default=None, help='Epsilon for AFC')
+parser.add_argument("-d", "--denom", type=int, default=0,
+                    help='Chooses one of five reference thetas for the denominator of the likelihood ratio.')
+parser.add_argument("--neyman", action='store_true',
                     help='Calculate toy experiments for the Neyman construction.')
 parser.add_argument("-o", "--options", nargs='+', default='', help="Further options to be passed on to the algorithm.")
 
@@ -81,7 +82,8 @@ logging.info('  Training sample:               %s', args.training)
 logging.info('  alpha:                         %s', args.alpha)
 logging.info('  Histogram / AFC X indices:     %s', args.xindices)
 logging.info('  AFC epsilon:                   %s', args.epsilon)
-logging.info('  Neyman construction toys:      %s', args.neyman)
+logging.info('  Denominator theta:             %s', args.neyman)
+logging.info('  Neyman construction toys:      %s', args.denom)
 logging.info('  Other options:                 %s', args.options)
 logging.info('  Base directory:                %s', settings.base_dir)
 logging.info('  ML-based strategies available: %s', loaded_ml_strategies)
@@ -103,15 +105,13 @@ if args.algorithm in ['p', 'cl', 'pvalues']:
 
 elif args.algorithm == 'truth':
     truth_inference(do_neyman=args.neyman,
+                    denominator=args.denom,
                     options=args.options)
-
-elif args.algorithm == 'localmodel':
-    local_model_truth_inference(do_neyman=args.neyman,
-                                options=args.options)
 
 elif args.algorithm == 'histo':
     histo_inference(indices_X=args.xindices,
                     use_smearing=args.smearing,
+                    denominator=args.denom,
                     do_neyman=args.neyman,
                     options=args.options)
 
@@ -119,12 +119,14 @@ elif args.algorithm == 'afc':
     afc_inference(indices_X=args.xindices,
                   epsilon=args.epsilon,
                   use_smearing=args.smearing,
+                  denominator=args.denom,
                   do_neyman=args.neyman,
                   options=args.options)
 
 elif args.algorithm == 'scoreregression':
     assert loaded_ml_strategies
     score_regression_inference(use_smearing=args.smearing,
+                               denominator=args.denom,
                                do_neyman=args.neyman,
                                options=args.options)
 
@@ -132,6 +134,7 @@ elif args.pointbypoint:
     assert loaded_ml_strategies
     point_by_point_inference(algorithm=args.algorithm,
                              use_smearing=args.smearing,
+                             denominator=args.denom,
                              do_neyman=args.neyman,
                              options=args.options)
 
@@ -140,6 +143,7 @@ else:
     parameterized_inference(algorithm=args.algorithm,
                             morphing_aware=args.aware,
                             use_smearing=args.smearing,
+                            denominator=args.denom,
                             training_sample=args.training,
                             alpha=args.alpha,
                             do_neyman=args.neyman,
