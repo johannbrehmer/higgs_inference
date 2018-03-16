@@ -1,0 +1,52 @@
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '173933')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/jb6504/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-centos-7.3.1611-Core-x86_64-2.7.12-64/lock_dir
+Using TensorFlow backend.
+16.03.2018 11:27:46 INFO    Hi! How are you today?
+16.03.2018 11:27:46 INFO    Startup options:
+16.03.2018 11:27:46 INFO      Algorithm:                     combined
+16.03.2018 11:27:46 INFO      Point by point:                False
+16.03.2018 11:27:46 INFO      Morphing-aware mode:           False
+16.03.2018 11:27:46 INFO      Smeared data:                  False
+16.03.2018 11:27:46 INFO      Training sample:               baseline
+16.03.2018 11:27:46 INFO      alpha:                         None
+16.03.2018 11:27:46 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+16.03.2018 11:27:46 INFO      AFC epsilon:                   None
+16.03.2018 11:27:46 INFO      Denominator theta:             False
+16.03.2018 11:27:46 INFO      Neyman construction toys:      3
+16.03.2018 11:27:46 INFO      Other options:                 ['deep']
+16.03.2018 11:27:46 INFO      Base directory:                /home/jb6504/higgs_inference
+16.03.2018 11:27:46 INFO      ML-based strategies available: True
+16.03.2018 11:27:46 INFO    Starting parameterized inference
+16.03.2018 11:27:46 INFO    Main settings:
+16.03.2018 11:27:46 INFO      Algorithm:                combined
+16.03.2018 11:27:46 INFO      Morphing-aware:           False
+16.03.2018 11:27:46 INFO      Training sample:          baseline
+16.03.2018 11:27:46 INFO      Denominator theta:        denominator 3 = theta 498 = [-0.04796927 -0.24493299]
+16.03.2018 11:27:46 INFO    Options:
+16.03.2018 11:27:46 INFO      Number of hidden layers:  5
+16.03.2018 11:27:46 INFO      alpha:                    5.0
+16.03.2018 11:27:46 INFO      Batch size:               128
+16.03.2018 11:27:46 INFO      Learning rate:            0.001
+16.03.2018 11:27:46 INFO      Learning rate decay:      0.0921034037198
+16.03.2018 11:27:46 INFO      Number of epochs:         50
+16.03.2018 11:27:46 INFO      NC experiments:           False
+16.03.2018 11:27:46 INFO      Debug mode:               False
+16.03.2018 11:28:16 INFO    Starting training
+Train on 7999997 samples, validate on 2000000 samples
+2018-03-16 11:28:17.309593: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 11:28:17.309909: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 11:28:17.309918: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 11:28:17.309922: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 11:28:17.309927: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-16 11:28:17.630868: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:05:00.0
+Total memory: 22.38GiB
+Free memory: 22.21GiB
+2018-03-16 11:28:17.630903: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-03-16 11:28:17.630909: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-03-16 11:28:17.630917: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:05:00.0)
+Epoch 1/50
+501s - loss: 0.8824 - full_cross_entropy: 0.6558 - trimmed_cross_entropy: 0.6456 - full_mse_log_r: inf - trimmed_mse_log_r: nan - full_mae_log_r: inf - full_mse_score: 2.7100 - trimmed_mse_score: 0.0847 - full_mae_score: 0.1304 - val_loss: 0.8605 - val_full_cross_entropy: 0.6572 - val_trimmed_cross_entropy: 0.6469 - val_full_mse_log_r: inf - val_trimmed_mse_log_r: nan - val_full_mae_log_r: inf - val_full_mse_score: 1.2731 - val_trimmed_mse_score: 0.0629 - val_full_mae_score: 0.1203
+Epoch 2/50

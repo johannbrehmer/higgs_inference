@@ -1,26 +1,23 @@
-16.03.2018 10:39:26 INFO    Hi! How are you today?
-16.03.2018 10:39:26 INFO    Startup options:
-16.03.2018 10:39:26 INFO      Algorithm:                     truth
-16.03.2018 10:39:26 INFO      Point by point:                False
-16.03.2018 10:39:26 INFO      Morphing-aware mode:           False
-16.03.2018 10:39:26 INFO      Smeared data:                  False
-16.03.2018 10:39:26 INFO      Training sample:               baseline
-16.03.2018 10:39:26 INFO      alpha:                         None
-16.03.2018 10:39:26 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-16.03.2018 10:39:26 INFO      AFC epsilon:                   None
-16.03.2018 10:39:26 INFO      Denominator theta:             False
-16.03.2018 10:39:26 INFO      Neyman construction toys:      3
-16.03.2018 10:39:26 INFO      Other options:                 
-16.03.2018 10:39:26 INFO      Base directory:                /home/jb6504/higgs_inference
-16.03.2018 10:39:26 INFO      ML-based strategies available: False
-16.03.2018 10:39:26 INFO    Starting truth calculation
-16.03.2018 10:39:26 DEBUG    NC settings: False neyman 36 10000 1001
-16.03.2018 10:39:26 DEBUG    Diagnostics settings: _denom3 _denom3
-Traceback (most recent call last):
-  File "experiments.py", line 109, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/truth.py", line 65, in truth_inference
-    r_roam = np.load(settings.unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
-  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
-    fid = open(file, "rb")
-IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/r_roam_denom3.npy'
+16.03.2018 11:28:57 INFO    Hi! How are you today?
+16.03.2018 11:28:57 INFO    Startup options:
+16.03.2018 11:28:57 INFO      Algorithm:                     truth
+16.03.2018 11:28:57 INFO      Point by point:                False
+16.03.2018 11:28:57 INFO      Morphing-aware mode:           False
+16.03.2018 11:28:57 INFO      Smeared data:                  False
+16.03.2018 11:28:57 INFO      Training sample:               baseline
+16.03.2018 11:28:57 INFO      alpha:                         None
+16.03.2018 11:28:57 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+16.03.2018 11:28:57 INFO      AFC epsilon:                   None
+16.03.2018 11:28:57 INFO      Denominator theta:             False
+16.03.2018 11:28:57 INFO      Neyman construction toys:      3
+16.03.2018 11:28:57 INFO      Other options:                 
+16.03.2018 11:28:57 INFO      Base directory:                /home/jb6504/higgs_inference
+16.03.2018 11:28:57 INFO      ML-based strategies available: False
+16.03.2018 11:28:57 INFO    Starting truth calculation
+16.03.2018 11:28:57 DEBUG    NC settings: False neyman 36 10000 1001
+16.03.2018 11:28:57 DEBUG    Diagnostics settings: _denom3 _denom3
+16.03.2018 11:29:03 INFO    Starting evaluation
+16.03.2018 11:29:06 INFO    Starting roaming
+16.03.2018 11:35:39 INFO    Calculating cross-entropy on train set
+16.03.2018 11:35:40 INFO    Training cross-entropy: 0.649907219136
+16.03.2018 11:35:40 INFO    That's it -- have a great day!
