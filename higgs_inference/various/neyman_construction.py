@@ -33,15 +33,16 @@ def calculate_median_p_value(test_statistics_null, test_statistics_alternate, n_
     alternate = test_statistics_alternate
 
     if not (np.all(np.isfinite(null)) and np.all(np.isfinite(alternate))):
-        return None, [None] * 3, [None] * 3, None
+        return None, [None] * 3, [None] * 3, None, None, None
 
     # Self convolutions: require histogram
     if n_self_convolutions > 0:
         xmin = settings.neyman_convolution_min
         xmax = settings.neyman_convolution_max
         nbins = settings.neyman_convolution_bins
-        xvals = np.linspace(xmin + 0.5*(xmax - xmin)/nbins, xmax - 0.5*(xmax - xmin)/nbins, nbins)
+        xvals = np.linspace(xmin + 0.5 * (xmax - xmin) / nbins, xmax - 0.5 * (xmax - xmin) / nbins, nbins)
 
+        # Calculate self-convolutions
         null_histo = calculate_self_convolutions(null, n_self_convolutions, xmin, xmax, nbins)
         alternate_histo = calculate_self_convolutions(alternate, n_self_convolutions, xmin, xmax, nbins)
 
@@ -52,7 +53,7 @@ def calculate_median_p_value(test_statistics_null, test_statistics_alternate, n_
         q_cuts = []
         for cl in settings.confidence_levels:
             q_cuts.append(weighted_quantile(xvals, cl, null_histo))
-        q_cut_uncertainties = np.ones_like(q_cuts) * 0.5*(xmax - xmin)/nbins
+        q_cut_uncertainties = np.ones_like(q_cuts) * 0.5 * (xmax - xmin) / nbins
 
         # Calculate p-values
         q_median_histo_index = int(math.floor((q_median - xmin) / (xmax - xmin) * nbins))
@@ -82,7 +83,10 @@ def calculate_median_p_value(test_statistics_null, test_statistics_alternate, n_
             q_cuts.append((null[q_cut_index] + null[q_cut_index + 1]) / 2)
             q_cut_uncertainties.append((null[q_cut_index + 1] - null[q_cut_index]) / 2)
 
-    return p_value, np.asarray(q_cuts), np.asarray(q_cut_uncertainties), q_median
+        null_histo = None
+        alternate_histo = None
+
+    return p_value, np.asarray(q_cuts), np.asarray(q_cut_uncertainties), q_median, null_histo, alternate_histo
 
 
 # def subtract_mle(filename, filename_suffix, folder, neyman2_mode=False):
@@ -213,7 +217,6 @@ def subtract_sm(filename, folder, neyman_set=1):
     # Settings
     t_alternate = settings.theta_observed
     neyman_dir = settings.neyman_dir + '/' + folder
-    result_dir = settings.base_dir + '/results/' + folder
     n_thetas = settings.n_thetas
 
     n_neyman_null_experiments = settings.n_neyman_null_experiments
@@ -335,12 +338,11 @@ def subtract_sm(filename, folder, neyman_set=1):
             llr_vs_true_alternates[t, exp] = (llr_alternates[t, exp] - llr_alternates[t_alternate, exp])
 
     # Save results
-    np.save(result_dir + '/' + neyman_filename + '_llr_vs_sm_nulls_' + filename + '.npy', llr_vs_true_nulls)
-    np.save(result_dir + '/' + neyman_filename + '_llr_vs_sm_alternates_' + filename + '.npy', llr_vs_true_alternates)
+    np.save(neyman_dir + '/' + neyman_filename + '_llr_vs_sm_nulls_' + filename + '.npy', llr_vs_true_nulls)
+    np.save(neyman_dir + '/' + neyman_filename + '_llr_vs_sm_alternates_' + filename + '.npy', llr_vs_true_alternates)
 
 
 def find_mle(filename, folder, neyman_set=1):
-
     logging.info('Finding MLE distribution under alternate for ' + folder + ' ' + filename)
 
     # Settings
@@ -370,7 +372,8 @@ def find_mle(filename, folder, neyman_set=1):
     for t in range(settings.n_thetas):
         if t in random_thetas:
             try:
-                entry = np.load(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_' + filename + '.npy')
+                entry = np.load(
+                    neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_' + filename + '.npy')
                 assert entry.shape == (n_neyman_alternate_experiments,)
                 llr_alternates.append(entry)
                 files_found += 1
@@ -381,7 +384,8 @@ def find_mle(filename, folder, neyman_set=1):
                 files_not_found += 1
             except AssertionError:
                 logging.warning("File %s has wrong shape %s",
-                                neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_' + filename + '.npy',
+                                neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(
+                                    t) + '_' + filename + '.npy',
                                 entry.shape)
                 llr_alternates.append(placeholder)
                 files_wrong_shape += 1
@@ -404,9 +408,9 @@ def calculate_confidence_limits(filename, folder, neyman_set=1):
     """ Steers the calculation of all p-values for a given filename and folder. """
 
     # Find and save MLEs
-    #try:
+    # try:
     #    find_mle(filename, folder, neyman_set)
-    #except ValueError as err:
+    # except ValueError as err:
     #    logging.warning('Error in MLE determination: %s', err)
 
     # Preprocessing
@@ -419,6 +423,7 @@ def calculate_confidence_limits(filename, folder, neyman_set=1):
     logging.info('Calculating p-values for ' + folder + '/' + filename)
 
     # Settings
+    neyman_dir = settings.neyman_dir + '/' + folder
     result_dir = settings.base_dir + '/results/' + folder
     n_thetas = settings.n_thetas
 
@@ -432,25 +437,29 @@ def calculate_confidence_limits(filename, folder, neyman_set=1):
         n_self_convolutions = settings.n_convolutions_neyman3
 
     # Load LLR
-    llr_vs_true_nulls = np.load(result_dir + '/' + neyman_filename + '_llr_vs_sm_nulls_' + filename + '.npy')
-    llr_vs_true_alternates = np.load(result_dir + '/' + neyman_filename + '_llr_vs_sm_alternates_' + filename + '.npy')
+    llr_vs_true_nulls = np.load(neyman_dir + '/' + neyman_filename + '_llr_vs_sm_nulls_' + filename + '.npy')
+    llr_vs_true_alternates = np.load(neyman_dir + '/' + neyman_filename + '_llr_vs_sm_alternates_' + filename + '.npy')
 
     # Quantities to calculate
     p_values_mle = np.zeros(n_thetas)
     q_cut_values_mle = np.zeros((n_thetas, len(settings.confidence_levels)))
     q_median_values_mle = np.zeros(n_thetas)
     q_cut_uncertainties_mle = np.zeros((n_thetas, len(settings.confidence_levels)))
+    null_histos = np.zeros((n_thetas, settings.neyman_convolution_bins))
+    alternate_histos = np.zeros((n_thetas, settings.neyman_convolution_bins))
 
     # Go!
     for t in range(n_thetas):
-        (p_values_mle[t], q_cut_values_mle[t, :], q_cut_uncertainties_mle[t, :],
-         q_median_values_mle[t]) = calculate_median_p_value(llr_vs_true_nulls[t, :], llr_vs_true_alternates[t, :],
-                                                            n_self_convolutions)
+        results = calculate_median_p_value(llr_vs_true_nulls[t, :], llr_vs_true_alternates[t, :], n_self_convolutions)
+        (p_values_mle[t], q_cut_values_mle[t, :], q_cut_uncertainties_mle[t, :], q_median_values_mle[t],
+         null_histos[t, :], alternate_histos[t, :]) = results
 
     np.save(result_dir + '/' + neyman_filename + '_pvalues_' + filename + '.npy', p_values_mle)
     np.save(result_dir + '/' + neyman_filename + '_qcut_' + filename + '.npy', q_cut_values_mle)
     np.save(result_dir + '/' + neyman_filename + '_qcut_uncertainties_' + filename + '.npy', q_cut_uncertainties_mle)
     np.save(result_dir + '/' + neyman_filename + '_qmedian_' + filename + '.npy', q_median_values_mle)
+    np.save(result_dir + '/' + neyman_filename + '_qdistribution_null_' + filename + '.npy', null_histos)
+    np.save(result_dir + '/' + neyman_filename + '_qdistribution_alternate_' + filename + '.npy', alternate_histos)
 
 
 def start_cl_calculation(options=''):
