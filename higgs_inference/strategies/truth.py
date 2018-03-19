@@ -10,8 +10,10 @@ import numpy as np
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import ConstantKernel as C, Matern
 
+from carl.learning.calibration import IsotonicCalibrator
+
 from higgs_inference import settings
-from higgs_inference.various.utils import s_from_r
+from higgs_inference.various.utils import s_from_r, r_from_s
 
 
 def truth_inference(do_neyman=False,
@@ -30,9 +32,11 @@ def truth_inference(do_neyman=False,
 
     filename_addition = ''
     input_filename_addition = ''
+    theta1 = settings.theta1_default
     if denominator > 0:
         input_filename_addition = '_denom' + str(denominator)
         filename_addition += '_denom' + str(denominator)
+        theta1 = settings.theta1_alternatives[denominator - 1]
 
     neyman_dir = settings.neyman_dir + '/truth'
     results_dir = settings.base_dir + '/results/truth'
@@ -68,6 +72,10 @@ def truth_inference(do_neyman=False,
     # To calculate cross entropy on train set
     s_train = s_from_r(np.load(settings.unweighted_events_dir + '/r_train' + input_filename_addition + '.npy'))
     y_train = np.load(settings.unweighted_events_dir + '/y_train' + input_filename_addition + '.npy')
+
+    # For calibrated truth results
+    weights_calibration = np.load(settings.unweighted_events_dir + '/weights_calibration' + input_filename_addition
+                                  + '.npy')
 
     n_events_test = r_test.shape[1]
     assert settings.n_thetas == r_test.shape[0]
@@ -115,6 +123,50 @@ def truth_inference(do_neyman=False,
     logging.info('Training cross-entropy: %s', cross_entropy_train)
     np.save(results_dir + '/cross_entropy_truth_train.npy', np.asarray([cross_entropy_train]))
 
+    ################################################################################
+    # Calibration (for fun)
+    ################################################################################
+
+    logging.info('Starting calibrated evaluation')
+    expected_llr_calibrated = []
+
+    for t, theta in enumerate(settings.thetas):
+
+        if (t + 1) % 100 == 0:
+            logging.info('Starting theta %s / %s', t + 1, settings.n_thetas)
+
+        # Prepare data for calibration
+        n_calibration_each = weights_calibration.shape[1]
+        y_calibration = np.zeros(2 * n_calibration_each)
+        y_calibration[n_calibration_each:] = 1.
+        w_calibration = np.zeros(2 * n_calibration_each)
+        w_calibration[:n_calibration_each] = weights_calibration[t]
+        w_calibration[n_calibration_each:] = weights_calibration[theta1]
+        s_calibration = weights_calibration[theta1, :] / (weights_calibration[t, :] + weights_calibration[theta1, :])
+
+        # Fit calibrator
+        calibrator = IsotonicCalibrator()
+        calibrator.fit(s_calibration, y_calibration, sample_weight=w_calibration)
+
+        # Apply to test data
+        s_test = s_from_r(r_test[t, :])
+        s_test_calibrated = calibrator.predict(s_test)
+        r_test_calibrated = r_from_s(s_test_calibrated)
+
+        # Extract numbers of interest
+        expected_llr_calibrated.append(
+            - 2. * settings.n_expected_events / n_events_test * np.sum(np.log(r_test_calibrated)))
+
+        # For benchmark theta, save more data
+        if t == settings.theta_benchmark_nottrained:
+            np.save(results_dir + '/r_nottrained_truth_calibrated' + filename_addition + '.npy', r_test_calibrated)
+        elif t == settings.theta_benchmark_trained:
+            np.save(results_dir + '/r_trained_truth_calibrated' + filename_addition + '.npy', r_test_calibrated)
+
+    ################################################################################
+    # Neyman construction
+    ################################################################################
+
     if do_neyman:
         logging.info('Starting evaluation of Neyman experiments')
         for t in range(settings.n_thetas):
@@ -142,7 +194,8 @@ def truth_inference(do_neyman=False,
             r_neyman_null = np.load(
                 settings.unweighted_events_dir + '/r_' + neyman_filename + '_null_' + str(t) + '.npy')
             llr_neyman_null = -2. * np.sum(np.log(r_neyman_null[1]), axis=1)
-            np.save(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(t) + '_truth' + filename_addition + '.npy', llr_neyman_null)
+            np.save(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(t) + '_truth' + filename_addition + '.npy',
+                    llr_neyman_null)
 
             # Null evaluated at alternative
             llr_neyman_nullatalternative = -2. * np.sum(np.log(r_neyman_null[0]), axis=1)
