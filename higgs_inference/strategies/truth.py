@@ -107,22 +107,6 @@ def truth_inference(do_neyman=False,
     np.save(results_dir + '/scores_nottrained_truth' + filename_addition + '.npy', scores_nottrained_truth)
     np.save(results_dir + '/llr_truth' + filename_addition + '.npy', expected_llr_truth)
 
-    logging.info('Starting roaming')
-    gp = GaussianProcessRegressor(normalize_y=True,
-                                  kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
-    gp.fit(settings.thetas[:], np.log(r_roam))
-    r_roam_truth = np.exp(gp.predict(np.c_[xx.ravel(), yy.ravel()])).T
-    np.save(results_dir + '/r_roam_truth' + filename_addition + '.npy', r_roam_truth)
-    np.save(results_dir + '/r_roam_thetas_truth' + filename_addition + '.npy', r_roam)
-
-    # Calculate cross entropy on training sample (for comparison to carl loss)
-    logging.info('Calculating cross-entropy on train set')
-    s_train = np.clip(s_train, settings.epsilon, 1. - settings.epsilon)
-    cross_entropy_train = - (y_train * np.log(s_train) + (1. - y_train) * np.log(1. - s_train)).astype(np.float64)
-    cross_entropy_train = np.mean(cross_entropy_train)
-    logging.info('Training cross-entropy: %s', cross_entropy_train)
-    np.save(results_dir + '/cross_entropy_truth_train.npy', np.asarray([cross_entropy_train]))
-
     ################################################################################
     # Calibration (for fun)
     ################################################################################
@@ -143,6 +127,7 @@ def truth_inference(do_neyman=False,
         w_calibration[:n_calibration_each] = weights_calibration[t]
         w_calibration[n_calibration_each:] = weights_calibration[theta1]
         s_calibration = weights_calibration[theta1, :] / (weights_calibration[t, :] + weights_calibration[theta1, :])
+        s_calibration = np.concatenate([s_calibration, s_calibration])
 
         # Fit calibrator
         calibrator = IsotonicCalibrator()
@@ -167,6 +152,26 @@ def truth_inference(do_neyman=False,
     expected_llr_calibrated = np.asarray(expected_llr_calibrated)
     np.save(results_dir + '/llr_truth_calibrated' + filename_addition + '.npy',
             expected_llr_calibrated)
+
+    ################################################################################
+    # Roaming etc
+    ################################################################################
+
+    logging.info('Starting roaming')
+    gp = GaussianProcessRegressor(normalize_y=True,
+                                  kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
+    gp.fit(settings.thetas[:], np.log(r_roam))
+    r_roam_truth = np.exp(gp.predict(np.c_[xx.ravel(), yy.ravel()])).T
+    np.save(results_dir + '/r_roam_truth' + filename_addition + '.npy', r_roam_truth)
+    np.save(results_dir + '/r_roam_thetas_truth' + filename_addition + '.npy', r_roam)
+
+    # Calculate cross entropy on training sample (for comparison to carl loss)
+    logging.info('Calculating cross-entropy on train set')
+    s_train = np.clip(s_train, settings.epsilon, 1. - settings.epsilon)
+    cross_entropy_train = - (y_train * np.log(s_train) + (1. - y_train) * np.log(1. - s_train)).astype(np.float64)
+    cross_entropy_train = np.mean(cross_entropy_train)
+    logging.info('Training cross-entropy: %s', cross_entropy_train)
+    np.save(results_dir + '/cross_entropy_truth_train.npy', np.asarray([cross_entropy_train]))
 
     ################################################################################
     # Neyman construction

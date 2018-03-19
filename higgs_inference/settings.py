@@ -102,6 +102,7 @@ n_convolutions_neyman3 = 35
 neyman_convolution_min = -50.
 neyman_convolution_max = 50.
 neyman_convolution_bins = 10001
+neyman_convolution_histo_edges = np.linspace(xmin, xmax, nbins + 1)
 
 # Confidence limit
 confidence_levels = np.asarray([0.68, 0.95, 0.997])
