@@ -1,22 +1,32 @@
-14.03.2018 16:01:19 INFO    Hi! How are you today?
-14.03.2018 16:01:19 INFO    Startup options:
-14.03.2018 16:01:19 INFO      Algorithm:                     truth
-14.03.2018 16:01:19 INFO      Point by point:                False
-14.03.2018 16:01:19 INFO      Morphing-aware mode:           False
-14.03.2018 16:01:19 INFO      Smeared data:                  False
-14.03.2018 16:01:19 INFO      Training sample:               baseline
-14.03.2018 16:01:19 INFO      alpha:                         None
-14.03.2018 16:01:19 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-14.03.2018 16:01:19 INFO      AFC epsilon:                   None
-14.03.2018 16:01:19 INFO      Neyman construction toys:      True
-14.03.2018 16:01:19 INFO      Other options:                 ['neyman2']
-14.03.2018 16:01:19 INFO      Base directory:                /home/jb6504/higgs_inference
-14.03.2018 16:01:19 INFO      ML-based strategies available: False
-14.03.2018 16:01:19 INFO    Starting truth calculation
-14.03.2018 16:01:19 DEBUG    NC settings: True neyman2 1 10000 10000
-14.03.2018 16:01:24 INFO    Starting evaluation
-14.03.2018 16:01:27 INFO    Starting roaming
-14.03.2018 16:12:38 INFO    Calculating cross-entropy on train set
-14.03.2018 16:12:40 INFO    Training cross-entropy: 0.657932534292
-14.03.2018 16:12:40 INFO    Starting evaluation of Neyman experiments
-14.03.2018 16:13:53 INFO    That's it -- have a great day!
+Using TensorFlow backend.
+19.03.2018 16:38:41 INFO    Hi! How are you today?
+19.03.2018 16:38:41 INFO    Startup options:
+19.03.2018 16:38:41 INFO      Algorithm:                     truth
+19.03.2018 16:38:41 INFO      Point by point:                False
+19.03.2018 16:38:41 INFO      Morphing-aware mode:           False
+19.03.2018 16:38:41 INFO      Smeared data:                  False
+19.03.2018 16:38:41 INFO      Training sample:               baseline
+19.03.2018 16:38:41 INFO      alpha:                         None
+19.03.2018 16:38:41 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+19.03.2018 16:38:41 INFO      AFC epsilon:                   None
+19.03.2018 16:38:41 INFO      Denominator theta:             False
+19.03.2018 16:38:41 INFO      Neyman construction toys:      0
+19.03.2018 16:38:41 INFO      Other options:                 
+19.03.2018 16:38:41 INFO      Base directory:                /home/jb6504/higgs_inference
+19.03.2018 16:38:41 INFO      ML-based strategies available: True
+19.03.2018 16:38:41 INFO    Starting truth calculation
+19.03.2018 16:38:41 DEBUG    NC settings: False neyman 36 10000 1001
+19.03.2018 16:38:41 DEBUG    Diagnostics settings:  
+19.03.2018 16:38:43 INFO    Starting evaluation
+19.03.2018 16:38:51 INFO    Starting calibrated evaluation
+19.03.2018 16:39:03 INFO    Starting theta 100 / 1017
+19.03.2018 16:39:14 INFO    Starting theta 200 / 1017
+19.03.2018 16:39:25 INFO    Starting theta 300 / 1017
+19.03.2018 16:39:36 INFO    Starting theta 400 / 1017
+19.03.2018 16:39:46 INFO    Starting theta 500 / 1017
+19.03.2018 16:39:57 INFO    Starting theta 600 / 1017
+19.03.2018 16:40:07 INFO    Starting theta 700 / 1017
+19.03.2018 16:40:18 INFO    Starting theta 800 / 1017
+19.03.2018 16:40:28 INFO    Starting theta 900 / 1017
+19.03.2018 16:40:39 INFO    Starting theta 1000 / 1017
+19.03.2018 16:40:41 INFO    Starting roaming
