@@ -163,6 +163,11 @@ def truth_inference(do_neyman=False,
         elif t == settings.theta_benchmark_trained:
             np.save(results_dir + '/r_trained_truth_calibrated' + filename_addition + '.npy', r_test_calibrated)
 
+    # Save evaluation results
+    expected_llr_calibrated = np.asarray(expected_llr_calibrated)
+    np.save(results_dir + '/llr_truth_calibrated' + filename_addition + '.npy',
+            expected_llr_calibrated)
+
     ################################################################################
     # Neyman construction
     ################################################################################
