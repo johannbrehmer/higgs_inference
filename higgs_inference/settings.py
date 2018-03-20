@@ -61,6 +61,7 @@ theta1_alternatives = [0, 602, 498, 202]
 
 theta_benchmark_trained = 422
 theta_benchmark_nottrained = 9
+theta_benchmark_extreme = 345
 
 thetas_train = list(range(17, n_thetas))
 thetas_test = list(range(17))
@@ -167,6 +168,9 @@ n_events_score_regression = 10000000
 
 # Calibration, per theta
 n_events_calibration = 1000
+
+# Recalibration, overall
+n_events_recalibration = 1000000
 
 # Evaluation, total
 n_events_test = 50000

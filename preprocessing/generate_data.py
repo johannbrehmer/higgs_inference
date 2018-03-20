@@ -47,6 +47,8 @@ parser.add_argument("-s", "--scoreregression", action="store_true",
                     help="Generate score regression training sample")
 parser.add_argument("-c", "--calibration", action="store_true",
                     help="Generate calibration sample")
+parser.add_argument("--recalibration", action="store_true",
+                    help="Generate recalibration sample")
 parser.add_argument("-e", "--test", action="store_true",
                     help="Generate likelihood ratio evaluation sample")
 parser.add_argument("--fixtest", action="store_true",
@@ -80,6 +82,7 @@ logging.info('  Random training:                   %s', args.random)
 logging.info('  Morphing training:                 %s', args.basis)
 logging.info('  Point-by-point training:           %s', args.pointbypoint)
 logging.info('  Calibration:                       %s', args.calibration)
+logging.info('  Recalibration:                     %s', args.recalibration)
 logging.info('  Likelihood ratio eval:             %s', args.test)
 logging.info('  Neyman construction:               %s', args.neyman)
 logging.info('  Neyman construction (alternative): %s', args.neyman2)
@@ -127,7 +130,7 @@ if args.new:
     filename_addition += '_new'
 
 need_train_sample = args.train or args.random or args.basis or args.pointbypoint
-need_calibration_sample = args.calibration
+need_calibration_sample = args.calibration or args.recalibration
 need_test_sample = args.test or args.neyman or args.neyman2 or args.neyman3 or args.roam or args.fixtest
 
 ################################################################################
@@ -590,14 +593,14 @@ if args.calibration:
 
 
     def generate_data_calibration(theta_observed):
-        indices = np.random.choice(list(range(n_events_train)), settings.n_events_calibration,
-                                   p=weights_train[theta_observed])
+        indices = np.random.choice(list(range(n_events_calibrate)), settings.n_events_calibration,
+                                   p=weights_calibrate[theta_observed])
 
-        X = np.asarray(weighted_data_train.iloc[indices, subset_features])
+        X = np.asarray(weighted_data_calibrate.iloc[indices, subset_features])
 
         r = np.zeros((n_thetas, settings.n_events_calibration))
         for t in range(n_thetas):
-            r[t, :] = np.array(weights_train[t][indices] / weights_train[theta_observed][indices])
+            r[t, :] = np.array(weights_calibrate[t][indices] / weights_calibrate[theta_observed][indices])
 
         # filter out bad events
         # cut = np.all(np.log(r) ** 2 < settings.max_logr ** 2, axis=0)
@@ -616,8 +619,39 @@ if args.calibration:
             X = np.array(this_X, dtype=np.float32)
             weights = np.array(this_weights, dtype=np.float32)
 
-        np.save(settings.unweighted_events_dir + '/X_calibration' + filename_addition + '.npy', X)
-        np.save(settings.unweighted_events_dir + '/weights_calibration' + filename_addition + '.npy', weights)
+    np.save(settings.unweighted_events_dir + '/X_calibration' + filename_addition + '.npy', X)
+    np.save(settings.unweighted_events_dir + '/weights_calibration' + filename_addition + '.npy', weights)
+
+################################################################################
+# Recalibration
+################################################################################
+
+if args.recalibration:
+
+    logging.info('Generating recalibration sample')
+
+
+    def generate_data_recalibration(theta_observed):
+        indices = np.random.choice(list(range(n_events_calibrate)), settings.n_events_recalibration,
+                                   p=weights_calibrate[theta_observed])
+
+        X = np.asarray(weighted_data_calibrate.iloc[indices, subset_features])
+
+        r = np.zeros((n_thetas, settings.n_events_calibration))
+        for t in range(n_thetas):
+            r[t, :] = np.array(weights_calibrate[t][indices] / weights_calibrate[theta_observed][indices])
+
+        # filter out bad events
+        # cut = np.all(np.log(r) ** 2 < settings.max_logr ** 2, axis=0)
+        cut = np.all(np.isfinite(np.log(r)), axis=0)
+
+        return X[cut], r[:, cut]
+
+
+    X, weights = generate_data_recalibration(t)
+
+    np.save(settings.unweighted_events_dir + '/X_recalibration' + filename_addition + '.npy', X)
+    np.save(settings.unweighted_events_dir + '/weights_recalibration' + filename_addition + '.npy', weights)
 
 ################################################################################
 # Training sample for score regression
@@ -867,7 +901,7 @@ if args.neyman2:
 
     # Observed
     X, r, scores = generate_data_neyman2(settings.theta_observed, settings.n_neyman2_alternate_experiments, theta1,
-                                        settings.theta_score_regression)
+                                         settings.theta_score_regression)
 
     logging.info('Generated %s toy experiments with %s events each for the alternate according to theta = %s',
                  X.shape[0], X.shape[1], thetas[settings.theta_observed])
@@ -882,8 +916,8 @@ if args.neyman2:
     # Distribution
     for t, theta in enumerate(thetas):
         X, r, scores = generate_data_neyman2(t, settings.n_neyman2_null_experiments, theta1,
-                                            settings.theta_score_regression,
-                                            thetas_r=[settings.theta_observed, t])
+                                             settings.theta_score_regression,
+                                             thetas_r=[settings.theta_observed, t])
 
         logging.info('Generated %s toy experiments with %s events each for the null according to theta = %s',
                      X.shape[0], X.shape[1], theta)
@@ -941,7 +975,7 @@ if args.neyman3:
 
     # Observed
     X, r, scores = generate_data_neyman3(settings.theta_observed, settings.n_neyman3_alternate_experiments, theta1,
-                                        settings.theta_score_regression)
+                                         settings.theta_score_regression)
 
     logging.info('Generated %s toy experiments with %s events each for the alternate according to theta = %s',
                  X.shape[0], X.shape[1], thetas[settings.theta_observed])
@@ -956,8 +990,8 @@ if args.neyman3:
     # Distribution
     for t, theta in enumerate(thetas):
         X, r, scores = generate_data_neyman3(t, settings.n_neyman3_null_experiments, theta1,
-                                            settings.theta_score_regression,
-                                            thetas_r=[settings.theta_observed, t])
+                                             settings.theta_score_regression,
+                                             thetas_r=[settings.theta_observed, t])
 
         logging.info('Generated %s toy experiments with %s events each for the null according to theta = %s',
                      X.shape[0], X.shape[1], theta)
