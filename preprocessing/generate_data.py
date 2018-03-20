@@ -648,7 +648,7 @@ if args.recalibration:
         return X[cut], r[:, cut]
 
 
-    X, weights = generate_data_recalibration(t)
+    X, weights = generate_data_recalibration(settings.theta_observed)
 
     np.save(settings.unweighted_events_dir + '/X_recalibration' + filename_addition + '.npy', X)
     np.save(settings.unweighted_events_dir + '/weights_recalibration' + filename_addition + '.npy', weights)
