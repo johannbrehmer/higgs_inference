@@ -230,8 +230,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     X_recalibration = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_recalibration' + input_filename_addition + '.npy')
-    weights_recalibration = np.load(
-        settings.unweighted_events_dir + '/weights_recalibration' + input_filename_addition + '.npy')
 
     X_test = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
@@ -403,6 +401,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     _save_metrics('full_cross_entropy', 'ce')
     _save_metrics('full_mse_log_r', 'mse_logr')
     _save_metrics('full_mse_score', 'mse_scores')
+
+    # Evaluate rhat on training sample
+    r_hat_train = np.exp(regr.predict(X_thetas_train)[1])
+    np.save(results_dir + '/r_train_' + algorithm + filename_addition + '.npy', r_hat_train)
 
     ################################################################################
     # Evaluation
@@ -632,7 +634,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         X_thetas_recalibration = np.hstack((X_recalibration_transformed, thetas0_array))
 
         # Evaluate recalibration data
-        this_r, _ = ratio_calibrated.predict(X_thetas_test)
+        this_r, _ = ratio_calibrated.predict(X_thetas_recalibration)
         recalibration_expected_r.append(np.mean(this_r))
 
         # Neyman construction
