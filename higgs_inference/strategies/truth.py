@@ -70,12 +70,17 @@ def truth_inference(do_neyman=False,
     r_neyman_alternate = np.load(settings.unweighted_events_dir + '/r_' + neyman_filename + '_alternate.npy')
 
     # To calculate cross entropy on train set
-    s_train = s_from_r(np.load(settings.unweighted_events_dir + '/r_train' + input_filename_addition + '.npy'))
+    r_train = np.load(settings.unweighted_events_dir + '/r_train' + input_filename_addition + '.npy')
+    s_train = s_from_r(r_train)
     y_train = np.load(settings.unweighted_events_dir + '/y_train' + input_filename_addition + '.npy')
 
     # For calibrated truth results
     weights_calibration = np.load(settings.unweighted_events_dir + '/weights_calibration' + input_filename_addition
                                   + '.npy')
+
+    # Recalibration
+    weights_recalibration = np.load(settings.unweighted_events_dir + '/weights_recalibration' + input_filename_addition
+                                    + '.npy')
 
     n_events_test = r_test.shape[1]
     assert settings.n_thetas == r_test.shape[0]
@@ -152,6 +157,13 @@ def truth_inference(do_neyman=False,
     expected_llr_calibrated = np.asarray(expected_llr_calibrated)
     np.save(results_dir + '/llr_truth_calibrated' + filename_addition + '.npy',
             expected_llr_calibrated)
+
+    ################################################################################
+    # Recalibration
+    ################################################################################
+
+    recalibration_expected_r = np.mean(weights_recalibration, axis=1)
+    np.save(results_dir + '/recalibration_expected_r_truth' + filename_addition + '.npy', recalibration_expected_r)
 
     ################################################################################
     # Roaming etc
