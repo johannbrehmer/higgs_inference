@@ -403,7 +403,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     _save_metrics('full_mse_score', 'mse_scores')
 
     # Evaluate rhat on training sample
-    r_hat_train = np.exp(regr.predict(X_thetas_train)[1])
+    r_hat_train = np.exp(regr.predict(X_thetas_train)[:, 1])
     np.save(results_dir + '/r_train_' + algorithm + filename_addition + '.npy', r_hat_train)
 
     ################################################################################
