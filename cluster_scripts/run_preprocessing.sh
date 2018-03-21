@@ -4,7 +4,7 @@
 #SBATCH --output=slurm_preprocessing.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=250GB
+#SBATCH --mem=60GB
 #SBATCH --time=1-00:00:00
 
 # Modules
@@ -15,7 +15,3 @@ module load scikit-learn/intel/0.18.1
 cd /home/jb6504/higgs_inference/preprocessing
 
 python -u generate_data.py --recalibration
-python -u generate_data.py --recalibration --alternativedenom1
-python -u generate_data.py --recalibration --alternativedenom2
-python -u generate_data.py --recalibration --alternativedenom3
-python -u generate_data.py --recalibration --alternativedenom4

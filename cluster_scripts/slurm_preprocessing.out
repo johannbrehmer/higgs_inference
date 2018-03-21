@@ -1,120 +1,28 @@
-16.03.2018 11:55:01 INFO    Welcome! How are you today?
-16.03.2018 11:55:01 INFO    Tasks:
-16.03.2018 11:55:01 INFO      Baseline training:                 True
-16.03.2018 11:55:01 INFO      Random training:                   False
-16.03.2018 11:55:01 INFO      Morphing training:                 False
-16.03.2018 11:55:01 INFO      Point-by-point training:           False
-16.03.2018 11:55:01 INFO      Calibration:                       False
-16.03.2018 11:55:01 INFO      Likelihood ratio eval:             False
-16.03.2018 11:55:01 INFO      Neyman construction:               False
-16.03.2018 11:55:01 INFO      Neyman construction (alternative): False
-16.03.2018 11:55:01 INFO      Neyman construction (alternative): False
-16.03.2018 11:55:01 INFO      Roaming:                           False
-16.03.2018 11:55:01 INFO    Options:
-16.03.2018 11:55:01 INFO      Dry run:                           False
-16.03.2018 11:55:01 INFO      Denominator:                       alternative 1
-16.03.2018 12:03:40 INFO    Splitting...
-16.03.2018 12:04:01 INFO    Number of events:
-16.03.2018 12:04:01 INFO      All:    821636
-16.03.2018 12:04:01 INFO      Training:    575145
-16.03.2018 12:04:01 INFO      Calibration: 82164
-16.03.2018 12:04:01 INFO      Evaluation:  164327
-16.03.2018 12:04:02 INFO    Normalizing probabilities
-16.03.2018 12:05:17 INFO    Generating baseline training sample
-generate_data.py:252: RuntimeWarning: divide by zero encountered in log
-  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
-generate_data.py:288: VisibleDeprecationWarning: boolean index did not match indexed array along dimension 0; dimension is 10009999 but corresponding boolean dimension is 9999999
-  p0 = p0[cut]
-generate_data.py:289: VisibleDeprecationWarning: boolean index did not match indexed array along dimension 0; dimension is 10009999 but corresponding boolean dimension is 9999999
-  p1 = p1[cut]
-16.03.2018 12:23:29 INFO    Done!
-16.03.2018 12:23:31 INFO    Welcome! How are you today?
-16.03.2018 12:23:31 INFO    Tasks:
-16.03.2018 12:23:31 INFO      Baseline training:                 True
-16.03.2018 12:23:31 INFO      Random training:                   False
-16.03.2018 12:23:31 INFO      Morphing training:                 False
-16.03.2018 12:23:31 INFO      Point-by-point training:           False
-16.03.2018 12:23:31 INFO      Calibration:                       False
-16.03.2018 12:23:31 INFO      Likelihood ratio eval:             False
-16.03.2018 12:23:31 INFO      Neyman construction:               False
-16.03.2018 12:23:31 INFO      Neyman construction (alternative): False
-16.03.2018 12:23:31 INFO      Neyman construction (alternative): False
-16.03.2018 12:23:31 INFO      Roaming:                           False
-16.03.2018 12:23:31 INFO    Options:
-16.03.2018 12:23:31 INFO      Dry run:                           False
-16.03.2018 12:23:31 INFO      Denominator:                       alternative 2
-16.03.2018 12:32:15 INFO    Splitting...
-16.03.2018 12:32:36 INFO    Number of events:
-16.03.2018 12:32:36 INFO      All:    821636
-16.03.2018 12:32:36 INFO      Training:    575145
-16.03.2018 12:32:36 INFO      Calibration: 82164
-16.03.2018 12:32:36 INFO      Evaluation:  164327
-16.03.2018 12:32:37 INFO    Normalizing probabilities
-16.03.2018 12:33:51 INFO    Generating baseline training sample
-generate_data.py:252: RuntimeWarning: divide by zero encountered in log
-  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
-generate_data.py:288: VisibleDeprecationWarning: boolean index did not match indexed array along dimension 0; dimension is 10009996 but corresponding boolean dimension is 9999996
-  p0 = p0[cut]
-generate_data.py:289: VisibleDeprecationWarning: boolean index did not match indexed array along dimension 0; dimension is 10009996 but corresponding boolean dimension is 9999996
-  p1 = p1[cut]
-16.03.2018 12:51:55 INFO    Done!
-16.03.2018 12:51:57 INFO    Welcome! How are you today?
-16.03.2018 12:51:57 INFO    Tasks:
-16.03.2018 12:51:57 INFO      Baseline training:                 True
-16.03.2018 12:51:57 INFO      Random training:                   False
-16.03.2018 12:51:57 INFO      Morphing training:                 False
-16.03.2018 12:51:57 INFO      Point-by-point training:           False
-16.03.2018 12:51:57 INFO      Calibration:                       False
-16.03.2018 12:51:57 INFO      Likelihood ratio eval:             False
-16.03.2018 12:51:57 INFO      Neyman construction:               False
-16.03.2018 12:51:57 INFO      Neyman construction (alternative): False
-16.03.2018 12:51:57 INFO      Neyman construction (alternative): False
-16.03.2018 12:51:57 INFO      Roaming:                           False
-16.03.2018 12:51:57 INFO    Options:
-16.03.2018 12:51:57 INFO      Dry run:                           False
-16.03.2018 12:51:57 INFO      Denominator:                       alternative 3
-16.03.2018 13:00:45 INFO    Splitting...
-16.03.2018 13:01:06 INFO    Number of events:
-16.03.2018 13:01:06 INFO      All:    821636
-16.03.2018 13:01:06 INFO      Training:    575145
-16.03.2018 13:01:06 INFO      Calibration: 82164
-16.03.2018 13:01:06 INFO      Evaluation:  164327
-16.03.2018 13:01:08 INFO    Normalizing probabilities
-16.03.2018 13:02:22 INFO    Generating baseline training sample
-generate_data.py:252: RuntimeWarning: divide by zero encountered in log
-  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
-generate_data.py:288: VisibleDeprecationWarning: boolean index did not match indexed array along dimension 0; dimension is 10009997 but corresponding boolean dimension is 9999997
-  p0 = p0[cut]
-generate_data.py:289: VisibleDeprecationWarning: boolean index did not match indexed array along dimension 0; dimension is 10009997 but corresponding boolean dimension is 9999997
-  p1 = p1[cut]
-16.03.2018 13:20:37 INFO    Done!
-16.03.2018 13:20:40 INFO    Welcome! How are you today?
-16.03.2018 13:20:40 INFO    Tasks:
-16.03.2018 13:20:40 INFO      Baseline training:                 True
-16.03.2018 13:20:40 INFO      Random training:                   False
-16.03.2018 13:20:40 INFO      Morphing training:                 False
-16.03.2018 13:20:40 INFO      Point-by-point training:           False
-16.03.2018 13:20:40 INFO      Calibration:                       False
-16.03.2018 13:20:40 INFO      Likelihood ratio eval:             False
-16.03.2018 13:20:40 INFO      Neyman construction:               False
-16.03.2018 13:20:40 INFO      Neyman construction (alternative): False
-16.03.2018 13:20:40 INFO      Neyman construction (alternative): False
-16.03.2018 13:20:40 INFO      Roaming:                           False
-16.03.2018 13:20:40 INFO    Options:
-16.03.2018 13:20:40 INFO      Dry run:                           False
-16.03.2018 13:20:40 INFO      Denominator:                       alternative 4
-16.03.2018 13:29:32 INFO    Splitting...
-16.03.2018 13:29:54 INFO    Number of events:
-16.03.2018 13:29:54 INFO      All:    821636
-16.03.2018 13:29:54 INFO      Training:    575145
-16.03.2018 13:29:54 INFO      Calibration: 82164
-16.03.2018 13:29:54 INFO      Evaluation:  164327
-16.03.2018 13:29:55 INFO    Normalizing probabilities
-16.03.2018 13:31:09 INFO    Generating baseline training sample
-generate_data.py:252: RuntimeWarning: divide by zero encountered in log
-  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
-generate_data.py:288: VisibleDeprecationWarning: boolean index did not match indexed array along dimension 0; dimension is 10009998 but corresponding boolean dimension is 9999998
-  p0 = p0[cut]
-generate_data.py:289: VisibleDeprecationWarning: boolean index did not match indexed array along dimension 0; dimension is 10009998 but corresponding boolean dimension is 9999998
-  p1 = p1[cut]
-16.03.2018 13:49:41 INFO    Done!
+20.03.2018 20:44:50 INFO    Welcome! How are you today?
+20.03.2018 20:44:50 INFO    Tasks:
+20.03.2018 20:44:50 INFO      Baseline training:                 False
+20.03.2018 20:44:50 INFO      Random training:                   False
+20.03.2018 20:44:50 INFO      Morphing training:                 False
+20.03.2018 20:44:50 INFO      Point-by-point training:           False
+20.03.2018 20:44:50 INFO      Calibration:                       False
+20.03.2018 20:44:50 INFO      Recalibration:                     True
+20.03.2018 20:44:50 INFO      Likelihood ratio eval:             False
+20.03.2018 20:44:50 INFO      Neyman construction:               False
+20.03.2018 20:44:50 INFO      Neyman construction (alternative): False
+20.03.2018 20:44:50 INFO      Neyman construction (alternative): False
+20.03.2018 20:44:50 INFO      Roaming:                           False
+20.03.2018 20:44:50 INFO    Options:
+20.03.2018 20:44:50 INFO      Dry run:                           False
+20.03.2018 20:44:50 INFO      Denominator:                       standard
+20.03.2018 20:57:56 INFO    Splitting...
+20.03.2018 20:58:27 INFO    Number of events:
+20.03.2018 20:58:27 INFO      All:    821636
+20.03.2018 20:58:27 INFO      Training:    575145
+20.03.2018 20:58:27 INFO      Calibration: 82164
+20.03.2018 20:58:27 INFO      Evaluation:  164327
+20.03.2018 20:58:29 INFO    Normalizing probabilities
+20.03.2018 20:58:44 INFO    Generating recalibration sample
+generate_data.py:646: RuntimeWarning: divide by zero encountered in log
+  cut = np.all(np.isfinite(np.log(r)), axis=0)
+20.03.2018 21:00:31 INFO    Done!
+slurmstepd: error: Exceeded step memory limit at some point.
