@@ -637,7 +637,7 @@ if args.recalibration:
 
         X = np.asarray(weighted_data_calibrate.iloc[indices, subset_features])
 
-        r = np.zeros((n_thetas, settings.n_events_calibration))
+        r = np.zeros((n_thetas, settings.n_events_recalibration))
         for t in range(n_thetas):
             r[t, :] = np.array(weights_calibrate[t][indices] / weights_calibrate[theta_observed][indices])
 
