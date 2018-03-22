@@ -279,8 +279,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         X_thetas_train = X_thetas_train[::100]
         y_logr_score_train = y_logr_score_train[::100]
         X_test_transformed = X_test[::100]
+        r_test = r_test[::100]
         X_calibration_transformed = X_calibration_transformed[::100]
         weights_calibration = weights_calibration[:, ::100]
+        X_recalibration_transformed = X_recalibration_transformed[::100]
         n_events_test = len(X_test_transformed)
 
     ################################################################################
