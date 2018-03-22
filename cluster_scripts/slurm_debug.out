@@ -1,76 +1,50 @@
 Using TensorFlow backend.
-21.03.2018 20:42:50 INFO    Hi! How are you today?
-21.03.2018 20:42:50 INFO    Startup options:
-21.03.2018 20:42:50 INFO      Algorithm:                     combinedregression
-21.03.2018 20:42:50 INFO      Point by point:                False
-21.03.2018 20:42:50 INFO      Morphing-aware mode:           False
-21.03.2018 20:42:50 INFO      Smeared data:                  False
-21.03.2018 20:42:50 INFO      Training sample:               baseline
-21.03.2018 20:42:50 INFO      alpha:                         None
-21.03.2018 20:42:50 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-21.03.2018 20:42:50 INFO      AFC epsilon:                   None
-21.03.2018 20:42:50 INFO      Denominator theta:             False
-21.03.2018 20:42:50 INFO      Neyman construction toys:      0
-21.03.2018 20:42:50 INFO      Other options:                 ['debug', 'deep', 'new']
-21.03.2018 20:42:50 INFO      Base directory:                /home/jb6504/higgs_inference
-21.03.2018 20:42:50 INFO      ML-based strategies available: True
-21.03.2018 20:42:50 INFO    Starting parameterized inference
-21.03.2018 20:42:50 INFO    Main settings:
-21.03.2018 20:42:50 INFO      Algorithm:                combinedregression
-21.03.2018 20:42:50 INFO      Morphing-aware:           False
-21.03.2018 20:42:50 INFO      Training sample:          baseline
-21.03.2018 20:42:50 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
-21.03.2018 20:42:50 INFO    Options:
-21.03.2018 20:42:50 INFO      Number of hidden layers:  5
-21.03.2018 20:42:50 INFO      alpha:                    100.0
-21.03.2018 20:42:50 INFO      Batch size:               128
-21.03.2018 20:42:50 INFO      Learning rate:            0.001
-21.03.2018 20:42:50 INFO      Learning rate decay:      0.0921034037198
-21.03.2018 20:42:50 INFO      Number of epochs:         1
-21.03.2018 20:42:50 INFO      NC experiments:           False
-21.03.2018 20:42:50 INFO      Debug mode:               True
-21.03.2018 20:43:17 INFO    Starting training
-Train on 80000 samples, validate on 20000 samples
-2018-03-21 20:43:18.358430: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-21 20:43:18.358683: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-21 20:43:18.358691: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-21 20:43:18.358695: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-21 20:43:18.358699: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-21 20:43:18.664397: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+22.03.2018 10:48:20 INFO    Hi! How are you today?
+22.03.2018 10:48:20 INFO    Startup options:
+22.03.2018 10:48:20 INFO      Algorithm:                     combinedregression
+22.03.2018 10:48:20 INFO      Point by point:                False
+22.03.2018 10:48:20 INFO      Morphing-aware mode:           False
+22.03.2018 10:48:20 INFO      Smeared data:                  False
+22.03.2018 10:48:20 INFO      Training sample:               baseline
+22.03.2018 10:48:20 INFO      alpha:                         None
+22.03.2018 10:48:20 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+22.03.2018 10:48:20 INFO      AFC epsilon:                   None
+22.03.2018 10:48:20 INFO      Denominator theta:             False
+22.03.2018 10:48:20 INFO      Neyman construction toys:      0
+22.03.2018 10:48:20 INFO      Other options:                 ['short', 'deep', 'new']
+22.03.2018 10:48:20 INFO      Base directory:                /home/jb6504/higgs_inference
+22.03.2018 10:48:20 INFO      ML-based strategies available: True
+22.03.2018 10:48:20 INFO    Starting parameterized inference
+22.03.2018 10:48:20 INFO    Main settings:
+22.03.2018 10:48:20 INFO      Algorithm:                combinedregression
+22.03.2018 10:48:20 INFO      Morphing-aware:           False
+22.03.2018 10:48:20 INFO      Training sample:          baseline
+22.03.2018 10:48:20 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+22.03.2018 10:48:20 INFO    Options:
+22.03.2018 10:48:20 INFO      Number of hidden layers:  5
+22.03.2018 10:48:20 INFO      alpha:                    100.0
+22.03.2018 10:48:20 INFO      Batch size:               128
+22.03.2018 10:48:20 INFO      Learning rate:            0.001
+22.03.2018 10:48:20 INFO      Learning rate decay:      0.0921034037198
+22.03.2018 10:48:20 INFO      Number of epochs:         1
+22.03.2018 10:48:20 INFO      NC experiments:           False
+22.03.2018 10:48:20 INFO      Debug mode:               False
+22.03.2018 10:49:04 INFO    Starting training
+Train on 7999997 samples, validate on 2000000 samples
+2018-03-22 10:49:05.675204: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-22 10:49:05.675471: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-22 10:49:05.675481: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-22 10:49:05.675485: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-22 10:49:05.675501: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-22 10:49:05.985746: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
 name: Tesla K80
 major: 3 minor: 7 memoryClockRate (GHz) 0.8235
-pciBusID 0000:04:00.0
+pciBusID 0000:84:00.0
 Total memory: 11.17GiB
 Free memory: 11.10GiB
-2018-03-21 20:43:18.664433: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-03-21 20:43:18.664440: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-03-21 20:43:18.664451: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:04:00.0)
+2018-03-22 10:49:05.985782: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-03-22 10:49:05.985789: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-03-22 10:49:05.985798: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:84:00.0)
 Epoch 1/1
-5s - loss: 5241.4605 - full_cross_entropy: 0.7144 - trimmed_cross_entropy: 0.7032 - full_mse_log_r: 0.5918 - trimmed_mse_log_r: 0.5826 - full_mae_log_r: 0.5082 - full_mse_score: 5.4904 - trimmed_mse_score: 0.9635 - full_mae_score: 0.4671 - val_loss: 1056.9523 - val_full_cross_entropy: 0.7224 - val_trimmed_cross_entropy: 0.7111 - val_full_mse_log_r: 0.6104 - val_trimmed_mse_log_r: 0.6008 - val_full_mae_log_r: 0.5591 - val_full_mse_score: 4.0704 - val_trimmed_mse_score: 0.8033 - val_full_mae_score: 0.4104
-21.03.2018 20:43:28 INFO    Starting evaluation
-21.03.2018 20:43:30 INFO    Starting theta 100 / 1017
-21.03.2018 20:43:31 INFO    Starting theta 200 / 1017
-21.03.2018 20:43:33 INFO    Starting theta 300 / 1017
-21.03.2018 20:43:35 INFO    Starting theta 400 / 1017
-21.03.2018 20:43:37 INFO    Starting theta 500 / 1017
-21.03.2018 20:43:38 INFO    Starting theta 600 / 1017
-21.03.2018 20:43:40 INFO    Starting theta 700 / 1017
-21.03.2018 20:43:42 INFO    Starting theta 800 / 1017
-21.03.2018 20:43:44 INFO    Starting theta 900 / 1017
-21.03.2018 20:43:46 INFO    Starting theta 1000 / 1017
-21.03.2018 20:43:46 INFO    Evaluation timing: median 0.017306804657 s, mean 0.0173913675306 s
-21.03.2018 20:43:46 INFO    Starting roaming
-21.03.2018 20:44:21 INFO    Starting calibrated evaluation and roaming
-21.03.2018 20:45:11 INFO    Starting theta 100 / 1017
-21.03.2018 20:46:02 INFO    Starting theta 200 / 1017
-21.03.2018 20:46:52 INFO    Starting theta 300 / 1017
-21.03.2018 20:47:42 INFO    Starting theta 400 / 1017
-21.03.2018 20:48:33 INFO    Starting theta 500 / 1017
-21.03.2018 20:49:23 INFO    Starting theta 600 / 1017
-21.03.2018 20:50:14 INFO    Starting theta 700 / 1017
-21.03.2018 20:51:04 INFO    Starting theta 800 / 1017
-21.03.2018 20:51:54 INFO    Starting theta 900 / 1017
-21.03.2018 20:52:44 INFO    Starting theta 1000 / 1017
-21.03.2018 20:52:53 INFO    Calibrated evaluation timing: median 0.0175099372864 s, mean 0.0175173880428 s
-21.03.2018 20:52:53 INFO    Interpolating calibrated roaming
-21.03.2018 20:57:26 INFO    That's it -- have a great day!
+651s - loss: 5271.2483 - full_cross_entropy: 0.6697 - trimmed_cross_entropy: 0.6592 - full_mse_log_r: 0.1346 - trimmed_mse_log_r: 0.1325 - full_mae_log_r: 0.2365 - full_mse_score: 6.3378 - trimmed_mse_score: 0.4162 - full_mae_score: 0.2540 - val_loss: 5418.5027 - val_full_cross_entropy: 0.6638 - val_trimmed_cross_entropy: 0.6534 - val_full_mse_log_r: 0.0747 - val_trimmed_mse_log_r: 0.0735 - val_full_mae_log_r: 0.1480 - val_full_mse_score: 4.7474 - val_trimmed_mse_score: 0.3511 - val_full_mae_score: 0.2173
+22.03.2018 11:05:37 INFO    Starting evaluation
