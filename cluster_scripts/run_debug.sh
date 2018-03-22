@@ -18,6 +18,4 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py combinedregression -o debug
-python -u experiments.py combined -o debug
-python -u experiments.py regression -o debug
+python -u experiments.py combinedregression -o debug deep new
