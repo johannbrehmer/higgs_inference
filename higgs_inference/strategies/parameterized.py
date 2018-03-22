@@ -42,6 +42,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     """
     Trains and evaluates one of the parameterized higgs_inference methods.
 
+    :param denominator:
     :param algorithm: Type of the algorithm used. Currently supported: 'carl', 'score', 'combined', 'regression', and
                       'combinedregression'.
     :param morphing_aware: bool that decides whether a morphing-aware or morphing-agnostic architecture is used.
@@ -218,10 +219,12 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         train_filename += '_new'
 
     X_train = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X' + train_filename + '.npy')
+    X_train_unshuffled = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X' + train_filename + '.npy')
     y_train = np.load(settings.unweighted_events_dir + '/y' + train_filename + '.npy')
     scores_train = np.load(settings.unweighted_events_dir + '/scores' + train_filename + '.npy')
     r_train = np.load(settings.unweighted_events_dir + '/r' + train_filename + '.npy')
     theta0_train = np.load(settings.unweighted_events_dir + '/theta0' + train_filename + '.npy')
+    theta0_train_unshuffled = np.load(settings.unweighted_events_dir + '/theta0' + train_filename + '.npy')
 
     X_calibration = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_calibration' + input_filename_addition + '.npy')
@@ -254,6 +257,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     scaler = StandardScaler()
     scaler.fit(np.array(X_train, dtype=np.float64))
     X_train_transformed = scaler.transform(X_train)
+    X_train_transformed_unshuffled = scaler.transform(X_train_unshuffled)
     X_test_transformed = scaler.transform(X_test)
     X_roam_transformed = scaler.transform(X_roam)
     X_calibration_transformed = scaler.transform(X_calibration)
@@ -264,6 +268,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     # Roaming data
     X_thetas_train = np.hstack((X_train_transformed, theta0_train))
+    X_thetas_train_unshuffled = np.hstack((X_train_transformed_unshuffled, theta0_train_unshuffled))
     y_logr_score_train = np.hstack((y_train.reshape(-1, 1), np.log(r_train).reshape((-1, 1)), scores_train))
     xi = np.linspace(-1.0, 1.0, settings.n_thetas_roam)
     yi = np.linspace(-1.0, 1.0, settings.n_thetas_roam)
@@ -279,7 +284,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         X_thetas_train = X_thetas_train[::100]
         y_logr_score_train = y_logr_score_train[::100]
         X_test_transformed = X_test[::100]
-        r_test = r_test[:,::100]
+        r_test = r_test[:, ::100]
         X_calibration_transformed = X_calibration_transformed[::100]
         weights_calibration = weights_calibration[:, ::100]
         X_recalibration_transformed = X_recalibration_transformed[::100]
@@ -405,7 +410,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     _save_metrics('full_mse_score', 'mse_scores')
 
     # Evaluate rhat on training sample
-    r_hat_train = np.exp(regr.predict(X_thetas_train)[:, 1])
+    r_hat_train = np.exp(regr.predict(X_thetas_train_unshuffled)[:, 1])
     np.save(results_dir + '/r_train_' + algorithm + filename_addition + '.npy', r_hat_train)
 
     ################################################################################
@@ -420,6 +425,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     mse_log_r = []
     trimmed_mse_log_r = []
     eval_times = []
+    recalibration_expected_r = []
 
     for t, theta in enumerate(settings.thetas):
 
@@ -461,6 +467,19 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             if morphing_aware:
                 np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_ri)
                 np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_wi)
+
+        # Prepare data for recalibration
+        thetas0_array = np.zeros((X_recalibration_transformed.shape[0], 2),
+                                 dtype=X_recalibration_transformed.dtype)
+        thetas0_array[:, :] = settings.thetas[t]
+        X_thetas_recalibration = np.hstack((X_recalibration_transformed, thetas0_array))
+
+        # Evaluate recalibration data
+        prediction = regr.predict(X_thetas_recalibration)
+        this_r = np.exp(prediction[:, 1])
+        if t == settings.theta_observed:
+            r_recalibration_sm = this_r
+        recalibration_expected_r.append(np.mean(this_r / r_recalibration_sm))
 
         if do_neyman:
             # Prepare alternate data for Neyman construction
@@ -507,7 +526,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
             # NC: null
             X_neyman_null = np.load(
-                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(t) + '.npy')
+                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
+                    t) + '.npy')
             X_neyman_null_transformed = scaler.transform(
                 X_neyman_null.reshape((-1, X_neyman_null.shape[2])))
 
@@ -542,9 +562,12 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     expected_llr = np.asarray(expected_llr)
     mse_log_r = np.asarray(mse_log_r)
     trimmed_mse_log_r = np.asarray(trimmed_mse_log_r)
+    recalibration_expected_r = np.asarray(recalibration_expected_r)
     np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', expected_llr)
     np.save(results_dir + '/mse_logr_' + algorithm + filename_addition + '.npy', mse_log_r)
     np.save(results_dir + '/trimmed_mse_logr_' + algorithm + filename_addition + '.npy', trimmed_mse_log_r)
+    np.save(results_dir + '/recalibration_expected_r_vs_sm_' + algorithm + filename_addition + '.npy',
+            recalibration_expected_r)
 
     # Evaluation times
     logging.info('Evaluation timing: median %s s, mean %s s', np.median(eval_times), np.mean(eval_times))
