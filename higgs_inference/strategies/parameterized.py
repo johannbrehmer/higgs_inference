@@ -635,7 +635,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
         # Evaluate recalibration data
         this_r, _ = ratio_calibrated.predict(X_thetas_recalibration)
-        recalibration_expected_r.append(np.mean(this_r))
+        if t == settings.theta_observed:
+            r_recalibration_sm = this_r
+        recalibration_expected_r.append(np.mean(this_r / r_recalibration_sm))
 
         # Neyman construction
         if do_neyman:
@@ -727,7 +729,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     np.save(results_dir + '/mse_logr_' + algorithm + '_calibrated' + filename_addition + '.npy', mse_log_r_calibrated)
     np.save(results_dir + '/trimmed_mse_logr_' + algorithm + '_calibrated' + filename_addition + '.npy',
             trimmed_mse_log_r_calibrated)
-    np.save(results_dir + '/recalibration_expected_r_' + algorithm + '_calibrated' + filename_addition + '.npy',
+    np.save(results_dir + '/recalibration_expected_r_vs_sm_' + algorithm + '_calibrated' + filename_addition + '.npy',
             recalibration_expected_r)
 
     # Evalauation times
