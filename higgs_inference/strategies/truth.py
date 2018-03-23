@@ -67,7 +67,7 @@ def truth_inference(do_neyman=False,
     scores_test = np.load(settings.unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
     r_roam = np.load(settings.unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
-    r_neyman_alternate = np.load(settings.unweighted_events_dir + '/r_' + neyman_filename + '_alternate.npy')
+    r_neyman_alternate = np.load(settings.unweighted_events_dir + '/neyman/r_' + neyman_filename + '_alternate.npy')
 
     # To calculate cross entropy on train set
     r_train = np.load(settings.unweighted_events_dir + '/r_train' + input_filename_addition + '.npy')
@@ -214,7 +214,7 @@ def truth_inference(do_neyman=False,
 
             # Null evaluated at null
             r_neyman_null = np.load(
-                settings.unweighted_events_dir + '/r_' + neyman_filename + '_null_' + str(t) + '.npy')
+                settings.unweighted_events_dir + '/neyman/r_' + neyman_filename + '_null_' + str(t) + '.npy')
             llr_neyman_null = -2. * np.sum(np.log(r_neyman_null[1]), axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(t) + '_truth' + filename_addition + '.npy',
                     llr_neyman_null)

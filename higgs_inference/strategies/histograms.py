@@ -128,7 +128,7 @@ def histo_inference(indices_X=None,
 
     if do_neyman:
         X_neyman_alternate = np.load(
-            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_alternate.npy')
+            settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_' + neyman_filename + '_alternate.npy')
     n_events_test = X_test.shape[0]
 
     ################################################################################
@@ -151,13 +151,13 @@ def histo_inference(indices_X=None,
         # Load data
         new_sample_prefix = '_new' if new_sample_mode else ''
         X_train = np.load(
-            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_point_by_point_' + str(
+            settings.unweighted_events_dir + '/point_by_point/' + input_X_prefix + 'X_train_point_by_point_' + str(
                 t) + input_filename_addition + new_sample_prefix + '.npy')
         y_train = np.load(
-            settings.unweighted_events_dir + '/y_train_point_by_point_' + str(
+            settings.unweighted_events_dir + '/point_by_point/y_train_point_by_point_' + str(
                 t) + input_filename_addition + new_sample_prefix + '.npy')
         r_train = np.load(
-            settings.unweighted_events_dir + '/r_train_point_by_point_' + str(
+            settings.unweighted_events_dir + '/point_by_point/r_train_point_by_point_' + str(
                 t) + input_filename_addition + new_sample_prefix + '.npy')
 
         # Construct summary statistics
@@ -254,7 +254,7 @@ def histo_inference(indices_X=None,
 
             # Neyman construction: null
             X_neyman_null = np.load(
-                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
+                settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
                     t) + '.npy')
             summary_statistics_neyman_null = X_neyman_null.reshape(
                 (-1, X_neyman_null.shape[2]))[:, indices_X]
@@ -272,7 +272,7 @@ def histo_inference(indices_X=None,
             if t == settings.theta_observed:
                 for tt in settings.extended_pbp_training_thetas:
                     X_neyman_null = np.load(
-                        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
+                        settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
                             tt) + '.npy')
                     summary_statistics_neyman_null = X_neyman_null.reshape(
                         (-1, X_neyman_null.shape[2]))[:, indices_X]

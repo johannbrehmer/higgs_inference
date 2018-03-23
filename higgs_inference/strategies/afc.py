@@ -100,7 +100,7 @@ def afc_inference(statistics='x',
     X_test = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
-    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+    #X_neyman_observed = np.load(settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_neyman_observed.npy')
     n_events_test = X_test.shape[0]
 
     ################################################################################
@@ -119,10 +119,10 @@ def afc_inference(statistics='x',
 
         # Load data
         X_train = np.load(
-            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_point_by_point_' + str(
+            settings.unweighted_events_dir + '/point_by_point/' + input_X_prefix + 'X_train_point_by_point_' + str(
                 t) + input_filename_addition + '.npy')
         y_train = np.load(
-            settings.unweighted_events_dir + '/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            settings.unweighted_events_dir + '/point_by_point/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
 
         # Scale data
         scaler = StandardScaler()

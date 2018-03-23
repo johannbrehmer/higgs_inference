@@ -468,19 +468,19 @@ if args.pointbypoint:
             cut]
 
 
-    for i, t in enumerate(settings.extended_pbp_training_thetas):
+    for t in range(settings.n_thetas): #enumerate(settings.extended_pbp_training_thetas):
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1 = generate_data_train_point_by_point(
             t, theta1)
 
-        np.save(settings.unweighted_events_dir + '/X_train_point_by_point_' + str(
+        np.save(settings.unweighted_events_dir + '/point_by_point/X_train_point_by_point_' + str(
             t) + filename_addition + '.npy', this_X)
-        np.save(settings.unweighted_events_dir + '/y_train_point_by_point_' + str(
+        np.save(settings.unweighted_events_dir + '/point_by_point/y_train_point_by_point_' + str(
             t) + filename_addition + '.npy', this_y)
-        np.save(settings.unweighted_events_dir + '/r_train_point_by_point_' + str(
+        np.save(settings.unweighted_events_dir + '/point_by_point/r_train_point_by_point_' + str(
             t) + filename_addition + '.npy', this_r)
-        np.save(settings.unweighted_events_dir + '/p0_train_point_by_point_' + str(
+        np.save(settings.unweighted_events_dir + '/point_by_point/p0_train_point_by_point_' + str(
             t) + filename_addition + '.npy', this_p0)
-        np.save(settings.unweighted_events_dir + '/p1_train_point_by_point_' + str(
+        np.save(settings.unweighted_events_dir + '/point_by_point/p1_train_point_by_point_' + str(
             t) + filename_addition + '.npy', this_p1)
 
         del this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1
@@ -834,9 +834,9 @@ if args.neyman:
                  X.shape[0], X.shape[1], thetas[settings.theta_observed])
 
     if not args.dry:
-        np.save(settings.unweighted_events_dir + '/X_neyman_alternate' + filename_addition + '.npy', X)
-        np.save(settings.unweighted_events_dir + '/r_neyman_alternate' + filename_addition + '.npy', r)
-        np.save(settings.unweighted_events_dir + '/scores_neyman_alternate' + filename_addition + '.npy', scores)
+        np.save(settings.unweighted_events_dir + '/neyman/X_neyman_alternate' + filename_addition + '.npy', X)
+        np.save(settings.unweighted_events_dir + '/neyman/r_neyman_alternate' + filename_addition + '.npy', r)
+        np.save(settings.unweighted_events_dir + '/neyman/scores_neyman_alternate' + filename_addition + '.npy', scores)
 
     del X, r, scores
 
@@ -850,10 +850,10 @@ if args.neyman:
                      X.shape[0], X.shape[1], theta)
 
         if not args.dry:
-            np.save(settings.unweighted_events_dir + '/X_neyman_null_' + str(t) + filename_addition + '.npy', X)
-            np.save(settings.unweighted_events_dir + '/r_neyman_null_' + str(t) + filename_addition + '.npy', r)
+            np.save(settings.unweighted_events_dir + '/neyman/X_neyman_null_' + str(t) + filename_addition + '.npy', X)
+            np.save(settings.unweighted_events_dir + '/neyman/r_neyman_null_' + str(t) + filename_addition + '.npy', r)
             np.save(
-                settings.unweighted_events_dir + '/scores_neyman_null_' + str(t) + filename_addition + '.npy',
+                settings.unweighted_events_dir + '/neyman/scores_neyman_null_' + str(t) + filename_addition + '.npy',
                 scores)
 
         del X, r, scores
@@ -907,9 +907,9 @@ if args.neyman2:
                  X.shape[0], X.shape[1], thetas[settings.theta_observed])
 
     if not args.dry:
-        np.save(settings.unweighted_events_dir + '/X_neyman2_alternate' + filename_addition + '.npy', X)
-        np.save(settings.unweighted_events_dir + '/r_neyman2_alternate' + filename_addition + '.npy', r)
-        np.save(settings.unweighted_events_dir + '/scores_neyman2_alternate' + filename_addition + '.npy', scores)
+        np.save(settings.unweighted_events_dir + '/neyman/X_neyman2_alternate' + filename_addition + '.npy', X)
+        np.save(settings.unweighted_events_dir + '/neyman/r_neyman2_alternate' + filename_addition + '.npy', r)
+        np.save(settings.unweighted_events_dir + '/neyman/scores_neyman2_alternate' + filename_addition + '.npy', scores)
 
     del X, r, scores
 
@@ -923,10 +923,10 @@ if args.neyman2:
                      X.shape[0], X.shape[1], theta)
 
         if not args.dry:
-            np.save(settings.unweighted_events_dir + '/X_neyman2_null_' + str(t) + filename_addition + '.npy', X)
-            np.save(settings.unweighted_events_dir + '/r_neyman2_null_' + str(t) + filename_addition + '.npy', r)
+            np.save(settings.unweighted_events_dir + '/neyman/X_neyman2_null_' + str(t) + filename_addition + '.npy', X)
+            np.save(settings.unweighted_events_dir + '/neyman/r_neyman2_null_' + str(t) + filename_addition + '.npy', r)
             np.save(
-                settings.unweighted_events_dir + '/scores_neyman2_null_' + str(t) + filename_addition + '.npy',
+                settings.unweighted_events_dir + '/neyman/scores_neyman2_null_' + str(t) + filename_addition + '.npy',
                 scores)
 
         del X, r, scores
@@ -981,9 +981,9 @@ if args.neyman3:
                  X.shape[0], X.shape[1], thetas[settings.theta_observed])
 
     if not args.dry:
-        np.save(settings.unweighted_events_dir + '/X_neyman3_alternate' + filename_addition + '.npy', X)
-        np.save(settings.unweighted_events_dir + '/r_neyman3_alternate' + filename_addition + '.npy', r)
-        np.save(settings.unweighted_events_dir + '/scores_neyman3_alternate' + filename_addition + '.npy', scores)
+        np.save(settings.unweighted_events_dir + '/neyman/X_neyman3_alternate' + filename_addition + '.npy', X)
+        np.save(settings.unweighted_events_dir + '/neyman/r_neyman3_alternate' + filename_addition + '.npy', r)
+        np.save(settings.unweighted_events_dir + '/neyman/scores_neyman3_alternate' + filename_addition + '.npy', scores)
 
     del X, r, scores
 
@@ -997,10 +997,10 @@ if args.neyman3:
                      X.shape[0], X.shape[1], theta)
 
         if not args.dry:
-            np.save(settings.unweighted_events_dir + '/X_neyman3_null_' + str(t) + filename_addition + '.npy', X)
-            np.save(settings.unweighted_events_dir + '/r_neyman3_null_' + str(t) + filename_addition + '.npy', r)
+            np.save(settings.unweighted_events_dir + '/neyman/X_neyman3_null_' + str(t) + filename_addition + '.npy', X)
+            np.save(settings.unweighted_events_dir + '/neyman/r_neyman3_null_' + str(t) + filename_addition + '.npy', r)
             np.save(
-                settings.unweighted_events_dir + '/scores_neyman3_null_' + str(t) + filename_addition + '.npy',
+                settings.unweighted_events_dir + '/neyman/scores_neyman3_null_' + str(t) + filename_addition + '.npy',
                 scores)
 
         del X, r, scores

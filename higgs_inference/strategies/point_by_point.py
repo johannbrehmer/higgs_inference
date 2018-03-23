@@ -144,7 +144,7 @@ def point_by_point_inference(algorithm='carl',
     X_test = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
-    X_neyman_observed = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_observed.npy')
+    X_neyman_observed = np.load(settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_neyman_observed.npy')
 
     n_events_test = X_test.shape[0]
     assert settings.n_thetas == r_test.shape[0]
@@ -168,12 +168,12 @@ def point_by_point_inference(algorithm='carl',
 
         # Load data
         X_train = np.load(
-            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_point_by_point_' + str(
+            settings.unweighted_events_dir + '/point_by_point/' + input_X_prefix + 'X_train_point_by_point_' + str(
                 t) + input_filename_addition + '.npy')
         r_train = np.load(
-            settings.unweighted_events_dir + '/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            settings.unweighted_events_dir + '/point_by_point/r_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
         y_train = np.load(
-            settings.unweighted_events_dir + '/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            settings.unweighted_events_dir + '/point_by_point/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
 
         # Shuffle training data
         X_train, y_train, r_train = shuffle(X_train, y_train, r_train, random_state=44)

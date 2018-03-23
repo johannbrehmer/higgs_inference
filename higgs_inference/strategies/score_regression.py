@@ -167,7 +167,7 @@ def score_regression_inference(use_smearing=False,
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
     if do_neyman:
         X_neyman_alternate = np.load(
-            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_alternate.npy')
+            settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_' + neyman_filename + '_alternate.npy')
 
     # Shuffle training data
     X_train, scores_train = shuffle(X_train, scores_train, random_state=44)
@@ -459,7 +459,7 @@ def score_regression_inference(use_smearing=False,
 
             # Neyman construction: load null sample
             X_neyman_null = np.load(
-                settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
+                settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
                     t) + '.npy')
             X_neyman_null_transformed = scaler.transform(
                 X_neyman_null.reshape((-1, X_neyman_null.shape[2])))
@@ -501,7 +501,7 @@ def score_regression_inference(use_smearing=False,
             if t == settings.theta_observed:
                 for tt in range(settings.n_thetas):
                     X_neyman_null = np.load(
-                        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
+                        settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
                             tt) + '.npy')
                     X_neyman_null_transformed = scaler.transform(
                         X_neyman_null.reshape((-1, X_neyman_null.shape[2])))
