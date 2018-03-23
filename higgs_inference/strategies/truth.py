@@ -163,7 +163,7 @@ def truth_inference(do_neyman=False,
     ################################################################################
 
     recalibration_expected_r = np.mean(weights_recalibration, axis=1)
-    np.save(results_dir + '/recalibration_expected_r_truth' + filename_addition + '.npy', recalibration_expected_r)
+    np.save(results_dir + '/recalibration_expected_r_vs_sm_truth' + filename_addition + '.npy', recalibration_expected_r)
 
     ################################################################################
     # Roaming etc
