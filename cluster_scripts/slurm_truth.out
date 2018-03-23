@@ -1,35 +1,36 @@
 Using TensorFlow backend.
-19.03.2018 19:44:17 INFO    Hi! How are you today?
-19.03.2018 19:44:17 INFO    Startup options:
-19.03.2018 19:44:17 INFO      Algorithm:                     truth
-19.03.2018 19:44:17 INFO      Point by point:                False
-19.03.2018 19:44:17 INFO      Morphing-aware mode:           False
-19.03.2018 19:44:17 INFO      Smeared data:                  False
-19.03.2018 19:44:17 INFO      Training sample:               baseline
-19.03.2018 19:44:17 INFO      alpha:                         None
-19.03.2018 19:44:17 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-19.03.2018 19:44:17 INFO      AFC epsilon:                   None
-19.03.2018 19:44:17 INFO      Denominator theta:             False
-19.03.2018 19:44:17 INFO      Neyman construction toys:      0
-19.03.2018 19:44:17 INFO      Other options:                 
-19.03.2018 19:44:17 INFO      Base directory:                /home/jb6504/higgs_inference
-19.03.2018 19:44:17 INFO      ML-based strategies available: True
-19.03.2018 19:44:17 INFO    Starting truth calculation
-19.03.2018 19:44:17 DEBUG    NC settings: False neyman 36 10000 1001
-19.03.2018 19:44:17 DEBUG    Diagnostics settings:  
-19.03.2018 19:44:26 INFO    Starting evaluation
-19.03.2018 19:44:28 INFO    Starting calibrated evaluation
-19.03.2018 19:44:38 INFO    Starting theta 100 / 1017
-19.03.2018 19:44:49 INFO    Starting theta 200 / 1017
-19.03.2018 19:44:59 INFO    Starting theta 300 / 1017
-19.03.2018 19:45:10 INFO    Starting theta 400 / 1017
-19.03.2018 19:45:20 INFO    Starting theta 500 / 1017
-19.03.2018 19:45:30 INFO    Starting theta 600 / 1017
-19.03.2018 19:45:41 INFO    Starting theta 700 / 1017
-19.03.2018 19:45:51 INFO    Starting theta 800 / 1017
-19.03.2018 19:46:01 INFO    Starting theta 900 / 1017
-19.03.2018 19:46:11 INFO    Starting theta 1000 / 1017
-19.03.2018 19:46:13 INFO    Starting roaming
-19.03.2018 19:55:53 INFO    Calculating cross-entropy on train set
-19.03.2018 19:55:55 INFO    Training cross-entropy: 0.657932534292
-19.03.2018 19:55:55 INFO    That's it -- have a great day!
+23.03.2018 09:55:24 INFO    Hi! How are you today?
+23.03.2018 09:55:24 INFO    Startup options:
+23.03.2018 09:55:24 INFO      Algorithm:                     truth
+23.03.2018 09:55:24 INFO      Point by point:                False
+23.03.2018 09:55:24 INFO      Morphing-aware mode:           False
+23.03.2018 09:55:24 INFO      Smeared data:                  False
+23.03.2018 09:55:24 INFO      Training sample:               baseline
+23.03.2018 09:55:24 INFO      alpha:                         None
+23.03.2018 09:55:24 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+23.03.2018 09:55:24 INFO      AFC epsilon:                   None
+23.03.2018 09:55:24 INFO      Denominator theta:             False
+23.03.2018 09:55:24 INFO      Neyman construction toys:      0
+23.03.2018 09:55:24 INFO      Other options:                 
+23.03.2018 09:55:24 INFO      Base directory:                /home/jb6504/higgs_inference
+23.03.2018 09:55:24 INFO      ML-based strategies available: True
+23.03.2018 09:55:24 INFO    Starting truth calculation
+23.03.2018 09:55:24 DEBUG    NC settings: False neyman 36 10000 1001
+23.03.2018 09:55:24 DEBUG    Diagnostics settings:  
+23.03.2018 09:55:57 INFO    Starting evaluation
+23.03.2018 09:55:59 INFO    Starting calibrated evaluation
+23.03.2018 09:56:08 INFO    Starting theta 100 / 1017
+23.03.2018 09:56:17 INFO    Starting theta 200 / 1017
+23.03.2018 09:56:27 INFO    Starting theta 300 / 1017
+23.03.2018 09:56:36 INFO    Starting theta 400 / 1017
+23.03.2018 09:56:46 INFO    Starting theta 500 / 1017
+23.03.2018 09:56:55 INFO    Starting theta 600 / 1017
+23.03.2018 09:57:04 INFO    Starting theta 700 / 1017
+23.03.2018 09:57:13 INFO    Starting theta 800 / 1017
+23.03.2018 09:57:23 INFO    Starting theta 900 / 1017
+23.03.2018 09:57:32 INFO    Starting theta 1000 / 1017
+23.03.2018 09:57:35 INFO    Starting roaming
+23.03.2018 10:08:10 INFO    Calculating cross-entropy on train set
+23.03.2018 10:08:12 INFO    Training cross-entropy: 0.657932534292
+23.03.2018 10:08:12 INFO    That's it -- have a great day!
+slurmstepd: error: Exceeded step memory limit at some point.
