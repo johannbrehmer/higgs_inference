@@ -18,5 +18,5 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py combined -o deep #--neyman -o deep new neyman2
-# python -u experiments.py combined --training random -o deep new
+python -u experiments.py combined --neyman -o deep neyman2
+python -u experiments.py combined --training random -o deep

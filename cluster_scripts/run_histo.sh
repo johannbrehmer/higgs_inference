@@ -5,7 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
-#SBATCH --time=7-00:00:00
+#SBATCH --time=4-00:00:00
 # #SBATCH --gres=gpu:1
 
 # Modules
@@ -18,6 +18,6 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py histo -x 1 41 #--neyman -o neyman2
-# python -u experiments.py histo -x 1 -o new
-# python -u experiments.py histo -x 41 -o new
+python -u experiments.py histo -x 1 41 --neyman -o neyman2
+python -u experiments.py histo -x 1
+python -u experiments.py histo -x 41
