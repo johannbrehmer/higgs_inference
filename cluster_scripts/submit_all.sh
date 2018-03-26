@@ -59,8 +59,8 @@ sbatch --array=1-4 run_combinedregression_diagnostics.sh
 # Hyperparameter scans
 ################################################################################
 
-# sbatch run_combined_tuning.sh
-# sbatch run_combinedregression_tuning.sh
+sbatch run_combined_tuning.sh
+sbatch run_combinedregression_tuning.sh
 
 # sbatch run_carl_depth_experiments.sh
 # sbatch run_combined_depth_experiments.sh
