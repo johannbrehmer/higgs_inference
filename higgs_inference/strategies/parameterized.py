@@ -232,7 +232,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         settings.unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
 
     X_recalibration = np.load(
-        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_recalibration' + input_filename_addition + '.npy')
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_recalibration' + '.npy')
 
     X_test = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
