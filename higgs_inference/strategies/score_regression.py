@@ -28,6 +28,7 @@ def score_regression_inference(use_smearing=False,
     """
     Trains and evaluates one of the parameterized higgs_inference methods.
 
+    :param denominator:
     :param use_smearing:
     :param do_neyman:
     :param options: Further options in a list of strings or string.
@@ -162,6 +163,9 @@ def score_regression_inference(use_smearing=False,
     weights_calibration = np.load(
         settings.unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
 
+    X_recalibration = np.load(
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_recalibration' + input_filename_addition + '.npy')
+
     X_test = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
@@ -181,6 +185,7 @@ def score_regression_inference(use_smearing=False,
     X_train_transformed = scaler.transform(X_train)
     X_test_transformed = scaler.transform(X_test)
     X_calibration_transformed = scaler.transform(X_calibration)
+    X_recalibration_transformed = scaler.transform(X_recalibration)
     if do_neyman:
         X_neyman_alternate_transformed = scaler.transform(X_neyman_alternate.reshape((-1, X_neyman_alternate.shape[2])))
 
@@ -207,11 +212,13 @@ def score_regression_inference(use_smearing=False,
     # Training
     regr.fit(X_train_transformed, scores_train, callbacks=callbacks, batch_size=batch_size)
 
+    # Estimate score
     logging.info('Starting evaluation')
-    that_calibration = regr.predict(X_calibration_transformed)
     time_before = time.time()
     that_test = regr.predict(X_test_transformed)
     eval_time = time.time() - time_before
+    that_calibration = regr.predict(X_calibration_transformed)
+    that_recalibration = regr.predict(X_recalibration_transformed)
 
     logging.info('Score regression evaluation timing: %s s', eval_time)
 
@@ -235,6 +242,12 @@ def score_regression_inference(use_smearing=False,
     eval_times_scoretheta = []
     eval_times_score = []
     eval_times_rotatedscore = []
+    expected_r_vs_sm_scoretheta = []
+    expected_r_vs_sm_score = []
+    expected_r_vs_sm_rotatedscore = []
+    recalibration_expected_r_scoretheta = []
+    recalibration_expected_r_score = []
+    recalibration_expected_r_rotatedscore = []
 
     for t, theta in enumerate(settings.thetas):
 
@@ -309,11 +322,11 @@ def score_regression_inference(use_smearing=False,
                                     y_calibration,
                                     sample_weight=w_calibration)
 
-        # Evaluation
+        # Prepare evaluation data
         tthat_test = that_test.dot(delta_theta)
         that_rotated_test = that_test.dot(rotation_matrix)
 
-        # Calibration
+        # Calibrated evaluation
         time_before = time.time()
         r_hat_scoretheta_test = r_from_s(calibrator_scoretheta.predict(tthat_test.reshape((-1,))))
         eval_times_scoretheta.append(time.time() - time_before)
@@ -347,6 +360,14 @@ def score_regression_inference(use_smearing=False,
         trimmed_mse_log_r_rotatedscore.append(
             calculate_mean_squared_error(np.log(r_test[t]), np.log(r_hat_rotatedscore_test), 'auto'))
 
+        if t == settings.theta_observed:
+            r_sm_score = r_hat_score_test
+            r_sm_scoretheta = r_hat_scoretheta_test
+            r_sm_rotatedscore = r_hat_rotatedscore_test
+        expected_r_vs_sm_score.append(np.mean(r_hat_score_test / r_sm_score))
+        expected_r_vs_sm_scoretheta.append(np.mean(r_hat_scoretheta_test / r_sm_scoretheta))
+        expected_r_vs_sm_rotatedscore.append(np.mean(r_hat_rotatedscore_test / r_sm_rotatedscore))
+
         # For some benchmark thetas, save r for each phase-space point
         if t == settings.theta_benchmark_nottrained:
             np.save(results_dir + '/r_nottrained_scoreregression' + filename_addition + '.npy',
@@ -367,6 +388,21 @@ def score_regression_inference(use_smearing=False,
                     r_hat_score_test)
             np.save(results_dir + '/r_trained_scoreregression_rotatedscore' + filename_addition + '.npy',
                     r_hat_rotatedscore_test)
+
+        # Prepare recalibration data
+        tthat_recalibration = that_recalibration.dot(delta_theta)
+        that_rotated_recalibration = that_recalibration.dot(rotation_matrix)
+
+        # Evaluate recalibration data
+        recalibration_expected_r_score.append(np.mean(
+            r_from_s(calibrator_score.predict(that_recalibration))
+        ))
+        recalibration_expected_r_scoretheta.append(np.mean(
+            r_from_s(calibrator_scoretheta.predict(tthat_recalibration.reshape((-1,))))
+        ))
+        recalibration_expected_r_rotatedscore.append(np.mean(
+            r_from_s(calibrator_rotatedscore.predict(that_rotated_recalibration))
+        ))
 
         ################################################################################
         # Neyman construction toys
@@ -564,6 +600,14 @@ def score_regression_inference(use_smearing=False,
     trimmed_mse_log_r_score = np.asarray(trimmed_mse_log_r_score)
     trimmed_mse_log_r_rotatedscore = np.asarray(trimmed_mse_log_r_rotatedscore)
 
+    expected_r_vs_sm_score = np.asarray(expected_r_vs_sm_score)
+    expected_r_vs_sm_scoretheta = np.asarray(expected_r_vs_sm_scoretheta)
+    expected_r_vs_sm_rotatedscore = np.asarray(expected_r_vs_sm_rotatedscore)
+
+    recalibration_expected_r_score = np.asarray(recalibration_expected_r_score)
+    recalibration_expected_r_rotatedscore = np.asarray(recalibration_expected_r_rotatedscore)
+    recalibration_expected_r_scoretheta = np.asarray(recalibration_expected_r_scoretheta)
+
     np.save(results_dir + '/llr_scoreregression' + filename_addition + '.npy', expected_llr)
     np.save(results_dir + '/llr_scoreregression_scoretheta' + filename_addition + '.npy', expected_llr_scoretheta)
     np.save(results_dir + '/llr_scoreregression_score' + filename_addition + '.npy', expected_llr_score)
@@ -581,3 +625,17 @@ def score_regression_inference(use_smearing=False,
             trimmed_mse_log_r_score)
     np.save(results_dir + '/trimmed_mse_logr_scoreregression_rotatedscore' + filename_addition + '.npy',
             trimmed_mse_log_r_rotatedscore)
+
+    np.save(results_dir + '/expected_r_vs_sm_scoreregression_score' + filename_addition + '.npy',
+            expected_r_vs_sm_score)
+    np.save(results_dir + '/expected_r_vs_sm_scoreregression_scoretheta' + filename_addition + '.npy',
+            expected_r_vs_sm_scoretheta)
+    np.save(results_dir + '/expected_r_vs_sm_scoreregression_rotatedscore' + filename_addition + '.npy',
+            expected_r_vs_sm_rotatedscore)
+
+    np.save(results_dir + '/recalibration_expected_r_vs_sm_scoreregression_score' + filename_addition + '.npy',
+            recalibration_expected_r_score)
+    np.save(results_dir + '/recalibration_expected_r_vs_sm_scoreregression_scoretheta' + filename_addition + '.npy',
+            recalibration_expected_r_scoretheta)
+    np.save(results_dir + '/recalibration_expected_r_vs_sm_scoreregression_rotatedscore' + filename_addition + '.npy',
+            recalibration_expected_r_rotatedscore)

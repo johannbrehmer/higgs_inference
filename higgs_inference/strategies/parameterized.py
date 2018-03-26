@@ -425,6 +425,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     mse_log_r = []
     trimmed_mse_log_r = []
     eval_times = []
+    expected_r_vs_sm = []
     recalibration_expected_r = []
 
     for t, theta in enumerate(settings.thetas):
@@ -453,6 +454,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         expected_llr.append(- 2. * settings.n_expected_events / n_events_test * np.sum(this_log_r))
         mse_log_r.append(calculate_mean_squared_error(np.log(r_test[t]), this_log_r, 0.))
         trimmed_mse_log_r.append(calculate_mean_squared_error(np.log(r_test[t]), this_log_r, 'auto'))
+
+        if t == settings.theta_observed:
+            r_sm = np.exp(this_log_r)
+        expected_r_vs_sm.append(np.mean(np.exp(this_log_r) / r_sm))
 
         # For benchmark thetas, save more info
         if t == settings.theta_benchmark_nottrained:
@@ -562,10 +567,13 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     expected_llr = np.asarray(expected_llr)
     mse_log_r = np.asarray(mse_log_r)
     trimmed_mse_log_r = np.asarray(trimmed_mse_log_r)
+    expected_r_vs_sm = np.asarray(expected_r_vs_sm)
     recalibration_expected_r = np.asarray(recalibration_expected_r)
     np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', expected_llr)
     np.save(results_dir + '/mse_logr_' + algorithm + filename_addition + '.npy', mse_log_r)
     np.save(results_dir + '/trimmed_mse_logr_' + algorithm + filename_addition + '.npy', trimmed_mse_log_r)
+    np.save(results_dir + '/expected_r_vs_sm_' + algorithm + filename_addition + '.npy',
+            expected_r_vs_sm)
     np.save(results_dir + '/recalibration_expected_r_vs_sm_' + algorithm + filename_addition + '.npy',
             recalibration_expected_r)
 
@@ -590,6 +598,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     trimmed_mse_log_r_calibrated = []
     r_roam_temp = np.zeros((settings.n_thetas, n_roaming))
     eval_times = []
+    expected_r_vs_sm = []
     recalibration_expected_r = []
 
     for t, theta in enumerate(settings.thetas):
@@ -629,6 +638,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         expected_llr_calibrated.append(- 2. * settings.n_expected_events / n_events_test * np.sum(np.log(this_r)))
         mse_log_r_calibrated.append(calculate_mean_squared_error(np.log(r_test[t]), np.log(this_r), 0.))
         trimmed_mse_log_r_calibrated.append(calculate_mean_squared_error(np.log(r_test[t]), np.log(this_r), 'auto'))
+
+        if t == settings.theta_observed:
+            r_sm = this_r
+        expected_r_vs_sm.append(np.mean(this_r / r_sm))
 
         # For benchmark theta, save more data
         if t == settings.theta_benchmark_nottrained:
@@ -748,16 +761,19 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     expected_llr_calibrated = np.asarray(expected_llr_calibrated)
     mse_log_r_calibrated = np.asarray(mse_log_r_calibrated)
     trimmed_mse_log_r_calibrated = np.asarray(trimmed_mse_log_r_calibrated)
+    expected_r_vs_sm = np.asarray(expected_r_vs_sm)
     recalibration_expected_r = np.asarray(recalibration_expected_r)
     np.save(results_dir + '/llr_' + algorithm + '_calibrated' + filename_addition + '.npy',
             expected_llr_calibrated)
     np.save(results_dir + '/mse_logr_' + algorithm + '_calibrated' + filename_addition + '.npy', mse_log_r_calibrated)
     np.save(results_dir + '/trimmed_mse_logr_' + algorithm + '_calibrated' + filename_addition + '.npy',
             trimmed_mse_log_r_calibrated)
+    np.save(results_dir + '/expected_r_vs_sm_' + algorithm + '_calibrated' + filename_addition + '.npy',
+            expected_r_vs_sm)
     np.save(results_dir + '/recalibration_expected_r_vs_sm_' + algorithm + '_calibrated' + filename_addition + '.npy',
             recalibration_expected_r)
 
-    # Evalauation times
+    # Evaluation times
     logging.info('Calibrated evaluation timing: median %s s, mean %s s', np.median(eval_times), np.mean(eval_times))
 
     logging.info('Interpolating calibrated roaming')
