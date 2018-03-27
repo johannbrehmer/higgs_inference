@@ -666,7 +666,7 @@ if args.recalibration:
             r = r.flatten()
             r[(~np.isfinite(np.log(r))) & (r < 1.)] = 1. / settings.new_samples_nan_r
             r[~np.isfinite(np.log(r))] = settings.new_samples_nan_r
-            r = r.reshape((n_thetas, settings.n_events_calibration))
+            r = r.reshape((n_thetas, settings.n_events_recalibration))
 
         cut = np.all(np.isfinite(np.log(r)), axis=0)
 
