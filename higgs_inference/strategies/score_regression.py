@@ -402,15 +402,24 @@ def score_regression_inference(use_smearing=False,
         tthat_recalibration = that_recalibration.dot(delta_theta)
         that_rotated_recalibration = that_recalibration.dot(rotation_matrix)
 
+        r_hat_recalibration_score = r_from_s(calibrator_score.predict(that_recalibration))
+        r_hat_recalibration_scoretheta = r_from_s(calibrator_scoretheta.predict(tthat_recalibration.reshape((-1,))))
+        r_hat_recalibration_rotatedscore = r_from_s(calibrator_rotatedscore.predict(that_rotated_recalibration))
+
+        if t == settings.theta_observed:
+            r_hat_recalibration_sm_score = r_hat_recalibration_score
+            r_hat_recalibration_sm_scoretheta = r_hat_recalibration_scoretheta
+            r_hat_recalibration_sm_rotatedscore = r_hat_recalibration_rotatedscore
+
         # Evaluate recalibration data
         recalibration_expected_r_score.append(np.mean(
-            r_from_s(calibrator_score.predict(that_recalibration))
+            r_hat_recalibration_score / r_hat_recalibration_sm_score
         ))
         recalibration_expected_r_scoretheta.append(np.mean(
-            r_from_s(calibrator_scoretheta.predict(tthat_recalibration.reshape((-1,))))
+            r_hat_recalibration_scoretheta / r_hat_recalibration_sm_scoretheta
         ))
         recalibration_expected_r_rotatedscore.append(np.mean(
-            r_from_s(calibrator_rotatedscore.predict(that_rotated_recalibration))
+            r_hat_recalibration_rotatedscore / r_hat_recalibration_sm_rotatedscore
         ))
 
         ################################################################################
