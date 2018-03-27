@@ -103,11 +103,15 @@ def truth_inference(do_neyman=False,
 
     r_nottrained_truth = np.copy(r_test[settings.theta_benchmark_nottrained, :])
     r_trained_truth = np.copy(r_test[settings.theta_benchmark_trained, :])
+    r_vs_sm_nottrained_truth = r_nottrained_truth / r_test[settings.theta_observed, :]
+    r_vs_sm_trained_truth = r_trained_truth / r_test[settings.theta_observed, :]
     scores_trained_truth = np.copy(scores_test[settings.theta_benchmark_trained, :])
     scores_nottrained_truth = np.copy(scores_test[settings.theta_benchmark_nottrained, :])
 
     np.save(results_dir + '/r_nottrained_truth' + filename_addition + '.npy', r_nottrained_truth)
     np.save(results_dir + '/r_trained_truth' + filename_addition + '.npy', r_trained_truth)
+    np.save(results_dir + '/r_vs_sm_nottrained_truth' + filename_addition + '.npy', r_vs_sm_nottrained_truth)
+    np.save(results_dir + '/r_vs_sm_trained_truth' + filename_addition + '.npy', r_vs_sm_trained_truth)
     np.save(results_dir + '/scores_trained_truth' + filename_addition + '.npy', scores_trained_truth)
     np.save(results_dir + '/scores_nottrained_truth' + filename_addition + '.npy', scores_nottrained_truth)
     np.save(results_dir + '/llr_truth' + filename_addition + '.npy', expected_llr_truth)

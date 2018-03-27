@@ -379,6 +379,13 @@ def score_regression_inference(use_smearing=False,
             np.save(results_dir + '/r_nottrained_scoreregression_rotatedscore' + filename_addition + '.npy',
                     r_hat_rotatedscore_test)
 
+            np.save(results_dir + '/r_vs_sm_nottrained_scoreregression_scoretheta' + filename_addition + '.npy',
+                    r_hat_scoretheta_test / r_sm_scoretheta)
+            np.save(results_dir + '/r_vs_sm_nottrained_scoreregression_score' + filename_addition + '.npy',
+                    r_hat_score_test / r_sm_score)
+            np.save(results_dir + '/r_vs_sm_nottrained_scoreregression_rotatedscore' + filename_addition + '.npy',
+                    r_hat_rotatedscore_test / r_sm_rotatedscore)
+
         elif t == settings.theta_benchmark_trained:
             np.save(results_dir + '/r_trained_scoreregression' + filename_addition + '.npy',
                     tthat_test)
@@ -388,6 +395,13 @@ def score_regression_inference(use_smearing=False,
                     r_hat_score_test)
             np.save(results_dir + '/r_trained_scoreregression_rotatedscore' + filename_addition + '.npy',
                     r_hat_rotatedscore_test)
+
+            np.save(results_dir + '/r_vs_sm_trained_scoreregression_scoretheta' + filename_addition + '.npy',
+                    r_hat_scoretheta_test / r_sm_scoretheta)
+            np.save(results_dir + '/r_vs_sm_trained_scoreregression_score' + filename_addition + '.npy',
+                    r_hat_score_test / r_sm_score)
+            np.save(results_dir + '/r_vs_sm_trained_scoreregression_rotatedscore' + filename_addition + '.npy',
+                    r_hat_rotatedscore_test / r_sm_rotatedscore)
 
         # Prepare recalibration data
         tthat_recalibration = that_recalibration.dot(delta_theta)

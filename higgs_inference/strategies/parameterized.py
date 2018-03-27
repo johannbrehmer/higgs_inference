@@ -463,12 +463,16 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         if t == settings.theta_benchmark_nottrained:
             np.save(results_dir + '/r_nottrained_' + algorithm + filename_addition + '.npy', np.exp(this_log_r))
             np.save(results_dir + '/scores_nottrained_' + algorithm + filename_addition + '.npy', this_score)
+            np.save(results_dir + '/r_vs_sm_nottrained_' + algorithm + filename_addition + '.npy',
+                    np.exp(this_log_r) / r_sm)
             if morphing_aware:
                 np.save(results_dir + '/morphing_ri_nottrained_' + algorithm + filename_addition + '.npy', this_ri)
                 np.save(results_dir + '/morphing_wi_nottrained_' + algorithm + filename_addition + '.npy', this_wi)
         elif t == settings.theta_benchmark_trained:
             np.save(results_dir + '/r_trained_' + algorithm + filename_addition + '.npy', np.exp(this_log_r))
             np.save(results_dir + '/scores_trained_' + algorithm + filename_addition + '.npy', this_score)
+            np.save(results_dir + '/r_vs_sm_trained_' + algorithm + filename_addition + '.npy',
+                    np.exp(this_log_r) / r_sm)
             if morphing_aware:
                 np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_ri)
                 np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_wi)
@@ -648,6 +652,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             np.save(results_dir + '/scores_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy',
                     this_score)
             np.save(results_dir + '/r_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
+            np.save(results_dir + '/r_vs_sm_nottrained_' + algorithm + '_calibrated' + filename_addition + '.npy',
+                    this_r / r_sm)
             np.save(results_dir + '/calvalues_nottrained_' + algorithm + filename_addition + '.npy',
                     ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
             # np.save(results_dir + '/cal0histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
@@ -659,6 +665,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             np.save(results_dir + '/scores_trained_' + algorithm + '_calibrated' + filename_addition + '.npy',
                     this_score)
             np.save(results_dir + '/r_trained_' + algorithm + '_calibrated' + filename_addition + '.npy', this_r)
+            np.save(results_dir + '/r_vs_sm_trained_' + algorithm + '_calibrated' + filename_addition + '.npy',
+                    this_r / r_sm)
             np.save(results_dir + '/calvalues_trained_' + algorithm + filename_addition + '.npy',
                     ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
             # np.save(results_dir + '/cal0histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
