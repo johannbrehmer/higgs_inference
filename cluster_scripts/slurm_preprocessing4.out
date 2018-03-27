@@ -15,3 +15,19 @@
 27.03.2018 10:31:48 INFO      Denominator:                       standard
 27.03.2018 10:31:48 INFO      New samples (no NaN removal):      True
 27.03.2018 10:31:48 INFO      Dry run:                           False
+27.03.2018 10:41:26 INFO    Splitting...
+27.03.2018 10:41:55 INFO    Number of events:
+27.03.2018 10:41:55 INFO      All:    821636
+27.03.2018 10:41:55 INFO      Training:    575145
+27.03.2018 10:41:55 INFO      Calibration: 82164
+27.03.2018 10:41:55 INFO      Evaluation:  164327
+27.03.2018 10:41:57 INFO    Normalizing probabilities
+27.03.2018 10:42:10 INFO    Generating recalibration sample
+generate_data.py:666: RuntimeWarning: divide by zero encountered in log
+  r = r.flatten()
+Traceback (most recent call last):
+  File "generate_data.py", line 675, in <module>
+    
+  File "generate_data.py", line 668, in generate_data_recalibration
+    r[~np.isfinite(np.log(r))] = settings.new_samples_nan_r
+ValueError: total size of new array must be unchanged

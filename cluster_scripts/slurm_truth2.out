@@ -1,0 +1,35 @@
+27.03.2018 11:53:56 INFO    Hi! How are you today?
+27.03.2018 11:53:56 INFO    Startup options:
+27.03.2018 11:53:56 INFO      Algorithm:                     truth
+27.03.2018 11:53:56 INFO      Point by point:                False
+27.03.2018 11:53:56 INFO      Morphing-aware mode:           False
+27.03.2018 11:53:56 INFO      Smeared data:                  False
+27.03.2018 11:53:56 INFO      Training sample:               baseline
+27.03.2018 11:53:56 INFO      alpha:                         None
+27.03.2018 11:53:56 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+27.03.2018 11:53:56 INFO      AFC epsilon:                   None
+27.03.2018 11:53:56 INFO      Denominator theta:             False
+27.03.2018 11:53:56 INFO      Neyman construction toys:      0
+27.03.2018 11:53:56 INFO      Other options:                 ['new']
+27.03.2018 11:53:56 INFO      Base directory:                /home/jb6504/higgs_inference
+27.03.2018 11:53:56 INFO      ML-based strategies available: False
+27.03.2018 11:53:56 INFO    Starting truth calculation
+27.03.2018 11:53:56 DEBUG    NC settings: False neyman 36 10000 1001
+27.03.2018 11:53:56 DEBUG    Diagnostics settings: _new _new
+27.03.2018 11:54:53 INFO    Starting evaluation
+27.03.2018 11:54:54 INFO    Starting calibrated evaluation
+27.03.2018 11:55:52 INFO    Starting theta 100 / 1017
+27.03.2018 11:56:49 INFO    Starting theta 200 / 1017
+27.03.2018 11:57:46 INFO    Starting theta 300 / 1017
+27.03.2018 11:58:43 INFO    Starting theta 400 / 1017
+27.03.2018 11:59:40 INFO    Starting theta 500 / 1017
+27.03.2018 12:00:38 INFO    Starting theta 600 / 1017
+27.03.2018 12:01:35 INFO    Starting theta 700 / 1017
+27.03.2018 12:02:31 INFO    Starting theta 800 / 1017
+27.03.2018 12:03:28 INFO    Starting theta 900 / 1017
+27.03.2018 12:04:25 INFO    Starting theta 1000 / 1017
+27.03.2018 12:04:37 INFO    Starting roaming
+27.03.2018 12:10:35 INFO    Calculating cross-entropy on train set
+27.03.2018 12:10:35 INFO    Training cross-entropy: 0.657851757345
+27.03.2018 12:10:36 INFO    That's it -- have a great day!
+slurmstepd: error: Exceeded step memory limit at some point.

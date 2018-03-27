@@ -15,3 +15,16 @@
 27.03.2018 10:32:23 INFO      Denominator:                       standard
 27.03.2018 10:32:23 INFO      New samples (no NaN removal):      True
 27.03.2018 10:32:23 INFO      Dry run:                           False
+27.03.2018 10:41:55 INFO    Splitting...
+27.03.2018 10:42:21 INFO    Number of events:
+27.03.2018 10:42:21 INFO      All:    821636
+27.03.2018 10:42:21 INFO      Training:    575145
+27.03.2018 10:42:21 INFO      Calibration: 82164
+27.03.2018 10:42:21 INFO      Evaluation:  164327
+27.03.2018 10:42:24 INFO    Normalizing probabilities
+27.03.2018 10:42:47 INFO    Generating likelihood ratio evaluation sample
+generate_data.py:746: RuntimeWarning: divide by zero encountered in log
+  r = r.flatten()
+generate_data.py:752: RuntimeWarning: invalid value encountered in log
+  scores[~ (np.isfinite(np.log(scores[:, 0]))
+27.03.2018 11:03:51 INFO    Done!

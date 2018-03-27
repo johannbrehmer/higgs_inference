@@ -1,0 +1,30 @@
+27.03.2018 10:59:49 INFO    Welcome! How are you today?
+27.03.2018 10:59:49 INFO    Tasks:
+27.03.2018 10:59:49 INFO      Baseline training:                 False
+27.03.2018 10:59:49 INFO      Random training:                   False
+27.03.2018 10:59:49 INFO      Morphing training:                 False
+27.03.2018 10:59:49 INFO      Point-by-point training:           False
+27.03.2018 10:59:49 INFO      Score regression training:         True
+27.03.2018 10:59:49 INFO      Calibration:                       False
+27.03.2018 10:59:49 INFO      Recalibration:                     False
+27.03.2018 10:59:49 INFO      Likelihood ratio eval:             False
+27.03.2018 10:59:49 INFO      Neyman construction:               False
+27.03.2018 10:59:49 INFO      Neyman construction (alternative): False
+27.03.2018 10:59:49 INFO      Neyman construction (alternative): False
+27.03.2018 10:59:49 INFO      Roaming:                           False
+27.03.2018 10:59:49 INFO    Options:
+27.03.2018 10:59:49 INFO      Denominator:                       standard
+27.03.2018 10:59:49 INFO      New samples (no NaN removal):      True
+27.03.2018 10:59:49 INFO      Dry run:                           False
+slurmstepd: error: *** JOB 5143058 ON c99-02 CANCELLED AT 2018-03-27T10:59:52 ***
+27.03.2018 11:07:13 INFO    Splitting...
+27.03.2018 11:07:34 INFO    Number of events:
+27.03.2018 11:07:34 INFO      All:    821636
+27.03.2018 11:07:34 INFO      Training:    575145
+27.03.2018 11:07:34 INFO      Calibration: 82164
+27.03.2018 11:07:34 INFO      Evaluation:  164327
+27.03.2018 11:07:36 INFO    Normalizing probabilities
+27.03.2018 11:08:50 INFO    Generating training sample for score regression
+generate_data.py:704: RuntimeWarning: invalid value encountered in log
+  & np.isfinite(np.log(scores[:, 1]))), :] = settings.new_samples_nan_score
+27.03.2018 11:16:18 INFO    Done!
