@@ -129,7 +129,7 @@ elif args.alternativedenom4:
 if args.new:
     filename_addition += '_new'
 
-need_train_sample = args.train or args.random or args.basis or args.pointbypoint
+need_train_sample = args.train or args.random or args.basis or args.pointbypoint or args.scoreregression
 need_calibration_sample = args.calibration or args.recalibration
 need_test_sample = args.test or args.neyman or args.neyman2 or args.neyman3 or args.roam
 
