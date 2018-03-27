@@ -108,6 +108,7 @@ def score_regression_inference(use_smearing=False,
         theta1 = settings.theta1_alternatives[denominator - 1]
 
     if new_sample_mode:
+        input_filename_addition = '_new'
         filename_addition += '_new'
 
     n_expected_events_neyman = settings.n_expected_events_neyman
@@ -147,16 +148,10 @@ def score_regression_inference(use_smearing=False,
     ################################################################################
 
     # Load data
-    if new_sample_mode:
-        X_train = np.load(
-            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_scoreregression' + input_filename_addition + '_new.npy')
-        scores_train = np.load(
-            settings.unweighted_events_dir + '/scores_train_scoreregression' + input_filename_addition + '_new.npy')
-    else:
-        X_train = np.load(
-            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_scoreregression' + input_filename_addition + '.npy')
-        scores_train = np.load(
-            settings.unweighted_events_dir + '/scores_train_scoreregression' + input_filename_addition + '.npy')
+    X_train = np.load(
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_train_scoreregression' + input_filename_addition + '.npy')
+    scores_train = np.load(
+        settings.unweighted_events_dir + '/scores_train_scoreregression' + input_filename_addition + '.npy')
 
     X_calibration = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_calibration' + input_filename_addition + '.npy')

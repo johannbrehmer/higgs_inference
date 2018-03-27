@@ -27,6 +27,7 @@ def truth_inference(do_neyman=False,
     # Settings
     ################################################################################
 
+    new_sample_mode = ('new' in options)
     neyman2_mode = ('neyman2' in options)
     neyman3_mode = ('neyman3' in options)
 
@@ -37,6 +38,10 @@ def truth_inference(do_neyman=False,
         input_filename_addition = '_denom' + str(denominator)
         filename_addition += '_denom' + str(denominator)
         theta1 = settings.theta1_alternatives[denominator - 1]
+
+    if new_sample_mode:
+        filename_addition += '_new'
+        input_filename_addition += '_new'
 
     neyman_dir = settings.neyman_dir + '/truth'
     results_dir = settings.base_dir + '/results/truth'
@@ -67,7 +72,8 @@ def truth_inference(do_neyman=False,
     scores_test = np.load(settings.unweighted_events_dir + '/scores_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
     r_roam = np.load(settings.unweighted_events_dir + '/r_roam' + input_filename_addition + '.npy')
-    r_neyman_alternate = np.load(settings.unweighted_events_dir + '/neyman/r_' + neyman_filename + '_alternate.npy')
+    if do_neyman:
+        r_neyman_alternate = np.load(settings.unweighted_events_dir + '/neyman/r_' + neyman_filename + '_alternate.npy')
 
     # To calculate cross entropy on train set
     r_train = np.load(settings.unweighted_events_dir + '/r_train' + input_filename_addition + '.npy')

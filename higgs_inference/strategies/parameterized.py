@@ -162,6 +162,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     if new_sample_mode:
         filename_addition += '_new'
+        input_filename_addition += '_new'
 
     n_expected_events_neyman = settings.n_expected_events_neyman
     n_neyman_null_experiments = settings.n_neyman_null_experiments
@@ -215,8 +216,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     elif basis_theta_mode:
         train_filename += '_basis'
     train_filename += input_filename_addition
-    if new_sample_mode:
-        train_filename += '_new'
 
     X_train = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X' + train_filename + '.npy')
     X_train_unshuffled = np.load(settings.unweighted_events_dir + '/' + input_X_prefix + 'X' + train_filename + '.npy')
