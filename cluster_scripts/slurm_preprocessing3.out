@@ -1,28 +1,18 @@
-24.03.2018 00:40:54 INFO    Welcome! How are you today?
-24.03.2018 00:40:54 INFO    Tasks:
-24.03.2018 00:40:54 INFO      Baseline training:                 False
-24.03.2018 00:40:54 INFO      Random training:                   False
-24.03.2018 00:40:54 INFO      Morphing training:                 False
-24.03.2018 00:40:54 INFO      Point-by-point training:           True
-24.03.2018 00:40:54 INFO      Calibration:                       False
-24.03.2018 00:40:54 INFO      Recalibration:                     False
-24.03.2018 00:40:54 INFO      Likelihood ratio eval:             False
-24.03.2018 00:40:54 INFO      Neyman construction:               False
-24.03.2018 00:40:54 INFO      Neyman construction (alternative): False
-24.03.2018 00:40:54 INFO      Neyman construction (alternative): False
-24.03.2018 00:40:54 INFO      Roaming:                           False
-24.03.2018 00:40:54 INFO    Options:
-24.03.2018 00:40:54 INFO      Dry run:                           False
-24.03.2018 00:40:54 INFO      Denominator:                       standard
-24.03.2018 00:54:37 INFO    Splitting...
-24.03.2018 00:55:10 INFO    Number of events:
-24.03.2018 00:55:10 INFO      All:    821636
-24.03.2018 00:55:10 INFO      Training:    575145
-24.03.2018 00:55:10 INFO      Calibration: 82164
-24.03.2018 00:55:10 INFO      Evaluation:  164327
-24.03.2018 00:55:12 INFO    Normalizing probabilities
-24.03.2018 00:56:44 INFO    Generating point-by-point training samples
-generate_data.py:465: RuntimeWarning: divide by zero encountered in log
-  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
-24.03.2018 11:39:28 INFO    Done!
-slurmstepd: error: Exceeded step memory limit at some point.
+27.03.2018 10:31:46 INFO    Welcome! How are you today?
+27.03.2018 10:31:46 INFO    Tasks:
+27.03.2018 10:31:46 INFO      Baseline training:                 False
+27.03.2018 10:31:46 INFO      Random training:                   False
+27.03.2018 10:31:46 INFO      Morphing training:                 False
+27.03.2018 10:31:46 INFO      Point-by-point training:           False
+27.03.2018 10:31:46 INFO      Calibration:                       True
+27.03.2018 10:31:46 INFO      Recalibration:                     False
+27.03.2018 10:31:46 INFO      Likelihood ratio eval:             False
+27.03.2018 10:31:46 INFO      Neyman construction:               False
+27.03.2018 10:31:46 INFO      Neyman construction (alternative): False
+27.03.2018 10:31:46 INFO      Neyman construction (alternative): False
+27.03.2018 10:31:46 INFO      Roaming:                           False
+27.03.2018 10:31:46 INFO    Options:
+27.03.2018 10:31:46 INFO      Denominator:                       standard
+27.03.2018 10:31:46 INFO      New samples (no NaN removal):      True
+27.03.2018 10:31:46 INFO      Dry run:                           False
+27.03.2018 10:40:44 INFO    Splitting...

@@ -1,18 +1,31 @@
-27.03.2018 09:43:43 INFO    Welcome! How are you today?
-27.03.2018 09:43:43 INFO    Tasks:
-27.03.2018 09:43:43 INFO      Baseline training:                 True
-27.03.2018 09:43:43 INFO      Random training:                   False
-27.03.2018 09:43:43 INFO      Morphing training:                 False
-27.03.2018 09:43:43 INFO      Point-by-point training:           False
-27.03.2018 09:43:43 INFO      Calibration:                       False
-27.03.2018 09:43:43 INFO      Recalibration:                     False
-27.03.2018 09:43:43 INFO      Likelihood ratio eval:             False
-27.03.2018 09:43:43 INFO      Neyman construction:               False
-27.03.2018 09:43:43 INFO      Neyman construction (alternative): False
-27.03.2018 09:43:43 INFO      Neyman construction (alternative): False
-27.03.2018 09:43:43 INFO      Roaming:                           False
-27.03.2018 09:43:43 INFO    Options:
-27.03.2018 09:43:43 INFO      Denominator:                       standard
-27.03.2018 09:43:43 INFO      New samples (no NaN removal):      True
-27.03.2018 09:43:43 INFO      Dry run:                           False
-27.03.2018 09:52:45 INFO    Splitting...
+27.03.2018 10:31:19 INFO    Welcome! How are you today?
+27.03.2018 10:31:19 INFO    Tasks:
+27.03.2018 10:31:19 INFO      Baseline training:                 False
+27.03.2018 10:31:19 INFO      Random training:                   False
+27.03.2018 10:31:19 INFO      Morphing training:                 False
+27.03.2018 10:31:19 INFO      Point-by-point training:           False
+27.03.2018 10:31:19 INFO      Calibration:                       False
+27.03.2018 10:31:19 INFO      Recalibration:                     False
+27.03.2018 10:31:19 INFO      Likelihood ratio eval:             False
+27.03.2018 10:31:19 INFO      Neyman construction:               False
+27.03.2018 10:31:19 INFO      Neyman construction (alternative): False
+27.03.2018 10:31:19 INFO      Neyman construction (alternative): False
+27.03.2018 10:31:19 INFO      Roaming:                           False
+27.03.2018 10:31:19 INFO    Options:
+27.03.2018 10:31:19 INFO      Denominator:                       standard
+27.03.2018 10:31:19 INFO      New samples (no NaN removal):      True
+27.03.2018 10:31:19 INFO      Dry run:                           False
+27.03.2018 10:40:16 INFO    Splitting...
+27.03.2018 10:40:39 INFO    Number of events:
+27.03.2018 10:40:39 INFO      All:    821636
+27.03.2018 10:40:39 INFO      Training:    575145
+27.03.2018 10:40:39 INFO      Calibration: 82164
+27.03.2018 10:40:39 INFO      Evaluation:  164327
+27.03.2018 10:40:41 INFO    Normalizing probabilities
+27.03.2018 10:40:41 INFO    Generating training sample for score regression
+Traceback (most recent call last):
+  File "generate_data.py", line 710, in <module>
+    
+  File "generate_data.py", line 690, in generate_data_score_regression
+    indices = np.random.choice(list(range(n_events_train)), settings.n_events_score_regression,
+IndexError: index 0 is out of bounds for axis 0 with size 0

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=comb
-#SBATCH --output=slurm_combined.out
+#SBATCH --job-name=comb2
+#SBATCH --output=slurm_combined2.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
@@ -18,5 +18,7 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py combined --neyman -o deep neyman2
-python -u experiments.py combined --training random -o deep
+python -u experiments.py combined -o deep new
+
+#python -u experiments.py combined --neyman -o deep neyman2
+#python -u experiments.py combined --training random -o deep
