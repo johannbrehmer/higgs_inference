@@ -1,33 +1,158 @@
 Using TensorFlow backend.
-26.03.2018 17:39:21 INFO    Hi! How are you today?
-26.03.2018 17:39:21 INFO    Startup options:
-26.03.2018 17:39:21 INFO      Algorithm:                     scoreregression
-26.03.2018 17:39:21 INFO      Point by point:                False
-26.03.2018 17:39:21 INFO      Morphing-aware mode:           False
-26.03.2018 17:39:21 INFO      Smeared data:                  False
-26.03.2018 17:39:21 INFO      Training sample:               baseline
-26.03.2018 17:39:21 INFO      alpha:                         None
-26.03.2018 17:39:21 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-26.03.2018 17:39:21 INFO      AFC epsilon:                   None
-26.03.2018 17:39:21 INFO      Denominator theta:             False
-26.03.2018 17:39:21 INFO      Neyman construction toys:      1
-26.03.2018 17:39:21 INFO      Other options:                 ['deep']
-26.03.2018 17:39:21 INFO      Base directory:                /home/jb6504/higgs_inference
-26.03.2018 17:39:21 INFO      ML-based strategies available: True
-26.03.2018 17:39:21 INFO    Starting score regression inference
-26.03.2018 17:39:21 INFO    Options:
-26.03.2018 17:39:21 INFO      Denominator theta:       denominator 1 = theta 0 = [ 0.  0.]
-26.03.2018 17:39:21 INFO      Number of hidden layers: 5
-26.03.2018 17:39:21 INFO      Batch size:              128
-26.03.2018 17:39:21 INFO      Learning rate:           0.001
-26.03.2018 17:39:21 INFO      Learning rate decay:     0.0921034037198
-26.03.2018 17:39:21 INFO      Number of epochs:        50
-26.03.2018 17:39:21 INFO      NC experiments:          False
-Traceback (most recent call last):
-  File "experiments.py", line 131, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/score_regression.py", line 167, in score_regression_inference
-    settings.unweighted_events_dir + '/' + input_X_prefix + 'X_recalibration' + input_filename_addition + '.npy')
-  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
-    fid = open(file, "rb")
-IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/X_recalibration_denom1.npy'
+26.03.2018 18:09:30 INFO    Hi! How are you today?
+26.03.2018 18:09:30 INFO    Startup options:
+26.03.2018 18:09:30 INFO      Algorithm:                     scoreregression
+26.03.2018 18:09:30 INFO      Point by point:                False
+26.03.2018 18:09:30 INFO      Morphing-aware mode:           False
+26.03.2018 18:09:30 INFO      Smeared data:                  False
+26.03.2018 18:09:30 INFO      Training sample:               baseline
+26.03.2018 18:09:30 INFO      alpha:                         None
+26.03.2018 18:09:30 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+26.03.2018 18:09:30 INFO      AFC epsilon:                   None
+26.03.2018 18:09:30 INFO      Denominator theta:             False
+26.03.2018 18:09:30 INFO      Neyman construction toys:      1
+26.03.2018 18:09:30 INFO      Other options:                 ['deep']
+26.03.2018 18:09:30 INFO      Base directory:                /home/jb6504/higgs_inference
+26.03.2018 18:09:30 INFO      ML-based strategies available: True
+26.03.2018 18:09:30 INFO    Starting score regression inference
+26.03.2018 18:09:30 INFO    Options:
+26.03.2018 18:09:30 INFO      Denominator theta:       denominator 1 = theta 0 = [ 0.  0.]
+26.03.2018 18:09:30 INFO      Number of hidden layers: 5
+26.03.2018 18:09:30 INFO      Batch size:              128
+26.03.2018 18:09:30 INFO      Learning rate:           0.001
+26.03.2018 18:09:30 INFO      Learning rate decay:     0.0921034037198
+26.03.2018 18:09:30 INFO      Number of epochs:        50
+26.03.2018 18:09:30 INFO      NC experiments:          False
+26.03.2018 18:09:52 INFO    Starting training of score regression
+Train on 8000000 samples, validate on 2000000 samples
+2018-03-26 18:09:52.751552: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-26 18:09:52.751939: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-26 18:09:52.751948: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-26 18:09:52.751953: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-26 18:09:52.751956: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-03-26 18:09:53.080478: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:05:00.0
+Total memory: 22.38GiB
+Free memory: 22.21GiB
+2018-03-26 18:09:53.080517: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-03-26 18:09:53.080523: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-03-26 18:09:53.080532: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:05:00.0)
+Epoch 1/50
+396s - loss: 0.0585 - val_loss: 0.0387
+Epoch 2/50
+395s - loss: 0.0345 - val_loss: 0.0349
+Epoch 3/50
+397s - loss: 0.0290 - val_loss: 0.0343
+Epoch 4/50
+399s - loss: 0.0251 - val_loss: 0.0205
+Epoch 5/50
+398s - loss: 0.0204 - val_loss: 0.0167
+Epoch 6/50
+398s - loss: 0.0181 - val_loss: 0.0185
+Epoch 7/50
+398s - loss: 0.0164 - val_loss: 0.0112
+Epoch 8/50
+398s - loss: 0.0144 - val_loss: 0.0149
+Epoch 9/50
+398s - loss: 0.0128 - val_loss: 0.0086
+Epoch 10/50
+399s - loss: 0.0114 - val_loss: 0.0115
+Epoch 11/50
+399s - loss: 0.0108 - val_loss: 0.0093
+Epoch 12/50
+398s - loss: 0.0089 - val_loss: 0.0075
+Epoch 13/50
+398s - loss: 0.0081 - val_loss: 0.0066
+Epoch 14/50
+398s - loss: 0.0072 - val_loss: 0.0063
+Epoch 15/50
+398s - loss: 0.0067 - val_loss: 0.0058
+Epoch 16/50
+398s - loss: 0.0060 - val_loss: 0.0073
+Epoch 17/50
+398s - loss: 0.0055 - val_loss: 0.0056
+Epoch 18/50
+398s - loss: 0.0052 - val_loss: 0.0044
+Epoch 19/50
+398s - loss: 0.0048 - val_loss: 0.0042
+Epoch 20/50
+398s - loss: 0.0045 - val_loss: 0.0040
+Epoch 21/50
+398s - loss: 0.0041 - val_loss: 0.0033
+Epoch 22/50
+398s - loss: 0.0039 - val_loss: 0.0040
+Epoch 23/50
+398s - loss: 0.0037 - val_loss: 0.0032
+Epoch 24/50
+400s - loss: 0.0035 - val_loss: 0.0029
+Epoch 25/50
+398s - loss: 0.0034 - val_loss: 0.0031
+Epoch 26/50
+398s - loss: 0.0032 - val_loss: 0.0030
+Epoch 27/50
+398s - loss: 0.0032 - val_loss: 0.0027
+Epoch 28/50
+398s - loss: 0.0030 - val_loss: 0.0026
+Epoch 29/50
+398s - loss: 0.0029 - val_loss: 0.0027
+Epoch 30/50
+398s - loss: 0.0029 - val_loss: 0.0027
+Epoch 31/50
+399s - loss: 0.0028 - val_loss: 0.0025
+Epoch 32/50
+399s - loss: 0.0027 - val_loss: 0.0024
+Epoch 33/50
+398s - loss: 0.0027 - val_loss: 0.0024
+Epoch 34/50
+398s - loss: 0.0026 - val_loss: 0.0024
+Epoch 35/50
+398s - loss: 0.0026 - val_loss: 0.0023
+Epoch 36/50
+398s - loss: 0.0026 - val_loss: 0.0023
+Epoch 37/50
+400s - loss: 0.0025 - val_loss: 0.0022
+Epoch 38/50
+399s - loss: 0.0025 - val_loss: 0.0022
+Epoch 39/50
+398s - loss: 0.0025 - val_loss: 0.0022
+Epoch 40/50
+401s - loss: 0.0024 - val_loss: 0.0022
+Epoch 41/50
+401s - loss: 0.0024 - val_loss: 0.0021
+Epoch 42/50
+401s - loss: 0.0024 - val_loss: 0.0022
+Epoch 43/50
+401s - loss: 0.0024 - val_loss: 0.0021
+Epoch 44/50
+407s - loss: 0.0024 - val_loss: 0.0021
+Epoch 45/50
+418s - loss: 0.0024 - val_loss: 0.0021
+Epoch 46/50
+418s - loss: 0.0023 - val_loss: 0.0021
+Epoch 47/50
+416s - loss: 0.0023 - val_loss: 0.0021
+Epoch 48/50
+416s - loss: 0.0023 - val_loss: 0.0021
+Epoch 49/50
+417s - loss: 0.0023 - val_loss: 0.0020
+Epoch 50/50
+416s - loss: 0.0023 - val_loss: 0.0021
+26.03.2018 23:44:13 INFO    Starting evaluation
+26.03.2018 23:44:55 INFO    Score regression evaluation timing: 1.04367804527 s
+26.03.2018 23:44:55 INFO    Starting density estimation
+26.03.2018 23:46:51 INFO    Starting theta 100 / 1017
+26.03.2018 23:48:47 INFO    Starting theta 200 / 1017
+26.03.2018 23:50:43 INFO    Starting theta 300 / 1017
+26.03.2018 23:52:38 INFO    Starting theta 400 / 1017
+26.03.2018 23:54:32 INFO    Starting theta 500 / 1017
+26.03.2018 23:56:26 INFO    Starting theta 600 / 1017
+26.03.2018 23:58:21 INFO    Starting theta 700 / 1017
+27.03.2018 00:00:16 INFO    Starting theta 800 / 1017
+27.03.2018 00:02:11 INFO    Starting theta 900 / 1017
+27.03.2018 00:04:10 INFO    Starting theta 1000 / 1017
+27.03.2018 00:04:31 INFO    Score density estimation timing: median 0.00592279434204 s, mean 0.0058389889221 s
+27.03.2018 00:04:31 INFO    Rotated score density estimation timing: median 0.0082700252533 s, mean 0.00828459644974 s
+27.03.2018 00:04:31 INFO    Score times theta density estimation timing: median 0.00994992256165 s, mean 0.00997856608065 s
+27.03.2018 00:04:31 INFO    That's it -- have a great day!

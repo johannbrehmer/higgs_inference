@@ -1,132 +1,27 @@
-16.03.2018 15:14:47 INFO    Hi! How are you today?
-16.03.2018 15:14:47 INFO    Startup options:
-16.03.2018 15:14:47 INFO      Algorithm:                     histo
-16.03.2018 15:14:47 INFO      Point by point:                False
-16.03.2018 15:14:47 INFO      Morphing-aware mode:           False
-16.03.2018 15:14:47 INFO      Smeared data:                  False
-16.03.2018 15:14:47 INFO      Training sample:               baseline
-16.03.2018 15:14:47 INFO      alpha:                         None
-16.03.2018 15:14:47 INFO      Histogram / AFC X indices:     [1, 41]
-16.03.2018 15:14:47 INFO      AFC epsilon:                   None
-16.03.2018 15:14:47 INFO      Denominator theta:             False
-16.03.2018 15:14:47 INFO      Neyman construction toys:      1
-16.03.2018 15:14:47 INFO      Other options:                 
-16.03.2018 15:14:47 INFO      Base directory:                /home/jb6504/higgs_inference
-16.03.2018 15:14:47 INFO      ML-based strategies available: False
-16.03.2018 15:14:47 INFO    Starting histogram-based inference
-16.03.2018 15:14:47 INFO    Settings:
-16.03.2018 15:14:47 INFO      Statistics:              x [1, 41]
-16.03.2018 15:14:47 INFO      Binning:                 optimized
-16.03.2018 15:14:48 INFO    Starting theta 1/108: number 0 ([ 0.  0.])
-16.03.2018 15:14:49 INFO    Starting theta 2/108: number 13 ([-1. -1.])
-16.03.2018 15:14:49 INFO    Starting theta 3/108: number 14 ([-1.  1.])
-16.03.2018 15:14:50 INFO    Starting theta 4/108: number 15 ([ 1. -1.])
-16.03.2018 15:14:51 INFO    Starting theta 5/108: number 16 ([ 1.  1.])
-16.03.2018 15:14:52 INFO    Starting theta 6/108: number 9 ([-0.5 -0.5])
-16.03.2018 15:14:52 INFO    Starting theta 7/108: number 422 ([-0.19238158 -0.59962178])
-16.03.2018 15:14:53 INFO    Starting theta 8/108: number 956 ([ 0.89009995 -0.46538046])
-16.03.2018 15:14:54 INFO    Starting theta 9/108: number 666 ([ 0.30761222  0.31321016])
-16.03.2018 15:14:56 INFO    Starting theta 10/108: number 802 ([ 0.57114539 -0.53482071])
-16.03.2018 15:14:56 INFO    Starting theta 11/108: number 675 ([ 0.32337198 -0.34480615])
-16.03.2018 15:14:57 INFO    Starting theta 12/108: number 839 ([ 0.64589677  0.55027312])
-16.03.2018 15:14:57 INFO    Starting theta 13/108: number 699 ([ 0.36795424  0.28437234])
-16.03.2018 15:14:58 INFO    Starting theta 14/108: number 820 ([ 0.60259509 -0.25412776])
-16.03.2018 15:15:00 INFO    Starting theta 15/108: number 203 ([-0.61645122 -0.16986252])
-16.03.2018 15:15:00 INFO    Starting theta 16/108: number 291 ([-0.44794652 -0.29910012])
-16.03.2018 15:15:01 INFO    Starting theta 17/108: number 634 ([ 0.24693496 -0.77942393])
-16.03.2018 15:15:02 INFO    Starting theta 18/108: number 371 ([-0.2996083   0.60243551])
-16.03.2018 15:15:02 INFO    Starting theta 19/108: number 973 ([ 0.93200575 -0.74254176])
-16.03.2018 15:15:03 INFO    Starting theta 20/108: number 742 ([ 0.45658682 -0.71556256])
-16.03.2018 15:15:04 INFO    Starting theta 21/108: number 901 ([ 0.76761916  0.18918917])
-16.03.2018 15:15:04 INFO    Starting theta 22/108: number 181 ([-0.67220747  0.99327244])
-16.03.2018 15:15:05 INFO    Starting theta 23/108: number 82 ([-0.86582211  0.18873229])
-16.03.2018 15:15:14 INFO    Starting theta 24/108: number 937 ([ 0.84175328  0.06646314])
-16.03.2018 15:15:15 INFO    Starting theta 25/108: number 510 ([-0.02257083 -0.17754257])
-16.03.2018 15:15:15 INFO    Starting theta 26/108: number 919 ([ 0.80563564 -0.3828255 ])
-16.03.2018 15:15:16 INFO    Starting theta 27/108: number 745 ([ 0.45758533  0.23764021])
-16.03.2018 15:15:17 INFO    Starting theta 28/108: number 588 ([ 0.14532057 -0.99903057])
-16.03.2018 15:15:17 INFO    Starting theta 29/108: number 804 ([ 0.57747224  0.07115072])
-16.03.2018 15:15:18 INFO    Starting theta 30/108: number 963 ([ 0.90819175 -0.62237577])
-16.03.2018 15:15:18 INFO    Starting theta 31/108: number 396 ([-0.24354882  0.89907487])
-16.03.2018 15:15:19 INFO    Starting theta 32/108: number 62 ([-0.91016569  0.09832916])
-16.03.2018 15:15:20 INFO    Starting theta 33/108: number 401 ([-0.23817276  0.51270026])
-16.03.2018 15:15:20 INFO    Starting theta 34/108: number 925 ([ 0.81840142 -0.15652572])
-16.03.2018 15:15:21 INFO    Starting theta 35/108: number 874 ([ 0.70345114 -0.82047772])
-16.03.2018 15:15:23 INFO    Starting theta 36/108: number 770 ([ 0.51044067 -0.52312918])
-16.03.2018 15:15:27 INFO    Starting theta 37/108: number 108 ([-0.81715907  0.17467073])
-16.03.2018 15:15:27 INFO    Starting theta 38/108: number 179 ([-0.67350217  0.25822043])
-16.03.2018 15:15:28 INFO    Starting theta 39/108: number 669 ([ 0.31134279 -0.91513634])
-16.03.2018 15:15:30 INFO    Starting theta 40/108: number 758 ([ 0.48555393  0.60272842])
-16.03.2018 15:15:30 INFO    Starting theta 41/108: number 113 ([-0.81090693 -0.35089443])
-16.03.2018 15:15:31 INFO    Starting theta 42/108: number 587 ([ 0.14343539 -0.40035765])
-16.03.2018 15:15:32 INFO    Starting theta 43/108: number 600 ([ 0.16780437 -0.66065983])
-16.03.2018 15:15:32 INFO    Starting theta 44/108: number 975 ([ 0.93334999 -0.05006023])
-16.03.2018 15:15:34 INFO    Starting theta 45/108: number 496 ([-0.05130633 -0.92036265])
-16.03.2018 15:15:34 INFO    Starting theta 46/108: number 66 ([-0.89913448 -0.075021  ])
-16.03.2018 15:15:35 INFO    Starting theta 47/108: number 467 ([-0.09097912  0.32569428])
-16.03.2018 15:15:36 INFO    Starting theta 48/108: number 412 ([-0.21229369  0.15277015])
-16.03.2018 15:15:37 INFO    Starting theta 49/108: number 701 ([ 0.37293732  0.80702849])
-16.03.2018 15:15:38 INFO    Starting theta 50/108: number 986 ([ 0.95088094  0.05214484])
-16.03.2018 15:15:38 INFO    Starting theta 51/108: number 598 ([ 0.16578311 -0.09655258])
-16.03.2018 15:15:40 INFO    Starting theta 52/108: number 810 ([ 0.58481973 -0.20571565])
-16.03.2018 15:15:40 INFO    Starting theta 53/108: number 97 ([-0.83949827 -0.85622854])
-16.03.2018 15:15:41 INFO    Starting theta 54/108: number 18 ([-0.99849038  0.13674514])
-16.03.2018 15:15:42 INFO    Starting theta 55/108: number 723 ([ 0.42313754  0.04817991])
-16.03.2018 15:15:43 INFO    Starting theta 56/108: number 159 ([-0.72275143  0.26484372])
-16.03.2018 15:15:43 INFO    Starting theta 57/108: number 320 ([-0.39025216  0.89762413])
-16.03.2018 15:15:44 INFO    Starting theta 58/108: number 301 ([-0.42496479 -0.29929615])
-16.03.2018 15:15:44 INFO    Starting theta 59/108: number 352 ([-0.33117606 -0.06437794])
-16.03.2018 15:15:45 INFO    Starting theta 60/108: number 159 ([-0.72275143  0.26484372])
-16.03.2018 15:15:45 INFO    Starting theta 61/108: number 89 ([-0.852803    0.39758022])
-16.03.2018 15:15:46 INFO    Starting theta 62/108: number 421 ([-0.19372397 -0.5487683 ])
-16.03.2018 15:15:46 INFO    Starting theta 63/108: number 574 ([ 0.12059293  0.25501418])
-16.03.2018 15:15:47 INFO    Starting theta 64/108: number 923 ([ 0.81364542  0.67663973])
-16.03.2018 15:15:56 INFO    Starting theta 65/108: number 849 ([ 0.6583114   0.73535462])
-16.03.2018 15:15:57 INFO    Starting theta 66/108: number 299 ([-0.43548471  0.24506174])
-16.03.2018 15:15:57 INFO    Starting theta 67/108: number 119 ([-0.80217018 -0.19137665])
-16.03.2018 15:15:58 INFO    Starting theta 68/108: number 167 ([-0.70631846 -0.18913046])
-16.03.2018 15:15:59 INFO    Starting theta 69/108: number 939 ([ 0.84561864 -0.65874341])
-16.03.2018 15:16:00 INFO    Starting theta 70/108: number 402 ([-0.23381329 -0.74778958])
-16.03.2018 15:16:01 INFO    Starting theta 71/108: number 52 ([-0.92568077  0.24722516])
-16.03.2018 15:16:02 INFO    Starting theta 72/108: number 787 ([ 0.54418497  0.30320758])
-16.03.2018 15:16:02 INFO    Starting theta 73/108: number 978 ([ 0.9400757   0.37123973])
-16.03.2018 15:16:03 INFO    Starting theta 74/108: number 41 ([-0.9466884  -0.84207419])
-16.03.2018 15:16:04 INFO    Starting theta 75/108: number 873 ([ 0.70219015 -0.19960724])
-16.03.2018 15:16:05 INFO    Starting theta 76/108: number 533 ([ 0.0176752  0.4110256])
-16.03.2018 15:16:07 INFO    Starting theta 77/108: number 827 ([ 0.62406481 -0.33833102])
-16.03.2018 15:16:08 INFO    Starting theta 78/108: number 304 ([-0.42112069 -0.83328775])
-16.03.2018 15:16:08 INFO    Starting theta 79/108: number 294 ([-0.44383773  0.33528586])
-16.03.2018 15:16:09 INFO    Starting theta 80/108: number 760 ([ 0.49108963 -0.17051546])
-16.03.2018 15:16:10 INFO    Starting theta 81/108: number 890 ([ 0.74368597  0.764742  ])
-16.03.2018 15:16:10 INFO    Starting theta 82/108: number 539 ([ 0.02611736  0.48536552])
-16.03.2018 15:16:11 INFO    Starting theta 83/108: number 1000 ([ 0.97310957 -0.81263698])
-16.03.2018 15:16:11 INFO    Starting theta 84/108: number 291 ([-0.44794652 -0.29910012])
-16.03.2018 15:16:12 INFO    Starting theta 85/108: number 740 ([ 0.45098284 -0.09648431])
-16.03.2018 15:16:13 INFO    Starting theta 86/108: number 276 ([-0.4640355  -0.39998652])
-16.03.2018 15:16:13 INFO    Starting theta 87/108: number 679 ([ 0.33068993 -0.75125927])
-16.03.2018 15:16:14 INFO    Starting theta 88/108: number 167 ([-0.70631846 -0.18913046])
-16.03.2018 15:16:14 INFO    Starting theta 89/108: number 125 ([-0.7910712  -0.98769884])
-16.03.2018 15:16:15 INFO    Starting theta 90/108: number 429 ([-0.17418656 -0.37102219])
-16.03.2018 15:16:16 INFO    Starting theta 91/108: number 149 ([-0.73726809 -0.38348788])
-16.03.2018 15:16:16 INFO    Starting theta 92/108: number 430 ([-0.16930044  0.22814164])
-16.03.2018 15:16:17 INFO    Starting theta 93/108: number 720 ([ 0.41602256 -0.1168588 ])
-16.03.2018 15:16:17 INFO    Starting theta 94/108: number 123 ([-0.79179407  0.72243203])
-16.03.2018 15:16:18 INFO    Starting theta 95/108: number 908 ([ 0.77844761  0.32603028])
-16.03.2018 15:16:18 INFO    Starting theta 96/108: number 256 ([-0.50703066 -0.72121867])
-16.03.2018 15:16:19 INFO    Starting theta 97/108: number 777 ([ 0.52377237  0.01987936])
-16.03.2018 15:16:20 INFO    Starting theta 98/108: number 809 ([ 0.58338739 -0.68531326])
-16.03.2018 15:16:20 INFO    Starting theta 99/108: number 269 ([-0.48969042 -0.23040933])
-16.03.2018 15:16:21 INFO    Starting theta 100/108: number 851 ([ 0.66684741 -0.33464755])
-16.03.2018 15:16:21 INFO    Starting theta 101/108: number 1 ([-0.1 -0.1])
-16.03.2018 15:16:22 INFO    Starting theta 102/108: number 2 ([-0.1  0. ])
-16.03.2018 15:16:23 INFO    Starting theta 103/108: number 3 ([-0.1  0.1])
-16.03.2018 15:16:24 INFO    Starting theta 104/108: number 4 ([ 0.  -0.1])
-16.03.2018 15:16:24 INFO    Starting theta 105/108: number 5 ([ 0.   0.1])
-16.03.2018 15:16:25 INFO    Starting theta 106/108: number 6 ([ 0.1 -0.1])
-16.03.2018 15:16:26 INFO    Starting theta 107/108: number 7 ([ 0.1  0. ])
-16.03.2018 15:16:26 INFO    Starting theta 108/108: number 8 ([ 0.1  0.1])
-16.03.2018 15:16:28 INFO    Evaluation timing: median 0.00797891616821 s, mean 0.00799904929267 s
-16.03.2018 15:16:28 INFO    Interpolation
-16.03.2018 15:16:28 INFO    Training cross-entropy: nan
-16.03.2018 15:16:28 INFO    Training MSE log r: 0.233186142814
-16.03.2018 15:16:28 INFO    That's it -- have a great day!
+27.03.2018 01:18:00 INFO    Hi! How are you today?
+27.03.2018 01:18:00 INFO    Startup options:
+27.03.2018 01:18:00 INFO      Algorithm:                     histo
+27.03.2018 01:18:00 INFO      Point by point:                False
+27.03.2018 01:18:00 INFO      Morphing-aware mode:           False
+27.03.2018 01:18:00 INFO      Smeared data:                  False
+27.03.2018 01:18:00 INFO      Training sample:               baseline
+27.03.2018 01:18:00 INFO      alpha:                         None
+27.03.2018 01:18:00 INFO      Histogram / AFC X indices:     [1, 41]
+27.03.2018 01:18:00 INFO      AFC epsilon:                   None
+27.03.2018 01:18:00 INFO      Denominator theta:             False
+27.03.2018 01:18:00 INFO      Neyman construction toys:      1
+27.03.2018 01:18:00 INFO      Other options:                 
+27.03.2018 01:18:00 INFO      Base directory:                /home/jb6504/higgs_inference
+27.03.2018 01:18:00 INFO      ML-based strategies available: False
+27.03.2018 01:18:00 INFO    Starting histogram-based inference
+27.03.2018 01:18:00 INFO    Settings:
+27.03.2018 01:18:00 INFO      Statistics:              x [1, 41]
+27.03.2018 01:18:00 INFO      Binning:                 optimized
+Traceback (most recent call last):
+  File "experiments.py", line 116, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/histograms.py", line 159, in histo_inference
+    t) + input_filename_addition + new_sample_prefix + '.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/point_by_point/X_train_point_by_point_10_denom1.npy'

@@ -1,23 +1,28 @@
-16.03.2018 14:35:16 INFO    Hi! How are you today?
-16.03.2018 14:35:16 INFO    Startup options:
-16.03.2018 14:35:16 INFO      Algorithm:                     truth
-16.03.2018 14:35:16 INFO      Point by point:                False
-16.03.2018 14:35:16 INFO      Morphing-aware mode:           False
-16.03.2018 14:35:16 INFO      Smeared data:                  False
-16.03.2018 14:35:16 INFO      Training sample:               baseline
-16.03.2018 14:35:16 INFO      alpha:                         None
-16.03.2018 14:35:16 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-16.03.2018 14:35:16 INFO      AFC epsilon:                   None
-16.03.2018 14:35:16 INFO      Denominator theta:             False
-16.03.2018 14:35:16 INFO      Neyman construction toys:      3
-16.03.2018 14:35:16 INFO      Other options:                 
-16.03.2018 14:35:16 INFO      Base directory:                /home/jb6504/higgs_inference
-16.03.2018 14:35:16 INFO      ML-based strategies available: False
-16.03.2018 14:35:16 INFO    Starting truth calculation
-16.03.2018 14:35:16 DEBUG    NC settings: False neyman 36 10000 1001
-16.03.2018 14:35:16 DEBUG    Diagnostics settings: _denom3 _denom3
-16.03.2018 14:35:22 INFO    Starting evaluation
-16.03.2018 14:35:24 INFO    Starting roaming
-16.03.2018 14:42:01 INFO    Calculating cross-entropy on train set
-16.03.2018 14:42:01 INFO    Training cross-entropy: 0.64981115289
-16.03.2018 14:42:01 INFO    That's it -- have a great day!
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '26271')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/jb6504/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-centos-7.3.1611-Core-x86_64-2.7.12-64/lock_dir
+27.03.2018 01:18:16 INFO    Hi! How are you today?
+27.03.2018 01:18:16 INFO    Startup options:
+27.03.2018 01:18:16 INFO      Algorithm:                     truth
+27.03.2018 01:18:16 INFO      Point by point:                False
+27.03.2018 01:18:16 INFO      Morphing-aware mode:           False
+27.03.2018 01:18:16 INFO      Smeared data:                  False
+27.03.2018 01:18:16 INFO      Training sample:               baseline
+27.03.2018 01:18:16 INFO      alpha:                         None
+27.03.2018 01:18:16 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+27.03.2018 01:18:16 INFO      AFC epsilon:                   None
+27.03.2018 01:18:16 INFO      Denominator theta:             False
+27.03.2018 01:18:16 INFO      Neyman construction toys:      3
+27.03.2018 01:18:16 INFO      Other options:                 
+27.03.2018 01:18:16 INFO      Base directory:                /home/jb6504/higgs_inference
+27.03.2018 01:18:16 INFO      ML-based strategies available: False
+27.03.2018 01:18:16 INFO    Starting truth calculation
+27.03.2018 01:18:16 DEBUG    NC settings: False neyman 36 10000 1001
+27.03.2018 01:18:16 DEBUG    Diagnostics settings: _denom3 _denom3
+Traceback (most recent call last):
+  File "experiments.py", line 109, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/truth.py", line 83, in truth_inference
+    + '.npy')
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/weights_recalibration_denom3.npy'
