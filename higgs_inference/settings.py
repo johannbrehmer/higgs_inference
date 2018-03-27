@@ -187,11 +187,11 @@ smearing_jet_energies = 0.5  # times sqrt(E). Original: 0.5. Not used in current
 smearing_lepton_pt = 3.e-4  # times pT^2. Original: 3.e-4
 
 ################################################################################
-# Sanitization cuts to avoid large impact of a few extreme events.
+# Instead of discarding events with NaNs, can replace them with the following placeholder numbers:
 ################################################################################
 
-max_score = 50.
-max_logr = 100.
+new_samples_nan_score = np.asarray([0.,0.])
+new_samples_nan_r = 1.e9
 
 ################################################################################
 # Metrics

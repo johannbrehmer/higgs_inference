@@ -51,8 +51,6 @@ parser.add_argument("--recalibration", action="store_true",
                     help="Generate recalibration sample")
 parser.add_argument("-e", "--test", action="store_true",
                     help="Generate likelihood ratio evaluation sample")
-parser.add_argument("--fixtest", action="store_true",
-                    help="Fix evaluation sample")
 parser.add_argument("-n", "--neyman", action="store_true",
                     help="Generate samples for Neyman construction")
 parser.add_argument("--neyman2", action="store_true",
@@ -70,7 +68,7 @@ parser.add_argument("--alternativedenom3", action="store_true",
 parser.add_argument("--alternativedenom4", action="store_true",
                     help="Use alternative denominator theta 4")
 parser.add_argument("--new", action="store_true",
-                    help="Generate alternative training set with filename part _new")
+                    help="Generate alternative training set, in which events with NaNs are not removed")
 parser.add_argument("--dry", action="store_true",
                     help="Don't save results")
 
@@ -89,7 +87,6 @@ logging.info('  Neyman construction (alternative): %s', args.neyman2)
 logging.info('  Neyman construction (alternative): %s', args.neyman3)
 logging.info('  Roaming:                           %s', args.roam)
 logging.info('Options:')
-logging.info('  Dry run:                           %s', args.dry)
 if args.alternativedenom1:
     logging.info('  Denominator:                       alternative 1')
 elif args.alternativedenom2:
@@ -100,6 +97,8 @@ elif args.alternativedenom4:
     logging.info('  Denominator:                       alternative 4')
 else:
     logging.info('  Denominator:                       standard')
+logging.info('  New samples (no NaN removal):      %s', args.new)
+logging.info('  Dry run:                           %s', args.dry)
 
 ################################################################################
 # Settings
@@ -249,11 +248,14 @@ if args.train:
             np.array(weights_train[theta1][indices_den]),
         ))
 
-        # filter out bad events
-        # cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
-        #        np.log(r) ** 2 < settings.max_logr ** 2)
-        cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+        # Sanitization
+        if args.new:
+            r[(~np.isfinite(np.log(r))) & (r < 1.)] = 1. / settings.new_samples_nan_r
+            r[~np.isfinite(np.log(r))] = settings.new_samples_nan_r
+            scores[~ (np.isfinite(np.log(scores[:, 0]))
+                      & np.isfinite(np.log(scores[:, 1]))), :] = settings.new_samples_nan_score
 
+        cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
         return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut], p0[cut], p1[cut]
 
 
@@ -358,9 +360,13 @@ if args.basis:
             np.array(weights_train[theta1][indices_den]),
         ))
 
-        # filter out bad events
-        # cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
-        #        np.log(r) ** 2 < settings.max_logr ** 2)
+        # Sanitization
+        if args.new:
+            r[(~np.isfinite(np.log(r))) & (r < 1.)] = 1. / settings.new_samples_nan_r
+            r[~np.isfinite(np.log(r))] = settings.new_samples_nan_r
+            scores[~ (np.isfinite(np.log(scores[:, 0]))
+                      & np.isfinite(np.log(scores[:, 1]))), :] = settings.new_samples_nan_score
+
         cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
 
         return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut], p0[cut], p1[
@@ -459,16 +465,20 @@ if args.pointbypoint:
             np.array(weights_train[theta1][indices_den]),
         ))
 
-        # filter out bad events
-        # cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
-        #        np.log(r) ** 2 < settings.max_logr ** 2) & (np.isfinite(np.log(r)))
+        # Sanitization
+        if args.new:
+            r[(~np.isfinite(np.log(r))) & (r < 1.)] = 1. / settings.new_samples_nan_r
+            r[~np.isfinite(np.log(r))] = settings.new_samples_nan_r
+            scores[~ (np.isfinite(np.log(scores[:, 0]))
+                      & np.isfinite(np.log(scores[:, 1]))), :] = settings.new_samples_nan_score
+
         cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
 
         return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut], p0[cut], p1[
             cut]
 
 
-    for t in range(125, settings.n_thetas): #enumerate(settings.extended_pbp_training_thetas):
+    for t in range(125, settings.n_thetas):  # enumerate(settings.extended_pbp_training_thetas):
         this_th0, this_th1, this_X, this_y, this_scores, this_r, this_p0, this_p1 = generate_data_train_point_by_point(
             t, theta1)
 
@@ -541,9 +551,13 @@ if args.random:
         thetas1 = np.zeros((len(X), 2))
         thetas1[:] = thetas[theta1]
 
-        # filter out bad events
-        # cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2) & (
-        #        np.log(r) ** 2 < settings.max_logr ** 2)
+        # Sanitization
+        if args.new:
+            r[(~np.isfinite(np.log(r))) & (r < 1.)] = 1. / settings.new_samples_nan_r
+            r[~np.isfinite(np.log(r))] = settings.new_samples_nan_r
+            scores[~ (np.isfinite(np.log(scores[:, 0]))
+                      & np.isfinite(np.log(scores[:, 1]))), :] = settings.new_samples_nan_score
+
         cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
 
         return thetas0[cut], thetas1[cut], X[cut], y[cut], scores[cut], r[cut]
@@ -602,8 +616,13 @@ if args.calibration:
         for t in range(n_thetas):
             r[t, :] = np.array(weights_calibrate[t][indices] / weights_calibrate[theta_observed][indices])
 
-        # filter out bad events
-        # cut = np.all(np.log(r) ** 2 < settings.max_logr ** 2, axis=0)
+        # Sanitization
+        if args.new:
+            r = r.flatten()
+            r[(~np.isfinite(np.log(r))) & (r < 1.)] = 1. / settings.new_samples_nan_r
+            r[~np.isfinite(np.log(r))] = settings.new_samples_nan_r
+            r = r.reshape((n_thetas, settings.n_events_calibration))
+
         cut = np.all(np.isfinite(np.log(r)), axis=0)
 
         return X[cut], r[:, cut]
@@ -641,8 +660,13 @@ if args.recalibration:
         for t in range(n_thetas):
             r[t, :] = np.array(weights_calibrate[t][indices] / weights_calibrate[theta_observed][indices])
 
-        # filter out bad events
-        # cut = np.all(np.log(r) ** 2 < settings.max_logr ** 2, axis=0)
+        # Sanitization
+        if args.new:
+            r = r.flatten()
+            r[(~np.isfinite(np.log(r))) & (r < 1.)] = 1. / settings.new_samples_nan_r
+            r[~np.isfinite(np.log(r))] = settings.new_samples_nan_r
+            r = r.reshape((n_thetas, settings.n_events_calibration))
+
         cut = np.all(np.isfinite(np.log(r)), axis=0)
 
         return X[cut], r[:, cut]
@@ -673,8 +697,11 @@ if args.scoreregression:
 
         p = np.array(weights_train[theta][indices])
 
-        # filter out bad events
-        # cut = (scores[:, 0] ** 2 + scores[:, 1] ** 2 < settings.max_score ** 2)
+        # Sanitization
+        if args.new:
+            scores[~ (np.isfinite(np.log(scores[:, 0]))
+                      & np.isfinite(np.log(scores[:, 1]))), :] = settings.new_samples_nan_score
+
         cut = np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
 
         return X[cut], scores[cut], p[cut]
@@ -713,7 +740,18 @@ if args.test:
 
         p1 = np.array(weights_test[theta1][indices])
 
-        # filter out bad events
+        # Sanitization
+        if args.new:
+            r = r.flatten()
+            r[(~np.isfinite(np.log(r))) & (r < 1.)] = 1. / settings.new_samples_nan_r
+            r[~np.isfinite(np.log(r))] = settings.new_samples_nan_r
+            r = r.reshape((n_thetas, settings.n_events_test))
+
+            scores = scores.reshape((-1, 2))
+            scores[~ (np.isfinite(np.log(scores[:, 0]))
+                      & np.isfinite(np.log(scores[:, 1]))), :] = settings.new_samples_nan_score
+            scores = scores.reshape((n_thetas, settings.n_events_test, 2))
+
         cut = np.all(np.isfinite(np.log(r[:, :])) & np.isfinite(scores[:, :, 0]) & np.isfinite(scores[:, :, 1]),
                      axis=0)
 
@@ -727,63 +765,6 @@ if args.test:
         np.save(settings.unweighted_events_dir + '/scores_test' + filename_addition + '.npy', scores)
         np.save(settings.unweighted_events_dir + '/r_test' + filename_addition + '.npy', r)
         np.save(settings.unweighted_events_dir + '/p1_test' + filename_addition + '.npy', p1)
-
-################################################################################
-# Likelihood ratio evaluation fix
-################################################################################
-
-if args.fixtest:
-
-    logging.info('Adding events to existing likelihood ratio evaluation samples to avoid a very small potential bias')
-
-    theta_observed = settings.theta_observed
-
-    all_X = np.load(settings.unweighted_events_dir + '/X_test' + filename_addition + '.npy')
-    all_scores = np.load(settings.unweighted_events_dir + '/scores_test' + filename_addition + '.npy')
-    all_r = np.load(settings.unweighted_events_dir + '/r_test' + filename_addition + '.npy')
-    all_p1 = np.load(settings.unweighted_events_dir + '/p1_test' + filename_addition + '.npy')
-
-    indices = np.random.choice(list(range(n_events_test)), settings.n_events_test,
-                               p=weights_test[theta_observed])
-
-    X = np.asarray(weighted_data_test.iloc[indices, subset_features])
-
-    r = np.zeros((n_thetas, settings.n_events_test))
-    for t in range(n_thetas):
-        r[t, :] = np.array(weights_test[t][indices] / weights_test[theta1][indices])
-
-    scores = np.zeros((n_thetas, settings.n_events_test, 2))
-    for t in range(n_thetas):
-        labels_scores = ["score_theta_" + str(t) + "_0", "score_theta_" + str(t) + "_1"]
-        subset_scores = [weighted_data_test.columns.get_loc(x) for x in labels_scores]
-        scores[t] = np.array(weighted_data_test.iloc[indices, subset_scores])
-
-    p1 = np.array(weights_test[theta1][indices])
-
-    cut = (np.all(np.isfinite(np.log(r[:, :])) & np.isfinite(scores[:, :, 0]) & np.isfinite(scores[:, :, 1]),
-                  axis=0) & ((scores[theta_observed, :, 0] ** 2 + scores[theta_observed, :, 1] ** 2 > 2500.) | (
-            np.log(r[theta_observed, :]) ** 2 > 10000.)))
-
-    if sum(cut) > 0:
-        X = X[cut]
-        scores = scores[:, cut, :]
-        r = r[:, cut]
-        p1 = p1[cut]
-
-        all_X = np.concatenate((all_X, X), axis=0)
-        all_scores = np.concatenate((all_scores, scores), axis=1)
-        all_r = np.concatenate((all_r, r), axis=1)
-        all_p1 = np.concatenate((all_p1, p1), axis=0)
-
-    n_events = all_X.shape[0]
-
-    logging.debug('%s / %s events pass fix cuts, sample now at %s', sum(cut), settings.n_events_test, n_events)
-
-    if not args.dry:
-        np.save(settings.unweighted_events_dir + '/X_test_fixed' + filename_addition + '.npy', all_X)
-        np.save(settings.unweighted_events_dir + '/scores_test_fixed' + filename_addition + '.npy', all_scores)
-        np.save(settings.unweighted_events_dir + '/r_test_fixed' + filename_addition + '.npy', all_r)
-        np.save(settings.unweighted_events_dir + '/p1_test_fixed' + filename_addition + '.npy', all_p1)
 
 ################################################################################
 # Neyman construction
@@ -817,6 +798,16 @@ if args.neyman:
         labels_scores = ["score_theta_" + str(theta_score) + "_0", "score_theta_" + str(theta_score) + "_1"]
         subset_scores = [weighted_data_test.columns.get_loc(x) for x in labels_scores]
         scores = np.array(weighted_data_test.iloc[indices, subset_scores])
+
+        # Sanitization
+        if args.new:
+            r = r.flatten()
+            r[(~np.isfinite(np.log(r))) & (r < 1.)] = 1. / settings.new_samples_nan_r
+            r[~np.isfinite(np.log(r))] = settings.new_samples_nan_r
+            r = r.reshape((len(thetas_r), n_toy_experiments * settings.n_expected_events_neyman))
+
+            scores[~ (np.isfinite(np.log(scores[:, 0]))
+                      & np.isfinite(np.log(scores[:, 1]))), :] = settings.new_samples_nan_score
 
         # Reshape to experiments x expected events
         X = X.reshape((n_toy_experiments, settings.n_expected_events_neyman, -1))
@@ -891,6 +882,16 @@ if args.neyman2:
         subset_scores = [weighted_data_test.columns.get_loc(x) for x in labels_scores]
         scores = np.array(weighted_data_test.iloc[indices, subset_scores])
 
+        # Sanitization
+        if args.new:
+            r = r.flatten()
+            r[(~np.isfinite(np.log(r))) & (r < 1.)] = 1. / settings.new_samples_nan_r
+            r[~np.isfinite(np.log(r))] = settings.new_samples_nan_r
+            r = r.reshape((len(thetas_r), settings.n_expected_events_neyman2))
+
+            scores[~ (np.isfinite(np.log(scores[:, 0]))
+                      & np.isfinite(np.log(scores[:, 1]))), :] = settings.new_samples_nan_score
+
         # Reshape to experiments x expected events
         X = X.reshape((n_toy_experiments, settings.n_expected_events_neyman2, -1))
         r = r.reshape((len(thetas_r), n_toy_experiments, settings.n_expected_events_neyman2))
@@ -909,7 +910,8 @@ if args.neyman2:
     if not args.dry:
         np.save(settings.unweighted_events_dir + '/neyman/X_neyman2_alternate' + filename_addition + '.npy', X)
         np.save(settings.unweighted_events_dir + '/neyman/r_neyman2_alternate' + filename_addition + '.npy', r)
-        np.save(settings.unweighted_events_dir + '/neyman/scores_neyman2_alternate' + filename_addition + '.npy', scores)
+        np.save(settings.unweighted_events_dir + '/neyman/scores_neyman2_alternate' + filename_addition + '.npy',
+                scores)
 
     del X, r, scores
 
@@ -965,6 +967,16 @@ if args.neyman3:
         subset_scores = [weighted_data_test.columns.get_loc(x) for x in labels_scores]
         scores = np.array(weighted_data_test.iloc[indices, subset_scores])
 
+        # Sanitization
+        if args.new:
+            r = r.flatten()
+            r[(~np.isfinite(np.log(r))) & (r < 1.)] = 1. / settings.new_samples_nan_r
+            r[~np.isfinite(np.log(r))] = settings.new_samples_nan_r
+            r = r.reshape((len(thetas_r), settings.n_expected_events_neyman3))
+
+            scores[~ (np.isfinite(np.log(scores[:, 0]))
+                      & np.isfinite(np.log(scores[:, 1]))), :] = settings.new_samples_nan_score
+
         # Reshape to experiments x expected events
         X = X.reshape((n_toy_experiments, settings.n_expected_events_neyman3, -1))
         r = r.reshape((len(thetas_r), n_toy_experiments, settings.n_expected_events_neyman3))
@@ -983,7 +995,8 @@ if args.neyman3:
     if not args.dry:
         np.save(settings.unweighted_events_dir + '/neyman/X_neyman3_alternate' + filename_addition + '.npy', X)
         np.save(settings.unweighted_events_dir + '/neyman/r_neyman3_alternate' + filename_addition + '.npy', r)
-        np.save(settings.unweighted_events_dir + '/neyman/scores_neyman3_alternate' + filename_addition + '.npy', scores)
+        np.save(settings.unweighted_events_dir + '/neyman/scores_neyman3_alternate' + filename_addition + '.npy',
+                scores)
 
     del X, r, scores
 
