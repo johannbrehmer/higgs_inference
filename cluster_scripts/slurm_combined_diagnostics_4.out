@@ -168,3 +168,8 @@ Epoch 50/50
 28.03.2018 09:05:48 INFO    Starting theta 700 / 1017
 28.03.2018 12:02:33 INFO    Starting theta 800 / 1017
 28.03.2018 14:59:20 INFO    Starting theta 900 / 1017
+28.03.2018 17:57:19 INFO    Starting theta 1000 / 1017
+28.03.2018 18:29:25 INFO    Calibrated evaluation timing: median 1.7070338726 s, mean 1.70896335197 s
+28.03.2018 18:29:25 INFO    Interpolating calibrated roaming
+28.03.2018 18:34:21 INFO    That's it -- have a great day!
+/opt/slurm/data/slurmd/job5136040/slurm_script: line 21: 172711 Bus error               (core dumped) python -u experiments.py combined --denom ${SLURM_ARRAY_TASK_ID} -o deep
