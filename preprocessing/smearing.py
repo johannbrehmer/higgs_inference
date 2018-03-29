@@ -296,7 +296,7 @@ def calculate_e_massless(momentum):
 # Main smearing function
 ################################################################################
 
-def apply_smearing(filename, dry_run=False):
+def apply_smearing(filename, dry_run=False, folder=''):
     logging.info('Applying smearing to sample %s', filename)
 
     # For debugging
@@ -307,14 +307,14 @@ def apply_smearing(filename, dry_run=False):
 
     # Load stuff
     try:
-        X_true = np.load(settings.unweighted_events_dir + '/X_' + filename + '.npy').astype(np.float64)
+        X_true = np.load(settings.unweighted_events_dir + '/' + folder + '/X_' + filename + '.npy').astype(np.float64)
     except IOError:
-        logging.error('File %s not found', settings.unweighted_events_dir + '/X_' + filename + '.npy')
+        logging.error('File %s not found', settings.unweighted_events_dir + '/' + folder + '/X_' + filename + '.npy')
         return
 
     if X_true.shape[-1] != 42:
         logging.error('File %s has wrong shape %s',
-                      settings.unweighted_events_dir + '/X_' + filename + '.npy', X_true.shape)
+                      settings.unweighted_events_dir + '/' + folder + '/X_' + filename + '.npy', X_true.shape)
         return
 
     X_shape = X_true.shape
@@ -500,7 +500,7 @@ def apply_smearing(filename, dry_run=False):
 
     # Save result
     if not dry_run:
-        np.save(settings.unweighted_events_dir + '/smeared_X_' + filename + '.npy', X_smeared)
+        np.save(settings.unweighted_events_dir + '/' + folder + '/smeared_X_' + filename + '.npy', X_smeared)
 
 
 ################################################################################
@@ -575,7 +575,7 @@ if args.basis:
 
 if args.pointbypoint:
     for t in range(settings.n_thetas):
-        apply_smearing('point_by_point/train_point_by_point_' + str(t) + suffix, args.dry)
+        apply_smearing('train_point_by_point_' + str(t) + suffix, args.dry, folder = 'point_by_point')
 
 if args.random:
     apply_smearing('train_random' + suffix, args.dry)
@@ -593,19 +593,19 @@ if args.test:
     apply_smearing('test' + suffix, args.dry)
 
 if args.neyman:
-    apply_smearing('neyman/neyman_alternate' + suffix, args.dry)
+    apply_smearing('neyman_alternate' + suffix, args.dry, folder = 'neyman')
     for t in range(settings.n_thetas):
-        apply_smearing('neyman_null_' + str(t) + suffix, args.dry)
+        apply_smearing('neyman_null_' + str(t) + suffix, args.dry, folder = 'neyman')
 
 if args.neyman2:
-    apply_smearing('neyman/neyman2_alternate' + suffix, args.dry)
+    apply_smearing('neyman2_alternate' + suffix, args.dry, folder = 'neyman')
     for t in range(settings.n_thetas):
-        apply_smearing('neyman2_null_' + str(t) + suffix, args.dry)
+        apply_smearing('neyman2_null_' + str(t) + suffix, args.dry, folder = 'neyman')
 
 if args.neyman3:
-    apply_smearing('neyman/neyman3_alternate' + suffix, args.dry)
+    apply_smearing('neyman3_alternate' + suffix, args.dry, folder = 'neyman')
     for t in range(settings.n_thetas):
-        apply_smearing('neyman3_null_' + str(t) + suffix, args.dry)
+        apply_smearing('neyman3_null_' + str(t) + suffix, args.dry, folder = 'neyman')
 
 if args.roam:
     apply_smearing('roam' + suffix, args.dry)

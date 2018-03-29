@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=smearing2
-#SBATCH --output=slurm_smearing2.out
+#SBATCH --job-name=smearing
+#SBATCH --output=slurm_smearing.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
