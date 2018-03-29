@@ -549,6 +549,7 @@ logging.info('  Random training:         %s', args.random)
 logging.info('  Morphing training:       %s', args.basis)
 logging.info('  Point-by-point training: %s', args.pointbypoint)
 logging.info('  Calibration:             %s', args.calibration)
+logging.info('  Recalibration:           %s', args.recalibration)
 logging.info('  Likelihood ratio eval:   %s', args.test)
 logging.info('  Neyman construction:     %s', args.neyman)
 logging.info('  Neyman construction (2): %s', args.neyman2)
@@ -582,6 +583,9 @@ if args.scoreregression:
 
 if args.calibration:
     apply_smearing('calibration' + suffix, args.dry)
+
+if args.recalibration:
+    apply_smearing('recalibration' + suffix, args.dry)
 
 if args.test:
     apply_smearing('test' + suffix, args.dry)
