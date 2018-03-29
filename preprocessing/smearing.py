@@ -575,7 +575,7 @@ if args.basis:
 
 if args.pointbypoint:
     for t in range(settings.n_thetas):
-        apply_smearing('train_point_by_point_' + str(t) + suffix, args.dry)
+        apply_smearing('point_by_point/train_point_by_point_' + str(t) + suffix, args.dry)
 
 if args.random:
     apply_smearing('train_random' + suffix, args.dry)
@@ -593,17 +593,17 @@ if args.test:
     apply_smearing('test' + suffix, args.dry)
 
 if args.neyman:
-    apply_smearing('neyman_alternate' + suffix, args.dry)
+    apply_smearing('neyman/neyman_alternate' + suffix, args.dry)
     for t in range(settings.n_thetas):
         apply_smearing('neyman_null_' + str(t) + suffix, args.dry)
 
 if args.neyman2:
-    apply_smearing('neyman2_alternate' + suffix, args.dry)
+    apply_smearing('neyman/neyman2_alternate' + suffix, args.dry)
     for t in range(settings.n_thetas):
         apply_smearing('neyman2_null_' + str(t) + suffix, args.dry)
 
 if args.neyman3:
-    apply_smearing('neyman3_alternate' + suffix, args.dry)
+    apply_smearing('neyman/neyman3_alternate' + suffix, args.dry)
     for t in range(settings.n_thetas):
         apply_smearing('neyman3_null_' + str(t) + suffix, args.dry)
 
