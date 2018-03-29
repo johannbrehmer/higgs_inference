@@ -526,6 +526,8 @@ parser.add_argument("-s", "--scoreregression", action="store_true",
                     help="Smear score regression training sample")
 parser.add_argument("-c", "--calibration", action="store_true",
                     help="Smear calibration sample")
+parser.add_argument("--recalibration", action="store_true",
+                    help="Smear recalibration sample")
 parser.add_argument("-e", "--test", action="store_true",
                     help="Smear evaluation sample")
 parser.add_argument("-n", "--neyman", action="store_true",
@@ -572,7 +574,7 @@ if args.basis:
     apply_smearing('train_basis' + suffix, args.dry)
 
 if args.pointbypoint:
-    for t in settings.pbp_training_thetas:
+    for t in range(settings.n_thetas):
         apply_smearing('train_point_by_point_' + str(t) + suffix, args.dry)
 
 if args.random:
