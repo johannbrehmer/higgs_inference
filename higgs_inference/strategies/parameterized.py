@@ -80,6 +80,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     constant_lr_mode = ('constantlr' in options)
     neyman2_mode = ('neyman2' in options)
     neyman3_mode = ('neyman3' in options)
+    recalibration_mode = ('recalibration' in options)
 
     filename_addition = ''
     if morphing_aware:
@@ -230,8 +231,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     weights_calibration = np.load(
         settings.unweighted_events_dir + '/weights_calibration' + input_filename_addition + '.npy')
 
-    X_recalibration = np.load(
-        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_recalibration' + '.npy')
+    if recalibration_mode:
+        X_recalibration = np.load(
+            settings.unweighted_events_dir + '/' + input_X_prefix + 'X_recalibration' + '.npy')
 
     X_test = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
@@ -260,7 +262,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     X_test_transformed = scaler.transform(X_test)
     X_roam_transformed = scaler.transform(X_roam)
     X_calibration_transformed = scaler.transform(X_calibration)
-    X_recalibration_transformed = scaler.transform(X_recalibration)
+    if recalibration_mode:
+        X_recalibration_transformed = scaler.transform(X_recalibration)
     if do_neyman:
         X_neyman_alternate_transformed = scaler.transform(
             X_neyman_alternate.reshape((-1, X_neyman_alternate.shape[2])))
@@ -286,7 +289,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         r_test = r_test[:, ::100]
         X_calibration_transformed = X_calibration_transformed[::100]
         weights_calibration = weights_calibration[:, ::100]
-        X_recalibration_transformed = X_recalibration_transformed[::100]
+        if recalibration_mode:
+            X_recalibration_transformed = X_recalibration_transformed[::100]
         n_events_test = len(X_test_transformed)
 
     ################################################################################
@@ -425,7 +429,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     trimmed_mse_log_r = []
     eval_times = []
     expected_r_vs_sm = []
-    recalibration_expected_r = []
+    if recalibration_mode:
+        recalibration_expected_r = []
 
     for t, theta in enumerate(settings.thetas):
 
@@ -476,18 +481,19 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_ri)
                 np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_wi)
 
-        # Prepare data for recalibration
-        thetas0_array = np.zeros((X_recalibration_transformed.shape[0], 2),
-                                 dtype=X_recalibration_transformed.dtype)
-        thetas0_array[:, :] = settings.thetas[t]
-        X_thetas_recalibration = np.hstack((X_recalibration_transformed, thetas0_array))
+        if recalibration_mode:
+            # Prepare data for recalibration
+            thetas0_array = np.zeros((X_recalibration_transformed.shape[0], 2),
+                                     dtype=X_recalibration_transformed.dtype)
+            thetas0_array[:, :] = settings.thetas[t]
+            X_thetas_recalibration = np.hstack((X_recalibration_transformed, thetas0_array))
 
-        # Evaluate recalibration data
-        prediction = regr.predict(X_thetas_recalibration)
-        this_r = np.exp(prediction[:, 1])
-        if t == settings.theta_observed:
-            r_recalibration_sm = this_r
-        recalibration_expected_r.append(np.mean(this_r / r_recalibration_sm))
+            # Evaluate recalibration data
+            prediction = regr.predict(X_thetas_recalibration)
+            this_r = np.exp(prediction[:, 1])
+            if t == settings.theta_observed:
+                r_recalibration_sm = this_r
+            recalibration_expected_r.append(np.mean(this_r / r_recalibration_sm))
 
         if do_neyman:
             # Prepare alternate data for Neyman construction
@@ -571,14 +577,15 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     mse_log_r = np.asarray(mse_log_r)
     trimmed_mse_log_r = np.asarray(trimmed_mse_log_r)
     expected_r_vs_sm = np.asarray(expected_r_vs_sm)
-    recalibration_expected_r = np.asarray(recalibration_expected_r)
     np.save(results_dir + '/llr_' + algorithm + filename_addition + '.npy', expected_llr)
     np.save(results_dir + '/mse_logr_' + algorithm + filename_addition + '.npy', mse_log_r)
     np.save(results_dir + '/trimmed_mse_logr_' + algorithm + filename_addition + '.npy', trimmed_mse_log_r)
     np.save(results_dir + '/expected_r_vs_sm_' + algorithm + filename_addition + '.npy',
             expected_r_vs_sm)
-    np.save(results_dir + '/recalibration_expected_r_vs_sm_' + algorithm + filename_addition + '.npy',
-            recalibration_expected_r)
+    if recalibration_mode:
+        recalibration_expected_r = np.asarray(recalibration_expected_r)
+        np.save(results_dir + '/recalibration_expected_r_vs_sm_' + algorithm + filename_addition + '.npy',
+                recalibration_expected_r)
 
     # Evaluation times
     logging.info('Evaluation timing: median %s s, mean %s s', np.median(eval_times), np.mean(eval_times))
@@ -602,7 +609,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     r_roam_temp = np.zeros((settings.n_thetas, n_roaming))
     eval_times = []
     expected_r_vs_sm = []
-    recalibration_expected_r = []
+    if recalibration_mode:
+        recalibration_expected_r = []
 
     for t, theta in enumerate(settings.thetas):
 
@@ -673,16 +681,17 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             # np.save(results_dir + '/cal1histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
             # np.save(results_dir + '/cal1edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
 
-        # Prepare data for recalibration
-        thetas0_array = np.zeros((X_recalibration_transformed.shape[0], 2), dtype=X_recalibration_transformed.dtype)
-        thetas0_array[:, :] = settings.thetas[t]
-        X_thetas_recalibration = np.hstack((X_recalibration_transformed, thetas0_array))
+        if recalibration_mode:
+            # Prepare data for recalibration
+            thetas0_array = np.zeros((X_recalibration_transformed.shape[0], 2), dtype=X_recalibration_transformed.dtype)
+            thetas0_array[:, :] = settings.thetas[t]
+            X_thetas_recalibration = np.hstack((X_recalibration_transformed, thetas0_array))
 
-        # Evaluate recalibration data
-        this_r, _ = ratio_calibrated.predict(X_thetas_recalibration)
-        if t == settings.theta_observed:
-            r_recalibration_sm = this_r
-        recalibration_expected_r.append(np.mean(this_r / r_recalibration_sm))
+            # Evaluate recalibration data
+            this_r, _ = ratio_calibrated.predict(X_thetas_recalibration)
+            if t == settings.theta_observed:
+                r_recalibration_sm = this_r
+            recalibration_expected_r.append(np.mean(this_r / r_recalibration_sm))
 
         # Neyman construction
         if do_neyman:
@@ -769,7 +778,8 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     mse_log_r_calibrated = np.asarray(mse_log_r_calibrated)
     trimmed_mse_log_r_calibrated = np.asarray(trimmed_mse_log_r_calibrated)
     expected_r_vs_sm = np.asarray(expected_r_vs_sm)
-    recalibration_expected_r = np.asarray(recalibration_expected_r)
+    if recalibration_mode:
+        recalibration_expected_r = np.asarray(recalibration_expected_r)
     np.save(results_dir + '/llr_' + algorithm + '_calibrated' + filename_addition + '.npy',
             expected_llr_calibrated)
     np.save(results_dir + '/mse_logr_' + algorithm + '_calibrated' + filename_addition + '.npy', mse_log_r_calibrated)
@@ -777,8 +787,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             trimmed_mse_log_r_calibrated)
     np.save(results_dir + '/expected_r_vs_sm_' + algorithm + '_calibrated' + filename_addition + '.npy',
             expected_r_vs_sm)
-    np.save(results_dir + '/recalibration_expected_r_vs_sm_' + algorithm + '_calibrated' + filename_addition + '.npy',
-            recalibration_expected_r)
+    if recalibration_mode:
+        recalibration_expected_r = np.asarray(recalibration_expected_r)
+        np.save(results_dir + '/recalibration_expected_r_vs_sm_' + algorithm + '_calibrated' + filename_addition + '.npy',
+                recalibration_expected_r)
 
     # Evaluation times
     logging.info('Calibrated evaluation timing: median %s s, mean %s s', np.median(eval_times), np.mean(eval_times))
