@@ -431,7 +431,10 @@ def score_regression_inference(use_smearing=False,
             that_neyman_alternate = regr.predict(X_neyman_alternate_transformed)
             tthat_neyman_alternate = that_neyman_alternate.dot(delta_theta)
             that_rotated_neyman_alternate = that_neyman_alternate.dot(rotation_matrix)
+            np.save(neyman_dir + '/' + neyman_filename + '_that_alternate_' + str(
+                t) + '_scoreregression' + filename_addition + '.npy', that_neyman_alternate)
 
+            # No calibration (local model)
             llr_raw_neyman_alternate = -2. * np.sum(tthat_neyman_alternate.reshape((-1, n_expected_events_neyman)),
                                                     axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(
@@ -542,6 +545,8 @@ def score_regression_inference(use_smearing=False,
             r_hat_neyman_null = r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
             llr_neyman_null_rotatedscore = -2. * np.sum(np.log(r_hat_neyman_null), axis=1)
 
+            np.save(neyman_dir + '/' + neyman_filename + '_that_null_' + str(
+                t) + '_scoreregression' + filename_addition + '.npy', that_neyman_null)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(
                 t) + '_scoreregression' + filename_addition + '.npy', llr_neyman_null)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_null_' + str(
