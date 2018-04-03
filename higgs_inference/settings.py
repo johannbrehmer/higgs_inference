@@ -178,6 +178,9 @@ n_events_test = 50000
 # Roaming, total
 n_events_roam = 100
 
+# Illustration, per nom and denom
+n_events_illustration = 100000
+
 ################################################################################
 # Smearing (approximate shower + detector simulation)
 ################################################################################

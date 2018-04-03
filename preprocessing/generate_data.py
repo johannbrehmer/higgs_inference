@@ -59,6 +59,8 @@ parser.add_argument("--neyman3", action="store_true",
                     help="Generate samples for Neyman construction (alternative settings)")
 parser.add_argument("-x", "--roam", action="store_true",
                     help="Generate roaming evaluation sample")
+parser.add_argument("--illustration", action="store_true",
+                    help="Generate illustration sample")
 parser.add_argument("--alternativedenom1", action="store_true",
                     help="Use alternative denominator theta 1")
 parser.add_argument("--alternativedenom2", action="store_true",
@@ -87,6 +89,7 @@ logging.info('  Neyman construction:               %s', args.neyman)
 logging.info('  Neyman construction (alternative): %s', args.neyman2)
 logging.info('  Neyman construction (alternative): %s', args.neyman3)
 logging.info('  Roaming:                           %s', args.roam)
+logging.info('  Illustration:                      %s', args.illustration)
 logging.info('Options:')
 if args.alternativedenom1:
     logging.info('  Denominator:                       alternative 1')
@@ -131,7 +134,7 @@ if args.new:
 
 need_train_sample = args.train or args.random or args.basis or args.pointbypoint or args.scoreregression
 need_calibration_sample = args.calibration or args.recalibration
-need_test_sample = args.test or args.neyman or args.neyman2 or args.neyman3 or args.roam
+need_test_sample = args.test or args.neyman or args.neyman2 or args.neyman3 or args.roam or args.illustration
 
 ################################################################################
 # Data
@@ -1045,5 +1048,61 @@ if args.roam:
 
     np.save(settings.unweighted_events_dir + '/X_roam' + filename_addition + '.npy', X)
     np.save(settings.unweighted_events_dir + '/r_roam' + filename_addition + '.npy', r)
+
+################################################################################
+# Baseline training
+################################################################################
+
+if args.illustration:
+
+    logging.info('Generating illustration sample')
+
+
+    def generate_data_illustration(theta0, theta1, theta_score):
+        indices_num = np.random.choice(list(range(n_events_test)), settings.n_events_illustration,
+                                       p=weights_test[theta0])
+        indices_den = np.random.choice(list(range(n_events_test)), settings.n_events_illustration,
+                                       p=weights_test[theta1])
+
+        X = np.vstack((
+            np.array(weighted_data_test.iloc[indices_num, subset_features]),
+            np.array(weighted_data_test.iloc[indices_den, subset_features])
+        ))
+
+        y = np.zeros(2 * settings.n_events_illustration)
+        y[settings.n_events_illustration:] = 1.
+
+        labels_scores = ["score_theta_" + str(theta_score) + "_0", "score_theta_" + str(theta_score) + "_1"]
+        subset_scores = [weighted_data_test.columns.get_loc(x) for x in labels_scores]
+        scores = np.vstack((
+            np.array(weighted_data_test.iloc[indices_num, subset_scores]),
+            np.array(weighted_data_test.iloc[indices_den, subset_scores])
+        ))
+
+        r = np.hstack((
+            np.array(weighted_data_test[theta0][indices_num] / weighted_data_test[theta1][indices_num]),
+            np.array(weighted_data_test[theta0][indices_den] / weighted_data_test[theta1][indices_den]),
+        ))
+
+        # Sanitization
+        if args.new:
+            r[(~np.isfinite(np.log(r))) & (r < 1.)] = 1. / settings.new_samples_nan_r
+            r[~np.isfinite(np.log(r))] = settings.new_samples_nan_r
+            scores[~ (np.isfinite(np.log(scores[:, 0]))
+                      & np.isfinite(np.log(scores[:, 1]))), :] = settings.new_samples_nan_score
+
+        cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+        return X[cut], y[cut], scores[cut], r[cut]
+
+
+    X, y, scores, r = generate_data_illustration(settings.theta_benchmark_nottrained, theta1,
+                                                 settings.theta_score_regression)
+
+    logging.debug('Returned shapes: %s %s %s %s', X.shape, y.shape, scores.shape, r.shape)
+
+    np.save(settings.unweighted_events_dir + '/X_illustration' + filename_addition + '.npy', X)
+    np.save(settings.unweighted_events_dir + '/y_illustration' + filename_addition + '.npy', y)
+    np.save(settings.unweighted_events_dir + '/scores_illustration' + filename_addition + '.npy', scores)
+    np.save(settings.unweighted_events_dir + '/r_illustration' + filename_addition + '.npy', r)
 
 logging.info('Done!')
