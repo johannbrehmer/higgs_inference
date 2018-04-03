@@ -71,9 +71,7 @@ def histo_inference(indices_X=None,
             bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
 
         elif rough_binning_mode:  # 50 bins overall
-            bins_pt = np.concatenate((
-                [0., 50., 80., 120., 160., 220., 300., 400., 600., 1000., 14000.]  # 10 bins
-            ))
+            bins_pt = np.array([0., 50., 80., 120., 160., 220., 300., 400., 600., 1000., 14000.])  # 10 bins
             bins_deltaphi = np.linspace(0., np.pi, 6)  # 5 bins
 
         if histogram_dimensionality == 2 and indices_X == [1, 41]:
