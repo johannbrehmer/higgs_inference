@@ -8,8 +8,6 @@ import logging
 import time
 import numpy as np
 
-from scipy.interpolate import LinearNDInterpolator
-
 from carl.learning.calibration import NDHistogramCalibrator
 
 from higgs_inference import settings
@@ -26,6 +24,7 @@ def histo_inference(indices_X=None,
     Approximates the likelihood throungh Approximate Frequentist Inference, a frequentist twist on ABC
     and effectively the same as kernel density estimation in the summary statistics space.
 
+    :param denominator:
     :param use_smearing:
     :param indices_X: Defines which of the features to histogram.
     :param binning:
@@ -40,6 +39,12 @@ def histo_inference(indices_X=None,
     # Settings
     ################################################################################
 
+    rough_binning_mode = ('roughbinning' in options)
+    fine_binning_mode = ('roughbinning' in options)
+    new_sample_mode = ('new' in options)
+    neyman2_mode = ('neyman2' in options)
+    neyman3_mode = ('neyman3' in options)
+
     if indices_X is None:
         indices_X = [1, 41]  # pT(j1), delta_phi(jj)
 
@@ -52,20 +57,29 @@ def histo_inference(indices_X=None,
     # Manually chosen histogram binning
     if binning == 'optimized':
 
-        if histogram_dimensionality == 2 and indices_X == [1, 41]:
-            bins_pt = np.concatenate((
-                np.linspace(0., 100., 6),  # steps of 20 GeV
-                [130., 160., 200., 250., 300., 400., 600., 1000., 14000.]
+        bins_pt = np.concatenate((  # 130 bins
+            np.linspace(0., 100., 6),  # steps of 20 GeV
+            [130., 160., 200., 250., 300., 400., 600., 1000., 14000.]
+        ))
+        bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
+
+        if fine_binning_mode:  # 240 bins
+            bins_pt = np.concatenate((  # 24 bins
+                np.linspace(0., 100., 11),  # steps of 10 GeV
+                [120., 140., 160., 180., 200., 240., 280., 320., 400., 500., 600., 800., 1000., 14000.]
             ))
-            bins_deltaphi = np.linspace(0., np.pi, 11)
+            bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
+
+        elif rough_binning_mode:  # 50 bins overall
+            bins_pt = np.concatenate((
+                [0., 50., 80., 120., 160., 220., 300., 400., 600., 1000., 14000.]  # 10 bins
+            ))
+            bins_deltaphi = np.linspace(0., np.pi, 6)  # 5 bins
+
+        if histogram_dimensionality == 2 and indices_X == [1, 41]:
             bins = (bins_pt, bins_deltaphi)
 
         elif histogram_dimensionality == 2 and indices_X == [41, 1]:
-            bins_pt = np.concatenate((
-                np.linspace(0., 100., 6),  # steps of 20 GeV
-                [130., 160., 200., 250., 300., 400., 600., 1000., 14000.]
-            ))
-            bins_deltaphi = np.linspace(0., np.pi, 11)
             bins = (bins_deltaphi, bins_pt)
 
         elif histogram_dimensionality == 1 and indices_X == [1]:
@@ -89,10 +103,6 @@ def histo_inference(indices_X=None,
     if use_smearing:
         input_X_prefix = 'smeared_'
         filename_addition += '_smeared'
-
-    new_sample_mode = ('new' in options)
-    neyman2_mode = ('neyman2' in options)
-    neyman3_mode = ('neyman3' in options)
 
     input_filename_addition = ''
     if denominator > 0:
@@ -143,13 +153,13 @@ def histo_inference(indices_X=None,
     eval_times = []
 
     # Loop over the hypothesis thetas
-    #for i, t in enumerate(settings.extended_pbp_training_thetas):
+    # for i, t in enumerate(settings.extended_pbp_training_thetas):
     for t, theta in enumerate(settings.thetas):
 
         if (t + 1) % 100 == 0:
             logging.info('Starting theta %s / %s', t + 1, settings.n_thetas)
 
-        #logging.info('Starting theta %s/%s: number %s (%s)',
+        # logging.info('Starting theta %s/%s: number %s (%s)',
         #             i + 1, len(settings.extended_pbp_training_thetas), t, settings.thetas[t])
 
         # Load data
@@ -311,31 +321,30 @@ def histo_inference(indices_X=None,
     logging.info('Mean training cross-entropy: %s', np.mean(cross_entropies_train))
     logging.info('Mean training log r: %s', np.mean(mse_log_r_train))
 
+    # logging.info('Interpolation')
 
-    #logging.info('Interpolation')
+    # interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], expected_llr)
+    # expected_llr_all = interpolator(settings.thetas)
+    # np.save(results_dir + '/llr_histo' + filename_addition + '.npy', expected_llr_all)
 
-    #interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], expected_llr)
-    #expected_llr_all = interpolator(settings.thetas)
-    #np.save(results_dir + '/llr_histo' + filename_addition + '.npy', expected_llr_all)
-
-    #interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], mse_log_r)
-    #mse_log_r_all = interpolator(settings.thetas)
-    #np.save(results_dir + '/mse_logr_histo' + filename_addition + '.npy',
+    # interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], mse_log_r)
+    # mse_log_r_all = interpolator(settings.thetas)
+    # np.save(results_dir + '/mse_logr_histo' + filename_addition + '.npy',
     #        mse_log_r_all)
 
-    #interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], trimmed_mse_log_r)
-    #trimmed_mse_log_r_all = interpolator(settings.thetas)
-    #np.save(results_dir + '/trimmed_mse_logr_histo' + filename_addition + '.npy',
+    # interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], trimmed_mse_log_r)
+    # trimmed_mse_log_r_all = interpolator(settings.thetas)
+    # np.save(results_dir + '/trimmed_mse_logr_histo' + filename_addition + '.npy',
     #        trimmed_mse_log_r_all)
 
-    #interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], cross_entropies_train)
-    #cross_entropy_train_mean = np.mean(interpolator(settings.thetas[settings.thetas_train]))
-    #logging.info('Training cross-entropy: %s', cross_entropy_train_mean)
-    #np.save(results_dir + '/cross_entropy_train_histo' + filename_addition + '.npy',
+    # interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], cross_entropies_train)
+    # cross_entropy_train_mean = np.mean(interpolator(settings.thetas[settings.thetas_train]))
+    # logging.info('Training cross-entropy: %s', cross_entropy_train_mean)
+    # np.save(results_dir + '/cross_entropy_train_histo' + filename_addition + '.npy',
     #        [cross_entropy_train_mean])
 
-    #interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], mse_log_r_train)
-    #mse_log_r_train_mean = np.mean(interpolator(settings.thetas[settings.thetas_train]))
-    #logging.info('Training MSE log r: %s', mse_log_r_train_mean)
-    #np.save(results_dir + '/mse_logr_train_histo' + filename_addition + '.npy',
+    # interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], mse_log_r_train)
+    # mse_log_r_train_mean = np.mean(interpolator(settings.thetas[settings.thetas_train]))
+    # logging.info('Training MSE log r: %s', mse_log_r_train_mean)
+    # np.save(results_dir + '/mse_logr_train_histo' + filename_addition + '.npy',
     #        [mse_log_r_train_mean])
