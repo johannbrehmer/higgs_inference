@@ -1,0 +1,33 @@
+03.04.2018 11:09:18 INFO    Hi! How are you today?
+03.04.2018 11:09:18 INFO    Startup options:
+03.04.2018 11:09:18 INFO      Algorithm:                     histo
+03.04.2018 11:09:18 INFO      Point by point:                False
+03.04.2018 11:09:18 INFO      Morphing-aware mode:           False
+03.04.2018 11:09:18 INFO      Smeared data:                  False
+03.04.2018 11:09:18 INFO      Training sample:               baseline
+03.04.2018 11:09:18 INFO      alpha:                         None
+03.04.2018 11:09:18 INFO      Histogram / AFC X indices:     [1, 41]
+03.04.2018 11:09:18 INFO      AFC epsilon:                   None
+03.04.2018 11:09:18 INFO      Denominator theta:             True
+03.04.2018 11:09:18 INFO      Neyman construction toys:      0
+03.04.2018 11:09:18 INFO      Other options:                 ['neyman2', 'roughbinning']
+03.04.2018 11:09:18 INFO      Base directory:                /home/jb6504/higgs_inference
+03.04.2018 11:09:18 INFO      ML-based strategies available: False
+03.04.2018 11:09:18 INFO    Starting histogram-based inference
+03.04.2018 11:09:18 INFO    Settings:
+03.04.2018 11:09:18 INFO      Statistics:              x [1, 41]
+03.04.2018 11:09:18 INFO      Binning:                 optimized
+03.04.2018 11:10:10 INFO    Starting theta 100 / 1017
+03.04.2018 11:11:03 INFO    Starting theta 200 / 1017
+03.04.2018 11:11:54 INFO    Starting theta 300 / 1017
+03.04.2018 11:12:49 INFO    Starting theta 400 / 1017
+03.04.2018 11:13:42 INFO    Starting theta 500 / 1017
+03.04.2018 11:14:35 INFO    Starting theta 600 / 1017
+03.04.2018 11:15:22 INFO    Starting theta 700 / 1017
+03.04.2018 11:16:10 INFO    Starting theta 800 / 1017
+03.04.2018 11:16:54 INFO    Starting theta 900 / 1017
+03.04.2018 11:17:33 INFO    Starting theta 1000 / 1017
+03.04.2018 11:17:39 INFO    Evaluation timing: median 0.00780701637268 s, mean 0.00787346974938 s
+03.04.2018 11:17:39 INFO    Mean training cross-entropy: 0.669836941729
+03.04.2018 11:17:39 INFO    Mean training log r: 0.213440072621
+03.04.2018 11:17:39 INFO    That's it -- have a great day!

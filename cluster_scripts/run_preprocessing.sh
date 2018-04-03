@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=pre7
-#SBATCH --output=slurm_preprocessing7.out
+#SBATCH --job-name=pre
+#SBATCH --output=slurm_preprocessing.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=250GB
