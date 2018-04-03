@@ -1080,8 +1080,8 @@ if args.illustration:
         ))
 
         r = np.hstack((
-            np.array(weighted_data_test[theta0][indices_num] / weighted_data_test[theta1][indices_num]),
-            np.array(weighted_data_test[theta0][indices_den] / weighted_data_test[theta1][indices_den]),
+            np.array(weights_test[theta0][indices_num] / weights_test[theta1][indices_num]),
+            np.array(weights_test[theta0][indices_den] / weights_test[theta1][indices_den]),
         ))
 
         # Sanitization
