@@ -40,7 +40,7 @@ def histo_inference(indices_X=None,
     ################################################################################
 
     rough_binning_mode = ('roughbinning' in options)
-    fine_binning_mode = ('roughbinning' in options)
+    fine_binning_mode = ('finebinning' in options)
     new_sample_mode = ('new' in options)
     neyman2_mode = ('neyman2' in options)
     neyman3_mode = ('neyman3' in options)
@@ -98,6 +98,11 @@ def histo_inference(indices_X=None,
 
         else:
             raise ValueError(indices_X)
+
+    if fine_binning_mode:
+        filename_addition += '_finebinning'
+    elif rough_binning_mode:
+        filename_addition += '_roughbinning'
 
     input_X_prefix = ''
     if use_smearing:
