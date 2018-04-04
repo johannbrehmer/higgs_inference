@@ -452,6 +452,8 @@ def score_regression_inference(use_smearing=False,
             r_hat_illustration_scoretheta = r_from_s(calibrator_scoretheta.predict(tthat_illustration.reshape((-1,))))
             r_hat_illustration_rotatedscore = r_from_s(calibrator_rotatedscore.predict(that_rotated_illustration))
 
+            np.save(results_dir + '/that_illustration_scoreregression' + filename_addition + '.npy',
+                    that_illustration)
             np.save(results_dir + '/r_illustration_scoreregression_scoretheta' + filename_addition + '.npy',
                     r_hat_illustration_scoretheta)
             np.save(results_dir + '/r_illustration_scoreregression_score' + filename_addition + '.npy',
