@@ -164,6 +164,8 @@ def score_regression_inference(use_smearing=False,
     X_test = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
+    X_illustration = np.load(
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_illustration' + input_filename_addition + '.npy')
     if do_neyman:
         X_neyman_alternate = np.load(
             settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_' + neyman_filename + '_alternate.npy')
@@ -181,6 +183,7 @@ def score_regression_inference(use_smearing=False,
     X_test_transformed = scaler.transform(X_test)
     X_calibration_transformed = scaler.transform(X_calibration)
     X_recalibration_transformed = scaler.transform(X_recalibration)
+    X_illustration_transformed = scaler.transform(X_illustration)
     if do_neyman:
         X_neyman_alternate_transformed = scaler.transform(X_neyman_alternate.reshape((-1, X_neyman_alternate.shape[2])))
 
@@ -207,18 +210,20 @@ def score_regression_inference(use_smearing=False,
     # Training
     regr.fit(X_train_transformed, scores_train, callbacks=callbacks, batch_size=batch_size)
 
-    # Estimate score
+    # Estimate local score on different samples
     logging.info('Starting evaluation')
     time_before = time.time()
     that_test = regr.predict(X_test_transformed)
     eval_time = time.time() - time_before
+
     that_calibration = regr.predict(X_calibration_transformed)
     that_recalibration = regr.predict(X_recalibration_transformed)
+    that_illustration = regr.predict(X_illustration_transformed)
 
     logging.info('Score regression evaluation timing: %s s', eval_time)
 
     ################################################################################
-    # Evaluation and density estimation
+    # Evaluation loop
     ################################################################################
 
     logging.info('Starting density estimation')
@@ -248,6 +253,10 @@ def score_regression_inference(use_smearing=False,
 
         if (t + 1) % 100 == 0:
             logging.info('Starting theta %s / %s', t + 1, settings.n_thetas)
+
+        ################################################################################
+        # Calibration (density estimation)
+        ################################################################################
 
         # Delta_theta
         delta_theta = theta - settings.thetas[theta1]
@@ -316,6 +325,10 @@ def score_regression_inference(use_smearing=False,
         calibrator_rotatedscore.fit(_that_rotated_calibration,
                                     y_calibration,
                                     sample_weight=w_calibration)
+
+        ################################################################################
+        # Evaluation
+        ################################################################################
 
         # Prepare evaluation data
         tthat_test = that_test.dot(delta_theta)
@@ -398,6 +411,10 @@ def score_regression_inference(use_smearing=False,
             np.save(results_dir + '/r_vs_sm_trained_scoreregression_rotatedscore' + filename_addition + '.npy',
                     r_hat_rotatedscore_test / r_sm_rotatedscore)
 
+        ################################################################################
+        # Recalibration
+        ################################################################################
+
         # Prepare recalibration data
         tthat_recalibration = that_recalibration.dot(delta_theta)
         that_rotated_recalibration = that_recalibration.dot(rotation_matrix)
@@ -421,6 +438,26 @@ def score_regression_inference(use_smearing=False,
         recalibration_expected_r_rotatedscore.append(np.mean(
             r_hat_recalibration_rotatedscore / r_hat_recalibration_sm_rotatedscore
         ))
+
+        ################################################################################
+        # Illustration
+        ################################################################################
+
+        if t == settings.theta_benchmark_illustration:
+            # Prepare illustration data
+            tthat_illustration = that_illustration.dot(delta_theta)
+            that_rotated_illustration = that_illustration.dot(rotation_matrix)
+
+            r_hat_illustration_score = r_from_s(calibrator_score.predict(that_illustration))
+            r_hat_illustration_scoretheta = r_from_s(calibrator_scoretheta.predict(tthat_illustration.reshape((-1,))))
+            r_hat_illustration_rotatedscore = r_from_s(calibrator_rotatedscore.predict(that_rotated_illustration))
+
+            np.save(results_dir + '/r_illustration_scoreregression_scoretheta' + filename_addition + '.npy',
+                    r_hat_illustration_scoretheta)
+            np.save(results_dir + '/r_illustration_scoreregression_score' + filename_addition + '.npy',
+                    r_hat_illustration_score)
+            np.save(results_dir + '/r_illustration_scoreregression_rotatedscore' + filename_addition + '.npy',
+                    r_hat_illustration_rotatedscore)
 
         ################################################################################
         # Neyman construction toys

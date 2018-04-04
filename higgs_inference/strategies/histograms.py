@@ -139,6 +139,9 @@ def histo_inference(indices_X=None,
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
 
+    X_illustration = np.load(
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_illustration' + input_filename_addition + '.npy')
+
     if do_neyman:
         X_neyman_alternate = np.load(
             settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_' + neyman_filename + '_alternate.npy')
@@ -180,6 +183,7 @@ def histo_inference(indices_X=None,
         # Construct summary statistics
         summary_statistics_train = X_train[:, indices_X]
         summary_statistics_test = X_test[:, indices_X]
+        summary_statistics_illustration = X_illustration[:, indices_X]
 
         ################################################################################
         # "Training"
@@ -219,6 +223,14 @@ def histo_inference(indices_X=None,
                                  + (1. - y_train) * np.log(1. - s_hat_train)).astype(np.float128)
         cross_entropy_train = np.mean(cross_entropy_train)
         cross_entropies_train.append(cross_entropy_train)
+
+        ################################################################################
+        # Illustration
+        ################################################################################
+
+        if t == settings.theta_benchmark_illustration:
+            r_hat_illustration = r_from_s(histogram.predict(summary_statistics_illustration))
+            np.save(results_dir + '/r_illustration_histo' + filename_addition + '.npy', r_hat_illustration)
 
         ################################################################################
         # Neyman construction toys

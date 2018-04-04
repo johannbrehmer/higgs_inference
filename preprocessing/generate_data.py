@@ -1095,7 +1095,7 @@ if args.illustration:
         return X[cut], y[cut], scores[cut], r[cut]
 
 
-    X, y, scores, r = generate_data_illustration(settings.theta_benchmark_nottrained, theta1,
+    X, y, scores, r = generate_data_illustration(settings.theta_benchmark_illustration, theta1,
                                                  settings.theta_score_regression)
 
     logging.debug('Returned shapes: %s %s %s %s', X.shape, y.shape, scores.shape, r.shape)

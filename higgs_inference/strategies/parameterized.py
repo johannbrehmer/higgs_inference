@@ -243,6 +243,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_roam' + input_filename_addition + '.npy')
     n_roaming = len(X_roam)
 
+    X_illustration = np.load(
+        settings.unweighted_events_dir + '/' + input_X_prefix + 'X_illustration' + input_filename_addition + '.npy')
+
     if do_neyman:
         X_neyman_alternate = np.load(
             settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_' + neyman_filename + '_alternate.npy')
@@ -262,6 +265,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     X_test_transformed = scaler.transform(X_test)
     X_roam_transformed = scaler.transform(X_roam)
     X_calibration_transformed = scaler.transform(X_calibration)
+    X_illustration_transformed = scaler.transform(X_illustration)
     if recalibration_mode:
         X_recalibration_transformed = scaler.transform(X_recalibration)
     if do_neyman:
@@ -289,6 +293,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         r_test = r_test[:, ::100]
         X_calibration_transformed = X_calibration_transformed[::100]
         weights_calibration = weights_calibration[:, ::100]
+        X_illustration_transformed = X_illustration_transformed[::100]
         if recalibration_mode:
             X_recalibration_transformed = X_recalibration_transformed[::100]
         n_events_test = len(X_test_transformed)
@@ -417,7 +422,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     np.save(results_dir + '/r_train_' + algorithm + filename_addition + '.npy', r_hat_train)
 
     ################################################################################
-    # Evaluation
+    # Raw evaluation loop
     ################################################################################
 
     # carl wrapper
@@ -436,6 +441,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
         if (t + 1) % 100 == 0:
             logging.info('Starting theta %s / %s', t + 1, settings.n_thetas)
+
+        ################################################################################
+        # Evaluation
+        ################################################################################
 
         # Prepare test data
         thetas0_array = np.zeros((X_test_transformed.shape[0], 2), dtype=X_test_transformed.dtype)
@@ -481,6 +490,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                 np.save(results_dir + '/morphing_ri_trained_' + algorithm + filename_addition + '.npy', this_ri)
                 np.save(results_dir + '/morphing_wi_trained_' + algorithm + filename_addition + '.npy', this_wi)
 
+        ################################################################################
+        # Recalibration
+        ################################################################################
+
         if recalibration_mode:
             # Prepare data for recalibration
             thetas0_array = np.zeros((X_recalibration_transformed.shape[0], 2),
@@ -494,6 +507,27 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             if t == settings.theta_observed:
                 r_recalibration_sm = this_r
             recalibration_expected_r.append(np.mean(this_r / r_recalibration_sm))
+
+        ################################################################################
+        # Illustration
+        ################################################################################
+
+        if t == settings.theta_benchmark_illustration:
+            # Prepare data for illustration
+            thetas0_array = np.zeros((X_illustration_transformed.shape[0], 2),
+                                     dtype=X_illustration_transformed.dtype)
+            thetas0_array[:, :] = settings.thetas[t]
+            X_thetas_illustration = np.hstack((X_illustration_transformed, thetas0_array))
+
+            # Evaluate illustration data
+            prediction = regr.predict(X_thetas_illustration)
+            r_hat_illustration = np.exp(prediction[:, 1])
+
+            np.save(results_dir + '/r_illustration_' + algorithm + filename_addition + '.npy', r_hat_illustration)
+
+        ################################################################################
+        # Neyman construction toys
+        ################################################################################
 
         if do_neyman:
             # Prepare alternate data for Neyman construction
@@ -599,7 +633,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     np.save(results_dir + '/r_roam_' + algorithm + filename_addition + '.npy', r_roam)
 
     ################################################################################
-    # Calibration
+    # Calibrated evaluation loop
     ################################################################################
 
     logging.info('Starting calibrated evaluation and roaming')
@@ -616,6 +650,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
         if (t + 1) % 100 == 0:
             logging.info('Starting theta %s / %s', t + 1, settings.n_thetas)
+
+        ################################################################################
+        # Calibration
+        ################################################################################
 
         # Prepare data for calibration
         n_calibration_each = X_calibration_transformed.shape[0]
@@ -634,6 +672,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             CalibratedClassifierScoreCV(regr, cv='prefit', method='isotonic')
         )
         ratio_calibrated.fit(X_thetas_calibration, y_calibration, sample_weight=w_calibration)
+
+        ################################################################################
+        # Evaluation
+        ################################################################################
 
         # Prepare data
         thetas0_array = np.zeros((X_test_transformed.shape[0], 2), dtype=X_test_transformed.dtype)
@@ -681,6 +723,10 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             # np.save(results_dir + '/cal1histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
             # np.save(results_dir + '/cal1edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
 
+        ################################################################################
+        # Recalibration
+        ################################################################################
+
         if recalibration_mode:
             # Prepare data for recalibration
             thetas0_array = np.zeros((X_recalibration_transformed.shape[0], 2), dtype=X_recalibration_transformed.dtype)
@@ -692,6 +738,27 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             if t == settings.theta_observed:
                 r_recalibration_sm = this_r
             recalibration_expected_r.append(np.mean(this_r / r_recalibration_sm))
+
+        ################################################################################
+        # Illustration
+        ################################################################################
+
+        if t == settings.theta_benchmark_illustration:
+            # Prepare data for illustration
+            thetas0_array = np.zeros((X_illustration_transformed.shape[0], 2),
+                                     dtype=X_illustration_transformed.dtype)
+            thetas0_array[:, :] = settings.thetas[t]
+            X_thetas_illustration = np.hstack((X_illustration_transformed, thetas0_array))
+
+            # Evaluate illustration data
+            r_hat_illustration, _ = ratio_calibrated.predict(X_thetas_illustration)
+
+            np.save(results_dir + '/r_illustration_' + algorithm + '_calibrated' + filename_addition + '.npy',
+                    r_hat_illustration)
+
+        ################################################################################
+        # Neyman construction toys
+        ################################################################################
 
         # Neyman construction
         if do_neyman:
@@ -789,8 +856,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
             expected_r_vs_sm)
     if recalibration_mode:
         recalibration_expected_r = np.asarray(recalibration_expected_r)
-        np.save(results_dir + '/recalibration_expected_r_vs_sm_' + algorithm + '_calibrated' + filename_addition + '.npy',
-                recalibration_expected_r)
+        np.save(
+            results_dir + '/recalibration_expected_r_vs_sm_' + algorithm + '_calibrated' + filename_addition + '.npy',
+            recalibration_expected_r)
 
     # Evaluation times
     logging.info('Calibrated evaluation timing: median %s s, mean %s s', np.median(eval_times), np.mean(eval_times))
