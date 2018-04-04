@@ -1,48 +1,18 @@
-19.03.2018 22:49:44 INFO    Hi! How are you today?
-19.03.2018 22:49:44 INFO    Startup options:
-19.03.2018 22:49:44 INFO      Algorithm:                     cl
-19.03.2018 22:49:44 INFO      Point by point:                False
-19.03.2018 22:49:44 INFO      Morphing-aware mode:           False
-19.03.2018 22:49:44 INFO      Smeared data:                  False
-19.03.2018 22:49:44 INFO      Training sample:               baseline
-19.03.2018 22:49:44 INFO      alpha:                         None
-19.03.2018 22:49:44 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-19.03.2018 22:49:44 INFO      AFC epsilon:                   None
-19.03.2018 22:49:44 INFO      Denominator theta:             False
-19.03.2018 22:49:44 INFO      Neyman construction toys:      0
-19.03.2018 22:49:44 INFO      Other options:                 ['neyman2']
-19.03.2018 22:49:44 INFO      Base directory:                /home/jb6504/higgs_inference
-19.03.2018 22:49:44 INFO      ML-based strategies available: False
-19.03.2018 22:49:44 INFO    Starting p-value calculation
-19.03.2018 22:49:44 INFO    Subtracting SM for truth truth
-19.03.2018 22:50:39 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-19.03.2018 22:50:47 INFO    Calculating p-values for truth/truth
-19.03.2018 23:12:03 INFO    Subtracting SM for histo histo_2d_new
-19.03.2018 23:12:04 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_10_histo_2d_new.npy'
-19.03.2018 23:12:04 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_null_10_histo_2d_new.npy'
-19.03.2018 23:12:04 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_nullatalternate_10_histo_2d_new.npy'
-19.03.2018 23:12:04 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_11_histo_2d_new.npy'
-19.03.2018 23:12:04 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_null_11_histo_2d_new.npy'
-19.03.2018 23:12:04 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_nullatalternate_11_histo_2d_new.npy'
-19.03.2018 23:12:04 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_12_histo_2d_new.npy'
-19.03.2018 23:12:04 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_null_12_histo_2d_new.npy'
-19.03.2018 23:12:04 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_nullatalternate_12_histo_2d_new.npy'
-19.03.2018 23:12:04 DEBUG    Error loading file: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/results/neyman/histo/neyman2_llr_alternate_17_histo_2d_new.npy'
-19.03.2018 23:12:10 DEBUG    Found 315 files, didn't find 2736 files, found 0 files with wrong shape
-19.03.2018 23:12:18 INFO    Calculating p-values for histo/histo_2d_new
-19.03.2018 23:14:29 INFO    Subtracting SM for score_regression scoreregression_score_deep_new
-19.03.2018 23:17:04 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-19.03.2018 23:17:13 INFO    Calculating p-values for score_regression/scoreregression_score_deep_new
-19.03.2018 23:38:32 INFO    Subtracting SM for parameterized carl_calibrated_shallow_new
-19.03.2018 23:39:29 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-19.03.2018 23:39:37 INFO    Calculating p-values for parameterized/carl_calibrated_shallow_new
-20.03.2018 00:00:57 INFO    Subtracting SM for parameterized combined_calibrated_deep_new
-20.03.2018 00:02:00 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-20.03.2018 00:02:08 INFO    Calculating p-values for parameterized/combined_calibrated_deep_new
-20.03.2018 00:23:29 INFO    Subtracting SM for parameterized regression_calibrated_new
-20.03.2018 00:24:50 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-20.03.2018 00:24:58 INFO    Calculating p-values for parameterized/regression_calibrated_new
-20.03.2018 00:46:23 INFO    Subtracting SM for parameterized combinedregression_calibrated_deep_new
-20.03.2018 00:47:22 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-20.03.2018 00:47:30 INFO    Calculating p-values for parameterized/combinedregression_calibrated_deep_new
-20.03.2018 01:08:50 INFO    That's it -- have a great day!
+04.04.2018 10:04:05 INFO    Hi! How are you today?
+04.04.2018 10:04:05 INFO    Startup options:
+04.04.2018 10:04:05 INFO      Algorithm:                     cl
+04.04.2018 10:04:05 INFO      Point by point:                False
+04.04.2018 10:04:05 INFO      Morphing-aware mode:           False
+04.04.2018 10:04:05 INFO      Smeared data:                  False
+04.04.2018 10:04:05 INFO      Training sample:               baseline
+04.04.2018 10:04:05 INFO      alpha:                         None
+04.04.2018 10:04:05 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+04.04.2018 10:04:05 INFO      AFC epsilon:                   None
+04.04.2018 10:04:05 INFO      Denominator theta:             False
+04.04.2018 10:04:05 INFO      Neyman construction toys:      0
+04.04.2018 10:04:05 INFO      Other options:                 ['neyman2']
+04.04.2018 10:04:05 INFO      Base directory:                /home/jb6504/higgs_inference
+04.04.2018 10:04:05 INFO      ML-based strategies available: False
+04.04.2018 10:04:05 INFO    Starting p-value calculation
+04.04.2018 10:04:05 INFO    Subtracting SM for truth truth
+04.04.2018 10:04:07 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape

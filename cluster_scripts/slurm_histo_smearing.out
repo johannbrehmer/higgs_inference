@@ -1,31 +1,19 @@
-27.03.2018 11:53:56 INFO    Hi! How are you today?
-27.03.2018 11:53:56 INFO    Startup options:
-27.03.2018 11:53:56 INFO      Algorithm:                     histo
-27.03.2018 11:53:56 INFO      Point by point:                False
-27.03.2018 11:53:56 INFO      Morphing-aware mode:           False
-27.03.2018 11:53:56 INFO      Smeared data:                  True
-27.03.2018 11:53:56 INFO      Training sample:               baseline
-27.03.2018 11:53:56 INFO      alpha:                         None
-27.03.2018 11:53:56 INFO      Histogram / AFC X indices:     [1, 41]
-27.03.2018 11:53:56 INFO      AFC epsilon:                   None
-27.03.2018 11:53:56 INFO      Denominator theta:             True
-27.03.2018 11:53:56 INFO      Neyman construction toys:      0
-27.03.2018 11:53:56 INFO      Other options:                 ['neyman2']
-27.03.2018 11:53:56 INFO      Base directory:                /home/jb6504/higgs_inference
-27.03.2018 11:53:56 INFO      ML-based strategies available: False
-27.03.2018 11:53:56 INFO    Starting histogram-based inference
-27.03.2018 11:53:56 INFO    Settings:
-27.03.2018 11:53:56 INFO      Statistics:              x [1, 41]
-27.03.2018 11:53:56 INFO      Binning:                 optimized
-/home/jb6504/tools/carl/carl/learning/calibration.py:879: VisibleDeprecationWarning: boolean index did not match indexed array along dimension 0; dimension is 498950 but corresponding boolean dimension is 500000
-  t0 = T[y == 0]
-/home/jb6504/tools/carl/carl/learning/calibration.py:880: VisibleDeprecationWarning: boolean index did not match indexed array along dimension 0; dimension is 498950 but corresponding boolean dimension is 500000
-  t1 = T[y == 1]
-Traceback (most recent call last):
-  File "experiments.py", line 116, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/histograms.py", line 178, in histo_inference
-    y_train)
-  File "/home/jb6504/tools/carl/carl/learning/calibration.py", line 880, in fit
-    t1 = T[y == 1]
-IndexError: index 498950 is out of bounds for axis 0 with size 498950
+04.04.2018 10:02:40 INFO    Hi! How are you today?
+04.04.2018 10:02:40 INFO    Startup options:
+04.04.2018 10:02:40 INFO      Algorithm:                     histo
+04.04.2018 10:02:40 INFO      Point by point:                False
+04.04.2018 10:02:40 INFO      Morphing-aware mode:           False
+04.04.2018 10:02:40 INFO      Smeared data:                  True
+04.04.2018 10:02:40 INFO      Training sample:               baseline
+04.04.2018 10:02:40 INFO      alpha:                         None
+04.04.2018 10:02:40 INFO      Histogram / AFC X indices:     [1, 41]
+04.04.2018 10:02:40 INFO      AFC epsilon:                   None
+04.04.2018 10:02:40 INFO      Denominator theta:             True
+04.04.2018 10:02:40 INFO      Neyman construction toys:      0
+04.04.2018 10:02:40 INFO      Other options:                 ['neyman2']
+04.04.2018 10:02:40 INFO      Base directory:                /home/jb6504/higgs_inference
+04.04.2018 10:02:40 INFO      ML-based strategies available: False
+04.04.2018 10:02:40 INFO    Starting histogram-based inference
+04.04.2018 10:02:40 INFO    Settings:
+04.04.2018 10:02:40 INFO      Statistics:              x [1, 41]
+04.04.2018 10:02:40 INFO      Binning:                 optimized
