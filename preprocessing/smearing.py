@@ -536,8 +536,10 @@ parser.add_argument("--neyman2", action="store_true",
                     help="Smear samples for Neyman construction 2")
 parser.add_argument("--neyman3", action="store_true",
                     help="Smear samples for Neyman construction 3")
-parser.add_argument("-x", "--roam", action="store_true",
-                    help="Smear roaming evaluation sample")
+parser.add_argument("--roam", action="store_true",
+                    help="Smear roaming sample")
+parser.add_argument("--illustration", action="store_true",
+                    help="Smear illustration sample")
 parser.add_argument("--dry", action="store_true",
                     help="Don't save results")
 parser.add_argument("--new", action="store_true",
@@ -557,6 +559,7 @@ logging.info('  Neyman construction:     %s', args.neyman)
 logging.info('  Neyman construction (2): %s', args.neyman2)
 logging.info('  Neyman construction (3): %s', args.neyman3)
 logging.info('  Roaming:                 %s', args.roam)
+logging.info('  Illustration:            %s', args.illustration)
 logging.info('Options:')
 logging.info('  Dry run:                 %s', args.dry)
 logging.info('  New samples:             %s', args.new)
@@ -609,5 +612,8 @@ if args.neyman3:
 
 if args.roam:
     apply_smearing('roam' + suffix, args.dry)
+
+if args.illustration:
+    apply_smearing('illustration' + suffix, args.dry)
 
 logging.info("That's it!")
