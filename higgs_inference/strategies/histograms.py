@@ -299,7 +299,8 @@ def histo_inference(indices_X=None,
 
             # Neyman construction: null evaluated at alternative
             if t == settings.theta_observed:
-                for tt in settings.extended_pbp_training_thetas:
+                #for tt in settings.extended_pbp_training_thetas:
+                for tt in range(settings.n_thetas):
                     X_neyman_null = np.load(
                         settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
                             tt) + '.npy')
