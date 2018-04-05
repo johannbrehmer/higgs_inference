@@ -58,25 +58,26 @@ def histo_inference(indices_X=None,
     # Manually chosen histogram binning
     if binning == 'optimized':
 
-        bins_pt = np.concatenate((  # 130 bins
-            np.linspace(0., 100., 6),  # steps of 20 GeV
-            [130., 160., 200., 250., 300., 400., 600., 1000., 14000.]
-        ))
+        # 140 bins
+        bins_pt = np.array([0.,30.,45.,60.,80.,100.,130., 160., 200., 250., 300., 400., 600., 1000., 14000.]) # 14 bins
         bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
 
-        if superfine_binning_mode:  # 540 bins
-            bins_pt = np.concatenate((  # 54 bins
-                np.linspace(0., 100., 21),  # steps of 5 GeV
+        if superfine_binning_mode:  # 1040 bins
+            bins_pt = np.concatenate((  # 52 bins
+                [0.],
+                np.linspace(24., 100., 20),  # steps of 4 GeV
                 np.linspace(110, 200., 10),  # steps of 10 GeV
-                np.linspace(220, 400., 10),  # steps of 20 GeV
+                np.linspace(225, 400., 8),  # steps of 25 GeV
                 np.linspace(450, 800., 8),  # steps of 50 GeV
                 [900., 1000., 1200., 1500., 2000.,14000.]
             ))
-            bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
+            bins_deltaphi = np.linspace(0., np.pi, 21)  # 20 bins
 
         elif fine_binning_mode:  # 240 bins
             bins_pt = np.concatenate((  # 24 bins
-                np.linspace(0., 100., 11),  # steps of 10 GeV
+                [0.],
+                np.linspace(25., 50, 5),
+                np.linspace(60., 100., 5),
                 [120., 140., 160., 180., 200., 240., 280., 320., 400., 500., 600., 800., 1000., 14000.]
             ))
             bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
@@ -109,6 +110,8 @@ def histo_inference(indices_X=None,
             raise ValueError(indices_X)
 
     if fine_binning_mode:
+        filename_addition += '_superfinebinning'
+    elif fine_binning_mode:
         filename_addition += '_finebinning'
     elif rough_binning_mode:
         filename_addition += '_roughbinning'
