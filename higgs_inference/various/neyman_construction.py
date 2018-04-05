@@ -458,8 +458,8 @@ def calculate_confidence_limits(filename, folder, neyman_set=1):
     np.save(result_dir + '/' + neyman_filename + '_qcut_' + filename + '.npy', q_cut_values_mle)
     np.save(result_dir + '/' + neyman_filename + '_qcut_uncertainties_' + filename + '.npy', q_cut_uncertainties_mle)
     np.save(result_dir + '/' + neyman_filename + '_qmedian_' + filename + '.npy', q_median_values_mle)
-    np.save(result_dir + '/' + neyman_filename + '_qdistribution_null_' + filename + '.npy', null_histos)
-    np.save(result_dir + '/' + neyman_filename + '_qdistribution_alternate_' + filename + '.npy', alternate_histos)
+    # np.save(result_dir + '/' + neyman_filename + '_qdistribution_null_' + filename + '.npy', null_histos)
+    # np.save(result_dir + '/' + neyman_filename + '_qdistribution_alternate_' + filename + '.npy', alternate_histos)
 
 
 def start_cl_calculation(options=''):

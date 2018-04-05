@@ -41,6 +41,7 @@ def histo_inference(indices_X=None,
 
     rough_binning_mode = ('roughbinning' in options)
     fine_binning_mode = ('finebinning' in options)
+    superfine_binning_mode = ('superbinning' in options)
     new_sample_mode = ('new' in options)
     neyman2_mode = ('neyman2' in options)
     neyman3_mode = ('neyman3' in options)
@@ -63,7 +64,17 @@ def histo_inference(indices_X=None,
         ))
         bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
 
-        if fine_binning_mode:  # 240 bins
+        if superfine_binning_mode:  # 540 bins
+            bins_pt = np.concatenate((  # 54 bins
+                np.linspace(0., 100., 21),  # steps of 5 GeV
+                np.linspace(110, 200., 10),  # steps of 10 GeV
+                np.linspace(220, 400., 10),  # steps of 20 GeV
+                np.linspace(450, 800., 8),  # steps of 50 GeV
+                [900., 1000., 1200., 1500., 2000.,14000.]
+            ))
+            bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
+
+        elif fine_binning_mode:  # 240 bins
             bins_pt = np.concatenate((  # 24 bins
                 np.linspace(0., 100., 11),  # steps of 10 GeV
                 [120., 140., 160., 180., 200., 240., 280., 320., 400., 500., 600., 800., 1000., 14000.]
@@ -129,7 +140,7 @@ def histo_inference(indices_X=None,
 
     logging.info('Settings:')
     logging.info('  Statistics:              x %s', indices_X)
-    logging.info('  Binning:                 %s', binning)
+    logging.info('  Binning:                 %s', bins)
 
     ################################################################################
     # Data

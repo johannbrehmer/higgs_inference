@@ -100,10 +100,11 @@ n_neyman3_alternate_experiments = 10000
 n_convolutions_neyman3 = 35
 
 # Convolution settings
-neyman_convolution_min = -50.
-neyman_convolution_max = 50.
-neyman_convolution_bins = 10001
-neyman_convolution_histo_edges = np.linspace(neyman_convolution_min, neyman_convolution_max, neyman_convolution_bins + 1)
+neyman_convolution_min = -75.
+neyman_convolution_max = 75.
+neyman_convolution_bins = 15001
+neyman_convolution_histo_edges = np.linspace(neyman_convolution_min, neyman_convolution_max,
+                                             neyman_convolution_bins + 1)
 
 # Confidence limit
 confidence_levels = np.asarray([0.68, 0.95, 0.997])
@@ -193,7 +194,7 @@ smearing_lepton_pt = 3.e-4  # times pT^2. Original: 3.e-4
 # Instead of discarding events with NaNs, can replace them with the following placeholder numbers:
 ################################################################################
 
-new_samples_nan_score = np.asarray([0.,0.])
+new_samples_nan_score = np.asarray([0., 0.])
 new_samples_nan_r = 1.e9
 
 ################################################################################
