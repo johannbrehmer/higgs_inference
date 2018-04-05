@@ -40,3 +40,119 @@ Free memory: 22.21GiB
 2018-04-04 17:53:02.542172: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
 2018-04-04 17:53:02.542180: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:85:00.0)
 Epoch 1/50
+340s - loss: 0.0644 - val_loss: 0.0397
+Epoch 2/50
+340s - loss: 0.0403 - val_loss: 0.0270
+Epoch 3/50
+340s - loss: 0.0320 - val_loss: 0.0219
+Epoch 4/50
+338s - loss: 0.0281 - val_loss: 0.0229
+Epoch 5/50
+339s - loss: 0.0250 - val_loss: 0.0174
+Epoch 6/50
+339s - loss: 0.0221 - val_loss: 0.0142
+Epoch 7/50
+340s - loss: 0.0190 - val_loss: 0.0111
+Epoch 8/50
+340s - loss: 0.0169 - val_loss: 0.0123
+Epoch 9/50
+340s - loss: 0.0148 - val_loss: 0.0105
+Epoch 10/50
+339s - loss: 0.0134 - val_loss: 0.0083
+Epoch 11/50
+340s - loss: 0.0120 - val_loss: 0.0091
+Epoch 12/50
+340s - loss: 0.0109 - val_loss: 0.0067
+Epoch 13/50
+339s - loss: 0.0099 - val_loss: 0.0052
+Epoch 14/50
+339s - loss: 0.0091 - val_loss: 0.0044
+Epoch 15/50
+338s - loss: 0.0087 - val_loss: 0.0067
+Epoch 16/50
+339s - loss: 0.0080 - val_loss: 0.0050
+Epoch 17/50
+340s - loss: 0.0076 - val_loss: 0.0047
+Epoch 18/50
+339s - loss: 0.0071 - val_loss: 0.0038
+Epoch 19/50
+339s - loss: 0.0069 - val_loss: 0.0034
+Epoch 20/50
+340s - loss: 0.0065 - val_loss: 0.0030
+Epoch 21/50
+340s - loss: 0.0062 - val_loss: 0.0027
+Epoch 22/50
+339s - loss: 0.0060 - val_loss: 0.0026
+Epoch 23/50
+338s - loss: 0.0058 - val_loss: 0.0029
+Epoch 24/50
+337s - loss: 0.0056 - val_loss: 0.0028
+Epoch 25/50
+340s - loss: 0.0055 - val_loss: 0.0031
+Epoch 26/50
+339s - loss: 0.0053 - val_loss: 0.0026
+Epoch 27/50
+340s - loss: 0.0052 - val_loss: 0.0025
+Epoch 28/50
+338s - loss: 0.0051 - val_loss: 0.0024
+Epoch 29/50
+337s - loss: 0.0050 - val_loss: 0.0026
+Epoch 30/50
+338s - loss: 0.0049 - val_loss: 0.0022
+Epoch 31/50
+339s - loss: 0.0048 - val_loss: 0.0025
+Epoch 32/50
+338s - loss: 0.0047 - val_loss: 0.0023
+Epoch 33/50
+337s - loss: 0.0047 - val_loss: 0.0019
+Epoch 34/50
+338s - loss: 0.0046 - val_loss: 0.0023
+Epoch 35/50
+338s - loss: 0.0046 - val_loss: 0.0020
+Epoch 36/50
+337s - loss: 0.0045 - val_loss: 0.0017
+Epoch 37/50
+338s - loss: 0.0045 - val_loss: 0.0019
+Epoch 38/50
+338s - loss: 0.0044 - val_loss: 0.0018
+Epoch 39/50
+337s - loss: 0.0044 - val_loss: 0.0018
+Epoch 40/50
+338s - loss: 0.0043 - val_loss: 0.0023
+Epoch 41/50
+338s - loss: 0.0043 - val_loss: 0.0016
+Epoch 42/50
+337s - loss: 0.0043 - val_loss: 0.0016
+Epoch 43/50
+338s - loss: 0.0043 - val_loss: 0.0020
+Epoch 44/50
+338s - loss: 0.0042 - val_loss: 0.0017
+Epoch 45/50
+339s - loss: 0.0042 - val_loss: 0.0016
+Epoch 46/50
+338s - loss: 0.0042 - val_loss: 0.0016
+Epoch 47/50
+337s - loss: 0.0042 - val_loss: 0.0017
+Epoch 48/50
+338s - loss: 0.0042 - val_loss: 0.0018
+Epoch 49/50
+337s - loss: 0.0042 - val_loss: 0.0017
+Epoch 50/50
+337s - loss: 0.0041 - val_loss: 0.0016
+04.04.2018 22:35:39 INFO    Starting evaluation
+04.04.2018 22:36:22 INFO    Score regression evaluation timing: 0.940589189529 s
+04.04.2018 22:36:22 INFO    Starting density estimation
+04.04.2018 22:38:14 INFO    Starting theta 100 / 1017
+04.04.2018 22:40:06 INFO    Starting theta 200 / 1017
+04.04.2018 22:41:57 INFO    Starting theta 300 / 1017
+04.04.2018 22:43:49 INFO    Starting theta 400 / 1017
+04.04.2018 22:45:40 INFO    Starting theta 500 / 1017
+04.04.2018 22:47:30 INFO    Starting theta 600 / 1017
+04.04.2018 22:49:20 INFO    Starting theta 700 / 1017
+04.04.2018 22:51:10 INFO    Starting theta 800 / 1017
+04.04.2018 22:53:00 INFO    Starting theta 900 / 1017
+04.04.2018 22:54:52 INFO    Starting theta 1000 / 1017
+04.04.2018 22:55:12 INFO    Score density estimation timing: median 0.00589394569397 s, mean 0.00575399914557 s
+04.04.2018 22:55:12 INFO    Rotated score density estimation timing: median 0.00788998603821 s, mean 0.0079302994082 s
+04.04.2018 22:55:12 INFO    Score times theta density estimation timing: median 0.00945019721985 s, mean 0.00959215121987 s
+04.04.2018 22:55:12 INFO    That's it -- have a great day!
