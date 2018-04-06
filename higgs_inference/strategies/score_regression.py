@@ -295,14 +295,21 @@ def score_regression_inference(use_smearing=False,
         calibrator_scoretheta.fit(_tthat_calibration, y_calibration, sample_weight=w_calibration)
 
         # 2d density estimation with score (fixed binning)
-        _bins = np.concatenate(([-100000., -20., -15., -10., -8., -6.],
-                                np.linspace(-5., -2.5, 6),
-                                np.linspace(-2., -1.2, 5),
-                                np.linspace(-1., 1., 21),
-                                np.linspace(1.2, 2.0, 5),
-                                np.linspace(2.5, 5., 6),
-                                [6., 8., 10., 15., 20., 100000.]))
-        _bins = (_bins, _bins)
+        # _bins = np.concatenate(([-100000., -20., -15., -10., -8., -6.],
+        #                         np.linspace(-5., -2.5, 6),
+        #                         np.linspace(-2., -1.2, 5),
+        #                         np.linspace(-1., 1., 21),
+        #                         np.linspace(1.2, 2.0, 5),
+        #                         np.linspace(2.5, 5., 6),
+        #                         [6., 8., 10., 15., 20., 100000.]))
+        # _bins = (_bins, _bins)
+        _bins0 = np.array([-100000, -0.48, -0.45, -0.43, -0.4, -0.37, -0.34, -0.31,
+                           -0.27, -0.23, -0.18, -0.12, -0.05, 0.05, 0.19, 0.39,
+                           0.7, 1.34, 3.31, 100000])
+        _bins1 = np.array([-100000, -0.86, -0.51, -0.36, -0.28, -0.22, -0.17, -0.12,
+                           -0.08, -0.04, 0., 0.05, 0.11, 0.18, 0.27, 0.41,
+                           0.61, 1.01, 2.03, 100000])
+        _bins = (_bins0, _bins1)
         _range = (np.array((-100000., 100000.)), np.array((-100000., 100000.)))
         calibrator_score = NDHistogramCalibrator(bins=_bins, range=_range)
         calibrator_score.fit(_that_calibration,
