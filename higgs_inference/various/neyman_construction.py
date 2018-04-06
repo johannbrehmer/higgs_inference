@@ -475,17 +475,17 @@ def start_cl_calculation(options=''):
 
     calculate_confidence_limits('truth', 'truth', neyman_set)
 
-    calculate_confidence_limits('scoreregression_score_deep', 'score_regression', neyman_set)
+    # calculate_confidence_limits('scoreregression_score_deep', 'score_regression', neyman_set)
     calculate_confidence_limits('carl_calibrated_shallow', 'parameterized', neyman_set)
     calculate_confidence_limits('combined_calibrated_deep', 'parameterized', neyman_set)
     calculate_confidence_limits('regression_calibrated', 'parameterized', neyman_set)
     calculate_confidence_limits('combinedregression_calibrated_deep', 'parameterized', neyman_set)
 
-    calculate_confidence_limits('scoreregression_score_deep_smeared', 'score_regression', neyman_set)
+    # calculate_confidence_limits('scoreregression_score_deep_smeared', 'score_regression', neyman_set)
     calculate_confidence_limits('carl_calibrated_shallow_smeared', 'parameterized', neyman_set)
     calculate_confidence_limits('combined_calibrated_deep_smeared', 'parameterized', neyman_set)
     calculate_confidence_limits('regression_calibrated_smeared', 'parameterized', neyman_set)
     calculate_confidence_limits('combinedregression_calibrated_deep_smeared', 'parameterized', neyman_set)
 
-    calculate_confidence_limits('histo_2d', 'histo', neyman_set)
-    calculate_confidence_limits('histo_2d_smeared', 'histo', neyman_set)
+    # calculate_confidence_limits('histo_2d', 'histo', neyman_set)
+    # calculate_confidence_limits('histo_2d_smeared', 'histo', neyman_set)
