@@ -58,13 +58,13 @@ def histo_inference(indices_X=None,
     # Manually chosen histogram binning
     if binning == 'optimized':
 
-        # 200 bins
+        # 160 bins
         bins_pt = np.array(
             [0., 48., 58., 67., 75., 83., 91., 100., 109., 119., 130., 141., 155., 172., 193., 221., 260., 325., 462.,
              14000.])  # 20 bins
-        bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
+        bins_deltaphi = np.linspace(0., np.pi, 9)  # 8 bins
 
-        if superfine_binning_mode:  # 1600 bins
+        if superfine_binning_mode:  # 960 bins
             bins_pt = np.array([0., 35., 40., 44., 47., 50., 53., 55., 58.,
                                 60., 62., 64., 66., 68., 70., 72., 74., 76.,
                                 78., 80., 82., 84., 86., 88., 90., 92., 94.,
@@ -74,19 +74,19 @@ def histo_inference(indices_X=None,
                                 172., 176., 181., 186., 192., 197., 203., 210., 218.,
                                 225., 235., 244., 255., 266., 280., 294., 311., 331.,
                                 355., 385., 424., 470., 539., 657., 872., 14000.]) # 80 bins
-            bins_deltaphi = np.linspace(0., np.pi, 21)  # 20 bins
+            bins_deltaphi = np.linspace(0., np.pi, 13)  # 12 bins
 
-        elif fine_binning_mode:  # 600 bins
+        elif fine_binning_mode:  # 400 bins
             bins_pt = np.array([0., 40., 47., 53., 58., 62., 67., 70., 74.,
                                 78., 82., 86., 90., 94., 98., 103., 107., 111.,
                                 116., 122., 127., 132., 138., 144., 151., 158., 166.,
                                 174., 184., 196., 209., 224., 242., 264., 292., 329.,
                                 382., 468., 654., 14000.])  # 40 bins
-            bins_deltaphi = np.linspace(0., np.pi, 16)  # 15 bins
+            bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
 
-        elif rough_binning_mode:  # 50 bins overall
+        elif rough_binning_mode:  # 60 bins overall
             bins_pt = np.array([0., 59., 77., 94., 113., 136., 166., 213., 315., 14000.])  # 10 bins
-            bins_deltaphi = np.linspace(0., np.pi, 6)  # 5 bins
+            bins_deltaphi = np.linspace(0., np.pi, 7)  # 6 bins
 
         if histogram_dimensionality == 2 and indices_X == [1, 41]:
             bins = (bins_pt, bins_deltaphi)
@@ -111,7 +111,7 @@ def histo_inference(indices_X=None,
         else:
             raise ValueError(indices_X)
 
-    if fine_binning_mode:
+    if superfine_binning_mode:
         filename_addition += '_superfinebinning'
     elif fine_binning_mode:
         filename_addition += '_finebinning'
