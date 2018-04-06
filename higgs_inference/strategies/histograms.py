@@ -15,7 +15,7 @@ from higgs_inference.various.utils import calculate_mean_squared_error, r_from_s
 
 
 def histo_inference(indices_X=None,
-                    binning='optimized',
+                    binning='adaptive',
                     use_smearing=False,
                     denominator=0,
                     do_neyman=False,
@@ -56,15 +56,15 @@ def histo_inference(indices_X=None,
     bins = binning
 
     # Manually chosen histogram binning
-    if binning == 'optimized':
+    if binning == 'optimized' or binning == 'adaptive':
 
-        # 160 bins
+        # 200 bins
         bins_pt = np.array(
             [0., 48., 58., 67., 75., 83., 91., 100., 109., 119., 130., 141., 155., 172., 193., 221., 260., 325., 462.,
              14000.])  # 20 bins
-        bins_deltaphi = np.linspace(0., np.pi, 9)  # 8 bins
+        bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
 
-        if superfine_binning_mode:  # 960 bins
+        if superfine_binning_mode:  # 1200 bins
             bins_pt = np.array([0., 35., 40., 44., 47., 50., 53., 55., 58.,
                                 60., 62., 64., 66., 68., 70., 72., 74., 76.,
                                 78., 80., 82., 84., 86., 88., 90., 92., 94.,
@@ -73,16 +73,16 @@ def histo_inference(indices_X=None,
                                 139., 142., 145., 149., 152., 156., 159., 163., 167.,
                                 172., 176., 181., 186., 192., 197., 203., 210., 218.,
                                 225., 235., 244., 255., 266., 280., 294., 311., 331.,
-                                355., 385., 424., 470., 539., 657., 872., 14000.]) # 80 bins
-            bins_deltaphi = np.linspace(0., np.pi, 13)  # 12 bins
+                                355., 385., 424., 470., 539., 657., 872., 14000.])  # 80 bins
+            bins_deltaphi = np.linspace(0., np.pi, 16)  # 15 bins
 
-        elif fine_binning_mode:  # 400 bins
+        elif fine_binning_mode:  # 480 bins
             bins_pt = np.array([0., 40., 47., 53., 58., 62., 67., 70., 74.,
                                 78., 82., 86., 90., 94., 98., 103., 107., 111.,
                                 116., 122., 127., 132., 138., 144., 151., 158., 166.,
                                 174., 184., 196., 209., 224., 242., 264., 292., 329.,
                                 382., 468., 654., 14000.])  # 40 bins
-            bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
+            bins_deltaphi = np.linspace(0., np.pi, 13)  # 12 bins
 
         elif rough_binning_mode:  # 60 bins overall
             bins_pt = np.array([0., 59., 77., 94., 113., 136., 166., 213., 315., 14000.])  # 10 bins
@@ -200,6 +200,55 @@ def histo_inference(indices_X=None,
         summary_statistics_train = X_train[:, indices_X]
         summary_statistics_test = X_test[:, indices_X]
         summary_statistics_illustration = X_illustration[:, indices_X]
+
+        ################################################################################
+        # Adaptive binning
+        ################################################################################
+
+        if binning == 'adaptive':
+
+            if histogram_dimensionality == 2 and indices_X == [1, 41]:
+
+                n_bins_pt = 20
+                n_bins_deltaphi = 10
+                if rough_binning_mode:
+                    n_bins_pt = 10
+                    n_bins_deltaphi = 5
+                elif fine_binning_mode:
+                    n_bins_pt = 30
+                    n_bins_deltaphi = 15
+                elif superfine_binning_mode:
+                    n_bins_pt = 50
+                    n_bins_deltaphi = 20
+
+                bins_pt = np.percentile(summary_statistics_train[:, 0], np.linspace(0., 100., n_bins_pt))
+                bins_pt[0] = 0.
+                bins_pt[-1] = 14000.
+
+                bins_deltaphi = np.percentile(summary_statistics_train[:, 1], np.linspace(0., 100., n_bins_deltaphi))
+                bins_deltaphi[0] = -.1
+                bins_deltaphi[-1] = np.pi + 0.1
+
+                bins = (bins_pt, bins_deltaphi)
+
+            elif histogram_dimensionality == 1 and indices_X == [1]:
+                n_bins_pt = 80
+
+                bins_pt = np.percentile(summary_statistics_train[:, 0], np.linspace(0., 100., n_bins_pt))
+                bins_pt[0] = 0.
+                bins_pt[-1] = 14000.
+                bins = (bins_pt,)
+
+            elif histogram_dimensionality == 1 and indices_X == [41]:
+                n_bins_deltaphi = 20
+
+                bins_deltaphi = np.percentile(summary_statistics_train[:, 0], np.linspace(0., 100., n_bins_deltaphi))
+                bins_deltaphi[0] = -.1
+                bins_deltaphi[-1] = np.pi + 0.1
+                bins = (bins_deltaphi,)
+
+            else:
+                raise ValueError
 
         ################################################################################
         # "Training"

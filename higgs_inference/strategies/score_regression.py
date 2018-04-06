@@ -40,6 +40,7 @@ def score_regression_inference(use_smearing=False,
     # Settings
     ################################################################################
 
+    fixed_binning_mode = ('fixedbinning' in options)
     deep_mode = ('deep' in options)
     shallow_mode = ('shallow' in options)
     short_mode = ('short' in options)
@@ -54,6 +55,9 @@ def score_regression_inference(use_smearing=False,
     neyman3_mode = ('neyman3' in options)
 
     filename_addition = ''
+
+    if fixed_binning_mode:
+        filename_addition += '_fixedbinning'
 
     learning_rate = settings.learning_rate_default
     if small_lr_mode:
@@ -279,55 +283,78 @@ def score_regression_inference(use_smearing=False,
         w_calibration = np.hstack((weights_calibration[t, ::], weights_calibration[theta1, ::]))
 
         # 1d density estimation with score * theta
-        _bins = [np.concatenate(([-100000., -100., -70., -50., -40., -30., -25., -22.],
-                                 np.linspace(-20., -11., 10),
-                                 np.linspace(-10., -5.5, 10),
-                                 np.linspace(-5., -2.2, 15),
-                                 np.linspace(-2., -1.1, 10),
-                                 np.linspace(-1., 1., 41),
-                                 np.linspace(1.1, 2., 10),
-                                 np.linspace(2.2, 5., 15),
-                                 np.linspace(5.5, 10., 10),
-                                 np.linspace(11., 20., 10),
-                                 [22., 25., 30., 40., 50., 70., 100., 100000.]))]
+        if fixed_binning_mode:
+            _bins = [np.concatenate(([-100000., -100., -70., -50., -40., -30., -25., -22.],
+                                     np.linspace(-20., -11., 10),
+                                     np.linspace(-10., -5.5, 10),
+                                     np.linspace(-5., -2.2, 15),
+                                     np.linspace(-2., -1.1, 10),
+                                     np.linspace(-1., 1., 41),
+                                     np.linspace(1.1, 2., 10),
+                                     np.linspace(2.2, 5., 15),
+                                     np.linspace(5.5, 10., 10),
+                                     np.linspace(11., 20., 10),
+                                     [22., 25., 30., 40., 50., 70., 100., 100000.]))]
+        else:
+            _bins = np.percentile(_tthat_calibration, np.linspace(0., 100., 80))
+            _bins[0] = -100000.
+            _bins[-1] = 100000.
 
         calibrator_scoretheta = HistogramCalibrator(bins=_bins, independent_binning=False, variable_width=False)
         calibrator_scoretheta.fit(_tthat_calibration, y_calibration, sample_weight=w_calibration)
 
         # 2d density estimation with score (fixed binning)
-        # _bins = np.concatenate(([-100000., -20., -15., -10., -8., -6.],
-        #                         np.linspace(-5., -2.5, 6),
-        #                         np.linspace(-2., -1.2, 5),
-        #                         np.linspace(-1., 1., 21),
-        #                         np.linspace(1.2, 2.0, 5),
-        #                         np.linspace(2.5, 5., 6),
-        #                         [6., 8., 10., 15., 20., 100000.]))
-        # _bins = (_bins, _bins)
-        _bins0 = np.array([-100000, -0.48, -0.45, -0.43, -0.4, -0.37, -0.34, -0.31,
-                           -0.27, -0.23, -0.18, -0.12, -0.05, 0.05, 0.19, 0.39,
-                           0.7, 1.34, 3.31, 100000])
-        _bins1 = np.array([-100000, -0.86, -0.51, -0.36, -0.28, -0.22, -0.17, -0.12,
-                           -0.08, -0.04, 0., 0.05, 0.11, 0.18, 0.27, 0.41,
-                           0.61, 1.01, 2.03, 100000])
-        _bins = (_bins0, _bins1)
+        if fixed_binning_mode:
+            _bins = np.concatenate(([-100000., -20., -15., -10., -8., -6.],
+                                    np.linspace(-5., -2.5, 6),
+                                    np.linspace(-2., -1.2, 5),
+                                    np.linspace(-1., 1., 21),
+                                    np.linspace(1.2, 2.0, 5),
+                                    np.linspace(2.5, 5., 6),
+                                    [6., 8., 10., 15., 20., 100000.]))
+            _bins = (_bins, _bins)
+        else:
+            _bins0 = np.percentile(_that_calibration[:, 0], np.linspace(0., 100., 20))
+            _bins0[0] = -100000.
+            _bins0[-1] = 100000.
+
+            _bins1 = np.percentile(_that_calibration[:, 1], np.linspace(0., 100., 20))
+            _bins1[0] = -100000.
+            _bins1[-1] = 100000.
+
+            _bins = (_bins0, _bins1)
+
         _range = (np.array((-100000., 100000.)), np.array((-100000., 100000.)))
+
         calibrator_score = NDHistogramCalibrator(bins=_bins, range=_range)
         calibrator_score.fit(_that_calibration,
                              y_calibration,
                              sample_weight=w_calibration)
 
         # 2d density estimation with score (dynamicically rotated)
-        _bins_main = np.concatenate(([-100000., -20., -15., -10., -8., -6.],
-                                     np.linspace(-5., -2.5, 6),
-                                     np.linspace(-2., -1.2, 5),
-                                     np.linspace(-1., 1., 21),
-                                     np.linspace(1.2, 2.0, 5),
-                                     np.linspace(2.5, 5., 6),
-                                     [6., 8., 10., 15., 20., 100000.]))
-        _bins_other = np.array(
-            [-100000., -20., -10., -5., -3., -2., -1., -0.5, 0., 0.5, 1., 2., 3., 5., 10., 20., 100000.])
+
+        if fixed_binning_mode:
+            _bins_main = np.concatenate(([-100000., -20., -15., -10., -8., -6.],
+                                         np.linspace(-5., -2.5, 6),
+                                         np.linspace(-2., -1.2, 5),
+                                         np.linspace(-1., 1., 21),
+                                         np.linspace(1.2, 2.0, 5),
+                                         np.linspace(2.5, 5., 6),
+                                         [6., 8., 10., 15., 20., 100000.]))
+            _bins_other = np.array(
+                [-100000., -20., -10., -5., -3., -2., -1., -0.5, 0., 0.5, 1., 2., 3., 5., 10., 20., 100000.])
+        else:
+            _bins_main = np.percentile(_that_rotated_calibration[:, 0], np.linspace(0., 100., 40))
+            _bins_main[0] = -100000.
+            _bins_main[-1] = 100000.
+
+            _bins_other = np.percentile(_that_rotated_calibration[:, 1], np.linspace(0., 100., 10))
+            _bins_other[0] = -100000.
+            _bins_other[-1] = 100000.
+
         _bins = (_bins_main, _bins_other)
         _range = (np.array((-100000., 100000.)), np.array((-100000., 100000.)))
+
         calibrator_rotatedscore = NDHistogramCalibrator(bins=_bins, range=_range)
         calibrator_rotatedscore.fit(_that_rotated_calibration,
                                     y_calibration,
