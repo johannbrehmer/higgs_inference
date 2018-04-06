@@ -1,40 +1,22 @@
-04.04.2018 10:04:05 INFO    Hi! How are you today?
-04.04.2018 10:04:05 INFO    Startup options:
-04.04.2018 10:04:05 INFO      Algorithm:                     cl
-04.04.2018 10:04:05 INFO      Point by point:                False
-04.04.2018 10:04:05 INFO      Morphing-aware mode:           False
-04.04.2018 10:04:05 INFO      Smeared data:                  False
-04.04.2018 10:04:05 INFO      Training sample:               baseline
-04.04.2018 10:04:05 INFO      alpha:                         None
-04.04.2018 10:04:05 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-04.04.2018 10:04:05 INFO      AFC epsilon:                   None
-04.04.2018 10:04:05 INFO      Denominator theta:             False
-04.04.2018 10:04:05 INFO      Neyman construction toys:      0
-04.04.2018 10:04:05 INFO      Other options:                 ['neyman2']
-04.04.2018 10:04:05 INFO      Base directory:                /home/jb6504/higgs_inference
-04.04.2018 10:04:05 INFO      ML-based strategies available: False
-04.04.2018 10:04:05 INFO    Starting p-value calculation
-04.04.2018 10:04:05 INFO    Subtracting SM for truth truth
-04.04.2018 10:04:07 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-04.04.2018 10:04:15 INFO    Calculating p-values for truth/truth
-04.04.2018 10:29:33 INFO    Subtracting SM for score_regression scoreregression_score_deep
-04.04.2018 10:29:35 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-04.04.2018 10:29:43 INFO    Calculating p-values for score_regression/scoreregression_score_deep
-04.04.2018 10:53:55 INFO    Subtracting SM for parameterized carl_calibrated_shallow
-04.04.2018 10:55:07 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-04.04.2018 10:55:15 INFO    Calculating p-values for parameterized/carl_calibrated_shallow
-04.04.2018 11:19:24 INFO    Subtracting SM for parameterized combined_calibrated_deep
-04.04.2018 11:20:30 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-04.04.2018 11:20:38 INFO    Calculating p-values for parameterized/combined_calibrated_deep
-04.04.2018 11:44:09 INFO    Subtracting SM for parameterized regression_calibrated
-04.04.2018 11:45:20 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-04.04.2018 11:45:29 INFO    Calculating p-values for parameterized/regression_calibrated
-04.04.2018 12:09:30 INFO    Subtracting SM for parameterized combinedregression_calibrated_deep
-04.04.2018 12:10:42 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-04.04.2018 12:10:50 INFO    Calculating p-values for parameterized/combinedregression_calibrated_deep
-04.04.2018 12:34:26 INFO    Subtracting SM for score_regression scoreregression_score_deep_smeared
-04.04.2018 12:35:41 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-04.04.2018 12:35:49 INFO    Calculating p-values for score_regression/scoreregression_score_deep_smeared
-04.04.2018 13:00:19 INFO    Subtracting SM for parameterized carl_calibrated_shallow_smeared
-04.04.2018 13:01:23 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-04.04.2018 13:01:32 INFO    Calculating p-values for parameterized/carl_calibrated_shallow_smeared
+06.04.2018 08:42:53 INFO    Hi! How are you today?
+06.04.2018 08:42:53 INFO    Startup options:
+06.04.2018 08:42:53 INFO      Algorithm:                     cl
+06.04.2018 08:42:53 INFO      Point by point:                False
+06.04.2018 08:42:53 INFO      Morphing-aware mode:           False
+06.04.2018 08:42:53 INFO      Smeared data:                  False
+06.04.2018 08:42:53 INFO      Training sample:               baseline
+06.04.2018 08:42:53 INFO      alpha:                         None
+06.04.2018 08:42:53 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+06.04.2018 08:42:53 INFO      AFC epsilon:                   None
+06.04.2018 08:42:53 INFO      Denominator theta:             False
+06.04.2018 08:42:53 INFO      Neyman construction toys:      0
+06.04.2018 08:42:53 INFO      Other options:                 ['neyman2']
+06.04.2018 08:42:53 INFO      Base directory:                /home/jb6504/higgs_inference
+06.04.2018 08:42:53 INFO      ML-based strategies available: False
+06.04.2018 08:42:53 INFO    Starting p-value calculation
+06.04.2018 08:42:53 INFO    Subtracting SM for truth truth
+06.04.2018 08:43:57 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+06.04.2018 08:44:06 INFO    Calculating p-values for truth/truth
+06.04.2018 09:38:06 INFO    Subtracting SM for score_regression scoreregression_score_deep
+06.04.2018 09:39:39 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+06.04.2018 09:39:48 INFO    Calculating p-values for score_regression/scoreregression_score_deep

@@ -1,85 +1,128 @@
-05.04.2018 16:14:22 INFO    Hi! How are you today?
-05.04.2018 16:14:22 INFO    Startup options:
-05.04.2018 16:14:22 INFO      Algorithm:                     histo
-05.04.2018 16:14:22 INFO      Point by point:                False
-05.04.2018 16:14:22 INFO      Morphing-aware mode:           False
-05.04.2018 16:14:22 INFO      Smeared data:                  False
-05.04.2018 16:14:22 INFO      Training sample:               baseline
-05.04.2018 16:14:22 INFO      alpha:                         None
-05.04.2018 16:14:22 INFO      Histogram / AFC X indices:     [1, 41]
-05.04.2018 16:14:22 INFO      AFC epsilon:                   None
-05.04.2018 16:14:22 INFO      Denominator theta:             False
-05.04.2018 16:14:22 INFO      Neyman construction toys:      0
-05.04.2018 16:14:22 INFO      Other options:                 ['superbinning']
-05.04.2018 16:14:22 INFO      Base directory:                /home/jb6504/higgs_inference
-05.04.2018 16:14:22 INFO      ML-based strategies available: False
-05.04.2018 16:14:22 INFO    Starting histogram-based inference
-05.04.2018 16:14:22 INFO    Settings:
-05.04.2018 16:14:22 INFO      Statistics:              x [1, 41]
-05.04.2018 16:14:22 INFO      Binning:                 (array([     0.,     24.,     28.,     32.,     36.,     40.,     44.,
-           48.,     52.,     56.,     60.,     64.,     68.,     72.,
-           76.,     80.,     84.,     88.,     92.,     96.,    100.,
-          110.,    120.,    130.,    140.,    150.,    160.,    170.,
-          180.,    190.,    200.,    225.,    250.,    275.,    300.,
-          325.,    350.,    375.,    400.,    450.,    500.,    550.,
-          600.,    650.,    700.,    750.,    800.,    900.,   1000.,
-         1200.,   1500.,   2000.,  14000.]), array([ 0.        ,  0.15707963,  0.31415927,  0.4712389 ,  0.62831853,
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '38533')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/jb6504/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-centos-7.3.1611-Core-x86_64-2.7.12-64/lock_dir
+06.04.2018 08:42:15 INFO    Hi! How are you today?
+06.04.2018 08:42:15 INFO    Startup options:
+06.04.2018 08:42:15 INFO      Algorithm:                     histo
+06.04.2018 08:42:15 INFO      Point by point:                False
+06.04.2018 08:42:15 INFO      Morphing-aware mode:           False
+06.04.2018 08:42:15 INFO      Smeared data:                  False
+06.04.2018 08:42:15 INFO      Training sample:               baseline
+06.04.2018 08:42:15 INFO      alpha:                         None
+06.04.2018 08:42:15 INFO      Histogram / AFC X indices:     [1, 41]
+06.04.2018 08:42:15 INFO      AFC epsilon:                   None
+06.04.2018 08:42:15 INFO      Denominator theta:             False
+06.04.2018 08:42:15 INFO      Neyman construction toys:      0
+06.04.2018 08:42:15 INFO      Other options:                 ['superbinning']
+06.04.2018 08:42:15 INFO      Base directory:                /home/jb6504/higgs_inference
+06.04.2018 08:42:15 INFO      ML-based strategies available: False
+06.04.2018 08:42:15 INFO    Starting histogram-based inference
+06.04.2018 08:42:15 INFO    Settings:
+06.04.2018 08:42:15 INFO      Statistics:              x [1, 41]
+06.04.2018 08:42:15 INFO      Binning:                 (array([     0.,     35.,     40.,     44.,     47.,     50.,     53.,
+           55.,     58.,     60.,     62.,     64.,     66.,     68.,
+           70.,     72.,     74.,     76.,     78.,     80.,     82.,
+           84.,     86.,     88.,     90.,     92.,     94.,     95.,
+           97.,    100.,    102.,    104.,    106.,    108.,    110.,
+          113.,    115.,    118.,    120.,    123.,    125.,    128.,
+          131.,    134.,    137.,    139.,    142.,    145.,    149.,
+          152.,    156.,    159.,    163.,    167.,    172.,    176.,
+          181.,    186.,    192.,    197.,    203.,    210.,    218.,
+          225.,    235.,    244.,    255.,    266.,    280.,    294.,
+          311.,    331.,    355.,    385.,    424.,    470.,    539.,
+          657.,    872.,  14000.]), array([ 0.        ,  0.15707963,  0.31415927,  0.4712389 ,  0.62831853,
         0.78539816,  0.9424778 ,  1.09955743,  1.25663706,  1.41371669,
         1.57079633,  1.72787596,  1.88495559,  2.04203522,  2.19911486,
         2.35619449,  2.51327412,  2.67035376,  2.82743339,  2.98451302,
         3.14159265]))
-05.04.2018 16:15:35 INFO    Starting theta 100 / 1017
-05.04.2018 16:16:40 INFO    Starting theta 200 / 1017
-05.04.2018 16:17:42 INFO    Starting theta 300 / 1017
-05.04.2018 16:18:47 INFO    Starting theta 400 / 1017
-05.04.2018 16:19:52 INFO    Starting theta 500 / 1017
-05.04.2018 16:21:02 INFO    Starting theta 600 / 1017
-05.04.2018 16:22:07 INFO    Starting theta 700 / 1017
-05.04.2018 16:23:11 INFO    Starting theta 800 / 1017
-05.04.2018 16:24:13 INFO    Starting theta 900 / 1017
-05.04.2018 16:25:16 INFO    Starting theta 1000 / 1017
-05.04.2018 16:25:27 INFO    Evaluation timing: median 0.0107951164246 s, mean 0.0108096435476 s
-05.04.2018 16:25:27 INFO    Mean training cross-entropy: nan
-05.04.2018 16:25:27 INFO    Mean training log r: 0.216534646877
-05.04.2018 16:25:27 INFO    That's it -- have a great day!
-05.04.2018 16:25:28 INFO    Hi! How are you today?
-05.04.2018 16:25:28 INFO    Startup options:
-05.04.2018 16:25:28 INFO      Algorithm:                     histo
-05.04.2018 16:25:28 INFO      Point by point:                False
-05.04.2018 16:25:28 INFO      Morphing-aware mode:           False
-05.04.2018 16:25:28 INFO      Smeared data:                  False
-05.04.2018 16:25:28 INFO      Training sample:               baseline
-05.04.2018 16:25:28 INFO      alpha:                         None
-05.04.2018 16:25:28 INFO      Histogram / AFC X indices:     [1, 41]
-05.04.2018 16:25:28 INFO      AFC epsilon:                   None
-05.04.2018 16:25:28 INFO      Denominator theta:             False
-05.04.2018 16:25:28 INFO      Neyman construction toys:      0
-05.04.2018 16:25:28 INFO      Other options:                 ['finebinning']
-05.04.2018 16:25:28 INFO      Base directory:                /home/jb6504/higgs_inference
-05.04.2018 16:25:28 INFO      ML-based strategies available: False
-05.04.2018 16:25:28 INFO    Starting histogram-based inference
-05.04.2018 16:25:28 INFO    Settings:
-05.04.2018 16:25:28 INFO      Statistics:              x [1, 41]
-05.04.2018 16:25:28 INFO      Binning:                 (array([     0.  ,     25.  ,     31.25,     37.5 ,     43.75,     50.  ,
-           60.  ,     70.  ,     80.  ,     90.  ,    100.  ,    120.  ,
-          140.  ,    160.  ,    180.  ,    200.  ,    240.  ,    280.  ,
-          320.  ,    400.  ,    500.  ,    600.  ,    800.  ,   1000.  ,
-        14000.  ]), array([ 0.        ,  0.31415927,  0.62831853,  0.9424778 ,  1.25663706,
-        1.57079633,  1.88495559,  2.19911486,  2.51327412,  2.82743339,
+06.04.2018 08:43:34 INFO    Starting theta 100 / 1017
+06.04.2018 08:44:45 INFO    Starting theta 200 / 1017
+06.04.2018 08:45:53 INFO    Starting theta 300 / 1017
+06.04.2018 08:47:05 INFO    Starting theta 400 / 1017
+06.04.2018 08:48:18 INFO    Starting theta 500 / 1017
+06.04.2018 08:49:40 INFO    Starting theta 600 / 1017
+06.04.2018 08:50:57 INFO    Starting theta 700 / 1017
+06.04.2018 08:52:17 INFO    Starting theta 800 / 1017
+06.04.2018 08:53:40 INFO    Starting theta 900 / 1017
+06.04.2018 08:54:55 INFO    Starting theta 1000 / 1017
+06.04.2018 08:55:09 INFO    Evaluation timing: median 0.0159831047058 s, mean 0.0158452237485 s
+06.04.2018 08:55:09 INFO    Mean training cross-entropy: nan
+06.04.2018 08:55:09 INFO    Mean training log r: 0.207863155582
+06.04.2018 08:55:09 INFO    That's it -- have a great day!
+06.04.2018 08:55:10 INFO    Hi! How are you today?
+06.04.2018 08:55:10 INFO    Startup options:
+06.04.2018 08:55:10 INFO      Algorithm:                     histo
+06.04.2018 08:55:10 INFO      Point by point:                False
+06.04.2018 08:55:10 INFO      Morphing-aware mode:           False
+06.04.2018 08:55:10 INFO      Smeared data:                  False
+06.04.2018 08:55:10 INFO      Training sample:               baseline
+06.04.2018 08:55:10 INFO      alpha:                         None
+06.04.2018 08:55:10 INFO      Histogram / AFC X indices:     [1, 41]
+06.04.2018 08:55:10 INFO      AFC epsilon:                   None
+06.04.2018 08:55:10 INFO      Denominator theta:             False
+06.04.2018 08:55:10 INFO      Neyman construction toys:      0
+06.04.2018 08:55:10 INFO      Other options:                 ['finebinning']
+06.04.2018 08:55:10 INFO      Base directory:                /home/jb6504/higgs_inference
+06.04.2018 08:55:10 INFO      ML-based strategies available: False
+06.04.2018 08:55:10 INFO    Starting histogram-based inference
+06.04.2018 08:55:10 INFO    Settings:
+06.04.2018 08:55:10 INFO      Statistics:              x [1, 41]
+06.04.2018 08:55:10 INFO      Binning:                 (array([     0.,     40.,     47.,     53.,     58.,     62.,     67.,
+           70.,     74.,     78.,     82.,     86.,     90.,     94.,
+           98.,    103.,    107.,    111.,    116.,    122.,    127.,
+          132.,    138.,    144.,    151.,    158.,    166.,    174.,
+          184.,    196.,    209.,    224.,    242.,    264.,    292.,
+          329.,    382.,    468.,    654.,  14000.]), array([ 0.        ,  0.20943951,  0.41887902,  0.62831853,  0.83775804,
+        1.04719755,  1.25663706,  1.46607657,  1.67551608,  1.88495559,
+        2.0943951 ,  2.30383461,  2.51327412,  2.72271363,  2.93215314,
         3.14159265]))
-05.04.2018 16:26:26 INFO    Starting theta 100 / 1017
-05.04.2018 16:27:23 INFO    Starting theta 200 / 1017
-05.04.2018 16:28:18 INFO    Starting theta 300 / 1017
-05.04.2018 16:29:12 INFO    Starting theta 400 / 1017
-05.04.2018 16:30:08 INFO    Starting theta 500 / 1017
-05.04.2018 16:31:11 INFO    Starting theta 600 / 1017
-05.04.2018 16:32:10 INFO    Starting theta 700 / 1017
-05.04.2018 16:33:08 INFO    Starting theta 800 / 1017
-05.04.2018 16:34:05 INFO    Starting theta 900 / 1017
-05.04.2018 16:34:59 INFO    Starting theta 1000 / 1017
-05.04.2018 16:35:10 INFO    Evaluation timing: median 0.00871610641479 s, mean 0.00872601848554 s
-05.04.2018 16:35:10 INFO    Mean training cross-entropy: nan
-05.04.2018 16:35:10 INFO    Mean training log r: 0.203374090396
-05.04.2018 16:35:10 INFO    That's it -- have a great day!
+06.04.2018 08:56:17 INFO    Starting theta 100 / 1017
+06.04.2018 08:57:18 INFO    Starting theta 200 / 1017
+06.04.2018 08:58:17 INFO    Starting theta 300 / 1017
+06.04.2018 08:59:17 INFO    Starting theta 400 / 1017
+06.04.2018 09:00:19 INFO    Starting theta 500 / 1017
+06.04.2018 09:01:27 INFO    Starting theta 600 / 1017
+06.04.2018 09:02:29 INFO    Starting theta 700 / 1017
+06.04.2018 09:03:36 INFO    Starting theta 800 / 1017
+06.04.2018 09:04:43 INFO    Starting theta 900 / 1017
+06.04.2018 09:05:45 INFO    Starting theta 1000 / 1017
+06.04.2018 09:05:57 INFO    Evaluation timing: median 0.0133149623871 s, mean 0.0132257598457 s
+06.04.2018 09:05:57 INFO    Mean training cross-entropy: 0.668530595693
+06.04.2018 09:05:57 INFO    Mean training log r: 0.207186169221
+06.04.2018 09:05:57 INFO    That's it -- have a great day!
+06.04.2018 09:05:59 INFO    Hi! How are you today?
+06.04.2018 09:05:59 INFO    Startup options:
+06.04.2018 09:05:59 INFO      Algorithm:                     histo
+06.04.2018 09:05:59 INFO      Point by point:                False
+06.04.2018 09:05:59 INFO      Morphing-aware mode:           False
+06.04.2018 09:05:59 INFO      Smeared data:                  False
+06.04.2018 09:05:59 INFO      Training sample:               baseline
+06.04.2018 09:05:59 INFO      alpha:                         None
+06.04.2018 09:05:59 INFO      Histogram / AFC X indices:     [1, 41]
+06.04.2018 09:05:59 INFO      AFC epsilon:                   None
+06.04.2018 09:05:59 INFO      Denominator theta:             False
+06.04.2018 09:05:59 INFO      Neyman construction toys:      0
+06.04.2018 09:05:59 INFO      Other options:                 ['roughbinning']
+06.04.2018 09:05:59 INFO      Base directory:                /home/jb6504/higgs_inference
+06.04.2018 09:05:59 INFO      ML-based strategies available: False
+06.04.2018 09:05:59 INFO    Starting histogram-based inference
+06.04.2018 09:05:59 INFO    Settings:
+06.04.2018 09:05:59 INFO      Statistics:              x [1, 41]
+06.04.2018 09:05:59 INFO      Binning:                 (array([     0.,     59.,     77.,     94.,    113.,    136.,    166.,
+          213.,    315.,  14000.]), array([ 0.        ,  0.62831853,  1.25663706,  1.88495559,  2.51327412,
+        3.14159265]))
+06.04.2018 09:07:09 INFO    Starting theta 100 / 1017
+06.04.2018 09:08:15 INFO    Starting theta 200 / 1017
+06.04.2018 09:09:19 INFO    Starting theta 300 / 1017
+06.04.2018 09:10:23 INFO    Starting theta 400 / 1017
+06.04.2018 09:11:28 INFO    Starting theta 500 / 1017
+06.04.2018 09:12:39 INFO    Starting theta 600 / 1017
+06.04.2018 09:14:00 INFO    Starting theta 700 / 1017
+06.04.2018 09:15:19 INFO    Starting theta 800 / 1017
+06.04.2018 09:16:57 INFO    Starting theta 900 / 1017
+06.04.2018 09:18:20 INFO    Starting theta 1000 / 1017
+06.04.2018 09:18:34 INFO    Evaluation timing: median 0.00940799713135 s, mean 0.00937988225924 s
+06.04.2018 09:18:34 INFO    Mean training cross-entropy: 0.672942570134
+06.04.2018 09:18:34 INFO    Mean training log r: 0.268950828903
+06.04.2018 09:18:34 INFO    That's it -- have a great day!
 slurmstepd: error: Exceeded step memory limit at some point.
 slurmstepd: error: This may or may not result in some failure. The SLURM utilizes Linux cgroups for resource containment. For reference please read the explanation in the bug report: https://bugs.schedmd.com/show_bug.cgi?id=3214#c4
