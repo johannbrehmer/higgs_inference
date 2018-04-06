@@ -18,5 +18,4 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py scoreregression -o deep
-#python -u experiments.py scoreregression --neyman -o deep neyman2
+python -u experiments.py scoreregression --neyman -o deep neyman2
