@@ -487,5 +487,5 @@ def start_cl_calculation(options=''):
     calculate_confidence_limits('regression_calibrated_smeared', 'parameterized', neyman_set)
     calculate_confidence_limits('combinedregression_calibrated_deep_smeared', 'parameterized', neyman_set)
 
-    # calculate_confidence_limits('histo_2d', 'histo', neyman_set)
-    # calculate_confidence_limits('histo_2d_smeared', 'histo', neyman_set)
+    calculate_confidence_limits('histo_2d', 'histo', neyman_set)
+    calculate_confidence_limits('histo_2d_smeared', 'histo', neyman_set)
