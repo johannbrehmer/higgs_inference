@@ -58,32 +58,34 @@ def histo_inference(indices_X=None,
     # Manually chosen histogram binning
     if binning == 'optimized':
 
-        # 140 bins
-        bins_pt = np.array([0.,30.,45.,60.,80.,100.,130., 160., 200., 250., 300., 400., 600., 1000., 14000.]) # 14 bins
+        # 200 bins
+        bins_pt = np.array(
+            [0., 48., 58., 67., 75., 83., 91., 100., 109., 119., 130., 141., 155., 172., 193., 221., 260., 325., 462.,
+             14000.])  # 20 bins
         bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
 
-        if superfine_binning_mode:  # 1040 bins
-            bins_pt = np.concatenate((  # 52 bins
-                [0.],
-                np.linspace(24., 100., 20),  # steps of 4 GeV
-                np.linspace(110, 200., 10),  # steps of 10 GeV
-                np.linspace(225, 400., 8),  # steps of 25 GeV
-                np.linspace(450, 800., 8),  # steps of 50 GeV
-                [900., 1000., 1200., 1500., 2000.,14000.]
-            ))
+        if superfine_binning_mode:  # 1600 bins
+            bins_pt = np.array([0., 35., 40., 44., 47., 50., 53., 55., 58.,
+                                60., 62., 64., 66., 68., 70., 72., 74., 76.,
+                                78., 80., 82., 84., 86., 88., 90., 92., 94.,
+                                95., 97., 100., 102., 104., 106., 108., 110., 113.,
+                                115., 118., 120., 123., 125., 128., 131., 134., 137.,
+                                139., 142., 145., 149., 152., 156., 159., 163., 167.,
+                                172., 176., 181., 186., 192., 197., 203., 210., 218.,
+                                225., 235., 244., 255., 266., 280., 294., 311., 331.,
+                                355., 385., 424., 470., 539., 657., 872., 14000.]) # 80 bins
             bins_deltaphi = np.linspace(0., np.pi, 21)  # 20 bins
 
-        elif fine_binning_mode:  # 240 bins
-            bins_pt = np.concatenate((  # 24 bins
-                [0.],
-                np.linspace(25., 50, 5),
-                np.linspace(60., 100., 5),
-                [120., 140., 160., 180., 200., 240., 280., 320., 400., 500., 600., 800., 1000., 14000.]
-            ))
-            bins_deltaphi = np.linspace(0., np.pi, 11)  # 10 bins
+        elif fine_binning_mode:  # 600 bins
+            bins_pt = np.array([0., 40., 47., 53., 58., 62., 67., 70., 74.,
+                                78., 82., 86., 90., 94., 98., 103., 107., 111.,
+                                116., 122., 127., 132., 138., 144., 151., 158., 166.,
+                                174., 184., 196., 209., 224., 242., 264., 292., 329.,
+                                382., 468., 654., 14000.])  # 40 bins
+            bins_deltaphi = np.linspace(0., np.pi, 16)  # 15 bins
 
         elif rough_binning_mode:  # 50 bins overall
-            bins_pt = np.array([0., 50., 80., 120., 160., 220., 300., 400., 600., 1000., 14000.])  # 10 bins
+            bins_pt = np.array([0., 59., 77., 94., 113., 136., 166., 213., 315., 14000.])  # 10 bins
             bins_deltaphi = np.linspace(0., np.pi, 6)  # 5 bins
 
         if histogram_dimensionality == 2 and indices_X == [1, 41]:
@@ -93,11 +95,11 @@ def histo_inference(indices_X=None,
             bins = (bins_deltaphi, bins_pt)
 
         elif histogram_dimensionality == 1 and indices_X == [1]:
-            bins_pt = np.concatenate((
-                np.linspace(0., 200., 21),  # steps of 10 GeV
-                np.linspace(225., 400., 8),  # steps of 25 GeV
-                [450., 500., 600., 800., 1000., 14000.]
-            ))
+            bins_pt = np.array([0., 40., 47., 53., 58., 62., 67., 70., 74.,
+                                78., 82., 86., 90., 94., 98., 103., 107., 111.,
+                                116., 122., 127., 132., 138., 144., 151., 158., 166.,
+                                174., 184., 196., 209., 224., 242., 264., 292., 329.,
+                                382., 468., 654., 14000.])  # 40 bins
             bins = (bins_pt,)
             filename_addition = '_ptj'
 
@@ -313,7 +315,7 @@ def histo_inference(indices_X=None,
 
             # Neyman construction: null evaluated at alternative
             if t == settings.theta_observed:
-                #for tt in settings.extended_pbp_training_thetas:
+                # for tt in settings.extended_pbp_training_thetas:
                 for tt in range(settings.n_thetas):
                     X_neyman_null = np.load(
                         settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(

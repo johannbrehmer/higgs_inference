@@ -20,4 +20,4 @@ cd /home/jb6504/higgs_inference/higgs_inference
 
 python -u experiments.py histo -x 1 41 -o superbinning
 python -u experiments.py histo -x 1 41 -o finebinning
-# python -u experiments.py histo -x 1 41 -o roughbinning
+python -u experiments.py histo -x 1 41 -o roughbinning
