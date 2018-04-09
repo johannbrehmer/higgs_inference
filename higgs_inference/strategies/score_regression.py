@@ -283,7 +283,10 @@ def score_regression_inference(use_smearing=False,
         w_calibration = np.hstack((weights_calibration[t, ::], weights_calibration[theta1, ::]))
 
         # 1d density estimation with score * theta
-        if fixed_binning_mode:
+        if (fixed_binning_mode
+                or delta_theta_norm < settings.epsilon
+                or (np.linspace(np.percentile(_tthat_calibration, 2.5) - np.percentile(_tthat_calibration, 97.5)))**2
+                < settings.epsilon**2):
             _bins = [np.concatenate(([-100000., -100., -70., -50., -40., -30., -25., -22.],
                                      np.linspace(-20., -11., 10),
                                      np.linspace(-10., -5.5, 10),
