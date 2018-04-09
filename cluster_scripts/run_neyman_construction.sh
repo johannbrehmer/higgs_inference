@@ -4,7 +4,7 @@
 #SBATCH --output=slurm_neyman_construction.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=125GB
+#SBATCH --mem=62GB
 #SBATCH --time=24:00:00
 # #SBATCH --gres=gpu:1
 
