@@ -298,9 +298,9 @@ def score_regression_inference(use_smearing=False,
         else:
             _bins = [np.concatenate((
                 [-100000.],
-                np.linspace(np.percentile(_tthat_calibration[:], .1), np.percentile(t[:, 0], 2.5), 30)[:-1],
-                np.linspace(np.percentile(_tthat_calibration[:], 2.5), np.percentile(t[:, 0], 97.5), 40)[:-1],
-                np.linspace(np.percentile(_tthat_calibration[:], 97.5), np.percentile(t[:, 0], 99.9), 30),
+                np.linspace(np.percentile(_tthat_calibration, .1), np.percentile(_tthat_calibration, 2.5), 30)[:-1],
+                np.linspace(np.percentile(_tthat_calibration, 2.5), np.percentile(_tthat_calibration, 97.5), 40)[:-1],
+                np.linspace(np.percentile(_tthat_calibration, 97.5), np.percentile(_tthat_calibration, 99.9), 30),
                 [100000.]
             ))]
 
@@ -322,16 +322,22 @@ def score_regression_inference(use_smearing=False,
         else:
             _bins0 = np.concatenate((
                 [-100000.],
-                np.linspace(np.percentile(_that_calibration[:, 0], .2), np.percentile(t[:, 0], 2.5), 7)[:-1],
-                np.linspace(np.percentile(_that_calibration[:, 0], 2.5), np.percentile(t[:, 0], 97.5), 12)[:-1],
-                np.linspace(np.percentile(_that_calibration[:, 0], 97.5), np.percentile(t[:, 0], 99.8), 7),
+                np.linspace(np.percentile(_that_calibration[:, 0], .2), np.percentile(_that_calibration[:, 0], 2.5), 7)[
+                :-1],
+                np.linspace(np.percentile(_that_calibration[:, 0], 2.5), np.percentile(_that_calibration[:, 0], 97.5),
+                            12)[:-1],
+                np.linspace(np.percentile(_that_calibration[:, 0], 97.5), np.percentile(_that_calibration[:, 0], 99.8),
+                            7),
                 [100000.]
             ))
             _bins1 = np.concatenate((
                 [-100000.],
-                np.linspace(np.percentile(_that_calibration[:, 1], .2), np.percentile(t[:, 0], 2.5), 7)[:-1],
-                np.linspace(np.percentile(_that_calibration[:, 1], 2.5), np.percentile(t[:, 0], 97.5), 12)[:-1],
-                np.linspace(np.percentile(_that_calibration[:, 1], 97.5), np.percentile(t[:, 0], 99.8), 7),
+                np.linspace(np.percentile(_that_calibration[:, 1], .2), np.percentile(_that_calibration[:, 1], 2.5), 7)[
+                :-1],
+                np.linspace(np.percentile(_that_calibration[:, 1], 2.5), np.percentile(_that_calibration[:, 1], 97.5),
+                            12)[:-1],
+                np.linspace(np.percentile(_that_calibration[:, 1], 97.5), np.percentile(_that_calibration[:, 1], 99.8),
+                            7),
                 [100000.]
             ))
             _bins = (_bins0, _bins1)
@@ -359,16 +365,22 @@ def score_regression_inference(use_smearing=False,
         else:
             _bins_main = np.concatenate((
                 [-100000.],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 0], .1), np.percentile(t[:, 0], 2.5), 24)[:-1],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 0], 2.5), np.percentile(t[:, 0], 97.5), 32)[:-1],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 0], 97.5), np.percentile(t[:, 0], 99.9), 24),
+                np.linspace(np.percentile(_that_rotated_calibration[:, 0], .1),
+                            np.percentile(_that_rotated_calibration[:, 0], 2.5), 24)[:-1],
+                np.linspace(np.percentile(_that_rotated_calibration[:, 0], 2.5),
+                            np.percentile(_that_rotated_calibration[:, 0], 97.5), 32)[:-1],
+                np.linspace(np.percentile(_that_rotated_calibration[:, 0], 97.5),
+                            np.percentile(_that_rotated_calibration[:, 0], 99.9), 24),
                 [100000.]
             ))
             _bins_other = np.concatenate((
                 [-100000.],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 1], .3), np.percentile(t[:, 0], 2.5), 3)[:-1],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 1], 2.5), np.percentile(t[:, 0], 97.5), 5)[:-1],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 1], 97.5), np.percentile(t[:, 0], 99.7), 3),
+                np.linspace(np.percentile(_that_rotated_calibration[:, 1], .3),
+                            np.percentile(_that_rotated_calibration[:, 1], 2.5), 3)[:-1],
+                np.linspace(np.percentile(_that_rotated_calibration[:, 1], 2.5),
+                            np.percentile(_that_rotated_calibration[:, 1], 97.5), 5)[:-1],
+                np.linspace(np.percentile(_that_rotated_calibration[:, 1], 97.5),
+                            np.percentile(_that_rotated_calibration[:, 1], 99.7), 3),
                 [100000.]
             ))
 
