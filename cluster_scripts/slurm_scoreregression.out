@@ -1,50 +1,42 @@
 Using TensorFlow backend.
-06.04.2018 13:38:02 INFO    Hi! How are you today?
-06.04.2018 13:38:02 INFO    Startup options:
-06.04.2018 13:38:02 INFO      Algorithm:                     scoreregression
-06.04.2018 13:38:02 INFO      Point by point:                False
-06.04.2018 13:38:02 INFO      Morphing-aware mode:           False
-06.04.2018 13:38:02 INFO      Smeared data:                  False
-06.04.2018 13:38:02 INFO      Training sample:               baseline
-06.04.2018 13:38:02 INFO      alpha:                         None
-06.04.2018 13:38:02 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-06.04.2018 13:38:02 INFO      AFC epsilon:                   None
-06.04.2018 13:38:02 INFO      Denominator theta:             True
-06.04.2018 13:38:02 INFO      Neyman construction toys:      0
-06.04.2018 13:38:02 INFO      Other options:                 ['deep', 'neyman2']
-06.04.2018 13:38:02 INFO      Base directory:                /home/jb6504/higgs_inference
-06.04.2018 13:38:02 INFO      ML-based strategies available: True
-06.04.2018 13:38:02 INFO    Starting score regression inference
-06.04.2018 13:38:02 INFO    Options:
-06.04.2018 13:38:02 INFO      Denominator theta:       denominator 0 = theta 708 = [ 0.39293227  0.43229216]
-06.04.2018 13:38:02 INFO      Number of hidden layers: 5
-06.04.2018 13:38:02 INFO      Batch size:              128
-06.04.2018 13:38:02 INFO      Learning rate:           0.001
-06.04.2018 13:38:02 INFO      Learning rate decay:     0.0921034037198
-06.04.2018 13:38:02 INFO      Number of epochs:        50
-06.04.2018 13:38:02 INFO      NC experiments:          (10000 alternate + 10000 null) experiments with 1 alternate events each
-06.04.2018 13:38:37 INFO    Starting training of score regression
+09.04.2018 09:26:08 INFO    Hi! How are you today?
+09.04.2018 09:26:08 INFO    Startup options:
+09.04.2018 09:26:08 INFO      Algorithm:                     scoreregression
+09.04.2018 09:26:08 INFO      Point by point:                False
+09.04.2018 09:26:08 INFO      Morphing-aware mode:           False
+09.04.2018 09:26:08 INFO      Smeared data:                  False
+09.04.2018 09:26:08 INFO      Training sample:               baseline
+09.04.2018 09:26:08 INFO      alpha:                         None
+09.04.2018 09:26:08 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+09.04.2018 09:26:08 INFO      AFC epsilon:                   None
+09.04.2018 09:26:08 INFO      Denominator theta:             True
+09.04.2018 09:26:08 INFO      Neyman construction toys:      0
+09.04.2018 09:26:08 INFO      Other options:                 ['deep', 'neyman2']
+09.04.2018 09:26:08 INFO      Base directory:                /home/jb6504/higgs_inference
+09.04.2018 09:26:08 INFO      ML-based strategies available: True
+09.04.2018 09:26:08 INFO    Starting score regression inference
+09.04.2018 09:26:08 INFO    Options:
+09.04.2018 09:26:08 INFO      Denominator theta:       denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+09.04.2018 09:26:08 INFO      Number of hidden layers: 5
+09.04.2018 09:26:08 INFO      Batch size:              128
+09.04.2018 09:26:08 INFO      Learning rate:           0.001
+09.04.2018 09:26:08 INFO      Learning rate decay:     0.0921034037198
+09.04.2018 09:26:08 INFO      Number of epochs:        50
+09.04.2018 09:26:08 INFO      NC experiments:          (10000 alternate + 10000 null) experiments with 1 alternate events each
+09.04.2018 09:26:44 INFO    Starting training of score regression
 Train on 8000000 samples, validate on 2000000 samples
-2018-04-06 13:38:38.174979: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-06 13:38:38.175251: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-06 13:38:38.175259: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-06 13:38:38.175264: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-06 13:38:38.175268: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-06 13:38:38.469694: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+2018-04-09 09:26:44.578648: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-09 09:26:44.578930: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-09 09:26:44.578940: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-09 09:26:44.578944: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-09 09:26:44.578949: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-09 09:26:44.872627: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
 name: Tesla K80
 major: 3 minor: 7 memoryClockRate (GHz) 0.8235
 pciBusID 0000:84:00.0
 Total memory: 11.17GiB
 Free memory: 11.10GiB
-2018-04-06 13:38:38.469734: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-04-06 13:38:38.469741: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-04-06 13:38:38.469751: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:84:00.0)
+2018-04-09 09:26:44.872661: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-04-09 09:26:44.872667: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-04-09 09:26:44.872675: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:84:00.0)
 Epoch 1/50
-365s - loss: 0.0641 - val_loss: 0.0425
-Epoch 2/50
-366s - loss: 0.0448 - val_loss: 0.0320
-Epoch 3/50
-366s - loss: 0.0346 - val_loss: 0.0247
-Epoch 4/50
-367s - loss: 0.0292 - val_loss: 0.0260
-Epoch 5/50

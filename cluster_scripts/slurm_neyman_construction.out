@@ -1,32 +1,44 @@
-06.04.2018 08:42:53 INFO    Hi! How are you today?
-06.04.2018 08:42:53 INFO    Startup options:
-06.04.2018 08:42:53 INFO      Algorithm:                     cl
-06.04.2018 08:42:53 INFO      Point by point:                False
-06.04.2018 08:42:53 INFO      Morphing-aware mode:           False
-06.04.2018 08:42:53 INFO      Smeared data:                  False
-06.04.2018 08:42:53 INFO      Training sample:               baseline
-06.04.2018 08:42:53 INFO      alpha:                         None
-06.04.2018 08:42:53 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-06.04.2018 08:42:53 INFO      AFC epsilon:                   None
-06.04.2018 08:42:53 INFO      Denominator theta:             False
-06.04.2018 08:42:53 INFO      Neyman construction toys:      0
-06.04.2018 08:42:53 INFO      Other options:                 ['neyman2']
-06.04.2018 08:42:53 INFO      Base directory:                /home/jb6504/higgs_inference
-06.04.2018 08:42:53 INFO      ML-based strategies available: False
-06.04.2018 08:42:53 INFO    Starting p-value calculation
-06.04.2018 08:42:53 INFO    Subtracting SM for truth truth
-06.04.2018 08:43:57 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-06.04.2018 08:44:06 INFO    Calculating p-values for truth/truth
-06.04.2018 09:38:06 INFO    Subtracting SM for score_regression scoreregression_score_deep
-06.04.2018 09:39:39 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-06.04.2018 09:39:48 INFO    Calculating p-values for score_regression/scoreregression_score_deep
-06.04.2018 10:31:14 INFO    Subtracting SM for parameterized carl_calibrated_shallow
-06.04.2018 10:32:35 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-06.04.2018 10:32:43 INFO    Calculating p-values for parameterized/carl_calibrated_shallow
-06.04.2018 11:26:54 INFO    Subtracting SM for parameterized combined_calibrated_deep
-06.04.2018 11:29:06 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-06.04.2018 11:29:16 INFO    Calculating p-values for parameterized/combined_calibrated_deep
-06.04.2018 12:20:48 INFO    Subtracting SM for parameterized regression_calibrated
-06.04.2018 12:22:12 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-06.04.2018 12:22:20 INFO    Calculating p-values for parameterized/regression_calibrated
-slurmstepd: error: *** JOB 5359573 ON c99-02 CANCELLED AT 2018-04-06T12:42:59 DUE TO TIME LIMIT ***
+07.04.2018 09:22:43 INFO    Hi! How are you today?
+07.04.2018 09:22:43 INFO    Startup options:
+07.04.2018 09:22:43 INFO      Algorithm:                     cl
+07.04.2018 09:22:43 INFO      Point by point:                False
+07.04.2018 09:22:43 INFO      Morphing-aware mode:           False
+07.04.2018 09:22:43 INFO      Smeared data:                  False
+07.04.2018 09:22:43 INFO      Training sample:               baseline
+07.04.2018 09:22:43 INFO      alpha:                         None
+07.04.2018 09:22:43 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+07.04.2018 09:22:43 INFO      AFC epsilon:                   None
+07.04.2018 09:22:43 INFO      Denominator theta:             False
+07.04.2018 09:22:43 INFO      Neyman construction toys:      0
+07.04.2018 09:22:43 INFO      Other options:                 ['neyman2']
+07.04.2018 09:22:43 INFO      Base directory:                /home/jb6504/higgs_inference
+07.04.2018 09:22:43 INFO      ML-based strategies available: False
+07.04.2018 09:22:43 INFO    Starting p-value calculation
+07.04.2018 09:22:43 INFO    Subtracting SM for truth truth
+07.04.2018 09:24:05 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+07.04.2018 09:24:13 INFO    Calculating p-values for truth/truth
+07.04.2018 10:12:15 INFO    Subtracting SM for parameterized carl_calibrated_shallow
+07.04.2018 10:13:36 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+07.04.2018 10:13:44 INFO    Calculating p-values for parameterized/carl_calibrated_shallow
+07.04.2018 11:10:24 INFO    Subtracting SM for parameterized combined_calibrated_deep
+07.04.2018 11:12:16 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+07.04.2018 11:12:25 INFO    Calculating p-values for parameterized/combined_calibrated_deep
+07.04.2018 12:02:48 INFO    Subtracting SM for parameterized regression_calibrated
+07.04.2018 12:04:16 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+07.04.2018 12:04:24 INFO    Calculating p-values for parameterized/regression_calibrated
+07.04.2018 12:54:09 INFO    Subtracting SM for parameterized combinedregression_calibrated_deep
+07.04.2018 12:55:31 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+07.04.2018 12:55:40 INFO    Calculating p-values for parameterized/combinedregression_calibrated_deep
+07.04.2018 13:44:53 INFO    Subtracting SM for parameterized carl_calibrated_shallow_smeared
+07.04.2018 13:46:08 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+07.04.2018 13:46:16 INFO    Calculating p-values for parameterized/carl_calibrated_shallow_smeared
+07.04.2018 14:34:33 INFO    Subtracting SM for parameterized combined_calibrated_deep_smeared
+07.04.2018 14:35:44 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+07.04.2018 14:35:52 INFO    Calculating p-values for parameterized/combined_calibrated_deep_smeared
+07.04.2018 15:25:46 INFO    Subtracting SM for parameterized regression_calibrated_smeared
+07.04.2018 15:27:04 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+07.04.2018 15:27:12 INFO    Calculating p-values for parameterized/regression_calibrated_smeared
+07.04.2018 16:17:18 INFO    Subtracting SM for parameterized combinedregression_calibrated_deep_smeared
+07.04.2018 16:18:22 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+07.04.2018 16:18:30 INFO    Calculating p-values for parameterized/combinedregression_calibrated_deep_smeared
+07.04.2018 17:08:52 INFO    That's it -- have a great day!
