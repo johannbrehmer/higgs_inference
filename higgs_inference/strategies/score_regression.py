@@ -296,7 +296,7 @@ def score_regression_inference(use_smearing=False,
                                      np.linspace(11., 20., 10),
                                      [22., 25., 30., 40., 50., 70., 100., 100000.]))]
         else:
-            _bins = np.percentile(_tthat_calibration, np.linspace(0., 100., 80))
+            _bins = [np.percentile(_tthat_calibration, np.linspace(0., 100., 80))]
             _bins[0] = -100000.
             _bins[-1] = 100000.
 
