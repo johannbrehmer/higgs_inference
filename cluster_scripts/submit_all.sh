@@ -11,7 +11,7 @@ cd /home/jb6504/higgs_inference/cluster_scripts
 # sbatch run_histo.sh
 # sbatch run_afc.sh
 
-# sbatch run_scoreregression.sh
+sbatch run_scoreregression.sh
 
 # sbatch run_carl_point_by_point.sh
 # sbatch run_regression_point_by_point.sh
@@ -33,8 +33,8 @@ cd /home/jb6504/higgs_inference/cluster_scripts
 
 # sbatch --array=1-4 run_truth_diagnostics.sh
 
-sbatch --array=1-4 run_histo_diagnostics.sh
-sbatch --array=1-4 run_scoreregression_diagnostics.sh
+# sbatch --array=1-4 run_histo_diagnostics.sh
+# sbatch --array=1-4 run_scoreregression_diagnostics.sh
 
 # sbatch --array=1-4 run_carl_diagnostics.sh
 # sbatch --array=1-4 run_combined_diagnostics.sh
@@ -47,7 +47,7 @@ sbatch --array=1-4 run_scoreregression_diagnostics.sh
 ################################################################################
 
 
-# sbatch run_scoreregression_smearing.sh
+sbatch run_scoreregression_smearing.sh
 # sbatch run_histo_smearing.sh
 
 # sbatch run_carl_smearing.sh
@@ -62,8 +62,11 @@ sbatch --array=1-4 run_scoreregression_diagnostics.sh
 
 # sbatch run_combined_tuning.sh
 # sbatch run_combinedregression_tuning.sh
-# sbatch run_histo_tuning.sh
 
+# sbatch run_histo_tuning.sh
+sbatch run_scoreregression_tuning.sh
+
+sbatch run_scoreregression_depth_experiments.sh
 # sbatch run_carl_depth_experiments.sh
 # sbatch run_combined_depth_experiments.sh
 # sbatch run_regression_depth_experiments.sh

@@ -296,7 +296,7 @@ def score_regression_inference(use_smearing=False,
                                      np.linspace(11., 20., 10),
                                      [22., 25., 30., 40., 50., 70., 100., 100000.]))]
         else:
-            _bins = [np.percentile(_tthat_calibration, np.linspace(0., 100., 80))]
+            _bins = [np.percentile(_tthat_calibration, np.linspace(0., 100., 100))]
             _bins[0] = -100000.
             _bins[-1] = 100000.
 
@@ -314,11 +314,11 @@ def score_regression_inference(use_smearing=False,
                                     [6., 8., 10., 15., 20., 100000.]))
             _bins = (_bins, _bins)
         else:
-            _bins0 = np.percentile(_that_calibration[:, 0], np.linspace(0., 100., 20))
+            _bins0 = np.percentile(_that_calibration[:, 0], np.linspace(0., 100., 40))
             _bins0[0] = -100000.
             _bins0[-1] = 100000.
 
-            _bins1 = np.percentile(_that_calibration[:, 1], np.linspace(0., 100., 20))
+            _bins1 = np.percentile(_that_calibration[:, 1], np.linspace(0., 100., 40))
             _bins1[0] = -100000.
             _bins1[-1] = 100000.
 
@@ -332,7 +332,6 @@ def score_regression_inference(use_smearing=False,
                              sample_weight=w_calibration)
 
         # 2d density estimation with score (dynamicically rotated)
-
         if fixed_binning_mode:
             _bins_main = np.concatenate(([-100000., -20., -15., -10., -8., -6.],
                                          np.linspace(-5., -2.5, 6),
@@ -344,7 +343,7 @@ def score_regression_inference(use_smearing=False,
             _bins_other = np.array(
                 [-100000., -20., -10., -5., -3., -2., -1., -0.5, 0., 0.5, 1., 2., 3., 5., 10., 20., 100000.])
         else:
-            _bins_main = np.percentile(_that_rotated_calibration[:, 0], np.linspace(0., 100., 40))
+            _bins_main = np.percentile(_that_rotated_calibration[:, 0], np.linspace(0., 100., 80))
             _bins_main[0] = -100000.
             _bins_main[-1] = 100000.
 
