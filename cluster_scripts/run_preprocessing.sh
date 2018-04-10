@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=pre
-#SBATCH --output=slurm_preprocessing.out
+#SBATCH --job-name=pre2
+#SBATCH --output=slurm_preprocessing2.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=250GB
@@ -14,7 +14,7 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/preprocessing
 
-python -u generate_data.py --pointbypoint --alternativedenom1
-python -u generate_data.py --pointbypoint --alternativedenom2
-python -u generate_data.py --pointbypoint --alternativedenom3
+#python -u generate_data.py --pointbypoint --alternativedenom1
+#python -u generate_data.py --pointbypoint --alternativedenom2
+#python -u generate_data.py --pointbypoint --alternativedenom3
 python -u generate_data.py --pointbypoint --alternativedenom4

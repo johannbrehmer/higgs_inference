@@ -27,3 +27,33 @@
 10.04.2018 11:12:26 INFO    Generating point-by-point training samples
 generate_data.py:479: RuntimeWarning: divide by zero encountered in log
   cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+10.04.2018 17:57:02 INFO    Done!
+10.04.2018 17:57:09 INFO    Welcome! How are you today?
+10.04.2018 17:57:09 INFO    Tasks:
+10.04.2018 17:57:09 INFO      Baseline training:                 False
+10.04.2018 17:57:09 INFO      Random training:                   False
+10.04.2018 17:57:09 INFO      Morphing training:                 False
+10.04.2018 17:57:09 INFO      Point-by-point training:           True
+10.04.2018 17:57:09 INFO      Score regression training:         False
+10.04.2018 17:57:09 INFO      Calibration:                       False
+10.04.2018 17:57:09 INFO      Recalibration:                     False
+10.04.2018 17:57:09 INFO      Likelihood ratio eval:             False
+10.04.2018 17:57:09 INFO      Neyman construction:               False
+10.04.2018 17:57:09 INFO      Neyman construction (alternative): False
+10.04.2018 17:57:09 INFO      Neyman construction (alternative): False
+10.04.2018 17:57:09 INFO      Roaming:                           False
+10.04.2018 17:57:09 INFO      Illustration:                      False
+10.04.2018 17:57:09 INFO    Options:
+10.04.2018 17:57:09 INFO      Denominator:                       alternative 2
+10.04.2018 17:57:09 INFO      New samples (no NaN removal):      False
+10.04.2018 17:57:09 INFO      Dry run:                           False
+10.04.2018 18:09:50 INFO    Splitting...
+10.04.2018 18:10:17 INFO    Number of events:
+10.04.2018 18:10:17 INFO      All:    821636
+10.04.2018 18:10:17 INFO      Training:    575145
+10.04.2018 18:10:17 INFO      Calibration: 82164
+10.04.2018 18:10:17 INFO      Evaluation:  164327
+10.04.2018 18:10:18 INFO    Normalizing probabilities
+10.04.2018 18:11:46 INFO    Generating point-by-point training samples
+generate_data.py:479: RuntimeWarning: divide by zero encountered in log
+  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
