@@ -64,7 +64,7 @@ sbatch run_scoreregression_smearing.sh
 # sbatch run_combinedregression_tuning.sh
 
 # sbatch run_histo_tuning.sh
-sbatch run_scoreregression_tuning.sh
+# sbatch run_scoreregression_tuning.sh
 
 sbatch run_scoreregression_depth_experiments.sh
 # sbatch run_carl_depth_experiments.sh
