@@ -34,7 +34,7 @@ sbatch run_scoreregression.sh
 # sbatch --array=1-4 run_truth_diagnostics.sh
 
 # sbatch --array=1-4 run_histo_diagnostics.sh
-# sbatch --array=1-4 run_scoreregression_diagnostics.sh
+sbatch --array=1-4 run_scoreregression_diagnostics.sh
 
 # sbatch --array=1-4 run_carl_diagnostics.sh
 # sbatch --array=1-4 run_combined_diagnostics.sh
