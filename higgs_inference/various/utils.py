@@ -227,7 +227,6 @@ def find_binning(data,
     for group, (group_size, nom_bin_size) in enumerate(zip(group_sizes, nominal_bin_sizes)):
         if nom_bin_size < min_bin_size:
             bins[group] = max(int(math.ceil(group_size / min_bin_size)), 1)
-        print(nominal_bins[group], bins[group])
         assert bins[group] <= nominal_bins[group]
         assert bins[group] >= 1
 
