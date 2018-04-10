@@ -1,24 +1,24 @@
-INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '14964')
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '27936')
 INFO (theano.gof.compilelock): To manually release the lock, delete /home/jb6504/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-centos-7.3.1611-Core-x86_64-2.7.12-64/lock_dir
-09.04.2018 09:28:31 INFO    Hi! How are you today?
-09.04.2018 09:28:31 INFO    Startup options:
-09.04.2018 09:28:31 INFO      Algorithm:                     histo
-09.04.2018 09:28:31 INFO      Point by point:                False
-09.04.2018 09:28:31 INFO      Morphing-aware mode:           False
-09.04.2018 09:28:31 INFO      Smeared data:                  False
-09.04.2018 09:28:31 INFO      Training sample:               baseline
-09.04.2018 09:28:31 INFO      alpha:                         None
-09.04.2018 09:28:31 INFO      Histogram / AFC X indices:     [1, 41]
-09.04.2018 09:28:31 INFO      AFC epsilon:                   None
-09.04.2018 09:28:31 INFO      Denominator theta:             False
-09.04.2018 09:28:31 INFO      Neyman construction toys:      4
-09.04.2018 09:28:31 INFO      Other options:                 
-09.04.2018 09:28:31 INFO      Base directory:                /home/jb6504/higgs_inference
-09.04.2018 09:28:31 INFO      ML-based strategies available: False
-09.04.2018 09:28:31 INFO    Starting histogram-based inference
-09.04.2018 09:28:31 INFO    Settings:
-09.04.2018 09:28:31 INFO      Statistics:              x [1, 41]
-09.04.2018 09:28:31 INFO      Binning:                 (array([     0.,     48.,     58.,     67.,     75.,     83.,     91.,
+10.04.2018 10:56:29 INFO    Hi! How are you today?
+10.04.2018 10:56:29 INFO    Startup options:
+10.04.2018 10:56:29 INFO      Algorithm:                     histo
+10.04.2018 10:56:29 INFO      Point by point:                False
+10.04.2018 10:56:29 INFO      Morphing-aware mode:           False
+10.04.2018 10:56:29 INFO      Smeared data:                  False
+10.04.2018 10:56:29 INFO      Training sample:               baseline
+10.04.2018 10:56:29 INFO      alpha:                         None
+10.04.2018 10:56:29 INFO      Histogram / AFC X indices:     [1, 41]
+10.04.2018 10:56:29 INFO      AFC epsilon:                   None
+10.04.2018 10:56:29 INFO      Denominator theta:             False
+10.04.2018 10:56:29 INFO      Neyman construction toys:      4
+10.04.2018 10:56:29 INFO      Other options:                 
+10.04.2018 10:56:29 INFO      Base directory:                /home/jb6504/higgs_inference
+10.04.2018 10:56:29 INFO      ML-based strategies available: False
+10.04.2018 10:56:29 INFO    Starting histogram-based inference
+10.04.2018 10:56:29 INFO    Settings:
+10.04.2018 10:56:29 INFO      Statistics:              x [1, 41]
+10.04.2018 10:56:29 INFO      Binning:                 (array([     0.,     48.,     58.,     67.,     75.,     83.,     91.,
           100.,    109.,    119.,    130.,    141.,    155.,    172.,
           193.,    221.,    260.,    325.,    462.,  14000.]), array([ 0.        ,  0.31415927,  0.62831853,  0.9424778 ,  1.25663706,
         1.57079633,  1.88495559,  2.19911486,  2.51327412,  2.82743339,
@@ -26,8 +26,8 @@ INFO (theano.gof.compilelock): To manually release the lock, delete /home/jb6504
 Traceback (most recent call last):
   File "experiments.py", line 116, in <module>
     options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/histograms.py", line 159, in histo_inference
-    settings.unweighted_events_dir + '/' + input_X_prefix + 'X_illustration' + input_filename_addition + '.npy')
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/histograms.py", line 191, in histo_inference
+    t) + input_filename_addition + new_sample_prefix + '.npy')
   File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
     fid = open(file, "rb")
-IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/X_illustration_denom4.npy'
+IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/point_by_point/X_train_point_by_point_0_denom4.npy'
