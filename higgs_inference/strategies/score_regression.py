@@ -302,11 +302,11 @@ def score_regression_inference(use_smearing=False,
             _bins = [find_binning(_tthat_calibration,
                                   nominal_bins=[32, 34, 32],
                                   percentile_edges=[.5, 5., 95., 99.5],
-                                  min_bin_size=0.025,
+                                  min_bin_size=0.04,
                                   add_overflow=(-100000., 100000.))]
 
         logging.debug('Theta %s = %s, score * theta bin sizes: %s, %s, %s', t, settings.thetas[t],
-                      _bins[0][2] - _bins[0][1], _bins[0][50] - _bins[0][49], _bins[0][-1] - _bins[0][-2])
+                      _bins[0][2] - _bins[0][1], _bins[0][50] - _bins[0][49], _bins[0][-2] - _bins[0][-3])
 
         calibrator_scoretheta = HistogramCalibrator(bins=_bins, independent_binning=False, variable_width=False)
         calibrator_scoretheta.fit(_tthat_calibration, y_calibration, sample_weight=w_calibration)
@@ -342,8 +342,8 @@ def score_regression_inference(use_smearing=False,
                              sample_weight=w_calibration)
 
         logging.debug('Theta %s = %s, score bin sizes: %s, %s, %s / %s, %s, %s', t, settings.thetas[t],
-                      _bins0[2] - _bins0[1], _bins0[10] - _bins0[9], _bins0[-1] - _bins0[-2],
-                      _bins1[2] - _bins1[1], _bins1[10] - _bins1[9], _bins1[-1] - _bins1[-2])
+                      _bins0[2] - _bins0[1], _bins0[15] - _bins0[14], _bins0[-2] - _bins0[-3],
+                      _bins1[2] - _bins1[1], _bins1[15] - _bins1[14], _bins1[-2] - _bins1[-3])
 
         # 2d density estimation with score (dynamicically rotated)
         if fixed_binning_mode:
@@ -360,7 +360,7 @@ def score_regression_inference(use_smearing=False,
             _bins_main = find_binning(_that_rotated_calibration[:, 0],
                                       nominal_bins=[24, 30, 24],
                                       percentile_edges=[0.5, 5, 95, 99.5],
-                                      min_bin_size=0.025,
+                                      min_bin_size=0.04,
                                       add_overflow=(-100000., 100000.))
             _bins_other = find_binning(_that_rotated_calibration[:, 1],
                                        nominal_bins=[2, 4, 2],
@@ -371,9 +371,9 @@ def score_regression_inference(use_smearing=False,
         _bins = (_bins_main, _bins_other)
 
         logging.debug('Theta %s = %s, dynamic score bin sizes: %s, %s, %s / %s, %s, %s', t, settings.thetas[t],
-                      _bins_main[2] - _bins_main[1], _bins_main[30] - _bins_main[29], _bins_main[-1] - _bins_main[-2],
+                      _bins_main[2] - _bins_main[1], _bins_main[30] - _bins_main[29], _bins_main[-2] - _bins_main[-3],
                       _bins_other[2] - _bins_other[1], _bins_other[5] - _bins_other[4],
-                      _bins_other[-1] - _bins_other[-2])
+                      _bins_other[-2] - _bins_other[-3])
 
         _range = (np.array((-100000., 100000.)), np.array((-100000., 100000.)))
 
