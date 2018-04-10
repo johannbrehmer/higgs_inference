@@ -18,7 +18,7 @@ from carl.learning.calibration import HistogramCalibrator, NDHistogramCalibrator
 
 from higgs_inference import settings
 from higgs_inference.models.models_score_regression import make_regressor
-from higgs_inference.various.utils import r_from_s, calculate_mean_squared_error
+from higgs_inference.various.utils import r_from_s, calculate_mean_squared_error, find_binning
 
 
 def score_regression_inference(use_smearing=False,
@@ -285,8 +285,8 @@ def score_regression_inference(use_smearing=False,
         # 1d density estimation with score * theta
         if (fixed_binning_mode
                 or delta_theta_norm < settings.epsilon
-                or (np.percentile(_tthat_calibration, 2.5) - np.percentile(_tthat_calibration, 97.5))**2
-                < settings.epsilon**2):
+                or (np.percentile(_tthat_calibration, 2.5) - np.percentile(_tthat_calibration, 97.5)) ** 2
+                < settings.epsilon ** 2):
             _bins = [np.concatenate(([-100000., -100., -70., -50., -40., -30., -25., -22.],
                                      np.linspace(-20., -11., 10),
                                      np.linspace(-10., -5.5, 10),
@@ -299,13 +299,11 @@ def score_regression_inference(use_smearing=False,
                                      np.linspace(11., 20., 10),
                                      [22., 25., 30., 40., 50., 70., 100., 100000.]))]
         else:
-            _bins = [np.concatenate((
-                [-100000.],
-                np.linspace(np.percentile(_tthat_calibration, .5), np.percentile(_tthat_calibration, 5.), 33)[:-1],
-                np.linspace(np.percentile(_tthat_calibration, 5), np.percentile(_tthat_calibration, 95.), 35)[:-1],
-                np.linspace(np.percentile(_tthat_calibration, 95), np.percentile(_tthat_calibration, 99.5), 33),
-                [100000.]
-            ))]
+            _bins = [find_binning(_tthat_calibration,
+                                  nominal_bins=[32, 34, 32],
+                                  percentile_edges=[.5, 5., 95., 99.5],
+                                  min_bin_size=0.025,
+                                  add_overflow=(-100000., 100000.))]
 
         logging.debug('Theta %s = %s, score * theta bin sizes: %s, %s, %s', t, settings.thetas[t],
                       _bins[0][2] - _bins[0][1], _bins[0][50] - _bins[0][49], _bins[0][-1] - _bins[0][-2])
@@ -324,26 +322,16 @@ def score_regression_inference(use_smearing=False,
                                     [6., 8., 10., 15., 20., 100000.]))
             _bins = (_bins, _bins)
         else:
-            _bins0 = np.concatenate((
-                [-100000.],
-                np.linspace(np.percentile(_that_calibration[:, 0], 1),
-                            np.percentile(_that_calibration[:, 0], 5), 10)[:-1],
-                np.linspace(np.percentile(_that_calibration[:, 0], 5),
-                            np.percentile(_that_calibration[:, 0], 95), 11)[:-1],
-                np.linspace(np.percentile(_that_calibration[:, 0], 95),
-                            np.percentile(_that_calibration[:, 0], 99), 10),
-                [100000.]
-            ))
-            _bins1 = np.concatenate((
-                [-100000.],
-                np.linspace(np.percentile(_that_calibration[:, 1], 1),
-                            np.percentile(_that_calibration[:, 1], 5), 10)[:-1],
-                np.linspace(np.percentile(_that_calibration[:, 1], 5),
-                            np.percentile(_that_calibration[:, 1], 95), 11)[:-1],
-                np.linspace(np.percentile(_that_calibration[:, 1], 95),
-                            np.percentile(_that_calibration[:, 1], 99), 10),
-                [100000.]
-            ))
+            _bins0 = find_binning(_that_calibration[:, 0],
+                                  nominal_bins=[9, 10, 9],
+                                  percentile_edges=[1, 5., 95., 99],
+                                  min_bin_size=0.1,
+                                  add_overflow=(-100000., 100000.))
+            _bins1 = find_binning(_that_calibration[:, 1],
+                                  nominal_bins=[9, 10, 9],
+                                  percentile_edges=[1, 5., 95., 99],
+                                  min_bin_size=0.1,
+                                  add_overflow=(-100000., 100000.))
             _bins = (_bins0, _bins1)
 
         _range = (np.array((-100000., 100000.)), np.array((-100000., 100000.)))
@@ -369,32 +357,23 @@ def score_regression_inference(use_smearing=False,
             _bins_other = np.array(
                 [-100000., -20., -10., -5., -3., -2., -1., -0.5, 0., 0.5, 1., 2., 3., 5., 10., 20., 100000.])
         else:
-            _bins_main = np.concatenate((
-                [-100000.],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 0], .5),
-                            np.percentile(_that_rotated_calibration[:, 0], 5), 25)[:-1],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 0], 5),
-                            np.percentile(_that_rotated_calibration[:, 0], 95), 31)[:-1],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 0], 95),
-                            np.percentile(_that_rotated_calibration[:, 0], 99.5), 25),
-                [100000.]
-            ))
-            _bins_other = np.concatenate((
-                [-100000.],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 1], 2),
-                            np.percentile(_that_rotated_calibration[:, 1], 5), 3)[:-1],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 1], 5),
-                            np.percentile(_that_rotated_calibration[:, 1], 95), 5)[:-1],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 1], 95),
-                            np.percentile(_that_rotated_calibration[:, 1], 98), 3),
-                [100000.]
-            ))
+            _bins_main = find_binning(_that_rotated_calibration[:, 0],
+                                      nominal_bins=[24, 30, 24],
+                                      percentile_edges=[0.5, 5, 95, 99.5],
+                                      min_bin_size=0.025,
+                                      add_overflow=(-100000., 100000.))
+            _bins_other = find_binning(_that_rotated_calibration[:, 1],
+                                       nominal_bins=[2, 4, 2],
+                                       percentile_edges=[2, 5, 95, 98],
+                                       min_bin_size=0.2,
+                                       add_overflow=(-100000., 100000.))
 
         _bins = (_bins_main, _bins_other)
 
         logging.debug('Theta %s = %s, dynamic score bin sizes: %s, %s, %s / %s, %s, %s', t, settings.thetas[t],
                       _bins_main[2] - _bins_main[1], _bins_main[30] - _bins_main[29], _bins_main[-1] - _bins_main[-2],
-                      _bins_other[2] - _bins_other[1], _bins_other[5] - _bins_other[4], _bins_other[-1] - _bins_other[-2])
+                      _bins_other[2] - _bins_other[1], _bins_other[5] - _bins_other[4],
+                      _bins_other[-1] - _bins_other[-2])
 
         _range = (np.array((-100000., 100000.)), np.array((-100000., 100000.)))
 
