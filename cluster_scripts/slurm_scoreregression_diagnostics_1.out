@@ -1,33 +1,54 @@
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '142899')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/jb6504/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-centos-7.3.1611-Core-x86_64-2.7.12-64/lock_dir
 Using TensorFlow backend.
-09.04.2018 09:27:04 INFO    Hi! How are you today?
-09.04.2018 09:27:04 INFO    Startup options:
-09.04.2018 09:27:04 INFO      Algorithm:                     scoreregression
-09.04.2018 09:27:04 INFO      Point by point:                False
-09.04.2018 09:27:04 INFO      Morphing-aware mode:           False
-09.04.2018 09:27:04 INFO      Smeared data:                  False
-09.04.2018 09:27:04 INFO      Training sample:               baseline
-09.04.2018 09:27:04 INFO      alpha:                         None
-09.04.2018 09:27:04 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-09.04.2018 09:27:04 INFO      AFC epsilon:                   None
-09.04.2018 09:27:04 INFO      Denominator theta:             False
-09.04.2018 09:27:04 INFO      Neyman construction toys:      1
-09.04.2018 09:27:04 INFO      Other options:                 ['deep']
-09.04.2018 09:27:04 INFO      Base directory:                /home/jb6504/higgs_inference
-09.04.2018 09:27:04 INFO      ML-based strategies available: True
-09.04.2018 09:27:04 INFO    Starting score regression inference
-09.04.2018 09:27:04 INFO    Options:
-09.04.2018 09:27:04 INFO      Denominator theta:       denominator 1 = theta 0 = [ 0.  0.]
-09.04.2018 09:27:04 INFO      Number of hidden layers: 5
-09.04.2018 09:27:04 INFO      Batch size:              128
-09.04.2018 09:27:04 INFO      Learning rate:           0.001
-09.04.2018 09:27:04 INFO      Learning rate decay:     0.0921034037198
-09.04.2018 09:27:04 INFO      Number of epochs:        50
-09.04.2018 09:27:04 INFO      NC experiments:          False
-Traceback (most recent call last):
-  File "experiments.py", line 131, in <module>
-    options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/score_regression.py", line 172, in score_regression_inference
-    settings.unweighted_events_dir + '/' + input_X_prefix + 'X_illustration' + input_filename_addition + '.npy')
-  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
-    fid = open(file, "rb")
-IOError: [Errno 2] No such file or directory: '/scratch/jb6504/higgs_inference/data/unweighted_events/X_illustration_denom1.npy'
+10.04.2018 11:34:20 INFO    Hi! How are you today?
+10.04.2018 11:34:20 INFO    Startup options:
+10.04.2018 11:34:20 INFO      Algorithm:                     scoreregression
+10.04.2018 11:34:20 INFO      Point by point:                False
+10.04.2018 11:34:20 INFO      Morphing-aware mode:           False
+10.04.2018 11:34:20 INFO      Smeared data:                  False
+10.04.2018 11:34:20 INFO      Training sample:               baseline
+10.04.2018 11:34:20 INFO      alpha:                         None
+10.04.2018 11:34:20 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+10.04.2018 11:34:20 INFO      AFC epsilon:                   None
+10.04.2018 11:34:20 INFO      Denominator theta:             False
+10.04.2018 11:34:20 INFO      Neyman construction toys:      1
+10.04.2018 11:34:20 INFO      Other options:                 ['deep']
+10.04.2018 11:34:20 INFO      Base directory:                /home/jb6504/higgs_inference
+10.04.2018 11:34:20 INFO      ML-based strategies available: True
+10.04.2018 11:34:20 INFO    Starting score regression inference
+10.04.2018 11:34:20 INFO    Options:
+10.04.2018 11:34:20 INFO      Denominator theta:       denominator 1 = theta 0 = [ 0.  0.]
+10.04.2018 11:34:20 INFO      Number of hidden layers: 5
+10.04.2018 11:34:20 INFO      Batch size:              128
+10.04.2018 11:34:20 INFO      Learning rate:           0.001
+10.04.2018 11:34:20 INFO      Learning rate decay:     0.0921034037198
+10.04.2018 11:34:20 INFO      Number of epochs:        50
+10.04.2018 11:34:20 INFO      NC experiments:          False
+10.04.2018 11:34:52 INFO    Starting training of score regression
+Train on 8000000 samples, validate on 2000000 samples
+2018-04-10 11:34:53.204536: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-10 11:34:53.204815: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-10 11:34:53.204826: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-10 11:34:53.204830: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-10 11:34:53.204834: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-10 11:34:53.506203: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:05:00.0
+Total memory: 22.38GiB
+Free memory: 22.21GiB
+2018-04-10 11:34:53.506241: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-04-10 11:34:53.506247: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-04-10 11:34:53.506255: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:05:00.0)
+Epoch 1/50
+334s - loss: 0.0605 - val_loss: 0.0434
+Epoch 2/50
+334s - loss: 0.0384 - val_loss: 0.0318
+Epoch 3/50
+333s - loss: 0.0316 - val_loss: 0.0272
+Epoch 4/50
+333s - loss: 0.0247 - val_loss: 0.0242
+Epoch 5/50
+334s - loss: 0.0224 - val_loss: 0.0179
+Epoch 6/50
