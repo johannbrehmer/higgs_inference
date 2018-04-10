@@ -301,13 +301,14 @@ def score_regression_inference(use_smearing=False,
         else:
             _bins = [np.concatenate((
                 [-100000.],
-                np.linspace(np.percentile(_tthat_calibration, .1), np.percentile(_tthat_calibration, 2.5), 30)[:-1],
-                np.linspace(np.percentile(_tthat_calibration, 2.5), np.percentile(_tthat_calibration, 97.5), 40)[:-1],
-                np.linspace(np.percentile(_tthat_calibration, 97.5), np.percentile(_tthat_calibration, 99.9), 30),
+                np.linspace(np.percentile(_tthat_calibration, .5), np.percentile(_tthat_calibration, 5.), 33)[:-1],
+                np.linspace(np.percentile(_tthat_calibration, 5), np.percentile(_tthat_calibration, 95.), 35)[:-1],
+                np.linspace(np.percentile(_tthat_calibration, 95), np.percentile(_tthat_calibration, 99.5), 33),
                 [100000.]
             ))]
 
-        logging.debug('Score * theta binning: %s', _bins)
+        logging.debug('Theta %s = %s, score * theta bin sizes: %s, %s, %s', t, settings.thetas[t],
+                      _bins[0][2] - _bins[0][1], _bins[0][50] - _bins[0][49], _bins[0][-1] - _bins[0][-2])
 
         calibrator_scoretheta = HistogramCalibrator(bins=_bins, independent_binning=False, variable_width=False)
         calibrator_scoretheta.fit(_tthat_calibration, y_calibration, sample_weight=w_calibration)
@@ -325,22 +326,22 @@ def score_regression_inference(use_smearing=False,
         else:
             _bins0 = np.concatenate((
                 [-100000.],
-                np.linspace(np.percentile(_that_calibration[:, 0], .2), np.percentile(_that_calibration[:, 0], 2.5), 7)[
-                :-1],
-                np.linspace(np.percentile(_that_calibration[:, 0], 2.5), np.percentile(_that_calibration[:, 0], 97.5),
-                            12)[:-1],
-                np.linspace(np.percentile(_that_calibration[:, 0], 97.5), np.percentile(_that_calibration[:, 0], 99.8),
-                            7),
+                np.linspace(np.percentile(_that_calibration[:, 0], 1),
+                            np.percentile(_that_calibration[:, 0], 5), 10)[:-1],
+                np.linspace(np.percentile(_that_calibration[:, 0], 5),
+                            np.percentile(_that_calibration[:, 0], 95), 11)[:-1],
+                np.linspace(np.percentile(_that_calibration[:, 0], 95),
+                            np.percentile(_that_calibration[:, 0], 99), 10),
                 [100000.]
             ))
             _bins1 = np.concatenate((
                 [-100000.],
-                np.linspace(np.percentile(_that_calibration[:, 1], .2), np.percentile(_that_calibration[:, 1], 2.5), 7)[
-                :-1],
-                np.linspace(np.percentile(_that_calibration[:, 1], 2.5), np.percentile(_that_calibration[:, 1], 97.5),
-                            12)[:-1],
-                np.linspace(np.percentile(_that_calibration[:, 1], 97.5), np.percentile(_that_calibration[:, 1], 99.8),
-                            7),
+                np.linspace(np.percentile(_that_calibration[:, 1], 1),
+                            np.percentile(_that_calibration[:, 1], 5), 10)[:-1],
+                np.linspace(np.percentile(_that_calibration[:, 1], 5),
+                            np.percentile(_that_calibration[:, 1], 95), 11)[:-1],
+                np.linspace(np.percentile(_that_calibration[:, 1], 95),
+                            np.percentile(_that_calibration[:, 1], 99), 10),
                 [100000.]
             ))
             _bins = (_bins0, _bins1)
@@ -352,7 +353,9 @@ def score_regression_inference(use_smearing=False,
                              y_calibration,
                              sample_weight=w_calibration)
 
-        logging.debug('Score binning: %s', _bins)
+        logging.debug('Theta %s = %s, score bin sizes: %s, %s, %s / %s, %s, %s', t, settings.thetas[t],
+                      _bins0[2] - _bins0[1], _bins0[10] - _bins0[9], _bins0[-1] - _bins0[-2],
+                      _bins1[2] - _bins1[1], _bins1[10] - _bins1[9], _bins1[-1] - _bins1[-2])
 
         # 2d density estimation with score (dynamicically rotated)
         if fixed_binning_mode:
@@ -368,28 +371,30 @@ def score_regression_inference(use_smearing=False,
         else:
             _bins_main = np.concatenate((
                 [-100000.],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 0], .1),
-                            np.percentile(_that_rotated_calibration[:, 0], 2.5), 24)[:-1],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 0], 2.5),
-                            np.percentile(_that_rotated_calibration[:, 0], 97.5), 32)[:-1],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 0], 97.5),
-                            np.percentile(_that_rotated_calibration[:, 0], 99.9), 24),
+                np.linspace(np.percentile(_that_rotated_calibration[:, 0], .5),
+                            np.percentile(_that_rotated_calibration[:, 0], 5), 25)[:-1],
+                np.linspace(np.percentile(_that_rotated_calibration[:, 0], 5),
+                            np.percentile(_that_rotated_calibration[:, 0], 95), 31)[:-1],
+                np.linspace(np.percentile(_that_rotated_calibration[:, 0], 95),
+                            np.percentile(_that_rotated_calibration[:, 0], 99.5), 25),
                 [100000.]
             ))
             _bins_other = np.concatenate((
                 [-100000.],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 1], .3),
-                            np.percentile(_that_rotated_calibration[:, 1], 2.5), 3)[:-1],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 1], 2.5),
-                            np.percentile(_that_rotated_calibration[:, 1], 97.5), 5)[:-1],
-                np.linspace(np.percentile(_that_rotated_calibration[:, 1], 97.5),
-                            np.percentile(_that_rotated_calibration[:, 1], 99.7), 3),
+                np.linspace(np.percentile(_that_rotated_calibration[:, 1], 2),
+                            np.percentile(_that_rotated_calibration[:, 1], 5), 3)[:-1],
+                np.linspace(np.percentile(_that_rotated_calibration[:, 1], 5),
+                            np.percentile(_that_rotated_calibration[:, 1], 95), 5)[:-1],
+                np.linspace(np.percentile(_that_rotated_calibration[:, 1], 95),
+                            np.percentile(_that_rotated_calibration[:, 1], 98), 3),
                 [100000.]
             ))
 
         _bins = (_bins_main, _bins_other)
 
-        logging.debug('Dynamic score binning: %s', _bins)
+        logging.debug('Theta %s = %s, dynamic score bin sizes: %s, %s, %s / %s, %s, %s', t, settings.thetas[t],
+                      _bins_main[2] - _bins_main[1], _bins_main[30] - _bins_main[29], _bins_main[-1] - _bins_main[-2],
+                      _bins_other[2] - _bins_other[1], _bins_other[5] - _bins_other[4], _bins_other[-1] - _bins_other[-2])
 
         _range = (np.array((-100000., 100000.)), np.array((-100000., 100000.)))
 
