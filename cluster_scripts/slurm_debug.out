@@ -1,51 +1,52 @@
 Using TensorFlow backend.
-22.03.2018 10:48:20 INFO    Hi! How are you today?
-22.03.2018 10:48:20 INFO    Startup options:
-22.03.2018 10:48:20 INFO      Algorithm:                     combinedregression
-22.03.2018 10:48:20 INFO      Point by point:                False
-22.03.2018 10:48:20 INFO      Morphing-aware mode:           False
-22.03.2018 10:48:20 INFO      Smeared data:                  False
-22.03.2018 10:48:20 INFO      Training sample:               baseline
-22.03.2018 10:48:20 INFO      alpha:                         None
-22.03.2018 10:48:20 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-22.03.2018 10:48:20 INFO      AFC epsilon:                   None
-22.03.2018 10:48:20 INFO      Denominator theta:             False
-22.03.2018 10:48:20 INFO      Neyman construction toys:      0
-22.03.2018 10:48:20 INFO      Other options:                 ['short', 'deep', 'new']
-22.03.2018 10:48:20 INFO      Base directory:                /home/jb6504/higgs_inference
-22.03.2018 10:48:20 INFO      ML-based strategies available: True
-22.03.2018 10:48:20 INFO    Starting parameterized inference
-22.03.2018 10:48:20 INFO    Main settings:
-22.03.2018 10:48:20 INFO      Algorithm:                combinedregression
-22.03.2018 10:48:20 INFO      Morphing-aware:           False
-22.03.2018 10:48:20 INFO      Training sample:          baseline
-22.03.2018 10:48:20 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
-22.03.2018 10:48:20 INFO    Options:
-22.03.2018 10:48:20 INFO      Number of hidden layers:  5
-22.03.2018 10:48:20 INFO      alpha:                    100.0
-22.03.2018 10:48:20 INFO      Batch size:               128
-22.03.2018 10:48:20 INFO      Learning rate:            0.001
-22.03.2018 10:48:20 INFO      Learning rate decay:      0.0921034037198
-22.03.2018 10:48:20 INFO      Number of epochs:         1
-22.03.2018 10:48:20 INFO      NC experiments:           False
-22.03.2018 10:48:20 INFO      Debug mode:               False
-22.03.2018 10:49:04 INFO    Starting training
-Train on 7999997 samples, validate on 2000000 samples
-2018-03-22 10:49:05.675204: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-22 10:49:05.675471: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-22 10:49:05.675481: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-22 10:49:05.675485: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-22 10:49:05.675501: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-03-22 10:49:05.985746: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
-name: Tesla K80
-major: 3 minor: 7 memoryClockRate (GHz) 0.8235
-pciBusID 0000:84:00.0
-Total memory: 11.17GiB
-Free memory: 11.10GiB
-2018-03-22 10:49:05.985782: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-03-22 10:49:05.985789: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-03-22 10:49:05.985798: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:84:00.0)
+09.04.2018 18:13:15 INFO    Hi! How are you today?
+09.04.2018 18:13:15 INFO    Startup options:
+09.04.2018 18:13:15 INFO      Algorithm:                     scoreregression
+09.04.2018 18:13:15 INFO      Point by point:                False
+09.04.2018 18:13:15 INFO      Morphing-aware mode:           False
+09.04.2018 18:13:15 INFO      Smeared data:                  False
+09.04.2018 18:13:15 INFO      Training sample:               baseline
+09.04.2018 18:13:15 INFO      alpha:                         None
+09.04.2018 18:13:15 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+09.04.2018 18:13:15 INFO      AFC epsilon:                   None
+09.04.2018 18:13:15 INFO      Denominator theta:             False
+09.04.2018 18:13:15 INFO      Neyman construction toys:      0
+09.04.2018 18:13:15 INFO      Other options:                 ['short']
+09.04.2018 18:13:15 INFO      Base directory:                /home/jb6504/higgs_inference
+09.04.2018 18:13:15 INFO      ML-based strategies available: True
+09.04.2018 18:13:15 INFO    Starting score regression inference
+09.04.2018 18:13:15 INFO    Options:
+09.04.2018 18:13:15 INFO      Denominator theta:       denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+09.04.2018 18:13:15 INFO      Number of hidden layers: 3
+09.04.2018 18:13:15 INFO      Batch size:              128
+09.04.2018 18:13:15 INFO      Learning rate:           0.001
+09.04.2018 18:13:15 INFO      Learning rate decay:     0.0921034037198
+09.04.2018 18:13:15 INFO      Number of epochs:        1
+09.04.2018 18:13:15 INFO      NC experiments:          False
+09.04.2018 18:13:50 INFO    Starting training of score regression
+Train on 8000000 samples, validate on 2000000 samples
+2018-04-09 18:13:51.312634: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-09 18:13:51.313028: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-09 18:13:51.313037: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-09 18:13:51.313041: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-09 18:13:51.313045: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-09 18:13:51.622869: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: GeForce GTX 1080
+major: 6 minor: 1 memoryClockRate (GHz) 1.7335
+pciBusID 0000:05:00.0
+Total memory: 7.93GiB
+Free memory: 7.81GiB
+2018-04-09 18:13:51.622908: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-04-09 18:13:51.622914: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-04-09 18:13:51.622923: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:05:00.0)
 Epoch 1/1
-651s - loss: 5271.2483 - full_cross_entropy: 0.6697 - trimmed_cross_entropy: 0.6592 - full_mse_log_r: 0.1346 - trimmed_mse_log_r: 0.1325 - full_mae_log_r: 0.2365 - full_mse_score: 6.3378 - trimmed_mse_score: 0.4162 - full_mae_score: 0.2540 - val_loss: 5418.5027 - val_full_cross_entropy: 0.6638 - val_trimmed_cross_entropy: 0.6534 - val_full_mse_log_r: 0.0747 - val_trimmed_mse_log_r: 0.0735 - val_full_mae_log_r: 0.1480 - val_full_mse_score: 4.7474 - val_trimmed_mse_score: 0.3511 - val_full_mae_score: 0.2173
-22.03.2018 11:05:37 INFO    Starting evaluation
-slurmstepd: error: *** JOB 5060771 ON gpu-01 CANCELLED AT 2018-03-22T11:29:08 ***
+301s - loss: 0.0531 - val_loss: 0.0442
+09.04.2018 18:18:54 INFO    Starting evaluation
+09.04.2018 18:19:35 INFO    Score regression evaluation timing: 0.914183139801 s
+09.04.2018 18:19:35 INFO    Starting density estimation
+Traceback (most recent call last):
+  File "experiments.py", line 131, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/score_regression.py", line 288, in score_regression_inference
+    or (np.linspace(np.percentile(_tthat_calibration, 2.5) - np.percentile(_tthat_calibration, 97.5)))**2
+TypeError: linspace() takes at least 2 arguments (1 given)

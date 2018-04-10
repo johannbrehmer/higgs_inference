@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=sreg
-#SBATCH --output=slurm_scoreregression.out
+#SBATCH --job-name=sreg-tuning
+#SBATCH --output=slurm_scoreregression_tuning.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
