@@ -1,24 +1,19 @@
-09.04.2018 11:31:41 INFO    Hi! How are you today?
-09.04.2018 11:31:41 INFO    Startup options:
-09.04.2018 11:31:41 INFO      Algorithm:                     cl
-09.04.2018 11:31:41 INFO      Point by point:                False
-09.04.2018 11:31:41 INFO      Morphing-aware mode:           False
-09.04.2018 11:31:41 INFO      Smeared data:                  False
-09.04.2018 11:31:41 INFO      Training sample:               baseline
-09.04.2018 11:31:41 INFO      alpha:                         None
-09.04.2018 11:31:41 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-09.04.2018 11:31:41 INFO      AFC epsilon:                   None
-09.04.2018 11:31:41 INFO      Denominator theta:             False
-09.04.2018 11:31:41 INFO      Neyman construction toys:      0
-09.04.2018 11:31:41 INFO      Other options:                 ['neyman2']
-09.04.2018 11:31:41 INFO      Base directory:                /home/jb6504/higgs_inference
-09.04.2018 11:31:41 INFO      ML-based strategies available: False
-09.04.2018 11:31:41 INFO    Starting p-value calculation
-09.04.2018 11:31:41 INFO    Subtracting SM for histo histo_2d
-09.04.2018 11:32:45 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-09.04.2018 11:32:56 INFO    Calculating p-values for histo/histo_2d
-slurmstepd: error: *** JOB 5414914 ON c23-01 CANCELLED AT 2018-04-09T11:35:22 ***
-09.04.2018 12:46:49 INFO    Subtracting SM for histo histo_2d_smeared
-09.04.2018 12:48:02 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-09.04.2018 12:48:12 INFO    Calculating p-values for histo/histo_2d_smeared
-09.04.2018 14:00:57 INFO    That's it -- have a great day!
+11.04.2018 18:30:24 INFO    Hi! How are you today?
+11.04.2018 18:30:24 INFO    Startup options:
+11.04.2018 18:30:24 INFO      Algorithm:                     cl
+11.04.2018 18:30:24 INFO      Point by point:                False
+11.04.2018 18:30:24 INFO      Morphing-aware mode:           False
+11.04.2018 18:30:24 INFO      Smeared data:                  False
+11.04.2018 18:30:24 INFO      Training sample:               baseline
+11.04.2018 18:30:24 INFO      alpha:                         None
+11.04.2018 18:30:24 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+11.04.2018 18:30:24 INFO      AFC epsilon:                   None
+11.04.2018 18:30:24 INFO      Denominator theta:             False
+11.04.2018 18:30:24 INFO      Neyman construction toys:      0
+11.04.2018 18:30:24 INFO      Other options:                 ['neyman2']
+11.04.2018 18:30:24 INFO      Base directory:                /home/jb6504/higgs_inference
+11.04.2018 18:30:24 INFO      ML-based strategies available: False
+11.04.2018 18:30:24 INFO    Starting p-value calculation
+11.04.2018 18:30:24 INFO    Subtracting SM for score_regression scoreregression_rotatedscore_deep
+11.04.2018 18:32:02 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+11.04.2018 18:32:10 INFO    Calculating p-values for score_regression/scoreregression_rotatedscore_deep
