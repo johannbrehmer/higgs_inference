@@ -1,352 +1,301 @@
 Using TensorFlow backend.
-10.04.2018 18:33:23 INFO    Hi! How are you today?
-10.04.2018 18:33:23 INFO    Startup options:
-10.04.2018 18:33:23 INFO      Algorithm:                     scoreregression
-10.04.2018 18:33:23 INFO      Point by point:                False
-10.04.2018 18:33:23 INFO      Morphing-aware mode:           False
-10.04.2018 18:33:23 INFO      Smeared data:                  False
-10.04.2018 18:33:23 INFO      Training sample:               baseline
-10.04.2018 18:33:23 INFO      alpha:                         None
-10.04.2018 18:33:23 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-10.04.2018 18:33:23 INFO      AFC epsilon:                   None
-10.04.2018 18:33:23 INFO      Denominator theta:             False
-10.04.2018 18:33:23 INFO      Neyman construction toys:      0
-10.04.2018 18:33:23 INFO      Other options:                 ['fixedbinning']
-10.04.2018 18:33:23 INFO      Base directory:                /home/jb6504/higgs_inference
-10.04.2018 18:33:23 INFO      ML-based strategies available: True
-10.04.2018 18:33:23 INFO    Starting score regression inference
-10.04.2018 18:33:23 INFO    Options:
-10.04.2018 18:33:23 INFO      Denominator theta:       denominator 0 = theta 708 = [ 0.39293227  0.43229216]
-10.04.2018 18:33:23 INFO      Number of hidden layers: 3
-10.04.2018 18:33:23 INFO      Batch size:              128
-10.04.2018 18:33:23 INFO      Learning rate:           0.001
-10.04.2018 18:33:23 INFO      Learning rate decay:     0.0921034037198
-10.04.2018 18:33:23 INFO      Number of epochs:        50
-10.04.2018 18:33:23 INFO      NC experiments:          False
-10.04.2018 18:33:58 INFO    Starting training of score regression
+11.04.2018 09:05:24 INFO    Hi! How are you today?
+11.04.2018 09:05:24 INFO    Startup options:
+11.04.2018 09:05:24 INFO      Algorithm:                     scoreregression
+11.04.2018 09:05:24 INFO      Point by point:                False
+11.04.2018 09:05:24 INFO      Morphing-aware mode:           False
+11.04.2018 09:05:24 INFO      Smeared data:                  False
+11.04.2018 09:05:24 INFO      Training sample:               baseline
+11.04.2018 09:05:24 INFO      alpha:                         None
+11.04.2018 09:05:24 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+11.04.2018 09:05:24 INFO      AFC epsilon:                   None
+11.04.2018 09:05:24 INFO      Denominator theta:             False
+11.04.2018 09:05:24 INFO      Neyman construction toys:      0
+11.04.2018 09:05:24 INFO      Other options:                 
+11.04.2018 09:05:24 INFO      Base directory:                /home/jb6504/higgs_inference
+11.04.2018 09:05:24 INFO      ML-based strategies available: True
+11.04.2018 09:05:24 INFO    Starting score regression inference
+11.04.2018 09:05:24 INFO    Options:
+11.04.2018 09:05:24 INFO      Denominator theta:       denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+11.04.2018 09:05:24 INFO      Number of hidden layers: 3
+11.04.2018 09:05:24 INFO      Batch size:              128
+11.04.2018 09:05:24 INFO      Learning rate:           0.001
+11.04.2018 09:05:24 INFO      Learning rate decay:     0.0921034037198
+11.04.2018 09:05:24 INFO      Number of epochs:        50
+11.04.2018 09:05:24 INFO      NC experiments:          False
+11.04.2018 09:05:55 INFO    Starting training of score regression
 Train on 8000000 samples, validate on 2000000 samples
-2018-04-10 18:33:58.832041: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-10 18:33:58.832329: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-10 18:33:58.832337: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-10 18:33:58.832341: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-10 18:33:58.832345: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-10 18:33:59.136225: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+2018-04-11 09:05:56.006425: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-11 09:05:56.006864: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-11 09:05:56.006883: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-11 09:05:56.006893: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-11 09:05:56.006903: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-11 09:05:56.320512: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
 name: Tesla P40
 major: 6 minor: 1 memoryClockRate (GHz) 1.531
-pciBusID 0000:04:00.0
+pciBusID 0000:85:00.0
 Total memory: 22.38GiB
 Free memory: 22.21GiB
-2018-04-10 18:33:59.136260: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-04-10 18:33:59.136266: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-04-10 18:33:59.136274: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:04:00.0)
+2018-04-11 09:05:56.320547: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-04-11 09:05:56.320552: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-04-11 09:05:56.320562: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:85:00.0)
 Epoch 1/50
-: 0.0058 - val_loss: 0.0023
-Epoch 41/50
-251s - loss: 0.0058 - val_loss: 0.0022
-Epoch 42/50
-301s - loss: 0.0507 - val_loss: 0.0382
+274s - loss: 0.0515 - val_loss: 0.0273
 Epoch 2/50
-251s - loss: 0.0057 - val_loss: 0.0022
-Epoch 43/50
-302s - loss: 0.0339 - val_loss: 0.0308
+274s - loss: 0.0324 - val_loss: 0.0296
 Epoch 3/50
-250s - loss: 0.0057 - val_loss: 0.0022
-Epoch 44/50
-299s - loss: 0.0293 - val_loss: 0.0257
+273s - loss: 0.0292 - val_loss: 0.0200
 Epoch 4/50
-251s - loss: 0.0057 - val_loss: 0.0022
-Epoch 45/50
-299s - loss: 0.0251 - val_loss: 0.0194
+273s - loss: 0.0252 - val_loss: 0.0176
 Epoch 5/50
-251s - loss: 0.0057 - val_loss: 0.0021
-Epoch 46/50
-251s - loss: 0.0056 - val_loss: 0.0021
-Epoch 47/50
-251s - loss: 0.0056 - val_loss: 0.0021
-Epoch 48/50
-299s - loss: 0.0239 - val_loss: 0.0163
-Epoch 7/50
-250s - loss: 0.0056 - val_loss: 0.0021
-Epoch 49/50
-298s - loss: 0.0202 - val_loss: 0.0151
-Epoch 8/50
-250s - loss: 0.0056 - val_loss: 0.0021
-Epoch 50/50
-298s - loss: 0.0186 - val_loss: 0.0117
-Epoch 9/50
-251s - loss: 0.0056 - val_loss: 0.0021
-10.04.2018 19:16:01 INFO    Starting evaluation
-10.04.2018 19:16:39 INFO    Score regression evaluation timing: 0.839554071426 s
-10.04.2018 19:16:39 INFO    Starting density estimation
-299s - loss: 0.0166 - val_loss: 0.0120
-Epoch 10/50
-17
-10.04.2018 19:20:15 INFO    Starting theta 200 / 1017
-10.04.2018 19:22:03 INFO    Starting theta 300 / 1017
-10.04.2018 19:23:52 INFO    Starting theta 400 / 1017
-299s - loss: 0.0183 - val_loss: 0.0124
-Epoch 11/50
-10.04.2018 19:25:42 INFO    Starting theta 500 / 1017
-10.04.2018 19:27:32 INFO    Starting theta 600 / 1017
-299s - loss: 0.0163 - val_loss: 0.0100
-Epoch 12/50
-17
-10.04.2018 19:31:16 INFO    Starting theta 800 / 1017
-10.04.2018 19:33:06 INFO    Starting theta 900 / 1017
-299s - loss: 0.0151 - val_loss: 0.0097
-Epoch 13/50
-10.04.2018 19:34:55 INFO    Starting theta 1000 / 1017
-10.04.2018 19:35:14 INFO    Score density estimation timing: median 0.00466990470886 s, mean 0.00475655099049 s
-10.04.2018 19:35:14 INFO    Rotated score density estimation timing: median 0.00709319114685 s, mean 0.00707632109831 s
-10.04.2018 19:35:14 INFO    Score times theta density estimation timing: median 0.00670909881592 s, mean 0.0067467349586 s
-10.04.2018 19:35:14 INFO    That's it -- have a great day!
-299s - loss: 0.0145 - val_loss: 0.0095
-Epoch 14/50
-299s - loss: 0.0134 - val_loss: 0.0091
-Epoch 15/50
-302s - loss: 0.0130 - val_loss: 0.0075
-Epoch 16/50
-300s - loss: 0.0114 - val_loss: 0.0067
-Epoch 17/50
-300s - loss: 0.0107 - val_loss: 0.0065
-Epoch 18/50
-299s - loss: 0.0104 - val_loss: 0.0064
-Epoch 19/50
-299s - loss: 0.0099 - val_loss: 0.0054
-Epoch 20/50
-298s - loss: 0.0096 - val_loss: 0.0054
-Epoch 21/50
-299s - loss: 0.0091 - val_loss: 0.0045
-Epoch 22/50
-298s - loss: 0.0088 - val_loss: 0.0047
-Epoch 23/50
-299s - loss: 0.0086 - val_loss: 0.0045
-Epoch 24/50
-298s - loss: 0.0080 - val_loss: 0.0040
-Epoch 25/50
-299s - loss: 0.0079 - val_loss: 0.0039
-Epoch 26/50
-299s - loss: 0.0077 - val_loss: 0.0040
-Epoch 27/50
-298s - loss: 0.0079 - val_loss: 0.0038
-Epoch 28/50
-298s - loss: 0.0074 - val_loss: 0.0034
-Epoch 29/50
-300s - loss: 0.0072 - val_loss: 0.0035
-Epoch 30/50
-301s - loss: 0.0072 - val_loss: 0.0035
-Epoch 31/50
-300s - loss: 0.0070 - val_loss: 0.0031
-Epoch 32/50
-299s - loss: 0.0068 - val_loss: 0.0032
-Epoch 33/50
-298s - loss: 0.0067 - val_loss: 0.0031
-Epoch 34/50
-298s - loss: 0.0066 - val_loss: 0.0030
-Epoch 35/50
-298s - loss: 0.0065 - val_loss: 0.0030
-Epoch 36/50
-299s - loss: 0.0064 - val_loss: 0.0029
-Epoch 37/50
-298s - loss: 0.0063 - val_loss: 0.0029
-Epoch 38/50
-298s - loss: 0.0062 - val_loss: 0.0028
-Epoch 39/50
-299s - loss: 0.0061 - val_loss: 0.0027
-Epoch 40/50
-299s - loss: 0.0061 - val_loss: 0.0027
-Epoch 41/50
-299s - loss: 0.0060 - val_loss: 0.0027
-Epoch 42/50
-298s - loss: 0.0060 - val_loss: 0.0026
-Epoch 43/50
-299s - loss: 0.0059 - val_loss: 0.0026
-Epoch 44/50
-301s - loss: 0.0059 - val_loss: 0.0026
-Epoch 45/50
-300s - loss: 0.0058 - val_loss: 0.0026
-Epoch 46/50
-300s - loss: 0.0058 - val_loss: 0.0025
-Epoch 47/50
-299s - loss: 0.0058 - val_loss: 0.0025
-Epoch 48/50
-299s - loss: 0.0057 - val_loss: 0.0025
-Epoch 49/50
-299s - loss: 0.0057 - val_loss: 0.0025
-Epoch 50/50
-299s - loss: 0.0057 - val_loss: 0.0025
-10.04.2018 22:43:40 INFO    Starting evaluation
-10.04.2018 22:44:21 INFO    Score regression evaluation timing: 0.917183160782 s
-10.04.2018 22:44:21 INFO    Starting density estimation
-10.04.2018 22:46:19 INFO    Starting theta 100 / 1017
-10.04.2018 22:48:17 INFO    Starting theta 200 / 1017
-10.04.2018 22:50:14 INFO    Starting theta 300 / 1017
-10.04.2018 22:52:11 INFO    Starting theta 400 / 1017
-10.04.2018 22:54:07 INFO    Starting theta 500 / 1017
-10.04.2018 22:56:03 INFO    Starting theta 600 / 1017
-10.04.2018 22:57:58 INFO    Starting theta 700 / 1017
-10.04.2018 22:59:54 INFO    Starting theta 800 / 1017
-10.04.2018 23:01:50 INFO    Starting theta 900 / 1017
-10.04.2018 23:03:47 INFO    Starting theta 1000 / 1017
-10.04.2018 23:04:08 INFO    Score density estimation timing: median 0.00621199607849 s, mean 0.00605804824079 s
-10.04.2018 23:04:08 INFO    Rotated score density estimation timing: median 0.00834703445435 s, mean 0.00830275705313 s
-10.04.2018 23:04:08 INFO    Score times theta density estimation timing: median 0.0101790428162 s, mean 0.0100402194373 s
-10.04.2018 23:04:09 INFO    That's it -- have a great day!
-Using TensorFlow backend.
-10.04.2018 23:04:11 INFO    Hi! How are you today?
-10.04.2018 23:04:11 INFO    Startup options:
-10.04.2018 23:04:11 INFO      Algorithm:                     scoreregression
-10.04.2018 23:04:11 INFO      Point by point:                False
-10.04.2018 23:04:11 INFO      Morphing-aware mode:           False
-10.04.2018 23:04:11 INFO      Smeared data:                  False
-10.04.2018 23:04:11 INFO      Training sample:               baseline
-10.04.2018 23:04:11 INFO      alpha:                         None
-10.04.2018 23:04:11 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
-10.04.2018 23:04:11 INFO      AFC epsilon:                   None
-10.04.2018 23:04:11 INFO      Denominator theta:             False
-10.04.2018 23:04:11 INFO      Neyman construction toys:      0
-10.04.2018 23:04:11 INFO      Other options:                 ['shallow', 'fixedbinning']
-10.04.2018 23:04:11 INFO      Base directory:                /home/jb6504/higgs_inference
-10.04.2018 23:04:11 INFO      ML-based strategies available: True
-10.04.2018 23:04:11 INFO    Starting score regression inference
-10.04.2018 23:04:11 INFO    Options:
-10.04.2018 23:04:11 INFO      Denominator theta:       denominator 0 = theta 708 = [ 0.39293227  0.43229216]
-10.04.2018 23:04:11 INFO      Number of hidden layers: 2
-10.04.2018 23:04:11 INFO      Batch size:              128
-10.04.2018 23:04:11 INFO      Learning rate:           0.001
-10.04.2018 23:04:11 INFO      Learning rate decay:     0.0921034037198
-10.04.2018 23:04:11 INFO      Number of epochs:        50
-10.04.2018 23:04:11 INFO      NC experiments:          False
-10.04.2018 23:04:48 INFO    Starting training of score regression
-Train on 8000000 samples, validate on 2000000 samples
-2018-04-10 23:04:48.622274: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-10 23:04:48.622635: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-10 23:04:48.622644: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-10 23:04:48.622649: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-10 23:04:48.622653: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2018-04-10 23:04:48.932862: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
-name: Tesla P40
-major: 6 minor: 1 memoryClockRate (GHz) 1.531
-pciBusID 0000:04:00.0
-Total memory: 22.38GiB
-Free memory: 22.21GiB
-2018-04-10 23:04:48.932895: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2018-04-10 23:04:48.932901: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2018-04-10 23:04:48.932908: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:04:00.0)
-Epoch 1/50
-263s - loss: 0.0558 - val_loss: 0.0275
-Epoch 2/50
-263s - loss: 0.0304 - val_loss: 0.0276
-Epoch 3/50
-263s - loss: 0.0253 - val_loss: 0.0181
-Epoch 4/50
-263s - loss: 0.0223 - val_loss: 0.0163
-Epoch 5/50
-265s - loss: 0.0195 - val_loss: 0.0143
+273s - loss: 0.0224 - val_loss: 0.0165
 Epoch 6/50
-264s - loss: 0.0174 - val_loss: 0.0136
+273s - loss: 0.0199 - val_loss: 0.0158
 Epoch 7/50
-264s - loss: 0.0157 - val_loss: 0.0097
+273s - loss: 0.0178 - val_loss: 0.0171
 Epoch 8/50
-264s - loss: 0.0147 - val_loss: 0.0090
+274s - loss: 0.0163 - val_loss: 0.0104
 Epoch 9/50
-263s - loss: 0.0136 - val_loss: 0.0082
+274s - loss: 0.0154 - val_loss: 0.0157
 Epoch 10/50
-263s - loss: 0.0126 - val_loss: 0.0075
+273s - loss: 0.0143 - val_loss: 0.0110
 Epoch 11/50
-263s - loss: 0.0116 - val_loss: 0.0070
+273s - loss: 0.0134 - val_loss: 0.0090
 Epoch 12/50
-263s - loss: 0.0109 - val_loss: 0.0061
+274s - loss: 0.0121 - val_loss: 0.0086
 Epoch 13/50
-263s - loss: 0.0104 - val_loss: 0.0060
+273s - loss: 0.0113 - val_loss: 0.0083
 Epoch 14/50
-263s - loss: 0.0098 - val_loss: 0.0059
+274s - loss: 0.0108 - val_loss: 0.0079
 Epoch 15/50
-263s - loss: 0.0093 - val_loss: 0.0059
+274s - loss: 0.0102 - val_loss: 0.0060
 Epoch 16/50
-262s - loss: 0.0088 - val_loss: 0.0051
+273s - loss: 0.0096 - val_loss: 0.0066
 Epoch 17/50
-263s - loss: 0.0086 - val_loss: 0.0046
+273s - loss: 0.0096 - val_loss: 0.0058
 Epoch 18/50
-263s - loss: 0.0082 - val_loss: 0.0045
+273s - loss: 0.0091 - val_loss: 0.0056
 Epoch 19/50
-263s - loss: 0.0080 - val_loss: 0.0041
+273s - loss: 0.0088 - val_loss: 0.0062
 Epoch 20/50
-263s - loss: 0.0077 - val_loss: 0.0041
+273s - loss: 0.0084 - val_loss: 0.0043
 Epoch 21/50
-263s - loss: 0.0075 - val_loss: 0.0039
+273s - loss: 0.0080 - val_loss: 0.0046
 Epoch 22/50
-265s - loss: 0.0073 - val_loss: 0.0038
+273s - loss: 0.0077 - val_loss: 0.0057
 Epoch 23/50
-263s - loss: 0.0072 - val_loss: 0.0036
+273s - loss: 0.0079 - val_loss: 0.0057
 Epoch 24/50
-264s - loss: 0.0070 - val_loss: 0.0035
+273s - loss: 0.0077 - val_loss: 0.0054
 Epoch 25/50
-264s - loss: 0.0069 - val_loss: 0.0034
+274s - loss: 0.0073 - val_loss: 0.0051
 Epoch 26/50
-263s - loss: 0.0068 - val_loss: 0.0033
+273s - loss: 0.0072 - val_loss: 0.0060
 Epoch 27/50
-263s - loss: 0.0067 - val_loss: 0.0032
+274s - loss: 0.0069 - val_loss: 0.0049
 Epoch 28/50
-262s - loss: 0.0065 - val_loss: 0.0030
+274s - loss: 0.0066 - val_loss: 0.0045
 Epoch 29/50
-263s - loss: 0.0065 - val_loss: 0.0030
+274s - loss: 0.0064 - val_loss: 0.0048
 Epoch 30/50
-263s - loss: 0.0064 - val_loss: 0.0029
+273s - loss: 0.0063 - val_loss: 0.0044
 Epoch 31/50
-263s - loss: 0.0063 - val_loss: 0.0029
+273s - loss: 0.0062 - val_loss: 0.0033
 Epoch 32/50
-263s - loss: 0.0062 - val_loss: 0.0029
+273s - loss: 0.0060 - val_loss: 0.0044
 Epoch 33/50
-263s - loss: 0.0062 - val_loss: 0.0028
+273s - loss: 0.0060 - val_loss: 0.0040
 Epoch 34/50
-263s - loss: 0.0061 - val_loss: 0.0029
+274s - loss: 0.0059 - val_loss: 0.0042
 Epoch 35/50
-263s - loss: 0.0061 - val_loss: 0.0027
+274s - loss: 0.0059 - val_loss: 0.0041
 Epoch 36/50
-263s - loss: 0.0060 - val_loss: 0.0027
+273s - loss: 0.0058 - val_loss: 0.0039
 Epoch 37/50
-263s - loss: 0.0060 - val_loss: 0.0026
+275s - loss: 0.0057 - val_loss: 0.0038
 Epoch 38/50
-264s - loss: 0.0059 - val_loss: 0.0026
+276s - loss: 0.0057 - val_loss: 0.0037
 Epoch 39/50
-265s - loss: 0.0059 - val_loss: 0.0026
+278s - loss: 0.0056 - val_loss: 0.0038
 Epoch 40/50
-263s - loss: 0.0058 - val_loss: 0.0026
+286s - loss: 0.0056 - val_loss: 0.0037
 Epoch 41/50
-264s - loss: 0.0058 - val_loss: 0.0026
+273s - loss: 0.0056 - val_loss: 0.0037
 Epoch 42/50
-264s - loss: 0.0058 - val_loss: 0.0025
+273s - loss: 0.0055 - val_loss: 0.0036
+Epoch 00041: early stopping
+11.04.2018 12:18:07 INFO    Starting evaluation
+11.04.2018 12:18:45 INFO    Score regression evaluation timing: 0.858771085739 s
+11.04.2018 12:18:45 INFO    Starting density estimation
+11.04.2018 12:21:30 INFO    Starting theta 100 / 1017
+11.04.2018 12:24:15 INFO    Starting theta 200 / 1017
+11.04.2018 12:27:00 INFO    Starting theta 300 / 1017
+11.04.2018 12:29:46 INFO    Starting theta 400 / 1017
+11.04.2018 12:32:32 INFO    Starting theta 500 / 1017
+11.04.2018 12:35:17 INFO    Starting theta 600 / 1017
+11.04.2018 12:38:03 INFO    Starting theta 700 / 1017
+11.04.2018 12:40:50 INFO    Starting theta 800 / 1017
+11.04.2018 12:43:36 INFO    Starting theta 900 / 1017
+11.04.2018 12:46:21 INFO    Starting theta 1000 / 1017
+11.04.2018 12:46:51 INFO    Score density estimation timing: median 0.0072979927063 s, mean 0.00733929772879 s
+11.04.2018 12:46:51 INFO    Rotated score density estimation timing: median 0.0108029842377 s, mean 0.010854717084 s
+11.04.2018 12:46:51 INFO    Score times theta density estimation timing: median 0.0112340450287 s, mean 0.0113075689111 s
+11.04.2018 12:46:52 INFO    That's it -- have a great day!
+Using TensorFlow backend.
+11.04.2018 12:46:54 INFO    Hi! How are you today?
+11.04.2018 12:46:54 INFO    Startup options:
+11.04.2018 12:46:54 INFO      Algorithm:                     scoreregression
+11.04.2018 12:46:54 INFO      Point by point:                False
+11.04.2018 12:46:54 INFO      Morphing-aware mode:           False
+11.04.2018 12:46:54 INFO      Smeared data:                  False
+11.04.2018 12:46:54 INFO      Training sample:               baseline
+11.04.2018 12:46:54 INFO      alpha:                         None
+11.04.2018 12:46:54 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+11.04.2018 12:46:54 INFO      AFC epsilon:                   None
+11.04.2018 12:46:54 INFO      Denominator theta:             False
+11.04.2018 12:46:54 INFO      Neyman construction toys:      0
+11.04.2018 12:46:54 INFO      Other options:                 ['shallow']
+11.04.2018 12:46:54 INFO      Base directory:                /home/jb6504/higgs_inference
+11.04.2018 12:46:54 INFO      ML-based strategies available: True
+11.04.2018 12:46:54 INFO    Starting score regression inference
+11.04.2018 12:46:54 INFO    Options:
+11.04.2018 12:46:54 INFO      Denominator theta:       denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+11.04.2018 12:46:54 INFO      Number of hidden layers: 2
+11.04.2018 12:46:54 INFO      Batch size:              128
+11.04.2018 12:46:54 INFO      Learning rate:           0.001
+11.04.2018 12:46:54 INFO      Learning rate decay:     0.0921034037198
+11.04.2018 12:46:54 INFO      Number of epochs:        50
+11.04.2018 12:46:54 INFO      NC experiments:          False
+11.04.2018 12:47:38 INFO    Starting training of score regression
+Train on 8000000 samples, validate on 2000000 samples
+2018-04-11 12:47:38.653017: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-11 12:47:38.653305: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-11 12:47:38.653314: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-11 12:47:38.653318: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-11 12:47:38.653322: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-11 12:47:38.964058: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:85:00.0
+Total memory: 22.38GiB
+Free memory: 22.21GiB
+2018-04-11 12:47:38.964094: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-04-11 12:47:38.964099: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-04-11 12:47:38.964107: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:85:00.0)
+Epoch 1/50
+253s - loss: 0.0532 - val_loss: 0.0286
+Epoch 2/50
+252s - loss: 0.0305 - val_loss: 0.0214
+Epoch 3/50
+252s - loss: 0.0255 - val_loss: 0.0174
+Epoch 4/50
+252s - loss: 0.0223 - val_loss: 0.0148
+Epoch 5/50
+252s - loss: 0.0197 - val_loss: 0.0129
+Epoch 6/50
+252s - loss: 0.0176 - val_loss: 0.0115
+Epoch 7/50
+252s - loss: 0.0161 - val_loss: 0.0109
+Epoch 8/50
+252s - loss: 0.0149 - val_loss: 0.0097
+Epoch 9/50
+252s - loss: 0.0140 - val_loss: 0.0086
+Epoch 10/50
+254s - loss: 0.0130 - val_loss: 0.0076
+Epoch 11/50
+254s - loss: 0.0121 - val_loss: 0.0065
+Epoch 12/50
+255s - loss: 0.0114 - val_loss: 0.0065
+Epoch 13/50
+255s - loss: 0.0109 - val_loss: 0.0064
+Epoch 14/50
+255s - loss: 0.0104 - val_loss: 0.0054
+Epoch 15/50
+257s - loss: 0.0099 - val_loss: 0.0053
+Epoch 16/50
+255s - loss: 0.0095 - val_loss: 0.0047
+Epoch 17/50
+258s - loss: 0.0090 - val_loss: 0.0043
+Epoch 18/50
+256s - loss: 0.0087 - val_loss: 0.0048
+Epoch 19/50
+256s - loss: 0.0085 - val_loss: 0.0044
+Epoch 20/50
+256s - loss: 0.0082 - val_loss: 0.0039
+Epoch 21/50
+256s - loss: 0.0080 - val_loss: 0.0037
+Epoch 22/50
+256s - loss: 0.0077 - val_loss: 0.0034
+Epoch 23/50
+258s - loss: 0.0076 - val_loss: 0.0032
+Epoch 24/50
+266s - loss: 0.0073 - val_loss: 0.0032
+Epoch 25/50
+271s - loss: 0.0072 - val_loss: 0.0030
+Epoch 26/50
+271s - loss: 0.0071 - val_loss: 0.0031
+Epoch 27/50
+264s - loss: 0.0070 - val_loss: 0.0028
+Epoch 28/50
+254s - loss: 0.0068 - val_loss: 0.0027
+Epoch 29/50
+255s - loss: 0.0068 - val_loss: 0.0026
+Epoch 30/50
+256s - loss: 0.0066 - val_loss: 0.0026
+Epoch 31/50
+255s - loss: 0.0065 - val_loss: 0.0026
+Epoch 32/50
+254s - loss: 0.0065 - val_loss: 0.0025
+Epoch 33/50
+255s - loss: 0.0064 - val_loss: 0.0024
+Epoch 34/50
+255s - loss: 0.0063 - val_loss: 0.0023
+Epoch 35/50
+263s - loss: 0.0063 - val_loss: 0.0023
+Epoch 36/50
+266s - loss: 0.0062 - val_loss: 0.0023
+Epoch 37/50
+266s - loss: 0.0062 - val_loss: 0.0022
+Epoch 38/50
+267s - loss: 0.0061 - val_loss: 0.0022
+Epoch 39/50
+266s - loss: 0.0061 - val_loss: 0.0021
+Epoch 40/50
+267s - loss: 0.0061 - val_loss: 0.0021
+Epoch 41/50
+267s - loss: 0.0060 - val_loss: 0.0021
+Epoch 42/50
+267s - loss: 0.0060 - val_loss: 0.0021
 Epoch 43/50
-263s - loss: 0.0058 - val_loss: 0.0025
+258s - loss: 0.0060 - val_loss: 0.0021
 Epoch 44/50
-262s - loss: 0.0057 - val_loss: 0.0025
+267s - loss: 0.0059 - val_loss: 0.0020
 Epoch 45/50
-263s - loss: 0.0057 - val_loss: 0.0025
+264s - loss: 0.0059 - val_loss: 0.0020
 Epoch 46/50
-263s - loss: 0.0057 - val_loss: 0.0025
+267s - loss: 0.0059 - val_loss: 0.0020
 Epoch 47/50
-263s - loss: 0.0057 - val_loss: 0.0025
+266s - loss: 0.0059 - val_loss: 0.0020
 Epoch 48/50
-263s - loss: 0.0056 - val_loss: 0.0024
+267s - loss: 0.0059 - val_loss: 0.0020
 Epoch 49/50
-263s - loss: 0.0056 - val_loss: 0.0024
+266s - loss: 0.0058 - val_loss: 0.0020
 Epoch 50/50
-263s - loss: 0.0056 - val_loss: 0.0024
-11.04.2018 02:44:30 INFO    Starting evaluation
-11.04.2018 02:45:09 INFO    Score regression evaluation timing: 0.882102966309 s
-11.04.2018 02:45:09 INFO    Starting density estimation
-11.04.2018 02:47:07 INFO    Starting theta 100 / 1017
-11.04.2018 02:49:06 INFO    Starting theta 200 / 1017
-11.04.2018 02:51:04 INFO    Starting theta 300 / 1017
-11.04.2018 02:53:01 INFO    Starting theta 400 / 1017
-11.04.2018 02:54:58 INFO    Starting theta 500 / 1017
-11.04.2018 02:56:54 INFO    Starting theta 600 / 1017
-11.04.2018 02:58:50 INFO    Starting theta 700 / 1017
-11.04.2018 03:00:45 INFO    Starting theta 800 / 1017
-11.04.2018 03:02:42 INFO    Starting theta 900 / 1017
-11.04.2018 03:04:42 INFO    Starting theta 1000 / 1017
-11.04.2018 03:05:03 INFO    Score density estimation timing: median 0.00613808631897 s, mean 0.00603197270321 s
-11.04.2018 03:05:03 INFO    Rotated score density estimation timing: median 0.00835704803467 s, mean 0.0083076799162 s
-11.04.2018 03:05:03 INFO    Score times theta density estimation timing: median 0.0101790428162 s, mean 0.0100505823231 s
-11.04.2018 03:05:04 INFO    That's it -- have a great day!
+267s - loss: 0.0058 - val_loss: 0.0020
+11.04.2018 16:24:01 INFO    Starting evaluation
+11.04.2018 16:24:40 INFO    Score regression evaluation timing: 0.873229980469 s
+11.04.2018 16:24:40 INFO    Starting density estimation
+11.04.2018 16:27:35 INFO    Starting theta 100 / 1017
+11.04.2018 16:30:31 INFO    Starting theta 200 / 1017
+11.04.2018 16:33:27 INFO    Starting theta 300 / 1017
+11.04.2018 16:36:23 INFO    Starting theta 400 / 1017
+11.04.2018 16:39:19 INFO    Starting theta 500 / 1017
+11.04.2018 16:42:14 INFO    Starting theta 600 / 1017
+11.04.2018 16:45:10 INFO    Starting theta 700 / 1017
+11.04.2018 16:48:04 INFO    Starting theta 800 / 1017
+11.04.2018 16:51:00 INFO    Starting theta 900 / 1017
+11.04.2018 16:53:54 INFO    Starting theta 1000 / 1017
+11.04.2018 16:54:26 INFO    Score density estimation timing: median 0.00779104232788 s, mean 0.00780399757618 s
+11.04.2018 16:54:26 INFO    Rotated score density estimation timing: median 0.0114631652832 s, mean 0.0114908675529 s
+11.04.2018 16:54:26 INFO    Score times theta density estimation timing: median 0.0119140148163 s, mean 0.0119641031136 s
+11.04.2018 16:54:26 INFO    That's it -- have a great day!

@@ -17,3 +17,14 @@
 11.04.2018 08:54:28 INFO      Denominator:                       alternative 2
 11.04.2018 08:54:28 INFO      New samples (no NaN removal):      False
 11.04.2018 08:54:28 INFO      Dry run:                           False
+11.04.2018 09:03:55 INFO    Splitting...
+11.04.2018 09:04:16 INFO    Number of events:
+11.04.2018 09:04:16 INFO      All:    821636
+11.04.2018 09:04:16 INFO      Training:    575145
+11.04.2018 09:04:16 INFO      Calibration: 82164
+11.04.2018 09:04:16 INFO      Evaluation:  164327
+11.04.2018 09:04:18 INFO    Normalizing probabilities
+11.04.2018 09:05:36 INFO    Generating point-by-point training samples
+generate_data.py:479: RuntimeWarning: divide by zero encountered in log
+  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+11.04.2018 14:57:50 INFO    Done!
