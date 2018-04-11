@@ -5,7 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
-#SBATCH --time=1-00:00:00
+#SBATCH --time=4-00:00:00
 #SBATCH --gres=gpu:1
 
 # Modules
@@ -18,5 +18,8 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py scoreregression -o fixedbinning
-python -u experiments.py scoreregression -o shallow fixedbinning
+# python -u experiments.py scoreregression -o deep fixedbinning
+python -u experiments.py scoreregression
+# python -u experiments.py scoreregression -o fixedbinning
+python -u experiments.py scoreregression -o shallow
+# python -u experiments.py scoreregression -o shallow fixedbinning
