@@ -102,7 +102,9 @@ def score_regression_inference(use_smearing=False,
         early_stopping = False
         filename_addition += '_short'
 
+    keras_verbosity = 2
     if training_sample_size is not None:
+        keras_verbosity = 0
         filename_addition += '_trainingsamplesize_' + str(training_sample_size)
         n_epoch_factor = int(len(settings.thetas_train) * (settings.n_events_baseline_num
                                                            + settings.n_events_baseline_den)
@@ -220,7 +222,7 @@ def score_regression_inference(use_smearing=False,
 
     regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers,
                                                  learning_rate=learning_rate),
-                          epochs=n_epochs, verbose=2, validation_split=settings.validation_split)
+                          epochs=n_epochs, verbose=keras_verbosity, validation_split=settings.validation_split)
 
     logging.info('Starting training of score regression')
 

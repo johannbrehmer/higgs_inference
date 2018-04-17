@@ -271,7 +271,9 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                                                                     theta0_train, random_state=44)
 
     # Limit training sample size
+    keras_verbosity = 2
     if training_sample_size is not None:
+        keras_verbosity = 0
         original_training_sample_size = X_train.shape[0]
 
         X_train = X_train[:training_sample_size]
@@ -334,13 +336,13 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                                                                              learn_log_r=learn_logr_mode,
                                                                              learning_rate=learning_rate),
                                   epochs=n_epochs, validation_split=settings.validation_split,
-                                  verbose=2)
+                                  verbose=keras_verbosity)
         else:
             regr = KerasRegressor(lambda: make_classifier_carl(n_hidden_layers=n_hidden_layers,
                                                                learn_log_r=learn_logr_mode,
                                                                learning_rate=learning_rate),
                                   epochs=n_epochs, validation_split=settings.validation_split,
-                                  verbose=2)
+                                  verbose=keras_verbosity)
 
     elif algorithm == 'score':
         if morphing_aware:
@@ -348,13 +350,13 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                                                                               learn_log_r=learn_logr_mode,
                                                                               learning_rate=learning_rate),
                                   epochs=n_epochs, validation_split=settings.validation_split,
-                                  verbose=2)
+                                  verbose=keras_verbosity)
         else:
             regr = KerasRegressor(lambda: make_classifier_score(n_hidden_layers=n_hidden_layers,
                                                                 learn_log_r=learn_logr_mode,
                                                                 learning_rate=learning_rate),
                                   epochs=n_epochs, validation_split=settings.validation_split,
-                                  verbose=2)
+                                  verbose=keras_verbosity)
 
     elif algorithm == 'combined':
         if morphing_aware:
@@ -364,14 +366,14 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                                                                alpha=alpha_carl,
                                                                learning_rate=learning_rate),
                 epochs=n_epochs, validation_split=settings.validation_split,
-                verbose=2)
+                verbose=keras_verbosity)
         else:
             regr = KerasRegressor(lambda: make_classifier_combined(n_hidden_layers=n_hidden_layers,
                                                                    learn_log_r=learn_logr_mode,
                                                                    alpha=alpha_carl,
                                                                    learning_rate=learning_rate),
                                   epochs=n_epochs, validation_split=settings.validation_split,
-                                  verbose=2)
+                                  verbose=keras_verbosity)
 
     elif algorithm == 'regression':
         if morphing_aware:
@@ -379,11 +381,11 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                                                                        factor_out_sm=factor_out_sm_in_aware_mode,
                                                                        learning_rate=learning_rate),
                                   epochs=n_epochs, validation_split=settings.validation_split,
-                                  verbose=2)
+                                  verbose=keras_verbosity)
         else:
             regr = KerasRegressor(lambda: make_regressor(n_hidden_layers=n_hidden_layers),
                                   epochs=n_epochs, validation_split=settings.validation_split,
-                                  verbose=2)
+                                  verbose=keras_verbosity)
 
     elif algorithm == 'combinedregression':
         if morphing_aware:
@@ -393,13 +395,13 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                                                               alpha=alpha_regression,
                                                               learning_rate=learning_rate),
                 epochs=n_epochs, validation_split=settings.validation_split,
-                verbose=2)
+                verbose=keras_verbosity)
         else:
             regr = KerasRegressor(lambda: make_combined_regressor(n_hidden_layers=n_hidden_layers,
                                                                   alpha=alpha_regression,
                                                                   learning_rate=learning_rate),
                                   epochs=n_epochs, validation_split=settings.validation_split,
-                                  verbose=2)
+                                  verbose=keras_verbosity)
 
     else:
         raise ValueError()
