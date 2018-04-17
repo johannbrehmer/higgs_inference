@@ -36,12 +36,14 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                             use_smearing=False,
                             denominator=0,
                             alpha=None,
+                            training_sample_size=None,
                             do_neyman=False,
                             options=''):  # all other options in a string
 
     """
     Trains and evaluates one of the parameterized higgs_inference methods.
 
+    :param training_sample_size:
     :param denominator:
     :param algorithm: Type of the algorithm used. Currently supported: 'carl', 'score', 'combined', 'regression', and
                       'combinedregression'.
@@ -149,6 +151,14 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
         early_stopping = False
         filename_addition += '_short'
 
+    if training_sample_size is not None:
+        filename_addition += '_trainingsamplesize_' + str(training_sample_size)
+        n_epoch_factor = int(len(settings.thetas_train) * (settings.n_events_baseline_num
+                                                           + settings.n_events_baseline_den)
+                             / training_sample_size)
+        n_epochs *= n_epoch_factor
+        lr_decay /= float(n_epoch_factor)
+
     input_X_prefix = ''
     if use_smearing:
         input_X_prefix = 'smeared_'
@@ -199,6 +209,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     logging.info('  Learning rate:            %s', learning_rate)
     logging.info('  Learning rate decay:      %s', lr_decay)
     logging.info('  Number of epochs:         %s', n_epochs)
+    logging.info('  Training samples:         %s', 'all' if training_sample_size is None else training_sample_size)
     if do_neyman:
         logging.info('  NC experiments:           (%s alternate + %s null) experiments with %s alternate events each',
                      n_neyman_alternate_experiments, n_neyman_null_experiments, n_expected_events_neyman)
@@ -256,6 +267,19 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     # Shuffle training data
     X_train, y_train, scores_train, r_train, theta0_train = shuffle(X_train, y_train, scores_train, r_train,
                                                                     theta0_train, random_state=44)
+
+    # Limit training sample size
+    if training_sample_size is not None:
+        original_training_sample_size = X_train.shape[0]
+
+        X_train = X_train[:training_sample_size]
+        y_train = y_train[:training_sample_size]
+        scores_train = scores_train[:training_sample_size]
+        r_train = r_train[:training_sample_size]
+        theta0_train = theta0_train[:training_sample_size]
+
+        logging.info('Reduced training sample size from %s to %s (factor %s)', original_training_sample_size,
+                     X_train.shape[0], n_epoch_factor)
 
     # Normalize data
     scaler = StandardScaler()

@@ -69,6 +69,7 @@ parser.add_argument("-d", "--denom", type=int, default=0,
                     help='Chooses one of five reference thetas for the denominator of the likelihood ratio.')
 parser.add_argument("--neyman", action='store_true',
                     help='Calculate toy experiments for the Neyman construction.')
+parser.add_argument("--samplesize", type=int, default=None, help='Number of samples in training sample')
 parser.add_argument("-o", "--options", nargs='+', default='', help="Further options to be passed on to the algorithm.")
 
 args = parser.parse_args()
@@ -84,6 +85,7 @@ logging.info('  Histogram / AFC X indices:     %s', args.xindices)
 logging.info('  AFC epsilon:                   %s', args.epsilon)
 logging.info('  Denominator theta:             %s', args.neyman)
 logging.info('  Neyman construction toys:      %s', args.denom)
+logging.info('  Training sample size limit:    %s', args.samplesize)
 logging.info('  Other options:                 %s', args.options)
 logging.info('  Base directory:                %s', settings.base_dir)
 logging.info('  ML-based strategies available: %s', loaded_ml_strategies)
@@ -128,6 +130,7 @@ elif args.algorithm == 'scoreregression':
     score_regression_inference(use_smearing=args.smearing,
                                denominator=args.denom,
                                do_neyman=args.neyman,
+                               training_sample_size=args.samplesize,
                                options=args.options)
 
 elif args.pointbypoint:
@@ -147,6 +150,7 @@ else:
                             training_sample=args.training,
                             alpha=args.alpha,
                             do_neyman=args.neyman,
+                            training_sample_size=args.samplesize,
                             options=args.options)
 
 logging.info("That's it -- have a great day!")

@@ -123,7 +123,7 @@ n_hidden_layers_deep = 5
 alpha_regression_default = 100.
 alpha_carl_default = 5.
 
-# Training length
+# Training length (for full training samples, will be increased for reduced training samples)
 n_epochs_short = 1
 n_epochs_default = 50
 n_epochs_long = 100
