@@ -93,6 +93,7 @@ def score_regression_inference(use_smearing=False,
 
     n_epochs = settings.n_epochs_default
     early_stopping = True
+    early_stopping_patience = settings.early_stopping_patience
     if long_mode:
         n_epochs = settings.n_epochs_long
         filename_addition += '_long'
@@ -108,6 +109,7 @@ def score_regression_inference(use_smearing=False,
                              / training_sample_size)
         n_epochs *= n_epoch_factor
         lr_decay /= float(n_epoch_factor)
+        early_stopping_patience *= n_epoch_factor
 
     input_X_prefix = ''
     if use_smearing:
@@ -230,7 +232,7 @@ def score_regression_inference(use_smearing=False,
 
         callbacks.append(LearningRateScheduler(lr_scheduler))
     if early_stopping:
-        callbacks.append(EarlyStopping(verbose=1, patience=settings.early_stopping_patience))
+        callbacks.append(EarlyStopping(verbose=1, patience=early_stopping_patience))
 
     # Training
     regr.fit(X_train_transformed, scores_train, callbacks=callbacks, batch_size=batch_size)
