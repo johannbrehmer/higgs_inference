@@ -113,7 +113,7 @@ def histo_inference(indices_X=None,
             raise ValueError(indices_X)
 
     if asymmetric_binning_mode:
-        filename_addition += '_asymmetricfinebinning'
+        filename_addition += '_asymmetricbinning'
     elif superfine_binning_mode:
         filename_addition += '_superfinebinning'
     elif fine_binning_mode:
