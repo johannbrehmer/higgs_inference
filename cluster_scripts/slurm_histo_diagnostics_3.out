@@ -1,34 +1,31 @@
-INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '27937')
-INFO (theano.gof.compilelock): To manually release the lock, delete /home/jb6504/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-centos-7.3.1611-Core-x86_64-2.7.12-64/lock_dir
-INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '27937')
-INFO (theano.gof.compilelock): To manually release the lock, delete /home/jb6504/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-centos-7.3.1611-Core-x86_64-2.7.12-64/lock_dir
-10.04.2018 10:56:37 INFO    Hi! How are you today?
-10.04.2018 10:56:37 INFO    Startup options:
-10.04.2018 10:56:37 INFO      Algorithm:                     histo
-10.04.2018 10:56:37 INFO      Point by point:                False
-10.04.2018 10:56:37 INFO      Morphing-aware mode:           False
-10.04.2018 10:56:37 INFO      Smeared data:                  False
-10.04.2018 10:56:37 INFO      Training sample:               baseline
-10.04.2018 10:56:37 INFO      alpha:                         None
-10.04.2018 10:56:37 INFO      Histogram / AFC X indices:     [1, 41]
-10.04.2018 10:56:37 INFO      AFC epsilon:                   None
-10.04.2018 10:56:37 INFO      Denominator theta:             False
-10.04.2018 10:56:37 INFO      Neyman construction toys:      3
-10.04.2018 10:56:37 INFO      Other options:                 
-10.04.2018 10:56:37 INFO      Base directory:                /home/jb6504/higgs_inference
-10.04.2018 10:56:37 INFO      ML-based strategies available: False
-10.04.2018 10:56:37 INFO    Starting histogram-based inference
-10.04.2018 10:56:37 INFO    Settings:
-10.04.2018 10:56:37 INFO      Statistics:              x [1, 41]
-10.04.2018 10:56:37 INFO      Binning:                 (array([     0.,     48.,     58.,     67.,     75.,     83.,     91.,
+18.04.2018 16:01:41 INFO    Hi! How are you today?
+18.04.2018 16:01:41 INFO    Startup options:
+18.04.2018 16:01:41 INFO      Algorithm:                     histo
+18.04.2018 16:01:41 INFO      Point by point:                False
+18.04.2018 16:01:41 INFO      Morphing-aware mode:           False
+18.04.2018 16:01:41 INFO      Smeared data:                  False
+18.04.2018 16:01:41 INFO      Training sample:               baseline
+18.04.2018 16:01:41 INFO      alpha:                         None
+18.04.2018 16:01:41 INFO      Histogram / AFC X indices:     [1, 41]
+18.04.2018 16:01:41 INFO      AFC epsilon:                   None
+18.04.2018 16:01:41 INFO      Denominator theta:             False
+18.04.2018 16:01:41 INFO      Neyman construction toys:      3
+18.04.2018 16:01:41 INFO      Training sample size limit:    None
+18.04.2018 16:01:41 INFO      Other options:                 ['asymmetricbinning']
+18.04.2018 16:01:41 INFO      Base directory:                /home/jb6504/higgs_inference
+18.04.2018 16:01:41 INFO      ML-based strategies available: False
+18.04.2018 16:01:41 INFO    Starting histogram-based inference
+18.04.2018 16:01:41 INFO    Settings:
+18.04.2018 16:01:41 INFO      Statistics:              x [1, 41]
+18.04.2018 16:01:41 INFO      Binning:                 (array([     0.,     48.,     58.,     67.,     75.,     83.,     91.,
           100.,    109.,    119.,    130.,    141.,    155.,    172.,
           193.,    221.,    260.,    325.,    462.,  14000.]), array([ 0.        ,  0.31415927,  0.62831853,  0.9424778 ,  1.25663706,
         1.57079633,  1.88495559,  2.19911486,  2.51327412,  2.82743339,
         3.14159265]))
 Traceback (most recent call last):
-  File "experiments.py", line 116, in <module>
+  File "experiments.py", line 118, in <module>
     options=args.options)
-  File "/home/jb6504/higgs_inference/higgs_inference/strategies/histograms.py", line 191, in histo_inference
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/histograms.py", line 194, in histo_inference
     t) + input_filename_addition + new_sample_prefix + '.npy')
   File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 362, in load
     fid = open(file, "rb")

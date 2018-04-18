@@ -1,41 +1,25 @@
-INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '31230')
-INFO (theano.gof.compilelock): To manually release the lock, delete /home/jb6504/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-centos-7.3.1611-Core-x86_64-2.7.12-64/lock_dir
-07.04.2018 05:16:28 INFO    Hi! How are you today?
-07.04.2018 05:16:28 INFO    Startup options:
-07.04.2018 05:16:28 INFO      Algorithm:                     histo
-07.04.2018 05:16:28 INFO      Point by point:                False
-07.04.2018 05:16:28 INFO      Morphing-aware mode:           False
-07.04.2018 05:16:28 INFO      Smeared data:                  True
-07.04.2018 05:16:28 INFO      Training sample:               baseline
-07.04.2018 05:16:28 INFO      alpha:                         None
-07.04.2018 05:16:28 INFO      Histogram / AFC X indices:     [1, 41]
-07.04.2018 05:16:28 INFO      AFC epsilon:                   None
-07.04.2018 05:16:28 INFO      Denominator theta:             True
-07.04.2018 05:16:28 INFO      Neyman construction toys:      0
-07.04.2018 05:16:28 INFO      Other options:                 ['neyman2']
-07.04.2018 05:16:28 INFO      Base directory:                /home/jb6504/higgs_inference
-07.04.2018 05:16:28 INFO      ML-based strategies available: False
-07.04.2018 05:16:28 INFO    Starting histogram-based inference
-07.04.2018 05:16:28 INFO    Settings:
-07.04.2018 05:16:28 INFO      Statistics:              x [1, 41]
-07.04.2018 05:16:28 INFO      Binning:                 (array([     0.,     48.,     58.,     67.,     75.,     83.,     91.,
+18.04.2018 16:00:41 INFO    Hi! How are you today?
+18.04.2018 16:00:41 INFO    Startup options:
+18.04.2018 16:00:41 INFO      Algorithm:                     histo
+18.04.2018 16:00:41 INFO      Point by point:                False
+18.04.2018 16:00:41 INFO      Morphing-aware mode:           False
+18.04.2018 16:00:41 INFO      Smeared data:                  True
+18.04.2018 16:00:41 INFO      Training sample:               baseline
+18.04.2018 16:00:41 INFO      alpha:                         None
+18.04.2018 16:00:41 INFO      Histogram / AFC X indices:     [1, 41]
+18.04.2018 16:00:41 INFO      AFC epsilon:                   None
+18.04.2018 16:00:41 INFO      Denominator theta:             True
+18.04.2018 16:00:41 INFO      Neyman construction toys:      0
+18.04.2018 16:00:41 INFO      Training sample size limit:    None
+18.04.2018 16:00:41 INFO      Other options:                 ['neyman2', 'asymmetricbinning']
+18.04.2018 16:00:41 INFO      Base directory:                /home/jb6504/higgs_inference
+18.04.2018 16:00:41 INFO      ML-based strategies available: False
+18.04.2018 16:00:41 INFO    Starting histogram-based inference
+18.04.2018 16:00:41 INFO    Settings:
+18.04.2018 16:00:41 INFO      Statistics:              x [1, 41]
+18.04.2018 16:00:41 INFO      Binning:                 (array([     0.,     48.,     58.,     67.,     75.,     83.,     91.,
           100.,    109.,    119.,    130.,    141.,    155.,    172.,
           193.,    221.,    260.,    325.,    462.,  14000.]), array([ 0.        ,  0.31415927,  0.62831853,  0.9424778 ,  1.25663706,
         1.57079633,  1.88495559,  2.19911486,  2.51327412,  2.82743339,
         3.14159265]))
-07.04.2018 05:18:42 INFO    Starting theta 100 / 1017
-07.04.2018 05:20:19 INFO    Starting theta 200 / 1017
-07.04.2018 05:22:08 INFO    Starting theta 300 / 1017
-07.04.2018 05:23:59 INFO    Starting theta 400 / 1017
-07.04.2018 05:25:58 INFO    Starting theta 500 / 1017
-07.04.2018 05:27:48 INFO    Starting theta 600 / 1017
-07.04.2018 05:29:40 INFO    Starting theta 700 / 1017
-07.04.2018 05:31:32 INFO    Starting theta 800 / 1017
-07.04.2018 05:33:26 INFO    Starting theta 900 / 1017
-07.04.2018 05:35:10 INFO    Starting theta 1000 / 1017
-07.04.2018 05:35:28 INFO    Evaluation timing: median 0.0089750289917 s, mean 0.00899927641907 s
-07.04.2018 05:35:28 INFO    Mean training cross-entropy: 0.670680111222
-07.04.2018 05:35:28 INFO    Mean training log r: 0.234752430145
-07.04.2018 05:35:28 INFO    That's it -- have a great day!
-slurmstepd: error: Exceeded step memory limit at some point.
-slurmstepd: error: This may or may not result in some failure. The SLURM utilizes Linux cgroups for resource containment. For reference please read the explanation in the bug report: https://bugs.schedmd.com/show_bug.cgi?id=3214#c4
+18.04.2018 16:03:05 INFO    Starting theta 100 / 1017

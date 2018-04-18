@@ -420,12 +420,11 @@ def calculate_confidence_limits(filename, folder, neyman_set=1):
     #    logging.warning('Error in MLE determination: %s', err)
 
     # Preprocessing
-    if False:
-        try:
-            subtract_sm(filename, folder, neyman_set)
-        except ValueError:
-            logging.warning('Error in SM subtraction, skipping set')
-            return
+    try:
+        subtract_sm(filename, folder, neyman_set)
+    except ValueError:
+        logging.warning('Error in SM subtraction, skipping set')
+        return
 
     logging.info('Neyman construction for ' + folder + '/' + filename)
 
@@ -458,19 +457,17 @@ def calculate_confidence_limits(filename, folder, neyman_set=1):
 
     # Go!
     for t in range(n_thetas):
-        if False:
-            results = neyman_construction(llr_vs_true_nulls[t, :], llr_vs_true_alternates[t, :], n_self_convolutions)
-            (p_values[t], q_cut_values[t, :], q_cut_uncertainties[t, :], q_median_values[t], null_histos[t, :],
-             alternate_histos[t, :]) = results
+        results = neyman_construction(llr_vs_true_nulls[t, :], llr_vs_true_alternates[t, :], n_self_convolutions)
+        (p_values[t], q_cut_values[t, :], q_cut_uncertainties[t, :], q_median_values[t], null_histos[t, :],
+         alternate_histos[t, :]) = results
 
         q_observed_values[t, :] = calculate_observed_test_statistics(llr_vs_true_alternates[t, :],
                                                                      settings.n_expected_events, 10)
 
-    if False:
-        np.save(result_dir + '/' + neyman_filename + '_pvalues_' + filename + '.npy', p_values)
-        np.save(result_dir + '/' + neyman_filename + '_qcut_' + filename + '.npy', q_cut_values)
-        np.save(result_dir + '/' + neyman_filename + '_qcut_uncertainties_' + filename + '.npy', q_cut_uncertainties)
-        np.save(result_dir + '/' + neyman_filename + '_qmedian_' + filename + '.npy', q_median_values)
+    np.save(result_dir + '/' + neyman_filename + '_pvalues_' + filename + '.npy', p_values)
+    np.save(result_dir + '/' + neyman_filename + '_qcut_' + filename + '.npy', q_cut_values)
+    np.save(result_dir + '/' + neyman_filename + '_qcut_uncertainties_' + filename + '.npy', q_cut_uncertainties)
+    np.save(result_dir + '/' + neyman_filename + '_qmedian_' + filename + '.npy', q_median_values)
     np.save(result_dir + '/' + neyman_filename + '_qobserved_' + filename + '.npy', q_observed_values)
 
 
@@ -494,7 +491,7 @@ def start_cl_calculation(options=''):
     #calculate_confidence_limits('regression_calibrated', 'parameterized', neyman_set)
     #calculate_confidence_limits('combinedregression_calibrated_deep', 'parameterized', neyman_set)
 
-    #calculate_confidence_limits('histo_2d_smeared', 'histo', neyman_set)
+    calculate_confidence_limits('histo_2d_asymmetricbinning_smeared', 'histo', neyman_set)
     #calculate_confidence_limits('scoreregression_rotatedscore_deep_smeared', 'score_regression', neyman_set)
     #calculate_confidence_limits('carl_calibrated_shallow_smeared', 'parameterized', neyman_set)
     #calculate_confidence_limits('combined_calibrated_deep_smeared', 'parameterized', neyman_set)
