@@ -42,6 +42,7 @@ def histo_inference(indices_X=None,
     rough_binning_mode = ('roughbinning' in options)
     fine_binning_mode = ('finebinning' in options)
     superfine_binning_mode = ('superbinning' in options)
+    asymmetric_binning_mode = ('asymmetricbinning' in options)
     new_sample_mode = ('new' in options)
     neyman2_mode = ('neyman2' in options)
     neyman3_mode = ('neyman3' in options)
@@ -111,7 +112,9 @@ def histo_inference(indices_X=None,
         else:
             raise ValueError(indices_X)
 
-    if superfine_binning_mode:
+    if asymmetric_binning_mode:
+        filename_addition += '_asymmetricfinebinning'
+    elif superfine_binning_mode:
         filename_addition += '_superfinebinning'
     elif fine_binning_mode:
         filename_addition += '_finebinning'
@@ -220,6 +223,9 @@ def histo_inference(indices_X=None,
                 elif superfine_binning_mode:
                     n_bins_pt = 50
                     n_bins_deltaphi = 20
+                elif asymmetric_binning_mode:
+                    n_bins_pt = 50
+                    n_bins_deltaphi = 5
 
                 bins_pt = np.percentile(summary_statistics_train[:, 0], np.linspace(0., 100., n_bins_pt))
                 bins_pt[0] = 0.
