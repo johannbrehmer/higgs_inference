@@ -447,7 +447,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     # Evaluate rhat on training sample
     r_hat_train = np.exp(regr.predict(X_thetas_train_unshuffled)[:, 1])
-    np.save(results_dir + '/r_train_' + algorithm + filename_addition + '.npy', r_hat_train)
+    # np.save(results_dir + '/r_train_' + algorithm + filename_addition + '.npy', r_hat_train)
 
     ################################################################################
     # Raw evaluation loop

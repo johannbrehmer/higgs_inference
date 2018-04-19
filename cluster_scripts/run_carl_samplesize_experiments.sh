@@ -18,8 +18,8 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py carl --samplesize 1000 -o shallow
-python -u experiments.py carl --samplesize 2000 -o shallow
+# python -u experiments.py carl --samplesize 1000 -o shallow
+# python -u experiments.py carl --samplesize 2000 -o shallow
 python -u experiments.py carl --samplesize 5000 -o shallow
 python -u experiments.py carl --samplesize 10000 -o shallow
 python -u experiments.py carl --samplesize 20000 -o shallow
