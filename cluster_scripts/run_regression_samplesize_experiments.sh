@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=regr-size
-#SBATCH --output=slurm_regression_samplesize.out
+#SBATCH --job-name=regr-size2
+#SBATCH --output=slurm_regression_samplesize2.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
@@ -20,12 +20,12 @@ cd /home/jb6504/higgs_inference/higgs_inference
 
 #python -u experiments.py regression --samplesize 1000
 #python -u experiments.py regression --samplesize 2000
-python -u experiments.py regression --samplesize 5000
-python -u experiments.py regression --samplesize 10000
-python -u experiments.py regression --samplesize 20000
-python -u experiments.py regression --samplesize 50000
-python -u experiments.py regression --samplesize 100000
-python -u experiments.py regression --samplesize 200000
+#python -u experiments.py regression --samplesize 5000
+#python -u experiments.py regression --samplesize 10000
+#python -u experiments.py regression --samplesize 20000
+#python -u experiments.py regression --samplesize 50000
+#python -u experiments.py regression --samplesize 100000
+#python -u experiments.py regression --samplesize 200000
 python -u experiments.py regression --samplesize 500000
 python -u experiments.py regression --samplesize 1000000
 python -u experiments.py regression --samplesize 2000000
