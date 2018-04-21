@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=comb-size
-#SBATCH --output=slurm_combined_samplesize.out
+#SBATCH --job-name=comb-size2
+#SBATCH --output=slurm_combined_samplesize2.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
@@ -20,12 +20,12 @@ cd /home/jb6504/higgs_inference/higgs_inference
 
 # python -u experiments.py combined --samplesize 1000 -o deep
 # python -u experiments.py combined --samplesize 2000 -o deep
-python -u experiments.py combined --samplesize 5000 -o deep
-python -u experiments.py combined --samplesize 10000 -o deep
-python -u experiments.py combined --samplesize 20000 -o deep
-python -u experiments.py combined --samplesize 50000 -o deep
-python -u experiments.py combined --samplesize 100000 -o deep
-python -u experiments.py combined --samplesize 200000 -o deep
+#python -u experiments.py combined --samplesize 5000 -o deep
+#python -u experiments.py combined --samplesize 10000 -o deep
+#python -u experiments.py combined --samplesize 20000 -o deep
+#python -u experiments.py combined --samplesize 50000 -o deep
+#python -u experiments.py combined --samplesize 100000 -o deep
+#python -u experiments.py combined --samplesize 200000 -o deep
 python -u experiments.py combined --samplesize 500000 -o deep
 python -u experiments.py combined --samplesize 1000000 -o deep
 python -u experiments.py combined --samplesize 2000000 -o deep
