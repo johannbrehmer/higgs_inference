@@ -1,127 +1,29 @@
-10.04.2018 10:57:51 INFO    Welcome! How are you today?
-10.04.2018 10:57:51 INFO    Tasks:
-10.04.2018 10:57:51 INFO      Baseline training:                 False
-10.04.2018 10:57:51 INFO      Random training:                   False
-10.04.2018 10:57:51 INFO      Morphing training:                 False
-10.04.2018 10:57:51 INFO      Point-by-point training:           True
-10.04.2018 10:57:51 INFO      Score regression training:         False
-10.04.2018 10:57:51 INFO      Calibration:                       False
-10.04.2018 10:57:51 INFO      Recalibration:                     False
-10.04.2018 10:57:51 INFO      Likelihood ratio eval:             False
-10.04.2018 10:57:51 INFO      Neyman construction:               False
-10.04.2018 10:57:51 INFO      Neyman construction (alternative): False
-10.04.2018 10:57:51 INFO      Neyman construction (alternative): False
-10.04.2018 10:57:51 INFO      Roaming:                           False
-10.04.2018 10:57:51 INFO      Illustration:                      False
-10.04.2018 10:57:51 INFO    Options:
-10.04.2018 10:57:51 INFO      Denominator:                       alternative 1
-10.04.2018 10:57:51 INFO      New samples (no NaN removal):      False
-10.04.2018 10:57:51 INFO      Dry run:                           False
-10.04.2018 11:10:31 INFO    Splitting...
-10.04.2018 11:10:57 INFO    Number of events:
-10.04.2018 11:10:57 INFO      All:    821636
-10.04.2018 11:10:57 INFO      Training:    575145
-10.04.2018 11:10:57 INFO      Calibration: 82164
-10.04.2018 11:10:57 INFO      Evaluation:  164327
-10.04.2018 11:10:59 INFO    Normalizing probabilities
-10.04.2018 11:12:26 INFO    Generating point-by-point training samples
+24.04.2018 14:31:12 INFO    Welcome! How are you today?
+24.04.2018 14:31:12 INFO    Tasks:
+24.04.2018 14:31:12 INFO      Baseline training:                 False
+24.04.2018 14:31:12 INFO      Random training:                   False
+24.04.2018 14:31:12 INFO      Morphing training:                 False
+24.04.2018 14:31:12 INFO      Point-by-point training:           True
+24.04.2018 14:31:12 INFO      Score regression training:         False
+24.04.2018 14:31:12 INFO      Calibration:                       False
+24.04.2018 14:31:12 INFO      Recalibration:                     False
+24.04.2018 14:31:12 INFO      Likelihood ratio eval:             False
+24.04.2018 14:31:12 INFO      Neyman construction:               False
+24.04.2018 14:31:12 INFO      Neyman construction (alternative): False
+24.04.2018 14:31:12 INFO      Neyman construction (alternative): False
+24.04.2018 14:31:12 INFO      Roaming:                           False
+24.04.2018 14:31:12 INFO      Illustration:                      False
+24.04.2018 14:31:12 INFO    Options:
+24.04.2018 14:31:12 INFO      Denominator:                       standard
+24.04.2018 14:31:12 INFO      New samples (no NaN removal):      False
+24.04.2018 14:31:12 INFO      Dry run:                           False
+24.04.2018 14:44:30 INFO    Splitting...
+24.04.2018 14:44:58 INFO    Number of events:
+24.04.2018 14:44:58 INFO      All:    821636
+24.04.2018 14:44:58 INFO      Training:    575145
+24.04.2018 14:44:58 INFO      Calibration: 82164
+24.04.2018 14:44:58 INFO      Evaluation:  164327
+24.04.2018 14:45:00 INFO    Normalizing probabilities
+24.04.2018 14:46:31 INFO    Generating point-by-point training samples
 generate_data.py:479: RuntimeWarning: divide by zero encountered in log
   cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
-10.04.2018 17:57:02 INFO    Done!
-10.04.2018 17:57:09 INFO    Welcome! How are you today?
-10.04.2018 17:57:09 INFO    Tasks:
-10.04.2018 17:57:09 INFO      Baseline training:                 False
-10.04.2018 17:57:09 INFO      Random training:                   False
-10.04.2018 17:57:09 INFO      Morphing training:                 False
-10.04.2018 17:57:09 INFO      Point-by-point training:           True
-10.04.2018 17:57:09 INFO      Score regression training:         False
-10.04.2018 17:57:09 INFO      Calibration:                       False
-10.04.2018 17:57:09 INFO      Recalibration:                     False
-10.04.2018 17:57:09 INFO      Likelihood ratio eval:             False
-10.04.2018 17:57:09 INFO      Neyman construction:               False
-10.04.2018 17:57:09 INFO      Neyman construction (alternative): False
-10.04.2018 17:57:09 INFO      Neyman construction (alternative): False
-10.04.2018 17:57:09 INFO      Roaming:                           False
-10.04.2018 17:57:09 INFO      Illustration:                      False
-10.04.2018 17:57:09 INFO    Options:
-10.04.2018 17:57:09 INFO      Denominator:                       alternative 2
-10.04.2018 17:57:09 INFO      New samples (no NaN removal):      False
-10.04.2018 17:57:09 INFO      Dry run:                           False
-10.04.2018 18:09:50 INFO    Splitting...
-10.04.2018 18:10:17 INFO    Number of events:
-10.04.2018 18:10:17 INFO      All:    821636
-10.04.2018 18:10:17 INFO      Training:    575145
-10.04.2018 18:10:17 INFO      Calibration: 82164
-10.04.2018 18:10:17 INFO      Evaluation:  164327
-10.04.2018 18:10:18 INFO    Normalizing probabilities
-10.04.2018 18:11:46 INFO    Generating point-by-point training samples
-generate_data.py:479: RuntimeWarning: divide by zero encountered in log
-  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
-Traceback (most recent call last):
-  File "generate_data.py", line 494, in <module>
-    t) + filename_addition + '.npy', this_r)
-  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/npyio.py", line 491, in save
-    pickle_kwargs=pickle_kwargs)
-  File "/share/apps/python/2.7.12/intel/lib/python2.7/site-packages/numpy-1.11.2-py2.7-linux-x86_64.egg/numpy/lib/format.py", line 584, in write_array
-    array.tofile(fp)
-IOError: 500000 requested and 2028 written
-10.04.2018 19:38:27 INFO    Welcome! How are you today?
-10.04.2018 19:38:27 INFO    Tasks:
-10.04.2018 19:38:27 INFO      Baseline training:                 False
-10.04.2018 19:38:27 INFO      Random training:                   False
-10.04.2018 19:38:27 INFO      Morphing training:                 False
-10.04.2018 19:38:27 INFO      Point-by-point training:           True
-10.04.2018 19:38:27 INFO      Score regression training:         False
-10.04.2018 19:38:27 INFO      Calibration:                       False
-10.04.2018 19:38:27 INFO      Recalibration:                     False
-10.04.2018 19:38:27 INFO      Likelihood ratio eval:             False
-10.04.2018 19:38:27 INFO      Neyman construction:               False
-10.04.2018 19:38:27 INFO      Neyman construction (alternative): False
-10.04.2018 19:38:27 INFO      Neyman construction (alternative): False
-10.04.2018 19:38:27 INFO      Roaming:                           False
-10.04.2018 19:38:27 INFO      Illustration:                      False
-10.04.2018 19:38:27 INFO    Options:
-10.04.2018 19:38:27 INFO      Denominator:                       alternative 3
-10.04.2018 19:38:27 INFO      New samples (no NaN removal):      False
-10.04.2018 19:38:27 INFO      Dry run:                           False
-10.04.2018 19:50:56 INFO    Splitting...
-10.04.2018 19:51:21 INFO    Number of events:
-10.04.2018 19:51:21 INFO      All:    821636
-10.04.2018 19:51:21 INFO      Training:    575145
-10.04.2018 19:51:21 INFO      Calibration: 82164
-10.04.2018 19:51:21 INFO      Evaluation:  164327
-10.04.2018 19:51:22 INFO    Normalizing probabilities
-10.04.2018 19:52:48 INFO    Generating point-by-point training samples
-generate_data.py:479: RuntimeWarning: divide by zero encountered in log
-  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
-11.04.2018 02:34:14 INFO    Done!
-11.04.2018 02:34:21 INFO    Welcome! How are you today?
-11.04.2018 02:34:21 INFO    Tasks:
-11.04.2018 02:34:21 INFO      Baseline training:                 False
-11.04.2018 02:34:21 INFO      Random training:                   False
-11.04.2018 02:34:21 INFO      Morphing training:                 False
-11.04.2018 02:34:21 INFO      Point-by-point training:           True
-11.04.2018 02:34:21 INFO      Score regression training:         False
-11.04.2018 02:34:21 INFO      Calibration:                       False
-11.04.2018 02:34:21 INFO      Recalibration:                     False
-11.04.2018 02:34:21 INFO      Likelihood ratio eval:             False
-11.04.2018 02:34:21 INFO      Neyman construction:               False
-11.04.2018 02:34:21 INFO      Neyman construction (alternative): False
-11.04.2018 02:34:21 INFO      Neyman construction (alternative): False
-11.04.2018 02:34:21 INFO      Roaming:                           False
-11.04.2018 02:34:21 INFO      Illustration:                      False
-11.04.2018 02:34:21 INFO    Options:
-11.04.2018 02:34:21 INFO      Denominator:                       alternative 4
-11.04.2018 02:34:21 INFO      New samples (no NaN removal):      False
-11.04.2018 02:34:21 INFO      Dry run:                           False
-11.04.2018 02:47:00 INFO    Splitting...
-11.04.2018 02:47:26 INFO    Number of events:
-11.04.2018 02:47:26 INFO      All:    821636
-11.04.2018 02:47:26 INFO      Training:    575145
-11.04.2018 02:47:26 INFO      Calibration: 82164
-11.04.2018 02:47:26 INFO      Evaluation:  164327
-11.04.2018 02:47:27 INFO    Normalizing probabilities
-11.04.2018 02:48:53 INFO    Generating point-by-point training samples
-generate_data.py:479: RuntimeWarning: divide by zero encountered in log
-  cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
-slurmstepd: error: *** JOB 5430355 ON c99-06 CANCELLED AT 2018-04-11T08:53:41 ***
