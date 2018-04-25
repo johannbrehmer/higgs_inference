@@ -1,0 +1,49 @@
+Using TensorFlow backend.
+25.04.2018 05:09:08 INFO    Hi! How are you today?
+25.04.2018 05:09:08 INFO    Startup options:
+25.04.2018 05:09:08 INFO      Algorithm:                     combinedregression
+25.04.2018 05:09:08 INFO      Point by point:                False
+25.04.2018 05:09:08 INFO      Morphing-aware mode:           False
+25.04.2018 05:09:08 INFO      Smeared data:                  False
+25.04.2018 05:09:08 INFO      Training sample:               baseline
+25.04.2018 05:09:08 INFO      alpha:                         None
+25.04.2018 05:09:08 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+25.04.2018 05:09:08 INFO      AFC epsilon:                   None
+25.04.2018 05:09:08 INFO      Denominator theta:             False
+25.04.2018 05:09:08 INFO      Neyman construction toys:      0
+25.04.2018 05:09:08 INFO      Training sample size limit:    5000000
+25.04.2018 05:09:08 INFO      Other options:                 ['deep']
+25.04.2018 05:09:08 INFO      Base directory:                /home/jb6504/higgs_inference
+25.04.2018 05:09:08 INFO      ML-based strategies available: True
+25.04.2018 05:09:08 INFO    Starting parameterized inference
+25.04.2018 05:09:08 INFO    Main settings:
+25.04.2018 05:09:08 INFO      Algorithm:                combinedregression
+25.04.2018 05:09:08 INFO      Morphing-aware:           False
+25.04.2018 05:09:08 INFO      Training sample:          baseline
+25.04.2018 05:09:08 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+25.04.2018 05:09:08 INFO    Options:
+25.04.2018 05:09:08 INFO      Number of hidden layers:  5
+25.04.2018 05:09:08 INFO      alpha:                    100.0
+25.04.2018 05:09:08 INFO      Batch size:               128
+25.04.2018 05:09:08 INFO      Learning rate:            0.001
+25.04.2018 05:09:08 INFO      Learning rate decay:      0.0460517018599
+25.04.2018 05:09:08 INFO      Number of epochs:         100
+25.04.2018 05:09:08 INFO      Training samples:         5000000
+25.04.2018 05:09:08 INFO      NC experiments:           False
+25.04.2018 05:09:08 INFO      Debug mode:               False
+25.04.2018 05:10:08 INFO    Reduced training sample size from 9999997 to 5000000 (factor 2)
+25.04.2018 05:10:33 INFO    Starting training
+2018-04-25 05:10:34.138363: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-25 05:10:34.138399: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-25 05:10:34.138404: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-25 05:10:34.138409: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-25 05:10:34.138413: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-25 05:10:34.439883: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:84:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-04-25 05:10:34.439919: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-04-25 05:10:34.439925: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-04-25 05:10:34.439934: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:84:00.0)
