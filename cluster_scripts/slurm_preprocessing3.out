@@ -27,3 +27,4 @@
 25.04.2018 07:45:35 INFO    Generating point-by-point training samples
 generate_data.py:479: RuntimeWarning: divide by zero encountered in log
   cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+25.04.2018 13:35:37 INFO    Done!
