@@ -9,12 +9,11 @@ Johann Brehmer, Kyle Cranmer, Gilles Louppe, and Juan Pavez
 - `evaluation`: IPython notebooks that extract metrics and figures from the experiments.
 - `figures`: Here the figures are stored.
 - `higgs_inference`: The main folder for the inference experiments.
-    - `models`: Code that generates the keras models at the heart of many inference strategies.
-    - `strategies`: The training and evaluation for the different inference strategies.
+    - `models`: The keras model code at the heart of many inference strategies.
+    - `strategies`: Training and evaluation routines for the different inference strategies.
     - `various`: Different utility functions and the p-value calculation.
     - `experiments.py`: Main executable that starts the different training and evaluation pieces.
     - `settings.py`:  Most settings and constants, including the main directories, event numbers, architecture parameters, and benchmark thetas.
-- `notes`: LaTeX notes roughly summarising the state of the experiments.
 - `preprocessing`: Unweighting routines that generate the different training, calibration, and evaluation samples from the original weighted event file.
 - `prototypes`: Toy experiments and cross-checks on other data. Includes the `flow` folder with a PyTorch implementation of normalizing flows.
 - `results`: The predictions of the different algorithms on the test data set.
