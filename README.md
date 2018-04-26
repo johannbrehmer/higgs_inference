@@ -1,4 +1,4 @@
-# Inference experiments on a Higgs EFT data set
+# Code repository for the paper "Constraining Effective Field Theories with Machine Learning"
 
 Johann Brehmer, Kyle Cranmer, Gilles Louppe, and Juan Pavez
 
