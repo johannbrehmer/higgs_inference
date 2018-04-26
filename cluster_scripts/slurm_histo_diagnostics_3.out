@@ -1,23 +1,25 @@
-18.04.2018 16:01:41 INFO    Hi! How are you today?
-18.04.2018 16:01:41 INFO    Startup options:
-18.04.2018 16:01:41 INFO      Algorithm:                     histo
-18.04.2018 16:01:41 INFO      Point by point:                False
-18.04.2018 16:01:41 INFO      Morphing-aware mode:           False
-18.04.2018 16:01:41 INFO      Smeared data:                  False
-18.04.2018 16:01:41 INFO      Training sample:               baseline
-18.04.2018 16:01:41 INFO      alpha:                         None
-18.04.2018 16:01:41 INFO      Histogram / AFC X indices:     [1, 41]
-18.04.2018 16:01:41 INFO      AFC epsilon:                   None
-18.04.2018 16:01:41 INFO      Denominator theta:             False
-18.04.2018 16:01:41 INFO      Neyman construction toys:      3
-18.04.2018 16:01:41 INFO      Training sample size limit:    None
-18.04.2018 16:01:41 INFO      Other options:                 ['asymmetricbinning']
-18.04.2018 16:01:41 INFO      Base directory:                /home/jb6504/higgs_inference
-18.04.2018 16:01:41 INFO      ML-based strategies available: False
-18.04.2018 16:01:41 INFO    Starting histogram-based inference
-18.04.2018 16:01:41 INFO    Settings:
-18.04.2018 16:01:41 INFO      Statistics:              x [1, 41]
-18.04.2018 16:01:41 INFO      Binning:                 (array([     0.,     48.,     58.,     67.,     75.,     83.,     91.,
+INFO (theano.gof.compilelock): Waiting for existing lock by unknown process (I am process '70865')
+INFO (theano.gof.compilelock): To manually release the lock, delete /home/jb6504/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-centos-7.3.1611-Core-x86_64-2.7.12-64/lock_dir
+25.04.2018 18:15:05 INFO    Hi! How are you today?
+25.04.2018 18:15:05 INFO    Startup options:
+25.04.2018 18:15:05 INFO      Algorithm:                     histo
+25.04.2018 18:15:05 INFO      Point by point:                False
+25.04.2018 18:15:05 INFO      Morphing-aware mode:           False
+25.04.2018 18:15:05 INFO      Smeared data:                  False
+25.04.2018 18:15:05 INFO      Training sample:               baseline
+25.04.2018 18:15:05 INFO      alpha:                         None
+25.04.2018 18:15:05 INFO      Histogram / AFC X indices:     [1, 41]
+25.04.2018 18:15:05 INFO      AFC epsilon:                   None
+25.04.2018 18:15:05 INFO      Denominator theta:             False
+25.04.2018 18:15:05 INFO      Neyman construction toys:      3
+25.04.2018 18:15:05 INFO      Training sample size limit:    None
+25.04.2018 18:15:05 INFO      Other options:                 ['asymmetricbinning']
+25.04.2018 18:15:05 INFO      Base directory:                /home/jb6504/higgs_inference
+25.04.2018 18:15:05 INFO      ML-based strategies available: False
+25.04.2018 18:15:05 INFO    Starting histogram-based inference
+25.04.2018 18:15:05 INFO    Settings:
+25.04.2018 18:15:05 INFO      Statistics:              x [1, 41]
+25.04.2018 18:15:05 INFO      Binning:                 (array([     0.,     48.,     58.,     67.,     75.,     83.,     91.,
           100.,    109.,    119.,    130.,    141.,    155.,    172.,
           193.,    221.,    260.,    325.,    462.,  14000.]), array([ 0.        ,  0.31415927,  0.62831853,  0.9424778 ,  1.25663706,
         1.57079633,  1.88495559,  2.19911486,  2.51327412,  2.82743339,
