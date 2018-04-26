@@ -70,3 +70,56 @@ Free memory: 11.10GiB
 26.04.2018 03:47:51 INFO    Starting theta 700 / 1017
 26.04.2018 05:44:37 INFO    Starting theta 800 / 1017
 26.04.2018 07:41:19 INFO    Starting theta 900 / 1017
+26.04.2018 09:38:16 INFO    Starting theta 1000 / 1017
+26.04.2018 09:59:21 INFO    Calibrated evaluation timing: median 1.67112493515 s, mean 1.6728495513 s
+26.04.2018 09:59:21 INFO    Interpolating calibrated roaming
+26.04.2018 10:04:16 INFO    That's it -- have a great day!
+Using TensorFlow backend.
+26.04.2018 10:04:19 INFO    Hi! How are you today?
+26.04.2018 10:04:19 INFO    Startup options:
+26.04.2018 10:04:19 INFO      Algorithm:                     combinedregression
+26.04.2018 10:04:19 INFO      Point by point:                False
+26.04.2018 10:04:19 INFO      Morphing-aware mode:           False
+26.04.2018 10:04:19 INFO      Smeared data:                  False
+26.04.2018 10:04:19 INFO      Training sample:               baseline
+26.04.2018 10:04:19 INFO      alpha:                         None
+26.04.2018 10:04:19 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+26.04.2018 10:04:19 INFO      AFC epsilon:                   None
+26.04.2018 10:04:19 INFO      Denominator theta:             False
+26.04.2018 10:04:19 INFO      Neyman construction toys:      0
+26.04.2018 10:04:19 INFO      Training sample size limit:    2000000
+26.04.2018 10:04:19 INFO      Other options:                 ['deep']
+26.04.2018 10:04:19 INFO      Base directory:                /home/jb6504/higgs_inference
+26.04.2018 10:04:19 INFO      ML-based strategies available: True
+26.04.2018 10:04:19 INFO    Starting parameterized inference
+26.04.2018 10:04:19 INFO    Main settings:
+26.04.2018 10:04:19 INFO      Algorithm:                combinedregression
+26.04.2018 10:04:19 INFO      Morphing-aware:           False
+26.04.2018 10:04:19 INFO      Training sample:          baseline
+26.04.2018 10:04:19 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+26.04.2018 10:04:19 INFO    Options:
+26.04.2018 10:04:19 INFO      Number of hidden layers:  5
+26.04.2018 10:04:19 INFO      alpha:                    100.0
+26.04.2018 10:04:19 INFO      Batch size:               128
+26.04.2018 10:04:19 INFO      Learning rate:            0.001
+26.04.2018 10:04:19 INFO      Learning rate decay:      0.018420680744
+26.04.2018 10:04:19 INFO      Number of epochs:         250
+26.04.2018 10:04:19 INFO      Training samples:         2000000
+26.04.2018 10:04:19 INFO      NC experiments:           False
+26.04.2018 10:04:19 INFO      Debug mode:               False
+26.04.2018 10:04:43 INFO    Reduced training sample size from 9999997 to 2000000 (factor 5)
+26.04.2018 10:05:01 INFO    Starting training
+2018-04-26 10:05:02.606467: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-26 10:05:02.606503: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-26 10:05:02.606513: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-26 10:05:02.606517: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-26 10:05:02.606522: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-04-26 10:05:02.907207: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla K80
+major: 3 minor: 7 memoryClockRate (GHz) 0.8235
+pciBusID 0000:84:00.0
+Total memory: 11.17GiB
+Free memory: 11.10GiB
+2018-04-26 10:05:02.907246: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-04-26 10:05:02.907253: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-04-26 10:05:02.907262: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:84:00.0)
