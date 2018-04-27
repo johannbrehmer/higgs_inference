@@ -1,11 +1,11 @@
 #!/bin/bash
 
-#SBATCH --job-name=creg-tuning2
-#SBATCH --output=slurm_combinedregression_tuning2.out
+#SBATCH --job-name=creg-tuning
+#SBATCH --output=slurm_combinedregression_tuning.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
-#SBATCH --time=7-00:00:00
+#SBATCH --time=1-00:00:00
 #SBATCH --gres=gpu:1
 
 # Modules
@@ -20,7 +20,7 @@ cd /home/jb6504/higgs_inference/higgs_inference
 
 # python -u experiments.py combinedregression --alpha 10. -o deep
 # python -u experiments.py combinedregression --alpha 20. -o deep
-# python -u experiments.py combinedregression --alpha 50. -o deep
-python -u experiments.py combinedregression --alpha 200. -o deep
+python -u experiments.py combinedregression --alpha 50. -o deep
+# python -u experiments.py combinedregression --alpha 200. -o deep
 # python -u experiments.py combinedregression --alpha 500. -o deep
 # python -u experiments.py combinedregression --alpha 1000. -o deep
