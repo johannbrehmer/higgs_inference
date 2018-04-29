@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=creg-size2
-#SBATCH --output=slurm_combinedregression_samplesize2.out
+#SBATCH --job-name=creg-size
+#SBATCH --output=slurm_combinedregression_samplesize.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
