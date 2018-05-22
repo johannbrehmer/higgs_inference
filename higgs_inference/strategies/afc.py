@@ -26,10 +26,9 @@ def afc_inference(statistics='x',
                   do_neyman=False,
                   options=''):
     """
-    Approximates the likelihood through Approximate Frequentist Inference, a frequentist twist on ABC
+    Likelihood ratio estimation through Approximate Frequentist Inference, a frequentist twist on ABC
     and effectively the same as kernel density estimation in the summary statistics space.
 
-    :param use_smearing:
     :param statistics: Defines which summary statistics is used to decide upon acceptance or rejection of events.
                        Currently the only option is 'x', which bases the acceptance decision on an epsilon ball in
                        (re-scaled) feature space.
@@ -40,10 +39,12 @@ def afc_inference(statistics='x',
                     statistics. If no value is given, the algorithm uses 0.1^(1/n_dim), where n_dim is the number of
                     dimensions of the statistics space, for instance the length of indices_X.
     :param kernel: The kernel. 'tophat' is equivalent to classic rejection ABC. Another option is 'gaussian'.
-    :param do_neyman:
-    :param kde_absolute_tolerance:
-    :param kde_relative_tolerance:
-    :param options: Further options in a list of strings or string.
+    :param use_smearing: Whether to use the training and evaluation sample with (simplified) detector simulation.
+    :param denominator: Which of five predefined denominator (reference) hypotheses to use.
+    :param kde_absolute_tolerance: Parameter for the KDE.
+    :param kde_relative_tolerance: Parameter for the KDE.
+    :param do_neyman: Whether to evaluate the estimator on the Neyman construction samples. Not yet implemented.
+    :param options: Further options in a list of strings or string. Not actually used right now.
     """
 
     logging.info('Starting AFC inference')
@@ -53,11 +54,13 @@ def afc_inference(statistics='x',
     ################################################################################
 
     if statistics is not 'x':
-        raise NotImplementedError
+        raise NotImplementedError('No summary statistics except X indices implemented')
+
+    if do_neyman:
+        raise NotImplementedError('Neyman construction for AFC not implemented')
 
     if indices_X is None:
         indices_X = [1, 38, 39, 40, 41]  # pT(j1), m(Z2), m(jj), delta_eta(jj), delta_phi(jj)
-        # indices_X = [1, 41]  # pT(j1), delta_phi(jj)
 
     statistics_dimensionality = len(indices_X)
 
@@ -81,7 +84,7 @@ def afc_inference(statistics='x',
         theta1 = settings.theta1_alternatives[denominator - 1]
 
     results_dir = settings.base_dir + '/results/afc'
-    neyman_dir = settings.neyman_dir + '/afc'
+    # neyman_dir = settings.neyman_dir + '/afc'
 
     logging.info('Settings:')
     if statistics == 'x':
@@ -100,7 +103,7 @@ def afc_inference(statistics='x',
     X_test = np.load(
         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_test' + input_filename_addition + '.npy')
     r_test = np.load(settings.unweighted_events_dir + '/r_test' + input_filename_addition + '.npy')
-    #X_neyman_observed = np.load(settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_neyman_observed.npy')
+    # X_neyman_observed = np.load(settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_neyman_observed.npy')
     n_events_test = X_test.shape[0]
 
     ################################################################################
@@ -122,7 +125,8 @@ def afc_inference(statistics='x',
             settings.unweighted_events_dir + '/point_by_point/' + input_X_prefix + 'X_train_point_by_point_' + str(
                 t) + input_filename_addition + '.npy')
         y_train = np.load(
-            settings.unweighted_events_dir + '/point_by_point/y_train_point_by_point_' + str(t) + input_filename_addition + '.npy')
+            settings.unweighted_events_dir + '/point_by_point/y_train_point_by_point_' + str(
+                t) + input_filename_addition + '.npy')
 
         # Scale data
         scaler = StandardScaler()
@@ -176,94 +180,6 @@ def afc_inference(statistics='x',
         elif t == settings.theta_benchmark_trained:
             np.save(results_dir + '/r_trained_afc' + filename_addition + '.npy', np.exp(log_r_hat_test))
 
-        # if do_neyman:
-        #     # logging.debug('Neyman observed')
-        #
-        #     # Neyman construction: prepare observed data and construct summary statistics
-        #     X_neyman_observed_transformed = scaler.transform(
-        #         X_neyman_observed.reshape((-1, X_neyman_observed.shape[2])))
-        #
-        #     if statistics == 'x':
-        #         summary_statistics_neyman_observed = X_neyman_observed_transformed[:, indices_X]
-        #     else:
-        #         raise NotImplementedError
-        #
-        #     # Neyman construction: evaluate observed sample
-        #     log_p_hat_num_neyman_observed = kde_num.score_samples(summary_statistics_neyman_observed)
-        #     log_p_hat_den_neyman_observed = kde_den.score_samples(summary_statistics_neyman_observed)
-        #
-        #     # Sanitize output
-        #     log_p_hat_num_neyman_observed[np.invert(np.isfinite(log_p_hat_num_neyman_observed))] = -1000.
-        #     log_p_hat_den_neyman_observed[np.invert(np.isfinite(log_p_hat_den_neyman_observed))] = -1000.
-        #
-        #     log_r_hat_neyman_observed = log_p_hat_num_neyman_observed - log_p_hat_den_neyman_observed
-        #     log_r_hat_neyman_observed = log_r_hat_neyman_observed.reshape((-1, settings.n_expected_events))
-        #
-        #     # logging.debug('Neyman observed log p (num): shape %s, %s nans, content \n %s',
-        #     #               log_p_hat_num_neyman_observed.shape, np.sum(np.isnan(log_p_hat_num_neyman_observed)),
-        #     #               log_p_hat_num_neyman_observed)
-        #     # logging.debug('Neyman observed log p (den): shape %s, %s nans, content \n %s',
-        #     #               log_p_hat_den_neyman_observed.shape, np.sum(np.isnan(log_p_hat_den_neyman_observed)),
-        #     #               log_p_hat_den_neyman_observed)
-        #     # logging.debug('Neyman observed log r: shape %s, %s nans, content \n %s',
-        #     #               log_r_hat_neyman_observed.shape, np.sum(np.isnan(log_r_hat_neyman_observed)),
-        #     #               log_r_hat_neyman_observed)
-        #
-        #     llr_neyman_observed = -2. * np.sum(log_r_hat_neyman_observed, axis=1)
-        #     np.save(neyman_dir + '/neyman_llr_observed_afc' + '_' + str(t) + filename_addition + '.npy',
-        #             llr_neyman_observed)
-        #
-        #     # Neyman construction: loop over distribution samples generated from different thetas
-        #     llr_neyman_distributions = []
-        #     for tt in range(settings.n_thetas):
-        #
-        #         # Only evaluate certain combinations of thetas to save computation time
-        #         if not decide_toy_evaluation(tt, t):
-        #             placeholder = np.empty(settings.n_neyman_null_experiments)
-        #             placeholder[:] = np.nan
-        #             llr_neyman_distributions.append(placeholder)
-        #             continue
-        #
-        #         # Neyman construction: load distribution sample and construct summary statistics
-        #         X_neyman_distribution = np.load(
-        #             settings.unweighted_events_dir + '/' + input_X_prefix + 'X_neyman_distribution_' + str(tt) + '.npy')
-        #         X_neyman_distribution_transformed = scaler.transform(
-        #             X_neyman_distribution.reshape((-1, X_neyman_distribution.shape[2])))
-        #
-        #         if statistics == 'x':
-        #             summary_statistics_neyman_distribution = X_neyman_distribution_transformed[:, indices_X]
-        #         else:
-        #             raise NotImplementedError
-        #
-        #         # Neyman construction: evaluate observed sample
-        #         log_p_hat_num_neyman_distribution = kde_num.score_samples(summary_statistics_neyman_distribution)
-        #         log_p_hat_den_neyman_distribution = kde_den.score_samples(summary_statistics_neyman_distribution)
-        #
-        #         # Sanitize output
-        #         log_p_hat_num_neyman_distribution[np.invert(np.isfinite(log_p_hat_num_neyman_distribution))] = -1000.
-        #         log_p_hat_den_neyman_distribution[np.invert(np.isfinite(log_p_hat_den_neyman_distribution))] = -1000.
-        #
-        #         log_r_hat_neyman_distribution = log_p_hat_num_neyman_distribution - log_p_hat_den_neyman_distribution
-        #         log_r_hat_neyman_distribution = log_r_hat_neyman_distribution.reshape((-1, settings.n_expected_events))
-        #
-        #         # logging.debug('Neyman distribution %s log p (num): shape %s, %s nans, content \n %s',
-        #         #               tt, log_p_hat_num_neyman_distribution.shape,
-        #         #               np.sum(np.isnan(log_p_hat_num_neyman_distribution)), log_p_hat_num_neyman_distribution)
-        #         # logging.debug('Neyman distribution %s log p (den): shape %s, %s nans, content \n %s',
-        #         #               tt, log_p_hat_den_neyman_distribution.shape,
-        #         #               np.sum(np.isnan(log_p_hat_den_neyman_distribution)), log_p_hat_den_neyman_distribution)
-        #         # logging.debug('Neyman distribution %s log r: shape %s, %s nans, content \n %s',
-        #         #               tt, log_r_hat_neyman_distribution.shape, np.sum(np.isnan(log_r_hat_neyman_distribution)),
-        #         #               log_r_hat_neyman_distribution)
-        #
-        #         llr_neyman_distribution = -2. * np.sum(log_r_hat_neyman_distribution, axis=1)
-        #         np.save(neyman_dir + '/neyman_llr_distribution_afc' + '_' + str(t) + filename_addition + '.npy',
-        #                 llr_neyman_distribution)
-        #
-        #     llr_neyman_distributions = np.asarray(llr_neyman_distributions)
-        #     np.save(neyman_dir + '/neyman_llr_distribution_afc' + '_' + str(t) + filename_addition + '.npy',
-        #             llr_neyman_distributions)
-
     # Interpolate and save evaluation results
     expected_llr = np.asarray(expected_llr)
     mse_log_r = np.asarray(mse_log_r)
@@ -273,10 +189,6 @@ def afc_inference(statistics='x',
 
     interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], expected_llr)
     expected_llr_all = interpolator(settings.thetas)
-    # gp = GaussianProcessRegressor(normalize_y=True,
-    #                              kernel=C(1.0) * Matern(1.0, nu=0.5), n_restarts_optimizer=10)
-    # gp.fit(thetas[settings.pbp_training_thetas], expected_llr)
-    # expected_llr_all = gp.predict(thetas)
     np.save(results_dir + '/llr_afc' + filename_addition + '.npy', expected_llr_all)
 
     interpolator = LinearNDInterpolator(settings.thetas[settings.pbp_training_thetas], mse_log_r)

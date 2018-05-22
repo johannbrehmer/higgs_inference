@@ -21,16 +21,18 @@ def histo_inference(indices_X=None,
                     do_neyman=False,
                     options=''):
     """
-    Approximates the likelihood throungh Approximate Frequentist Inference, a frequentist twist on ABC
-    and effectively the same as kernel density estimation in the summary statistics space.
+    Likelihood ratio estimation through histograms of standard kinematic observables.
 
-    :param denominator:
-    :param use_smearing:
-    :param indices_X: Defines which of the features to histogram.
-    :param binning:
-    :param use_smearing:
-    :param do_neyman:
-    :param options: Further options in a list of strings or string.
+    :param indices_X: Defines which of the features to histogram. If None, a default selection of two variables is used.
+    :param binning: Binning of the histogram. If 'optimized', use a fixed binning (only supported for jet pT and delta
+                    phi). If 'adaptive' (the default), the binning is chosen based on percentiles of the data.
+    :param use_smearing: Whether to use the training and evaluation sample with (simplified) detector simulation.
+    :param denominator: Which of five predefined denominator (reference) hypotheses to use.
+    :param do_neyman: Whether to evaluate the estimator on the Neyman construction samples.
+    :param options: Further options in a list of strings or string. Possible options are 'roughbinning', 'finebinning',
+                    'superbinning', 'asymmetricbinning', all of which change the number of bins in the 'adaptive' and
+                    'optimal' binning modes; 'new' for different samples, and 'neyman2' and 'neyman3' for different
+                    Neyman construction samples.
     """
 
     logging.info('Starting histogram-based inference')
@@ -322,36 +324,6 @@ def histo_inference(indices_X=None,
                 neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(t) + '_histo' + filename_addition + '.npy',
                 llr_neyman_alternate)
 
-            # # Neyman construction: old null
-            # llr_neyman_nulls = []
-            # for tt in range(settings.n_thetas):
-            #
-            #     # Only evaluate certain combinations of thetas to save computation time
-            #     if not decide_toy_evaluation(tt, t):
-            #         placeholder = np.empty(n_neyman_null_experiments)
-            #         placeholder[:] = np.nan
-            #         llr_neyman_nulls.append(placeholder)
-            #         continue
-            #
-            #     # Neyman construction: load null sample and construct summary statistics
-            #     X_neyman_null = np.load(
-            #         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
-            #             tt) + '.npy')
-            #     summary_statistics_neyman_null = X_neyman_null.reshape(
-            #         (-1, X_neyman_null.shape[2]))[:, indices_X]
-            #
-            #     # Evaluation
-            #     s_hat_neyman_null = histogram.predict(summary_statistics_neyman_null)
-            #     log_r_hat_neyman_null = np.log(r_from_s(s_hat_neyman_null))
-            #     log_r_hat_neyman_null = log_r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
-            #
-            #     llr_neyman_nulls.append(-2. * np.sum(log_r_hat_neyman_null, axis=1))
-            #
-            # llr_neyman_nulls = np.asarray(llr_neyman_nulls)
-            # np.save(neyman_dir + '/' + neyman_filename + '_llr_null_histo' + '_' + str(
-            #     t) + filename_addition + '.npy',
-            #         llr_neyman_nulls)
-
             # Neyman construction: null
             X_neyman_null = np.load(
                 settings.unweighted_events_dir + '/neyman/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
@@ -407,31 +379,3 @@ def histo_inference(indices_X=None,
 
     logging.info('Mean training cross-entropy: %s', np.mean(cross_entropies_train))
     logging.info('Mean training log r: %s', np.mean(mse_log_r_train))
-
-    # logging.info('Interpolation')
-
-    # interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], expected_llr)
-    # expected_llr_all = interpolator(settings.thetas)
-    # np.save(results_dir + '/llr_histo' + filename_addition + '.npy', expected_llr_all)
-
-    # interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], mse_log_r)
-    # mse_log_r_all = interpolator(settings.thetas)
-    # np.save(results_dir + '/mse_logr_histo' + filename_addition + '.npy',
-    #        mse_log_r_all)
-
-    # interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], trimmed_mse_log_r)
-    # trimmed_mse_log_r_all = interpolator(settings.thetas)
-    # np.save(results_dir + '/trimmed_mse_logr_histo' + filename_addition + '.npy',
-    #        trimmed_mse_log_r_all)
-
-    # interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], cross_entropies_train)
-    # cross_entropy_train_mean = np.mean(interpolator(settings.thetas[settings.thetas_train]))
-    # logging.info('Training cross-entropy: %s', cross_entropy_train_mean)
-    # np.save(results_dir + '/cross_entropy_train_histo' + filename_addition + '.npy',
-    #        [cross_entropy_train_mean])
-
-    # interpolator = LinearNDInterpolator(settings.thetas[settings.extended_pbp_training_thetas], mse_log_r_train)
-    # mse_log_r_train_mean = np.mean(interpolator(settings.thetas[settings.thetas_train]))
-    # logging.info('Training MSE log r: %s', mse_log_r_train_mean)
-    # np.save(results_dir + '/mse_logr_train_histo' + filename_addition + '.npy',
-    #        [mse_log_r_train_mean])

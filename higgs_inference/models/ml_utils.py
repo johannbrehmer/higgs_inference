@@ -15,6 +15,9 @@ from keras.callbacks import Callback
 ################################################################################
 
 def stack_layers(layers):
+
+    """ Helper function for Keras models.  """
+
     def f(x):
         for k in range(len(layers)):
             x = layers[k](x)
@@ -27,6 +30,8 @@ def build_hidden_layers(n,
                         hidden_layer_size=100,
                         activation='tanh',
                         dropout_prob=0.0):
+    """ Helper function for Keras models.  """
+
     r = []
     for k in range(n):
         if dropout_prob > 0.:
@@ -41,10 +46,12 @@ def build_hidden_layers(n,
 
 
 ################################################################################
-# Callback to save metrics after every batch
+# Callback to save metrics after every few batches
 ################################################################################
 
 class DetailedHistory(Callback):
+
+    """ Keras Callback that saves metric every n batches rather than just every epoch.  """
 
     def __init__(self, detailed_history, n_batches_per_entry=100):
         super(DetailedHistory, self).__init__()

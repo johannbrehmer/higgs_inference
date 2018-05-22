@@ -106,7 +106,7 @@ neyman_convolution_bins = 15001
 neyman_convolution_histo_edges = np.linspace(neyman_convolution_min, neyman_convolution_max,
                                              neyman_convolution_bins + 1)
 
-# Confidence limit
+# Confidence limits
 confidence_levels = np.asarray([0.68, 0.95, 0.997])
 q_threshold = - 2. * np.log(1. - confidence_levels)
 
@@ -119,14 +119,19 @@ n_hidden_layers_shallow = 2
 n_hidden_layers_default = 3
 n_hidden_layers_deep = 5
 
-# Carl / regression + score: relative weight in loss function
+# Loss function clipping of |log r|
+log_r_clip_value = 10.
+
+# CASCAL and RASCAL hyperparameters alpha (weight score term in loss)
 alpha_regression_default = 100.
 alpha_carl_default = 5.
 
-# Training length (for full training samples, will be increased for reduced training samples)
+# Training length (number of epochs for full training samples, will be increased for reduced training samples)
 n_epochs_short = 1
 n_epochs_default = 50
 n_epochs_long = 100
+
+# Other training settings
 early_stopping_patience = 10
 validation_split = 0.2
 

@@ -26,14 +26,20 @@ def score_regression_inference(use_smearing=False,
                                do_neyman=False,
                                training_sample_size=None,
                                options=''):
-    """
-    Trains and evaluates one of the parameterized higgs_inference methods.
 
-    :param training_sample_size:
-    :param denominator:
-    :param use_smearing:
-    :param do_neyman:
-    :param options: Further options in a list of strings or string.
+    """
+    Likelihood ratio estimation through SALLY and SALLINO.
+
+    :param use_smearing: Whether to use the training and evaluation sample with (simplified) detector simulation.
+    :param denominator: Which of five predefined denominator (reference) hypotheses to use.
+    :param do_neyman: Switches on the evaluation of toy experiments for the Neyman construction.
+    :param training_sample_size: If not None, limits the training sample size to the given value.
+    :param options: Further options in a list of strings or string. 'fixedbinning' uses a fixed binning of t or h rather
+                    than an adaptive one based on percentiles. 'new' changes the samples. 'short' and
+                    'long' change the number of epochs. 'deep' and 'shallow' use more or less hidden layers.
+                    'slowlearning' and 'fastlearning' change the learning rate, while 'constantlr' turns off the
+                    learning rate decay. 'debug' activates a debug mode with much smaller samples. 'neyman2' and
+                    'neyman3' change the Neyman construction sample
     """
 
     logging.info('Starting score regression inference')
@@ -381,10 +387,6 @@ def score_regression_inference(use_smearing=False,
                              y_calibration,
                              sample_weight=w_calibration)
 
-        # logging.debug('Theta %s = %s, score bin sizes: %s, %s, %s / %s, %s, %s', t, settings.thetas[t],
-        #              _bins0[2] - _bins0[1], _bins0[15] - _bins0[14], _bins0[-2] - _bins0[-3],
-        #              _bins1[2] - _bins1[1], _bins1[15] - _bins1[14], _bins1[-2] - _bins1[-3])
-
         # 2d density estimation with score (dynamicically rotated)
         if fixed_binning_mode:
             _bins_main = np.concatenate(([-100000., -20., -15., -10., -8., -6.],
@@ -397,17 +399,6 @@ def score_regression_inference(use_smearing=False,
             _bins_other = np.array(
                 [-100000., -20., -10., -5., -3., -2., -1., -0.5, 0., 0.5, 1., 2., 3., 5., 10., 20., 100000.])
         else:
-            # _bins_main = find_binning(_that_rotated_calibration[:, 0],
-            #                           nominal_bins=[19, 40, 19],
-            #                           percentile_edges=[0.5, 5, 95, 99.5],
-            #                           min_bin_size=0.04,
-            #                           add_overflow=(-100000., 100000.))
-            # _bins_other = find_binning(_that_rotated_calibration[:, 1],
-            #                            nominal_bins=[2, 4, 2],
-            #                            percentile_edges=[2, 5, 95, 98],
-            #                            min_bin_size=0.2,
-            #                            add_overflow=(-100000., 100000.))
-
             _bins_main = np.percentile(_that_rotated_calibration[:, 0], np.linspace(0., 100., 80))
             _bins_main[0] = -100000.
             _bins_main[-1] = 100000.
@@ -417,12 +408,6 @@ def score_regression_inference(use_smearing=False,
             _bins_other[-1] = 100000.
 
         _bins = (_bins_main, _bins_other)
-
-        # logging.debug('Theta %s = %s, dynamic score bin sizes: %s, %s, %s / %s, %s, %s', t, settings.thetas[t],
-        #              _bins_main[2] - _bins_main[1], _bins_main[30] - _bins_main[29], _bins_main[-2] - _bins_main[-3],
-        #              _bins_other[2] - _bins_other[1], _bins_other[5] - _bins_other[4],
-        #              _bins_other[-2] - _bins_other[-3])
-
         _range = (np.array((-100000., 100000.)), np.array((-100000., 100000.)))
 
         calibrator_rotatedscore = NDHistogramCalibrator(bins=_bins, range=_range)
@@ -606,56 +591,6 @@ def score_regression_inference(use_smearing=False,
             llr_calibrated_neyman_alternate = -2. * np.sum(np.log(r_hat_neyman_alternate), axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(
                 t) + '_scoreregression_rotatedscore' + filename_addition + '.npy', llr_calibrated_neyman_alternate)
-
-            # # Neyman construction: loop over null samples generated from different thetas (old)
-            # llr_neyman_nulls = []
-            # llr_neyman_nulls_scoretheta = []
-            # llr_neyman_nulls_score = []
-            # llr_neyman_nulls_rotatedscore = []
-            #
-            # for tt in range(settings.n_thetas):
-            #
-            #     # Only evaluate certain combinations of thetas to save computation time
-            #     if not decide_toy_evaluation(tt, t):
-            #         placeholder = np.empty(n_neyman_null_experiments)
-            #         placeholder[:] = np.nan
-            #         llr_neyman_nulls.append(placeholder)
-            #         llr_neyman_nulls_scoretheta.append(placeholder)
-            #         llr_neyman_nulls_score.append(placeholder)
-            #         llr_neyman_nulls_rotatedscore.append(placeholder)
-            #         continue
-            #
-            #     # Neyman construction: load null sample
-            #     X_neyman_null = np.load(
-            #         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(tt) + '.npy')
-            #     X_neyman_null_transformed = scaler.transform(
-            #         X_neyman_null.reshape((-1, X_neyman_null.shape[2])))
-            #
-            #     # Neyman construction: evaluate null sample (raw)
-            #     that_neyman_null = regr.predict(X_neyman_null_transformed)
-            #     tthat_neyman_null = that_neyman_null.dot(delta_theta)
-            #     that_rotated_neyman_null = that_neyman_null.dot(rotation_matrix)
-            #
-            #     llr_neyman_nulls.append(
-            #         -2. * np.sum(tthat_neyman_null.reshape((-1, n_expected_events_neyman)), axis=1))
-            #
-            #     # Neyman construction: evaluate null sample (score * theta calibration)
-            #     s_hat_neyman_null = calibrator_scoretheta.predict(tthat_neyman_null.reshape((-1,)))
-            #     r_hat_neyman_null = r_from_s(s_hat_neyman_null)
-            #     r_hat_neyman_null = r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
-            #     llr_neyman_nulls_scoretheta.append(-2. * np.sum(np.log(r_hat_neyman_null), axis=1))
-            #
-            #     # Neyman construction: evaluate null sample (score calibration)
-            #     s_hat_neyman_null = calibrator_score.predict(that_neyman_null)
-            #     r_hat_neyman_null = r_from_s(s_hat_neyman_null)
-            #     r_hat_neyman_null = r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
-            #     llr_neyman_nulls_score.append(-2. * np.sum(np.log(r_hat_neyman_null), axis=1))
-            #
-            #     # Neyman construction: evaluate null sample (rotated score calibration)
-            #     s_hat_neyman_null = calibrator_rotatedscore.predict(that_rotated_neyman_null)
-            #     r_hat_neyman_null = r_from_s(s_hat_neyman_null)
-            #     r_hat_neyman_null = r_hat_neyman_null.reshape((-1, n_expected_events_neyman))
-            #     llr_neyman_nulls_rotatedscore.append(-2. * np.sum(np.log(r_hat_neyman_null), axis=1))
 
             # Neyman construction: load null sample
             X_neyman_null = np.load(
