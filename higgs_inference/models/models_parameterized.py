@@ -15,8 +15,10 @@ from higgs_inference.models.loss_functions import loss_function_carl, loss_funct
 from higgs_inference.models.metrics import full_cross_entropy, full_mse_log_r, full_mse_score
 from higgs_inference.models.metrics import full_mae_log_r, full_mae_score
 from higgs_inference.models.metrics import trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score
+from higgs_inference.models.metrics import full_modified_cross_entropy
 
 metrics = [full_cross_entropy, trimmed_cross_entropy,
+           full_modified_cross_entropy,
            full_mse_log_r, trimmed_mse_log_r,
            full_mae_log_r,
            full_mse_score, trimmed_mse_score,

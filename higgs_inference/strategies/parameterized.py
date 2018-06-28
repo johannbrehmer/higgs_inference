@@ -140,9 +140,11 @@ def parameterized_inference(algorithm='carl',
 
     alpha_regression = settings.alpha_regression_default
     alpha_carl = settings.alpha_carl_default
+    alpha_mxe = settings.alpha_mxe_default
     if alpha is not None:
         alpha_regression = alpha
         alpha_carl = alpha
+        alpha_mxe = alpha
         precision = int(max(- math.floor(np.log10(alpha)) + 1, 0))
         filename_addition += '_alpha_' + format_number(alpha, precision)
 
@@ -224,6 +226,8 @@ def parameterized_inference(algorithm='carl',
         logging.info('  alpha:                    %s', alpha_carl)
     elif algorithm == 'combinedregression':
         logging.info('  alpha:                    %s', alpha_regression)
+    elif algorithm == 'combinedmxe':
+        logging.info('  alpha:                    %s', alpha_mxe)
     logging.info('  Batch size:               %s', batch_size)
     logging.info('  Learning rate:            %s', learning_rate)
     logging.info('  Learning rate decay:      %s', lr_decay)
@@ -434,7 +438,7 @@ def parameterized_inference(algorithm='carl',
             raise NotImplementedError()
         else:
             regr = KerasRegressor(lambda: make_combined_modified_xe_model(n_hidden_layers=n_hidden_layers,
-                                                                          alpha=alpha_regression,
+                                                                          alpha=alpha_mxe,
                                                                           learning_rate=learning_rate),
                                   epochs=n_epochs, validation_split=settings.validation_split,
                                   verbose=keras_verbosity)
