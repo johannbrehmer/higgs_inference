@@ -20,7 +20,6 @@ except ImportError:
     sys.path.append(base_dir)
     from higgs_inference import settings
 
-from higgs_inference.various.neyman_construction import start_cl_calculation
 from higgs_inference.strategies.truth import truth_inference
 from higgs_inference.strategies.afc import afc_inference
 from higgs_inference.strategies.histograms import histo_inference
@@ -48,12 +47,11 @@ logging.info('Hi! How are you today?')
 # Parse arguments
 parser = argparse.ArgumentParser(description='Inference experiments for Higgs EFT measurements')
 
-parser.add_argument('algorithm', help='Algorithm type. Options are "p" or "cl" for the calculation of p values '
-                                      + 'through the Neyman construction; "truth", "localmodel", '
-                                      + '"afc", "histo", "carl", "score" (in the carl setup), '
-                                      + '"combined" (carl + score), "regression", "combinedregression" '
-                                      + '(regression + score), or "scoreregression" (regresses on the score and '
-                                      + 'performs density estimation on theta times score.')
+parser.add_argument('algorithm', help='Algorithm type. Options are "truth", '
+                                      + '"afc", "histo", "carl", "score" (in the CARL setup), '
+                                      + '"combined" (CASCAL), "regression", "combinedregression" '
+                                      + '(RASCAL), "scoreregression" (SALLY / SALLINO), "mxe" (modified cross '
+                                      + 'entropy), or "combinedmxe" (modixied XE + score).')
 parser.add_argument("-pbp", "--pointbypoint", action="store_true",
                     help="Point-by-point rather than parameterized setup.")
 parser.add_argument("-a", "--aware", action="store_true",
@@ -91,10 +89,9 @@ logging.info('  Base directory:                %s', settings.base_dir)
 logging.info('  ML-based strategies available: %s', loaded_ml_strategies)
 
 # Sanity checks
-assert args.algorithm in ['p', 'cl', 'pvalues',
-                          'truth', 'localmodel', 'histo', 'afc',
+assert args.algorithm in ['truth', 'histo', 'afc',
                           'carl', 'score', 'combined', 'regression', 'combinedregression',
-                          'scoreregression']
+                          'scoreregression', 'mxe', 'combinedmxe']
 assert args.training in ['baseline', 'basis', 'random']
 
 ################################################################################
@@ -102,10 +99,7 @@ assert args.training in ['baseline', 'basis', 'random']
 ################################################################################
 
 # Start calculation
-if args.algorithm in ['p', 'cl', 'pvalues']:
-    start_cl_calculation(options=args.options)
-
-elif args.algorithm == 'truth':
+if args.algorithm == 'truth':
     truth_inference(do_neyman=args.neyman,
                     denominator=args.denom,
                     options=args.options)

@@ -21,6 +21,9 @@ sigma_component = component_sample.dot(sigma_sample)
 
 
 def generate_wtilde_layer(input_layer):
+
+    """ Helper function for morphing-aware inference techniques.  """
+
     wtilde_component_layers = [Lambda(lambda t: 1. + 0. * t[:, 0])(input_layer),
                                Lambda(lambda t: t[:, 1])(input_layer),
                                Lambda(lambda t: t[:, 1] * t[:, 1])(input_layer),
@@ -45,6 +48,9 @@ def generate_wtilde_layer(input_layer):
 
 
 def generate_wi_layer(wtilde_layer):
+
+    """ Helper function for morphing-aware inference techniques.  """
+
     sigma_sample_var = K.variable(sigma_sample)
     sigma_wtilde_layer = Lambda(lambda w: w * sigma_sample_var)(wtilde_layer)
 

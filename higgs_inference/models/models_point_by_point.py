@@ -18,7 +18,7 @@ metrics = [full_cross_entropy, trimmed_cross_entropy,
 
 
 ################################################################################
-# Regression
+# ROLR
 ################################################################################
 
 def make_regressor(n_hidden_layers=3,
@@ -26,6 +26,17 @@ def make_regressor(n_hidden_layers=3,
                    activation='tanh',
                    learning_rate=0.001,
                    dropout_prob=0.0):
+    """
+    Builds a Keras model for the point-by-point version of the ROLR technique.
+
+    :param n_hidden_layers: Number of hidden layers.
+    :param hidden_layer_size: Number of units in each hidden layer.
+    :param activation: Activation function.
+    :param dropout_prob: Dropout probability.
+    :param learning_rate: Initial learning rate.
+    :return: Keras model.
+    """
+
     # Inputs
     input_layer = Input(shape=(settings.n_features,))
 
@@ -56,7 +67,7 @@ def make_regressor(n_hidden_layers=3,
 
 
 ################################################################################
-# carl
+# CARL
 ################################################################################
 
 def make_classifier(n_hidden_layers=3,
@@ -65,6 +76,19 @@ def make_classifier(n_hidden_layers=3,
                     dropout_prob=0.0,
                     learning_rate=0.001,
                     learn_log_r=False):
+
+    """
+    Builds a Keras model for the point-by-point version of the CARL technique.
+
+    :param n_hidden_layers: Number of hidden layers.
+    :param hidden_layer_size: Number of units in each hidden layer.
+    :param activation: Activation function.
+    :param dropout_prob: Dropout probability.
+    :param learn_log_r: Fully connected network represents log r rather than s.
+    :param learning_rate: Initial learning rate.
+    :return: Keras model.
+    """
+
     # Inputs
     input_layer = Input(shape=(settings.n_features,))
 

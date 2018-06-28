@@ -5,7 +5,6 @@
 from __future__ import absolute_import, division, print_function
 
 import numpy as np
-import math
 from scipy.interpolate import LinearNDInterpolator, CloughTocher2DInterpolator
 from scipy.stats import trim_mean, ncx2, chi2
 from sklearn.metrics import mean_squared_error
@@ -202,51 +201,3 @@ def weighted_quantile(values, quantiles, sample_weight=None,
     else:
         weighted_quantiles /= np.sum(sample_weight)
     return np.interp(quantiles, weighted_quantiles, values)
-
-
-################################################################################
-# Find binning
-################################################################################
-
-def find_binning(data,
-                 nominal_bins=[32, 34, 32],
-                 percentile_edges=[1., 5., 95., 99.],
-                 min_bin_size=0.1,
-                 add_overflow=(-100000., 100000.)):
-    nominal_bins = np.asarray(nominal_bins)
-    percentile_edges = np.asarray(percentile_edges)
-
-    group_edges = np.percentile(data, percentile_edges)
-    group_sizes = group_edges[1:] - group_edges[:-1]
-
-    # Nominal bins
-    nominal_bin_sizes = group_sizes / nominal_bins
-    bins = np.copy(nominal_bins)
-
-    # Make bins larger
-    for group, (group_size, nom_bin_size) in enumerate(zip(group_sizes, nominal_bin_sizes)):
-        if nom_bin_size < min_bin_size:
-            bins[group] = max(int(math.ceil(group_size / min_bin_size)), 1)
-        assert bins[group] <= nominal_bins[group]
-        assert bins[group] >= 1
-
-    # Redistribute additional bins
-    unused_bins = np.sum(nominal_bins) - np.sum(bins)
-    for i in range(unused_bins):
-        bin_sizes = group_sizes / bins
-        group_with_largest_bins = np.argmax(bin_sizes)
-        bins[group_with_largest_bins] += 1
-    assert np.sum(bins) == np.sum(nominal_bins)
-
-    # Do actual binning
-    bin_edges = np.concatenate(
-        [np.linspace(group_min, group_max, _bins + 1)[:-1] for _bins, group_min, group_max in
-         zip(bins, group_edges[:-1], group_edges[1:])]
-        + [[group_edges[-1]]]
-    )
-
-    # Overflow bins
-    if add_overflow is not None:
-        bin_edges = np.concatenate(([add_overflow[0]], bin_edges, [add_overflow[1]]))
-
-    return bin_edges

@@ -19,7 +19,14 @@ from higgs_inference.various.utils import s_from_r, r_from_s
 def truth_inference(do_neyman=False,
                     denominator=0,
                     options=''):
-    """ Extracts the true likelihood ratios for the evaluation samples. """
+
+    """
+    Ground truth for likelihood ratios.
+    :param do_neyman: Switches on the evaluation of toy experiments for the Neyman construction.
+    :param denominator: Which of five predefined denominator (reference) hypotheses to use.
+    :param options: Further options in a list of strings or string.  'new' changes the samples. 'neyman2' and
+                    'neyman3' change the Neyman construction sample.
+    """
 
     logging.info('Starting truth calculation')
 
@@ -206,22 +213,6 @@ def truth_inference(do_neyman=False,
             llr_neyman_alternate = -2. * np.sum(np.log(r_neyman_alternate[t]), axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(
                 t) + '_truth' + filename_addition + '.npy', llr_neyman_alternate)
-
-            # # Old null distributions
-            # llr_neyman_nulls = []
-            # for tt in range(settings.n_thetas):
-            #
-            #     # Only evaluate certain combinations of thetas to save computation time
-            #     if not decide_toy_evaluation(tt, t):
-            #         placeholder = np.empty(n_neyman_null_experiments)
-            #         placeholder[:] = np.nan
-            #         llr_neyman_nulls.append(placeholder)
-            #         continue
-            #
-            #     r_neyman_null = np.load(
-            #         settings.unweighted_events_dir + '/r_' + neyman_filename + '_null_' + str(tt) + '.npy')
-            #     llr_neyman_nulls.append(-2. * np.sum(np.log(r_neyman_null[t]), axis=1))
-
             # Null evaluated at null
             r_neyman_null = np.load(
                 settings.unweighted_events_dir + '/neyman/r_' + neyman_filename + '_null_' + str(t) + '.npy')

@@ -18,7 +18,19 @@ def make_regressor(n_hidden_layers=3,
                    hidden_layer_size=100,
                    activation='tanh',
                    dropout_prob=0.0,
-                   learning_rate=1.e-3,):
+                   learning_rate=1.e-3):
+
+    """
+    Builds a Keras model for the SALLY and SALLINO techniques.
+
+    :param n_hidden_layers: Number of hidden layers.
+    :param hidden_layer_size: Number of units in each hidden layer.
+    :param activation: Activation function.
+    :param dropout_prob: Dropout probability.
+    :param learning_rate: Initial learning rate.
+    :return: Keras model.
+    """
+
     # Inputs
     input_layer = Input(shape=(42,))
 

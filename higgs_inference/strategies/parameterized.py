@@ -22,15 +22,22 @@ from carl.learning import CalibratedClassifierScoreCV
 
 from higgs_inference import settings
 from higgs_inference.various.utils import format_number, calculate_mean_squared_error
-from higgs_inference.models.models_parameterized import make_classifier_carl, make_classifier_carl_morphingaware
-from higgs_inference.models.models_parameterized import make_classifier_score, make_classifier_score_morphingaware
-from higgs_inference.models.models_parameterized import make_classifier_combined, make_classifier_combined_morphingaware
-from higgs_inference.models.models_parameterized import make_regressor, make_regressor_morphingaware
-from higgs_inference.models.models_parameterized import make_combined_regressor, make_combined_regressor_morphingaware
+from higgs_inference.models.models_parameterized import make_classifier_carl
+from higgs_inference.models.models_parameterized import make_classifier_score
+from higgs_inference.models.models_parameterized import make_classifier_combined
+from higgs_inference.models.models_parameterized import make_regressor
+from higgs_inference.models.models_parameterized import make_combined_regressor
+from higgs_inference.models.models_parameterized import make_modified_xe_model
+from higgs_inference.models.models_parameterized import make_combined_modified_xe_model
+from higgs_inference.models.models_aware import make_classifier_carl_morphingaware
+from higgs_inference.models.models_aware import make_classifier_score_morphingaware
+from higgs_inference.models.models_aware import make_classifier_combined_morphingaware
+from higgs_inference.models.models_aware import make_regressor_morphingaware
+from higgs_inference.models.models_aware import make_combined_regressor_morphingaware
 from higgs_inference.models.ml_utils import DetailedHistory
 
 
-def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'regression', 'combinedregression'
+def parameterized_inference(algorithm='carl',
                             morphing_aware=False,
                             training_sample='baseline',  # 'baseline', 'basis', 'random'
                             use_smearing=False,
@@ -41,18 +48,28 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                             options=''):  # all other options in a string
 
     """
-    Trains and evaluates one of the parameterized higgs_inference methods.
+    Likelihood ratio estimation through parameterized or morphing-aware versions of CARL, CASCAL, ROLR, and RASCAL.
 
-    :param training_sample_size:
-    :param denominator:
-    :param algorithm: Type of the algorithm used. Currently supported: 'carl', 'score', 'combined', 'regression', and
-                      'combinedregression'.
-    :param morphing_aware: bool that decides whether a morphing-aware or morphing-agnostic architecture is used.
+    :param algorithm: Inference strategy. 'carl' for CARL, 'score' for an unnamed strategy that just uses the score,
+                      'combined' for CASCAL, 'regression' for ROLR, 'combinedregression' for RASCAL,
+                      'mxe' for modified cross entropy, or 'combinedmxe' for modified cross entropy + score.
+    :param morphing_aware: bool that decides whether a morphing-aware or morphing-agnostic parameterized architecture is
+                           used.
     :param training_sample: Training sample. Can be 'baseline', 'basis', or 'random'.
-    :param use_smearing:
-    :param alpha: Factor that weights the score term in the if algorithm is 'combined' or 'combinedregression'.
+    :param use_smearing: Whether to use the training and evaluation sample with (simplified) detector simulation.
+    :param denominator: Which of five predefined denominator (reference) hypotheses to use.
+    :param alpha: Hyperparameter that multiplies score term in loss function for RASCAL and CASCAL. If None, default
+                  values are used.
+    :param training_sample_size: If not None, limits the training sample size to the given value.
     :param do_neyman: Switches on the evaluation of toy experiments for the Neyman construction.
-    :param options: Further options in a list of strings or string.
+    :param options: Further options in a list of strings or string. 'learns' changes the architecture such that the
+                    fully connected networks represent s rather than log r. 'new' changes the samples. 'short' and
+                    'long' change the number of epochs. 'deep' and 'shallow' use more or less hidden layers. 'factorsm'
+                    changes the architecture in the morphing-aware mode such that the SM and the deviation from it are
+                    modelled independently. 'slowlearning' and 'fastlearning' change the learning rate, while
+                    'constantlr' turns off the learning rate decay. 'neyman2' and 'neyman3' change the Neyman
+                    construction sample, and 'recalibration' activates the calculation of E[r] on a separate sample
+                    for the expectation calibration step. 'debug' activates a debug mode with much smaller samples.
     """
 
     logging.info('Starting parameterized inference')
@@ -61,7 +78,7 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
     # Settings
     ################################################################################
 
-    assert algorithm in ['carl', 'score', 'combined', 'regression', 'combinedregression']
+    assert algorithm in ['carl', 'score', 'combined', 'regression', 'combinedregression', 'mxe', 'combinedmxe']
     assert training_sample in ['baseline', 'basis', 'random']
 
     random_theta_mode = training_sample == 'random'
@@ -403,6 +420,25 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                                   epochs=n_epochs, validation_split=settings.validation_split,
                                   verbose=keras_verbosity)
 
+    elif algorithm == 'mxe':
+        if morphing_aware:
+            raise NotImplementedError()
+        else:
+            regr = KerasRegressor(lambda: make_modified_xe_model(n_hidden_layers=n_hidden_layers,
+                                                                 learning_rate=learning_rate),
+                                  epochs=n_epochs, validation_split=settings.validation_split,
+                                  verbose=keras_verbosity)
+
+    elif algorithm == 'combinedmxe':
+        if morphing_aware:
+            raise NotImplementedError()
+        else:
+            regr = KerasRegressor(lambda: make_combined_modified_xe_model(n_hidden_layers=n_hidden_layers,
+                                                                          alpha=alpha_regression,
+                                                                          learning_rate=learning_rate),
+                                  epochs=n_epochs, validation_split=settings.validation_split,
+                                  verbose=keras_verbosity)
+
     else:
         raise ValueError()
 
@@ -442,11 +478,12 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
 
     _save_metrics('loss', 'loss')
     _save_metrics('full_cross_entropy', 'ce')
+    _save_metrics('full_modified_cross_entropy', 'mce')
     _save_metrics('full_mse_log_r', 'mse_logr')
     _save_metrics('full_mse_score', 'mse_scores')
 
     # Evaluate rhat on training sample
-    r_hat_train = np.exp(regr.predict(X_thetas_train_unshuffled)[:, 1])
+    # r_hat_train = np.exp(regr.predict(X_thetas_train_unshuffled)[:, 1])
     # np.save(results_dir + '/r_train_' + algorithm + filename_addition + '.npy', r_hat_train)
 
     ################################################################################
@@ -570,35 +607,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                                                 axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(
                 t) + '_' + algorithm + filename_addition + '.npy', llr_neyman_alternate)
-
-            # # Neyman construction: old null
-            # llr_neyman_nulls = []
-            # for tt in range(settings.n_thetas):
-            #
-            #     # Only evaluate certain combinations of thetas to save computation time
-            #     if not decide_toy_evaluation(tt, t):
-            #         placeholder = np.empty(n_neyman_null_experiments)
-            #         placeholder[:] = np.nan
-            #         llr_neyman_nulls.append(placeholder)
-            #         continue
-            #
-            #     # Neyman construction: load null sample
-            #     X_neyman_null = np.load(
-            #         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
-            #             tt) + '.npy')
-            #     X_neyman_null_transformed = scaler.transform(
-            #         X_neyman_null.reshape((-1, X_neyman_null.shape[2])))
-            #
-            #     # Prepare null data for Neyman construction
-            #     thetas0_array = np.zeros((X_neyman_null_transformed.shape[0], 2),
-            #                              dtype=X_neyman_null_transformed.dtype)
-            #     thetas0_array[:, :] = settings.thetas[t]
-            #     X_thetas_neyman_null = np.hstack((X_neyman_null_transformed, thetas0_array))
-            #
-            #     # Neyman construction: evaluate null sample (raw)
-            #     log_r_neyman_null = regr.predict(X_thetas_neyman_null)[:, 1]
-            #     llr_neyman_nulls.append(
-            #         -2. * np.sum(log_r_neyman_null.reshape((-1, n_expected_events_neyman)), axis=1))
 
             # NC: null
             X_neyman_null = np.load(
@@ -733,10 +741,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                     this_r / r_sm)
             np.save(results_dir + '/calvalues_nottrained_' + algorithm + filename_addition + '.npy',
                     ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
-            # np.save(results_dir + '/cal0histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
-            # np.save(results_dir + '/cal0edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
-            # np.save(results_dir + '/cal1histo_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
-            # np.save(results_dir + '/cal1edges_nottrained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
 
         elif t == settings.theta_benchmark_trained:
             np.save(results_dir + '/scores_trained_' + algorithm + '_calibrated' + filename_addition + '.npy',
@@ -746,10 +750,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                     this_r / r_sm)
             np.save(results_dir + '/calvalues_trained_' + algorithm + filename_addition + '.npy',
                     ratio_calibrated.classifier_.calibration_sample[:n_calibration_each])
-            # np.save(results_dir + '/cal0histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.histogram_)
-            # np.save(results_dir + '/cal0edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator0.edges_[0])
-            # np.save(results_dir + '/cal1histo_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.histogram_)
-            # np.save(results_dir + '/cal1edges_trained_' + algorithm + filename_addition + '.npy', ratio_calibrated.classifier_.calibrators_[0].calibrator1.edges_[0])
 
         ################################################################################
         # Recalibration
@@ -802,27 +802,6 @@ def parameterized_inference(algorithm='carl',  # 'carl', 'score', 'combined', 'r
                                                 axis=1)
             np.save(neyman_dir + '/' + neyman_filename + '_llr_alternate_' + str(
                 t) + '_' + algorithm + '_calibrated' + filename_addition + '.npy', llr_neyman_alternate)
-
-            # # Neyman construction: old null (calibrated)
-            # llr_neyman_nulls = []
-            # for tt in range(settings.n_thetas):
-            #     # Neyman construction: load null sample
-            #     X_neyman_null = np.load(
-            #         settings.unweighted_events_dir + '/' + input_X_prefix + 'X_' + neyman_filename + '_null_' + str(
-            #             tt) + '.npy')
-            #     X_neyman_null_transformed = scaler.transform(
-            #         X_neyman_null.reshape((-1, X_neyman_null.shape[2])))
-            #
-            #     # Prepare null data for Neyman construction
-            #     thetas0_array = np.zeros((X_neyman_null_transformed.shape[0], 2),
-            #                              dtype=X_neyman_null_transformed.dtype)
-            #     thetas0_array[:, :] = settings.thetas[t]
-            #     X_thetas_neyman_null = np.hstack((X_neyman_null_transformed, thetas0_array))
-            #
-            #     # Neyman construction: evaluate null sample (calibrated)
-            #     r_neyman_null, _ = ratio_calibrated.predict(X_thetas_neyman_null)
-            #     llr_neyman_nulls.append(
-            #         -2. * np.sum(np.log(r_neyman_null).reshape((-1, n_expected_events_neyman)), axis=1))
 
             # Neyman construction: null
             X_neyman_null = np.load(
