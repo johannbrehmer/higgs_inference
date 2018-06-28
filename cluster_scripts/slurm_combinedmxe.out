@@ -1,0 +1,51 @@
+Using TensorFlow backend.
+28.06.2018 08:32:51 INFO    Hi! How are you today?
+28.06.2018 08:32:51 INFO    Startup options:
+28.06.2018 08:32:51 INFO      Algorithm:                     combinedmxe
+28.06.2018 08:32:51 INFO      Point by point:                False
+28.06.2018 08:32:51 INFO      Morphing-aware mode:           False
+28.06.2018 08:32:51 INFO      Smeared data:                  False
+28.06.2018 08:32:51 INFO      Training sample:               baseline
+28.06.2018 08:32:51 INFO      alpha:                         None
+28.06.2018 08:32:51 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+28.06.2018 08:32:51 INFO      AFC epsilon:                   None
+28.06.2018 08:32:51 INFO      Denominator theta:             False
+28.06.2018 08:32:51 INFO      Neyman construction toys:      0
+28.06.2018 08:32:51 INFO      Training sample size limit:    None
+28.06.2018 08:32:51 INFO      Other options:                 ['deep']
+28.06.2018 08:32:51 INFO      Base directory:                /home/jb6504/higgs_inference
+28.06.2018 08:32:51 INFO      ML-based strategies available: True
+28.06.2018 08:32:51 INFO    Starting parameterized inference
+28.06.2018 08:32:51 INFO    Main settings:
+28.06.2018 08:32:51 INFO      Algorithm:                combinedmxe
+28.06.2018 08:32:51 INFO      Morphing-aware:           False
+28.06.2018 08:32:51 INFO      Training sample:          baseline
+28.06.2018 08:32:51 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+28.06.2018 08:32:51 INFO    Options:
+28.06.2018 08:32:51 INFO      Number of hidden layers:  5
+28.06.2018 08:32:51 INFO      Batch size:               128
+28.06.2018 08:32:51 INFO      Learning rate:            0.001
+28.06.2018 08:32:51 INFO      Learning rate decay:      0.0921034037198
+28.06.2018 08:32:51 INFO      Number of epochs:         50
+28.06.2018 08:32:51 INFO      Training samples:         all
+28.06.2018 08:32:51 INFO      NC experiments:           False
+28.06.2018 08:32:51 INFO      Debug mode:               False
+28.06.2018 08:33:36 INFO    Starting training
+Train on 7999997 samples, validate on 2000000 samples
+2018-06-28 08:33:37.353595: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 08:33:37.353944: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 08:33:37.353964: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 08:33:37.353976: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 08:33:37.353986: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 08:33:37.570255: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:84:00.0
+Total memory: 22.38GiB
+Free memory: 22.22GiB
+2018-06-28 08:33:37.570294: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-06-28 08:33:37.570300: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-06-28 08:33:37.570309: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:84:00.0)
+Epoch 1/50
+624s - loss: 5.0113 - full_cross_entropy: 0.6727 - trimmed_cross_entropy: 0.6622 - full_mse_log_r: 0.1827 - trimmed_mse_log_r: 0.1798 - full_mae_log_r: 0.2667 - full_mse_score: 6.1870 - trimmed_mse_score: 0.3552 - full_mae_score: 0.2023 - val_loss: 3.8122 - val_full_cross_entropy: 0.6807 - val_trimmed_cross_entropy: 0.6701 - val_full_mse_log_r: 0.2440 - val_trimmed_mse_log_r: 0.2402 - val_full_mae_log_r: 0.3951 - val_full_mse_score: 4.5185 - val_trimmed_mse_score: 0.2914 - val_full_mae_score: 0.1736
+Epoch 2/50
