@@ -125,10 +125,10 @@ def loss_function_score_regression(y_true, y_pred):
     return losses.mean_squared_error(y_true[:, :], y_pred[:, :])
 
 
-def loss_function_carl(y_true, y_pred):
+def loss_function_modified_crossentropy(y_true, y_pred):
 
     """
-    Cross entropy loss function.
+    Cross entropy loss function, where instead of y = 0 or 1 we use s(x,z)
 
     :param y_true: ndarray with shape (n_samples, 2 + n_parameters) where the first column are the y_i (0 if from
                    numerator, 1 if from denominator), the second column are the true log r(x, z | theta0, theta1), and the
@@ -136,7 +136,28 @@ def loss_function_carl(y_true, y_pred):
     :param y_pred: ndarray with shape (n_samples, 2 + n_parameters) where the first column is the classifier decision
                    function \hat{s}_i, the second column are the estimated log \hat{r}(x | theta0, theta1), and the
                    remaining columns are the estimated \hat{t}(x | theta0).
-    :return: Binary cross entropy.
+    :return: Binary cross entropy
     """
 
-    return losses.binary_crossentropy(y_true[:, 0], y_pred[:, 0])
+    r = K.exp(K.clip(y_true[:, 1], -settings.log_r_clip_value, settings.log_r_clip_value))
+    s = K.clip(1. / (1. + r), 0., 1.)
+
+    return losses.binary_crossentropy(s, y_pred[:, 0])
+
+
+def loss_function_combined_modified_crossentropy(y_true, y_pred, alpha=100.):
+
+    """
+    Modified cross entropy plus derived score.
+
+    :param y_true: ndarray with shape (n_samples, 2 + n_parameters) where the first column are the y_i (0 if from
+                   numerator, 1 if from denominator), the second column are the true log r(x, z | theta0, theta1), and the
+                   remaining columns are the true t(x, z | theta0).
+    :param y_pred: ndarray with shape (n_samples, 2 + n_parameters) where the first column is the classifier decision
+                   function \hat{s}_i, the second column are the estimated log \hat{r}(x | theta0, theta1), and the
+                   remaining columns are the estimated \hat{t}(x | theta0).
+    :param alpha: Hyperparameter that weights the score term in the loss function.
+    :return: Combined RASCAL loss.
+    """
+
+    return loss_function_modified_crossentropy(y_true, y_pred) + alpha * loss_function_score(y_true, y_pred)

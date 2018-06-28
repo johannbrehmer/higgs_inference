@@ -10,7 +10,8 @@ import keras.backend as K
 from higgs_inference import settings
 from higgs_inference.models.ml_utils import build_hidden_layers
 from higgs_inference.models.loss_functions import loss_function_carl, loss_function_combined, \
-    loss_function_combinedregression, loss_function_ratio_regression, loss_function_score
+    loss_function_combinedregression, loss_function_ratio_regression, loss_function_score, \
+    loss_function_modified_crossentropy, loss_function_combined_modified_crossentropy
 from higgs_inference.models.metrics import full_cross_entropy, full_mse_log_r, full_mse_score
 from higgs_inference.models.metrics import full_mae_log_r, full_mae_score
 from higgs_inference.models.metrics import trimmed_cross_entropy, trimmed_mse_log_r, trimmed_mse_score
@@ -316,5 +317,115 @@ def make_classifier_combined(n_hidden_layers=3,
     model.compile(loss=lambda x, y: loss_function_combined(x, y, alpha=alpha),
                   metrics=metrics,
                   optimizer=optimizers.Adam(lr=learning_rate, clipnorm=1.))
+
+    return model
+
+
+################################################################################
+# Modified cross entropy
+################################################################################
+
+def make_modified_xe_model(n_hidden_layers=3,
+                           hidden_layer_size=100,
+                           activation='tanh',
+                           dropout_prob=0.0,
+                           learning_rate=1.e-3):
+    """
+    Builds a Keras model for the parameterized version of the modified XE technique.
+
+    :param n_hidden_layers: Number of hidden layers.
+    :param hidden_layer_size: Number of units in each hidden layer.
+    :param activation: Activation function.
+    :param dropout_prob: Dropout probability.
+    :param learning_rate: Initial learning rate.
+    :return: Keras model.
+    """
+
+    # Inputs
+    input_layer = Input(shape=(settings.n_thetas_features,))
+
+    # Network
+    hidden_layer = Dense(hidden_layer_size, activation=activation)(input_layer)
+    if n_hidden_layers > 1:
+        hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                            hidden_layer_size=hidden_layer_size,
+                                            activation=activation,
+                                            dropout_prob=dropout_prob)
+        hidden_layer = hidden_layer_(hidden_layer)
+    log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
+
+    # Translate to s
+    r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
+    s_hat_layer = Lambda(lambda x: 1. / (1. + x))(r_hat_layer)
+
+    # Score
+    gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0],
+                            output_shape=(settings.n_thetas_features,))([log_r_hat_layer, input_layer])
+    score_layer = Lambda(lambda x: x[:, -settings.n_params:], output_shape=(settings.n_params,))(gradient_layer)
+
+    # Combine outputs
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer, score_layer])
+    model = Model(inputs=[input_layer], outputs=[output_layer])
+
+    # Compile model
+    model.compile(loss=lambda x, y: loss_function_modified_crossentropy(x, y),
+                  metrics=metrics,
+                  optimizer=optimizers.Adam(lr=learning_rate, clipnorm=10.))
+
+    return model
+
+
+################################################################################
+# Modified cross entropy + score
+################################################################################
+
+def make_combined_modified_xe_model(n_hidden_layers=3,
+                                    hidden_layer_size=100,
+                                    activation='tanh',
+                                    dropout_prob=0.0,
+                                    alpha=100.,
+                                    learning_rate=1.e-3):
+    """
+    Builds a Keras model for the modified XE + score technique.
+
+    :param n_hidden_layers: Number of hidden layers.
+    :param hidden_layer_size: Number of units in each hidden layer.
+    :param activation: Activation function.
+    :param dropout_prob: Dropout probability.
+    :param alpha: RASCAL hyperparameter that weights the score term in the loss.
+    :param learning_rate: Initial learning rate.
+    :return: Keras model.
+    """
+
+    # Inputs
+    input_layer = Input(shape=(settings.n_thetas_features,))
+
+    # Network
+    hidden_layer = Dense(hidden_layer_size, activation=activation)(input_layer)
+    if n_hidden_layers > 1:
+        hidden_layer_ = build_hidden_layers(n_hidden_layers - 1,
+                                            hidden_layer_size=hidden_layer_size,
+                                            activation=activation,
+                                            dropout_prob=dropout_prob)
+        hidden_layer = hidden_layer_(hidden_layer)
+    log_r_hat_layer = Dense(1, activation='linear')(hidden_layer)
+
+    # Translate to s
+    r_hat_layer = Lambda(lambda x: K.exp(x))(log_r_hat_layer)
+    s_hat_layer = Lambda(lambda x: 1. / (1. + x))(r_hat_layer)
+
+    # Score
+    gradient_layer = Lambda(lambda x: K.gradients(x[0], x[1])[0],
+                            output_shape=(settings.n_thetas_features,))([log_r_hat_layer, input_layer])
+    score_layer = Lambda(lambda x: x[:, -settings.n_params:], output_shape=(settings.n_params,))(gradient_layer)
+
+    # Combine outputs
+    output_layer = Concatenate()([s_hat_layer, log_r_hat_layer, score_layer])
+    model = Model(inputs=[input_layer], outputs=[output_layer])
+
+    # Compile model
+    model.compile(loss=lambda x, y: loss_function_combined_modified_crossentropy(x, y, alpha=alpha),
+                  metrics=metrics,
+                  optimizer=optimizers.Adam(lr=learning_rate, clipnorm=10.))
 
     return model

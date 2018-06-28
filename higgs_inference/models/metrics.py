@@ -19,6 +19,13 @@ def full_cross_entropy(y_true, y_pred):
     return losses.binary_crossentropy(y_true[:, 0], y_pred[:, 0])
 
 
+def full_modified_cross_entropy(y_true, y_pred):
+    r = K.exp(K.clip(y_true[:, 1], -settings.log_r_clip_value, settings.log_r_clip_value))
+    s = K.clip(1. / (1. + r), 0., 1.)
+
+    return losses.binary_crossentropy(s, y_pred[:, 0])
+
+
 def full_mse_log_r(y_true, y_pred):
     return losses.mean_squared_error(y_true[:, 1], y_pred[:, 1])
 

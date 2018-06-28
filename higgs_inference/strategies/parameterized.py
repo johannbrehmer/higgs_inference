@@ -27,6 +27,8 @@ from higgs_inference.models.models_parameterized import make_classifier_score
 from higgs_inference.models.models_parameterized import make_classifier_combined
 from higgs_inference.models.models_parameterized import make_regressor
 from higgs_inference.models.models_parameterized import make_combined_regressor
+from higgs_inference.models.models_parameterized import make_modified_xe_model
+from higgs_inference.models.models_parameterized import make_combined_modified_xe_model
 from higgs_inference.models.models_aware import make_classifier_carl_morphingaware
 from higgs_inference.models.models_aware import make_classifier_score_morphingaware
 from higgs_inference.models.models_aware import make_classifier_combined_morphingaware
@@ -49,7 +51,8 @@ def parameterized_inference(algorithm='carl',
     Likelihood ratio estimation through parameterized or morphing-aware versions of CARL, CASCAL, ROLR, and RASCAL.
 
     :param algorithm: Inference strategy. 'carl' for CARL, 'score' for an unnamed strategy that just uses the score,
-                      'combined' for CASCAL, 'regression' for ROLR, or 'combinedregression' for RASCAL.
+                      'combined' for CASCAL, 'regression' for ROLR, 'combinedregression' for RASCAL,
+                      'mxe' for modified cross entropy, or 'combinedmxe' for modified cross entropy + score.
     :param morphing_aware: bool that decides whether a morphing-aware or morphing-agnostic parameterized architecture is
                            used.
     :param training_sample: Training sample. Can be 'baseline', 'basis', or 'random'.
@@ -75,7 +78,7 @@ def parameterized_inference(algorithm='carl',
     # Settings
     ################################################################################
 
-    assert algorithm in ['carl', 'score', 'combined', 'regression', 'combinedregression']
+    assert algorithm in ['carl', 'score', 'combined', 'regression', 'combinedregression', 'mxe', 'combinedmxe']
     assert training_sample in ['baseline', 'basis', 'random']
 
     random_theta_mode = training_sample == 'random'
@@ -417,6 +420,25 @@ def parameterized_inference(algorithm='carl',
                                   epochs=n_epochs, validation_split=settings.validation_split,
                                   verbose=keras_verbosity)
 
+    elif algorithm == 'mxe':
+        if morphing_aware:
+            raise NotImplementedError()
+        else:
+            regr = KerasRegressor(lambda: make_modified_xe_model(n_hidden_layers=n_hidden_layers,
+                                                                 learning_rate=learning_rate),
+                                  epochs=n_epochs, validation_split=settings.validation_split,
+                                  verbose=keras_verbosity)
+
+    elif algorithm == 'combinedmxe':
+        if morphing_aware:
+            raise NotImplementedError()
+        else:
+            regr = KerasRegressor(lambda: make_combined_modified_xe_model(n_hidden_layers=n_hidden_layers,
+                                                                          alpha=alpha_regression,
+                                                                          learning_rate=learning_rate),
+                                  epochs=n_epochs, validation_split=settings.validation_split,
+                                  verbose=keras_verbosity)
+
     else:
         raise ValueError()
 
@@ -456,6 +478,7 @@ def parameterized_inference(algorithm='carl',
 
     _save_metrics('loss', 'loss')
     _save_metrics('full_cross_entropy', 'ce')
+    _save_metrics('full_modified_cross_entropy', 'mce')
     _save_metrics('full_mse_log_r', 'mse_logr')
     _save_metrics('full_mse_score', 'mse_scores')
 

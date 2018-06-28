@@ -48,10 +48,10 @@ logging.info('Hi! How are you today?')
 parser = argparse.ArgumentParser(description='Inference experiments for Higgs EFT measurements')
 
 parser.add_argument('algorithm', help='Algorithm type. Options are "truth", '
-                                      + '"afc", "histo", "carl", "score" (in the carl setup), '
-                                      + '"combined" (carl + score), "regression", "combinedregression" '
-                                      + '(regression + score), or "scoreregression" (regresses on the score and '
-                                      + 'performs density estimation on theta times score.')
+                                      + '"afc", "histo", "carl", "score" (in the CARL setup), '
+                                      + '"combined" (CASCAL), "regression", "combinedregression" '
+                                      + '(RASCAL), "scoreregression" (SALLY / SALLINO), "mxe" (modified cross '
+                                      + 'entropy), or "combinedmxe" (modixied XE + score).')
 parser.add_argument("-pbp", "--pointbypoint", action="store_true",
                     help="Point-by-point rather than parameterized setup.")
 parser.add_argument("-a", "--aware", action="store_true",
@@ -91,7 +91,7 @@ logging.info('  ML-based strategies available: %s', loaded_ml_strategies)
 # Sanity checks
 assert args.algorithm in ['truth', 'histo', 'afc',
                           'carl', 'score', 'combined', 'regression', 'combinedregression',
-                          'scoreregression']
+                          'scoreregression', 'mxe', 'combinedmxe']
 assert args.training in ['baseline', 'basis', 'random']
 
 ################################################################################
