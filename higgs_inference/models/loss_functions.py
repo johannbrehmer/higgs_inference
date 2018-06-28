@@ -123,3 +123,20 @@ def loss_function_score_regression(y_true, y_pred):
     """
 
     return losses.mean_squared_error(y_true[:, :], y_pred[:, :])
+
+
+def loss_function_carl(y_true, y_pred):
+
+    """
+    Cross entropy loss function.
+
+    :param y_true: ndarray with shape (n_samples, 2 + n_parameters) where the first column are the y_i (0 if from
+                   numerator, 1 if from denominator), the second column are the true log r(x, z | theta0, theta1), and the
+                   remaining columns are the true t(x, z | theta0).
+    :param y_pred: ndarray with shape (n_samples, 2 + n_parameters) where the first column is the classifier decision
+                   function \hat{s}_i, the second column are the estimated log \hat{r}(x | theta0, theta1), and the
+                   remaining columns are the estimated \hat{t}(x | theta0).
+    :return: Binary cross entropy.
+    """
+
+    return losses.binary_crossentropy(y_true[:, 0], y_pred[:, 0])
