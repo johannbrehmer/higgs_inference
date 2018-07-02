@@ -1,0 +1,434 @@
+Using TensorFlow backend.
+28.06.2018 11:19:57 INFO    Hi! How are you today?
+28.06.2018 11:19:57 INFO    Startup options:
+28.06.2018 11:19:57 INFO      Algorithm:                     combinedmxe
+28.06.2018 11:19:57 INFO      Point by point:                False
+28.06.2018 11:19:57 INFO      Morphing-aware mode:           False
+28.06.2018 11:19:57 INFO      Smeared data:                  False
+28.06.2018 11:19:57 INFO      Training sample:               baseline
+28.06.2018 11:19:57 INFO      alpha:                         None
+28.06.2018 11:19:57 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+28.06.2018 11:19:57 INFO      AFC epsilon:                   None
+28.06.2018 11:19:57 INFO      Denominator theta:             False
+28.06.2018 11:19:57 INFO      Neyman construction toys:      0
+28.06.2018 11:19:57 INFO      Training sample size limit:    1000
+28.06.2018 11:19:57 INFO      Other options:                 ['deep']
+28.06.2018 11:19:57 INFO      Base directory:                /home/jb6504/higgs_inference
+28.06.2018 11:19:57 INFO      ML-based strategies available: True
+28.06.2018 11:19:57 INFO    Starting parameterized inference
+28.06.2018 11:19:57 INFO    Main settings:
+28.06.2018 11:19:57 INFO      Algorithm:                combinedmxe
+28.06.2018 11:19:57 INFO      Morphing-aware:           False
+28.06.2018 11:19:57 INFO      Training sample:          baseline
+28.06.2018 11:19:57 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+28.06.2018 11:19:57 INFO    Options:
+28.06.2018 11:19:57 INFO      Number of hidden layers:  5
+28.06.2018 11:19:57 INFO      alpha:                    5.0
+28.06.2018 11:19:57 INFO      Batch size:               128
+28.06.2018 11:19:57 INFO      Learning rate:            0.001
+28.06.2018 11:19:57 INFO      Learning rate decay:      9.21034037198e-06
+28.06.2018 11:19:57 INFO      Number of epochs:         500000
+28.06.2018 11:19:57 INFO      Training samples:         1000
+28.06.2018 11:19:57 INFO      NC experiments:           False
+28.06.2018 11:19:57 INFO      Debug mode:               False
+28.06.2018 11:20:09 INFO    Reduced training sample size from 9999997 to 1000 (factor 10000)
+28.06.2018 11:20:22 INFO    Starting training
+2018-06-28 11:20:23.458712: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:23.458756: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:23.458761: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:23.458765: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:23.458770: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:23.680790: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:84:00.0
+Total memory: 22.38GiB
+Free memory: 22.22GiB
+2018-06-28 11:20:23.680830: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-06-28 11:20:23.680836: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-06-28 11:20:23.680845: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:84:00.0)
+Epoch 163041: early stopping
+28.06.2018 14:27:13 INFO    Starting evaluation
+28.06.2018 14:29:22 INFO    Starting theta 100 / 1017
+28.06.2018 14:31:27 INFO    Starting theta 200 / 1017
+28.06.2018 14:33:31 INFO    Starting theta 300 / 1017
+28.06.2018 14:35:36 INFO    Starting theta 400 / 1017
+28.06.2018 14:37:40 INFO    Starting theta 500 / 1017
+28.06.2018 14:39:45 INFO    Starting theta 600 / 1017
+28.06.2018 14:41:49 INFO    Starting theta 700 / 1017
+28.06.2018 14:43:54 INFO    Starting theta 800 / 1017
+28.06.2018 14:45:58 INFO    Starting theta 900 / 1017
+28.06.2018 14:48:03 INFO    Starting theta 1000 / 1017
+28.06.2018 14:48:26 INFO    Evaluation timing: median 1.23221993446 s, mean 1.23528057378 s
+28.06.2018 14:48:26 INFO    Starting roaming
+28.06.2018 14:48:51 INFO    Starting calibrated evaluation and roaming
+28.06.2018 16:14:41 INFO    Starting theta 100 / 1017
+28.06.2018 17:41:16 INFO    Starting theta 200 / 1017
+28.06.2018 19:07:51 INFO    Starting theta 300 / 1017
+28.06.2018 20:34:26 INFO    Starting theta 400 / 1017
+28.06.2018 22:01:00 INFO    Starting theta 500 / 1017
+28.06.2018 23:27:32 INFO    Starting theta 600 / 1017
+29.06.2018 00:54:00 INFO    Starting theta 700 / 1017
+29.06.2018 02:20:03 INFO    Starting theta 800 / 1017
+29.06.2018 03:46:07 INFO    Starting theta 900 / 1017
+29.06.2018 05:12:05 INFO    Starting theta 1000 / 1017
+29.06.2018 05:27:32 INFO    Calibrated evaluation timing: median 1.23483085632 s, mean 1.2351396541 s
+29.06.2018 05:27:32 INFO    Interpolating calibrated roaming
+29.06.2018 05:33:06 INFO    That's it -- have a great day!
+Using TensorFlow backend.
+29.06.2018 05:33:08 INFO    Hi! How are you today?
+29.06.2018 05:33:08 INFO    Startup options:
+29.06.2018 05:33:08 INFO      Algorithm:                     combinedmxe
+29.06.2018 05:33:08 INFO      Point by point:                False
+29.06.2018 05:33:08 INFO      Morphing-aware mode:           False
+29.06.2018 05:33:08 INFO      Smeared data:                  False
+29.06.2018 05:33:08 INFO      Training sample:               baseline
+29.06.2018 05:33:08 INFO      alpha:                         None
+29.06.2018 05:33:08 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+29.06.2018 05:33:08 INFO      AFC epsilon:                   None
+29.06.2018 05:33:08 INFO      Denominator theta:             False
+29.06.2018 05:33:08 INFO      Neyman construction toys:      0
+29.06.2018 05:33:08 INFO      Training sample size limit:    2000
+29.06.2018 05:33:08 INFO      Other options:                 ['deep']
+29.06.2018 05:33:08 INFO      Base directory:                /home/jb6504/higgs_inference
+29.06.2018 05:33:08 INFO      ML-based strategies available: True
+29.06.2018 05:33:08 INFO    Starting parameterized inference
+29.06.2018 05:33:08 INFO    Main settings:
+29.06.2018 05:33:08 INFO      Algorithm:                combinedmxe
+29.06.2018 05:33:08 INFO      Morphing-aware:           False
+29.06.2018 05:33:08 INFO      Training sample:          baseline
+29.06.2018 05:33:08 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+29.06.2018 05:33:08 INFO    Options:
+29.06.2018 05:33:08 INFO      Number of hidden layers:  5
+29.06.2018 05:33:08 INFO      alpha:                    5.0
+29.06.2018 05:33:08 INFO      Batch size:               128
+29.06.2018 05:33:08 INFO      Learning rate:            0.001
+29.06.2018 05:33:08 INFO      Learning rate decay:      1.8420680744e-05
+29.06.2018 05:33:08 INFO      Number of epochs:         250000
+29.06.2018 05:33:08 INFO      Training samples:         2000
+29.06.2018 05:33:08 INFO      NC experiments:           False
+29.06.2018 05:33:08 INFO      Debug mode:               False
+29.06.2018 05:33:34 INFO    Reduced training sample size from 9999997 to 2000 (factor 5000)
+29.06.2018 05:33:48 INFO    Starting training
+2018-06-29 05:33:48.836367: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-29 05:33:48.836404: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-29 05:33:48.836413: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-29 05:33:48.836418: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-29 05:33:48.836421: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-29 05:33:49.057776: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:84:00.0
+Total memory: 22.38GiB
+Free memory: 22.22GiB
+2018-06-29 05:33:49.057814: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-06-29 05:33:49.057820: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-06-29 05:33:49.057829: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:84:00.0)
+Epoch 59235: early stopping
+29.06.2018 07:38:13 INFO    Starting evaluation
+29.06.2018 07:40:20 INFO    Starting theta 100 / 1017
+29.06.2018 07:42:23 INFO    Starting theta 200 / 1017
+29.06.2018 07:44:26 INFO    Starting theta 300 / 1017
+29.06.2018 07:46:30 INFO    Starting theta 400 / 1017
+29.06.2018 07:48:33 INFO    Starting theta 500 / 1017
+29.06.2018 07:50:36 INFO    Starting theta 600 / 1017
+29.06.2018 07:52:39 INFO    Starting theta 700 / 1017
+29.06.2018 07:54:43 INFO    Starting theta 800 / 1017
+29.06.2018 07:56:46 INFO    Starting theta 900 / 1017
+29.06.2018 07:58:49 INFO    Starting theta 1000 / 1017
+29.06.2018 07:59:11 INFO    Evaluation timing: median 1.22121095657 s, mean 1.22319935838 s
+29.06.2018 07:59:11 INFO    Starting roaming
+29.06.2018 07:59:37 INFO    Starting calibrated evaluation and roaming
+29.06.2018 09:24:28 INFO    Starting theta 100 / 1017
+29.06.2018 10:50:05 INFO    Starting theta 200 / 1017
+29.06.2018 12:15:43 INFO    Starting theta 300 / 1017
+29.06.2018 13:41:21 INFO    Starting theta 400 / 1017
+29.06.2018 15:07:25 INFO    Starting theta 500 / 1017
+29.06.2018 16:33:31 INFO    Starting theta 600 / 1017
+29.06.2018 17:59:30 INFO    Starting theta 700 / 1017
+29.06.2018 19:25:19 INFO    Starting theta 800 / 1017
+29.06.2018 20:51:33 INFO    Starting theta 900 / 1017
+29.06.2018 22:17:41 INFO    Starting theta 1000 / 1017
+29.06.2018 22:33:10 INFO    Calibrated evaluation timing: median 1.22698402405 s, mean 1.22975911316 s
+29.06.2018 22:33:10 INFO    Interpolating calibrated roaming
+29.06.2018 22:39:00 INFO    That's it -- have a great day!
+Using TensorFlow backend.
+29.06.2018 22:39:03 INFO    Hi! How are you today?
+29.06.2018 22:39:03 INFO    Startup options:
+29.06.2018 22:39:03 INFO      Algorithm:                     combinedmxe
+29.06.2018 22:39:03 INFO      Point by point:                False
+29.06.2018 22:39:03 INFO      Morphing-aware mode:           False
+29.06.2018 22:39:03 INFO      Smeared data:                  False
+29.06.2018 22:39:03 INFO      Training sample:               baseline
+29.06.2018 22:39:03 INFO      alpha:                         None
+29.06.2018 22:39:03 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+29.06.2018 22:39:03 INFO      AFC epsilon:                   None
+29.06.2018 22:39:03 INFO      Denominator theta:             False
+29.06.2018 22:39:03 INFO      Neyman construction toys:      0
+29.06.2018 22:39:03 INFO      Training sample size limit:    5000
+29.06.2018 22:39:03 INFO      Other options:                 ['deep']
+29.06.2018 22:39:03 INFO      Base directory:                /home/jb6504/higgs_inference
+29.06.2018 22:39:03 INFO      ML-based strategies available: True
+29.06.2018 22:39:03 INFO    Starting parameterized inference
+29.06.2018 22:39:03 INFO    Main settings:
+29.06.2018 22:39:03 INFO      Algorithm:                combinedmxe
+29.06.2018 22:39:03 INFO      Morphing-aware:           False
+29.06.2018 22:39:03 INFO      Training sample:          baseline
+29.06.2018 22:39:03 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+29.06.2018 22:39:03 INFO    Options:
+29.06.2018 22:39:03 INFO      Number of hidden layers:  5
+29.06.2018 22:39:03 INFO      alpha:                    5.0
+29.06.2018 22:39:03 INFO      Batch size:               128
+29.06.2018 22:39:03 INFO      Learning rate:            0.001
+29.06.2018 22:39:03 INFO      Learning rate decay:      4.60517018599e-05
+29.06.2018 22:39:03 INFO      Number of epochs:         100000
+29.06.2018 22:39:03 INFO      Training samples:         5000
+29.06.2018 22:39:03 INFO      NC experiments:           False
+29.06.2018 22:39:03 INFO      Debug mode:               False
+29.06.2018 22:39:24 INFO    Reduced training sample size from 9999997 to 5000 (factor 2000)
+29.06.2018 22:39:37 INFO    Starting training
+2018-06-29 22:39:38.459493: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-29 22:39:38.459789: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-29 22:39:38.459797: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-29 22:39:38.459802: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-29 22:39:38.459807: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-29 22:39:38.677581: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:84:00.0
+Total memory: 22.38GiB
+Free memory: 22.22GiB
+2018-06-29 22:39:38.677620: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-06-29 22:39:38.677626: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-06-29 22:39:38.677635: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:84:00.0)
+Epoch 20140: early stopping
+30.06.2018 00:22:12 INFO    Starting evaluation
+30.06.2018 00:24:18 INFO    Starting theta 100 / 1017
+30.06.2018 00:26:20 INFO    Starting theta 200 / 1017
+30.06.2018 00:28:23 INFO    Starting theta 300 / 1017
+30.06.2018 00:30:25 INFO    Starting theta 400 / 1017
+30.06.2018 00:32:27 INFO    Starting theta 500 / 1017
+30.06.2018 00:34:29 INFO    Starting theta 600 / 1017
+30.06.2018 00:36:32 INFO    Starting theta 700 / 1017
+30.06.2018 00:38:34 INFO    Starting theta 800 / 1017
+30.06.2018 00:40:36 INFO    Starting theta 900 / 1017
+30.06.2018 00:42:39 INFO    Starting theta 1000 / 1017
+30.06.2018 00:43:01 INFO    Evaluation timing: median 1.21207118034 s, mean 1.2145897388 s
+30.06.2018 00:43:01 INFO    Starting roaming
+30.06.2018 00:43:26 INFO    Starting calibrated evaluation and roaming
+30.06.2018 02:07:57 INFO    Starting theta 100 / 1017
+30.06.2018 03:33:15 INFO    Starting theta 200 / 1017
+30.06.2018 04:58:34 INFO    Starting theta 300 / 1017
+30.06.2018 06:23:55 INFO    Starting theta 400 / 1017
+30.06.2018 07:49:13 INFO    Starting theta 500 / 1017
+30.06.2018 09:14:32 INFO    Starting theta 600 / 1017
+30.06.2018 10:39:55 INFO    Starting theta 700 / 1017
+30.06.2018 12:05:14 INFO    Starting theta 800 / 1017
+30.06.2018 13:30:32 INFO    Starting theta 900 / 1017
+30.06.2018 14:55:51 INFO    Starting theta 1000 / 1017
+30.06.2018 15:11:13 INFO    Calibrated evaluation timing: median 1.21887898445 s, mean 1.2199402329 s
+30.06.2018 15:11:13 INFO    Interpolating calibrated roaming
+30.06.2018 15:15:54 INFO    That's it -- have a great day!
+Using TensorFlow backend.
+30.06.2018 15:15:56 INFO    Hi! How are you today?
+30.06.2018 15:15:56 INFO    Startup options:
+30.06.2018 15:15:56 INFO      Algorithm:                     combinedmxe
+30.06.2018 15:15:56 INFO      Point by point:                False
+30.06.2018 15:15:56 INFO      Morphing-aware mode:           False
+30.06.2018 15:15:56 INFO      Smeared data:                  False
+30.06.2018 15:15:56 INFO      Training sample:               baseline
+30.06.2018 15:15:56 INFO      alpha:                         None
+30.06.2018 15:15:56 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+30.06.2018 15:15:56 INFO      AFC epsilon:                   None
+30.06.2018 15:15:56 INFO      Denominator theta:             False
+30.06.2018 15:15:56 INFO      Neyman construction toys:      0
+30.06.2018 15:15:56 INFO      Training sample size limit:    10000
+30.06.2018 15:15:56 INFO      Other options:                 ['deep']
+30.06.2018 15:15:56 INFO      Base directory:                /home/jb6504/higgs_inference
+30.06.2018 15:15:56 INFO      ML-based strategies available: True
+30.06.2018 15:15:56 INFO    Starting parameterized inference
+30.06.2018 15:15:56 INFO    Main settings:
+30.06.2018 15:15:56 INFO      Algorithm:                combinedmxe
+30.06.2018 15:15:56 INFO      Morphing-aware:           False
+30.06.2018 15:15:56 INFO      Training sample:          baseline
+30.06.2018 15:15:56 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+30.06.2018 15:15:56 INFO    Options:
+30.06.2018 15:15:56 INFO      Number of hidden layers:  5
+30.06.2018 15:15:56 INFO      alpha:                    5.0
+30.06.2018 15:15:56 INFO      Batch size:               128
+30.06.2018 15:15:56 INFO      Learning rate:            0.001
+30.06.2018 15:15:56 INFO      Learning rate decay:      9.21034037198e-05
+30.06.2018 15:15:56 INFO      Number of epochs:         50000
+30.06.2018 15:15:56 INFO      Training samples:         10000
+30.06.2018 15:15:56 INFO      NC experiments:           False
+30.06.2018 15:15:56 INFO      Debug mode:               False
+30.06.2018 15:16:18 INFO    Reduced training sample size from 9999997 to 10000 (factor 1000)
+30.06.2018 15:16:31 INFO    Starting training
+2018-06-30 15:16:32.486776: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-30 15:16:32.486814: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-30 15:16:32.486819: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-30 15:16:32.486823: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-30 15:16:32.486827: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-30 15:16:32.702870: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:84:00.0
+Total memory: 22.38GiB
+Free memory: 22.22GiB
+2018-06-30 15:16:32.702909: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-06-30 15:16:32.702915: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-06-30 15:16:32.702923: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:84:00.0)
+Epoch 12923: early stopping
+30.06.2018 17:26:39 INFO    Starting evaluation
+30.06.2018 17:28:45 INFO    Starting theta 100 / 1017
+30.06.2018 17:30:48 INFO    Starting theta 200 / 1017
+30.06.2018 17:32:51 INFO    Starting theta 300 / 1017
+30.06.2018 17:34:54 INFO    Starting theta 400 / 1017
+30.06.2018 17:36:56 INFO    Starting theta 500 / 1017
+30.06.2018 17:38:59 INFO    Starting theta 600 / 1017
+30.06.2018 17:41:02 INFO    Starting theta 700 / 1017
+30.06.2018 17:43:05 INFO    Starting theta 800 / 1017
+30.06.2018 17:45:08 INFO    Starting theta 900 / 1017
+30.06.2018 17:47:11 INFO    Starting theta 1000 / 1017
+30.06.2018 17:47:33 INFO    Evaluation timing: median 1.21696996689 s, mean 1.21968043706 s
+30.06.2018 17:47:33 INFO    Starting roaming
+30.06.2018 17:47:58 INFO    Starting calibrated evaluation and roaming
+30.06.2018 19:12:47 INFO    Starting theta 100 / 1017
+30.06.2018 20:38:23 INFO    Starting theta 200 / 1017
+30.06.2018 22:03:58 INFO    Starting theta 300 / 1017
+30.06.2018 23:29:35 INFO    Starting theta 400 / 1017
+01.07.2018 00:55:12 INFO    Starting theta 500 / 1017
+01.07.2018 02:20:48 INFO    Starting theta 600 / 1017
+01.07.2018 03:46:23 INFO    Starting theta 700 / 1017
+01.07.2018 05:11:58 INFO    Starting theta 800 / 1017
+01.07.2018 06:37:35 INFO    Starting theta 900 / 1017
+01.07.2018 08:03:10 INFO    Starting theta 1000 / 1017
+01.07.2018 08:18:34 INFO    Calibrated evaluation timing: median 1.22314500809 s, mean 1.22440888701 s
+01.07.2018 08:18:34 INFO    Interpolating calibrated roaming
+01.07.2018 08:23:24 INFO    That's it -- have a great day!
+Using TensorFlow backend.
+01.07.2018 08:23:27 INFO    Hi! How are you today?
+01.07.2018 08:23:27 INFO    Startup options:
+01.07.2018 08:23:27 INFO      Algorithm:                     combinedmxe
+01.07.2018 08:23:27 INFO      Point by point:                False
+01.07.2018 08:23:27 INFO      Morphing-aware mode:           False
+01.07.2018 08:23:27 INFO      Smeared data:                  False
+01.07.2018 08:23:27 INFO      Training sample:               baseline
+01.07.2018 08:23:27 INFO      alpha:                         None
+01.07.2018 08:23:27 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+01.07.2018 08:23:27 INFO      AFC epsilon:                   None
+01.07.2018 08:23:27 INFO      Denominator theta:             False
+01.07.2018 08:23:27 INFO      Neyman construction toys:      0
+01.07.2018 08:23:27 INFO      Training sample size limit:    20000
+01.07.2018 08:23:27 INFO      Other options:                 ['deep']
+01.07.2018 08:23:27 INFO      Base directory:                /home/jb6504/higgs_inference
+01.07.2018 08:23:27 INFO      ML-based strategies available: True
+01.07.2018 08:23:27 INFO    Starting parameterized inference
+01.07.2018 08:23:27 INFO    Main settings:
+01.07.2018 08:23:27 INFO      Algorithm:                combinedmxe
+01.07.2018 08:23:27 INFO      Morphing-aware:           False
+01.07.2018 08:23:27 INFO      Training sample:          baseline
+01.07.2018 08:23:27 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+01.07.2018 08:23:27 INFO    Options:
+01.07.2018 08:23:27 INFO      Number of hidden layers:  5
+01.07.2018 08:23:27 INFO      alpha:                    5.0
+01.07.2018 08:23:27 INFO      Batch size:               128
+01.07.2018 08:23:27 INFO      Learning rate:            0.001
+01.07.2018 08:23:27 INFO      Learning rate decay:      0.00018420680744
+01.07.2018 08:23:27 INFO      Number of epochs:         25000
+01.07.2018 08:23:27 INFO      Training samples:         20000
+01.07.2018 08:23:27 INFO      NC experiments:           False
+01.07.2018 08:23:27 INFO      Debug mode:               False
+01.07.2018 08:23:46 INFO    Reduced training sample size from 9999997 to 20000 (factor 500)
+01.07.2018 08:24:00 INFO    Starting training
+2018-07-01 08:24:01.117944: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-07-01 08:24:01.117996: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-07-01 08:24:01.118001: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-07-01 08:24:01.118005: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-07-01 08:24:01.118009: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-07-01 08:24:01.334936: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:84:00.0
+Total memory: 22.38GiB
+Free memory: 22.22GiB
+2018-07-01 08:24:01.334973: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-07-01 08:24:01.334983: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-07-01 08:24:01.334992: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:84:00.0)
+Epoch 11267: early stopping
+01.07.2018 12:06:56 INFO    Starting evaluation
+01.07.2018 12:09:03 INFO    Starting theta 100 / 1017
+01.07.2018 12:11:05 INFO    Starting theta 200 / 1017
+01.07.2018 12:13:08 INFO    Starting theta 300 / 1017
+01.07.2018 12:15:10 INFO    Starting theta 400 / 1017
+01.07.2018 12:17:13 INFO    Starting theta 500 / 1017
+01.07.2018 12:19:16 INFO    Starting theta 600 / 1017
+01.07.2018 12:21:18 INFO    Starting theta 700 / 1017
+01.07.2018 12:23:21 INFO    Starting theta 800 / 1017
+01.07.2018 12:25:23 INFO    Starting theta 900 / 1017
+01.07.2018 12:27:26 INFO    Starting theta 1000 / 1017
+01.07.2018 12:27:48 INFO    Evaluation timing: median 1.21529102325 s, mean 1.21715191332 s
+01.07.2018 12:27:48 INFO    Starting roaming
+01.07.2018 12:28:13 INFO    Starting calibrated evaluation and roaming
+01.07.2018 13:52:53 INFO    Starting theta 100 / 1017
+01.07.2018 15:18:19 INFO    Starting theta 200 / 1017
+01.07.2018 16:43:44 INFO    Starting theta 300 / 1017
+01.07.2018 18:09:09 INFO    Starting theta 400 / 1017
+01.07.2018 19:34:33 INFO    Starting theta 500 / 1017
+01.07.2018 21:00:09 INFO    Starting theta 600 / 1017
+01.07.2018 22:26:04 INFO    Starting theta 700 / 1017
+01.07.2018 23:51:38 INFO    Starting theta 800 / 1017
+02.07.2018 01:17:06 INFO    Starting theta 900 / 1017
+02.07.2018 02:42:30 INFO    Starting theta 1000 / 1017
+02.07.2018 02:57:52 INFO    Calibrated evaluation timing: median 1.22100806236 s, mean 1.22355418548 s
+02.07.2018 02:57:52 INFO    Interpolating calibrated roaming
+02.07.2018 03:02:14 INFO    That's it -- have a great day!
+Using TensorFlow backend.
+02.07.2018 03:02:17 INFO    Hi! How are you today?
+02.07.2018 03:02:17 INFO    Startup options:
+02.07.2018 03:02:17 INFO      Algorithm:                     combinedmxe
+02.07.2018 03:02:17 INFO      Point by point:                False
+02.07.2018 03:02:17 INFO      Morphing-aware mode:           False
+02.07.2018 03:02:17 INFO      Smeared data:                  False
+02.07.2018 03:02:17 INFO      Training sample:               baseline
+02.07.2018 03:02:17 INFO      alpha:                         None
+02.07.2018 03:02:17 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+02.07.2018 03:02:17 INFO      AFC epsilon:                   None
+02.07.2018 03:02:17 INFO      Denominator theta:             False
+02.07.2018 03:02:17 INFO      Neyman construction toys:      0
+02.07.2018 03:02:17 INFO      Training sample size limit:    50000
+02.07.2018 03:02:17 INFO      Other options:                 ['deep']
+02.07.2018 03:02:17 INFO      Base directory:                /home/jb6504/higgs_inference
+02.07.2018 03:02:17 INFO      ML-based strategies available: True
+02.07.2018 03:02:17 INFO    Starting parameterized inference
+02.07.2018 03:02:17 INFO    Main settings:
+02.07.2018 03:02:17 INFO      Algorithm:                combinedmxe
+02.07.2018 03:02:17 INFO      Morphing-aware:           False
+02.07.2018 03:02:17 INFO      Training sample:          baseline
+02.07.2018 03:02:17 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+02.07.2018 03:02:17 INFO    Options:
+02.07.2018 03:02:17 INFO      Number of hidden layers:  5
+02.07.2018 03:02:17 INFO      alpha:                    5.0
+02.07.2018 03:02:17 INFO      Batch size:               128
+02.07.2018 03:02:17 INFO      Learning rate:            0.001
+02.07.2018 03:02:17 INFO      Learning rate decay:      0.000460517018599
+02.07.2018 03:02:17 INFO      Number of epochs:         10000
+02.07.2018 03:02:17 INFO      Training samples:         50000
+02.07.2018 03:02:17 INFO      NC experiments:           False
+02.07.2018 03:02:17 INFO      Debug mode:               False
+02.07.2018 03:02:37 INFO    Reduced training sample size from 9999997 to 50000 (factor 200)
+02.07.2018 03:02:50 INFO    Starting training
+2018-07-02 03:02:51.585475: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-07-02 03:02:51.585512: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-07-02 03:02:51.585517: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-07-02 03:02:51.585521: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-07-02 03:02:51.585525: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-07-02 03:02:51.831205: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+name: Tesla P40
+major: 6 minor: 1 memoryClockRate (GHz) 1.531
+pciBusID 0000:84:00.0
+Total memory: 22.38GiB
+Free memory: 22.22GiB
+2018-07-02 03:02:51.831242: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2018-07-02 03:02:51.831249: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2018-07-02 03:02:51.831257: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P40, pci bus id: 0000:84:00.0)

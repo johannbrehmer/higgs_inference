@@ -1,0 +1,408 @@
+Using TensorFlow backend.
+28.06.2018 11:19:44 INFO    Hi! How are you today?
+28.06.2018 11:19:44 INFO    Startup options:
+28.06.2018 11:19:44 INFO      Algorithm:                     mxe
+28.06.2018 11:19:44 INFO      Point by point:                False
+28.06.2018 11:19:44 INFO      Morphing-aware mode:           False
+28.06.2018 11:19:44 INFO      Smeared data:                  False
+28.06.2018 11:19:44 INFO      Training sample:               baseline
+28.06.2018 11:19:44 INFO      alpha:                         None
+28.06.2018 11:19:44 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+28.06.2018 11:19:44 INFO      AFC epsilon:                   None
+28.06.2018 11:19:44 INFO      Denominator theta:             False
+28.06.2018 11:19:44 INFO      Neyman construction toys:      0
+28.06.2018 11:19:44 INFO      Training sample size limit:    1000
+28.06.2018 11:19:44 INFO      Other options:                 ['deep']
+28.06.2018 11:19:44 INFO      Base directory:                /home/jb6504/higgs_inference
+28.06.2018 11:19:44 INFO      ML-based strategies available: True
+28.06.2018 11:19:44 INFO    Starting parameterized inference
+28.06.2018 11:19:44 INFO    Main settings:
+28.06.2018 11:19:44 INFO      Algorithm:                mxe
+28.06.2018 11:19:44 INFO      Morphing-aware:           False
+28.06.2018 11:19:44 INFO      Training sample:          baseline
+28.06.2018 11:19:44 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+28.06.2018 11:19:44 INFO    Options:
+28.06.2018 11:19:44 INFO      Number of hidden layers:  5
+28.06.2018 11:19:44 INFO      Batch size:               128
+28.06.2018 11:19:44 INFO      Learning rate:            0.001
+28.06.2018 11:19:44 INFO      Learning rate decay:      9.21034037198e-06
+28.06.2018 11:19:44 INFO      Number of epochs:         500000
+28.06.2018 11:19:44 INFO      Training samples:         1000
+28.06.2018 11:19:44 INFO      NC experiments:           False
+28.06.2018 11:19:44 INFO      Debug mode:               False
+28.06.2018 11:20:08 INFO    Reduced training sample size from 9999997 to 1000 (factor 10000)
+28.06.2018 11:20:22 INFO    Starting training
+2018-06-28 11:20:23.521067: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:23.521100: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:23.521105: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:23.521109: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:23.521113: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:23.715655: E tensorflow/core/common_runtime/direct_session.cc:171] Internal: failed initializing StreamExecutor for CUDA device ordinal 0: Internal: failed call to cuDevicePrimaryCtxRetain: CUDA_ERROR_ECC_UNCORRECTABLE
+Traceback (most recent call last):
+  File "experiments.py", line 148, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 463, in parameterized_inference
+    history = regr.fit(X_thetas_train[::], y_logr_score_train[::], callbacks=callbacks, batch_size=batch_size)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 149, in fit
+    history = self.model.fit(x, y, **fit_args)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1485, in fit
+    initial_epoch=initial_epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1116, in _fit_loop
+    callbacks.on_epoch_begin(epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 61, in on_epoch_begin
+    callback.on_epoch_begin(epoch, logs)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 561, in on_epoch_begin
+    K.set_value(self.model.optimizer.lr, lr)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 1970, in set_value
+    get_session().run(assign_op, feed_dict={assign_placeholder: value})
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 150, in get_session
+    _SESSION = tf.Session(config=config)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1486, in __init__
+    super(Session, self).__init__(target, graph, config=config)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 621, in __init__
+    self._session = tf_session.TF_NewDeprecatedSession(opts, status)
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/contextlib.py", line 24, in __exit__
+    self.gen.next()
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/framework/errors_impl.py", line 466, in raise_exception_on_not_ok_status
+    pywrap_tensorflow.TF_GetCode(status))
+tensorflow.python.framework.errors_impl.InternalError: Failed to create session.
+Using TensorFlow backend.
+28.06.2018 11:20:25 INFO    Hi! How are you today?
+28.06.2018 11:20:25 INFO    Startup options:
+28.06.2018 11:20:25 INFO      Algorithm:                     mxe
+28.06.2018 11:20:25 INFO      Point by point:                False
+28.06.2018 11:20:25 INFO      Morphing-aware mode:           False
+28.06.2018 11:20:25 INFO      Smeared data:                  False
+28.06.2018 11:20:25 INFO      Training sample:               baseline
+28.06.2018 11:20:25 INFO      alpha:                         None
+28.06.2018 11:20:25 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+28.06.2018 11:20:25 INFO      AFC epsilon:                   None
+28.06.2018 11:20:25 INFO      Denominator theta:             False
+28.06.2018 11:20:25 INFO      Neyman construction toys:      0
+28.06.2018 11:20:25 INFO      Training sample size limit:    2000
+28.06.2018 11:20:25 INFO      Other options:                 ['deep']
+28.06.2018 11:20:25 INFO      Base directory:                /home/jb6504/higgs_inference
+28.06.2018 11:20:25 INFO      ML-based strategies available: True
+28.06.2018 11:20:25 INFO    Starting parameterized inference
+28.06.2018 11:20:25 INFO    Main settings:
+28.06.2018 11:20:25 INFO      Algorithm:                mxe
+28.06.2018 11:20:25 INFO      Morphing-aware:           False
+28.06.2018 11:20:25 INFO      Training sample:          baseline
+28.06.2018 11:20:25 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+28.06.2018 11:20:25 INFO    Options:
+28.06.2018 11:20:25 INFO      Number of hidden layers:  5
+28.06.2018 11:20:25 INFO      Batch size:               128
+28.06.2018 11:20:25 INFO      Learning rate:            0.001
+28.06.2018 11:20:25 INFO      Learning rate decay:      1.8420680744e-05
+28.06.2018 11:20:25 INFO      Number of epochs:         250000
+28.06.2018 11:20:25 INFO      Training samples:         2000
+28.06.2018 11:20:25 INFO      NC experiments:           False
+28.06.2018 11:20:25 INFO      Debug mode:               False
+28.06.2018 11:20:31 INFO    Reduced training sample size from 9999997 to 2000 (factor 5000)
+28.06.2018 11:20:45 INFO    Starting training
+2018-06-28 11:20:46.060065: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:46.060100: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:46.060104: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:46.060108: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:46.060111: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:20:46.254757: E tensorflow/core/common_runtime/direct_session.cc:171] Internal: failed initializing StreamExecutor for CUDA device ordinal 0: Internal: failed call to cuDevicePrimaryCtxRetain: CUDA_ERROR_ECC_UNCORRECTABLE
+Traceback (most recent call last):
+  File "experiments.py", line 148, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 463, in parameterized_inference
+    history = regr.fit(X_thetas_train[::], y_logr_score_train[::], callbacks=callbacks, batch_size=batch_size)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 149, in fit
+    history = self.model.fit(x, y, **fit_args)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1485, in fit
+    initial_epoch=initial_epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1116, in _fit_loop
+    callbacks.on_epoch_begin(epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 61, in on_epoch_begin
+    callback.on_epoch_begin(epoch, logs)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 561, in on_epoch_begin
+    K.set_value(self.model.optimizer.lr, lr)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 1970, in set_value
+    get_session().run(assign_op, feed_dict={assign_placeholder: value})
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 150, in get_session
+    _SESSION = tf.Session(config=config)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1486, in __init__
+    super(Session, self).__init__(target, graph, config=config)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 621, in __init__
+    self._session = tf_session.TF_NewDeprecatedSession(opts, status)
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/contextlib.py", line 24, in __exit__
+    self.gen.next()
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/framework/errors_impl.py", line 466, in raise_exception_on_not_ok_status
+    pywrap_tensorflow.TF_GetCode(status))
+tensorflow.python.framework.errors_impl.InternalError: Failed to create session.
+Using TensorFlow backend.
+28.06.2018 11:20:48 INFO    Hi! How are you today?
+28.06.2018 11:20:48 INFO    Startup options:
+28.06.2018 11:20:48 INFO      Algorithm:                     mxe
+28.06.2018 11:20:48 INFO      Point by point:                False
+28.06.2018 11:20:48 INFO      Morphing-aware mode:           False
+28.06.2018 11:20:48 INFO      Smeared data:                  False
+28.06.2018 11:20:48 INFO      Training sample:               baseline
+28.06.2018 11:20:48 INFO      alpha:                         None
+28.06.2018 11:20:48 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+28.06.2018 11:20:48 INFO      AFC epsilon:                   None
+28.06.2018 11:20:48 INFO      Denominator theta:             False
+28.06.2018 11:20:48 INFO      Neyman construction toys:      0
+28.06.2018 11:20:48 INFO      Training sample size limit:    5000
+28.06.2018 11:20:48 INFO      Other options:                 ['deep']
+28.06.2018 11:20:48 INFO      Base directory:                /home/jb6504/higgs_inference
+28.06.2018 11:20:48 INFO      ML-based strategies available: True
+28.06.2018 11:20:48 INFO    Starting parameterized inference
+28.06.2018 11:20:48 INFO    Main settings:
+28.06.2018 11:20:48 INFO      Algorithm:                mxe
+28.06.2018 11:20:48 INFO      Morphing-aware:           False
+28.06.2018 11:20:48 INFO      Training sample:          baseline
+28.06.2018 11:20:48 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+28.06.2018 11:20:48 INFO    Options:
+28.06.2018 11:20:48 INFO      Number of hidden layers:  5
+28.06.2018 11:20:48 INFO      Batch size:               128
+28.06.2018 11:20:48 INFO      Learning rate:            0.001
+28.06.2018 11:20:48 INFO      Learning rate decay:      4.60517018599e-05
+28.06.2018 11:20:48 INFO      Number of epochs:         100000
+28.06.2018 11:20:48 INFO      Training samples:         5000
+28.06.2018 11:20:48 INFO      NC experiments:           False
+28.06.2018 11:20:48 INFO      Debug mode:               False
+28.06.2018 11:20:54 INFO    Reduced training sample size from 9999997 to 5000 (factor 2000)
+28.06.2018 11:21:08 INFO    Starting training
+2018-06-28 11:21:08.926848: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:08.926880: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:08.926885: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:08.926889: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:08.926893: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:09.122783: E tensorflow/core/common_runtime/direct_session.cc:171] Internal: failed initializing StreamExecutor for CUDA device ordinal 0: Internal: failed call to cuDevicePrimaryCtxRetain: CUDA_ERROR_ECC_UNCORRECTABLE
+Traceback (most recent call last):
+  File "experiments.py", line 148, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 463, in parameterized_inference
+    history = regr.fit(X_thetas_train[::], y_logr_score_train[::], callbacks=callbacks, batch_size=batch_size)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 149, in fit
+    history = self.model.fit(x, y, **fit_args)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1485, in fit
+    initial_epoch=initial_epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1116, in _fit_loop
+    callbacks.on_epoch_begin(epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 61, in on_epoch_begin
+    callback.on_epoch_begin(epoch, logs)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 561, in on_epoch_begin
+    K.set_value(self.model.optimizer.lr, lr)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 1970, in set_value
+    get_session().run(assign_op, feed_dict={assign_placeholder: value})
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 150, in get_session
+    _SESSION = tf.Session(config=config)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1486, in __init__
+    super(Session, self).__init__(target, graph, config=config)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 621, in __init__
+    self._session = tf_session.TF_NewDeprecatedSession(opts, status)
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/contextlib.py", line 24, in __exit__
+    self.gen.next()
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/framework/errors_impl.py", line 466, in raise_exception_on_not_ok_status
+    pywrap_tensorflow.TF_GetCode(status))
+tensorflow.python.framework.errors_impl.InternalError: Failed to create session.
+Using TensorFlow backend.
+28.06.2018 11:21:11 INFO    Hi! How are you today?
+28.06.2018 11:21:11 INFO    Startup options:
+28.06.2018 11:21:11 INFO      Algorithm:                     mxe
+28.06.2018 11:21:11 INFO      Point by point:                False
+28.06.2018 11:21:11 INFO      Morphing-aware mode:           False
+28.06.2018 11:21:11 INFO      Smeared data:                  False
+28.06.2018 11:21:11 INFO      Training sample:               baseline
+28.06.2018 11:21:11 INFO      alpha:                         None
+28.06.2018 11:21:11 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+28.06.2018 11:21:11 INFO      AFC epsilon:                   None
+28.06.2018 11:21:11 INFO      Denominator theta:             False
+28.06.2018 11:21:11 INFO      Neyman construction toys:      0
+28.06.2018 11:21:11 INFO      Training sample size limit:    10000
+28.06.2018 11:21:11 INFO      Other options:                 ['deep']
+28.06.2018 11:21:11 INFO      Base directory:                /home/jb6504/higgs_inference
+28.06.2018 11:21:11 INFO      ML-based strategies available: True
+28.06.2018 11:21:11 INFO    Starting parameterized inference
+28.06.2018 11:21:11 INFO    Main settings:
+28.06.2018 11:21:11 INFO      Algorithm:                mxe
+28.06.2018 11:21:11 INFO      Morphing-aware:           False
+28.06.2018 11:21:11 INFO      Training sample:          baseline
+28.06.2018 11:21:11 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+28.06.2018 11:21:11 INFO    Options:
+28.06.2018 11:21:11 INFO      Number of hidden layers:  5
+28.06.2018 11:21:11 INFO      Batch size:               128
+28.06.2018 11:21:11 INFO      Learning rate:            0.001
+28.06.2018 11:21:11 INFO      Learning rate decay:      9.21034037198e-05
+28.06.2018 11:21:11 INFO      Number of epochs:         50000
+28.06.2018 11:21:11 INFO      Training samples:         10000
+28.06.2018 11:21:11 INFO      NC experiments:           False
+28.06.2018 11:21:11 INFO      Debug mode:               False
+28.06.2018 11:21:16 INFO    Reduced training sample size from 9999997 to 10000 (factor 1000)
+28.06.2018 11:21:30 INFO    Starting training
+2018-06-28 11:21:31.338579: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:31.338615: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:31.338620: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:31.338635: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:31.338638: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:31.533586: E tensorflow/core/common_runtime/direct_session.cc:171] Internal: failed initializing StreamExecutor for CUDA device ordinal 0: Internal: failed call to cuDevicePrimaryCtxRetain: CUDA_ERROR_ECC_UNCORRECTABLE
+Traceback (most recent call last):
+  File "experiments.py", line 148, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 463, in parameterized_inference
+    history = regr.fit(X_thetas_train[::], y_logr_score_train[::], callbacks=callbacks, batch_size=batch_size)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 149, in fit
+    history = self.model.fit(x, y, **fit_args)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1485, in fit
+    initial_epoch=initial_epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1116, in _fit_loop
+    callbacks.on_epoch_begin(epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 61, in on_epoch_begin
+    callback.on_epoch_begin(epoch, logs)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 561, in on_epoch_begin
+    K.set_value(self.model.optimizer.lr, lr)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 1970, in set_value
+    get_session().run(assign_op, feed_dict={assign_placeholder: value})
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 150, in get_session
+    _SESSION = tf.Session(config=config)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1486, in __init__
+    super(Session, self).__init__(target, graph, config=config)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 621, in __init__
+    self._session = tf_session.TF_NewDeprecatedSession(opts, status)
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/contextlib.py", line 24, in __exit__
+    self.gen.next()
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/framework/errors_impl.py", line 466, in raise_exception_on_not_ok_status
+    pywrap_tensorflow.TF_GetCode(status))
+tensorflow.python.framework.errors_impl.InternalError: Failed to create session.
+Using TensorFlow backend.
+28.06.2018 11:21:33 INFO    Hi! How are you today?
+28.06.2018 11:21:33 INFO    Startup options:
+28.06.2018 11:21:33 INFO      Algorithm:                     mxe
+28.06.2018 11:21:33 INFO      Point by point:                False
+28.06.2018 11:21:33 INFO      Morphing-aware mode:           False
+28.06.2018 11:21:33 INFO      Smeared data:                  False
+28.06.2018 11:21:33 INFO      Training sample:               baseline
+28.06.2018 11:21:33 INFO      alpha:                         None
+28.06.2018 11:21:33 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+28.06.2018 11:21:33 INFO      AFC epsilon:                   None
+28.06.2018 11:21:33 INFO      Denominator theta:             False
+28.06.2018 11:21:33 INFO      Neyman construction toys:      0
+28.06.2018 11:21:33 INFO      Training sample size limit:    20000
+28.06.2018 11:21:33 INFO      Other options:                 ['deep']
+28.06.2018 11:21:33 INFO      Base directory:                /home/jb6504/higgs_inference
+28.06.2018 11:21:33 INFO      ML-based strategies available: True
+28.06.2018 11:21:33 INFO    Starting parameterized inference
+28.06.2018 11:21:33 INFO    Main settings:
+28.06.2018 11:21:33 INFO      Algorithm:                mxe
+28.06.2018 11:21:33 INFO      Morphing-aware:           False
+28.06.2018 11:21:33 INFO      Training sample:          baseline
+28.06.2018 11:21:33 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+28.06.2018 11:21:33 INFO    Options:
+28.06.2018 11:21:33 INFO      Number of hidden layers:  5
+28.06.2018 11:21:33 INFO      Batch size:               128
+28.06.2018 11:21:33 INFO      Learning rate:            0.001
+28.06.2018 11:21:33 INFO      Learning rate decay:      0.00018420680744
+28.06.2018 11:21:33 INFO      Number of epochs:         25000
+28.06.2018 11:21:33 INFO      Training samples:         20000
+28.06.2018 11:21:33 INFO      NC experiments:           False
+28.06.2018 11:21:33 INFO      Debug mode:               False
+28.06.2018 11:21:39 INFO    Reduced training sample size from 9999997 to 20000 (factor 500)
+28.06.2018 11:21:53 INFO    Starting training
+2018-06-28 11:21:53.862357: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:53.862390: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:53.862395: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:53.862398: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:53.862402: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:21:54.057813: E tensorflow/core/common_runtime/direct_session.cc:171] Internal: failed initializing StreamExecutor for CUDA device ordinal 0: Internal: failed call to cuDevicePrimaryCtxRetain: CUDA_ERROR_ECC_UNCORRECTABLE
+Traceback (most recent call last):
+  File "experiments.py", line 148, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 463, in parameterized_inference
+    history = regr.fit(X_thetas_train[::], y_logr_score_train[::], callbacks=callbacks, batch_size=batch_size)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 149, in fit
+    history = self.model.fit(x, y, **fit_args)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1485, in fit
+    initial_epoch=initial_epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1116, in _fit_loop
+    callbacks.on_epoch_begin(epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 61, in on_epoch_begin
+    callback.on_epoch_begin(epoch, logs)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 561, in on_epoch_begin
+    K.set_value(self.model.optimizer.lr, lr)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 1970, in set_value
+    get_session().run(assign_op, feed_dict={assign_placeholder: value})
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 150, in get_session
+    _SESSION = tf.Session(config=config)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1486, in __init__
+    super(Session, self).__init__(target, graph, config=config)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 621, in __init__
+    self._session = tf_session.TF_NewDeprecatedSession(opts, status)
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/contextlib.py", line 24, in __exit__
+    self.gen.next()
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/framework/errors_impl.py", line 466, in raise_exception_on_not_ok_status
+    pywrap_tensorflow.TF_GetCode(status))
+tensorflow.python.framework.errors_impl.InternalError: Failed to create session.
+Using TensorFlow backend.
+28.06.2018 11:21:56 INFO    Hi! How are you today?
+28.06.2018 11:21:56 INFO    Startup options:
+28.06.2018 11:21:56 INFO      Algorithm:                     mxe
+28.06.2018 11:21:56 INFO      Point by point:                False
+28.06.2018 11:21:56 INFO      Morphing-aware mode:           False
+28.06.2018 11:21:56 INFO      Smeared data:                  False
+28.06.2018 11:21:56 INFO      Training sample:               baseline
+28.06.2018 11:21:56 INFO      alpha:                         None
+28.06.2018 11:21:56 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+28.06.2018 11:21:56 INFO      AFC epsilon:                   None
+28.06.2018 11:21:56 INFO      Denominator theta:             False
+28.06.2018 11:21:56 INFO      Neyman construction toys:      0
+28.06.2018 11:21:56 INFO      Training sample size limit:    50000
+28.06.2018 11:21:56 INFO      Other options:                 ['deep']
+28.06.2018 11:21:56 INFO      Base directory:                /home/jb6504/higgs_inference
+28.06.2018 11:21:56 INFO      ML-based strategies available: True
+28.06.2018 11:21:56 INFO    Starting parameterized inference
+28.06.2018 11:21:56 INFO    Main settings:
+28.06.2018 11:21:56 INFO      Algorithm:                mxe
+28.06.2018 11:21:56 INFO      Morphing-aware:           False
+28.06.2018 11:21:56 INFO      Training sample:          baseline
+28.06.2018 11:21:56 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+28.06.2018 11:21:56 INFO    Options:
+28.06.2018 11:21:56 INFO      Number of hidden layers:  5
+28.06.2018 11:21:56 INFO      Batch size:               128
+28.06.2018 11:21:56 INFO      Learning rate:            0.001
+28.06.2018 11:21:56 INFO      Learning rate decay:      0.000460517018599
+28.06.2018 11:21:56 INFO      Number of epochs:         10000
+28.06.2018 11:21:56 INFO      Training samples:         50000
+28.06.2018 11:21:56 INFO      NC experiments:           False
+28.06.2018 11:21:56 INFO      Debug mode:               False
+28.06.2018 11:22:02 INFO    Reduced training sample size from 9999997 to 50000 (factor 200)
+28.06.2018 11:22:16 INFO    Starting training
+2018-06-28 11:22:16.682129: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:22:16.682154: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:22:16.682159: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:22:16.682163: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:22:16.682168: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2018-06-28 11:22:16.877778: E tensorflow/core/common_runtime/direct_session.cc:171] Internal: failed initializing StreamExecutor for CUDA device ordinal 0: Internal: failed call to cuDevicePrimaryCtxRetain: CUDA_ERROR_ECC_UNCORRECTABLE
+Traceback (most recent call last):
+  File "experiments.py", line 148, in <module>
+    options=args.options)
+  File "/home/jb6504/higgs_inference/higgs_inference/strategies/parameterized.py", line 463, in parameterized_inference
+    history = regr.fit(X_thetas_train[::], y_logr_score_train[::], callbacks=callbacks, batch_size=batch_size)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/wrappers/scikit_learn.py", line 149, in fit
+    history = self.model.fit(x, y, **fit_args)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1485, in fit
+    initial_epoch=initial_epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/engine/training.py", line 1116, in _fit_loop
+    callbacks.on_epoch_begin(epoch)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 61, in on_epoch_begin
+    callback.on_epoch_begin(epoch, logs)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/callbacks.py", line 561, in on_epoch_begin
+    K.set_value(self.model.optimizer.lr, lr)
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 1970, in set_value
+    get_session().run(assign_op, feed_dict={assign_placeholder: value})
+  File "/share/apps/keras/2.0.2/lib/python2.7/site-packages/Keras-2.0.2-py2.7.egg/keras/backend/tensorflow_backend.py", line 150, in get_session
+    _SESSION = tf.Session(config=config)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1486, in __init__
+    super(Session, self).__init__(target, graph, config=config)
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 621, in __init__
+    self._session = tf_session.TF_NewDeprecatedSession(opts, status)
+  File "/share/apps/python/2.7.12/intel/lib/python2.7/contextlib.py", line 24, in __exit__
+    self.gen.next()
+  File "/share/apps/tensorflow/20170707/python2.7/lib/python2.7/site-packages/tensorflow/python/framework/errors_impl.py", line 466, in raise_exception_on_not_ok_status
+    pywrap_tensorflow.TF_GetCode(status))
+tensorflow.python.framework.errors_impl.InternalError: Failed to create session.
