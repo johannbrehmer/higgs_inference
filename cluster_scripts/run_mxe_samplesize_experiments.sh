@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=mxe-size
+#SBATCH --job-name=mxe-s
 #SBATCH --output=slurm_mxe_samplesize.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1

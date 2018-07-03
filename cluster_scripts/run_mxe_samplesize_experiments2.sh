@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=mxe-size2
+#SBATCH --job-name=mxe-s2
 #SBATCH --output=slurm_mxe_samplesize2.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
@@ -24,9 +24,9 @@ cd /home/jb6504/higgs_inference/higgs_inference
 #python -u experiments.py mxe --samplesize 10000 -o deep
 #python -u experiments.py mxe --samplesize 20000 -o deep
 #python -u experiments.py mxe --samplesize 50000 -o deep
-python -u experiments.py mxe --samplesize 100000 -o deep
-python -u experiments.py mxe --samplesize 200000 -o deep
-python -u experiments.py mxe --samplesize 500000 -o deep
-python -u experiments.py mxe --samplesize 1000000 -o deep
+#python -u experiments.py mxe --samplesize 100000 -o deep
+#python -u experiments.py mxe --samplesize 200000 -o deep
+#python -u experiments.py mxe --samplesize 500000 -o deep
+#python -u experiments.py mxe --samplesize 1000000 -o deep
 python -u experiments.py mxe --samplesize 2000000 -o deep
 python -u experiments.py mxe --samplesize 5000000 -o deep
