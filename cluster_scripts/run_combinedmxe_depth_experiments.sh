@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=mxe
-#SBATCH --output=slurm_mxe.out
+#SBATCH --job-name=cmxe-depth
+#SBATCH --output=slurm_combinedmxe_depth_experiments.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
@@ -18,5 +18,8 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py mxe --training random -o deep
-python -u experiments.py mxe --neyman -o deep neyman2
+python -u experiments.py combinedmxe -o shallow
+python -u experiments.py combinedmxe --training random -o shallow
+
+python -u experiments.py combinedmxe -o deep
+python -u experiments.py combinedmxe --training random -o deep
