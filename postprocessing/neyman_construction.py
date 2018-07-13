@@ -399,6 +399,8 @@ parser.add_argument("--carl", action="store_true", help="Calculate NC for CARL")
 parser.add_argument("--regression", action="store_true", help="Calculate NC for ROLR")
 parser.add_argument("--combined", action="store_true", help="Calculate NC for CASCAL")
 parser.add_argument("--combinedregression", action="store_true", help="Calculate NC for RASCAL")
+parser.add_argument("--mxe", action="store_true", help="Calculate NC for CRAWLR")
+parser.add_argument("--combinedmxe", action="store_true", help="Calculate NC for SCRAWLR")
 parser.add_argument("--scoreregression", action="store_true", help="Calculate NC for SALLY")
 parser.add_argument("--set", type=int, default=0, help='Neyman construction set.')
 
@@ -432,6 +434,10 @@ if args.regression or args.all:
     calculate_confidence_limits('regression_calibrated', 'parameterized', args.set)
 if args.combinedregression or args.all:
     calculate_confidence_limits('combinedregression_calibrated_deep', 'parameterized', args.set)
+if args.mxe or args.all:
+    calculate_confidence_limits('mxe_calibrated_deep', 'parameterized', args.set)
+if args.combinedmxe or args.all:
+    calculate_confidence_limits('combinedmxe_calibrated_deep', 'parameterized', args.set)
 
 if args.histo or args.all:
     calculate_confidence_limits('histo_2d_asymmetricbinning_smeared', 'histo', args.set)
@@ -445,3 +451,7 @@ if args.regression or args.all:
     calculate_confidence_limits('regression_calibrated_smeared', 'parameterized', args.set)
 if args.combinedregression or args.all:
     calculate_confidence_limits('combinedregression_calibrated_deep_smeared', 'parameterized', args.set)
+if args.mxe or args.all:
+    calculate_confidence_limits('mxe_calibrated_deep_smeared', 'parameterized', args.set)
+if args.combinedmxe or args.all:
+    calculate_confidence_limits('combinedmxe_calibrated_deep_smeared', 'parameterized', args.set)
