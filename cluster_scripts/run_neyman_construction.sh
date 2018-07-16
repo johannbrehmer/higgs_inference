@@ -14,4 +14,4 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/postprocessing
 
-python -u neyman_construction.py --mxe --combinedmxe --set 2
+python -u neyman_construction.py --combinedmxe --set 2

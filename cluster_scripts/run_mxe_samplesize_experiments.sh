@@ -18,13 +18,13 @@ module load keras/2.0.2
 
 cd /home/jb6504/higgs_inference/higgs_inference
 
-python -u experiments.py mxe --samplesize 1000 -o deep
-python -u experiments.py mxe --samplesize 2000 -o deep
-python -u experiments.py mxe --samplesize 5000 -o deep
-python -u experiments.py mxe --samplesize 10000 -o deep
-python -u experiments.py mxe --samplesize 20000 -o deep
-python -u experiments.py mxe --samplesize 50000 -o deep
-#python -u experiments.py mxe --samplesize 100000 -o deep
+#python -u experiments.py mxe --samplesize 1000 -o deep
+#python -u experiments.py mxe --samplesize 2000 -o deep
+#python -u experiments.py mxe --samplesize 5000 -o deep
+#python -u experiments.py mxe --samplesize 10000 -o deep
+#python -u experiments.py mxe --samplesize 20000 -o deep
+#python -u experiments.py mxe --samplesize 50000 -o deep
+python -u experiments.py mxe --samplesize 100000 -o deep neyman2 --neyman
 #python -u experiments.py mxe --samplesize 200000 -o deep
 #python -u experiments.py mxe --samplesize 500000 -o deep
 #python -u experiments.py mxe --samplesize 1000000 -o deep

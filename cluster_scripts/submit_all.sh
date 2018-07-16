@@ -77,23 +77,26 @@ cd /home/jb6504/higgs_inference/cluster_scripts
 # Sample size experiments
 ################################################################################
 
-# sbatch run_scoreregression_samplesize_experiments.sh
-# sbatch run_carl_samplesize_experiments.sh
-# sbatch run_combined_samplesize_experiments.sh
-# sbatch run_regression_samplesize_experiments.sh
-# sbatch run_combinedregression_samplesize_experiments.sh
+sbatch run_scoreregression_samplesize_experiments.sh
+sbatch run_carl_samplesize_experiments.sh
+sbatch run_combined_samplesize_experiments.sh
+sbatch run_regression_samplesize_experiments.sh
+sbatch run_combinedregression_samplesize_experiments.sh
 
 
 ################################################################################
 # Follow-up
 ################################################################################
 
-sbatch run_mxe.sh
-sbatch run_combinedmxe.sh
+# sbatch run_mxe.sh
+# sbatch run_combinedmxe.sh
 
-sbatch run_mxe_smearing.sh
-sbatch run_combinedmxe_smearing.sh
+# sbatch run_mxe_smearing.sh
+# sbatch run_combinedmxe_smearing.sh
 
-sbatch run_combinedmxe_tuning.sh
-sbatch run_mxe_depth_experiments.sh
-sbatch run_combinedmxe_depth_experiments.sh
+# sbatch run_combinedmxe_tuning.sh
+# sbatch run_mxe_depth_experiments.sh
+# sbatch run_combinedmxe_depth_experiments.sh
+
+sbatch run_mxe_samplesize_experiments.sh
+sbatch run_combinedmxe_samplesize_experiments.sh

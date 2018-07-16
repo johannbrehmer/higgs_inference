@@ -24,9 +24,9 @@ cd /home/jb6504/higgs_inference/higgs_inference
 #python -u experiments.py regression --samplesize 10000
 #python -u experiments.py regression --samplesize 20000
 #python -u experiments.py regression --samplesize 50000
-#python -u experiments.py regression --samplesize 100000
+python -u experiments.py regression --samplesize 100000 --neyman -o neyman2
 #python -u experiments.py regression --samplesize 200000
-python -u experiments.py regression --samplesize 500000
-python -u experiments.py regression --samplesize 1000000
-python -u experiments.py regression --samplesize 2000000
-python -u experiments.py regression --samplesize 5000000
+#python -u experiments.py regression --samplesize 500000
+#python -u experiments.py regression --samplesize 1000000
+#python -u experiments.py regression --samplesize 2000000
+#python -u experiments.py regression --samplesize 5000000

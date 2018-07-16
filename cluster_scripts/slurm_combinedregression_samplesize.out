@@ -1,0 +1,33 @@
+Using TensorFlow backend.
+16.07.2018 11:30:31 INFO    Hi! How are you today?
+16.07.2018 11:30:31 INFO    Startup options:
+16.07.2018 11:30:31 INFO      Algorithm:                     combinedregression
+16.07.2018 11:30:31 INFO      Point by point:                False
+16.07.2018 11:30:31 INFO      Morphing-aware mode:           False
+16.07.2018 11:30:31 INFO      Smeared data:                  False
+16.07.2018 11:30:31 INFO      Training sample:               baseline
+16.07.2018 11:30:31 INFO      alpha:                         None
+16.07.2018 11:30:31 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+16.07.2018 11:30:31 INFO      AFC epsilon:                   None
+16.07.2018 11:30:31 INFO      Denominator theta:             True
+16.07.2018 11:30:31 INFO      Neyman construction toys:      0
+16.07.2018 11:30:31 INFO      Training sample size limit:    100000
+16.07.2018 11:30:31 INFO      Other options:                 ['deep', 'neyman2']
+16.07.2018 11:30:31 INFO      Base directory:                /home/jb6504/higgs_inference
+16.07.2018 11:30:31 INFO      ML-based strategies available: True
+16.07.2018 11:30:31 INFO    Starting parameterized inference
+16.07.2018 11:30:31 INFO    Main settings:
+16.07.2018 11:30:31 INFO      Algorithm:                combinedregression
+16.07.2018 11:30:31 INFO      Morphing-aware:           False
+16.07.2018 11:30:31 INFO      Training sample:          baseline
+16.07.2018 11:30:31 INFO      Denominator theta:        denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+16.07.2018 11:30:31 INFO    Options:
+16.07.2018 11:30:31 INFO      Number of hidden layers:  5
+16.07.2018 11:30:31 INFO      alpha:                    100.0
+16.07.2018 11:30:31 INFO      Batch size:               128
+16.07.2018 11:30:31 INFO      Learning rate:            0.001
+16.07.2018 11:30:31 INFO      Learning rate decay:      0.000921034037198
+16.07.2018 11:30:31 INFO      Number of epochs:         5000
+16.07.2018 11:30:31 INFO      Training samples:         100000
+16.07.2018 11:30:31 INFO      NC experiments:           (10000 alternate + 10000 null) experiments with 1 alternate events each
+16.07.2018 11:30:31 INFO      Debug mode:               False
