@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=nc
-#SBATCH --output=slurm_neyman_construction.out
+#SBATCH --output=slurm_neyman_construction2.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=62GB
@@ -14,4 +14,4 @@ module load scikit-learn/intel/0.18.1
 
 cd /home/jb6504/higgs_inference/postprocessing
 
-python -u neyman_construction.py --combinedmxe --set 2
+python -u neyman_construction.py --mxe --combined --combinedregression --combinedmxe --samplesize 100000 --set 2

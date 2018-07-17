@@ -403,55 +403,61 @@ parser.add_argument("--mxe", action="store_true", help="Calculate NC for CRAWLR"
 parser.add_argument("--combinedmxe", action="store_true", help="Calculate NC for SCRAWLR")
 parser.add_argument("--scoreregression", action="store_true", help="Calculate NC for SALLY")
 parser.add_argument("--set", type=int, default=0, help='Neyman construction set.')
+parser.add_argument("--samplesize", type=int, help='Training sample size')
 
 args = parser.parse_args()
 
 logging.info('Tasks:')
-logging.info('  Truth:      %s', args.all or args.truth)
-logging.info('  Histo:      %s', args.all or args.histo)
-logging.info('  CARL:       %s', args.all or args.carl)
-logging.info('  ROLR:       %s', args.all or args.regression)
-logging.info('  SALLY:      %s', args.all or args.scoreregression)
-logging.info('  CASCAL:     %s', args.all or args.combined)
-logging.info('  RASCAL:     %s', args.all or args.combinedregression)
+logging.info('  Truth:       %s', args.all or args.truth)
+logging.info('  Histo:       %s', args.all or args.histo)
+logging.info('  CARL:        %s', args.all or args.carl)
+logging.info('  ROLR:        %s', args.all or args.regression)
+logging.info('  SALLY:       %s', args.all or args.scoreregression)
+logging.info('  CASCAL:      %s', args.all or args.combined)
+logging.info('  RASCAL:      %s', args.all or args.combinedregression)
+logging.info('  ALICE:       %s', args.all or args.mxe)
+logging.info('  ALICES:      %s', args.all or args.combinedmxe)
 logging.info('Options:')
-logging.info('  Neyman set: %s', args.set)
+logging.info('  Neyman set:  %s', args.set)
+logging.info('  Sample size: %s', 'Full' if args.samplesize is None else args.samplesize)
+
+postfix = '' if args.samplesize is None else '_trainingsamplesize_' + str(args.samplesize)
 
 logging.info('Starting p-value calculation')
 
-if args.truth or args.all:
+if (args.truth or args.all) and args.samplesize is None:
     calculate_confidence_limits('truth', 'truth', args.set)
 
-if args.histo or args.all:
+if (args.histo or args.all) and args.samplesize is None:
     calculate_confidence_limits('histo_2d_asymmetricbinning', 'histo', args.set)
 if args.scoreregression or args.all:
-    calculate_confidence_limits('scoreregression_rotatedscore_deep', 'score_regression', args.set)
+    calculate_confidence_limits('scoreregression_rotatedscore_deep' + postfix, 'score_regression', args.set)
 if args.carl or args.all:
-    calculate_confidence_limits('carl_calibrated_shallow', 'parameterized', args.set)
-if args.combined or args.all:
-    calculate_confidence_limits('combined_calibrated_deep', 'parameterized', args.set)
+    calculate_confidence_limits('carl_calibrated_shallow' + postfix, 'parameterized', args.set)
 if args.regression or args.all:
-    calculate_confidence_limits('regression_calibrated', 'parameterized', args.set)
-if args.combinedregression or args.all:
-    calculate_confidence_limits('combinedregression_calibrated_deep', 'parameterized', args.set)
+    calculate_confidence_limits('regression_calibrated' + postfix, 'parameterized', args.set)
 if args.mxe or args.all:
-    calculate_confidence_limits('mxe_calibrated_deep', 'parameterized', args.set)
+    calculate_confidence_limits('mxe_calibrated_deep' + postfix, 'parameterized', args.set)
 if args.combinedmxe or args.all:
-    calculate_confidence_limits('combinedmxe_calibrated_deep', 'parameterized', args.set)
+    calculate_confidence_limits('combinedmxe_calibrated_deep' + postfox, 'parameterized', args.set)
+if args.combined or args.all:
+    calculate_confidence_limits('combined_calibrated_deep' + postfix, 'parameterized', args.set)
+if args.combinedregression or args.all:
+    calculate_confidence_limits('combinedregression_calibrated_deep' + postfix, 'parameterized', args.set)
 
-if args.histo or args.all:
+if (args.histo or args.all) and args.samplesize is None:
     calculate_confidence_limits('histo_2d_asymmetricbinning_smeared', 'histo', args.set)
 if args.scoreregression or args.all:
-    calculate_confidence_limits('scoreregression_rotatedscore_deep_smeared', 'score_regression', args.set)
+    calculate_confidence_limits('scoreregression_rotatedscore_deep_smeared' + postfix, 'score_regression', args.set)
 if args.carl or args.all:
-    calculate_confidence_limits('carl_calibrated_shallow_smeared', 'parameterized', args.set)
+    calculate_confidence_limits('carl_calibrated_shallow_smeared' + postfix, 'parameterized', args.set)
 if args.combined or args.all:
-    calculate_confidence_limits('combined_calibrated_deep_smeared', 'parameterized', args.set)
+    calculate_confidence_limits('combined_calibrated_deep_smeared' + postfix, 'parameterized', args.set)
 if args.regression or args.all:
-    calculate_confidence_limits('regression_calibrated_smeared', 'parameterized', args.set)
+    calculate_confidence_limits('regression_calibrated_smeared' + postfix, 'parameterized', args.set)
 if args.combinedregression or args.all:
-    calculate_confidence_limits('combinedregression_calibrated_deep_smeared', 'parameterized', args.set)
+    calculate_confidence_limits('combinedregression_calibrated_deep_smeared' + postfix, 'parameterized', args.set)
 if args.mxe or args.all:
-    calculate_confidence_limits('mxe_calibrated_deep_smeared', 'parameterized', args.set)
+    calculate_confidence_limits('mxe_calibrated_deep_smeared' + postfix, 'parameterized', args.set)
 if args.combinedmxe or args.all:
-    calculate_confidence_limits('combinedmxe_calibrated_deep_smeared', 'parameterized', args.set)
+    calculate_confidence_limits('combinedmxe_calibrated_deep_smeared' + postfix, 'parameterized', args.set)

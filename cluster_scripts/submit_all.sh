@@ -47,13 +47,13 @@ cd /home/jb6504/higgs_inference/cluster_scripts
 ################################################################################
 
 
-# sbatch run_scoreregression_smearing.sh
+sbatch run_scoreregression_smearing.sh
 # sbatch run_histo_smearing.sh
 
-# sbatch run_carl_smearing.sh
-# sbatch run_combined_smearing.sh
-# sbatch run_regression_smearing.sh
-# sbatch run_combinedregression_smearing.sh
+sbatch run_carl_smearing.sh
+sbatch run_combined_smearing.sh
+sbatch run_regression_smearing.sh
+sbatch run_combinedregression_smearing.sh
 
 
 ################################################################################
@@ -77,11 +77,11 @@ cd /home/jb6504/higgs_inference/cluster_scripts
 # Sample size experiments
 ################################################################################
 
-sbatch run_scoreregression_samplesize_experiments.sh
-sbatch run_carl_samplesize_experiments.sh
-sbatch run_combined_samplesize_experiments.sh
-sbatch run_regression_samplesize_experiments.sh
-sbatch run_combinedregression_samplesize_experiments.sh
+# sbatch run_scoreregression_samplesize_experiments.sh
+# sbatch run_carl_samplesize_experiments.sh
+# sbatch run_combined_samplesize_experiments.sh
+# sbatch run_regression_samplesize_experiments.sh
+# sbatch run_combinedregression_samplesize_experiments.sh
 
 
 ################################################################################
@@ -98,5 +98,5 @@ sbatch run_combinedregression_samplesize_experiments.sh
 # sbatch run_mxe_depth_experiments.sh
 # sbatch run_combinedmxe_depth_experiments.sh
 
-sbatch run_mxe_samplesize_experiments.sh
-sbatch run_combinedmxe_samplesize_experiments.sh
+# sbatch run_mxe_samplesize_experiments.sh
+# sbatch run_combinedmxe_samplesize_experiments.sh

@@ -1,0 +1,27 @@
+Using TensorFlow backend.
+17.07.2018 12:55:05 INFO    Hi! How are you today?
+17.07.2018 12:55:05 INFO    Startup options:
+17.07.2018 12:55:05 INFO      Algorithm:                     scoreregression
+17.07.2018 12:55:05 INFO      Point by point:                False
+17.07.2018 12:55:05 INFO      Morphing-aware mode:           False
+17.07.2018 12:55:05 INFO      Smeared data:                  True
+17.07.2018 12:55:05 INFO      Training sample:               baseline
+17.07.2018 12:55:05 INFO      alpha:                         None
+17.07.2018 12:55:05 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+17.07.2018 12:55:05 INFO      AFC epsilon:                   None
+17.07.2018 12:55:05 INFO      Denominator theta:             True
+17.07.2018 12:55:05 INFO      Neyman construction toys:      0
+17.07.2018 12:55:05 INFO      Training sample size limit:    100000
+17.07.2018 12:55:05 INFO      Other options:                 ['deep', 'neyman2']
+17.07.2018 12:55:05 INFO      Base directory:                /home/jb6504/higgs_inference
+17.07.2018 12:55:05 INFO      ML-based strategies available: True
+17.07.2018 12:55:05 INFO    Starting score regression inference
+17.07.2018 12:55:05 INFO    Options:
+17.07.2018 12:55:05 INFO      Denominator theta:       denominator 0 = theta 708 = [ 0.39293227  0.43229216]
+17.07.2018 12:55:05 INFO      Number of hidden layers: 5
+17.07.2018 12:55:05 INFO      Batch size:              128
+17.07.2018 12:55:05 INFO      Learning rate:           0.001
+17.07.2018 12:55:05 INFO      Learning rate decay:     0.000921034037198
+17.07.2018 12:55:05 INFO      Number of epochs:        5000
+17.07.2018 12:55:05 INFO      Training samples:        100000
+17.07.2018 12:55:05 INFO      NC experiments:          (10000 alternate + 10000 null) experiments with 1 alternate events each
