@@ -47,13 +47,13 @@ cd /home/jb6504/higgs_inference/cluster_scripts
 ################################################################################
 
 
-sbatch run_scoreregression_smearing.sh
+# sbatch run_scoreregression_smearing.sh
 # sbatch run_histo_smearing.sh
 
-sbatch run_carl_smearing.sh
-sbatch run_combined_smearing.sh
-sbatch run_regression_smearing.sh
-sbatch run_combinedregression_smearing.sh
+# sbatch run_carl_smearing.sh
+# sbatch run_combined_smearing.sh
+# sbatch run_regression_smearing.sh
+# sbatch run_combinedregression_smearing.sh
 
 
 ################################################################################
@@ -91,8 +91,8 @@ sbatch run_combinedregression_smearing.sh
 # sbatch run_mxe.sh
 # sbatch run_combinedmxe.sh
 
-# sbatch run_mxe_smearing.sh
-# sbatch run_combinedmxe_smearing.sh
+sbatch run_mxe_smearing.sh
+sbatch run_combinedmxe_smearing.sh
 
 # sbatch run_combinedmxe_tuning.sh
 # sbatch run_mxe_depth_experiments.sh

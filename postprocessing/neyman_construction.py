@@ -439,7 +439,7 @@ if args.regression or args.all:
 if args.mxe or args.all:
     calculate_confidence_limits('mxe_calibrated_deep' + postfix, 'parameterized', args.set)
 if args.combinedmxe or args.all:
-    calculate_confidence_limits('combinedmxe_calibrated_deep' + postfox, 'parameterized', args.set)
+    calculate_confidence_limits('combinedmxe_calibrated_deep' + postfix, 'parameterized', args.set)
 if args.combined or args.all:
     calculate_confidence_limits('combined_calibrated_deep' + postfix, 'parameterized', args.set)
 if args.combinedregression or args.all:
