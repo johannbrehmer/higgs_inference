@@ -1,18 +1,30 @@
-17.07.2018 16:27:05 INFO    Welcome! How are you today?
-17.07.2018 16:27:05 INFO    Tasks:
-17.07.2018 16:27:05 INFO      Truth:       False
-17.07.2018 16:27:05 INFO      Histo:       False
-17.07.2018 16:27:05 INFO      CARL:        False
-17.07.2018 16:27:05 INFO      ROLR:        False
-17.07.2018 16:27:05 INFO      SALLY:       False
-17.07.2018 16:27:05 INFO      CASCAL:      True
-17.07.2018 16:27:05 INFO      RASCAL:      True
-17.07.2018 16:27:05 INFO      ALICE:       True
-17.07.2018 16:27:05 INFO      ALICES:      True
-17.07.2018 16:27:05 INFO    Options:
-17.07.2018 16:27:05 INFO      Neyman set:  2
-17.07.2018 16:27:05 INFO      Sample size: 100000
-17.07.2018 16:27:05 INFO    Starting p-value calculation
-17.07.2018 16:27:05 INFO    Subtracting SM for parameterized mxe_calibrated_deep_trainingsamplesize_100000
-17.07.2018 16:28:09 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
-17.07.2018 16:28:17 INFO    Neyman construction for parameterized/mxe_calibrated_deep_trainingsamplesize_100000
+18.07.2018 11:41:08 INFO    Welcome! How are you today?
+18.07.2018 11:41:08 INFO    Tasks:
+18.07.2018 11:41:08 INFO      Truth:       True
+18.07.2018 11:41:08 INFO      Histo:       True
+18.07.2018 11:41:08 INFO      CARL:        True
+18.07.2018 11:41:08 INFO      ROLR:        True
+18.07.2018 11:41:08 INFO      SALLY:       True
+18.07.2018 11:41:08 INFO      CASCAL:      True
+18.07.2018 11:41:08 INFO      RASCAL:      True
+18.07.2018 11:41:08 INFO      ALICE:       True
+18.07.2018 11:41:08 INFO      ALICES:      True
+18.07.2018 11:41:08 INFO    Options:
+18.07.2018 11:41:08 INFO      Neyman set:  2
+18.07.2018 11:41:08 INFO      Sample size: 100000
+18.07.2018 11:41:08 INFO    Starting p-value calculation
+18.07.2018 11:41:08 INFO    Subtracting SM for score_regression scoreregression_rotatedscore_deep_trainingsamplesize_100000
+18.07.2018 11:42:13 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+18.07.2018 11:42:22 INFO    Neyman construction for score_regression/scoreregression_rotatedscore_deep_trainingsamplesize_100000
+18.07.2018 12:37:43 INFO    Subtracting SM for parameterized carl_calibrated_shallow_trainingsamplesize_100000
+18.07.2018 12:38:52 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+18.07.2018 12:39:00 INFO    Neyman construction for parameterized/carl_calibrated_shallow_trainingsamplesize_100000
+18.07.2018 13:34:07 INFO    Subtracting SM for parameterized regression_calibrated_trainingsamplesize_100000
+18.07.2018 13:35:20 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+18.07.2018 13:35:28 INFO    Neyman construction for parameterized/regression_calibrated_trainingsamplesize_100000
+18.07.2018 14:30:03 INFO    Subtracting SM for parameterized mxe_calibrated_deep_trainingsamplesize_100000
+18.07.2018 14:31:29 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+18.07.2018 14:31:37 INFO    Neyman construction for parameterized/mxe_calibrated_deep_trainingsamplesize_100000
+18.07.2018 15:25:45 INFO    Subtracting SM for parameterized combinedmxe_calibrated_deep_trainingsamplesize_100000
+18.07.2018 15:27:11 DEBUG    Found 3051 files, didn't find 0 files, found 0 files with wrong shape
+18.07.2018 15:27:19 INFO    Neyman construction for parameterized/combinedmxe_calibrated_deep_trainingsamplesize_100000
