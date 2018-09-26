@@ -20,25 +20,25 @@ except ImportError:
     sys.path.append(base_dir)
     from higgs_inference import settings
 
-from higgs_inference.strategies.truth import truth_inference
-from higgs_inference.strategies.afc import afc_inference
-from higgs_inference.strategies.histograms import histo_inference
+try:
+    from higgs_inference.strategies.truth import truth_inference
+    from higgs_inference.strategies.afc import afc_inference
+    from higgs_inference.strategies.histograms import histo_inference
+    loaded_other_strategies = True
+except ImportError:
+    loaded_other_strategies = False
 
 try:
     from higgs_inference.strategies.parameterized import parameterized_inference
     from higgs_inference.strategies.point_by_point import point_by_point_inference
     from higgs_inference.strategies.score_regression import score_regression_inference
-
     loaded_ml_strategies = True
-
 except ImportError:
     loaded_ml_strategies = False
 
 try:
     from higgs_inference.strategies.flows import flow_inference
-
     loaded_flow_strategies = True
-
 except ImportError:
     loaded_flow_strategies = False
 
@@ -108,11 +108,13 @@ assert args.training in ['baseline', 'basis', 'random']
 
 # Start calculation
 if args.algorithm == 'truth':
+    assert loaded_other_strategies
     truth_inference(do_neyman=args.neyman,
                     denominator=args.denom,
                     options=args.options)
 
 elif args.algorithm == 'histo':
+    assert loaded_other_strategies
     histo_inference(indices_X=args.xindices,
                     use_smearing=args.smearing,
                     denominator=args.denom,
@@ -120,6 +122,7 @@ elif args.algorithm == 'histo':
                     options=args.options)
 
 elif args.algorithm == 'afc':
+    assert loaded_other_strategies
     afc_inference(indices_X=args.xindices,
                   epsilon=args.epsilon,
                   use_smearing=args.smearing,
