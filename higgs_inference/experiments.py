@@ -34,6 +34,14 @@ try:
 except ImportError:
     loaded_ml_strategies = False
 
+try:
+    from higgs_inference.strategies.flows import flow_inference
+
+    loaded_flow_strategies = True
+
+except ImportError:
+    loaded_flow_strategies = False
+
 ################################################################################
 # Set up logging and parse arguments
 ################################################################################
@@ -91,7 +99,7 @@ logging.info('  ML-based strategies available: %s', loaded_ml_strategies)
 # Sanity checks
 assert args.algorithm in ['truth', 'histo', 'afc',
                           'carl', 'score', 'combined', 'regression', 'combinedregression',
-                          'scoreregression', 'mxe', 'combinedmxe']
+                          'scoreregression', 'mxe', 'combinedmxe', 'maf', 'scandal']
 assert args.training in ['baseline', 'basis', 'random']
 
 ################################################################################
@@ -126,6 +134,18 @@ elif args.algorithm == 'scoreregression':
                                do_neyman=args.neyman,
                                training_sample_size=args.samplesize,
                                options=args.options)
+
+elif args.algorithm == 'maf' or args.algorithm == 'scandal':
+    assert loaded_flow_strategies
+    flow_inference(algorithm=args.algorithm,
+                   morphing_aware=args.aware,
+                   use_smearing=args.smearing,
+                   denominator=args.denom,
+                   training_sample=args.training,
+                   alpha=args.alpha,
+                   do_neyman=args.neyman,
+                   training_sample_size=args.samplesize,
+                   options=args.options)
 
 elif args.pointbypoint:
     assert loaded_ml_strategies

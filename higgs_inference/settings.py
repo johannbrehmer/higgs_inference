@@ -126,6 +126,7 @@ log_r_clip_value = 10.
 alpha_regression_default = 100.
 alpha_carl_default = 5.
 alpha_mxe_default = 5.
+alpha_scandal_default = 1.
 
 # Training length (number of epochs for full training samples, will be increased for reduced training samples)
 n_epochs_short = 1
