@@ -72,14 +72,14 @@ def train_model(model,
     logging.debug('Transform coefficients: %s', pre_loss_transform_coefficients)
 
     # Convert to Tensor
-    thetas = torch.stack([tensor(i, requires_grad=True) for i in thetas])
-    xs = torch.stack([tensor(i) for i in xs])
+    thetas = torch.stack([tensor(i.astype(np.float), requires_grad=True) for i in thetas])
+    xs = torch.stack([tensor(i.astype(np.float)) for i in xs])
     if ys is not None:
-        ys = torch.stack([tensor(i.astype(np.int32)) for i in ys])  # pyTorch cannot cast np.float64
+        ys = torch.stack([tensor(i.astype(np.float)) for i in ys])
     if r_xzs is not None:
-        r_xzs = torch.stack([tensor(i) for i in r_xzs])
+        r_xzs = torch.stack([tensor(i.astype(np.float)) for i in r_xzs])
     if t_xzs is not None:
-        t_xzs = torch.stack([tensor(i) for i in t_xzs])
+        t_xzs = torch.stack([tensor(i.astype(np.float)) for i in t_xzs])
 
     # Dataset
     dataset = GoldDataset(thetas, xs, ys, r_xzs, t_xzs)
