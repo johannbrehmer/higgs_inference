@@ -141,7 +141,6 @@ elif args.algorithm == 'scoreregression':
 elif args.algorithm == 'maf' or args.algorithm == 'scandal':
     assert loaded_flow_strategies
     flow_inference(algorithm=args.algorithm,
-                   morphing_aware=args.aware,
                    use_smearing=args.smearing,
                    denominator=args.denom,
                    training_sample=args.training,

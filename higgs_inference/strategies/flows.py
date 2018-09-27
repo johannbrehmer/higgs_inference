@@ -21,7 +21,6 @@ from higgs_inference.flows.inference.scandal import SCANDALInference
 
 
 def flow_inference(algorithm='maf',
-                   morphing_aware=False,
                    training_sample='baseline',  # 'baseline', 'basis', 'random'
                    use_smearing=False,
                    denominator=0,
@@ -34,8 +33,6 @@ def flow_inference(algorithm='maf',
     Likelihood ratio estimation through parameterized or morphing-aware versions of CARL, CASCAL, ROLR, and RASCAL.
 
     :param algorithm: Inference strategy. 'maf' for MAF, 'scandal' for SCANDAL.
-    :param morphing_aware: bool that decides whether a morphing-aware or morphing-agnostic parameterized architecture is
-                           used.
     :param training_sample: Training sample. Can be 'baseline', 'basis', or 'random'.
     :param use_smearing: Whether to use the training and evaluation sample with (simplified) detector simulation.
     :param denominator: Which of five predefined denominator (reference) hypotheses to use.
@@ -65,14 +62,11 @@ def flow_inference(algorithm='maf',
     random_theta_mode = training_sample == 'random'
     basis_theta_mode = training_sample == 'basis'
 
-    learn_logr_mode = ('learns' not in options)
     new_sample_mode = ('new' in options)
     short_mode = ('short' in options)
     long_mode = ('long' in options)
     deep_mode = ('deep' in options)
     shallow_mode = ('shallow' in options)
-    debug_mode = ('debug' in options)
-    factor_out_sm_in_aware_mode = morphing_aware and ('factorsm' in options)
     small_lr_mode = ('slowlearning' in options)
     large_lr_mode = ('fastlearning' in options)
     large_batch_mode = ('largebatch' in options)
@@ -82,19 +76,11 @@ def flow_inference(algorithm='maf',
     neyman3_mode = ('neyman3' in options)
 
     filename_addition = ''
-    if morphing_aware:
-        filename_addition = '_aware'
 
     if random_theta_mode:
         filename_addition += '_random'
     elif basis_theta_mode:
         filename_addition += '_basis'
-
-    if not learn_logr_mode:
-        filename_addition += '_learns'
-
-    if factor_out_sm_in_aware_mode:
-        filename_addition += '_factorsm'
 
     learning_rate = settings.learning_rate_default
     if small_lr_mode:
@@ -135,11 +121,7 @@ def flow_inference(algorithm='maf',
     n_epochs = settings.n_epochs_default
     early_stopping = True
     early_stopping_patience = settings.early_stopping_patience
-    if debug_mode:
-        n_epochs = settings.n_epochs_short
-        early_stopping = False
-        filename_addition += '_debug'
-    elif long_mode:
+    if long_mode:
         n_epochs = settings.n_epochs_long
         filename_addition += '_long'
     elif short_mode:
@@ -192,7 +174,6 @@ def flow_inference(algorithm='maf',
 
     logging.info('Main settings:')
     logging.info('  Algorithm:                %s', algorithm)
-    logging.info('  Morphing-aware:           %s', morphing_aware)
     logging.info('  Training sample:          %s', training_sample)
     logging.info('  Denominator theta:        denominator %s = theta %s = %s', denominator, th1,
                  theta1)
@@ -211,7 +192,6 @@ def flow_inference(algorithm='maf',
                      n_neyman_alternate_experiments, n_neyman_null_experiments, n_expected_events_neyman)
     else:
         logging.info('  NC experiments:           False')
-    logging.info('  Debug mode:               %s', debug_mode)
 
     ################################################################################
     # Data
