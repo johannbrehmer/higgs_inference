@@ -329,7 +329,6 @@ def flow_inference(algorithm='maf',
     # Inference object
     inference_type = SCANDALInference if algorithm == 'scandal' else MAFInference
     inference = inference_type(
-        algorithm,
         n_mades=n_hidden_layers,
         n_made_hidden_layers=1,
         n_made_units_per_layer=100,
