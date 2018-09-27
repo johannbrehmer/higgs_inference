@@ -7,6 +7,7 @@ from higgs_inference.flows.inference.base import Inference
 from higgs_inference.flows.ml.models.maf import ConditionalMaskedAutoregressiveFlow
 from higgs_inference.flows.ml.trainer import train_model
 from higgs_inference.flows.ml.losses import negative_log_likelihood
+from higgs_inference.flows.various.utils import expand_array_2d
 
 
 class MAFInference(Inference):
@@ -143,6 +144,9 @@ class MAFInference(Inference):
         self.maf.to(self.device, self.dtype)
 
     def predict_density(self, theta, x, log=False):
+        # If just one theta given, broadcast to number of samples
+        theta = expand_array_2d(theta, x.shape[0])
+
         self.maf = self.maf.to(self.device, self.dtype)
         theta_tensor = tensor(theta).to(self.device, self.dtype)
         x_tensor = tensor(x).to(self.device, self.dtype)
@@ -155,6 +159,10 @@ class MAFInference(Inference):
         return np.exp(log_likelihood)
 
     def predict_ratio(self, theta0, theta1, x, log=False):
+        # If just one theta given, broadcast to number of samples
+        theta0 = expand_array_2d(theta0, x.shape[0])
+        theta1 = expand_array_2d(theta1, x.shape[0])
+
         self.maf = self.maf.to(self.device, self.dtype)
         theta0_tensor = tensor(theta0).to(self.device, self.dtype)
         theta1_tensor = tensor(theta1).to(self.device, self.dtype)
@@ -171,6 +179,9 @@ class MAFInference(Inference):
         return np.exp(log_likelihood_theta0 - log_likelihood_theta1)
 
     def predict_score(self, theta, x):
+        # If just one theta given, broadcast to number of samples
+        theta = expand_array_2d(theta, x.shape[0])
+
         self.maf = self.maf.to(self.device, self.dtype)
         theta_tensor = tensor(theta).to(self.device, self.dtype)
         x_tensor = tensor(x).to(self.device, self.dtype)

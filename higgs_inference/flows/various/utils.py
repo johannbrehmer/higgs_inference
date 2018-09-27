@@ -176,3 +176,9 @@ def check_for_nans_in_parameters(model, check_gradients=True):
             return True
 
     return False
+
+
+def expand_array_2d(array, n_copies):
+    if len(array.shape) == 1 or (len(array.shape) == 2 and array.shape[0] == 1):
+        array = array.reshape((1, -1))
+        array = np.broadcast_to(array, (n_copies, array.shape[1]))
