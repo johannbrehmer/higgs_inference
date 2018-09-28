@@ -1,0 +1,59 @@
+27.09.2018 07:16:05 INFO    Hi! How are you today?
+27.09.2018 07:16:05 INFO    Startup options:
+27.09.2018 07:16:05 INFO      Algorithm:                     scandal
+27.09.2018 07:16:05 INFO      Point by point:                False
+27.09.2018 07:16:05 INFO      Morphing-aware mode:           False
+27.09.2018 07:16:05 INFO      Smeared data:                  False
+27.09.2018 07:16:05 INFO      Training sample:               baseline
+27.09.2018 07:16:05 INFO      alpha:                         None
+27.09.2018 07:16:05 INFO      Histogram / AFC X indices:     [1, 38, 39, 40, 41]
+27.09.2018 07:16:05 INFO      AFC epsilon:                   None
+27.09.2018 07:16:05 INFO      Denominator theta:             False
+27.09.2018 07:16:05 INFO      Neyman construction toys:      0
+27.09.2018 07:16:05 INFO      Training sample size limit:    None
+27.09.2018 07:16:05 INFO      Other options:                 ['short']
+27.09.2018 07:16:05 INFO      Base directory:                /home/jb6504/higgs_inference
+27.09.2018 07:16:05 INFO      ML-based strategies available: False
+27.09.2018 07:16:05 INFO    Starting parameterized inference
+27.09.2018 07:16:05 INFO    Main settings:
+27.09.2018 07:16:05 INFO      Algorithm:                scandal
+27.09.2018 07:16:05 INFO      Training sample:          baseline
+27.09.2018 07:16:05 INFO      Denominator theta:        denominator 0 = theta 708 = [0.39293227 0.43229216]
+27.09.2018 07:16:05 INFO    Options:
+27.09.2018 07:16:05 INFO      Number of MADEs:    3
+27.09.2018 07:16:05 INFO      alpha:                    1.0
+27.09.2018 07:16:05 INFO      Learning rate:            0.001
+27.09.2018 07:16:05 INFO      Learning rate decay:      0.01
+27.09.2018 07:16:05 INFO      Number of epochs:         1
+27.09.2018 07:16:05 INFO      Training samples:         all
+27.09.2018 07:16:05 INFO      NC experiments:           False
+/home/jb6504/tools/miniconda3/envs/goldmine/lib/python3.6/site-packages/numpy/core/_methods.py:32: RuntimeWarning: overflow encountered in reduce
+  return umr_sum(a, axis, dtype, out, keepdims)
+27.09.2018 07:16:29 INFO    Initialized NDE (MAF) with the following settings:
+27.09.2018 07:16:29 INFO      Parameters:    2
+27.09.2018 07:16:29 INFO      Observables:   42
+27.09.2018 07:16:29 INFO      MADEs:         3
+27.09.2018 07:16:29 INFO      Hidden layers: 1
+27.09.2018 07:16:29 INFO      Units:         100
+27.09.2018 07:16:29 INFO      Activation:    tanh
+27.09.2018 07:16:29 INFO      Batch norm:    False
+27.09.2018 07:16:29 INFO    Starting training
+27.09.2018 07:16:29 INFO    Training SCANDAL (MAF + score) with settings:
+27.09.2018 07:16:29 INFO      alpha:          1.0
+27.09.2018 07:16:29 INFO      theta given:    True
+27.09.2018 07:16:29 INFO      x given:        True
+27.09.2018 07:16:29 INFO      y given:        True
+27.09.2018 07:16:29 INFO      r_xz given:     True
+27.09.2018 07:16:29 INFO      t_xz given:     True
+27.09.2018 07:16:29 INFO      theta1 given:   False
+27.09.2018 07:16:29 INFO      Samples:        9999997
+27.09.2018 07:16:29 INFO      Parameters:     2
+27.09.2018 07:16:29 INFO      Obserables:     42
+27.09.2018 07:16:29 INFO      Batch size:     128
+27.09.2018 07:16:29 INFO      Optimizer:      adam
+27.09.2018 07:16:29 INFO      Learning rate:  0.001 initially, decaying to 1e-05
+27.09.2018 07:16:29 INFO      Valid. split:   0.2
+27.09.2018 07:16:29 INFO      Early stopping: False
+27.09.2018 07:16:29 INFO      Epochs:         1
+27.09.2018 07:16:30 DEBUG    Transform coefficients: None
+27.09.2018 07:20:05 INFO    Starting training

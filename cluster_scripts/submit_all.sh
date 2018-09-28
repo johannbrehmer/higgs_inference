@@ -85,14 +85,14 @@ cd /home/jb6504/higgs_inference/cluster_scripts
 
 
 ################################################################################
-# Follow-up
+# Follow-up (ALICE)
 ################################################################################
 
 # sbatch run_mxe.sh
 # sbatch run_combinedmxe.sh
 
-sbatch run_mxe_smearing.sh
-sbatch run_combinedmxe_smearing.sh
+# sbatch run_mxe_smearing.sh
+# sbatch run_combinedmxe_smearing.sh
 
 # sbatch run_combinedmxe_tuning.sh
 # sbatch run_mxe_depth_experiments.sh
@@ -100,3 +100,12 @@ sbatch run_combinedmxe_smearing.sh
 
 # sbatch run_mxe_samplesize_experiments.sh
 # sbatch run_combinedmxe_samplesize_experiments.sh
+
+
+################################################################################
+# Flow experiments
+################################################################################
+
+sbatch run_maf.sh
+sbatch run_scandal.sh
+
