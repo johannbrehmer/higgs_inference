@@ -162,6 +162,8 @@ def train_model(model,
     # Loop over epochs
     for epoch in range(n_epochs):
 
+        logging.debug('Epoch %s / %s', epoch + 1, n_epochs)
+
         # Training
         model.train()
         individual_train_loss = np.zeros(n_losses)
@@ -175,6 +177,8 @@ def train_model(model,
 
         # Loop over batches
         for i_batch, (theta, x, y, r_xz, t_xz) in enumerate(train_loader):
+
+            logging.debug('  Batch %s', i_batch + 1)
 
             # Put on device
             theta = theta.to(device, dtype)
