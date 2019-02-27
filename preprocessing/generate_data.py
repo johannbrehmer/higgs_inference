@@ -45,6 +45,8 @@ parser.add_argument("-p", "--pointbypoint", action="store_true",
                     help="Generate point-by-point training samples")
 parser.add_argument("-s", "--scoreregression", action="store_true",
                     help="Generate score regression training sample")
+parser.add_argument("-f", "--flow", action="store_true",
+                    help="Generate flow training sample")
 parser.add_argument("-c", "--calibration", action="store_true",
                     help="Generate calibration sample")
 parser.add_argument("--recalibration", action="store_true",
@@ -313,6 +315,71 @@ if args.train:
     np.save(settings.unweighted_events_dir + '/r_train' + filename_addition + '.npy', r)
     np.save(settings.unweighted_events_dir + '/p0_train' + filename_addition + '.npy', p0)
     np.save(settings.unweighted_events_dir + '/p1_train' + filename_addition + '.npy', p1)
+
+################################################################################
+# Flow training
+################################################################################
+
+if args.flow:
+
+    logging.info('Generating flow training sample')
+
+    def generate_flow_data_train(randomtheta0):
+        prob_num = (
+                float(settings.n_events_randomtheta_num * n_events) / float(settings.n_randomthetas * n_events_train)
+                * weighted_data_train['p_randomtheta_' + str(randomtheta0)])
+
+        n_dice = int(max(prob_num) + 1.)
+        assert n_dice < 200
+        prob_num /= float(n_dice)
+
+        accepted_num = weighted_data_train[prob_num > np.random.rand(n_events_train)]
+        for i in range(n_dice - 1):
+            accepted_num = pd.concat([accepted_num, weighted_data_train[prob_num > np.random.rand(n_events_train)]])
+
+        X = np.array(accepted_num.iloc[:, subset_features])
+
+        subset_scores = [weighted_data_train.columns.get_loc(x)
+                         for x in ['score_randomtheta_' + str(randomtheta0) + '_0',
+                                   'score_randomtheta_' + str(randomtheta0) + '_1']]
+        scores = np.array(accepted_num.iloc[:, subset_scores])
+
+        subset_randomthetas = [weighted_data_train.columns.get_loc(x)
+                               for x in
+                               ['randomtheta_' + str(randomtheta0) + '_0', 'randomtheta_' + str(randomtheta0) + '_1']]
+        thetas0 = np.array(accepted_num.iloc[:, subset_randomthetas])
+
+        # Sanitization
+        if args.new:
+            scores[~ (np.isfinite(np.log(scores[:, 0]))
+                      & np.isfinite(np.log(scores[:, 1]))), :] = settings.new_samples_nan_score
+
+        cut = np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+
+        return thetas0[cut], X[cut], scores[cut]
+
+
+    for t in range(settings.n_randomthetas):
+        this_th0, this_X, this_scores = generate_flow_data_train(t)
+
+        if t > 0:
+            th0 = np.vstack((th0, np.array(this_th0, dtype=np.float32)))
+            X = np.vstack((X, np.array(this_X, dtype=np.float32)))
+            scores = np.vstack((scores, np.array(this_scores, dtype=np.float32)))
+        else:
+            th0 = np.array(this_th0, dtype=np.float32)
+            X = np.array(this_X, dtype=np.float32)
+            scores = np.array(this_scores, dtype=np.float32)
+
+    # Just to make sure
+    cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+    th0 = th0[cut]
+    X = X[cut]
+    scores = scores[cut]
+
+    np.save(settings.unweighted_events_dir + '/theta_train_flow' + filename_addition + '.npy', th0)
+    np.save(settings.unweighted_events_dir + '/X_train_flow' + filename_addition + '.npy', X)
+    np.save(settings.unweighted_events_dir + '/scores_train_flow' + filename_addition + '.npy', scores)
 
 ################################################################################
 # Basis training
