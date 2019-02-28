@@ -372,7 +372,7 @@ if args.flow:
             scores = np.array(this_scores, dtype=np.float32)
 
     # Just to make sure
-    cut = np.isfinite(np.log(r)) & np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
+    cut = np.isfinite(scores[:, 0]) & np.isfinite(scores[:, 1])
     th0 = th0[cut]
     X = X[cut]
     scores = scores[cut]
