@@ -2,6 +2,8 @@
 
 Johann Brehmer, Kyle Cranmer, Gilles Louppe, and Juan Pavez
 
+**Note**: If you want to use these methods for a particle physics problem, please have a look at our new tool [MadMiner](https://github.com/diana-hep/madminer) -- you will likely find that much easier to use than this repo!
+
 ## Folder structure
 
 - `cluster_scripts`: SLURM scripts that start the preprocessing and experiments on the NYU HPC cluster.
